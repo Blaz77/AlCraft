@@ -1,0 +1,44 @@
+Pruebas:
+
+
+Colocar refineria de gas lejos de volcan:
+	Creamos un mapa
+	Donde no haya volcan, tratamos de poner refineria
+	Comprobar que falle o que no haga nada
+	
+Colocar refineria de mineral lejos de nodos:
+	Basicamente lo mismo de arriba
+	
+Ver que colecten:
+	Creamos un personaje, mapa, etc
+	Ponemos una refineria de gas/mineral en un lugar valido
+	dejamos pasar un turno
+	chequeamos que los recursos hayan aumentado 10 x refineria.
+
+Crear construcciones de otra raza:
+	Eso.. crear un jugador terran
+	Tratar de crear todas las construcciones protoss
+	Ver que explote en cada una
+	Despues lo mismo pero viceversa
+	
+Crear un marine consuma 1 poblacion
+
+Crear un Espectro consuma 2
+
+Matar una unidad me devuelva poblacion	
+
+nave de ciencia cargue energia:
+	...
+	
+Energia maxima de 200
+
+Usar magias sin energia
+
+Usar habilidades con energia, ver que se causen efecto deseado
+
+Unidades actuando 2 veces x turno
+
+Jugadores caracter menor a 4
+
+Jugadores de igual nombre/color
+
