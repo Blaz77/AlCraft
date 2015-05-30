@@ -10,7 +10,11 @@ public class Punto {
 		this.x = x;
 		this.y = y;
 	}
-	
+	/*
+	public int distancia2(Punto otroPunto) {
+		return Math.abs(this.x - otroPunto.x) + Math.abs(this.x - otroPunto.x);
+	}
+	*/
 	public double distancia(Punto otroPunto) {
 		return Math.sqrt( Math.pow(this.x - otroPunto.x, 2) + Math.pow(this.y - otroPunto.y, 2) );
 	}
