@@ -35,8 +35,10 @@ public class Mapa {
 		
 		for (int fila = 0; fila < filas; fila++) {
 			for (int columna = 0; columna < columnas; columna++) {
-				bases.add(new Punto(DISTANCIA_BORDE + DISTANCIA_ENTRE_BASES * columna,
-									DISTANCIA_BORDE + DISTANCIA_ENTRE_BASES * fila));
+				if (bases.size() < cantidadBases) {
+					bases.add(new Punto(DISTANCIA_BORDE + DISTANCIA_ENTRE_BASES * columna,
+										DISTANCIA_BORDE + DISTANCIA_ENTRE_BASES * fila));
+				}
 			}
 		}
 		
@@ -57,6 +59,10 @@ public class Mapa {
 	/* Devuelve el alto del mapa. */
 	public int alto() {
 		return _alto;
+	}
+
+	public ArrayList<Punto> getBases() {
+		return new ArrayList<Punto>(bases);
 	}
 
 }
