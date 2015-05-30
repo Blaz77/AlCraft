@@ -8,6 +8,7 @@ public class Mapa {
 	
 	private int _ancho;
 	private int _alto;
+	private Punto[][] mapa;
 	private ArrayList<Punto> bases = new ArrayList<Punto>();
 	private ArrayList<Punto> basesJugadores = new ArrayList<Punto>();
 
@@ -15,7 +16,7 @@ public class Mapa {
 	 * especxificada
 	 */
 	public Mapa(int cantidadBases) {
-		// Por ahora es todo fijo, después veremos como hacer un generador 
+		// Por ahora es todo fijo, despuï¿½s veremos como hacer un generador 
 		// aleatorio
 		// Esto genera una cuadricula estilo
 		// ---------------------
@@ -33,11 +34,24 @@ public class Mapa {
 		_ancho = DISTANCIA_BORDE * 2 + DISTANCIA_ENTRE_BASES * (columnas - 1);
 		_alto = DISTANCIA_BORDE * 2 + DISTANCIA_ENTRE_BASES * (filas - 1);
 		
+		mapa = new Punto[_ancho][_alto];// X==ancho, y==alto
+		
+		for (int x = 0; x < _ancho; x++){
+			for (int y = 0; y < _alto; y++){
+				mapa[x][y] = new Punto(x,y); //faltaran parametros
+			}
+		}
+		
 		for (int fila = 0; fila < filas; fila++) {
 			for (int columna = 0; columna < columnas; columna++) {
 				if (bases.size() < cantidadBases) {
-					bases.add(new Punto(DISTANCIA_BORDE + DISTANCIA_ENTRE_BASES * columna,
-										DISTANCIA_BORDE + DISTANCIA_ENTRE_BASES * fila));
+					int x = DISTANCIA_BORDE + (DISTANCIA_ENTRE_BASES * columna);
+					int y = DISTANCIA_BORDE + (DISTANCIA_ENTRE_BASES * fila);
+					Punto p = mapa[x][y];
+					p.setRecurso((Recurso) new Mineral());
+					bases.add(p); //hago que la base apunte directo a un mineral
+					p = mapa[x+1][y]; //a la derecha enchufo GAS
+					p.setRecurso((Recurso) new GasVespeno());
 				}
 			}
 		}

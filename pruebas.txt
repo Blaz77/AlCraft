@@ -1,5 +1,9 @@
 Pruebas:
 
+Mapa:
+
+	En un radio/rango seteado chequear la existencia de X Minerales e Y Gases alrededor de las Bases
+	
 
 Colocar refineria de gas lejos de volcan:
 	Creamos un mapa

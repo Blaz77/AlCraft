@@ -11,7 +11,7 @@ public class TestMapa {
 	final int SEIS_BASES = 6;
 	private Mapa mapaNuevo;
 
-	/* Métodos auxiliares */
+	/* Mï¿½todos auxiliares */
 	
 	/* Suma las distancias entre la base de puntoBase y cada una de las bases ajenas dadas
 	 * como puntos
@@ -38,11 +38,11 @@ public class TestMapa {
 		Punto puntoGeneracionJugador1 = mapaNuevo.obtenerPuntoGeneradorJugador(1);
 		Punto puntoGeneracionJugador2 = mapaNuevo.obtenerPuntoGeneradorJugador(2);
 		
-		// Para considerar que los jugadores están en extremos opuestos, su distancia
+		// Para considerar que los jugadores estï¿½n en extremos opuestos, su distancia
 		// horizontal o vertical debe ser similar al ancho o alto del mapa respectivamente
 		
-		int distanciaHorizontal = Math.abs(puntoGeneracionJugador1.x - puntoGeneracionJugador2.x);
-		int distanciaVertical = Math.abs(puntoGeneracionJugador1.y - puntoGeneracionJugador2.y);
+		int distanciaHorizontal = Math.abs(puntoGeneracionJugador1.getX() - puntoGeneracionJugador2.getX());
+		int distanciaVertical = Math.abs(puntoGeneracionJugador1.getY() - puntoGeneracionJugador2.getY());
 		
 		Assert.assertTrue(distanciaHorizontal > mapaNuevo.ancho() * 0.7 || 
 						distanciaVertical > mapaNuevo.alto() * 0.7);
@@ -70,6 +70,16 @@ public class TestMapa {
 											sumarDistancias(puntoGeneracionJugador2, basesAjenas));
 		
 		Assert.assertTrue(diferenciaDistancias <= DIFERENCIA_TOLERABLE);
+	}
+	
+	@Test
+	public void testMapaGeneradoDejaEnBasesUnMineral(){
+		
+		Punto puntoGeneracionJugador1 = mapaNuevo.obtenerPuntoGeneradorJugador(1);
+		Punto puntoGeneracionJugador2 = mapaNuevo.obtenerPuntoGeneradorJugador(2);
+		
+		Assert.assertEquals(puntoGeneracionJugador1.getRecurso().getClass(),Mineral.class);
+		Assert.assertEquals(puntoGeneracionJugador2.getRecurso().getClass(),Mineral.class);
 	}
 	
 }
