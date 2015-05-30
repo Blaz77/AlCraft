@@ -1,0 +1,93 @@
+CLASES:
+
+Punto/Espacio:
+	Attr:
+		-pos x
+		-pos y
+		-tipo de terreno (tierra/espacio)
+		-tipo de recurso o nada
+		-edificio construido 
+		-unidad en esa posicion / (multiples unidades?)
+
+Jugador: 
+	Atributos:
+		-MAPA? (para preguntar por posiciones en las creaciones?)
+		-raza
+		-poblacion
+		-recursos
+		-(unidades?)
+		-(edificios?)
+		-(en creacion?)
+	Metodos:
+		-pasarTurno() -> recoleccion de recursos, turnos de construccion decrementar, etc
+		-crearUnidadX() -> para cada unidad?
+		-
+		
+CreadorDeUnidades: (para cada unidad(?), algun patron de diseño)
+	Atributos:
+		-tiempo construccion/ tiempo RESTANTE
+		-costo
+		-Cumplir otros requisitos: p/ej edificio pre-existente
+		-(suministro?)
+		-(posicion de creacion?)
+
+Unidades:
+	Atributos: (los de la tabla)
+		-vida
+		-(escudo)
+		-Ocupacion en poblacion (suministro)
+		-nombre
+		-vision
+		-ataque
+		- rango ataque
+
+CreadorDeEdificios: (para cada edificio(?), algun patron de diseño)
+	Atributos:
+		-costo
+		-tiempo construccion/ restante
+		-(accion secundaria?: p/ej: permitir crear unidades especificas)
+
+Edificios:
+	Att:
+		-nombre
+		-vida
+		-posicion?
+		-(accion secundaria?: p/ej: permitir crear unidades especificas)
+
+----
+PROCEDIMIENTOS/IDEAS: (A DISCUTIR)
+
+Crear una unidad:
+	
+	- Pedir a jugador crear una unidad
+		- Chequea recursos propios con necesidades de creacion
+		- Cheque pos x,y libres en el mapa
+	- Crearme un CreadorDeUnidad, posicionar en el mapa
+		- Con los turnos baja el tiempo restante
+	- En turno 0: CreadorDeUnidad crea la Unidad y se la da al Jugador
+	- Jugador la guarda y posiciona en en el mapa.
+
+Construir edificio:
+
+	Idem arriba (crear unidad)
+
+
+Cola/Vector de acciones por turno:
+	
+	- Indefinidos: P/ej con edificios que generan recursos, regeneracion de vida/energia.
+	- Por turno: Creacion de unidades/edificios.
+	->Solucion:
+		1?- Pedir lista de unidades y edificios a jugadores(?)
+		1.1?- Que los jugadores lo hagan solos?!?
+		2?- Iterar el mapa?
+		3?- Lista de elementos con acciones por turno guardado en algun lado?
+
+
+Sombreado del MAPA:
+
+	-Tener un mapa central con toda la informacion
+	-Cada jugador se conecta por un proxy al mapa
+	-El proxy le arma el sombreado para que no se pase de piola (p/ej: excepcion si se pregunta por una posicion no conocida)
+		
+
+	-
