@@ -107,6 +107,7 @@ public class TestMapa {
 			for (int x=baseActual.getX()-RADIO_BASE; x<baseActual.getX()+RADIO_BASE; x++) {
 				for (int y=baseActual.getY()-RADIO_BASE; y<baseActual.getY()+RADIO_BASE; y++) {
 					if (perteneceAlMapa(new Punto(x, y), mapaNuevo)) {
+						// Inspeccion de la celda
 						recurso = mapaNuevo.getCelda(x, y).getRecurso();
 						if (recurso.getClass().equals(Mineral.class))
 							cristales++;
@@ -119,7 +120,19 @@ public class TestMapa {
 			Assert.assertTrue(volcanes == 1);
 			Assert.assertTrue(cristales >= 2);
 		}
+	}
+	
+	@Test
+	public void testMapaGeneradoCreaBasesEnTierra() {
+		final int RADIO_BASE = 8;
 		
+		Assert.assertTrue(true);
+	}
+	
+	@Test
+	public void testMapaGeneradoTieneAreasEspaciales() {
+		
+		Assert.assertTrue(true);
 	}
 	
 }
