@@ -4,7 +4,7 @@ public class Punto {
 
 	private int x;
 	private int y;
-	private Recurso recurso = null;
+	private Recurso recurso = new Recurso();
 
 	public Punto(int x, int y) {
 		this.x = x;

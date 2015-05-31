@@ -38,7 +38,7 @@ public class Mapa {
 		
 		for (int x = 0; x < _ancho; x++){
 			for (int y = 0; y < _alto; y++){
-				mapa[x][y] = new Punto(x,y); //faltaran parametros
+				mapa[x][y] = new Punto(x, y); //faltaran parametros
 			}
 		}
 		
@@ -48,10 +48,12 @@ public class Mapa {
 					int x = DISTANCIA_BORDE + (DISTANCIA_ENTRE_BASES * columna);
 					int y = DISTANCIA_BORDE + (DISTANCIA_ENTRE_BASES * fila);
 					Punto p = mapa[x][y];
-					p.setRecurso((Recurso) new Mineral());
-					bases.add(p); //hago que la base apunte directo a un mineral
-					p = mapa[x+1][y]; //a la derecha enchufo GAS
-					p.setRecurso((Recurso) new GasVespeno());
+					bases.add(p);
+					
+					// Agrego recursos
+					mapa[x][y].setRecurso(new Mineral());
+					mapa[x+2][y].setRecurso(new GasVespeno());
+					mapa[x-1][y+3].setRecurso(new Mineral());
 				}
 			}
 		}
@@ -77,6 +79,10 @@ public class Mapa {
 
 	public ArrayList<Punto> getBases() {
 		return new ArrayList<Punto>(bases);
+	}
+
+	public Punto getCelda(int x, int y) {
+		return mapa[x][y];
 	}
 
 }
