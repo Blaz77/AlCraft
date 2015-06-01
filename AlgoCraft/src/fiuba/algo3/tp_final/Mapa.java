@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class Mapa implements Iterable<Punto>{
+public class Mapa implements Iterable<Celda>{
 	final int DISTANCIA_BORDE = 10;
 	final int DISTANCIA_ENTRE_BASES = 64;
 	
-	static int BASES_PARA_MAIN = 3;
+	static int BASES_PARA_MAIN = 5;
 	
 	private int _ancho;
 	private int _alto;
-	private Punto[][] mapa;
-	private ArrayList<Punto> bases = new ArrayList<Punto>();
-	private ArrayList<Punto> basesJugadores = new ArrayList<Punto>();
+	private Celda[][] mapa;
+	private ArrayList<Celda> bases = new ArrayList<Celda>();
+	private ArrayList<Celda> basesJugadores = new ArrayList<Celda>();
 
 	/* Genera un mapa para 2 jugadores, con la cantidad de bases
 	 * especxificada
@@ -31,18 +31,17 @@ public class Mapa implements Iterable<Punto>{
 		// ---B------B----------
 		// ---------------------
 		// Si queda rectangular, se extiende en ancho
-		int columnas = (int) Math.sqrt(cantidadBases);
-		if (Math.sqrt(cantidadBases) > columnas) columnas++;
-		int filas = (int) Math.sqrt(cantidadBases);
+		int filas = (int) Math.ceil(Math.sqrt(cantidadBases));
+		int columnas = filas;//(int) Math.sqrt(cantidadBases);
 		
 		_ancho = DISTANCIA_BORDE * 2 + DISTANCIA_ENTRE_BASES * (columnas - 1);
 		_alto = DISTANCIA_BORDE * 2 + DISTANCIA_ENTRE_BASES * (filas - 1);
 		
-		mapa = new Punto[_ancho][_alto];// X==ancho, y==alto
+		mapa = new Celda[_ancho][_alto];// X==ancho, y==alto
 		
 		for (int x = 0; x < _ancho; x++){
 			for (int y = 0; y < _alto; y++){
-				mapa[x][y] = new Punto(x, y); //faltaran parametros
+				mapa[x][y] = new Celda(x, y); //faltaran parametros
 			}
 		}
 		
@@ -51,7 +50,7 @@ public class Mapa implements Iterable<Punto>{
 				if (bases.size() < cantidadBases) {
 					int x = DISTANCIA_BORDE + (DISTANCIA_ENTRE_BASES * columna);
 					int y = DISTANCIA_BORDE + (DISTANCIA_ENTRE_BASES * fila);
-					Punto p = mapa[x][y];
+					Celda p = mapa[x][y];
 					bases.add(p);
 					
 					// Agrego recursos
@@ -67,7 +66,7 @@ public class Mapa implements Iterable<Punto>{
 		basesJugadores.add(bases.get(bases.size() - 1));
 	}
 
-	public Punto obtenerPuntoGeneradorJugador(int numeroJugador) {
+	public Celda obtenerPuntoGeneradorJugador(int numeroJugador) {
 		return basesJugadores.get(numeroJugador - 1);
 	}
 
@@ -81,21 +80,37 @@ public class Mapa implements Iterable<Punto>{
 		return _alto;
 	}
 
-	public ArrayList<Punto> getBases() {
-		return new ArrayList<Punto>(bases);
+	public ArrayList<Celda> getBases() {
+		return new ArrayList<Celda>(bases);
 	}
 
-	public Punto getCelda(int x, int y) {
+	public Celda getCelda(int x, int y) { // Esto de aca... public?
 		return mapa[x][y];
 	}
 	
+	public void setRecurso(Recurso recurso, int x, int y) {
+		mapa[x][y].setRecurso(recurso);
+	}	
 	
-	public Iterator<Punto> iterator() {		
+	public Recurso getRecurso(int x, int y) {
+		return mapa[x][y].getRecurso();
+	}
+
+	public TipoTerreno getTerreno(int x, int y){
+		return mapa[x][y].getTerreno();
+	}
+	
+	public void setTerreno(TipoTerreno tipoTerreno, int x, int y){
+		mapa[x][y].setTerreno(tipoTerreno);
+	}
+	
+	
+	public Iterator<Celda> iterator() {		
 		
 		return new MapaIterator();
 	}
 
-	class MapaIterator implements Iterator<Punto> {
+	class MapaIterator implements Iterator<Celda> {
 			
 		private int actual_x;
 		private int actual_y;
@@ -115,10 +130,10 @@ public class Mapa implements Iterable<Punto>{
 			}
 		}
 		
-		public Punto next(){
+		public Celda next(){
 			if (!this.hasNext())
 				throw new NoSuchElementException();
-			Punto next = mapa.mapa[actual_x][actual_y];
+			Celda next = mapa.mapa[actual_x][actual_y];
 			this.advance();
 			return next;
 		}
@@ -132,9 +147,9 @@ public class Mapa implements Iterable<Punto>{
 	
 	// Mostrar el mapa de una forma horriblemente hermosa (?".
 	public static void main(String[] args){
-			
+
 		Mapa miMapa = new Mapa(BASES_PARA_MAIN);
-		Punto elPunto;
+		Celda elPunto;
 		Recurso elRecurso;
 		for (int y2 = 0; y2 < miMapa.alto(); y2++){
 			for (int x2 = 0; x2 < miMapa.ancho(); x2++){
