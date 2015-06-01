@@ -1,10 +1,14 @@
 package fiuba.algo3.tp_final;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-public class Mapa {
+public class Mapa implements Iterable<Punto>{
 	final int DISTANCIA_BORDE = 10;
 	final int DISTANCIA_ENTRE_BASES = 64;
+	
+	static int BASES_PARA_MAIN = 3;
 	
 	private int _ancho;
 	private int _alto;
@@ -84,5 +88,92 @@ public class Mapa {
 	public Punto getCelda(int x, int y) {
 		return mapa[x][y];
 	}
+	
+	
+	public Iterator<Punto> iterator() {		
+		
+		return new MapaIterator();
+	}
 
+	class MapaIterator implements Iterator<Punto> {
+			
+		private int actual_x;
+		private int actual_y;
+		private Mapa mapa;
+		
+		public MapaIterator() {
+			actual_x = 0;
+			actual_y = 0;
+			mapa = Mapa.this;
+		}
+		
+		private void advance(){
+			actual_x ++;
+			if (actual_x == mapa._ancho){
+				actual_x = 0;
+				actual_y ++;
+			}
+		}
+		
+		public Punto next(){
+			if (!this.hasNext())
+				throw new NoSuchElementException();
+			Punto next = mapa.mapa[actual_x][actual_y];
+			this.advance();
+			return next;
+		}
+     
+		public boolean hasNext(){
+			return((actual_y < mapa._alto ) && ( actual_x < mapa._ancho));
+		}
+	};
+
+	
+	/*
+	// Mostrar el mapa de una forma horriblemente hermosa (?".
+	public static void main(String[] args){
+			
+		Mapa miMapa = new Mapa(BASES_PARA_MAIN);
+		Punto elPunto;
+		Recurso elRecurso;
+		for (int y2 = 0; y2 < miMapa.alto(); y2++){
+			for (int x2 = 0; x2 < miMapa.ancho(); x2++){
+				elPunto = miMapa.getCelda(x2,y2);
+				
+				if (miMapa.bases.contains(elPunto) || miMapa.basesJugadores.contains(elPunto) )
+					System.out.print("B");
+				else {
+					elRecurso = elPunto.getRecurso();
+					if(elRecurso.getClass().equals(Recurso.class))
+						System.out.print(".");
+					else if(elRecurso.getClass().equals(GasVespeno.class))
+						System.out.print("G");
+					else if(elRecurso.getClass().equals(Mineral.class))
+						System.out.print("M");
+					else
+						System.out.print(" ");
+				}
+			}
+			System.out.println("");
+		}
+		
+	}	
+	
+	
+	
+	*/
+	public static void main(String[] args){
+			
+		Mapa miMapa = new Mapa(BASES_PARA_MAIN);
+		
+		// Mostrar los puntos en formato "x, y: recurso".
+		for (Punto punto : miMapa){
+			System.out.print(punto.getX());
+			System.out.print(", ");
+			System.out.print(punto.getY());
+			System.out.print(": ");
+			System.out.println(punto.getRecurso());
+		}
+	}
+	
 }
