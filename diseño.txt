@@ -1,4 +1,4 @@
-CLASES:
+﻿CLASES:
 
 Punto/Espacio:
 	Attr:
@@ -6,24 +6,29 @@ Punto/Espacio:
 		-pos y
 		-tipo de terreno (tierra/espacio)
 		-tipo de recurso o nada
-		-edificio construido 
-		-unidad en esa posicion / (multiples unidades?)
+		-edificio construido  (Tipo de recurso y edificio podriiian compartir alguna interfaz, 
+					xq no pueden coexistir en una misma celda)
+		-unidad en esa posicion / (multiples unidades?) <- conjunto de unidades adentro,
+		con cada una un "tamaño" y q la suma de estos no pueda pasarse de un limite
+
+		Nota: Puede haber unidades y edificio a la vez en una misma celda? :O
 
 Jugador: 
 	Atributos:
-		-MAPA? (para preguntar por posiciones en las creaciones?)
+		-MAPA? (para preguntar por posiciones en las creaciones?) <- Como ya implementado, a traves de un proxy
 		-raza
 		-poblacion
 		-recursos
 		-(unidades?)
-		-(edificios?)
-		-(en creacion?)
+		-(edificios?) <- Algo de los edificios tendria q saber, xq hay limites en la construccion
+		-(en creacion?) <- De eso se podria encargar cada edificio mismo.
 	Metodos:
 		-pasarTurno() -> recoleccion de recursos, turnos de construccion decrementar, etc
-		-crearUnidadX() -> para cada unidad?
+		-crearUnidadX() -> para cada unidad? <- De esto se encargarian mejor los edificios
 		-
 		
-CreadorDeUnidades: (para cada unidad(?), algun patron de diseño)
+CreadorDeUnidades: (para cada unidad(?), algun patron de diseño) <- usando simpleton tal vez? ya q todos los edificios iguales 
+								tendrian el mismo constructor y otras caracteristicas similares
 	Atributos:
 		-tiempo construccion/ tiempo RESTANTE
 		-costo
@@ -35,6 +40,10 @@ Unidades:
 	Atributos: (los de la tabla)
 		-vida
 		-(escudo)
+
+		- (tal vez q sepan a q color pertenecen? si una unidad quiere cagar a tiros a otra, tiene q saber si es aliada)
+
+		(Estos atributos de aca abajo, son comunes a todas las unidades de un mismo tipo)
 		-Ocupacion en poblacion (suministro)
 		-nombre
 		-vision
@@ -49,10 +58,24 @@ CreadorDeEdificios: (para cada edificio(?), algun patron de diseño)
 
 Edificios:
 	Att:
-		-nombre
+		-nombre <- Algun TipoEdificio usando simpleton?
 		-vida
-		-posicion?
-		-(accion secundaria?: p/ej: permitir crear unidades especificas)
+		-posicion? 
+		-(accion secundaria?: p/ej: permitir crear unidades especificas) <- Enchufandole un ConstructorUnidades
+
+
+MAPA:
+
+	Att:
+		matriz de puntos (entonces, el mapa es cuadrado)
+	
+	Notas:
+		Distancia entre puntos A y B para los ataques con rango, medir x cantidad de 
+		celdas a recorrer entre A y B (las diagonales valen doble).
+		
+			
+		
+
 
 ----
 PROCEDIMIENTOS/IDEAS: (A DISCUTIR)
@@ -88,6 +111,12 @@ Sombreado del MAPA:
 	-Tener un mapa central con toda la informacion
 	-Cada jugador se conecta por un proxy al mapa
 	-El proxy le arma el sombreado para que no se pase de piola (p/ej: excepcion si se pregunta por una posicion no conocida)
-		
-
+	
+	-Tipicamente en estos juegos, hay dos tipos de "sombreado":
+		- Por un lado, las zonas del mapa q un jugador jamas vio se le ocultan totalmente
+		(esto podria tenerse activado o desactivado, ya que en la campaña es asi, 
+		pero en juegos competitivos no se usa esto)
+		- Por otra parte, esta el conocido "Fog of war" donde a un jugador se le sombrea
+		la parte del mapa q ninguna unidad tiene en rango de vision, y se le ocultan las
+		unidades y el estado actual de edificios enemigos.
 	-

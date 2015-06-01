@@ -32,7 +32,7 @@ public class Mapa implements Iterable<Punto>{
 		// ---------------------
 		// Si queda rectangular, se extiende en ancho
 		int columnas = (int) Math.sqrt(cantidadBases);
-		if (Math.sqrt(cantidadBases) > columnas) columnas++; 
+		if (Math.sqrt(cantidadBases) > columnas) columnas++;
 		int filas = (int) Math.sqrt(cantidadBases);
 		
 		_ancho = DISTANCIA_BORDE * 2 + DISTANCIA_ENTRE_BASES * (columnas - 1);
@@ -129,7 +129,7 @@ public class Mapa implements Iterable<Punto>{
 	};
 
 	
-	/*
+	
 	// Mostrar el mapa de una forma horriblemente hermosa (?".
 	public static void main(String[] args){
 			
@@ -161,7 +161,7 @@ public class Mapa implements Iterable<Punto>{
 	
 	
 	
-	*/
+	/*
 	public static void main(String[] args){
 			
 		Mapa miMapa = new Mapa(BASES_PARA_MAIN);
@@ -175,5 +175,5 @@ public class Mapa implements Iterable<Punto>{
 			System.out.println(punto.getRecurso());
 		}
 	}
-	
+	*/
 }
