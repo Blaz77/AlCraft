@@ -7,6 +7,13 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import fiuba.algo3.mapa.Celda;
+import fiuba.algo3.mapa.GasVespeno;
+import fiuba.algo3.mapa.Mapa;
+import fiuba.algo3.mapa.Mineral;
+import fiuba.algo3.mapa.Recurso;
+import fiuba.algo3.mapa.Tierra;
+
 public class TestMapa {
 	final int SEIS_BASES = 6;
 	private Mapa mapaNuevo;
@@ -26,10 +33,10 @@ public class TestMapa {
 		return suma;
 	}
 	
-	private boolean perteneceAlMapa(Celda punto, Mapa mapa) {
-		if (punto.getX() < 0 || punto.getY() < 0)
+	private boolean perteneceAlMapa(int x, int y, Mapa mapa) {
+		if (x < 0 || y < 0)
 			return false;
-		if (punto.getX() > mapa.ancho() - 1 || punto.getY() > mapa.alto() - 1)
+		if (x > mapa.ancho() - 1 || y > mapa.alto() - 1)
 			return false;
 		
 		return true;
@@ -106,9 +113,10 @@ public class TestMapa {
 			volcanes = 0;
 			for (int x=baseActual.getX()-RADIO_BASE; x<baseActual.getX()+RADIO_BASE; x++) {
 				for (int y=baseActual.getY()-RADIO_BASE; y<baseActual.getY()+RADIO_BASE; y++) {
-					if (perteneceAlMapa(new Celda(x, y), mapaNuevo)) {
+					if (perteneceAlMapa(x, y, mapaNuevo)) {
 						// Inspeccion de la celda
-						recurso = mapaNuevo.getCelda(x, y).getRecurso();
+						recurso = mapaNuevo.getRecurso(x,y);
+						if (recurso == null) continue; //Despues sacar si hacemos RecursoNULL
 						if (recurso.getClass().equals(Mineral.class))
 							cristales++;
 						if (recurso.getClass().equals(GasVespeno.class))
@@ -128,7 +136,7 @@ public class TestMapa {
 		
 		for (Celda punto: mapaNuevo){
 			// O es terrestre, o no tiene base, y punto (cuac)
-			Assert.assertTrue(punto.getTerreno() == TipoTerreno.TERRESTRE || !(mapaNuevo.getBases().contains(punto)));
+			Assert.assertTrue(punto.getTerreno().getClass() == Tierra.class || !(mapaNuevo.getBases().contains(punto)));
 		}
 	}
 	

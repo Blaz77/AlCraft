@@ -1,6 +1,8 @@
-package fiuba.algo3.tp_final;
+package fiuba.algo3.edificios;
 
-public class Edificio implements Atacable{
+import fiuba.algo3.tp_final.Atacable;
+
+public class Edificio implements Atacable, Edificable{
 
 	// 2 Opciones: 
 	// - Herencia Edificio -> EdificioConstructor -> Barracas, etc.

@@ -1,4 +1,4 @@
-package fiuba.algo3.tp_final;
+package fiuba.algo3.mapa;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -41,7 +41,8 @@ public class Mapa implements Iterable<Celda>{
 		
 		for (int x = 0; x < _ancho; x++){
 			for (int y = 0; y < _alto; y++){
-				mapa[x][y] = new Celda(x, y); //faltaran parametros
+				//Por ahora todo Tierra, chancho ya se
+				mapa[x][y] = new Celda(x, y, new Tierra()); //faltaran parametros
 			}
 		}
 		
@@ -96,14 +97,15 @@ public class Mapa implements Iterable<Celda>{
 		return mapa[x][y].getRecurso();
 	}
 
-	public TipoTerreno getTerreno(int x, int y){
+	public Terreno getTerreno(int x, int y){
 		return mapa[x][y].getTerreno();
 	}
 	
-	public void setTerreno(TipoTerreno tipoTerreno, int x, int y){
-		mapa[x][y].setTerreno(tipoTerreno);
-	}
-	
+	//Esto lo hace en la creacion de la Celda
+//	public void setTerreno(TipoTerreno tipoTerreno, int x, int y){
+//		mapa[x][y].setTerreno(tipoTerreno);
+//	}
+//	
 	
 	public Iterator<Celda> iterator() {		
 		
