@@ -26,3 +26,8 @@ Aquél grupo que acumule 3 no aprobados, quedará automáticamente desaprobado c
 - **2da Entrega:** Miércoles 10 / 06 / 2015 - Jueves 11 / 06 / 2015
 - **3er Entrega:** Miércoles 17 / 06 / 2015 - Jueves 18 / 06 / 2015
 - **4ta y última Entrega:** Miércoles 24 / 06 / 2015 - Jueves 25 / 06 / 2015
+
+
+## UML preliminar:
+
+https://cloud.githubusercontent.com/assets/7725349/7939339/edd309d4-0920-11e5-8372-303aeb1f1e81.png
