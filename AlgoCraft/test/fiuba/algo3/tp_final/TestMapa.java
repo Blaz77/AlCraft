@@ -16,7 +16,7 @@ public class TestMapa {
 	/* Suma las distancias entre la base de puntoBase y cada una de las bases ajenas dadas
 	 * como puntos
 	 */
-	private double sumarDistancias(Punto puntoBase, ArrayList<Punto> basesAjenas) {
+	private double sumarDistancias(Celda puntoBase, ArrayList<Celda> basesAjenas) {
 		double suma = 0;
 		
 		for (int i=0; i < basesAjenas.size(); i++) {
@@ -26,7 +26,7 @@ public class TestMapa {
 		return suma;
 	}
 	
-	private boolean perteneceAlMapa(Punto punto, Mapa mapa) {
+	private boolean perteneceAlMapa(Celda punto, Mapa mapa) {
 		if (punto.getX() < 0 || punto.getY() < 0)
 			return false;
 		if (punto.getX() > mapa.ancho() - 1 || punto.getY() > mapa.alto() - 1)
@@ -44,8 +44,8 @@ public class TestMapa {
 	
 	@Test
 	public void testMapaGeneradoRespetaSeparacionJugadores() {
-		Punto puntoGeneracionJugador1 = mapaNuevo.obtenerPuntoGeneradorJugador(1);
-		Punto puntoGeneracionJugador2 = mapaNuevo.obtenerPuntoGeneradorJugador(2);
+		Celda puntoGeneracionJugador1 = mapaNuevo.obtenerPuntoGeneradorJugador(1);
+		Celda puntoGeneracionJugador2 = mapaNuevo.obtenerPuntoGeneradorJugador(2);
 		
 		// Para considerar que los jugadores estan en extremos opuestos, su distancia
 		// horizontal o vertical debe ser similar al ancho o alto del mapa respectivamente
@@ -66,12 +66,12 @@ public class TestMapa {
 	public void testMapaGeneradoDispersaBasesEnFormaJusta() {
 		final int DIFERENCIA_TOLERABLE = 40;
 		
-		Punto puntoGeneracionJugador1 = mapaNuevo.obtenerPuntoGeneradorJugador(1);
-		Punto puntoGeneracionJugador2 = mapaNuevo.obtenerPuntoGeneradorJugador(2);
+		Celda puntoGeneracionJugador1 = mapaNuevo.obtenerPuntoGeneradorJugador(1);
+		Celda puntoGeneracionJugador2 = mapaNuevo.obtenerPuntoGeneradorJugador(2);
 		
 		// Dispersa bien cuando la suma de distancias a las bases es similar en ambos 
 		// jugadores
-		ArrayList<Punto> basesAjenas = mapaNuevo.getBases();
+		ArrayList<Celda> basesAjenas = mapaNuevo.getBases();
 		basesAjenas.remove(puntoGeneracionJugador1);
 		basesAjenas.remove(puntoGeneracionJugador2);
 		
@@ -84,8 +84,8 @@ public class TestMapa {
 	@Test
 	public void testMapaGeneradoDejaEnBasesUnMineral(){
 		
-		Punto puntoGeneracionJugador1 = mapaNuevo.obtenerPuntoGeneradorJugador(1);
-		Punto puntoGeneracionJugador2 = mapaNuevo.obtenerPuntoGeneradorJugador(2);
+		Celda puntoGeneracionJugador1 = mapaNuevo.obtenerPuntoGeneradorJugador(1);
+		Celda puntoGeneracionJugador2 = mapaNuevo.obtenerPuntoGeneradorJugador(2);
 		
 		Assert.assertEquals(puntoGeneracionJugador1.getRecurso().getClass(),Mineral.class);
 		Assert.assertEquals(puntoGeneracionJugador2.getRecurso().getClass(),Mineral.class);
@@ -97,16 +97,16 @@ public class TestMapa {
 		
 		// Se toma un sector cuadrado en torno a cada base y se comprueba que haya un volcan
 		// y al menos 2 cristales
-		ArrayList<Punto> bases = mapaNuevo.getBases();
+		ArrayList<Celda> bases = mapaNuevo.getBases();
 		int cristales, volcanes;
 		Recurso recurso;
 		
-		for (Punto baseActual : bases) {
+		for (Celda baseActual : bases) {
 			cristales = 0;
 			volcanes = 0;
 			for (int x=baseActual.getX()-RADIO_BASE; x<baseActual.getX()+RADIO_BASE; x++) {
 				for (int y=baseActual.getY()-RADIO_BASE; y<baseActual.getY()+RADIO_BASE; y++) {
-					if (perteneceAlMapa(new Punto(x, y), mapaNuevo)) {
+					if (perteneceAlMapa(new Celda(x, y), mapaNuevo)) {
 						// Inspeccion de la celda
 						recurso = mapaNuevo.getCelda(x, y).getRecurso();
 						if (recurso.getClass().equals(Mineral.class))
@@ -124,9 +124,12 @@ public class TestMapa {
 	
 	@Test
 	public void testMapaGeneradoCreaBasesEnTierra() {
-		final int RADIO_BASE = 8;
+		//final int RADIO_BASE = 8;
 		
-		Assert.assertTrue(true);
+		for (Celda punto: mapaNuevo){
+			// O es terrestre, o no tiene base, y punto (cuac)
+			Assert.assertTrue(punto.getTerreno() == TipoTerreno.TERRESTRE || !(mapaNuevo.getBases().contains(punto)));
+		}
 	}
 	
 	@Test
