@@ -9,8 +9,9 @@ public class TrabajoRecoleccionMineral extends TrabajoRecoleccion {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void pasarTurno(){
+	public Trabajo pasarTurno(){
 		(this.beneficiario).agregarMinerales(this.cantPorTurnoARecolectar);
+		return this;
 	}
 
 }

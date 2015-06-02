@@ -10,7 +10,7 @@ public class TrabajoEntrenarUnidades implements Trabajo {
 		
 	}
 
-	public void pasarTurno() {
+	public Trabajo pasarTurno() {
 		//iterar la cola de los que se entrenan y llamarles .pasarTurno();
 		
 	}

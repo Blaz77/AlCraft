@@ -5,8 +5,8 @@ package fiuba.algo3.tp_final;
 public class Jugador {
 	private Color color;
 	private Raza raza;
-	private int minerales;
-	private int gasVespeno;
+	private int minerales = 0; //luego pasar a constructor de Jugador
+	private int gasVespeno = 0; //luego pasar a constructor de Jugador
 
 	public Jugador(TipoRaza raza, Color color) {
 		this.color = color;
@@ -19,6 +19,10 @@ public class Jugador {
 
 	public TipoRaza getRaza() {
 		return raza.getTipoRaza();
+	}
+	
+	public int getMinerales(){
+		return this.minerales;
 	}
 
 	public void agregarMinerales(int cantidad) {

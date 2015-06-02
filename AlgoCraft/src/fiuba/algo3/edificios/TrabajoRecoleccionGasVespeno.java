@@ -9,8 +9,9 @@ public class TrabajoRecoleccionGasVespeno extends TrabajoRecoleccion {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void pasarTurno(){
+	public Trabajo pasarTurno(){
 		(this.beneficiario).agregarGasVespeno(this.cantPorTurnoARecolectar);
+		return this;
 	}
 
 }
