@@ -56,10 +56,12 @@ public class TestRefineria {
 					}
 					catch (RuntimeException e) { // Crear excepcion propia
 						assertTrue(true);
+						return;
 					}
 				}
 			}
 		}
+		fail();
 	}
 	
 	@Test
