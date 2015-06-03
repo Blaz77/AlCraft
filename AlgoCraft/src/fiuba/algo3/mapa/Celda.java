@@ -5,33 +5,29 @@ import fiuba.algo3.edificios.Edificio;
 
 public class Celda { //quizas heredar de celda y armar Tierra/Espacio extends Celda
 
-	private int x;
-	private int y;
+	private Posicion posicion;
 	private Recurso recurso = null; //RecursoNULL
 	private Terreno terreno;
 	private Edificio edificio = null; //EdificioNULL
 
 	public Celda(int x, int y, Terreno terreno) {
-		this.x = x;
-		this.y = y;
+		this.posicion = new Posicion(x, y);
 		this.terreno = terreno;
 	}
 	
 	public int distancia(Celda other) {
-		return Math.abs(this.x - other.x) + Math.abs(this.y - other.y);
+		return posicion.distancia(other.getPosicion());
 	}
 
-	/*
-	public double distancia(Celda otroPunto) {
-		return Math.sqrt( Math.pow(this.x - otroPunto.x, 2) + Math.pow(this.y - otroPunto.y, 2) );
-	}*/
-
+	public Posicion getPosicion() {
+		return this.posicion;
+	}
 	public int getX() {
-		return x;
+		return this.posicion.getX();
 	}
 
 	public int getY() {
-		return y;
+		return this.posicion.getY();
 	}
 		
 	public void setRecurso(Recurso recurso) {

@@ -8,11 +8,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import fiuba.algo3.mapa.Celda;
-import fiuba.algo3.mapa.GasVespeno;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Mineral;
 import fiuba.algo3.mapa.Recurso;
-import fiuba.algo3.mapa.Tierra;
 import fiuba.algo3.mapa.TipoRecurso;
 import fiuba.algo3.mapa.TipoTerreno;
 
@@ -132,24 +130,28 @@ public class TestMapa {
 		}
 	}
 	
+	
+	
 	@Test
 	public void testMapaGeneradoCreaBasesEnTierra() {
 		//final int RADIO_BASE = 8;
 		
-		for (Celda punto: mapaNuevo){
-			// O es terrestre, o no tiene base, y punto (cuac)
-			Assert.assertTrue(punto.getTerreno().getTipo() == TipoTerreno.TIERRA || !(mapaNuevo.getBases().contains(punto)));
-		}
+		for (int y = 0; y < mapaNuevo.alto(); y++)
+			for (int x = 0; x < mapaNuevo.ancho(); x++){
+				// O es terrestre, o no tiene base, y punto (cuac)
+				Assert.assertTrue(mapaNuevo.getTerreno(x, y).getTipo() == TipoTerreno.TIERRA || !(mapaNuevo.esBase(x, y)));
+			}
 	}
 	
 	@Test
 	public void testMapaGeneradoTieneAreasEspaciales() {
 		boolean hayAreasEspaciales = false;
 		
-		for (Celda punto: mapaNuevo){
-			if (punto.getTerreno().getTipo() == TipoTerreno.ESPACIO) {
-				hayAreasEspaciales = true;
-				break;
+		for (int y = 0; y < mapaNuevo.alto(); y++)
+			for (int x = 0; x < mapaNuevo.ancho(); x++){
+				if (mapaNuevo.getTerreno(x, y).getTipo() == TipoTerreno.ESPACIO) {
+					hayAreasEspaciales = true;
+					break;
 			}
 		}
 		
