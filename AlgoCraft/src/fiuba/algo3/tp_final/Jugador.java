@@ -61,4 +61,8 @@ public class Jugador {
 		return this.mapaPropio;
 	}
 
+	public int getGasVespeno() {
+		return this.gasVespeno;
+	}
+
 }

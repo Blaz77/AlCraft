@@ -64,6 +64,8 @@ public class TestRefineria {
 	
 	@Test
 	public void testRefineriaSubeVidaDuranteConstruccion() {
+		refineria = crearEnVolcan(jugador, mapa);
+		
 		int vidaRelativa = refineria.getVida();
 		for(int i = 0; i < 4; i++){
 			refineria.pasarTurno();
@@ -73,18 +75,20 @@ public class TestRefineria {
 		}
 		assertEquals(vidaRelativa, refineria.getVidaMaxima());
 	}
-	/*
+	
 	@Test
-	public void testCentroDeMineralRecolectaMinerales() {
-		for(int i = 0; i < 4; i++) refineria.pasarTurno();
-		int mineralRelativo = jugador.getMinerales();
+	public void testRefineriaRecolectaGasVespeno() {
+		refineria = crearEnVolcan(jugador, mapa);
+		
+		for(int i = 0; i < 6; i++) refineria.pasarTurno(); // Construyendo
+		int gasRelativo = jugador.getGasVespeno();
 		
 		for(int i = 0; i < 10; i++){
-			mineralRelativo += 10;
-			centroMineral.pasarTurno();
-			if (jugador.getMinerales() != mineralRelativo)
-				fail("El centro de Minerales no esta recolectando Minerales (de a 10)");
+			gasRelativo += 10;
+			refineria.pasarTurno();
+			if (jugador.getGasVespeno() != gasRelativo)
+				fail("La refineria no esta recolectando gas (de a 10)");
 		}
 	}
-*/
+
 }
