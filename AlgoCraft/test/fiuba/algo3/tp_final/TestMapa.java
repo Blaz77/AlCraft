@@ -144,8 +144,16 @@ public class TestMapa {
 	
 	@Test
 	public void testMapaGeneradoTieneAreasEspaciales() {
+		boolean hayAreasEspaciales = false;
 		
-		Assert.assertTrue(true);
+		for (Celda punto: mapaNuevo){
+			if (punto.getTerreno().getTipo() == TipoTerreno.ESPACIO) {
+				hayAreasEspaciales = true;
+				break;
+			}
+		}
+		
+		Assert.assertTrue(hayAreasEspaciales);
 	}
 	
 }

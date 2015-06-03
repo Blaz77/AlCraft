@@ -42,7 +42,7 @@ public class Mapa implements Iterable<Celda>{
 
 		mapa = new Celda[_ancho][_alto];// X==ancho, y==alto
 
-		llenarMapaDeTierra();
+		llenarTerrenoMapa();
 		
 		ubicarBases(cantidadBases);
 		
@@ -74,13 +74,14 @@ public class Mapa implements Iterable<Celda>{
 	}
 	
 	
-	private void llenarMapaDeTierra(){
+	private void llenarTerrenoMapa(){
+		//Por ahora todo Tierra, excepto una celda chancho ya se
 		for (int x = 0; x < _ancho; x++){
 			for (int y = 0; y < _alto; y++){
-				//Por ahora todo Tierra, chancho ya se
 				mapa[x][y] = new Celda(x, y, new Tierra()); //faltaran parametros
 			}
 		}
+		mapa[0][0] = new Celda(0, 0, new Espacio());
 	}
 	
 	
