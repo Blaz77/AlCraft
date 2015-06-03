@@ -3,10 +3,9 @@ package fiuba.algo3.mapa;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Random;
 
-import junit.framework.Assert;
-
-import org.junit.Test;
+//import junit.framework.Assert;
 
 public class Mapa implements Iterable<Celda>{
 	final int DISTANCIA_BORDE = 10;
@@ -76,12 +75,28 @@ public class Mapa implements Iterable<Celda>{
 	
 	private void llenarTerrenoMapa(){
 		//Por ahora todo Tierra, excepto una celda chancho ya se
+		
+		Random miRNG = new Random();
 		for (int x = 0; x < _ancho; x++){
 			for (int y = 0; y < _alto; y++){
 				mapa[x][y] = new Celda(x, y, new Tierra()); //faltaran parametros
 			}
 		}
-		mapa[0][0] = new Celda(0, 0, new Espacio());
+		
+		// Esto le pone algunas celdas espaciales al borde de arriba
+		for (int y = 0; y < DISTANCIA_BORDE; y++)
+			for (int x = 0; x < _ancho; x++)
+				if ((y == 0 || getTerreno(x, y-1).getTipo() == TipoTerreno.ESPACIO) && miRNG.nextBoolean())
+					mapa[x][y] = new Celda(x, y, new Espacio());
+		
+		
+		// y esto al de abajo
+		for (int y = _alto - 1; y > _alto - DISTANCIA_BORDE; y--)
+			for (int x = 0; x < _ancho; x++)
+				if ((((y == _alto - 1) || getTerreno(x, y+1).getTipo() == TipoTerreno.ESPACIO) && miRNG.nextBoolean()))
+					mapa[x][y] = new Celda(x, y, new Espacio());
+		
+		
 	}
 	
 	
@@ -216,7 +231,6 @@ public class Mapa implements Iterable<Celda>{
 		System.out.format("Geyseres cerca del jugador 1: %d%n", vespenoJ1);		
 		System.out.format("Minerales cerca del jugador 2: %d%n", mineralesJ2);		
 		System.out.format("Geyseres cerca del jugador 2: %d%n", vespenoJ2);	
-		Assert.assertTrue(true);
 	}	
 
 		
