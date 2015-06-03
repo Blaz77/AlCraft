@@ -1,13 +1,10 @@
 package fiuba.algo3.mapa;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
 import java.util.Random;
 
-//import junit.framework.Assert;
 
-public class Mapa implements Iterable<Celda>{
+public class Mapa {
 	final int DISTANCIA_BORDE = 10;
 	final int DISTANCIA_ENTRE_BASES = 64;
 	
@@ -72,7 +69,6 @@ public class Mapa implements Iterable<Celda>{
 		}
 	}
 	
-	
 	private void llenarTerrenoMapa(){
 		//Por ahora todo Tierra, excepto una celda chancho ya se
 		
@@ -98,7 +94,6 @@ public class Mapa implements Iterable<Celda>{
 		
 		
 	}
-	
 	
 	public double distancia(int x1, int y1, int x2, int y2) {
 		return mapa[x1][y1].distancia(mapa[x2][y2]);
@@ -137,63 +132,22 @@ public class Mapa implements Iterable<Celda>{
 	public Terreno getTerreno(int x, int y){
 		return mapa[x][y].getTerreno();
 	}
-	
-	//Esto lo hace en la creacion de la Celda
-//	public void setTerreno(TipoTerreno tipoTerreno, int x, int y){
-//		mapa[x][y].setTerreno(tipoTerreno);
-//	}
-//	
-	
-	public Iterator<Celda> iterator() {		
-		
-		return new MapaIterator();
-	}
-
-	class MapaIterator implements Iterator<Celda> {
-			
-		private int actual_x;
-		private int actual_y;
-		private Mapa mapa;
-		
-		public MapaIterator() {
-			actual_x = 0;
-			actual_y = 0;
-			mapa = Mapa.this;
-		}
-		
-		private void advance(){
-			actual_x ++;
-			if (actual_x == mapa._ancho){
-				actual_x = 0;
-				actual_y ++;
-			}
-		}
-		
-		public Celda next(){
-			if (!this.hasNext())
-				throw new NoSuchElementException();
-			Celda next = mapa.mapa[actual_x][actual_y];
-			this.advance();
-			return next;
-		}
-     
-		public boolean hasNext(){
-			return((actual_y < mapa._alto ) && ( actual_x < mapa._ancho));
-		}
-	};
 
 	
 	/* DEBUG AREA */
 
 	private void imprimirRecursoPorCelda(){
-		
+		Celda celda;
 		// Mostrar los puntos en formato "x, y: recurso".
-		for (Celda celda : this){
-			System.out.print(celda.getX());
-			System.out.print(", ");
-			System.out.print(celda.getY());
-			System.out.print(": ");
-			System.out.println(celda.getRecurso());
+		for (int y2 = 0; y2 < _alto; y2++)
+			for (int x2 = 0; x2 < _ancho; x2++){
+				celda = mapa[x2][y2];
+			
+				System.out.print(celda.getX());
+				System.out.print(", ");
+				System.out.print(celda.getY());
+				System.out.print(": ");
+				System.out.println(celda.getRecurso());
 		}
 	}
 	
@@ -267,8 +221,14 @@ public class Mapa implements Iterable<Celda>{
 		Mapa miMapa = new Mapa(BASES_PARA_MAIN);
 		
 		miMapa.imprimirMapaConReferencias();
-		//miMapa.imprimirMineralesCercaDeJugadores();
-		//miMapa.imprimirRecursoPorCelda();
+		if (args.length != 0) {
+			miMapa.imprimirMineralesCercaDeJugadores();
+			miMapa.imprimirRecursoPorCelda();
+		}
+	}
+
+	public boolean esBase(int x, int y) {
+		return bases.contains(mapa[x][y]);
 	}
 		
 
