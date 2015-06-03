@@ -5,18 +5,22 @@ package fiuba.algo3.tp_final;
 public class Jugador {
 	private Color color;
 	private Raza raza;
-	private int minerales = 0; //luego pasar a constructor de Jugador
-	private int gasVespeno = 0; //luego pasar a constructor de Jugador
+	private int minerales;
+	private int gasVespeno;
 	//quizas hacer Objeto Poblacion?
 	//poblacionMax = 200;
 	//poblacionlibre = x;
-	private int poblacion = 0;
+	private int poblacion;
 
 	public Jugador(TipoRaza raza, Color color) {
 		RazaFactory razaFactory = new RazaFactory();
 		
 		this.color = color;
 		this.raza = razaFactory.getRaza(raza);
+		
+		this.minerales = 200;
+		this.gasVespeno = 50;
+		this.poblacion = 0;
 	}
 
 	public Color getColor() {
