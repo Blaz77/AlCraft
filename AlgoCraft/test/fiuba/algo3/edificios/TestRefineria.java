@@ -27,7 +27,7 @@ public class TestRefineria {
 	
 	@Before
 	public void setUp() throws Exception {
-		//mapa = new Mapa(6);
+		mapa = new Mapa(6);
 		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL);
 		this.terranFactory = new EdificiosTerranFactory();
 		//this.refineria = terranFactory.crearRecolectorGasVespeno(jugador, 20, 40);
@@ -43,6 +43,7 @@ public class TestRefineria {
 		assertEquals(refineria.getNombre(),"Refineria");
 	}
 	
+	@Test
 	public void testCrearRefineriaFueraDeVolcanFalla() {
 		for (Celda punto : mapa) {
 			if (punto.getRecurso().getTipo() != TipoRecurso.VESPENO) {

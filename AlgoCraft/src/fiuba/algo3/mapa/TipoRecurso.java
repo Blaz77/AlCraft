@@ -1,5 +1,5 @@
 package fiuba.algo3.mapa;
 
 public enum TipoRecurso {
-	MINERAL, VESPENO
+	NO_RECURSO, MINERAL, VESPENO
 }

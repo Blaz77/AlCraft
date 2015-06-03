@@ -7,7 +7,7 @@ public class Celda { //quizas heredar de celda y armar Tierra/Espacio extends Ce
 
 	private int x;
 	private int y;
-	private Recurso recurso = null; //RecursoNULL
+	private Recurso recurso = new NoRecurso();
 	private Terreno terreno;
 	private Edificio edificio = null; //EdificioNULL
 
