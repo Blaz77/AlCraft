@@ -17,9 +17,11 @@ public class TestRefineria {
 	private Edificio refineria;
 	
 	private Edificio crearEnVolcan(Jugador jugador, Mapa mapa) {
-		for (Celda punto : mapa) {
-			if (punto.getRecurso().getTipo() == TipoRecurso.VESPENO) {
-				return terranFactory.crearRecolectorGasVespeno(jugador, punto.getX(), punto.getY());
+		for (int y = 0; y < mapa.alto(); y++) {
+			for (int x = 0; x < mapa.ancho(); x++) {
+				if (mapa.getRecurso(x, y).getTipo() == TipoRecurso.VESPENO) {
+					return terranFactory.crearRecolectorGasVespeno(jugador, x, y);
+				}
 			}
 		}
 		return null;
@@ -45,20 +47,19 @@ public class TestRefineria {
 	
 	@Test
 	public void testCrearRefineriaFueraDeVolcanFalla() {
-		for (Celda punto : mapa) {
-			if (punto.getRecurso().getTipo() != TipoRecurso.VESPENO) {
-				try {
-					refineria = terranFactory.crearRecolectorGasVespeno(jugador, punto.getX(), punto.getY());
-					fail();
-				}
-				catch (RuntimeException e) { // Crear excepcion propia
-					assertTrue(true);
+		for (int y = 0; y < mapa.alto(); y++) {
+			for (int x = 0; x < mapa.ancho(); x++) {
+				if (mapa.getRecurso(x, y).getTipo() != TipoRecurso.VESPENO) {
+					try {
+						refineria = terranFactory.crearRecolectorGasVespeno(jugador, x, y);
+						fail();
+					}
+					catch (RuntimeException e) { // Crear excepcion propia
+						assertTrue(true);
+					}
 				}
 			}
 		}
-		
-		assertNotNull(refineria);
-		assertEquals(refineria.getNombre(),"Refineria");
 	}
 	
 	@Test
