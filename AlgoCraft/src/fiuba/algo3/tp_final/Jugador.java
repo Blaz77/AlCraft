@@ -7,10 +7,11 @@ public class Jugador {
 	private Raza raza;
 	private int minerales;
 	private int gasVespeno;
+	//quizas hacer Objeto Poblacion?
+	//poblacionMax = 200;
+	//poblacionlibre = x;
 	private int poblacion;
 
-	final int poblacionMaxima = 200;
-	
 	public Jugador(TipoRaza raza, Color color) {
 		RazaFactory razaFactory = new RazaFactory();
 		
@@ -34,17 +35,17 @@ public class Jugador {
 		return this.minerales;
 	}
 
-	public void modificarMinerales(int cantidad) {
-		//si cantidad es negativo levantar excepcion? No: con esto la "gastamos"
+	public void agregarMinerales(int cantidad) {
+		//si cantidad es negativo levantar excepcion?
 		this.minerales += cantidad;
 	}
 	
-	public void modificarGasVespeno(int cantidad){
-		//si cantidad es negativo levantar excepcion? Idem arriba. si queda negativo el recurso, en cambio...
+	public void agregarGasVespeno(int cantidad){
+		//si cantidad es negativo levantar excepcion?
 		this.gasVespeno += cantidad;
 	}
 
-	public void modificarPoblacion(int i) { // Aca si es negativo es xq se murio gente.
+	public void aumentarPoblacion(int i) {
 		this.poblacion += i;		
 	}
 	
