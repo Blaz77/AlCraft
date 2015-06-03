@@ -1,5 +1,7 @@
 package fiuba.algo3.tp_final;
 
+import fiuba.algo3.mapa.Mapa;
+
 //import java.util.ArrayList;
 
 public class Jugador {
@@ -11,8 +13,9 @@ public class Jugador {
 	//poblacionMax = 200;
 	//poblacionlibre = x;
 	private int poblacion;
+	private Mapa mapaPropio;
 
-	public Jugador(TipoRaza raza, Color color) {
+	public Jugador(TipoRaza raza, Color color, Mapa mapa) {
 		RazaFactory razaFactory = new RazaFactory();
 		
 		this.color = color;
@@ -21,6 +24,7 @@ public class Jugador {
 		this.minerales = 200;
 		this.gasVespeno = 50;
 		this.poblacion = 0;
+		this.mapaPropio = mapa;
 	}
 
 	public Color getColor() {
@@ -51,6 +55,10 @@ public class Jugador {
 	
 	public int getPoblacion(){
 		return this.poblacion;
+	}
+	
+	public Mapa getMApa() {
+		return this.mapaPropio;
 	}
 
 }

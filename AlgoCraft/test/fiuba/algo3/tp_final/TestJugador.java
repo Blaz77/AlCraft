@@ -5,12 +5,14 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import fiuba.algo3.mapa.Mapa;
+
 public class TestJugador {
 	Jugador jugadorTerran;
 	
 	@Before
 	public void setUp() {
-		jugadorTerran = new Jugador(TipoRaza.TERRAN, Color.ROJO);
+		jugadorTerran = new Jugador(TipoRaza.TERRAN, Color.ROJO, new Mapa(6));
 	}
 
 	@Test

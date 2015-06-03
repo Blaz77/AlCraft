@@ -1,10 +1,14 @@
 package fiuba.algo3.edificios;
 
+import fiuba.algo3.mapa.TipoRecurso;
 import fiuba.algo3.tp_final.*;
 
 public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 
 	public Edificio crearRecolectorGasVespeno(Jugador jugador, int x, int y) {
+		if (jugador.getMApa().getRecurso(x, y).getTipo() != TipoRecurso.VESPENO) {
+			throw new RuntimeException();
+		}
 		Edificio edificio = new Refineria(jugador, x, y);
 		Trabajo construccion = new TrabajoConstruccion(6);
 		edificio.setTrabajo(construccion);

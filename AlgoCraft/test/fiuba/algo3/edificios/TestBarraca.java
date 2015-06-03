@@ -19,7 +19,7 @@ public class TestBarraca {
 	@Before
 	public void setUp() throws Exception {
 		//mapa = new Mapa(6);
-		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL);
+		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL, mapa);
 		this.terranFactory = new EdificiosTerranFactory();
 		this.barraca = terranFactory.crearEntrenadorUnidadesBasicas(jugador, 20, 40);
 	}
