@@ -1,5 +1,7 @@
 package fiuba.algo3.tp_final;
 
+import fiuba.algo3.edificios.Edificio;
+
 
 /* 
  * 

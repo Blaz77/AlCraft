@@ -8,6 +8,6 @@ public interface Vida {
 	
 	public void regenerar(int vida);
 	
-	public void recibirDaño(int puntos);
+	public void recibirDanio(int puntos);
 
 }

@@ -49,8 +49,8 @@ public class Edificio { //implements Atacable
 		return this.vida.getVidaMaxima();
 	}
 	
-	public void recibirDaño(int puntos){
-		this.vida.recibirDaño(puntos);
+	public void recibirDanio(int puntos){
+		this.vida.recibirDanio(puntos);
 	}
 	
 	public void setTrabajo(Trabajo trabajo){

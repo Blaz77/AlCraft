@@ -11,6 +11,7 @@ public class TrabajoEntrenarUnidades implements Trabajo {
 	}
 
 	public Trabajo pasarTurno() {
+		return null;
 		//iterar la cola de los que se entrenan y llamarles .pasarTurno();
 		
 	}

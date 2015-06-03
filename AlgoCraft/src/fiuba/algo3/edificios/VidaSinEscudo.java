@@ -24,7 +24,7 @@ public class VidaSinEscudo implements Vida {
 		if (this.vida > this.vidaMaxima) this.vida = this.vidaMaxima;
 	}
 	
-	public void recibirDaño(int puntos){
+	public void recibirDanio(int puntos){
 		this.vida -= puntos;
 		if (this.vida <= 0) throw new RuntimeException();//? 
 	}
