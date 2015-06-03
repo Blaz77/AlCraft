@@ -1,5 +1,7 @@
 package fiuba.algo3.edificios;
 
+import fiuba.algo3.tp_final.*;
+
 public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 
 	public Edificio crearRecolectorGasVespeno() {
@@ -7,9 +9,11 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 		return null;
 	}
 
-	public Edificio crearRecolectorMineral() {
-		// TODO Auto-generated method stub
-		return null;
+	public Edificio crearRecolectorMineral(Jugador jugador, int x, int y) {
+		Edificio edificio = new CentroDeMineral(jugador, x, y);
+		Trabajo construccion = new TrabajoConstruccion(4);
+		edificio.setTrabajo(construccion);
+		return edificio;
 	}
 
 	public Edificio crearIncrementadorPoblacion() {
@@ -28,6 +32,11 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 	}
 
 	public Edificio crearEntrenadorUnidadesAvanzadas() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Edificio crearRecolectorMineral() {
 		// TODO Auto-generated method stub
 		return null;
 	}

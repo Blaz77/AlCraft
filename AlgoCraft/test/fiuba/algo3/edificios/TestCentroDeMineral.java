@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import fiuba.algo3.edificios.ConstruccionesTerran;
 import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.tp_final.*;
 import fiuba.algo3.mapa.*;
@@ -14,15 +13,15 @@ public class TestCentroDeMineral {
 
 	private Mapa mapa;
 	private Jugador jugador;
-	private ConstruccionesTerran constructor;
+	private EdificiosTerranFactory terranFactory;
 	private Edificio centroMineral;
 	
 	@Before
 	public void setUp() throws Exception {
 		//mapa = new Mapa(6);
 		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL);
-		this.constructor = new ConstruccionesTerran();
-		this.centroMineral = constructor.crearCentroDeMineral(jugador, 20, 40);
+		this.terranFactory = new EdificiosTerranFactory();
+		this.centroMineral = terranFactory.crearRecolectorMineral(jugador, 20, 40);
 	}
 
 	//TESTS SIN REQUISITOS POR AHORA!!!

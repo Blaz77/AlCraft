@@ -1,6 +1,6 @@
 package fiuba.algo3.edificios;
 
-public interface Trabajo {
+public interface Trabajo extends Componente {
 	
 	//public void cambiarA(Trabajo otroTrabajo) throws Exception;
 	

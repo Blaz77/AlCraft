@@ -15,5 +15,10 @@ public class TrabajoEntrenarUnidades implements Trabajo {
 		//iterar la cola de los que se entrenan y llamarles .pasarTurno();
 		
 	}
+
+	public void setAnterior(Componente componenteAnterior) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

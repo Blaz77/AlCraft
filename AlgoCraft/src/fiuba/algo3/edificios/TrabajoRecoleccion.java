@@ -12,5 +12,9 @@ public abstract class TrabajoRecoleccion implements Trabajo {
 		this.cantPorTurnoARecolectar = cantidadPorTurno;
 		this.beneficiario = beneficiario;
 	}
+	
+	public void setAnterior(Componente trabajo){
+		
+	}
 
 }

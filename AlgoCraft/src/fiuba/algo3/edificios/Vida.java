@@ -1,6 +1,6 @@
 package fiuba.algo3.edificios;
 
-public interface Vida {
+public interface Vida extends Componente{
 	
 	public int getVidaMaxima();
 	

@@ -3,7 +3,7 @@ package fiuba.algo3.edificios;
 import fiuba.algo3.tp_final.Atacable;
 import fiuba.algo3.tp_final.Jugador;
 
-public class Edificio { //implements Atacable
+public abstract class Edificio { //implements Atacable
 
 	// 2 Opciones: 
 	// - Herencia Edificio -> EdificioConstructor -> Barracas, etc.
@@ -11,22 +11,22 @@ public class Edificio { //implements Atacable
 	// - Edificio generico con estados internos - modificables, si fuese necesario-
 	// El constructor de unidades va de la mano con estos estados.
 
-	private String nombre;
+	protected String nombre;
 	private Jugador propietario;
 	private int x;
 	private int y;
-	private Vida vida;
-	//private Trabajo porDefecto;
-	private Trabajo trabajo; //En construccion/Trabajando (no se puede accionar) /En espera (permite acciones)
+	protected Vida vida = new VidaNull();
+	protected Trabajo trabajo = new TrabajoNull(); //En construccion/Trabajando (no se puede accionar) /En espera (permite acciones)
+	protected EntrenadorUnidades entrenador = new EntrenadorUnidadesNull();
 	
+	//private Trabajo porDefecto;
 	//private Ataque ataque;
 	//private Movimiento mov;
 	//private Almacenador alm;
 	
 	
 	
-	public Edificio(String nombre, Jugador propietario, int x, int y) {
-		this.nombre = nombre;
+	public Edificio(Jugador propietario, int x, int y) {
 		this.propietario = propietario;
 		this.x = x;
 		this.y = y;
@@ -53,8 +53,9 @@ public class Edificio { //implements Atacable
 		this.vida.recibirDanio(puntos);
 	}
 	
-	public void setTrabajo(Trabajo trabajo){
-		this.trabajo = trabajo;
+	public void setTrabajo(Trabajo nuevoTrabajo){
+		nuevoTrabajo.setAnterior(this.trabajo);
+		this.trabajo = nuevoTrabajo;
 	}
 	
 	// Manejar veneno. Alguna interfaz para esto

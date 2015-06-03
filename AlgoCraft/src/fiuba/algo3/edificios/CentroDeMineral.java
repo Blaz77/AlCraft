@@ -3,13 +3,17 @@ package fiuba.algo3.edificios;
 import fiuba.algo3.tp_final.Jugador;
 
 
-public class CentroDeMineral extends Edificio{
+public class CentroDeMineral extends Edificio {
 	
-	public CentroDeMineral(String nombre, Jugador propietario, int x, int y) {
-		super(nombre, propietario, x, y);
-		// TODO Auto-generated constructor stub
+	public CentroDeMineral(Jugador propietario, int x, int y) {
+		super(propietario, x, y);
+		this.vida = new VidaSinEscudo(500);
+		this.trabajo = new TrabajoRecoleccionMineral(10, propietario);
+		this.nombre = "Centro de Mineral";
 	}
-
+	
+	
+	// no ver esto de abajo
 	public boolean enTierra(){
 		return true;
 	}

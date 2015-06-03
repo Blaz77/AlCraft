@@ -6,11 +6,15 @@ public class VidaSinEscudo implements Vida {
 	private final int vidaMaxima;
 	private int vida;
 
-	public VidaSinEscudo(int vidaMaxima, int vidaInicial){
+	public VidaSinEscudo(int vidaInicial, int vidaMaxima){
 		this.vidaMaxima = vidaMaxima;
 		this.vida = vidaInicial;
 	}
 	
+	public VidaSinEscudo(int vidaMaxima) {
+		this(vidaMaxima, vidaMaxima);
+	}
+
 	public int getVidaMaxima(){
 		return this.vidaMaxima;
 	}
@@ -27,5 +31,9 @@ public class VidaSinEscudo implements Vida {
 	public void recibirDanio(int puntos){
 		this.vida -= puntos;
 		if (this.vida <= 0) throw new RuntimeException();//? 
+	}
+
+	public void setAnterior(Componente componenteAnterior) {
+
 	}
 }
