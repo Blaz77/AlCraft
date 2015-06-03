@@ -1,6 +1,7 @@
-package fiuba.algo3.tp_final;
+package fiuba.algo3.unidades;
 
 import fiuba.algo3.edificios.Edificio;
+import fiuba.algo3.tp_final.Atacable;
 
 
 /* 
