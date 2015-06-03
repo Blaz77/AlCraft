@@ -40,6 +40,12 @@ public class Mapa implements Iterable<Celda>{
 
 		llenarMapaDeTierra();
 		
+		ubicarBases(cantidadBases);
+		
+		ubicarRecursos();
+	}
+
+	private void ubicarBases(int cantidadBases) {
 		for (int i = 0; i < cantidadBases; i++){
 			int base_x = DISTANCIA_BORDE + SEMILADO_BASE + i * (1 + 2*SEMILADO_BASE + DISTANCIA_ENTRE_BASES); 
 			int base_y = DISTANCIA_BORDE + SEMILADO_BASE;
@@ -50,6 +56,20 @@ public class Mapa implements Iterable<Celda>{
 		basesJugadores.add(bases.get(bases.size() - 1));
 	}
 
+	private void ubicarRecursos(){
+
+		int x;
+		int y;
+		for (Celda base : bases){
+			x = base.getX();
+			y = base.getY();
+			mapa[x][y].setRecurso(new Mineral());
+			mapa[x+2][y].setRecurso(new GasVespeno());
+			mapa[x-1][y+3].setRecurso(new Mineral());
+		}
+	}
+	
+	
 	private void llenarMapaDeTierra(){
 		for (int x = 0; x < _ancho; x++){
 			for (int y = 0; y < _alto; y++){
@@ -152,29 +172,27 @@ public class Mapa implements Iterable<Celda>{
 		Recurso elRecurso;
 		for (int y2 = 0; y2 < miMapa.alto(); y2++){
 			for (int x2 = 0; x2 < miMapa.ancho(); x2++){
-				elPunto = miMapa.getCelda(x2,y2);
+				elPunto = miMapa.mapa[x2][y2];
 
 				if (miMapa.basesJugadores.contains(elPunto))
 					System.out.print("P");
 				else if (miMapa.bases.contains(elPunto) )
 					System.out.print("B");
-				else /*{
-					elRecurso = elPunto.getRecurso();
-					if(elRecurso.getClass().equals(Recurso.class))
-						System.out.print(".");
-					else if(elRecurso.getClass().equals(GasVespeno.class))
+				else {
+					elRecurso = miMapa.getRecurso(x2, y2);
+					if(elRecurso != null && elRecurso.getClass().equals(Recurso.class))
+						System.out.print("R");
+					else if(elRecurso != null && elRecurso.getClass().equals(GasVespeno.class))
 						System.out.print("G");
-					else if(elRecurso.getClass().equals(Mineral.class))
+					else if(elRecurso != null && elRecurso.getClass().equals(Mineral.class))
 						System.out.print("M");
-					else*/
+					else
 						System.out.print(".");
 				}
-			
+			}
 			System.out.println("");
 		}
-		
-	}	
-	
+	}
 }
 	
 	/*
