@@ -8,6 +8,9 @@ public class Mapa implements Iterable<Celda>{
 	final int DISTANCIA_BORDE = 10;
 	final int DISTANCIA_ENTRE_BASES = 64;
 	
+	// La base es un territorio cuadrado, del q marcamos su centro
+	final int SEMILADO_BASE = 8; // El lado de una base sera entonces 2 * semilado + 1 (el centro)
+	
 	static int BASES_PARA_MAIN = 5;
 	
 	private int _ancho;
@@ -19,52 +22,46 @@ public class Mapa implements Iterable<Celda>{
 	/* Genera un mapa para 2 jugadores, con la cantidad de bases
 	 * especxificada
 	 */
-	public Mapa(int cantidadBases) {
-		// Por ahora es todo fijo, despu�s veremos como hacer un generador 
+	public Mapa(int cantidadBases){
+		// Por ahora es todo fijo, despues veremos como hacer un generador 
 		// aleatorio
-		// Esto genera una cuadricula estilo
-		// ---------------------
-		// ---B------B------B---
-		// ---------------------
-		// ---B------B------B---
-		// ---------------------
-		// ---B------B----------
-		// ---------------------
-		// Si queda rectangular, se extiende en ancho
-		int filas = (int) Math.ceil(Math.sqrt(cantidadBases));
-		int columnas = filas;//(int) Math.sqrt(cantidadBases);
+		// Esto genera un chorizo estilo
+
+		//...........         .......
+		//..P.....B.. ..etc.. ....P..
+		//...........         .......
 		
-		_ancho = DISTANCIA_BORDE * 2 + DISTANCIA_ENTRE_BASES * (columnas - 1);
-		_alto = DISTANCIA_BORDE * 2 + DISTANCIA_ENTRE_BASES * (filas - 1);
-		
+		int lado = 2 * SEMILADO_BASE + 1;
+		int bordes = 2 * DISTANCIA_BORDE;
+		_ancho = bordes + cantidadBases * lado + DISTANCIA_ENTRE_BASES * (cantidadBases - 1);
+		_alto = bordes + lado;
+
 		mapa = new Celda[_ancho][_alto];// X==ancho, y==alto
+
+		llenarMapaDeTierra();
 		
+		for (int i = 0; i < cantidadBases; i++){
+			int base_x = DISTANCIA_BORDE + SEMILADO_BASE + i * (1 + 2*SEMILADO_BASE + DISTANCIA_ENTRE_BASES); 
+			int base_y = DISTANCIA_BORDE + SEMILADO_BASE;
+			bases.add(mapa[base_x][base_y]);
+		}
+			
+		basesJugadores.add(bases.get(0));
+		basesJugadores.add(bases.get(bases.size() - 1));
+	}
+
+	private void llenarMapaDeTierra(){
 		for (int x = 0; x < _ancho; x++){
 			for (int y = 0; y < _alto; y++){
 				//Por ahora todo Tierra, chancho ya se
 				mapa[x][y] = new Celda(x, y, new Tierra()); //faltaran parametros
 			}
 		}
-		
-		for (int fila = 0; fila < filas; fila++) {
-			for (int columna = 0; columna < columnas; columna++) {
-				if (bases.size() < cantidadBases) {
-					int x = DISTANCIA_BORDE + (DISTANCIA_ENTRE_BASES * columna);
-					int y = DISTANCIA_BORDE + (DISTANCIA_ENTRE_BASES * fila);
-					Celda p = mapa[x][y];
-					bases.add(p);
-					
-					// Agrego recursos
-					mapa[x][y].setRecurso(new Mineral());
-					mapa[x+2][y].setRecurso(new GasVespeno());
-					mapa[x-1][y+3].setRecurso(new Mineral());
-				}
-			}
-		}
-		
-		// Puntos de generacion para 2 jugadores
-		basesJugadores.add(bases.get(0));
-		basesJugadores.add(bases.get(bases.size() - 1));
+	}
+	
+	
+	public double distancia(int x1, int y1, int x2, int y2) {
+		return mapa[x1][y1].distancia(mapa[x2][y2]);
 	}
 
 	public Celda obtenerPuntoGeneradorJugador(int numeroJugador) {
@@ -156,10 +153,12 @@ public class Mapa implements Iterable<Celda>{
 		for (int y2 = 0; y2 < miMapa.alto(); y2++){
 			for (int x2 = 0; x2 < miMapa.ancho(); x2++){
 				elPunto = miMapa.getCelda(x2,y2);
-				
-				if (miMapa.bases.contains(elPunto) || miMapa.basesJugadores.contains(elPunto) )
+
+				if (miMapa.basesJugadores.contains(elPunto))
+					System.out.print("P");
+				else if (miMapa.bases.contains(elPunto) )
 					System.out.print("B");
-				else {
+				else /*{
 					elRecurso = elPunto.getRecurso();
 					if(elRecurso.getClass().equals(Recurso.class))
 						System.out.print(".");
@@ -167,16 +166,16 @@ public class Mapa implements Iterable<Celda>{
 						System.out.print("G");
 					else if(elRecurso.getClass().equals(Mineral.class))
 						System.out.print("M");
-					else
-						System.out.print(" ");
+					else*/
+						System.out.print(".");
 				}
-			}
+			
 			System.out.println("");
 		}
 		
 	}	
 	
-	
+}
 	
 	/*
 	public static void main(String[] args){
@@ -192,5 +191,5 @@ public class Mapa implements Iterable<Celda>{
 			System.out.println(punto.getRecurso());
 		}
 	}
-	*/
-}
+	
+}*/
