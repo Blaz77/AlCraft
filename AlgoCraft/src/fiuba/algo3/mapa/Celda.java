@@ -38,7 +38,7 @@ public class Celda { //quizas heredar de celda y armar Tierra/Espacio extends Ce
 	}	
 	
 	public Recurso getRecurso() {
-		return recurso;
+		return this.recurso;
 	}
 
 	//O posicionar directo!

@@ -13,6 +13,8 @@ import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Mineral;
 import fiuba.algo3.mapa.Recurso;
 import fiuba.algo3.mapa.Tierra;
+import fiuba.algo3.mapa.TipoRecurso;
+import fiuba.algo3.mapa.TipoTerreno;
 
 public class TestMapa {
 	final int SEIS_BASES = 6;
@@ -117,9 +119,9 @@ public class TestMapa {
 						// Inspeccion de la celda
 						recurso = mapaNuevo.getRecurso(x,y);
 						if (recurso == null) continue; //Despues sacar si hacemos RecursoNULL
-						if (recurso.getClass().equals(Mineral.class))
+						if (recurso.getTipo() == TipoRecurso.MINERAL)
 							cristales++;
-						if (recurso.getClass().equals(GasVespeno.class))
+						if (recurso.getTipo() == TipoRecurso.VESPENO)
 							volcanes++;
 					}
 				}
@@ -136,7 +138,7 @@ public class TestMapa {
 		
 		for (Celda punto: mapaNuevo){
 			// O es terrestre, o no tiene base, y punto (cuac)
-			Assert.assertTrue(punto.getTerreno().getClass() == Tierra.class || !(mapaNuevo.getBases().contains(punto)));
+			Assert.assertTrue(punto.getTerreno().getTipo() == TipoTerreno.TIERRA || !(mapaNuevo.getBases().contains(punto)));
 		}
 	}
 	

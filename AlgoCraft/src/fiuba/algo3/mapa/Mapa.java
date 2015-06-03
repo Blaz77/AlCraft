@@ -106,9 +106,9 @@ public class Mapa implements Iterable<Celda>{
 		return new ArrayList<Celda>(bases);
 	}
 
-	public Celda getCelda(int x, int y) { // Esto de aca... public?
+	/*public Celda getCelda(int x, int y) { // Esto de aca... public?
 		return mapa[x][y];
-	}
+	}*/
 	
 	public void setRecurso(Recurso recurso, int x, int y) {
 		mapa[x][y].setRecurso(recurso);
@@ -167,7 +167,7 @@ public class Mapa implements Iterable<Celda>{
 	};
 
 	
-	
+	/* DEBUG AREA */
 
 	private void imprimirRecursoPorCelda(){
 		
@@ -180,8 +180,6 @@ public class Mapa implements Iterable<Celda>{
 			System.out.println(celda.getRecurso());
 		}
 	}
-	
-	
 	
 	private void imprimirMineralesCercaDeJugadores(){
 		
