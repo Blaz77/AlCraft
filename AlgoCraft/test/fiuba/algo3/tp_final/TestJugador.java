@@ -6,17 +6,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TestJugador {
-	Jugador jugadorNuevo;
+	Jugador jugadorTerran;
 	
 	@Before
 	public void setUp() {
-		jugadorNuevo = new Jugador(TipoRaza.TERRAN, Color.ROJO);
+		jugadorTerran = new Jugador(TipoRaza.TERRAN, Color.ROJO);
 	}
 
 	@Test
 	public void testJugadorCreadoPreservaDatos() {
-		Assert.assertTrue(jugadorNuevo.getColor() == Color.ROJO);
-		Assert.assertTrue(jugadorNuevo.getRaza() == TipoRaza.TERRAN);
+		Assert.assertTrue(jugadorTerran.getColor() == Color.ROJO);
+		Assert.assertTrue(jugadorTerran.getRaza() == TipoRaza.TERRAN);
 	}
+	
 
 }

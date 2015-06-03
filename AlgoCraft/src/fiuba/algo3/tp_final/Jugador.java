@@ -9,8 +9,10 @@ public class Jugador {
 	private int gasVespeno = 0; //luego pasar a constructor de Jugador
 
 	public Jugador(TipoRaza raza, Color color) {
+		RazaFactory razaFactory = new RazaFactory();
+		
 		this.color = color;
-		this.raza = new Raza(raza);
+		this.raza = razaFactory.getRaza(raza);
 	}
 
 	public Color getColor() {
