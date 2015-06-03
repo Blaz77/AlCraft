@@ -16,14 +16,15 @@ public class Celda { //quizas heredar de celda y armar Tierra/Espacio extends Ce
 		this.y = y;
 		this.terreno = terreno;
 	}
-	/*
-	public int distancia2(Punto otroPunto) {
-		return Math.abs(this.x - otroPunto.x) + Math.abs(this.y - otroPunto.y);
+	
+	public int distancia(Celda other) {
+		return Math.abs(this.x - other.x) + Math.abs(this.y - other.y);
 	}
-	*/
+
+	/*
 	public double distancia(Celda otroPunto) {
 		return Math.sqrt( Math.pow(this.x - otroPunto.x, 2) + Math.pow(this.y - otroPunto.y, 2) );
-	}
+	}*/
 
 	public int getX() {
 		return x;
