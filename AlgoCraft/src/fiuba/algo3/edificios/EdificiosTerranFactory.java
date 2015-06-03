@@ -4,9 +4,11 @@ import fiuba.algo3.tp_final.*;
 
 public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 
-	public Edificio crearRecolectorGasVespeno() {
-		// TODO Auto-generated method stub
-		return null;
+	public Edificio crearRecolectorGasVespeno(Jugador jugador, int x, int y) {
+		Edificio edificio = new Refineria(jugador, x, y);
+		Trabajo construccion = new TrabajoConstruccion(6);
+		edificio.setTrabajo(construccion);
+		return edificio;
 	}
 
 	public Edificio crearRecolectorMineral(Jugador jugador, int x, int y) {
@@ -16,29 +18,34 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 		return edificio;
 	}
 
-	public Edificio crearIncrementadorPoblacion() {
-		// TODO Auto-generated method stub
-		return null;
+	public Edificio crearIncrementadorPoblacion(Jugador jugador, int x, int y) {
+		Edificio edificio = new DepositoDeSuministros(jugador, x, y);
+		Trabajo construccion = new TrabajoConstruccion(6);
+		edificio.setTrabajo(construccion);
+		return edificio;
 	}
 
-	public Edificio crearEntrenadorUnidadesBasicas() {
-		// TODO Auto-generated method stub
-		return null;
+	public Edificio crearEntrenadorUnidadesBasicas(Jugador jugador, int x, int y) {
+		Edificio edificio = new Barraca(jugador, x, y);
+		Trabajo construccion = new TrabajoConstruccion(12);
+		edificio.setTrabajo(construccion);
+		return edificio;
 	}
 
-	public Edificio crearEntrenadorUnidadesIntermedias() {
-		// TODO Auto-generated method stub
-		return null;
+	public Edificio crearEntrenadorUnidadesIntermedias(Jugador jugador, int x,
+			int y) {
+		Edificio edificio = new Fabrica(jugador, x, y);
+		Trabajo construccion = new TrabajoConstruccion(12);
+		edificio.setTrabajo(construccion);
+		return edificio;
 	}
 
-	public Edificio crearEntrenadorUnidadesAvanzadas() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Edificio crearRecolectorMineral() {
-		// TODO Auto-generated method stub
-		return null;
+	public Edificio crearEntrenadorUnidadesAvanzadas(Jugador jugador, int x,
+			int y) {
+		Edificio edificio = new PuertoEstelar(jugador, x, y);
+		Trabajo construccion = new TrabajoConstruccion(10);
+		edificio.setTrabajo(construccion);
+		return edificio;
 	}
 
 }

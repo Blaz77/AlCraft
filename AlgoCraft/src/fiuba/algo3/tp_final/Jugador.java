@@ -7,6 +7,10 @@ public class Jugador {
 	private Raza raza;
 	private int minerales = 0; //luego pasar a constructor de Jugador
 	private int gasVespeno = 0; //luego pasar a constructor de Jugador
+	//quizas hacer Objeto Poblacion?
+	//poblacionMax = 200;
+	//poblacionlibre = x;
+	private int poblacion = 0;
 
 	public Jugador(TipoRaza raza, Color color) {
 		RazaFactory razaFactory = new RazaFactory();
@@ -35,6 +39,14 @@ public class Jugador {
 	public void agregarGasVespeno(int cantidad){
 		//si cantidad es negativo levantar excepcion?
 		this.gasVespeno += cantidad;
+	}
+
+	public void aumentarPoblacion(int i) {
+		this.poblacion += i;		
+	}
+	
+	public int getPoblacion(){
+		return this.poblacion;
 	}
 
 }
