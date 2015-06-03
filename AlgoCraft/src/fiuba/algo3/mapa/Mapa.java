@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import junit.framework.Assert;
+
+import org.junit.Test;
+
 public class Mapa implements Iterable<Celda>{
 	final int DISTANCIA_BORDE = 10;
 	final int DISTANCIA_ENTRE_BASES = 64;
@@ -164,22 +168,72 @@ public class Mapa implements Iterable<Celda>{
 
 	
 	
-	// Mostrar el mapa de una forma horriblemente hermosa (?".
-	public static void main(String[] args){
 
-		Mapa miMapa = new Mapa(BASES_PARA_MAIN);
+	private void imprimirRecursoPorCelda(){
+		
+		// Mostrar los puntos en formato "x, y: recurso".
+		for (Celda celda : this){
+			System.out.print(celda.getX());
+			System.out.print(", ");
+			System.out.print(celda.getY());
+			System.out.print(": ");
+			System.out.println(celda.getRecurso());
+		}
+	}
+	
+	
+	
+	private void imprimirMineralesCercaDeJugadores(){
+		
+		Celda puntoGeneracionJugador1 = obtenerPuntoGeneradorJugador(1);
+		Celda puntoGeneracionJugador2 = obtenerPuntoGeneradorJugador(2);
+		int mineralesJ1 = 0;
+		int mineralesJ2 = 0;
+		int vespenoJ1 = 0;
+		int vespenoJ2 = 0;
+
+		int x1 = puntoGeneracionJugador1.getX();
+		int y1 = puntoGeneracionJugador1.getY();
+		int x2 = puntoGeneracionJugador2.getX();
+		int y2 = puntoGeneracionJugador2.getY();
+		
+		for(int y = 0; y < alto(); y++) {
+			for (int x = 0; x < ancho(); x++) {
+				if (distancia(x,y,x1,y1) < 20) {
+					if (getRecurso(x, y) != null && getRecurso(x, y).getClass() == Mineral.class)
+						mineralesJ1++;
+					else if (getRecurso(x, y) != null && getRecurso(x, y).getClass() == GasVespeno.class)
+						vespenoJ1++;
+				}
+				else if (distancia(x,y,x2,y2) < 20) {
+					if (getRecurso(x, y) != null && getRecurso(x, y).getClass() == Mineral.class)
+						mineralesJ2++;
+					else if (getRecurso(x, y) != null && getRecurso(x, y).getClass() == GasVespeno.class)
+						vespenoJ2++;
+				}
+			}
+		}
+		System.out.format("Minerales cerca del jugador 1: %d%n", mineralesJ1);		
+		System.out.format("Geyseres cerca del jugador 1: %d%n", vespenoJ1);		
+		System.out.format("Minerales cerca del jugador 2: %d%n", mineralesJ2);		
+		System.out.format("Geyseres cerca del jugador 2: %d%n", vespenoJ2);	
+		Assert.assertTrue(true);
+	}	
+
+		
+	private void imprimirMapaConReferencias() {
 		Celda elPunto;
 		Recurso elRecurso;
-		for (int y2 = 0; y2 < miMapa.alto(); y2++){
-			for (int x2 = 0; x2 < miMapa.ancho(); x2++){
-				elPunto = miMapa.mapa[x2][y2];
+		for (int y2 = 0; y2 < alto(); y2++){
+			for (int x2 = 0; x2 < ancho(); x2++){
+				elPunto = mapa[x2][y2];
 
-				if (miMapa.basesJugadores.contains(elPunto))
+				if (basesJugadores.contains(elPunto))
 					System.out.print("P");
-				else if (miMapa.bases.contains(elPunto) )
+				else if (bases.contains(elPunto) )
 					System.out.print("B");
 				else {
-					elRecurso = miMapa.getRecurso(x2, y2);
+					elRecurso = getRecurso(x2, y2);
 					if(elRecurso != null && elRecurso.getClass().equals(Recurso.class))
 						System.out.print("R");
 					else if(elRecurso != null && elRecurso.getClass().equals(GasVespeno.class))
@@ -193,21 +247,16 @@ public class Mapa implements Iterable<Celda>{
 			System.out.println("");
 		}
 	}
-}
-	
-	/*
+
+	// Mostrar info del mapa de varias formas".
 	public static void main(String[] args){
-			
+
 		Mapa miMapa = new Mapa(BASES_PARA_MAIN);
 		
-		// Mostrar los puntos en formato "x, y: recurso".
-		for (Punto punto : miMapa){
-			System.out.print(punto.getX());
-			System.out.print(", ");
-			System.out.print(punto.getY());
-			System.out.print(": ");
-			System.out.println(punto.getRecurso());
-		}
+		miMapa.imprimirMapaConReferencias();
+		//miMapa.imprimirMineralesCercaDeJugadores();
+		//miMapa.imprimirRecursoPorCelda();
 	}
-	
-}*/
+		
+
+}
