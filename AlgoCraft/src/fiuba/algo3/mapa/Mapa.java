@@ -72,7 +72,7 @@ public class Mapa {
 	}
 
 
-// TODO: Ubicar los recursos de forma mas canchera (no anda)
+// Ubicar los recursos de forma mas canchera :D (anda pero no es perfecto, pruebenlo :D)
 /*	private void ubicarRecursos(){
 
 		int x, rand_x, y, rand_y, last_x, last_y;
@@ -89,7 +89,7 @@ public class Mapa {
 				rand_x = x + miRNG.nextInt(lado) - SEMILADO_BASE;
 				rand_y = y + miRNG.nextInt(lado) - SEMILADO_BASE;
 				System.out.format("(%d,%d)%n",rand_x, rand_y);
-				if (sinUbicar == MINERALES_POR_BASE || (distancia(rand_x, rand_y, last_x, last_y) < 6 &&
+				if (sinUbicar == MINERALES_POR_BASE || (distancia(rand_x, rand_y, last_x, last_y) == 1 &&
 						getRecurso(rand_x, rand_y).getTipo() != TipoRecurso.MINERAL)){
 					mapa[rand_x][rand_y].setRecurso(new Mineral());
 					sinUbicar--;
