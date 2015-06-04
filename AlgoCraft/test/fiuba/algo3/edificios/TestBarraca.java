@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.tp_final.*;
+import fiuba.algo3.unidades.Marine;
 import fiuba.algo3.mapa.*;
 
 public class TestBarraca {
@@ -42,18 +43,18 @@ public class TestBarraca {
 		}
 		assertEquals(vidaRelativa, barraca.getVidaMaxima());
 	}
-	/*
+	
+	
 	@Test
 	public void testBarracaEntrenaUnidad() {
-		for(int i = 0; i < 4; i++) centroMineral.pasarTurno();
-		int mineralRelativo = jugador.getMinerales();
+		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
 		
-		for(int i = 0; i < 10; i++){
-			mineralRelativo += 10;
-			centroMineral.pasarTurno();
-			if (jugador.getMinerales() != mineralRelativo)
-				fail("El centro de Minerales no esta recolectando Minerales (de a 10)");
-		}
-	}*/
+		barraca.getUnidadesEntrenables().get(0).crear();
+		
+		for(int i = 0; i < 3; i++) barraca.pasarTurno();//Entrenar Marine
+		
+		assertEquals(jugador.getUnidades().get(0).getClass(), Marine.class);
+
+	}
 
 }

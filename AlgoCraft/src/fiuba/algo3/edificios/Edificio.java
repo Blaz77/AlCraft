@@ -1,7 +1,10 @@
 package fiuba.algo3.edificios;
 
+import java.util.ArrayList;
+
 import fiuba.algo3.tp_final.Atacable;
 import fiuba.algo3.tp_final.Jugador;
+import fiuba.algo3.unidades.Constructor;
 
 public abstract class Edificio { //implements Atacable
 
@@ -33,6 +36,18 @@ public abstract class Edificio { //implements Atacable
 		//this.trabajoActual = primerTrabajo; generalmente una Construccion
 	}
 	
+	public Jugador getPropietario(){
+		return this.propietario;
+	}
+	
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
 	public int getVida() {
 		return this.vida.getVida();
 	}
@@ -67,8 +82,10 @@ public abstract class Edificio { //implements Atacable
 		return false;
 	}
 	
-	//				UnidadConstructor
-	//public ArrayList<Unidad> getConstructorDeUnidades(){
+	public ArrayList<Constructor> getUnidadesEntrenables(){
+		return this.entrenador.getUnidadesEntrenables();
+	}
+
 		
 	//}
 	// con lo que devuelve el de arriba uno haria: unidadConstructor.crear();

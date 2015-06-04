@@ -1,6 +1,10 @@
 package fiuba.algo3.tp_final;
 
+import java.util.ArrayList;
+
 import fiuba.algo3.mapa.Mapa;
+import fiuba.algo3.unidades.Constructor;
+import fiuba.algo3.unidades.Unidad;
 
 //import java.util.ArrayList;
 
@@ -14,6 +18,7 @@ public class Jugador {
 	//poblacionlibre = x;
 	private int poblacion;
 	private Mapa mapaPropio;
+	private ArrayList<Unidad> unidades;
 
 	public Jugador(TipoRaza raza, Color color, Mapa mapa) {
 		RazaFactory razaFactory = new RazaFactory();
@@ -25,6 +30,7 @@ public class Jugador {
 		this.gasVespeno = 50;
 		this.poblacion = 0;
 		this.mapaPropio = mapa;
+		this.unidades = new ArrayList<Unidad>();
 	}
 
 	public Color getColor() {
@@ -65,4 +71,11 @@ public class Jugador {
 		return this.gasVespeno;
 	}
 
+	public ArrayList<Unidad> getUnidades() {
+		return this.unidades;
+	}
+
+	public void agregarUnidad(Unidad unidad){
+		this.unidades.add(unidad);
+	}
 }
