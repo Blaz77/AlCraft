@@ -36,7 +36,7 @@ public class TestDepositoSuministros {
 		this.depositoSuministros = terranFactory.crearIncrementadorPoblacion(jugador, 20, 40);
 		
 		int vidaRelativa = depositoSuministros.getVida();
-		for(int i = 0; i < 4; i++){
+		for(int i = 0; i < 6; i++){
 			depositoSuministros.pasarTurno();
 			if (depositoSuministros.getVida() <= vidaRelativa) 
 				fail("No aumenta la vida en la Construccion");

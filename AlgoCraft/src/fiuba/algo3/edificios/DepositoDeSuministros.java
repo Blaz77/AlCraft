@@ -8,7 +8,9 @@ public class DepositoDeSuministros extends Edificio {
 		super(propietario, x, y);
 		this.vida = new VidaSinEscudo(500);
 		this.nombre = "Deposito De Suministros";
-		propietario.aumentarPoblacion(5);
 	}
 	
+	public void construccionFinalizada() {
+		propietario.aumentarPoblacion(5);
+	}
 }

@@ -15,7 +15,7 @@ public abstract class Edificio { //implements Atacable
 	// El constructor de unidades va de la mano con estos estados.
 
 	protected String nombre;
-	private Jugador propietario;
+	protected Jugador propietario;
 	private int x;
 	private int y;
 	protected Vida vida = new VidaNull();
@@ -52,6 +52,10 @@ public abstract class Edificio { //implements Atacable
 		return this.vida.getVida();
 	}
 	
+	public void regenerarVida(int puntos) {
+		this.vida.regenerar(puntos);
+	}
+	
 	public String getNombre(){
 		return this.nombre;
 	}
@@ -84,6 +88,12 @@ public abstract class Edificio { //implements Atacable
 	
 	public ArrayList<Constructor> getUnidadesEntrenables(){
 		return this.entrenador.getUnidadesEntrenables();
+	}
+
+	public void construccionFinalizada() {
+		// Se ejecuta al terminar la construccion (Puede dar un aviso,
+		// desbloquear otros edificios o aumentar poblacion)
+		return;
 	}
 
 		

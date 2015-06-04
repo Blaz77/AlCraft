@@ -35,7 +35,7 @@ public class TestBarraca {
 	@Test
 	public void testBarracaSubeVidaDuranteConstruccion() {
 		int vidaRelativa = barraca.getVida();
-		for(int i = 0; i < 4; i++){
+		for(int i = 0; i < 12; i++){
 			barraca.pasarTurno();
 			if (barraca.getVida() <= vidaRelativa) 
 				fail("No aumenta la vida en la Construccion");

@@ -6,13 +6,14 @@ public class VidaSinEscudo implements Vida {
 	private final int vidaMaxima;
 	private int vida;
 
-	public VidaSinEscudo(int vidaInicial, int vidaMaxima){
+	/*public VidaSinEscudo(int vidaInicial, int vidaMaxima){
 		this.vidaMaxima = vidaMaxima;
 		this.vida = vidaInicial;
-	}
+	}*/
 	
 	public VidaSinEscudo(int vidaMaxima) {
-		this(vidaMaxima, vidaMaxima);
+		this.vidaMaxima = vidaMaxima;
+		this.vida = 0;
 	}
 
 	public int getVidaMaxima(){
@@ -24,6 +25,7 @@ public class VidaSinEscudo implements Vida {
 	}
 	
 	public void regenerar(int vida){
+		// Si excede la vida maxima, la iguala
 		this.vida += vida;
 		if (this.vida > this.vidaMaxima) this.vida = this.vidaMaxima;
 	}

@@ -69,7 +69,7 @@ public class TestRefineria {
 		refineria = crearEnVolcan(jugador, mapa);
 		
 		int vidaRelativa = refineria.getVida();
-		for(int i = 0; i < 4; i++){
+		for(int i = 0; i < 6; i++){
 			refineria.pasarTurno();
 			if (refineria.getVida() <= vidaRelativa) 
 				fail("No aumenta la vida en la Construccion");
