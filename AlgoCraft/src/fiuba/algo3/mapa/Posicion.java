@@ -18,6 +18,6 @@ public class Posicion {
 	}
 	
 	public int distancia(Posicion other) {
-		return 0;
+		return Math.abs(this.x - other.x) + Math.abs(this.x - other.x);
 	}
 }
