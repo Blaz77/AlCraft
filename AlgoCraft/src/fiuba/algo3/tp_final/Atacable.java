@@ -1,15 +1,19 @@
 package fiuba.algo3.tp_final;
 
+// TODO En peligro de ser eliminada, dado que si ubicamos los edificios y unidades en distintos
+// casilleros nunca tendremos un caso de polimorfismo en tiempo de ejecucion...
+
+
+/* Interfaz atacable engloba todas las clases vulnerables a 
+ * recibir ataques. Por ende, deben tener una "vida" y 
+ * métodos para acceder a ella y/o modificarla
+ */
 public interface Atacable {
 
-	// Este podria ir a una interface con edificios.
 	public int getVida();
 
-	// Este podria ir a una interface con edificios.
 	public int getVidaMaxima();
 	
-	
-	// Este podria ir a una interface con edificios.
 	public void bajarVida(int puntos);
 	
 }
