@@ -56,10 +56,33 @@ public class Celda { //quizas heredar de celda y armar Tierra/Espacio extends Ce
 
 	//O posicionar directo!
 	//O preguntar si puede posicionar y luego posicionar
+	
+	// Esto me huele mal... xq la celda tiene que preguntarle al recurso si puede edificar o no?
+	// Consideren separar esto por lo siguiente:
+	
+	// - Cuando uno edifica en estos juegos, si no tiene recursos/edificios previos requeridos, la
+	// opcion de edificar no aparece o esta bloqueada / en rojo.
+	// Sin embargo, si SI puede, entonces se le pide al usuario donde quiere ubicarlo.. y AHI es donde
+	// preguntarle al terreno importa, no antes.
+	// Por ende, mi idea de una secuencia correcta de esto seria:
+	
+	// * Interfaz le pregunta al mapa si puede edificar edif en (x,y), 
+	// * Mapa le pregunta a la celda.
+	// * Celda al terreno.
+	
+	// Y para la construccion en si:
+	// * De arriba se construye el edificio (ya con posicion incluida)
+	// * Le ordenan al mapa ubicarla en (x,y)
+	// * Mapa delega en celda.
+	// * Celda lo coloca, sin preguntar. En todo caso, que explote todo si
+	// el terreno era incompatible.
+	
 	public void posicionar(Edificable edif){
-		if (terreno.puedeEdificar(edif) && recurso.puedeEdificar(edif) && edificio != null){
-			this.edificio = (Edificio)edif; //FEO, despues arreglar!
-			
+		// TODO: crear una excepcion valida para esta situacion (dejenlo asi
+		// por ahora, sino despues tenemos 200 excepciones todas iguales.)
+		if (!terreno.puedeEdificar(edif))
+			raise Exception;
+		this.edificio = (Edificio)edif; //FEO, despues arreglar! (Edificable edificio? :D)
 		}
 	}
 	
