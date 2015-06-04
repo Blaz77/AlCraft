@@ -11,6 +11,8 @@ public class Mapa {
 	// La base es un territorio cuadrado, del q marcamos su centro
 	final int SEMILADO_BASE = 8; // El lado de una base sera entonces 2 * semilado + 1 (el centro)
 	
+	final int MINERALES_POR_BASE = 4;
+	
 	static int BASES_PARA_MAIN = 5;
 	
 	private int _ancho;
@@ -68,7 +70,37 @@ public class Mapa {
 			mapa[x-1][y+3].setRecurso(new Mineral());
 		}
 	}
-	
+
+
+// TODO: Ubicar los recursos de forma mas canchera (no anda)
+/*	private void ubicarRecursos(){
+
+		int x, rand_x, y, rand_y, last_x, last_y;
+		int lado = 2 * SEMILADO_BASE + 1;
+		int sinUbicar;
+		Random miRNG = new Random();
+		for (Celda base : bases){
+			x  = base.getX();
+			y  = base.getY();
+			last_x = x;
+			last_y = y;
+			sinUbicar = MINERALES_POR_BASE;
+			while(sinUbicar > 0){
+				rand_x = x + miRNG.nextInt(lado) - SEMILADO_BASE;
+				rand_y = y + miRNG.nextInt(lado) - SEMILADO_BASE;
+				System.out.format("(%d,%d)%n",rand_x, rand_y);
+				if (sinUbicar == MINERALES_POR_BASE || (distancia(rand_x, rand_y, last_x, last_y) < 6 &&
+						getRecurso(rand_x, rand_y).getTipo() != TipoRecurso.MINERAL)){
+					mapa[rand_x][rand_y].setRecurso(new Mineral());
+					sinUbicar--;
+					last_x = rand_x;
+					last_y = rand_y;
+				}
+			}
+		}
+	}
+	*/
+
 	private void llenarTerrenoMapa(){
 		//Por ahora todo Tierra, excepto una celda chancho ya se
 		
