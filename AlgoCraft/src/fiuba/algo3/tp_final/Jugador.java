@@ -17,6 +17,7 @@ public class Jugador {
 	//poblacionMax = 200;
 	//poblacionlibre = x;
 	private int poblacion;
+	private int poblacionCapacidad;
 	private Mapa mapaPropio;
 	private ArrayList<Unidad> unidades;
 
@@ -29,6 +30,7 @@ public class Jugador {
 		this.minerales = 200;
 		this.gasVespeno = 50;
 		this.poblacion = 0;
+		this.poblacionCapacidad = 5;
 		this.mapaPropio = mapa;
 		this.unidades = new ArrayList<Unidad>();
 	}
@@ -59,8 +61,17 @@ public class Jugador {
 		this.poblacion += i;		
 	}
 	
+	public void aumentarCapacidadPoblacion(int i) {
+		this.poblacionCapacidad += i;		
+	}
+	
+
 	public int getPoblacion(){
 		return this.poblacion;
+	}
+	
+	public int getCapacidadPoblacion(){
+		return this.poblacionCapacidad;
 	}
 	
 	public Mapa getMApa() {

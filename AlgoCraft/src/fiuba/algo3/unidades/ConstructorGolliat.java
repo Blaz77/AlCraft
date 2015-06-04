@@ -22,10 +22,4 @@ public class ConstructorGolliat extends Constructor {
 		return new ConstructorGolliat();
 	}
 
-	@Override
-	public boolean cumpleRequisitos() {
-		// TODO 
-		return true;
-	}
-
 }

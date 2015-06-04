@@ -50,7 +50,7 @@ public class TestFabrica {
 	public void testFabricaEntrenaUnidad() {
 		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Construccion
 		
-		fabrica.getUnidadesEntrenables().get(0).crear();
+		fabrica.getUnidadesEntrenables().get(0).crear(jugador);
 		
 		for(int i = 0; i < 6; i++) fabrica.pasarTurno();//Entrenar Golliat
 		

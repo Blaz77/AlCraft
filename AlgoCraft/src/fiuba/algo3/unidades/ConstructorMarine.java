@@ -21,11 +21,7 @@ public class ConstructorMarine extends Constructor{
 		return new ConstructorMarine();
 	}
 
-	@Override
-	public boolean cumpleRequisitos() {
-		//TODO
-		return true;
-	}
+	
 	
 	
 

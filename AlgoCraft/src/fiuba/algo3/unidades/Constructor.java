@@ -16,9 +16,8 @@ public abstract class Constructor {
 	
 	abstract public Constructor copia();
 	
-	public void crear(){
-		//chequear Requisitos
-		// if (!this.cumpleRequisitos()) throw Exception;
+	public void crear(Jugador propietario){
+		if (! (cumpleRequisitos(propietario))) throw new RuntimeException();
 		entrenador.entrenar(this.copia());
 		
 	}
@@ -28,7 +27,14 @@ public abstract class Constructor {
 		if (this.turnosNecesarios == 0) throw new UnidadFinalizadaException();
 	}
 	
-	abstract public boolean cumpleRequisitos();
+	public boolean cumpleRequisitos(Jugador jugador) {
+		if ( (jugador.getCapacidadPoblacion() - jugador.getPoblacion() >= this.costoPoblacion) &&
+			(jugador.getMinerales() >= this.costoMinerales) &&
+			(jugador.getGasVespeno() >= this.costoGas) ) {
+			return true;
+		}
+		return false;
+	}
 	
 	public void setEntrenador(EntrenadorUnidades entrenador){
 		this.entrenador = entrenador;		

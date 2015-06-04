@@ -49,7 +49,7 @@ public class TestBarraca {
 	public void testBarracaEntrenaUnidad() {
 		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
 		
-		barraca.getUnidadesEntrenables().get(0).crear();
+		barraca.getUnidadesEntrenables().get(0).crear(jugador);
 		
 		for(int i = 0; i < 3; i++) barraca.pasarTurno();//Entrenar Marine
 		
