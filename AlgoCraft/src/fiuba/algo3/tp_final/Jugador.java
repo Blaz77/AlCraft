@@ -8,6 +8,14 @@ import fiuba.algo3.unidades.Unidad;
 
 //import java.util.ArrayList;
 
+
+/*
+ * La Clase Jugador maneja los recursos y datos especificos 
+ * del jugador (raza, color). 
+ * Ademas,se encarga principalmente de limitar las acciones del 
+ * usuario mediante las restricciones de poblacion maxima, rango 
+ * de vision, recursos para gastar, edificios ya construidos, etc.
+ */
 public class Jugador {
 	private Color color;
 	private Raza raza;
@@ -17,16 +25,19 @@ public class Jugador {
 	//poblacionMax = 200;
 	//poblacionlibre = x;
 	private int poblacion;
-	private int poblacionCapacidad;
+	private int poblacionCapacidad; // Depende de los edificios correspondientes.
 	private Mapa mapaPropio;
 	private ArrayList<Unidad> unidades;
 
-	public Jugador(TipoRaza raza, Color color, Mapa mapa) {
+	public Jugador(TipoRaza raza, Color color, Mapa mapa) { // MapaProxy? 
 		RazaFactory razaFactory = new RazaFactory();
 		
 		this.color = color;
 		this.raza = razaFactory.getRaza(raza);
 		
+		// Por ahora estos numeros magicos funcionan, despues se ve si
+		// extraerlos en forma de constantes o pasados x parametro
+		// (en caso de implementar un menu de 'opciones' antes de jugar)
 		this.minerales = 200;
 		this.gasVespeno = 50;
 		this.poblacion = 0;
@@ -74,7 +85,7 @@ public class Jugador {
 		return this.poblacionCapacidad;
 	}
 	
-	public Mapa getMApa() {
+	public Mapa getMapa() {
 		return this.mapaPropio;
 	}
 
