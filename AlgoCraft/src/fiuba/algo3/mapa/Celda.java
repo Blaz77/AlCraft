@@ -3,9 +3,19 @@ package fiuba.algo3.mapa;
 import fiuba.algo3.edificios.Edificable;
 import fiuba.algo3.edificios.Edificio;
 
+
+/*
+ * Una Celda es basicamente un nodo del mapa, que contiene
+ * toda la info correspondiente a un casillero de la grilla
+ * que basicamente compone el juego.
+ * Naturalmente, tiene poco o ningun comportamiento.
+ 
+ * Recuerden que, por ahora al menos, sólo el mapa debe tener
+ * acceso directo a esta clase.
+ */
 public class Celda { //quizas heredar de celda y armar Tierra/Espacio extends Celda
 
-	private Posicion posicion;
+	private Posicion posicion; // Es de utilidad esto aca? XD. Si las unidades/edificios/recursos lo tienen.
 	private Recurso recurso = new NoRecurso();
 	private Terreno terreno;
 	private Edificio edificio = null; //EdificioNULL
