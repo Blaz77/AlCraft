@@ -18,6 +18,9 @@ public abstract class Edificio extends ObjetoVivo { //implements Atacable
 
 	protected Trabajo trabajo = new TrabajoNull(); //En construccion/Trabajando (no se puede accionar) /En espera (permite acciones)
 	
+	public void pasarTurno(){
+		this.trabajo = trabajo.pasarTurno();
+	}
 	
 	//private Trabajo porDefecto;
 	//private Ataque ataque;
