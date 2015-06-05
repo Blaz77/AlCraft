@@ -7,7 +7,7 @@ import java.util.Queue;
 import fiuba.algo3.excepciones.UnidadFinalizadaException;
 import fiuba.algo3.unidades.Constructor;
 
-public class EntrenadorUnidades implements Trabajo{
+public class EntrenadorUnidades implements Trabajo,IEntrenador {
 
 	private ArrayList<Constructor> unidadesEntrenables = new ArrayList<Constructor>();
 	private Edificio edificio;//o edificio
