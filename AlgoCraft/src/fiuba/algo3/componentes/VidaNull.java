@@ -1,6 +1,6 @@
 package fiuba.algo3.componentes;
 
-public class VidaNull implements Vida {
+public class VidaNull implements IVida {
 //
 // Hacer que lance excepciones?//NO NECESARIAMENTE
 	
@@ -29,6 +29,26 @@ public class VidaNull implements Vida {
 	public void setAnterior(Componente componenteAnterior) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public Componente pasarTurno() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean tieneEscudo() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public int getEscudo() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getEscudoMaximo() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

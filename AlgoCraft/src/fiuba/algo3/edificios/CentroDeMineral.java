@@ -1,6 +1,6 @@
 package fiuba.algo3.edificios;
 
-import fiuba.algo3.componentes.VidaSinEscudo;
+import fiuba.algo3.componentes.Vida;
 import fiuba.algo3.juego.Jugador;
 
 
@@ -8,7 +8,7 @@ public class CentroDeMineral extends EdificioRecolectorMineral {
 	
 	public CentroDeMineral(Jugador propietario, int x, int y) {
 		super(propietario, x, y, 10);
-		this.vida = new VidaSinEscudo(500);
+		this.vida = new Vida(500);
 		this.nombre = "Centro de Mineral";
 	}
 	

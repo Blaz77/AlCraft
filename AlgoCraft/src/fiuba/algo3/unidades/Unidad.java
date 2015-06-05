@@ -13,10 +13,6 @@ import fiuba.algo3.edificios.ObjetoVivo;
  * 
  * */
 public abstract class Unidad extends ObjetoVivo implements Atacable{
-
-	private int vida;
-	private int x;
-	private int y;
 	
 	public Unidad(Jugador propietario, int x, int y){
 		super(propietario, x, y);

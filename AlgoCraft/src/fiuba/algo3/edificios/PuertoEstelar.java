@@ -1,6 +1,6 @@
 package fiuba.algo3.edificios;
 
-import fiuba.algo3.componentes.VidaSinEscudo;
+import fiuba.algo3.componentes.Vida;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.unidades.ConstructorEspectro;
 import fiuba.algo3.unidades.ConstructorNaveDeCiencia;
@@ -10,7 +10,7 @@ public class PuertoEstelar extends EdificioEntrenadorUnidades {
 
 	public PuertoEstelar(Jugador propietario, int x, int y) {
 		super(propietario, x, y);
-		this.vida = new VidaSinEscudo(1300);
+		this.vida = new Vida(1300);
 		this.nombre = "Puerto Estelar";
 		this.entrenador.agregarEntrenable(new ConstructorEspectro());
 		this.entrenador.agregarEntrenable(new ConstructorNaveDeCiencia());
