@@ -21,7 +21,7 @@ public class TestPuertoEstelar {
 	private Mapa mapa;
 	private Jugador jugador;
 	private EdificiosTerranFactory terranFactory;
-	private Edificio puerto;
+	private EdificioEntrenadorUnidades puerto;
 	
 	@Before
 	public void setUp() throws Exception {

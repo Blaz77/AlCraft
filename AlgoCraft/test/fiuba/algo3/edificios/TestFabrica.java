@@ -18,7 +18,7 @@ public class TestFabrica {
 	private Mapa mapa;
 	private Jugador jugador;
 	private EdificiosTerranFactory terranFactory;
-	private Edificio fabrica;
+	private EdificioEntrenadorUnidades fabrica;
 	
 	@Before
 	public void setUp() throws Exception {

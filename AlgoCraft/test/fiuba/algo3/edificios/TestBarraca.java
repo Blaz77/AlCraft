@@ -17,8 +17,8 @@ public class TestBarraca {
 
 	private Mapa mapa;
 	private Jugador jugador;
-	private EdificiosTerranFactory terranFactory;
-	private Edificio barraca;
+	private EdificiosTerranFactory terranFactory; //EdificiosAbstractFactory
+	private EdificioEntrenadorUnidades barraca;
 	
 	@Before
 	public void setUp() throws Exception {
