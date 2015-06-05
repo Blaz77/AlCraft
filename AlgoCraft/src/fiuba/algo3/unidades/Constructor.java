@@ -8,6 +8,12 @@ import fiuba.algo3.excepciones.UnidadFinalizadaException;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
 
+
+/* Una instancia de ConstructorUnidadX, heredera de esta, se encarga de controlar 
+ * que el jugador a usarlo tenga los recursos para spawnear una UnidadX.
+ * */
+
+// TODO Permitirle al constructor crear procesos de entrenador multiples
 public abstract class Constructor {
 	
 	protected int costoMinerales;
@@ -25,10 +31,14 @@ public abstract class Constructor {
 	abstract public Constructor copia();
 	
 	public void crear(Jugador propietario){
+		
+		// Si no hay requisitos, se pasa una excepcion.
 		verificarRequisitos(propietario);
+		
 		propietario.agregarMinerales(-this.costoMinerales);
 		propietario.agregarGasVespeno(-this.costoGas);
 		propietario.aumentarPoblacion(this.costoPoblacion);
+		
 		this.turnosRestantes = this.turnosNecesarios;
 		entrenador.entrenar(this);
 		
