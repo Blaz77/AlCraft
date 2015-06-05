@@ -13,7 +13,10 @@ public abstract class Constructor {
 	protected int costoGas;
 	protected int costoPoblacion;
 	protected int turnosNecesarios;
-	private int turnosRestantes;
+	//
+	private int turnosRestantes; //OJO ACA!
+	// -> SI SE PERMITE EN SIMULTANEO ES NECESARIO HACER COPIAS
+	// -> ahora funciona porque es de a uno.
 	protected EntrenadorUnidades entrenador;
 
 	abstract public void liberarUnidad(Jugador j, int x, int y);//aca va un return new Marine()

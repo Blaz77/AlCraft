@@ -13,7 +13,7 @@ public class ConstructorEspectro extends Constructor {
 	
 	@Override
 	public void liberarUnidad(Jugador j, int x, int y) {
-		Unidad u = new Espectro(j, x, y);
+		new Espectro(j, x, y);
 
 	}
 

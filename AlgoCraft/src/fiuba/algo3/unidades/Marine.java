@@ -4,8 +4,7 @@ import fiuba.algo3.juego.Jugador;
 
 public class Marine extends Unidad {
 
-	public Marine(Jugador j, int x, int y){
-		j.agregarUnidad(this);
-		//TODO
+	public Marine(Jugador propietario, int x, int y){
+		super(propietario, y, y);
 	}
 }

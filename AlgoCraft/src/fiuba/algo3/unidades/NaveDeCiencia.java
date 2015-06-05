@@ -4,8 +4,7 @@ import fiuba.algo3.juego.Jugador;
 
 public class NaveDeCiencia extends Unidad {
 
-	public NaveDeCiencia(Jugador j, int x, int y){
-		j.agregarUnidad(this);
-		//TODO
+	public NaveDeCiencia(Jugador propietario, int x, int y){
+		super(propietario, y, y);
 	}
 }
