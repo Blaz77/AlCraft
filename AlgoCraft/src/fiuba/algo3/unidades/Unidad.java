@@ -1,7 +1,9 @@
 package fiuba.algo3.unidades;
 
+import java.util.ArrayList;
+
+import fiuba.algo3.componentes.Movimiento;
 import fiuba.algo3.edificios.Edificio;
-import fiuba.algo3.juego.Atacable;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.edificios.ObjetoVivo;
@@ -13,7 +15,9 @@ import fiuba.algo3.edificios.ObjetoVivo;
  * 
  * 
  * */
-public abstract class Unidad extends ObjetoVivo implements Atacable{
+public abstract class Unidad extends ObjetoVivo{
+	
+	protected Movimiento movimiento;
 	
 	public Unidad(Jugador propietario, Posicion posicion){
 		super(propietario, posicion);
@@ -25,7 +29,8 @@ public abstract class Unidad extends ObjetoVivo implements Atacable{
 	}
 	
 	public void pasarTurno(){
-		
+		super.pasarTurno();
+		this.movimiento = (Movimiento)this.movimiento.pasarTurno();
 	}
 
 	
@@ -44,34 +49,25 @@ public abstract class Unidad extends ObjetoVivo implements Atacable{
 	 * 
 	 * */
 	
-	// Este podria ir a una interface con edificios.
-	public int getVida() {
-		return 0;
-	}
-
-	// Este podria ir a una interface con edificios.
-	public int getVidaMaxima() {
-		return 0;
+	public boolean puedeMoverse(){
+		return this.movimiento.puedeMoverse();
 	}
 	
-	// Este podria ir a una interface con edificios.
-	public void bajarVida(int puntos){
-		
+	// si no puede volar significa que es terrestre
+	public boolean puedeVolar(){ //esAereo();
+		return this.movimiento.puedeVolar();
 	}
 	
-	// Manejar veneno. Alguna interfaz para esto
-	public void pasoDeTurno() {
-		return;
+	public boolean puedeMoverseA(Posicion destino){
+		return this.movimiento.puedeMoverseA(this.posicion, destino);
 	}
 	
-	public int movimiento() {
-		return 0;
+	public void moverA(Posicion destino){
+		this.posicion = this.movimiento.moverA(this.posicion, destino);
 	}
 	
-	// Se mueve el? o acata ordenes?
-	public void moverA(Posicion posicion){
-		//this.movimiento.moverA(posicion);
-		//this.vision
+	public ArrayList<Posicion> getPosiblesMovimientos(){
+		return this.movimiento.getPosiblesMovimientos();
 	}
 	
 	public boolean puedeAtacar(){
