@@ -3,7 +3,7 @@ package fiuba.algo3.edificios;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.unidades.ConstructorGolliat;
 
-public class Fabrica extends Edificio {
+public class Fabrica extends EdificioEntrenadorUnidades {
 	
 	public Fabrica(Jugador propietario, int x, int y) {
 		super(propietario, x, y);
