@@ -9,10 +9,10 @@ import org.junit.Test;
 
 import fiuba.algo3.mapa.Celda;
 import fiuba.algo3.mapa.Mapa;
-import fiuba.algo3.mapa.Mineral;
-import fiuba.algo3.mapa.Recurso;
-import fiuba.algo3.mapa.TipoRecurso;
-import fiuba.algo3.mapa.TipoTerreno;
+import fiuba.algo3.mapa.recurso.Mineral;
+import fiuba.algo3.mapa.recurso.Recurso;
+import fiuba.algo3.mapa.recurso.TipoRecurso;
+import fiuba.algo3.terreno.TipoTerreno;
 
 public class TestMapa {
 	final int SEIS_BASES = 6;

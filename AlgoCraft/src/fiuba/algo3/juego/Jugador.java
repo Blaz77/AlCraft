@@ -1,8 +1,11 @@
-package fiuba.algo3.tp_final;
+package fiuba.algo3.juego;
 
 import java.util.ArrayList;
 
 import fiuba.algo3.mapa.Mapa;
+import fiuba.algo3.raza.Raza;
+import fiuba.algo3.raza.RazaFactory;
+import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.unidades.Constructor;
 import fiuba.algo3.unidades.Unidad;
 

@@ -1,4 +1,4 @@
-package fiuba.algo3.tp_final;
+package fiuba.algo3.raza;
 
 public class RazaFactory {
 	// Un hashmap es mas portable y modificable que una cadena de ifs.

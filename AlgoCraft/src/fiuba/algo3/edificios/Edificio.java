@@ -2,8 +2,8 @@ package fiuba.algo3.edificios;
 
 import java.util.ArrayList;
 
-import fiuba.algo3.tp_final.Atacable;
-import fiuba.algo3.tp_final.Jugador;
+import fiuba.algo3.juego.Atacable;
+import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.unidades.Constructor;
 
 public abstract class Edificio { //implements Atacable

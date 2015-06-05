@@ -1,6 +1,6 @@
 package fiuba.algo3.edificios;
 
-import fiuba.algo3.tp_final.*;
+import fiuba.algo3.juego.*;
 
 public class DepositoDeSuministros extends Edificio {
 

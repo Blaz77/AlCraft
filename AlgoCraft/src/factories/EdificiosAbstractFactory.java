@@ -1,6 +1,7 @@
-package fiuba.algo3.edificios;
+package factories;
 
-import fiuba.algo3.tp_final.Jugador;
+import fiuba.algo3.edificios.Edificio;
+import fiuba.algo3.juego.Jugador;
 
 public interface EdificiosAbstractFactory {
 	

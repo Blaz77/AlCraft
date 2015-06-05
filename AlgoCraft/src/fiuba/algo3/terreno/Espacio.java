@@ -1,15 +1,15 @@
-package fiuba.algo3.mapa;
+package fiuba.algo3.terreno;
 
 import fiuba.algo3.edificios.Edificable;
 
-public class Tierra extends Terreno {
+public class Espacio extends Terreno {
 	
 	public TipoTerreno getTipo() {
-		return TipoTerreno.TIERRA;
+		return TipoTerreno.ESPACIO;
 	}
 	
 	public boolean puedeEdificar(Edificable edif){
-		return edif.enTierra();
+		return edif.enEspacio();
 	}
 
 }

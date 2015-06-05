@@ -3,6 +3,14 @@ package fiuba.algo3.mapa;
 import java.util.ArrayList;
 import java.util.Random;
 
+import fiuba.algo3.mapa.recurso.GasVespeno;
+import fiuba.algo3.mapa.recurso.Mineral;
+import fiuba.algo3.mapa.recurso.Recurso;
+import fiuba.algo3.terreno.Espacio;
+import fiuba.algo3.terreno.Terreno;
+import fiuba.algo3.terreno.Tierra;
+import fiuba.algo3.terreno.TipoTerreno;
+
 
 public class Mapa {
 	final int DISTANCIA_BORDE = 10;

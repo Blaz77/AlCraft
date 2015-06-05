@@ -1,4 +1,4 @@
-package fiuba.algo3.tp_final;
+package fiuba.algo3.juego;
 
 // TODO En peligro de ser eliminada, dado que si ubicamos los edificios y unidades en distintos
 // casilleros nunca tendremos un caso de polimorfismo en tiempo de ejecucion...

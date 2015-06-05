@@ -1,6 +1,6 @@
 package fiuba.algo3.unidades;
 
-import fiuba.algo3.tp_final.Jugador;
+import fiuba.algo3.juego.Jugador;
 
 public class ConstructorMarine extends Constructor{
 	

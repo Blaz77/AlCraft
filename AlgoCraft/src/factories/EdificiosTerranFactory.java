@@ -1,12 +1,21 @@
-package fiuba.algo3.edificios;
+package factories;
 
-import fiuba.algo3.mapa.TipoRecurso;
-import fiuba.algo3.tp_final.*;
+import fiuba.algo3.edificios.Barraca;
+import fiuba.algo3.edificios.CentroDeMineral;
+import fiuba.algo3.edificios.DepositoDeSuministros;
+import fiuba.algo3.edificios.Edificio;
+import fiuba.algo3.edificios.Fabrica;
+import fiuba.algo3.edificios.PuertoEstelar;
+import fiuba.algo3.edificios.Refineria;
+import fiuba.algo3.edificios.Trabajo;
+import fiuba.algo3.edificios.TrabajoConstruccion;
+import fiuba.algo3.juego.*;
+import fiuba.algo3.mapa.recurso.TipoRecurso;
 
 public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 
 	public Edificio crearRecolectorGasVespeno(Jugador jugador, int x, int y) {
-		if (jugador.getMApa().getRecurso(x, y).getTipo() != TipoRecurso.VESPENO) {
+		if (jugador.getMapa().getRecurso(x, y).getTipo() != TipoRecurso.VESPENO) {
 			throw new RuntimeException();
 		}
 		Edificio edificio = new Refineria(jugador, x, y);

@@ -1,5 +1,10 @@
 package fiuba.algo3.edificios;
 
+
+// Strategy que, como todo trabajo, implementa el estado y 
+// comportamiento de quien lo contiene entre turnos.
+// En este caso, implementa la construccion del edificio.
+
 public class TrabajoConstruccion implements Trabajo {
 	
 	int cantVidaSumadaPorTurno;

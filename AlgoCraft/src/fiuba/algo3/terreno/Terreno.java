@@ -1,4 +1,4 @@
-package fiuba.algo3.mapa;
+package fiuba.algo3.terreno;
 
 import fiuba.algo3.edificios.Edificable;
 

@@ -1,4 +1,4 @@
-package fiuba.algo3.tp_final;
+package fiuba.algo3.juego;
 
 public class Juego {
 	// Algunos atributos posibles:

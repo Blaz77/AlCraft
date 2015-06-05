@@ -2,6 +2,9 @@ package fiuba.algo3.mapa;
 
 import fiuba.algo3.edificios.Edificable;
 import fiuba.algo3.edificios.Edificio;
+import fiuba.algo3.mapa.recurso.NoRecurso;
+import fiuba.algo3.mapa.recurso.Recurso;
+import fiuba.algo3.terreno.Terreno;
 
 
 /*
@@ -19,7 +22,7 @@ public class Celda { //quizas heredar de celda y armar Tierra/Espacio extends Ce
 	private Recurso recurso = new NoRecurso();
 	private Terreno terreno;
 	private Edificio edificio = null; //EdificioNULL
-
+	
 	public Celda(int x, int y, Terreno terreno) {
 		posicion = new Posicion(x, y);
 		this.terreno = terreno;
@@ -81,9 +84,9 @@ public class Celda { //quizas heredar de celda y armar Tierra/Espacio extends Ce
 		// TODO: crear una excepcion valida para esta situacion (dejenlo asi
 		// por ahora, sino despues tenemos 200 excepciones todas iguales.)
 		if (!terreno.puedeEdificar(edif))
-			raise Exception;
+			throw new RuntimeException();
 		this.edificio = (Edificio)edif; //FEO, despues arreglar! (Edificable edificio? :D)
-		}
+		
 	}
 	
 	public Terreno getTerreno(){

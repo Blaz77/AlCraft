@@ -5,9 +5,12 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import factories.EdificiosTerranFactory;
 import fiuba.algo3.edificios.Edificio;
-import fiuba.algo3.tp_final.*;
+import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
+import fiuba.algo3.mapa.recurso.TipoRecurso;
+import fiuba.algo3.raza.TipoRaza;
 
 public class TestRefineria {
 

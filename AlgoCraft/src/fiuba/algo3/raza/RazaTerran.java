@@ -1,6 +1,6 @@
-package fiuba.algo3.tp_final;
+package fiuba.algo3.raza;
 
-class RazaProtoss implements Raza {
+class RazaTerran implements Raza {
 
 	public Object construccionesDisponibles() {
 		// TODO Auto-generated method stub
@@ -13,7 +13,7 @@ class RazaProtoss implements Raza {
 	}
 
 	public TipoRaza getTipoRaza() {
-		return TipoRaza.PROTOSS;
+		return TipoRaza.TERRAN;
 	}
 	
 }

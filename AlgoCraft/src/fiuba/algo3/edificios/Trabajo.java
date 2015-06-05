@@ -1,5 +1,8 @@
 package fiuba.algo3.edificios;
 
+// Interfaz para accion que una unidad/rec/edif
+// esta realizando. 
+// TODO renombrar a algo mas logico.
 public interface Trabajo extends Componente {
 	
 	//public void cambiarA(Trabajo otroTrabajo) throws Exception;
