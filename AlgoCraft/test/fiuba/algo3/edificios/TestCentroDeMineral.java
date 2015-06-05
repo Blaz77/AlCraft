@@ -23,7 +23,7 @@ public class TestCentroDeMineral {
 		//mapa = new Mapa(6);
 		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL, mapa);
 		this.terranFactory = new EdificiosTerranFactory();
-		this.centroMineral = terranFactory.crearRecolectorMineral(jugador, 20, 40);
+		this.centroMineral = terranFactory.crearRecolectorMineral(jugador, new Posicion(2,4));
 	}
 
 	//TESTS SIN REQUISITOS POR AHORA!!!

@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import fiuba.algo3.mapa.Celda;
 import fiuba.algo3.mapa.Mapa;
+import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.mapa.recurso.Mineral;
 import fiuba.algo3.mapa.recurso.Recurso;
 import fiuba.algo3.mapa.recurso.TipoRecurso;
@@ -115,7 +116,7 @@ public class TestMapa {
 				for (int y=baseActual.getY()-RADIO_BASE; y<baseActual.getY()+RADIO_BASE; y++) {
 					if (perteneceAlMapa(x, y, mapaNuevo)) {
 						// Inspeccion de la celda
-						recurso = mapaNuevo.getRecurso(x,y);
+						recurso = mapaNuevo.getRecurso(new Posicion(x,y));
 						if (recurso == null) continue; //Despues sacar si hacemos RecursoNULL
 						if (recurso.getTipo() == TipoRecurso.MINERAL)
 							cristales++;
@@ -139,7 +140,8 @@ public class TestMapa {
 		for (int y = 0; y < mapaNuevo.alto(); y++)
 			for (int x = 0; x < mapaNuevo.ancho(); x++){
 				// O es terrestre, o no tiene base, y punto (cuac)
-				Assert.assertTrue(mapaNuevo.getTerreno(x, y).getTipo() == TipoTerreno.TIERRA || !(mapaNuevo.esBase(x, y)));
+				Posicion pos = new Posicion(x,y);
+				Assert.assertTrue(mapaNuevo.getTerreno(pos).getTipo() == TipoTerreno.TIERRA || !(mapaNuevo.esBase(x, y)));
 			}
 	}
 	
@@ -149,7 +151,7 @@ public class TestMapa {
 		
 		for (int y = 0; y < mapaNuevo.alto(); y++)
 			for (int x = 0; x < mapaNuevo.ancho(); x++){
-				if (mapaNuevo.getTerreno(x, y).getTipo() == TipoTerreno.ESPACIO) {
+				if (mapaNuevo.getTerreno(new Posicion(x,y)).getTipo() == TipoTerreno.ESPACIO) {
 					hayAreasEspaciales = true;
 					break;
 			}

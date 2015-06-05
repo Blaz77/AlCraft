@@ -29,13 +29,13 @@ public class TestDepositoSuministros {
 	
 	@Test
 	public void testCrearDepositoSuministros() {
-		this.depositoSuministros = terranFactory.crearIncrementadorPoblacion(jugador, 20, 40);
+		this.depositoSuministros = terranFactory.crearIncrementadorPoblacion(jugador, new Posicion(2,4));
 		assertEquals(depositoSuministros.getNombre(),"Deposito De Suministros");
 	}
 	
 	@Test
 	public void testDepositoSubeVidaDuranteConstruccion() {
-		this.depositoSuministros = terranFactory.crearIncrementadorPoblacion(jugador, 20, 40);
+		this.depositoSuministros = terranFactory.crearIncrementadorPoblacion(jugador, new Posicion(2,4));
 		
 		int vidaRelativa = depositoSuministros.getVida();
 		for(int i = 0; i < 6; i++){
@@ -50,7 +50,7 @@ public class TestDepositoSuministros {
 	@Test
 	public void testDepositoMientrasConstruyeNoAumentaPoblacion() {
 		int poblacionRelativa = jugador.getPoblacion();
-		this.depositoSuministros = terranFactory.crearIncrementadorPoblacion(jugador, 20, 40);
+		this.depositoSuministros = terranFactory.crearIncrementadorPoblacion(jugador, new Posicion(2,4));
 		
 		assertEquals(poblacionRelativa, jugador.getPoblacion());
 	}
@@ -58,7 +58,7 @@ public class TestDepositoSuministros {
 	@Test
 	public void testDepositoDespuesDeConstruirAumentaPoblacion() {
 		int poblacionRelativa = jugador.getPoblacion();
-		this.depositoSuministros = terranFactory.crearIncrementadorPoblacion(jugador, 20, 40);
+		this.depositoSuministros = terranFactory.crearIncrementadorPoblacion(jugador, new Posicion(2,4));
 		for(int i = 0; i < 6; i++) depositoSuministros.pasarTurno(); // Construyendo
 		
 		assertEquals(poblacionRelativa + 5, jugador.getPoblacion());

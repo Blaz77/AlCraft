@@ -25,7 +25,7 @@ public class TestFabrica {
 		//mapa = new Mapa(6);
 		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL, mapa);
 		this.terranFactory = new EdificiosTerranFactory();
-		this.fabrica = terranFactory.crearEntrenadorUnidadesIntermedias(jugador, 20, 40);
+		this.fabrica = terranFactory.crearEntrenadorUnidadesIntermedias(jugador, new Posicion(2,4));
 	}
 
 	//TESTS SIN REQUISITOS POR AHORA!!!

@@ -25,7 +25,7 @@ public class TestBarraca {
 		//mapa = new Mapa(6);
 		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL, mapa);
 		this.terranFactory = new EdificiosTerranFactory();
-		this.barraca = terranFactory.crearEntrenadorUnidadesBasicas(jugador, 20, 40);
+		this.barraca = terranFactory.crearEntrenadorUnidadesBasicas(jugador, new Posicion(2,4));
 	}
 
 	//TESTS SIN REQUISITOS POR AHORA!!!
@@ -37,7 +37,10 @@ public class TestBarraca {
 	
 	@Test
 	public void testBarracaSubeVidaDuranteConstruccion() {
-		int vidaRelativa = barraca.getVida();
+		if (barraca.getVida() == barraca.getVidaMaxima())
+			fail("La construccion inicio con la vida maxima");
+		
+		int vidaRelativa = barraca.getVida();		
 		for(int i = 0; i < 12; i++){
 			barraca.pasarTurno();
 			if (barraca.getVida() <= vidaRelativa) 

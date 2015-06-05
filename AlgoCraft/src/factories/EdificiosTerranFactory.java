@@ -14,52 +14,51 @@ import fiuba.algo3.edificios.Fabrica;
 import fiuba.algo3.edificios.PuertoEstelar;
 import fiuba.algo3.edificios.Refineria;
 import fiuba.algo3.juego.*;
+import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.mapa.recurso.TipoRecurso;
 
 public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 
-	public EdificioRecolectorGasVespeno crearRecolectorGasVespeno(Jugador jugador, int x, int y) {
-		if (jugador.getMapa().getRecurso(x, y).getTipo() != TipoRecurso.VESPENO) {
+	public EdificioRecolectorGasVespeno crearRecolectorGasVespeno(Jugador jugador, Posicion posicion) {
+		if (jugador.getMapa().getRecurso(posicion).getTipo() != TipoRecurso.VESPENO) {
 			throw new RuntimeException();
 		}
-		EdificioRecolectorGasVespeno edificio = new Refineria(jugador, x, y);
+		EdificioRecolectorGasVespeno edificio = new Refineria(jugador, posicion);
 		Trabajo construccion = new TrabajoConstruccion(6, edificio);
 		edificio.setTrabajo(construccion);
 		return edificio;
 	}
 
-	public EdificioRecolectorMineral crearRecolectorMineral(Jugador jugador, int x, int y) {
-		EdificioRecolectorMineral edificio = new CentroDeMineral(jugador, x, y);
+	public EdificioRecolectorMineral crearRecolectorMineral(Jugador jugador, Posicion posicion) {
+		EdificioRecolectorMineral edificio = new CentroDeMineral(jugador, posicion);
 		Trabajo construccion = new TrabajoConstruccion(4, edificio);
 		edificio.setTrabajo(construccion);
 		return edificio;
 	}
 
-	public EdificioIncrementadorPoblacion crearIncrementadorPoblacion(Jugador jugador, int x, int y) {
-		EdificioIncrementadorPoblacion edificio = new DepositoDeSuministros(jugador, x, y);
+	public EdificioIncrementadorPoblacion crearIncrementadorPoblacion(Jugador jugador, Posicion posicion) {
+		EdificioIncrementadorPoblacion edificio = new DepositoDeSuministros(jugador, posicion);
 		Trabajo construccion = new TrabajoConstruccion(6, edificio);
 		edificio.setTrabajo(construccion);
 		return edificio;
 	}
 
-	public EdificioEntrenadorUnidades crearEntrenadorUnidadesBasicas(Jugador jugador, int x, int y) {
-		EdificioEntrenadorUnidades edificio = new Barraca(jugador, x, y);
+	public EdificioEntrenadorUnidades crearEntrenadorUnidadesBasicas(Jugador jugador, Posicion posicion) {
+		EdificioEntrenadorUnidades edificio = new Barraca(jugador, posicion);
 		Trabajo construccion = new TrabajoConstruccion(12, edificio);
 		edificio.setTrabajo(construccion);
 		return edificio;
 	}
 
-	public EdificioEntrenadorUnidades crearEntrenadorUnidadesIntermedias(Jugador jugador, int x,
-			int y) {
-		EdificioEntrenadorUnidades edificio = new Fabrica(jugador, x, y);
+	public EdificioEntrenadorUnidades crearEntrenadorUnidadesIntermedias(Jugador jugador, Posicion posicion) {
+		EdificioEntrenadorUnidades edificio = new Fabrica(jugador, posicion);
 		Trabajo construccion = new TrabajoConstruccion(12, edificio);
 		edificio.setTrabajo(construccion);
 		return edificio;
 	}
 
-	public EdificioEntrenadorUnidades crearEntrenadorUnidadesAvanzadas(Jugador jugador, int x,
-			int y) {
-		EdificioEntrenadorUnidades edificio = new PuertoEstelar(jugador, x, y);
+	public EdificioEntrenadorUnidades crearEntrenadorUnidadesAvanzadas(Jugador jugador, Posicion posicion) {
+		EdificioEntrenadorUnidades edificio = new PuertoEstelar(jugador, posicion);
 		Trabajo construccion = new TrabajoConstruccion(10, edificio);
 		edificio.setTrabajo(construccion);
 		return edificio;

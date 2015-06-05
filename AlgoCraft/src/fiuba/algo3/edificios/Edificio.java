@@ -6,6 +6,7 @@ import fiuba.algo3.componentes.Trabajo;
 import fiuba.algo3.componentes.TrabajoNull;
 import fiuba.algo3.juego.Atacable;
 import fiuba.algo3.juego.Jugador;
+import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.unidades.Constructor;
 
 public abstract class Edificio extends ObjetoVivo { //implements Atacable
@@ -29,8 +30,8 @@ public abstract class Edificio extends ObjetoVivo { //implements Atacable
 	
 
 	
-	public Edificio(Jugador propietario, int x, int y) {
-		super(propietario, x, y);
+	public Edificio(Jugador propietario, Posicion posicion) {
+		super(propietario, posicion);
 		//this.trabajoActual = primerTrabajo; generalmente una Construccion
 	}
 	

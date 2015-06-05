@@ -3,31 +3,26 @@ package fiuba.algo3.edificios;
 import fiuba.algo3.componentes.IVida;
 import fiuba.algo3.excepciones.VidaEnCeroException;
 import fiuba.algo3.juego.Jugador;
+import fiuba.algo3.mapa.Posicion;
 
 public abstract class ObjetoVivo { //ObjetoVivo / ObjetoInteractuable / etc.
 
 	protected String nombre; //pasar a toString()
 	protected Jugador propietario;
-	protected int x;
-	protected int y;
+	protected Posicion posicion;
 	protected IVida vida;
 
-	public ObjetoVivo(Jugador propietario, int x, int y) {
+	public ObjetoVivo(Jugador propietario, Posicion posicion) {
 		this.propietario = propietario;
-		this.x = x;
-		this.y = y;
+		this.posicion = posicion;
 	}
 
 	public Jugador getPropietario() {
 		return this.propietario;
 	}
 
-	public int getX() {
-		return x;
-	}
-
-	public int getY() {
-		return y;
+	public Posicion getPosicion() {
+		return this.posicion;  //quizas devolver copia!
 	}
 
 	public int getVida() {

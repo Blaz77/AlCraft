@@ -3,6 +3,7 @@ package fiuba.algo3.unidades;
 import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.juego.Atacable;
 import fiuba.algo3.juego.Jugador;
+import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.edificios.ObjetoVivo;
 
 
@@ -14,11 +15,13 @@ import fiuba.algo3.edificios.ObjetoVivo;
  * */
 public abstract class Unidad extends ObjetoVivo implements Atacable{
 	
-	public Unidad(Jugador propietario, int x, int y){
-		super(propietario, x, y);
+	public Unidad(Jugador propietario, Posicion posicion){
+		super(propietario, posicion);
 		//POSICIONAR EN ESTE CONSTRUCTOR:
 		// -UNIDAD EN EL MAPA -> mapa.addUnidad(this, POSicion)
 		propietario.agregarUnidad(this);
+		
+		//O HACER EN LOS CONSTRUCTORES!?!??!
 	}
 	
 	public void pasarTurno(){
@@ -66,8 +69,9 @@ public abstract class Unidad extends ObjetoVivo implements Atacable{
 	}
 	
 	// Se mueve el? o acata ordenes?
-	public void moverse(){
-		
+	public void moverA(Posicion posicion){
+		//this.movimiento.moverA(posicion);
+		//this.vision
 	}
 	
 	public boolean puedeAtacar(){

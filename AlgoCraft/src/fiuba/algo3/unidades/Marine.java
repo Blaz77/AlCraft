@@ -1,10 +1,11 @@
 package fiuba.algo3.unidades;
 
 import fiuba.algo3.juego.Jugador;
+import fiuba.algo3.mapa.Posicion;
 
 public class Marine extends Unidad {
 
-	public Marine(Jugador propietario, int x, int y){
-		super(propietario, y, y);
+	public Marine(Jugador propietario, Posicion posicion){
+		super(propietario, posicion);
 	}
 }

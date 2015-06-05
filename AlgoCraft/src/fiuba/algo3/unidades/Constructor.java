@@ -6,6 +6,7 @@ import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.SuministroInsuficiente;
 import fiuba.algo3.excepciones.UnidadFinalizadaException;
 import fiuba.algo3.juego.Jugador;
+import fiuba.algo3.mapa.Posicion;
 
 public abstract class Constructor {
 	
@@ -19,7 +20,7 @@ public abstract class Constructor {
 	// -> ahora funciona porque es de a uno.
 	protected EntrenadorUnidades entrenador;
 
-	abstract public void liberarUnidad(Jugador j, int x, int y);//aca va un return new Marine()
+	abstract public void liberarUnidad(Jugador propietario, Posicion posicion);//aca va un return new Marine()
 	
 	abstract public Constructor copia();
 	

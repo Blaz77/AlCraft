@@ -28,7 +28,7 @@ public class TestPuertoEstelar {
 		//mapa = new Mapa(6);
 		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL, mapa);
 		this.terranFactory = new EdificiosTerranFactory();
-		this.puerto = terranFactory.crearEntrenadorUnidadesAvanzadas(jugador, 20, 40);
+		this.puerto = terranFactory.crearEntrenadorUnidadesAvanzadas(jugador, new Posicion(2,4));
 	}
 
 	//TESTS SIN REQUISITOS POR AHORA!!!

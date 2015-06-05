@@ -1,6 +1,7 @@
 package fiuba.algo3.unidades;
 
 import fiuba.algo3.juego.Jugador;
+import fiuba.algo3.mapa.Posicion;
 
 public class ConstructorEspectro extends Constructor {
 
@@ -12,8 +13,8 @@ public class ConstructorEspectro extends Constructor {
 	}
 	
 	@Override
-	public void liberarUnidad(Jugador j, int x, int y) {
-		new Espectro(j, x, y);
+	public void liberarUnidad(Jugador j, Posicion posicion) {
+		new Espectro(j, posicion);
 
 	}
 

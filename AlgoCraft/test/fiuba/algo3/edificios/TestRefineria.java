@@ -22,8 +22,9 @@ public class TestRefineria {
 	private Edificio crearEnVolcan(Jugador jugador, Mapa mapa) {
 		for (int y = 0; y < mapa.alto(); y++) {
 			for (int x = 0; x < mapa.ancho(); x++) {
-				if (mapa.getRecurso(x, y).getTipo() == TipoRecurso.VESPENO) {
-					return terranFactory.crearRecolectorGasVespeno(jugador, x, y);
+				Posicion posConVespeno = new Posicion(x, y);
+				if (mapa.getRecurso(posConVespeno).getTipo() == TipoRecurso.VESPENO) {
+					return terranFactory.crearRecolectorGasVespeno(jugador, posConVespeno);
 				}
 			}
 		}
@@ -52,9 +53,10 @@ public class TestRefineria {
 	public void testCrearRefineriaFueraDeVolcanFalla() {
 		for (int y = 0; y < mapa.alto(); y++) {
 			for (int x = 0; x < mapa.ancho(); x++) {
-				if (mapa.getRecurso(x, y).getTipo() != TipoRecurso.VESPENO) {
+				Posicion posSinVespeno = new Posicion(x, y);
+				if (mapa.getRecurso(posSinVespeno).getTipo() != TipoRecurso.VESPENO) {
 					try {
-						refineria = terranFactory.crearRecolectorGasVespeno(jugador, x, y);
+						refineria = terranFactory.crearRecolectorGasVespeno(jugador, posSinVespeno);
 						fail();
 					}
 					catch (RuntimeException e) { // Crear excepcion propia

@@ -5,14 +5,15 @@ import java.util.ArrayList;
 import fiuba.algo3.componentes.EntrenadorUnidades;
 import fiuba.algo3.componentes.Trabajo;
 import fiuba.algo3.juego.Jugador;
+import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.unidades.Constructor;
 
 public abstract class EdificioEntrenadorUnidades extends Edificio implements IEntrenador{
 	
 	protected EntrenadorUnidades entrenador = new EntrenadorUnidades(this);
 	
-	public EdificioEntrenadorUnidades(Jugador propietario, int x, int y) {
-		super(propietario, x, y);
+	public EdificioEntrenadorUnidades(Jugador propietario, Posicion posicion) {
+		super(propietario, posicion);
 		this.trabajo = (Trabajo) this.entrenador; //quizas mover esto despues
 	}
 	

@@ -1,6 +1,7 @@
 package fiuba.algo3.unidades;
 
 import fiuba.algo3.juego.Jugador;
+import fiuba.algo3.mapa.Posicion;
 
 public class ConstructorNaveDeTransporte extends Constructor {
 
@@ -12,8 +13,8 @@ public class ConstructorNaveDeTransporte extends Constructor {
 	}
 	
 	@Override
-	public void liberarUnidad(Jugador j, int x, int y) {
-		Unidad u = new NaveDeTransporte(j, x, y);
+	public void liberarUnidad(Jugador propietario, Posicion posicion) {
+		new NaveDeTransporte(propietario, posicion);
 
 	}
 

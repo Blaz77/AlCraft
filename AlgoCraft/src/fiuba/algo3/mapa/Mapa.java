@@ -161,16 +161,30 @@ public class Mapa {
 		return mapa[x][y];
 	}*/
 	
-	public void setRecurso(Recurso recurso, int x, int y) {
-		mapa[x][y].setRecurso(recurso);
-	}	
+	private Celda getCelda(Posicion posicion){
+		return mapa[posicion.getX()][posicion.getY()];
+	}
 	
-	public Recurso getRecurso(int x, int y) {
+	//Uso interno, para hacer la vida mas facil con la matriz
+	private Recurso getRecurso(int x, int y){ 
 		return mapa[x][y].getRecurso();
 	}
-
-	public Terreno getTerreno(int x, int y){
+	
+	//Uso interno, para hacer la vida mas facil con la matriz
+	private Terreno getTerreno(int x, int y){
 		return mapa[x][y].getTerreno();
+	}
+	
+	public void setRecurso(Recurso recurso, Posicion posicion) {
+		this.getCelda(posicion).setRecurso(recurso);
+	}	
+	
+	public Recurso getRecurso(Posicion posicion) {
+		return this.getCelda(posicion).getRecurso();
+	}
+
+	public Terreno getTerreno(Posicion posicion){
+		return this.getCelda(posicion).getTerreno();
 	}
 
 	
