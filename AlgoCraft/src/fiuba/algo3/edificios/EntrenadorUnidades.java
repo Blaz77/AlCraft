@@ -22,13 +22,14 @@ public class EntrenadorUnidades implements Trabajo{
 	}
 
 	public Trabajo pasarTurno() {
-		if (actual == null) actual = esperando.poll(); //despues pasar a remove
+		if (actual == null) actual = esperando.remove();
 		if (actual != null){
 			try { 
 				actual.pasarTurno();
 			} catch (UnidadFinalizadaException e) {
 				actual.liberarUnidad(this.edificio.getPropietario(),
 									 this.edificio.getX(), this.edificio.getY());
+				actual = null;
 			}
 		}
 		return this;

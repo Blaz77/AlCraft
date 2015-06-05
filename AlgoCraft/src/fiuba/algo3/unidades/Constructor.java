@@ -13,6 +13,7 @@ public abstract class Constructor {
 	protected int costoGas;
 	protected int costoPoblacion;
 	protected int turnosNecesarios;
+	private int turnosRestantes;
 	protected EntrenadorUnidades entrenador;
 
 	abstract public void liberarUnidad(Jugador j, int x, int y);//aca va un return new Marine()
@@ -24,13 +25,17 @@ public abstract class Constructor {
 		propietario.agregarMinerales(-this.costoMinerales);
 		propietario.agregarGasVespeno(-this.costoGas);
 		propietario.aumentarPoblacion(this.costoPoblacion);
-		entrenador.entrenar(this.copia());
+		this.turnosRestantes = this.turnosNecesarios;
+		entrenador.entrenar(this);
 		
 	}
 	
 	public void pasarTurno(){
-		this.turnosNecesarios--;
-		if (this.turnosNecesarios == 0) throw new UnidadFinalizadaException();
+		this.turnosRestantes--;
+		if (this.turnosRestantes == 0) {
+			this.turnosRestantes = this.turnosNecesarios;
+			throw new UnidadFinalizadaException();
+		}
 	}
 	
 	/* Verifica si hay recursos y poblacion necesaria para crear la unidad.
