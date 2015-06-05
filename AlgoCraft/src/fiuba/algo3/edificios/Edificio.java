@@ -6,7 +6,7 @@ import fiuba.algo3.juego.Atacable;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.unidades.Constructor;
 
-public abstract class Edificio { //implements Atacable
+public abstract class Edificio extends ObjetoVivo { //implements Atacable
 
 	// 2 Opciones: 
 	// - Herencia Edificio -> EdificioConstructor -> Barracas, etc.
@@ -14,62 +14,19 @@ public abstract class Edificio { //implements Atacable
 	// - Edificio generico con estados internos - modificables, si fuese necesario-
 	// El constructor de unidades va de la mano con estos estados.
 
-	protected String nombre;
-	protected Jugador propietario;
-	private int x;
-	private int y;
-	protected Vida vida = new VidaNull();
 	protected Trabajo trabajo = new TrabajoNull(); //En construccion/Trabajando (no se puede accionar) /En espera (permite acciones)
-	protected EntrenadorUnidades entrenador = new EntrenadorUnidadesNull();
+	
 	
 	//private Trabajo porDefecto;
 	//private Ataque ataque;
 	//private Movimiento mov;
 	//private Almacenador alm;
 	
-	
+
 	
 	public Edificio(Jugador propietario, int x, int y) {
-		this.propietario = propietario;
-		this.x = x;
-		this.y = y;
+		super(propietario, x, y);
 		//this.trabajoActual = primerTrabajo; generalmente una Construccion
-	}
-	
-	public Jugador getPropietario(){
-		return this.propietario;
-	}
-	
-	public int getX() {
-		return x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public int getVida() {
-		return this.vida.getVida();
-	}
-	
-	public void regenerarVida(int puntos) {
-		this.vida.regenerar(puntos);
-	}
-	
-	public String getNombre(){
-		return this.nombre;
-	}
-	
-	public void setVida(Vida vida) {
-		this.vida = vida;		
-	}
-
-	public int getVidaMaxima() {
-		return this.vida.getVidaMaxima();
-	}
-	
-	public void recibirDanio(int puntos){
-		this.vida.recibirDanio(puntos);
 	}
 	
 	public void setTrabajo(Trabajo nuevoTrabajo){
@@ -77,25 +34,20 @@ public abstract class Edificio { //implements Atacable
 		this.trabajo = nuevoTrabajo;
 	}
 	
-	// Manejar veneno. Alguna interfaz para esto
-	public void pasarTurno() {
-		this.trabajo = this.trabajo.pasarTurno();
-	}
-	
-	public boolean puedeEntrenarUnidades(){
-		return false;
-	}
-	
-	public ArrayList<Constructor> getUnidadesEntrenables(){
-		return this.entrenador.getUnidadesEntrenables();
-	}
-
 	public void construccionFinalizada() {
 		// Se ejecuta al terminar la construccion (Puede dar un aviso,
 		// desbloquear otros edificios o aumentar poblacion)
 		return;
 	}
 
+	public boolean puedeEntrenarUnidades(){
+		// Devolver true aca implica la obligacion de implementar IEntrenador
+		return false;
+	}
+	
+	
+	
+	//public boolean puedeAlmacenarUnidades(){}
 		
 	//}
 	// con lo que devuelve el de arriba uno haria: unidadConstructor.crear();
