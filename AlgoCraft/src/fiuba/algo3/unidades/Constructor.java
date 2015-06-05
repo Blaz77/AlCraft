@@ -1,6 +1,6 @@
 package fiuba.algo3.unidades;
 
-import fiuba.algo3.edificios.EntrenadorUnidades;
+import fiuba.algo3.componentes.EntrenadorUnidades;
 import fiuba.algo3.excepciones.GasVespenoInsuficiente;
 import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.SuministroInsuficiente;

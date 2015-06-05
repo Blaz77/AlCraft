@@ -2,6 +2,8 @@ package fiuba.algo3.edificios;
 
 import java.util.ArrayList;
 
+import fiuba.algo3.componentes.EntrenadorUnidades;
+import fiuba.algo3.componentes.Trabajo;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.unidades.Constructor;
 

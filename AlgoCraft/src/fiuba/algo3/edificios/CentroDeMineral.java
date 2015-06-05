@@ -1,5 +1,7 @@
 package fiuba.algo3.edificios;
 
+import fiuba.algo3.componentes.TrabajoRecoleccionMineral;
+import fiuba.algo3.componentes.VidaSinEscudo;
 import fiuba.algo3.juego.Jugador;
 
 

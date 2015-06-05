@@ -1,5 +1,7 @@
 package factories;
 
+import fiuba.algo3.componentes.Trabajo;
+import fiuba.algo3.componentes.TrabajoConstruccion;
 import fiuba.algo3.edificios.Barraca;
 import fiuba.algo3.edificios.CentroDeMineral;
 import fiuba.algo3.edificios.DepositoDeSuministros;
@@ -7,8 +9,6 @@ import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.edificios.Fabrica;
 import fiuba.algo3.edificios.PuertoEstelar;
 import fiuba.algo3.edificios.Refineria;
-import fiuba.algo3.edificios.Trabajo;
-import fiuba.algo3.edificios.TrabajoConstruccion;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.recurso.TipoRecurso;
 

@@ -1,5 +1,7 @@
 package fiuba.algo3.edificios;
 
+import fiuba.algo3.componentes.Vida;
+import fiuba.algo3.componentes.VidaNull;
 import fiuba.algo3.juego.Jugador;
 
 public abstract class ObjetoVivo { //ObjetoVivo / ObjetoInteractuable / etc.

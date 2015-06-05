@@ -1,4 +1,4 @@
-package fiuba.algo3.edificios;
+package fiuba.algo3.componentes;
 
 //public class Vida implements Lastimable/Atacable/etc
 public class VidaSinEscudo implements Vida {

@@ -1,4 +1,6 @@
-package fiuba.algo3.edificios;
+package fiuba.algo3.componentes;
+
+import fiuba.algo3.edificios.Edificio;
 
 
 // Strategy que, como todo trabajo, implementa el estado y 

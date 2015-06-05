@@ -1,4 +1,4 @@
-package fiuba.algo3.edificios;
+package fiuba.algo3.componentes;
 
 // Interfaz para accion que una unidad/rec/edif
 // esta realizando. 

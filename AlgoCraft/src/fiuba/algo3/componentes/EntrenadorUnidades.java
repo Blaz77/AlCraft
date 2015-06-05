@@ -1,9 +1,11 @@
-package fiuba.algo3.edificios;
+package fiuba.algo3.componentes;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import fiuba.algo3.edificios.Edificio;
+import fiuba.algo3.edificios.IEntrenador;
 import fiuba.algo3.excepciones.UnidadFinalizadaException;
 import fiuba.algo3.unidades.Constructor;
 
