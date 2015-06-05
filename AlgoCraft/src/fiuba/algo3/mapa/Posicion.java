@@ -20,4 +20,8 @@ public class Posicion {
 	public int distancia(Posicion other) {
 		return Math.abs(this.x - other.x) + Math.abs(this.x - other.x);
 	}
+
+	public boolean estaEnRango(Posicion otraPosicion, int rango) {
+		return (this.distancia(otraPosicion) <= rango);
+	}
 }
