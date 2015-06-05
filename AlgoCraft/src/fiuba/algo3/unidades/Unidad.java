@@ -2,6 +2,8 @@ package fiuba.algo3.unidades;
 
 import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.juego.Atacable;
+import fiuba.algo3.juego.Jugador;
+import fiuba.algo3.edificios.ObjetoVivo;
 
 
 /* 
@@ -10,11 +12,22 @@ import fiuba.algo3.juego.Atacable;
  * 
  * 
  * */
-public class Unidad implements Atacable{
+public abstract class Unidad extends ObjetoVivo implements Atacable{
 
 	private int vida;
 	private int x;
 	private int y;
+	
+	public Unidad(Jugador propietario, int x, int y){
+		super(propietario, x, y);
+		//POSICIONAR EN ESTE CONSTRUCTOR:
+		// -UNIDAD EN EL MAPA -> mapa.addUnidad(this, POSicion)
+		propietario.agregarUnidad(this);
+	}
+	
+	public void pasarTurno(){
+		
+	}
 
 	
 	/*

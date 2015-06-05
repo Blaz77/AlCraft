@@ -54,8 +54,8 @@ public abstract class ObjetoVivo { //ObjetoVivo / ObjetoInteractuable / etc.
 		this.vida.recibirDanio(puntos);
 	}
 
-	public void pasarTurno() {
+	public abstract void pasarTurno();
 		//this.vida = this.vida.pasarTurno();
-	}
+	
 
 }
