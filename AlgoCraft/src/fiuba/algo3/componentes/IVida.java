@@ -1,10 +1,16 @@
 package fiuba.algo3.componentes;
 
-public interface Vida extends Componente{
+public interface IVida extends Componente{
+	
+	public int getVida();
 	
 	public int getVidaMaxima();
 	
-	public int getVida();
+	public boolean tieneEscudo();
+	
+	public int getEscudo();
+	
+	public int getEscudoMaximo();
 	
 	public void regenerar(int vida);
 	
