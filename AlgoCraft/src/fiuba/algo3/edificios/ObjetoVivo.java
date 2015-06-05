@@ -1,7 +1,7 @@
 package fiuba.algo3.edificios;
 
-import fiuba.algo3.componentes.Vida;
-import fiuba.algo3.componentes.VidaNull;
+import fiuba.algo3.componentes.IVida;
+import fiuba.algo3.excepciones.VidaEnCeroException;
 import fiuba.algo3.juego.Jugador;
 
 public abstract class ObjetoVivo { //ObjetoVivo / ObjetoInteractuable / etc.
@@ -10,7 +10,7 @@ public abstract class ObjetoVivo { //ObjetoVivo / ObjetoInteractuable / etc.
 	protected Jugador propietario;
 	protected int x;
 	protected int y;
-	protected Vida vida = new VidaNull();
+	protected IVida vida;
 
 	public ObjetoVivo(Jugador propietario, int x, int y) {
 		this.propietario = propietario;
@@ -42,7 +42,15 @@ public abstract class ObjetoVivo { //ObjetoVivo / ObjetoInteractuable / etc.
 		return this.nombre;
 	}
 
-	public void setVida(Vida vida) {
+	public boolean tieneEscudo(){
+		return vida.tieneEscudo();
+	}
+	
+	public int getEscudo(){
+		return vida.getEscudo();
+	}
+	
+	public void setVida(IVida vida) {
 		this.vida = vida;		
 	}
 
@@ -51,11 +59,25 @@ public abstract class ObjetoVivo { //ObjetoVivo / ObjetoInteractuable / etc.
 	}
 
 	public void recibirDanio(int puntos) {
-		this.vida.recibirDanio(puntos);
+		try {
+			this.vida.recibirDanio(puntos);
+		} 
+		catch (VidaEnCeroException e) {
+			this.destruir();
+		}
+	}
+	
+	public void destruir(){
+		//Codigo para limpiar la existencia de Unidad o Edificio:
+		//- eliminar del mapa
+		//- eliminar de la lista del jugador
+		//- Limpiezas internas:
+		//	--p/ej: devolver las unidades transportadas al mapa
+		//  --p/ej: devolver recursos en EntrenadorUnidades de construcciones no terminadas.
 	}
 
-	public abstract void pasarTurno();
-		//this.vida = this.vida.pasarTurno();
-	
+	public void pasarTurno(){
+		this.vida = (IVida)this.vida.pasarTurno(); //debe haber solucion mas elegante
+	}
 
 }
