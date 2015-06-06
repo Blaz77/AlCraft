@@ -12,7 +12,7 @@ public enum TipoTerreno {
 	private boolean esTransitable;
 	private boolean esSobrevolable;
 
-	TipoTerreno(boolean ed, boolean tr, boolean sv){
+	private TipoTerreno(boolean ed, boolean tr, boolean sv){
 		this.esEdificable = ed;
 		this.esTransitable = tr;
 		this.esSobrevolable = sv;

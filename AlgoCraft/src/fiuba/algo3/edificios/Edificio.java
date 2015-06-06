@@ -4,6 +4,7 @@ import fiuba.algo3.componentes.Trabajo;
 import fiuba.algo3.componentes.TrabajoNull;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.mapa.recurso.TipoOcupante;
 
 public abstract class Edificio extends ObjetoVivo {
 
@@ -51,7 +52,9 @@ public abstract class Edificio extends ObjetoVivo {
 		return false;
 	}
 	
-	
+	public TipoOcupante getTipo(){
+		return TipoOcupante.EDIFICIO;
+	}
 	
 	//public boolean puedeAlmacenarUnidades(){}
 		

@@ -1,5 +1,3 @@
-//TODO Clase sin usar!
-
 package factories;
 
 import fiuba.algo3.componentes.Trabajo;
@@ -21,7 +19,7 @@ import fiuba.algo3.excepciones.RecursoAusente;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.Posicion;
-import fiuba.algo3.mapa.recurso.TipoRecurso;
+import fiuba.algo3.mapa.recurso.TipoOcupante;
 import fiuba.algo3.terreno.TipoTerreno;
 
 public class EdificiosTerranFactory implements EdificiosAbstractFactory{
@@ -34,7 +32,7 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 	}
 	
 	public EdificioRecolectorGasVespeno crearRecolectorGasVespeno(Jugador jugador, Posicion posicion) {
-		if (jugador.getMapa().getRecurso(posicion).getTipo() != TipoRecurso.VESPENO) {
+		if (jugador.getMapa().getOcupante(posicion).getTipo() != TipoOcupante.VESPENO) {
 			throw new RecursoAusente();
 		}
 		if (jugador.getMapa().getTerreno(posicion).getTipo() != TipoTerreno.TIERRA) {
@@ -48,7 +46,7 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 	}
 
 	public EdificioRecolectorMineral crearRecolectorMineral(Jugador jugador, Posicion posicion) {
-		if (jugador.getMapa().getRecurso(posicion).getTipo() != TipoRecurso.MINERAL) {
+		if (jugador.getMapa().getOcupante(posicion).getTipo() != TipoOcupante.MINERAL) {
 			throw new RecursoAusente();
 		}
 		if (jugador.getMapa().getTerreno(posicion).getTipo() != TipoTerreno.TIERRA) {
