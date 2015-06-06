@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import factories.EdificiosTerranFactory;
-import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.excepciones.GasVespenoInsuficiente;
 import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.SuministroInsuficiente;
@@ -14,7 +13,6 @@ import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.terreno.TipoTerreno;
 import fiuba.algo3.unidades.Golliat;
-import fiuba.algo3.unidades.Marine;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
 
@@ -81,7 +79,7 @@ public class TestFabrica {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.fabrica = terranFactory.crearEntrenadorUnidadesIntermedias(jugador, new Posicion(2,4));
+			this.fabrica = terranFactory.crearEntrenadorUnidadesIntermedias(jugador, new Posicion(2,10));
 			fail();
 		}
 		catch (MineralInsuficiente e) {

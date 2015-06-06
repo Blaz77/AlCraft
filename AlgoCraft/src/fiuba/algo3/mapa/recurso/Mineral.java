@@ -4,12 +4,17 @@ import fiuba.algo3.edificios.Edificable;
 
 public class Mineral extends Recurso {
 	
-	public TipoRecurso getTipo() {
-		return TipoRecurso.MINERAL;
+	public TipoOcupante getTipo() {
+		return TipoOcupante.MINERAL;
 	}
 	
 	public boolean puedeEdificar(Edificable edif){
 		return edif.sobreMineral();
+	}
+
+	@Override
+	public void pasarTurno() {
+		return;		
 	}
 
 }

@@ -10,13 +10,19 @@ public class GasVespeno extends Recurso {
 		return edif.sobreGasVespeno();
 	}
 	
-	public TipoRecurso getTipo() {
-		return TipoRecurso.VESPENO;
+	public TipoOcupante getTipo() {
+		return TipoOcupante.VESPENO;
 	}
 	
 	// Este metodo despues se borra :3 es para los print y probar cosas
 	public String toString() {
 		return "Geyser";
+	}
+
+	@Override
+	public void pasarTurno() {
+		return;
+		
 	}
 	
 }

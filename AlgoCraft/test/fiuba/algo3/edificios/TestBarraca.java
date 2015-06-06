@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import factories.EdificiosTerranFactory;
-import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.SuministroInsuficiente;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
@@ -15,7 +14,6 @@ import fiuba.algo3.terreno.TipoTerreno;
 import fiuba.algo3.unidades.Marine;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
-import fiuba.algo3.mapa.recurso.TipoRecurso;
 
 public class TestBarraca {
 
@@ -77,7 +75,7 @@ public class TestBarraca {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.barraca = terranFactory.crearEntrenadorUnidadesBasicas(jugador, new Posicion(2,4));
+			this.barraca = terranFactory.crearEntrenadorUnidadesBasicas(jugador, new Posicion(2,10)); // A veces la otra era espacial
 			fail();
 		}
 		catch (MineralInsuficiente e) {

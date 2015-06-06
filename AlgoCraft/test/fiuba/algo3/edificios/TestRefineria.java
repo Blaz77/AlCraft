@@ -10,7 +10,7 @@ import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
-import fiuba.algo3.mapa.recurso.TipoRecurso;
+import fiuba.algo3.mapa.recurso.TipoOcupante;
 import fiuba.algo3.raza.TipoRaza;
 
 public class TestRefineria {
@@ -24,7 +24,7 @@ public class TestRefineria {
 		for (int y = 0; y < mapa.alto(); y++) {
 			for (int x = 0; x < mapa.ancho(); x++) {
 				Posicion posConVespeno = new Posicion(x, y);
-				if (mapa.getRecurso(posConVespeno).getTipo() == TipoRecurso.VESPENO) {
+				if (mapa.getOcupante(posConVespeno).getTipo() == TipoOcupante.VESPENO) {
 					return terranFactory.crearRecolectorGasVespeno(jugador, posConVespeno);
 				}
 			}
@@ -70,7 +70,7 @@ public class TestRefineria {
 		for (int y = 0; y < mapa.alto(); y++) {
 			for (int x = 0; x < mapa.ancho(); x++) {
 				Posicion posSinVespeno = new Posicion(x, y);
-				if (mapa.getRecurso(posSinVespeno).getTipo() != TipoRecurso.VESPENO) {
+				if (mapa.getOcupante(posSinVespeno).getTipo() != TipoOcupante.VESPENO) {
 					try {
 						refineria = terranFactory.crearRecolectorGasVespeno(jugador, posSinVespeno);
 						fail();
