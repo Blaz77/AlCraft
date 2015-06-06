@@ -8,6 +8,7 @@ import org.junit.Test;
 import factories.EdificiosTerranFactory;
 import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.excepciones.MineralInsuficiente;
+import fiuba.algo3.excepciones.RecursoAusente;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
 import fiuba.algo3.mapa.recurso.TipoRecurso;
@@ -72,7 +73,7 @@ public class TestCentroDeMineral {
 						centroMineral = terranFactory.crearRecolectorMineral(jugador, posSinMineral);
 						fail();
 					}
-					catch (RuntimeException e) { // Crear excepcion propia
+					catch (RecursoAusente e) {
 						assertTrue(true);
 						return;
 					}

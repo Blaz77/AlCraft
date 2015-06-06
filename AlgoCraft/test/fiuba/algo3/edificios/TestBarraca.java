@@ -9,10 +9,13 @@ import factories.EdificiosTerranFactory;
 import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.SuministroInsuficiente;
+import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.raza.TipoRaza;
+import fiuba.algo3.terreno.TipoTerreno;
 import fiuba.algo3.unidades.Marine;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
+import fiuba.algo3.mapa.recurso.TipoRecurso;
 
 public class TestBarraca {
 
@@ -21,12 +24,24 @@ public class TestBarraca {
 	private EdificiosTerranFactory terranFactory; //EdificiosAbstractFactory
 	private EdificioEntrenadorUnidades barraca;
 	
+	private EdificioEntrenadorUnidades crearEnTierra(Jugador jugador, Mapa mapa) {
+		for (int y = 0; y < mapa.alto(); y++) {
+			for (int x = 0; x < mapa.ancho(); x++) {
+				Posicion posEnTierra = new Posicion(x, y);
+				if (mapa.getTerreno(posEnTierra).getTipo() == TipoTerreno.TIERRA) {
+					return terranFactory.crearEntrenadorUnidadesBasicas(jugador, posEnTierra);
+				}
+			}
+		}
+		return null;
+	}
+	
 	@Before
 	public void setUp() {
-		//mapa = new Mapa(6);
+		mapa = new Mapa(6);
 		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL, mapa);
 		this.terranFactory = new EdificiosTerranFactory();
-		this.barraca = terranFactory.crearEntrenadorUnidadesBasicas(jugador, new Posicion(2,4));
+		this.barraca = crearEnTierra(jugador, mapa);
 	}
 
 	//TESTS SIN REQUISITOS POR AHORA!!!
@@ -34,6 +49,26 @@ public class TestBarraca {
 	@Test
 	public void testCrearBarraca() {
 		assertEquals(barraca.getNombre(),"Barraca");
+	}
+	
+	@Test
+	public void testCrearBarracaFueraDeTierraFalla() {
+		for (int y = 0; y < mapa.alto(); y++) {
+			for (int x = 0; x < mapa.ancho(); x++) {
+				Posicion posFueraDeTierra = new Posicion(x, y);
+				if (mapa.getTerreno(posFueraDeTierra).getTipo() != TipoTerreno.TIERRA) {
+					try {
+						this.barraca = terranFactory.crearEntrenadorUnidadesBasicas(jugador, posFueraDeTierra);
+						fail();
+					}
+					catch (TerrenoInadecuado e) {
+						assertTrue(true);
+						return;
+					}
+				}
+			}
+		}
+		fail();
 	}
 	
 	@Test

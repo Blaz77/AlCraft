@@ -8,9 +8,12 @@ import org.junit.Test;
 import factories.EdificiosTerranFactory;
 import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.excepciones.MineralInsuficiente;
+import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
+import fiuba.algo3.mapa.recurso.TipoRecurso;
 import fiuba.algo3.raza.TipoRaza;
+import fiuba.algo3.terreno.TipoTerreno;
 
 public class TestDepositoSuministros {
 
@@ -19,9 +22,21 @@ public class TestDepositoSuministros {
 	private EdificiosTerranFactory terranFactory;
 	private Edificio depositoSuministros;
 	
+	private Edificio crearEnTierra(Jugador jugador, Mapa mapa) {
+		for (int y = 0; y < mapa.alto(); y++) {
+			for (int x = 0; x < mapa.ancho(); x++) {
+				Posicion posEnTierra = new Posicion(x, y);
+				if (mapa.getTerreno(posEnTierra).getTipo() == TipoTerreno.TIERRA) {
+					return terranFactory.crearIncrementadorPoblacion(jugador, posEnTierra);
+				}
+			}
+		}
+		return null;
+	}
+	
 	@Before
 	public void setUp() {
-		//mapa = new Mapa(6);
+		mapa = new Mapa(6);
 		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL, mapa);
 		this.terranFactory = new EdificiosTerranFactory();
 	}
@@ -30,8 +45,28 @@ public class TestDepositoSuministros {
 	
 	@Test
 	public void testCrearDepositoSuministros() {
-		this.depositoSuministros = terranFactory.crearIncrementadorPoblacion(jugador, new Posicion(2,4));
+		this.depositoSuministros = crearEnTierra(jugador, mapa);
 		assertEquals(depositoSuministros.getNombre(),"Deposito De Suministros");
+	}
+	
+	@Test
+	public void testCrearDepositoSuministrosFueraDeTierraFalla() {
+		for (int y = 0; y < mapa.alto(); y++) {
+			for (int x = 0; x < mapa.ancho(); x++) {
+				Posicion posFueraDeTierra = new Posicion(x, y);
+				if (mapa.getTerreno(posFueraDeTierra).getTipo() != TipoTerreno.TIERRA) {
+					try {
+						this.depositoSuministros = terranFactory.crearIncrementadorPoblacion(jugador, posFueraDeTierra);
+						fail();
+					}
+					catch (TerrenoInadecuado e) {
+						assertTrue(true);
+						return;
+					}
+				}
+			}
+		}
+		fail();
 	}
 	
 	@Test
@@ -40,7 +75,7 @@ public class TestDepositoSuministros {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.depositoSuministros = terranFactory.crearIncrementadorPoblacion(jugador, new Posicion(2,4));
+			this.depositoSuministros = crearEnTierra(jugador, mapa);
 			fail();
 		}
 		catch (MineralInsuficiente e) {
@@ -51,7 +86,7 @@ public class TestDepositoSuministros {
 	
 	@Test
 	public void testDepositoSubeVidaDuranteConstruccion() {
-		this.depositoSuministros = terranFactory.crearIncrementadorPoblacion(jugador, new Posicion(2,4));
+		this.depositoSuministros = crearEnTierra(jugador, mapa);
 		
 		int vidaRelativa = depositoSuministros.getVida();
 		for(int i = 0; i < 6; i++){
@@ -66,7 +101,7 @@ public class TestDepositoSuministros {
 	@Test
 	public void testDepositoMientrasConstruyeNoAumentaPoblacion() {
 		int poblacionRelativa = jugador.getPoblacion();
-		this.depositoSuministros = terranFactory.crearIncrementadorPoblacion(jugador, new Posicion(2,4));
+		this.depositoSuministros = crearEnTierra(jugador, mapa);
 		
 		assertEquals(poblacionRelativa, jugador.getPoblacion());
 	}
@@ -74,7 +109,7 @@ public class TestDepositoSuministros {
 	@Test
 	public void testDepositoDespuesDeConstruirAumentaPoblacion() {
 		int poblacionRelativa = jugador.getPoblacion();
-		this.depositoSuministros = terranFactory.crearIncrementadorPoblacion(jugador, new Posicion(2,4));
+		this.depositoSuministros = crearEnTierra(jugador, mapa);
 		for(int i = 0; i < 6; i++) depositoSuministros.pasarTurno(); // Construyendo
 		
 		assertEquals(poblacionRelativa + 5, jugador.getPoblacion());

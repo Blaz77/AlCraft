@@ -10,7 +10,9 @@ import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.excepciones.GasVespenoInsuficiente;
 import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.SuministroInsuficiente;
+import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.raza.TipoRaza;
+import fiuba.algo3.terreno.TipoTerreno;
 import fiuba.algo3.unidades.Golliat;
 import fiuba.algo3.unidades.Marine;
 import fiuba.algo3.juego.*;
@@ -23,15 +25,27 @@ public class TestFabrica {
 	private EdificiosTerranFactory terranFactory;
 	private EdificioEntrenadorUnidades fabrica;
 	
+	private EdificioEntrenadorUnidades crearEnTierra(Jugador jugador, Mapa mapa) {
+		for (int y = 0; y < mapa.alto(); y++) {
+			for (int x = 0; x < mapa.ancho(); x++) {
+				Posicion posEnTierra = new Posicion(x, y);
+				if (mapa.getTerreno(posEnTierra).getTipo() == TipoTerreno.TIERRA) {
+					return terranFactory.crearEntrenadorUnidadesIntermedias(jugador, posEnTierra);
+				}
+			}
+		}
+		return null;
+	}
+	
 	@Before
 	public void setUp() throws Exception {
-		//mapa = new Mapa(6);
+		mapa = new Mapa(6);
 		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL, mapa);
 		this.terranFactory = new EdificiosTerranFactory();
 		
 		// Aseguro recursos
 		jugador.agregarGasVespeno(50);
-		this.fabrica = terranFactory.crearEntrenadorUnidadesIntermedias(jugador, new Posicion(2,4));
+		this.fabrica = crearEnTierra(jugador, mapa);
 	}
 
 	//TESTS SIN REQUISITOS POR AHORA!!!
@@ -39,6 +53,26 @@ public class TestFabrica {
 	@Test
 	public void testCrearFabrica() {
 		assertEquals(fabrica.getNombre(),"Fabrica");
+	}
+	
+	@Test
+	public void testCrearFabricaFueraDeTierraFalla() {
+		for (int y = 0; y < mapa.alto(); y++) {
+			for (int x = 0; x < mapa.ancho(); x++) {
+				Posicion posFueraDeTierra = new Posicion(x, y);
+				if (mapa.getTerreno(posFueraDeTierra).getTipo() != TipoTerreno.TIERRA) {
+					try {
+						this.fabrica = terranFactory.crearEntrenadorUnidadesIntermedias(jugador, posFueraDeTierra);
+						fail();
+					}
+					catch (TerrenoInadecuado e) {
+						assertTrue(true);
+						return;
+					}
+				}
+			}
+		}
+		fail();
 	}
 	
 	@Test

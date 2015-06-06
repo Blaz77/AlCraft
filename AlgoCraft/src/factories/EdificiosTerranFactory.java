@@ -17,10 +17,12 @@ import fiuba.algo3.edificios.PuertoEstelar;
 import fiuba.algo3.edificios.Refineria;
 import fiuba.algo3.excepciones.GasVespenoInsuficiente;
 import fiuba.algo3.excepciones.MineralInsuficiente;
-import fiuba.algo3.excepciones.SuministroInsuficiente;
+import fiuba.algo3.excepciones.RecursoAusente;
+import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.mapa.recurso.TipoRecurso;
+import fiuba.algo3.terreno.TipoTerreno;
 
 public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 
@@ -33,7 +35,10 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 	
 	public EdificioRecolectorGasVespeno crearRecolectorGasVespeno(Jugador jugador, Posicion posicion) {
 		if (jugador.getMapa().getRecurso(posicion).getTipo() != TipoRecurso.VESPENO) {
-			throw new RuntimeException();
+			throw new RecursoAusente();
+		}
+		if (jugador.getMapa().getTerreno(posicion).getTipo() != TipoTerreno.TIERRA) {
+			throw new TerrenoInadecuado();
 		}
 		EdificioRecolectorGasVespeno edificio = new Refineria(jugador, posicion);
 		verificarCostosConstruccion(jugador, edificio);
@@ -44,7 +49,10 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 
 	public EdificioRecolectorMineral crearRecolectorMineral(Jugador jugador, Posicion posicion) {
 		if (jugador.getMapa().getRecurso(posicion).getTipo() != TipoRecurso.MINERAL) {
-			throw new RuntimeException();
+			throw new RecursoAusente();
+		}
+		if (jugador.getMapa().getTerreno(posicion).getTipo() != TipoTerreno.TIERRA) {
+			throw new TerrenoInadecuado();
 		}
 		EdificioRecolectorMineral edificio = new CentroDeMineral(jugador, posicion);
 		verificarCostosConstruccion(jugador, edificio);
@@ -54,6 +62,9 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 	}
 
 	public EdificioIncrementadorPoblacion crearIncrementadorPoblacion(Jugador jugador, Posicion posicion) {
+		if (jugador.getMapa().getTerreno(posicion).getTipo() != TipoTerreno.TIERRA) {
+			throw new TerrenoInadecuado();
+		}
 		EdificioIncrementadorPoblacion edificio = new DepositoDeSuministros(jugador, posicion);
 		verificarCostosConstruccion(jugador, edificio);
 		Trabajo construccion = new TrabajoConstruccion(6, edificio);
@@ -62,6 +73,9 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 	}
 
 	public EdificioEntrenadorUnidades crearEntrenadorUnidadesBasicas(Jugador jugador, Posicion posicion) {
+		if (jugador.getMapa().getTerreno(posicion).getTipo() != TipoTerreno.TIERRA) {
+			throw new TerrenoInadecuado();
+		}
 		EdificioEntrenadorUnidades edificio = new Barraca(jugador, posicion);
 		verificarCostosConstruccion(jugador, edificio);
 		Trabajo construccion = new TrabajoConstruccion(12, edificio);
@@ -70,6 +84,9 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 	}
 
 	public EdificioEntrenadorUnidades crearEntrenadorUnidadesIntermedias(Jugador jugador, Posicion posicion) {
+		if (jugador.getMapa().getTerreno(posicion).getTipo() != TipoTerreno.TIERRA) {
+			throw new TerrenoInadecuado();
+		}
 		EdificioEntrenadorUnidades edificio = new Fabrica(jugador, posicion);
 		verificarCostosConstruccion(jugador, edificio);
 		Trabajo construccion = new TrabajoConstruccion(12, edificio);
@@ -78,6 +95,9 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 	}
 
 	public EdificioEntrenadorUnidades crearEntrenadorUnidadesAvanzadas(Jugador jugador, Posicion posicion) {
+		if (jugador.getMapa().getTerreno(posicion).getTipo() != TipoTerreno.TIERRA) {
+			throw new TerrenoInadecuado();
+		}
 		EdificioEntrenadorUnidades edificio = new PuertoEstelar(jugador, posicion);
 		verificarCostosConstruccion(jugador, edificio);
 		Trabajo construccion = new TrabajoConstruccion(10, edificio);
