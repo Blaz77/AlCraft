@@ -7,5 +7,6 @@ public class Marine extends Unidad {
 
 	public Marine(Jugador propietario, Posicion posicion){
 		super(propietario, posicion);
+		this.nombre = "Marine".intern();
 	}
 }

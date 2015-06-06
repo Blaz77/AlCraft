@@ -7,5 +7,6 @@ public class Espectro extends Unidad {
 
 	public Espectro(Jugador propietario, Posicion posicion){
 		super(propietario, posicion);
+		this.nombre = "Espectro".intern();
 	}
 }

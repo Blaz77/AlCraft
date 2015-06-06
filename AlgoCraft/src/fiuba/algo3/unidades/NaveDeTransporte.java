@@ -7,5 +7,6 @@ public class NaveDeTransporte extends Unidad {
 
 	public NaveDeTransporte(Jugador propietario, Posicion posicion){
 		super(propietario, posicion);
+		this.nombre = "Nave de Transporte".intern();
 	}
 }

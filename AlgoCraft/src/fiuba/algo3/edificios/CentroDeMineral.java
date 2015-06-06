@@ -10,7 +10,7 @@ public class CentroDeMineral extends EdificioRecolectorMineral {
 	public CentroDeMineral(Jugador propietario, Posicion posicion) {
 		super(propietario, posicion, 10);
 		this.vida = new Vida(0, 500);
-		this.nombre = "Centro de Mineral";
+		this.nombre = "Centro de Mineral".intern();
 	}
 	
 	

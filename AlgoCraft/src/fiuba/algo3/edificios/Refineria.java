@@ -9,7 +9,7 @@ public class Refineria extends EdificioRecolectorGasVespeno {
 	public Refineria(Jugador propietario, Posicion posicion) {
 		super(propietario, posicion, 10);
 		this.vida = new Vida(0, 750);
-		this.nombre = "Refineria";
+		this.nombre = "Refineria".intern();
 	}
 
 }

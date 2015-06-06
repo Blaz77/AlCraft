@@ -328,7 +328,7 @@ public class Mapa {
 
 	/* Mostrar info del mapa de varias formas" */
 	public static void main(String[] args){
-
+		
 		Mapa miMapa = new Mapa(BASES_PARA_MAIN);
 		
 		miMapa.imprimirMapaConReferencias();

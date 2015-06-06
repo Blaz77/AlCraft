@@ -1,15 +1,11 @@
 package fiuba.algo3.edificios;
 
-import java.util.ArrayList;
-
 import fiuba.algo3.componentes.Trabajo;
 import fiuba.algo3.componentes.TrabajoNull;
-import fiuba.algo3.juego.Atacable;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
-import fiuba.algo3.unidades.Constructor;
 
-public abstract class Edificio extends ObjetoVivo { //implements Atacable
+public abstract class Edificio extends ObjetoVivo {
 
 	// 2 Opciones: 
 	// - Herencia Edificio -> EdificioConstructor -> Barracas, etc.

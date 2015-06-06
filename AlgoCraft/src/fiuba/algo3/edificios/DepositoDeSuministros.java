@@ -9,7 +9,7 @@ public class DepositoDeSuministros extends EdificioIncrementadorPoblacion {
 	public DepositoDeSuministros(Jugador propietario, Posicion posicion) {
 		super(propietario, posicion);
 		this.vida = new Vida(0, 500);
-		this.nombre = "Deposito De Suministros";
+		this.nombre = "Deposito De Suministros".intern();
 	}
 	
 }

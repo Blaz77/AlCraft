@@ -12,7 +12,7 @@ public class PuertoEstelar extends EdificioEntrenadorUnidades {
 	public PuertoEstelar(Jugador propietario, Posicion posicion) {
 		super(propietario, posicion);
 		this.vida = new Vida(0, 1300);
-		this.nombre = "Puerto Estelar";
+		this.nombre = "Puerto Estelar".intern();
 		this.entrenador.agregarEntrenable(new ConstructorEspectro());
 		this.entrenador.agregarEntrenable(new ConstructorNaveDeCiencia());
 		this.entrenador.agregarEntrenable(new ConstructorNaveDeTransporte());

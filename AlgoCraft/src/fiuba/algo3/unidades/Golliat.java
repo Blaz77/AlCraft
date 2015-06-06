@@ -7,5 +7,6 @@ public class Golliat extends Unidad {
 	
 	public Golliat(Jugador propietario, Posicion posicion){
 		super(propietario, posicion);
+		this.nombre = "Golliat".intern();
 	}
 }

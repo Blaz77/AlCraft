@@ -8,8 +8,4 @@ public abstract class Recurso {
 	
 	public abstract TipoRecurso getTipo();
 	
-	// Este metodo despues se borra :3 es para los string y eso.
-	public String toString() {
-		return "Sin Recurso";
-	}
 }
