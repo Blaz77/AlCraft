@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.mapa.Mapa;
-import fiuba.algo3.mapa.MapaProxy;
 import fiuba.algo3.raza.Raza;
 import fiuba.algo3.raza.RazaFactory;
 import fiuba.algo3.raza.TipoRaza;
@@ -21,21 +20,18 @@ import fiuba.algo3.unidades.Unidad;
  * de vision, recursos para gastar, edificios ya construidos, etc.
  */
 public class Jugador {
-
-	private final static int POB_MAX_INICIAL = 5;
-	private final static int POB_MAX_TOTAL = 200;
-	private final static int MINERALES_INICIAL = 200;
-	private final static int VESPENO_INICIAL = 50;
-
 	private Color color;
 	private Raza raza;
 	private int minerales;
 	private int gasVespeno;
+	//quizas hacer Objeto Poblacion?
+	//poblacionMax = 200;
+	//poblacionlibre = x;
 	private int poblacion;
 	private int poblacionCapacidad; // Depende de los edificios correspondientes.
-	private MapaProxy mapaPropio;
-	private ArrayList<Unidad> unidades = new ArrayList<Unidad>();
-	private ArrayList<Edificio> edificios = new ArrayList<Edificio>();
+	private Mapa mapaPropio;
+	private ArrayList<Unidad> unidades;
+	private ArrayList<Edificio> edificios;
 
 	public Jugador(TipoRaza raza, Color color, Mapa mapa) { // MapaProxy? 
 		RazaFactory razaFactory = new RazaFactory();
@@ -46,11 +42,12 @@ public class Jugador {
 		// Por ahora estos numeros magicos funcionan, despues se ve si
 		// extraerlos en forma de constantes o pasados x parametro
 		// (en caso de implementar un menu de 'opciones' antes de jugar)
-		this.poblacionCapacidad = POB_MAX_INICIAL;
-		this.minerales = MINERALES_INICIAL;
-		this.gasVespeno = VESPENO_INICIAL;
+		this.minerales = 200;
+		this.gasVespeno = 50;
 		this.poblacion = 0;
-		this.mapaPropio = new MapaProxy(mapa);
+		this.poblacionCapacidad = 5;
+		this.mapaPropio = mapa;
+		this.unidades = new ArrayList<Unidad>();
 	}
 
 	public Color getColor() {
@@ -80,7 +77,7 @@ public class Jugador {
 	}
 	
 	public void aumentarCapacidadPoblacion(int i) {
-		this.poblacionCapacidad += i;	
+		this.poblacionCapacidad += i;		
 	}
 	
 
@@ -92,7 +89,7 @@ public class Jugador {
 		return this.poblacionCapacidad;
 	}
 	
-	public MapaProxy getMapa() {
+	public Mapa getMapa() {
 		return this.mapaPropio;
 	}
 

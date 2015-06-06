@@ -1,6 +1,9 @@
 package fiuba.algo3.mapa;
 
-import fiuba.algo3.juego.Ocupante;
+import fiuba.algo3.edificios.Edificable;
+import fiuba.algo3.edificios.Edificio;
+import fiuba.algo3.mapa.recurso.NoRecurso;
+import fiuba.algo3.mapa.recurso.Recurso;
 import fiuba.algo3.terreno.Terreno;
 
 
@@ -16,8 +19,9 @@ import fiuba.algo3.terreno.Terreno;
 public class Celda { //quizas heredar de celda y armar Tierra/Espacio extends Celda
 
 	private Posicion posicion; // Es de utilidad esto aca? XD. Si las unidades/edificios/recursos lo tienen.
+	private Recurso recurso = new NoRecurso();
 	private Terreno terreno;
-	private Ocupante ocupante = new CeldaVacia();
+	private Edificio edificio = null; //EdificioNULL
 	
 	public Celda(Posicion posicion, Terreno terreno) {
 		this.posicion = posicion;
@@ -27,6 +31,11 @@ public class Celda { //quizas heredar de celda y armar Tierra/Espacio extends Ce
 	public int distancia(Celda other) {
 		return posicion.distancia(other.posicion);
 	}
+
+	/*
+	public double distancia(Celda otroPunto) {
+		return Math.sqrt( Math.pow(this.x - otroPunto.x, 2) + Math.pow(this.y - otroPunto.y, 2) );
+	}*/
 
 	public int getX() {
 		return posicion.getX();
@@ -40,16 +49,12 @@ public class Celda { //quizas heredar de celda y armar Tierra/Espacio extends Ce
 		return posicion;
 	}
 		
-	public void setOcupante(Ocupante ocupante) {
-		this.ocupante = ocupante;
+	public void setRecurso(Recurso recurso) {
+		this.recurso = recurso;
 	}	
 	
-	public Ocupante getOcupante() {
-		return this.ocupante;
-	}
-	
-	public Terreno getTerreno(){
-		return this.terreno;
+	public Recurso getRecurso() {
+		return this.recurso;
 	}
 
 	//O posicionar directo!
@@ -75,13 +80,18 @@ public class Celda { //quizas heredar de celda y armar Tierra/Espacio extends Ce
 	// * Celda lo coloca, sin preguntar. En todo caso, que explote todo si
 	// el terreno era incompatible.
 	
-	/*public void posicionar(Edificable edif){
+	public void posicionar(Edificable edif){
 		// TODO: crear una excepcion valida para esta situacion (dejenlo asi
 		// por ahora, sino despues tenemos 200 excepciones todas iguales.)
 		if (!terreno.puedeEdificar(edif))
 			throw new RuntimeException();
 		this.edificio = (Edificio)edif; //FEO, despues arreglar! (Edificable edificio? :D)
 		
-	}*/
+	}
+	
+	public Terreno getTerreno(){
+		return this.terreno;
+	}
+
 	
 }

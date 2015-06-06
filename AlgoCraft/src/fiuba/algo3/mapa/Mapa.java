@@ -3,10 +3,10 @@ package fiuba.algo3.mapa;
 import java.util.ArrayList;
 import java.util.Random;
 
-import fiuba.algo3.juego.Ocupante;
 import fiuba.algo3.mapa.recurso.GasVespeno;
 import fiuba.algo3.mapa.recurso.Mineral;
-import fiuba.algo3.mapa.recurso.TipoOcupante;
+import fiuba.algo3.mapa.recurso.Recurso;
+import fiuba.algo3.mapa.recurso.TipoRecurso;
 import fiuba.algo3.terreno.Espacio;
 import fiuba.algo3.terreno.Terreno;
 import fiuba.algo3.terreno.Tierra;
@@ -107,17 +107,17 @@ public class Mapa {
 			randPos = celdaRandomEnBase(base);
 			
 			if (yaUbicados.isEmpty()){
-				setOcupante(new Mineral(), randPos);
+				setRecurso(new Mineral(), randPos);
 				yaUbicados.add(getCelda(randPos));
 			}
 			
 			// La idea es que todos los nodos de mineral esten conectados.
 			// Asi que pongo minerales en puntos aleatorios conectados a minerales ya
 			// colocados.
-			else if (getOcupante(randPos).getTipo() != TipoOcupante.MINERAL)
+			else if (getRecurso(randPos).getTipo() != TipoRecurso.MINERAL)
 				for(Celda conMineral : yaUbicados)
 					if (distancia(randPos, conMineral.getPosicion()) == 1){
-						setOcupante(new Mineral(), randPos);
+						setRecurso(new Mineral(), randPos);
 						yaUbicados.add(getCelda(randPos));
 						break;
 					}
@@ -135,8 +135,8 @@ public class Mapa {
 		Posicion randPos;
 		do 
 			randPos = celdaRandomEnBase(base);
-		while(getOcupante(randPos).getTipo() == TipoOcupante.MINERAL);
-		setOcupante(new GasVespeno(), randPos);
+		while(getRecurso(randPos).getTipo() == TipoRecurso.MINERAL);
+		setRecurso(new GasVespeno(), randPos);
 	}
 	
 	/* Inyecta zonas espaciales al mapa.
@@ -203,12 +203,12 @@ public class Mapa {
 		return mapa[posicion.getX()][posicion.getY()];
 	}
 	
-	public void setOcupante(Ocupante ocupante, Posicion posicion) {
-		this.getCelda(posicion).setOcupante(ocupante);
+	public void setRecurso(Recurso recurso, Posicion posicion) {
+		this.getCelda(posicion).setRecurso(recurso);
 	}	
 	
-	public Ocupante getOcupante(Posicion posicion) {
-		return this.getCelda(posicion).getOcupante();
+	public Recurso getRecurso(Posicion posicion) {
+		return this.getCelda(posicion).getRecurso();
 	}
 
 	public Terreno getTerreno(Posicion posicion){
@@ -251,7 +251,7 @@ public class Mapa {
 				System.out.print(", ");
 				System.out.print(celda.getY());
 				System.out.print(": ");
-				System.out.println(celda.getOcupante());
+				System.out.println(celda.getRecurso());
 		}
 	}
 
@@ -272,15 +272,15 @@ public class Mapa {
 			for (int x = 0; x < ancho(); x++) {
 				pos = new Posicion(x, y);
 				if (distancia(pos, posJ1) < SEMILADO_BASE * 2) {
-					if (getOcupante(pos) != null && getOcupante(pos).getTipo() == TipoOcupante.MINERAL)
+					if (getRecurso(pos) != null && getRecurso(pos).getTipo() == TipoRecurso.MINERAL)
 						mineralesJ1++;
-					else if (getOcupante(pos) != null && getOcupante(pos).getTipo() == TipoOcupante.VESPENO)
+					else if (getRecurso(pos) != null && getRecurso(pos).getTipo() == TipoRecurso.VESPENO)
 						vespenoJ1++;
 				}
 				else if (distancia(pos, posJ2) < SEMILADO_BASE * 2) {
-					if (getOcupante(pos) != null && getOcupante(pos).getTipo() == TipoOcupante.MINERAL)
+					if (getRecurso(pos) != null && getRecurso(pos).getTipo() == TipoRecurso.MINERAL)
 						mineralesJ2++;
-					else if (getOcupante(pos) != null && getOcupante(pos).getTipo() == TipoOcupante.VESPENO)
+					else if (getRecurso(pos) != null && getRecurso(pos).getTipo() == TipoRecurso.VESPENO)
 						vespenoJ2++;
 				}
 			}
@@ -301,7 +301,7 @@ public class Mapa {
 	 * */
 	private void imprimirMapaConReferencias() {
 		Celda elPunto;
-		Ocupante elRecurso;
+		Recurso elRecurso;
 		for (int y2 = 0; y2 < alto(); y2++){
 			for (int x2 = 0; x2 < ancho(); x2++){
 				elPunto = mapa[x2][y2];
@@ -311,10 +311,10 @@ public class Mapa {
 				else if (bases.contains(elPunto) )
 					System.out.print("B");
 				else {
-					elRecurso = getOcupante(new Posicion(x2, y2));
-					if(elRecurso != null && elRecurso.getTipo() == TipoOcupante.VESPENO)
+					elRecurso = getRecurso(new Posicion(x2, y2));
+					if(elRecurso != null && elRecurso.getTipo() == TipoRecurso.VESPENO)
 						System.out.print("G");
-					else if(elRecurso != null && elRecurso.getTipo() == TipoOcupante.MINERAL)
+					else if(elRecurso != null && elRecurso.getTipo() == TipoRecurso.MINERAL)
 						System.out.print("M");
 					else if(getTerreno(new Posicion(x2, y2)).getTipo() == TipoTerreno.ESPACIO)
 						System.out.print(" ");
