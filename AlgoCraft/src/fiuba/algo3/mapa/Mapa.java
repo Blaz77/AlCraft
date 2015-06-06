@@ -66,14 +66,14 @@ public class Mapa {
 		// Esto le pone algunas celdas espaciales al borde de arriba
 		for (int y = 0; y < DISTANCIA_BORDE; y++)
 			for (int x = 0; x < _ancho; x++)
-				if ((y == 0 || getTerreno(x, y-1).getTipo() == TipoTerreno.ESPACIO) && miRNG.nextBoolean())
+				if ((y == 0 || getTerreno(new Posicion(x, y-1)).getTipo() == TipoTerreno.ESPACIO) && miRNG.nextBoolean())
 					mapa[x][y] = new Celda(x, y, new Espacio());
 		
 		
 		// y esto al de abajo
 		for (int y = _alto - 1; y > _alto - DISTANCIA_BORDE; y--)
 			for (int x = 0; x < _ancho; x++)
-				if ((((y == _alto - 1) || getTerreno(x, y+1).getTipo() == TipoTerreno.ESPACIO) && miRNG.nextBoolean()))
+				if ((((y == _alto - 1) || getTerreno(new Posicion(x, y-1)).getTipo() == TipoTerreno.ESPACIO) && miRNG.nextBoolean()))
 					mapa[x][y] = new Celda(x, y, new Espacio());
 		
 		
@@ -110,14 +110,16 @@ public class Mapa {
 		while(yaUbicados.size() < MINERALES_POR_BASE){
 			
 			// Genero un punto aleatorio dentro de la base.
-			randPos = _CeldaEnBaseRandom(base);
+			randPos = celdaRandomEnBase(base);
 			
 			if (yaUbicados.isEmpty()){
 				setRecurso(new Mineral(), randPos);
 				yaUbicados.add(getCelda(randPos));
 			}
 			
-			// La idea es que todos los nodos de mineral esten conectados
+			// La idea es que todos los nodos de mineral esten conectados.
+			// Asi que pongo minerales en puntos aleatorios conectados a minerales ya
+			// colocados.
 			else if (getRecurso(randPos).getTipo() != TipoRecurso.MINERAL)
 				for(Celda conMineral : yaUbicados)
 					if (distancia(randPos, conMineral.getPosicion()) == 1){
@@ -128,7 +130,7 @@ public class Mapa {
 		}
 	}
 
-	private Posicion _CeldaEnBaseRandom(Celda base) {
+	private Posicion celdaRandomEnBase(Celda base) {
 		Random miRNG = new Random();
 		int rand_x = base.getX() + miRNG.nextInt(2 * SEMILADO_BASE + 1) - SEMILADO_BASE;
 		int rand_y = base.getY() + miRNG.nextInt(2 * SEMILADO_BASE + 1) - SEMILADO_BASE;
@@ -136,31 +138,18 @@ public class Mapa {
 	}
 
 	private void ubicarVolcan(Celda base) {
-		int rand_x;
-		int rand_y;
-		int x = base.getX();
-		int y = base.getY();
-		Random miRNG = new Random();
-		
-		// Ahora ubico el volcan
-		do {
-			rand_x = x + miRNG.nextInt(2 * SEMILADO_BASE + 1) - SEMILADO_BASE;
-			rand_y = y + miRNG.nextInt(2 * SEMILADO_BASE + 1) - SEMILADO_BASE;
-		} while(getRecurso(rand_x, rand_y).getTipo() == TipoRecurso.MINERAL);
-		mapa[rand_x][rand_y].setRecurso(new GasVespeno());
-	}
-	
-
-
-	public int distancia(int x1, int y1, int x2, int y2) {
-		return mapa[x1][y1].distancia(mapa[x2][y2]);
+		Posicion randPos;
+		do 
+			randPos = celdaRandomEnBase(base);
+		while(getRecurso(randPos).getTipo() == TipoRecurso.MINERAL);
+		setRecurso(new GasVespeno(), randPos);
 	}
 	
 	public int distancia(Posicion pos1, Posicion pos2) {
 		return mapa[pos1.getX()][pos1.getY()].distancia(mapa[pos2.getX()][pos2.getY()]);
 	}
 	
-	public Celda obtenerPuntoGeneradorJugador(int numeroJugador) {
+	public Celda obtenerBaseDeJugador(int numeroJugador) {
 		return basesJugadores.get(numeroJugador - 1);
 	}
 	
@@ -182,16 +171,6 @@ public class Mapa {
 		return mapa[posicion.getX()][posicion.getY()];
 	}
 
-	//Uso interno, para hacer la vida mas facil con la matriz
-	private Recurso getRecurso(int x, int y){ 
-		return mapa[x][y].getRecurso();
-	}
-
-	//Uso interno, para hacer la vida mas facil con la matriz
-	private Terreno getTerreno(int x, int y){
-		return mapa[x][y].getTerreno();
-	}
-	
 	public void setRecurso(Recurso recurso, Posicion posicion) {
 		this.getCelda(posicion).setRecurso(recurso);
 	}	
@@ -224,30 +203,28 @@ public class Mapa {
 	
 	private void imprimirMineralesCercaDeJugadores(){
 		
-		Celda puntoGeneracionJugador1 = obtenerPuntoGeneradorJugador(1);
-		Celda puntoGeneracionJugador2 = obtenerPuntoGeneradorJugador(2);
 		int mineralesJ1 = 0;
 		int mineralesJ2 = 0;
 		int vespenoJ1 = 0;
 		int vespenoJ2 = 0;
 
-		int x1 = puntoGeneracionJugador1.getX();
-		int y1 = puntoGeneracionJugador1.getY();
-		int x2 = puntoGeneracionJugador2.getX();
-		int y2 = puntoGeneracionJugador2.getY();
+		Posicion posJ1 = obtenerBaseDeJugador(1).getPosicion();
+		Posicion posJ2 = obtenerBaseDeJugador(2).getPosicion();
 		
+		Posicion pos;
 		for(int y = 0; y < alto(); y++) {
 			for (int x = 0; x < ancho(); x++) {
-				if (distancia(x,y,x1,y1) < 20) {
-					if (getRecurso(x, y) != null && getRecurso(x, y).getClass() == Mineral.class)
+				pos = new Posicion(x, y);
+				if (distancia(pos, posJ1) < 20) {
+					if (getRecurso(pos) != null && getRecurso(pos).getTipo() == TipoRecurso.MINERAL)
 						mineralesJ1++;
-					else if (getRecurso(x, y) != null && getRecurso(x, y).getClass() == GasVespeno.class)
+					else if (getRecurso(pos) != null && getRecurso(pos).getTipo() == TipoRecurso.VESPENO)
 						vespenoJ1++;
 				}
-				else if (distancia(x,y,x2,y2) < 20) {
-					if (getRecurso(x, y) != null && getRecurso(x, y).getClass() == Mineral.class)
+				else if (distancia(pos, posJ2) < 20) {
+					if (getRecurso(pos) != null && getRecurso(pos).getTipo() == TipoRecurso.MINERAL)
 						mineralesJ2++;
-					else if (getRecurso(x, y) != null && getRecurso(x, y).getClass() == GasVespeno.class)
+					else if (getRecurso(pos) != null && getRecurso(pos).getTipo() == TipoRecurso.VESPENO)
 						vespenoJ2++;
 				}
 			}
@@ -271,14 +248,14 @@ public class Mapa {
 				else if (bases.contains(elPunto) )
 					System.out.print("B");
 				else {
-					elRecurso = getRecurso(x2, y2);
+					elRecurso = getRecurso(new Posicion(x2, y2));
 					if(elRecurso != null && elRecurso.getClass().equals(Recurso.class))
 						System.out.print("R");
 					else if(elRecurso != null && elRecurso.getClass().equals(GasVespeno.class))
 						System.out.print("G");
 					else if(elRecurso != null && elRecurso.getClass().equals(Mineral.class))
 						System.out.print("M");
-					else if(getTerreno(x2, y2).getTipo() == TipoTerreno.ESPACIO)
+					else if(getTerreno(new Posicion(x2, y2)).getTipo() == TipoTerreno.ESPACIO)
 						System.out.print(" ");
 					else
 						System.out.print(".");
@@ -300,8 +277,8 @@ public class Mapa {
 		}
 	}
 
-	public boolean esBase(int x, int y) {
-		return bases.contains(mapa[x][y]);
+	public boolean esBase(Posicion pos) {
+		return bases.contains(getCelda(pos));
 	}
 		
 

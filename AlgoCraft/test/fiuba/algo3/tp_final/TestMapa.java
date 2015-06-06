@@ -52,8 +52,8 @@ public class TestMapa {
 	
 	@Test
 	public void testMapaGeneradoRespetaSeparacionJugadores() {
-		Celda puntoGeneracionJugador1 = mapaNuevo.obtenerPuntoGeneradorJugador(1);
-		Celda puntoGeneracionJugador2 = mapaNuevo.obtenerPuntoGeneradorJugador(2);
+		Celda puntoGeneracionJugador1 = mapaNuevo.obtenerBaseDeJugador(1);
+		Celda puntoGeneracionJugador2 = mapaNuevo.obtenerBaseDeJugador(2);
 		
 		// Para considerar que los jugadores estan en extremos opuestos, su distancia
 		// horizontal o vertical debe ser similar al ancho o alto del mapa respectivamente
@@ -74,8 +74,8 @@ public class TestMapa {
 	public void testMapaGeneradoDispersaBasesEnFormaJusta() {
 		final int DIFERENCIA_TOLERABLE = 40;
 		
-		Celda puntoGeneracionJugador1 = mapaNuevo.obtenerPuntoGeneradorJugador(1);
-		Celda puntoGeneracionJugador2 = mapaNuevo.obtenerPuntoGeneradorJugador(2);
+		Celda puntoGeneracionJugador1 = mapaNuevo.obtenerBaseDeJugador(1);
+		Celda puntoGeneracionJugador2 = mapaNuevo.obtenerBaseDeJugador(2);
 		
 		// Dispersa bien cuando la suma de distancias a las bases es similar en ambos 
 		// jugadores
@@ -92,8 +92,8 @@ public class TestMapa {
 	@Test
 	public void testMapaGeneradoDejaEnBasesUnMineral(){
 		
-		Celda puntoGeneracionJugador1 = mapaNuevo.obtenerPuntoGeneradorJugador(1);
-		Celda puntoGeneracionJugador2 = mapaNuevo.obtenerPuntoGeneradorJugador(2);
+		Celda puntoGeneracionJugador1 = mapaNuevo.obtenerBaseDeJugador(1);
+		Celda puntoGeneracionJugador2 = mapaNuevo.obtenerBaseDeJugador(2);
 		
 		Assert.assertEquals(puntoGeneracionJugador1.getRecurso().getClass(),Mineral.class);
 		Assert.assertEquals(puntoGeneracionJugador2.getRecurso().getClass(),Mineral.class);
@@ -141,7 +141,7 @@ public class TestMapa {
 			for (int x = 0; x < mapaNuevo.ancho(); x++){
 				// O es terrestre, o no tiene base, y punto (cuac)
 				Posicion pos = new Posicion(x,y);
-				Assert.assertTrue(mapaNuevo.getTerreno(pos).getTipo() == TipoTerreno.TIERRA || !(mapaNuevo.esBase(x, y)));
+				Assert.assertTrue(mapaNuevo.getTerreno(pos).getTipo() == TipoTerreno.TIERRA || !(mapaNuevo.esBase(pos)));
 			}
 	}
 	
