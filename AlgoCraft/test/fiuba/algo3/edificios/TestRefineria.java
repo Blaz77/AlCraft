@@ -13,23 +13,20 @@ import fiuba.algo3.mapa.*;
 import fiuba.algo3.mapa.recurso.TipoRecurso;
 import fiuba.algo3.raza.TipoRaza;
 
-public class TestRefineria {
+public class TestRefineria extends TestEdificio {
 
 	private Mapa mapa;
 	private Jugador jugador;
 	private EdificiosTerranFactory terranFactory;
 	private Edificio refineria;
 	
+	@Override
+	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
+		return terranFactory.crearRecolectorGasVespeno(jugador, posicion);
+	}
+	
 	private Edificio crearEnVolcan(Jugador jugador, Mapa mapa) {
-		for (int y = 0; y < mapa.alto(); y++) {
-			for (int x = 0; x < mapa.ancho(); x++) {
-				Posicion posConVespeno = new Posicion(x, y);
-				if (mapa.getRecurso(posConVespeno).getTipo() == TipoRecurso.VESPENO) {
-					return terranFactory.crearRecolectorGasVespeno(jugador, posConVespeno);
-				}
-			}
-		}
-		return null;
+		return crearEnRecurso(jugador, mapa, TipoRecurso.VESPENO);
 	}
 	
 	@Before

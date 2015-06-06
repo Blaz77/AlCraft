@@ -3,6 +3,7 @@ package fiuba.algo3.edificios;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.mapa.recurso.TipoRecurso;
 import fiuba.algo3.terreno.TipoTerreno;
 
 public abstract class TestEdificio {
@@ -15,6 +16,18 @@ public abstract class TestEdificio {
 				Posicion posEnTierra = new Posicion(x, y);
 				if (mapa.getTerreno(posEnTierra).getTipo() == TipoTerreno.TIERRA) {
 					return crearEdificio(jugador, posEnTierra);
+				}
+			}
+		}
+		return null;
+	}
+	
+	protected Edificio crearEnRecurso(Jugador jugador, Mapa mapa, TipoRecurso recurso) {
+		for (int y = 0; y < mapa.alto(); y++) {
+			for (int x = 0; x < mapa.ancho(); x++) {
+				Posicion posConRecurso = new Posicion(x, y);
+				if (mapa.getRecurso(posConRecurso).getTipo() == recurso) {
+					return crearEdificio(jugador, posConRecurso);
 				}
 			}
 		}

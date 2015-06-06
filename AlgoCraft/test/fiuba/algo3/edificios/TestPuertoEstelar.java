@@ -20,23 +20,20 @@ import fiuba.algo3.unidades.NaveDeTransporte;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
 
-public class TestPuertoEstelar {
+public class TestPuertoEstelar extends TestEdificio {
 
 	private Mapa mapa;
 	private Jugador jugador;
 	private EdificiosTerranFactory terranFactory;
 	private EdificioEntrenadorUnidades puerto;
 	
-	private EdificioEntrenadorUnidades crearEnTierra(Jugador jugador, Mapa mapa) {
-		for (int y = 0; y < mapa.alto(); y++) {
-			for (int x = 0; x < mapa.ancho(); x++) {
-				Posicion posEnTierra = new Posicion(x, y);
-				if (mapa.getTerreno(posEnTierra).getTipo() == TipoTerreno.TIERRA) {
-					return terranFactory.crearEntrenadorUnidadesAvanzadas(jugador, posEnTierra);
-				}
-			}
-		}
-		return null;
+	@Override
+	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
+		return terranFactory.crearEntrenadorUnidadesAvanzadas(jugador, posicion);
+	}
+	
+	protected EdificioEntrenadorUnidades crearEnTierra(Jugador jugador, Mapa mapa) {
+		return (EdificioEntrenadorUnidades) super.crearEnTierra(jugador, mapa);
 	}
 	
 	@Before

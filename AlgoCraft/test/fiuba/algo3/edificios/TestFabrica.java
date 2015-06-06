@@ -16,24 +16,22 @@ import fiuba.algo3.unidades.Golliat;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
 
-public class TestFabrica {
+public class TestFabrica extends TestEdificio {
 
 	private Mapa mapa;
 	private Jugador jugador;
 	private EdificiosTerranFactory terranFactory;
 	private EdificioEntrenadorUnidades fabrica;
 	
-	private EdificioEntrenadorUnidades crearEnTierra(Jugador jugador, Mapa mapa) {
-		for (int y = 0; y < mapa.alto(); y++) {
-			for (int x = 0; x < mapa.ancho(); x++) {
-				Posicion posEnTierra = new Posicion(x, y);
-				if (mapa.getTerreno(posEnTierra).getTipo() == TipoTerreno.TIERRA) {
-					return terranFactory.crearEntrenadorUnidadesIntermedias(jugador, posEnTierra);
-				}
-			}
-		}
-		return null;
+	@Override
+	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
+		return terranFactory.crearEntrenadorUnidadesIntermedias(jugador, posicion);
 	}
+	
+	protected EdificioEntrenadorUnidades crearEnTierra(Jugador jugador, Mapa mapa) {
+		return (EdificioEntrenadorUnidades) super.crearEnTierra(jugador, mapa);
+	}
+	
 	
 	@Before
 	public void setUp() throws Exception {

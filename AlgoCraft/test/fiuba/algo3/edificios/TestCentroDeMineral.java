@@ -14,23 +14,20 @@ import fiuba.algo3.mapa.*;
 import fiuba.algo3.mapa.recurso.TipoRecurso;
 import fiuba.algo3.raza.TipoRaza;
 
-public class TestCentroDeMineral {
+public class TestCentroDeMineral extends TestEdificio{
 
 	private Mapa mapa;
 	private Jugador jugador;
 	private EdificiosTerranFactory terranFactory;
 	private Edificio centroMineral;
 	
+	@Override
+	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
+		return terranFactory.crearRecolectorMineral(jugador, posicion);
+	}
+	
 	private Edificio crearEnMineral(Jugador jugador, Mapa mapa) {
-		for (int y = 0; y < mapa.alto(); y++) {
-			for (int x = 0; x < mapa.ancho(); x++) {
-				Posicion posConMineral = new Posicion(x, y);
-				if (mapa.getRecurso(posConMineral).getTipo() == TipoRecurso.MINERAL) {
-					return terranFactory.crearRecolectorMineral(jugador, posConMineral);
-				}
-			}
-		}
-		return null;
+		return crearEnRecurso(jugador, mapa, TipoRecurso.MINERAL);
 	}
 	
 	@Before
@@ -109,5 +106,7 @@ public class TestCentroDeMineral {
 				fail("El centro de Minerales no esta recolectando Minerales (de a 10)");
 		}
 	}
+
+
 
 }

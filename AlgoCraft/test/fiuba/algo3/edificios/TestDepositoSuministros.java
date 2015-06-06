@@ -15,23 +15,17 @@ import fiuba.algo3.mapa.recurso.TipoRecurso;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.terreno.TipoTerreno;
 
-public class TestDepositoSuministros {
+public class TestDepositoSuministros extends TestEdificio {
 
 	private Mapa mapa;
 	private Jugador jugador;
 	private EdificiosTerranFactory terranFactory;
 	private Edificio depositoSuministros;
 	
-	private Edificio crearEnTierra(Jugador jugador, Mapa mapa) {
-		for (int y = 0; y < mapa.alto(); y++) {
-			for (int x = 0; x < mapa.ancho(); x++) {
-				Posicion posEnTierra = new Posicion(x, y);
-				if (mapa.getTerreno(posEnTierra).getTipo() == TipoTerreno.TIERRA) {
-					return terranFactory.crearIncrementadorPoblacion(jugador, posEnTierra);
-				}
-			}
-		}
-		return null;
+	
+	@Override
+	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
+		return terranFactory.crearIncrementadorPoblacion(jugador, posicion);
 	}
 	
 	@Before
