@@ -17,24 +17,33 @@ import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
 import fiuba.algo3.mapa.recurso.TipoRecurso;
 
-public class TestBarraca {
+public class TestBarraca extends TestEdificio {
 
 	private Mapa mapa;
 	private Jugador jugador;
 	private EdificiosTerranFactory terranFactory; //EdificiosAbstractFactory
 	private EdificioEntrenadorUnidades barraca;
 	
-	private EdificioEntrenadorUnidades crearEnTierra(Jugador jugador, Mapa mapa) {
+	@Override
+	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
+		return terranFactory.crearEntrenadorUnidadesBasicas(jugador, posicion);
+	}
+	
+	protected EdificioEntrenadorUnidades crearEnTierra(Jugador jugador, Mapa mapa) {
+		return (EdificioEntrenadorUnidades) super.crearEnTierra(jugador, mapa);
+	}
+	
+	/*private EdificioEntrenadorUnidades crearEnTierra(Jugador jugador, Mapa mapa) {
 		for (int y = 0; y < mapa.alto(); y++) {
 			for (int x = 0; x < mapa.ancho(); x++) {
 				Posicion posEnTierra = new Posicion(x, y);
 				if (mapa.getTerreno(posEnTierra).getTipo() == TipoTerreno.TIERRA) {
-					return terranFactory.crearEntrenadorUnidadesBasicas(jugador, posEnTierra);
+					
 				}
 			}
 		}
 		return null;
-	}
+	}*/
 	
 	@Before
 	public void setUp() {
@@ -77,7 +86,7 @@ public class TestBarraca {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.barraca = terranFactory.crearEntrenadorUnidadesBasicas(jugador, new Posicion(2,4));
+			this.barraca = crearEnTierra(jugador, mapa);
 			fail();
 		}
 		catch (MineralInsuficiente e) {
@@ -187,4 +196,5 @@ public class TestBarraca {
 		}
 
 	}
+
 }
