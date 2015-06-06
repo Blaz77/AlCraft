@@ -1,3 +1,5 @@
+//TODO Clase sin usar!
+
 package factories;
 
 import fiuba.algo3.componentes.Trabajo;

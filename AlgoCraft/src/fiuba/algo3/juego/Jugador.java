@@ -2,11 +2,11 @@ package fiuba.algo3.juego;
 
 import java.util.ArrayList;
 
+import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.raza.Raza;
 import fiuba.algo3.raza.RazaFactory;
 import fiuba.algo3.raza.TipoRaza;
-import fiuba.algo3.unidades.Constructor;
 import fiuba.algo3.unidades.Unidad;
 
 //import java.util.ArrayList;
@@ -31,6 +31,7 @@ public class Jugador {
 	private int poblacionCapacidad; // Depende de los edificios correspondientes.
 	private Mapa mapaPropio;
 	private ArrayList<Unidad> unidades;
+	private ArrayList<Edificio> edificios;
 
 	public Jugador(TipoRaza raza, Color color, Mapa mapa) { // MapaProxy? 
 		RazaFactory razaFactory = new RazaFactory();
@@ -102,5 +103,12 @@ public class Jugador {
 
 	public void agregarUnidad(Unidad unidad){
 		this.unidades.add(unidad);
+	}
+	
+	public void pasarTurno(){
+		for (Unidad unidad: unidades)
+			unidad.pasarTurno();
+		for (Edificio edificio: edificios)
+			edificio.pasarTurno();
 	}
 }

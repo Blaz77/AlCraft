@@ -1,3 +1,5 @@
+//TODO: Q onda esto.. nadie lo esta implementando
+
 package fiuba.algo3.edificios;
 
 public interface Edificable {

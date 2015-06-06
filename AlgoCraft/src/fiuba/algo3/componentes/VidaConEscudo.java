@@ -1,3 +1,5 @@
+//TODO Clase sin usar!
+
 package fiuba.algo3.componentes;
 
 public class VidaConEscudo extends Vida {

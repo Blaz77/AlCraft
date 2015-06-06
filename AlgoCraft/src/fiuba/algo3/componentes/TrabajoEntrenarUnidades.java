@@ -1,3 +1,5 @@
+//TODO Clase sin usar!
+
 package fiuba.algo3.componentes;
 
 import java.util.Queue;
