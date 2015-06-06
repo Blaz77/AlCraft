@@ -24,62 +24,58 @@ public class Mapa {
 	
 	static int BASES_PARA_MAIN = 5;
 	
-	private int _ancho;
-	private int _alto;
+	private int ancho;
+	private int alto;
 	private Celda[][] mapa;
 	private ArrayList<Celda> bases = new ArrayList<Celda>();
 	private ArrayList<Celda> basesJugadores = new ArrayList<Celda>();
 
-	/* Genera un mapa para 2 jugadores, con la cantidad de bases
-	 * especxificada
+	
+/**********************************************/
+/**              INICIALIZACION              **/
+/**********************************************/
+	
+	/* Genera un mapa aleatorio para 2 jugadores, con la cantidad 
+	 * de bases especificada
 	 */
 	public Mapa(int cantidadBases){
 		
-		generarMapaVacio(cantidadBases); // Define el alto y ancho, todo de tierra x ahora.
-		ubicarBases(cantidadBases);	// Define los centros de zonas de recursos y de jugadores.
-		definirTerreno(); // Define cuales celdas seran de tierra y cuales espaciales.
-		ubicarRecursos(); // Ubica los recursos en las bases.
-	}
+		generarMapaVacio(cantidadBases);
+		ubicarBases(cantidadBases);
+		definirTerreno();
+		ubicarRecursos();
 
+}
+
+	
+	/* Genera la pieza central de la clase: la matriz de celdas.
+	 * Las filas y columnas dependeran de la cant. de bases.
+	 * A priori, esta estara compuesta integramente de celdas
+	 * de tierra.
+	 */
 	private void generarMapaVacio(int cantidadBases) {
-		// Esto genera un chorizo estilo
-		//...........         .......
-		//..P.....B.. ..etc.. ....P..
-		//...........         .......
+		// En particular, esto genera un chorizo estilo
+		//...........       ...........
+		//..P.....B....etc....B.....P..  P = Base de Jugador
+		//...........       ...........  B = Base neutral.
 		int lado = 2 * SEMILADO_BASE + 1;
 		int bordes = 2 * DISTANCIA_BORDE;
-		_ancho = bordes + cantidadBases * lado + DISTANCIA_ENTRE_BASES * (cantidadBases - 1);
-		_alto = bordes + lado;
+		Posicion pos;
+		ancho = bordes + cantidadBases * lado + DISTANCIA_ENTRE_BASES * (cantidadBases - 1);
+		alto = bordes + lado;
 
-		mapa = new Celda[_ancho][_alto];
+		mapa = new Celda[ancho][alto];
 		
-		for (int x = 0; x < _ancho; x++){
-			for (int y = 0; y < _alto; y++){
-				mapa[x][y] = new Celda(x, y, new Tierra());
+		for (int x = 0; x < ancho; x++){
+			for (int y = 0; y < alto; y++){
+				pos = new Posicion(x, y);
+				setCelda(pos, new Tierra());
 			}
 		}		
 	}
 
-	private void definirTerreno(){
-		
-		Random miRNG = new Random();
-		// Esto le pone algunas celdas espaciales al borde de arriba
-		for (int y = 0; y < DISTANCIA_BORDE; y++)
-			for (int x = 0; x < _ancho; x++)
-				if ((y == 0 || getTerreno(new Posicion(x, y-1)).getTipo() == TipoTerreno.ESPACIO) && miRNG.nextBoolean())
-					mapa[x][y] = new Celda(x, y, new Espacio());
-		
-		
-		// y esto al de abajo
-		for (int y = _alto - 1; y > _alto - DISTANCIA_BORDE; y--)
-			for (int x = 0; x < _ancho; x++)
-				if ((((y == _alto - 1) || getTerreno(new Posicion(x, y-1)).getTipo() == TipoTerreno.ESPACIO) && miRNG.nextBoolean()))
-					mapa[x][y] = new Celda(x, y, new Espacio());
-		
-		
-	}
-	
 	private void ubicarBases(int cantidadBases) {
+		
 		for (int i = 0; i < cantidadBases; i++){
 			int base_x = DISTANCIA_BORDE + SEMILADO_BASE + i * (1 + 2*SEMILADO_BASE + DISTANCIA_ENTRE_BASES); 
 			int base_y = DISTANCIA_BORDE + SEMILADO_BASE;
@@ -145,6 +141,40 @@ public class Mapa {
 		setRecurso(new GasVespeno(), randPos);
 	}
 	
+	/* Inyecta zonas espaciales al mapa.
+	 */
+	private void definirTerreno(){
+		
+		Posicion posAnterior, pos = null;
+		Random miRNG = new Random();
+		// Esto le pone algunas celdas espaciales al borde de arriba
+		for (int y = 0; y < DISTANCIA_BORDE; y++)
+			for (int x = 0; x < ancho; x++){
+				posAnterior = new Posicion(x, y-1);
+				pos = new Posicion(x, y);
+				if (miRNG.nextBoolean() && (y == 0 || 
+						getTerreno(posAnterior).getTipo() == TipoTerreno.ESPACIO))
+					setCelda(pos, new Espacio());
+			}		
+		
+		// y esto al de abajo
+		for (int y = alto - 1; y > alto - DISTANCIA_BORDE; y--)
+			for (int x = 0; x < ancho; x++){
+				posAnterior = new Posicion(x, y+1);
+				pos = new Posicion(x, y);
+				if (miRNG.nextBoolean() && (((y == alto-1) || 
+						getTerreno(posAnterior).getTipo() == TipoTerreno.ESPACIO)))
+					setCelda(pos, new Espacio());
+			}
+		
+		
+	}
+	
+	/**********************************************/
+	/**             SETTERS, GETTERS             **/
+	/**********************************************/
+	
+	
 	public int distancia(Posicion pos1, Posicion pos2) {
 		return mapa[pos1.getX()][pos1.getY()].distancia(mapa[pos2.getX()][pos2.getY()]);
 	}
@@ -155,22 +185,26 @@ public class Mapa {
 	
 	/* Devuelve el ancho del mapa. */
 	public int ancho() {
-		return _ancho;
+		return ancho;
 	}
 	
 	/* Devuelve el alto del mapa. */
 	public int alto() {
-		return _alto;
+		return alto;
 	}
 	
 	public ArrayList<Celda> getBases() {
 		return new ArrayList<Celda>(bases);
 	}
 	
+	private void setCelda(Posicion posicion, Terreno terreno){
+		mapa[posicion.getX()][posicion.getY()] = new Celda(posicion, terreno);
+	}
+	
 	private Celda getCelda(Posicion posicion){
 		return mapa[posicion.getX()][posicion.getY()];
 	}
-
+	
 	public void setRecurso(Recurso recurso, Posicion posicion) {
 		this.getCelda(posicion).setRecurso(recurso);
 	}	
@@ -184,13 +218,16 @@ public class Mapa {
 	}
 
 	
-	/* DEBUG AREA */
-
+	/**********************************************/
+	/**                DEBUG AREA                **/
+	/**********************************************/
+	
+	/* Imprime los puntos en formato "x, y: recurso". 
+	 * Achicar constantes antes de usar. */
 	private void imprimirRecursoPorCelda(){
 		Celda celda;
-		// Mostrar los puntos en formato "x, y: recurso".
-		for (int y2 = 0; y2 < _alto; y2++)
-			for (int x2 = 0; x2 < _ancho; x2++){
+		for (int y2 = 0; y2 < alto; y2++)
+			for (int x2 = 0; x2 < ancho; x2++){
 				celda = mapa[x2][y2];
 			
 				System.out.print(celda.getX());
@@ -200,7 +237,9 @@ public class Mapa {
 				System.out.println(celda.getRecurso());
 		}
 	}
-	
+
+	/* Imprime en consola la cantidad de recursos por
+	 * base de jugador. */
 	private void imprimirMineralesCercaDeJugadores(){
 		
 		int mineralesJ1 = 0;
@@ -215,13 +254,13 @@ public class Mapa {
 		for(int y = 0; y < alto(); y++) {
 			for (int x = 0; x < ancho(); x++) {
 				pos = new Posicion(x, y);
-				if (distancia(pos, posJ1) < 20) {
+				if (distancia(pos, posJ1) < SEMILADO_BASE * 2) {
 					if (getRecurso(pos) != null && getRecurso(pos).getTipo() == TipoRecurso.MINERAL)
 						mineralesJ1++;
 					else if (getRecurso(pos) != null && getRecurso(pos).getTipo() == TipoRecurso.VESPENO)
 						vespenoJ1++;
 				}
-				else if (distancia(pos, posJ2) < 20) {
+				else if (distancia(pos, posJ2) < SEMILADO_BASE * 2) {
 					if (getRecurso(pos) != null && getRecurso(pos).getTipo() == TipoRecurso.MINERAL)
 						mineralesJ2++;
 					else if (getRecurso(pos) != null && getRecurso(pos).getTipo() == TipoRecurso.VESPENO)
@@ -235,7 +274,14 @@ public class Mapa {
 		System.out.format("Geyseres cerca del jugador 2: %d%n", vespenoJ2);	
 	}	
 
-		
+	/* Imprime una version ASCII del mapa, con las sig. referencias:
+	 * ' ' = Celda espacial
+	 * '.' = Celda de tierra
+	 * 'B' = Base neutral
+	 * 'P' = Base de jugador
+	 * 'M' = Cristal de minerales
+	 * 'G' = Geyser de Gas Vespeno
+	 * */
 	private void imprimirMapaConReferencias() {
 		Celda elPunto;
 		Recurso elRecurso;
@@ -249,11 +295,9 @@ public class Mapa {
 					System.out.print("B");
 				else {
 					elRecurso = getRecurso(new Posicion(x2, y2));
-					if(elRecurso != null && elRecurso.getClass().equals(Recurso.class))
-						System.out.print("R");
-					else if(elRecurso != null && elRecurso.getClass().equals(GasVespeno.class))
+					if(elRecurso != null && elRecurso.getTipo() == TipoRecurso.VESPENO)
 						System.out.print("G");
-					else if(elRecurso != null && elRecurso.getClass().equals(Mineral.class))
+					else if(elRecurso != null && elRecurso.getTipo() == TipoRecurso.MINERAL)
 						System.out.print("M");
 					else if(getTerreno(new Posicion(x2, y2)).getTipo() == TipoTerreno.ESPACIO)
 						System.out.print(" ");
@@ -265,18 +309,19 @@ public class Mapa {
 		}
 	}
 
-	// Mostrar info del mapa de varias formas".
+	/* Mostrar info del mapa de varias formas" */
 	public static void main(String[] args){
 
 		Mapa miMapa = new Mapa(BASES_PARA_MAIN);
 		
 		miMapa.imprimirMapaConReferencias();
-		if (args.length != 0) {
+		if (true)
 			miMapa.imprimirMineralesCercaDeJugadores();
+		if (args.length != 0) // false
 			miMapa.imprimirRecursoPorCelda();
-		}
 	}
 
+	/* Para uso especifico de TestMapa */
 	public boolean esBase(Posicion pos) {
 		return bases.contains(getCelda(pos));
 	}

@@ -23,8 +23,8 @@ public class Celda { //quizas heredar de celda y armar Tierra/Espacio extends Ce
 	private Terreno terreno;
 	private Edificio edificio = null; //EdificioNULL
 	
-	public Celda(int x, int y, Terreno terreno) {
-		posicion = new Posicion(x, y);
+	public Celda(Posicion posicion, Terreno terreno) {
+		this.posicion = posicion;
 		this.terreno = terreno;
 	}
 	
