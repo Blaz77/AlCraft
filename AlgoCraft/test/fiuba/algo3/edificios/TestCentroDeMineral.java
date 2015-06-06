@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import factories.EdificiosTerranFactory;
 import fiuba.algo3.edificios.Edificio;
+import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
 import fiuba.algo3.mapa.recurso.TipoRecurso;
@@ -44,6 +45,21 @@ public class TestCentroDeMineral {
 	public void testCrearCentroDeMineral() {
 		this.centroMineral = crearEnMineral(jugador, mapa);
 		assertEquals(centroMineral.getNombre(),"Centro de Mineral");
+	}
+	
+	@Test
+	public void testCrearCentroDeMineralSinRecursosDebeFallar() {
+		while (jugador.getMinerales() >= 50) {
+			jugador.agregarMinerales(-10);
+		}
+		try {
+			this.centroMineral = crearEnMineral(jugador, mapa);
+			fail();
+		}
+		catch (MineralInsuficiente e) {
+			assertTrue(true);
+			return;
+		}
 	}
 	
 	@Test

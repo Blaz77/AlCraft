@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import factories.EdificiosTerranFactory;
 import fiuba.algo3.edificios.Edificio;
+import fiuba.algo3.excepciones.GasVespenoInsuficiente;
+import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.unidades.Espectro;
 import fiuba.algo3.unidades.Golliat;
@@ -28,6 +30,9 @@ public class TestPuertoEstelar {
 		//mapa = new Mapa(6);
 		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL, mapa);
 		this.terranFactory = new EdificiosTerranFactory();
+		
+		// Aseguro recursos
+		jugador.agregarGasVespeno(50);
 		this.puerto = terranFactory.crearEntrenadorUnidadesAvanzadas(jugador, new Posicion(2,4));
 	}
 
@@ -36,6 +41,35 @@ public class TestPuertoEstelar {
 	@Test
 	public void testCrearPuertoEstelar() {
 		assertEquals(puerto.getNombre(),"Puerto Estelar");
+	}
+	
+	@Test
+	public void testCrearPuertoEstelarSinMineralesDebeFallar() {
+		while (jugador.getMinerales() >= 150) {
+			jugador.agregarMinerales(-10);
+		}
+		try {
+			this.puerto = terranFactory.crearEntrenadorUnidadesAvanzadas(jugador, new Posicion(2,4));
+			fail();
+		}
+		catch (MineralInsuficiente e) {
+			assertTrue(true);
+			return;
+		}
+	}
+	
+	public void testCrearPuertoEstelarSinGasVespenoDebeFallar() {
+		while (jugador.getMinerales() >= 100) {
+			jugador.agregarMinerales(-10);
+		}
+		try {
+			this.puerto = terranFactory.crearEntrenadorUnidadesAvanzadas(jugador, new Posicion(2,4));
+			fail();
+		}
+		catch (GasVespenoInsuficiente e) {
+			assertTrue(true);
+			return;
+		}
 	}
 	
 	@Test

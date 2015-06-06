@@ -17,6 +17,16 @@ public class PuertoEstelar extends EdificioEntrenadorUnidades {
 		this.entrenador.agregarEntrenable(new ConstructorNaveDeCiencia());
 		this.entrenador.agregarEntrenable(new ConstructorNaveDeTransporte());
 	}
+
+	@Override
+	public int getCostoMineral() {
+		return 150;
+	}
+
+	@Override
+	public int getCostoGas() {
+		return 100;
+	}
 	
 	
 }

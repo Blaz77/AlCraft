@@ -12,5 +12,15 @@ public class Barraca extends EdificioEntrenadorUnidades {
 		this.nombre = "Barraca".intern();
 		this.entrenador.agregarEntrenable(new ConstructorMarine());
 	}
+
+	@Override
+	public int getCostoMineral() {
+		return 150;
+	}
+
+	@Override
+	public int getCostoGas() {
+		return 0;
+	}
 	
 }

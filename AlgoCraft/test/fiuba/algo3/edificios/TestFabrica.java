@@ -28,6 +28,9 @@ public class TestFabrica {
 		//mapa = new Mapa(6);
 		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL, mapa);
 		this.terranFactory = new EdificiosTerranFactory();
+		
+		// Aseguro recursos
+		jugador.agregarGasVespeno(50);
 		this.fabrica = terranFactory.crearEntrenadorUnidadesIntermedias(jugador, new Posicion(2,4));
 	}
 
@@ -36,6 +39,36 @@ public class TestFabrica {
 	@Test
 	public void testCrearFabrica() {
 		assertEquals(fabrica.getNombre(),"Fabrica");
+	}
+	
+	@Test
+	public void testCrearFabricaSinMineralesDebeFallar() {
+		while (jugador.getMinerales() >= 200) {
+			jugador.agregarMinerales(-10);
+		}
+		try {
+			this.fabrica = terranFactory.crearEntrenadorUnidadesIntermedias(jugador, new Posicion(2,4));
+			fail();
+		}
+		catch (MineralInsuficiente e) {
+			assertTrue(true);
+			return;
+		}
+	}
+	
+	@Test
+	public void testCrearFabricaSinGasVespenoDebeFallar() {
+		while (jugador.getGasVespeno() >= 100) {
+			jugador.agregarGasVespeno(-10);
+		}
+		try {
+			this.fabrica = terranFactory.crearEntrenadorUnidadesIntermedias(jugador, new Posicion(2,4));
+			fail();
+		}
+		catch (GasVespenoInsuficiente e) {
+			assertTrue(true);
+			return;
+		}
 	}
 	
 	@Test

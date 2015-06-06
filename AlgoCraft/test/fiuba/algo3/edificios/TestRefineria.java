@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import factories.EdificiosTerranFactory;
 import fiuba.algo3.edificios.Edificio;
+import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
 import fiuba.algo3.mapa.recurso.TipoRecurso;
@@ -47,6 +48,21 @@ public class TestRefineria {
 		
 		assertNotNull(refineria);
 		assertEquals(refineria.getNombre(),"Refineria");
+	}
+	
+	@Test
+	public void testCrearRefineriaSinMineralesDebeFallar() {
+		while (jugador.getMinerales() >= 100) {
+			jugador.agregarMinerales(-10);
+		}
+		try {
+			refineria = crearEnVolcan(jugador, mapa);
+			fail();
+		}
+		catch (MineralInsuficiente e) {
+			assertTrue(true);
+			return;
+		}
 	}
 	
 	@Test

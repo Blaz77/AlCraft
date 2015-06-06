@@ -22,7 +22,7 @@ public class TestBarraca {
 	private EdificioEntrenadorUnidades barraca;
 	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		//mapa = new Mapa(6);
 		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL, mapa);
 		this.terranFactory = new EdificiosTerranFactory();
@@ -34,6 +34,21 @@ public class TestBarraca {
 	@Test
 	public void testCrearBarraca() {
 		assertEquals(barraca.getNombre(),"Barraca");
+	}
+	
+	@Test
+	public void testCrearBarracaSinRecursosDebeFallar() {
+		while (jugador.getMinerales() >= 150) {
+			jugador.agregarMinerales(-10);
+		}
+		try {
+			this.barraca = terranFactory.crearEntrenadorUnidadesBasicas(jugador, new Posicion(2,4));
+			fail();
+		}
+		catch (MineralInsuficiente e) {
+			assertTrue(true);
+			return;
+		}
 	}
 	
 	@Test

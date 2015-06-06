@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import factories.EdificiosTerranFactory;
 import fiuba.algo3.edificios.Edificio;
+import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
 import fiuba.algo3.raza.TipoRaza;
@@ -19,7 +20,7 @@ public class TestDepositoSuministros {
 	private Edificio depositoSuministros;
 	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		//mapa = new Mapa(6);
 		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL, mapa);
 		this.terranFactory = new EdificiosTerranFactory();
@@ -31,6 +32,21 @@ public class TestDepositoSuministros {
 	public void testCrearDepositoSuministros() {
 		this.depositoSuministros = terranFactory.crearIncrementadorPoblacion(jugador, new Posicion(2,4));
 		assertEquals(depositoSuministros.getNombre(),"Deposito De Suministros");
+	}
+	
+	@Test
+	public void testCrearDepositoSuministrosSinRecursosDebeFallar() {
+		while (jugador.getMinerales() >= 100) {
+			jugador.agregarMinerales(-10);
+		}
+		try {
+			this.depositoSuministros = terranFactory.crearIncrementadorPoblacion(jugador, new Posicion(2,4));
+			fail();
+		}
+		catch (MineralInsuficiente e) {
+			assertTrue(true);
+			return;
+		}
 	}
 	
 	@Test

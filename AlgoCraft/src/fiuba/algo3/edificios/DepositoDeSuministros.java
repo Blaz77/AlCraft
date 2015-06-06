@@ -11,5 +11,15 @@ public class DepositoDeSuministros extends EdificioIncrementadorPoblacion {
 		this.vida = new Vida(0, 500);
 		this.nombre = "Deposito De Suministros".intern();
 	}
+
+	@Override
+	public int getCostoMineral() {
+		return 100;
+	}
+
+	@Override
+	public int getCostoGas() {
+		return 0;
+	}
 	
 }

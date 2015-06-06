@@ -12,5 +12,15 @@ public class Refineria extends EdificioRecolectorGasVespeno {
 		this.nombre = "Refineria".intern();
 	}
 
+	@Override
+	public int getCostoMineral() {
+		return 200;
+	}
+
+	@Override
+	public int getCostoGas() {
+		return 0;
+	}
+
 }
 

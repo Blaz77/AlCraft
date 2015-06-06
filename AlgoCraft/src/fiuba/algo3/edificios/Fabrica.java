@@ -13,5 +13,15 @@ public class Fabrica extends EdificioEntrenadorUnidades {
 		this.vida = new Vida(0, 1250);
 		this.entrenador.agregarEntrenable(new ConstructorGolliat());
 	}
+
+	@Override
+	public int getCostoMineral() {
+		return 200;
+	}
+
+	@Override
+	public int getCostoGas() {
+		return 100;
+	}
 	
 }
