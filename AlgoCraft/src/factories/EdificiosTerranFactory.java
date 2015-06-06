@@ -32,6 +32,9 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 	}
 
 	public EdificioRecolectorMineral crearRecolectorMineral(Jugador jugador, Posicion posicion) {
+		if (jugador.getMapa().getRecurso(posicion).getTipo() != TipoRecurso.MINERAL) {
+			throw new RuntimeException();
+		}
 		EdificioRecolectorMineral edificio = new CentroDeMineral(jugador, posicion);
 		Trabajo construccion = new TrabajoConstruccion(4, edificio);
 		edificio.setTrabajo(construccion);
