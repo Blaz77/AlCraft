@@ -216,6 +216,23 @@ public class Mapa {
 	public Terreno getTerreno(Posicion posicion){
 		return this.getCelda(posicion).getTerreno();
 	}
+	
+	/*
+	 * public posicionar(Edif/Unid, posicion):
+	 * 	-	En el PROXY:
+	 * 		//Des-Sombreado bruto:
+			// - Desde el eje: posInicial todo el circulo/rombo que se forma 
+			//		con el rangoVision
+	 */
+	
+	/*
+	 * public mover(Edif/Unid, destino):
+	 * 	-	En el PROXY:
+	 * 		//Des-Sombreado Inteligente:
+			//	- Sabiendo la posicion anterior y la nueva posicion
+			//		se puede des-sombrear solamente las posiciones necesarias!
+			// 
+	 */
 
 	
 	/**********************************************/

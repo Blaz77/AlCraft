@@ -63,6 +63,10 @@ public class Ataque implements Componente {
 			unidad.recibirDanio(danioAAire);
 		else
 			unidad.recibirDanio(danioATierra);
+		//SOLUCION:
+				// Pasar por parametro los dos danios,
+				// que decida la unidad receptora que es lo que la afecta!
+				// unidad.recibirDanio(danioATierra,danioAAire);
 	}
 	
 	public ArrayList<ObjetoVivo> getPosiblesObjetivos(){
