@@ -11,7 +11,7 @@ import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.RecursoAusente;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
-import fiuba.algo3.mapa.recurso.TipoOcupante;
+import fiuba.algo3.mapa.recurso.TipoRecurso;
 import fiuba.algo3.raza.TipoRaza;
 
 public class TestCentroDeMineral {
@@ -25,7 +25,7 @@ public class TestCentroDeMineral {
 		for (int y = 0; y < mapa.alto(); y++) {
 			for (int x = 0; x < mapa.ancho(); x++) {
 				Posicion posConMineral = new Posicion(x, y);
-				if (mapa.getOcupante(posConMineral).getTipo() == TipoOcupante.MINERAL) {
+				if (mapa.getRecurso(posConMineral).getTipo() == TipoRecurso.MINERAL) {
 					return terranFactory.crearRecolectorMineral(jugador, posConMineral);
 				}
 			}
@@ -68,7 +68,7 @@ public class TestCentroDeMineral {
 		for (int y = 0; y < mapa.alto(); y++) {
 			for (int x = 0; x < mapa.ancho(); x++) {
 				Posicion posSinMineral = new Posicion(x, y);
-				if (mapa.getOcupante(posSinMineral).getTipo() != TipoOcupante.MINERAL) {
+				if (mapa.getRecurso(posSinMineral).getTipo() != TipoRecurso.MINERAL) {
 					try {
 						centroMineral = terranFactory.crearRecolectorMineral(jugador, posSinMineral);
 						fail();
