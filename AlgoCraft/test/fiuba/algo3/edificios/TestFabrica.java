@@ -7,6 +7,9 @@ import org.junit.Test;
 
 import factories.EdificiosTerranFactory;
 import fiuba.algo3.edificios.Edificio;
+import fiuba.algo3.excepciones.GasVespenoInsuficiente;
+import fiuba.algo3.excepciones.MineralInsuficiente;
+import fiuba.algo3.excepciones.SuministroInsuficiente;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.unidades.Golliat;
 import fiuba.algo3.unidades.Marine;
@@ -60,4 +63,101 @@ public class TestFabrica {
 
 	}
 
+	@Test
+	public void testFabricaEntrenaUnidadConsumeRecursos() {
+		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Construccion
+		int mineralRelativo = jugador.getMinerales();
+		int gasRelativo = jugador.getGasVespeno();
+		
+		fabrica.getUnidadesEntrenables().get(0).crear(jugador);
+		for(int i = 0; i < 6; i++) fabrica.pasarTurno();//Entrenar Golliat
+		
+		assertEquals(jugador.getMinerales(), mineralRelativo - 100);
+		assertEquals(jugador.getGasVespeno(), gasRelativo - 50);
+
+	}
+	
+	@Test
+	public void testFabricaEntrenaUnidadSinMineralesDebeFallar() {
+		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Construccion
+		
+		while (jugador.getMinerales() >= 100) {
+			jugador.agregarMinerales(-10);
+		}
+		try {
+			fabrica.getUnidadesEntrenables().get(0).crear(jugador);
+			fail();
+		}
+		catch (MineralInsuficiente e) {
+			assertTrue(true);
+			return;
+		}
+
+	}
+	
+	@Test
+	public void testFabricaEntrenaUnidadSinGasVespenoDebeFallar() {
+		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Construccion
+		
+		while (jugador.getGasVespeno() >= 50) {
+			jugador.agregarGasVespeno(-10);
+		}
+		try {
+			fabrica.getUnidadesEntrenables().get(0).crear(jugador);
+			fail();
+		}
+		catch (GasVespenoInsuficiente e) {
+			assertTrue(true);
+			return;
+		}
+
+	}
+	
+	@Test
+	public void testFabricaEntrenarVariasUnidadesSinColaDeEspera() {
+		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Construccion
+		
+		// Aseguro recursos
+		jugador.agregarGasVespeno(100);
+		
+		fabrica.getUnidadesEntrenables().get(0).crear(jugador);
+		for(int i = 0; i < 6; i++) fabrica.pasarTurno();//Entrenar Golliat
+		assertEquals(jugador.getUnidades().get(0).getClass(), Golliat.class);
+		
+		fabrica.getUnidadesEntrenables().get(0).crear(jugador);
+		for(int i = 0; i < 6; i++) fabrica.pasarTurno();//Entrenar Golliat
+		assertEquals(jugador.getUnidades().get(1).getClass(), Golliat.class);
+	}
+	
+	@Test
+	public void testFabricaEntrenarVariasUnidadesConColaDeEspera() {
+		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Construccion
+		
+		// Aseguro recursos
+		jugador.agregarGasVespeno(100);
+		
+		fabrica.getUnidadesEntrenables().get(0).crear(jugador);
+		fabrica.getUnidadesEntrenables().get(0).crear(jugador);
+		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Entrenar 2 Golliats
+		assertEquals(jugador.getUnidades().get(0).getClass(), Golliat.class);
+		assertEquals(jugador.getUnidades().get(1).getClass(), Golliat.class);
+	}
+
+	@Test
+	public void testFabricaEntrenaUnidadSinPoblacionDebeFallar() {
+		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Construccion
+		
+		while (jugador.getCapacidadPoblacion() > 1) {
+			jugador.aumentarCapacidadPoblacion(-1);
+		}
+		try {
+			fabrica.getUnidadesEntrenables().get(0).crear(jugador);
+			fail();
+		}
+		catch (SuministroInsuficiente e) {
+			assertTrue(true);
+			return;
+		}
+
+	}
 }
