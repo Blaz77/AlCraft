@@ -8,7 +8,7 @@ public abstract class EdificioRecolectorGasVespeno extends Edificio {
 	
 	public EdificioRecolectorGasVespeno(Jugador propietario, Posicion posicion, int recoleccionPorTurno) {
 		super(propietario, posicion);
-		this.trabajo = new TrabajoRecoleccionGasVespeno(recoleccionPorTurno, propietario);
+		this.estado = new TrabajoRecoleccionGasVespeno(recoleccionPorTurno, propietario);
 	}
 	
 }

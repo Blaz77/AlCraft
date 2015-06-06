@@ -10,13 +10,15 @@ import org.junit.Test;
 import fiuba.algo3.mapa.Celda;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
-import fiuba.algo3.mapa.recurso.Mineral;
 import fiuba.algo3.mapa.recurso.Recurso;
 import fiuba.algo3.mapa.recurso.TipoRecurso;
 import fiuba.algo3.terreno.TipoTerreno;
 
 public class TestMapa {
-	final int SEIS_BASES = 6;
+	final int cantidadBases = 6;
+	final int SEMILADO_BASE = 8;
+	final int MINERALES_POR_BASE = 6;
+
 	private Mapa mapaNuevo;
 
 	/* Metodos auxiliares */
@@ -47,7 +49,7 @@ public class TestMapa {
 	
 	@Before
 	public void setUp() {
-		mapaNuevo = new Mapa(SEIS_BASES);
+		mapaNuevo = new Mapa(cantidadBases);
 	}
 	
 	@Test
@@ -67,7 +69,7 @@ public class TestMapa {
 	
 	@Test
 	public void testMapaGeneradoRespetaCantidadDeBases() {
-		Assert.assertTrue(mapaNuevo.getBases().size() == SEIS_BASES);
+		Assert.assertTrue(mapaNuevo.getBases().size() == cantidadBases);
 	}
 	
 	@Test
@@ -88,7 +90,7 @@ public class TestMapa {
 		
 		Assert.assertTrue(diferenciaDistancias <= DIFERENCIA_TOLERABLE);
 	}
-	
+	/*
 	@Test
 	public void testMapaGeneradoDejaEnBasesUnMineral(){
 		
@@ -97,12 +99,11 @@ public class TestMapa {
 		
 		Assert.assertEquals(puntoGeneracionJugador1.getRecurso().getClass(),Mineral.class);
 		Assert.assertEquals(puntoGeneracionJugador2.getRecurso().getClass(),Mineral.class);
-	}
+	}*/
 	
 	@Test
 	public void testMapaGeneradoDejaRecursosCercaDeCadaBase(){
-		final int RADIO_BASE = 8;
-		
+				
 		// Se toma un sector cuadrado en torno a cada base y se comprueba que haya un volcan
 		// y al menos 2 cristales
 		ArrayList<Celda> bases = mapaNuevo.getBases();
@@ -112,8 +113,8 @@ public class TestMapa {
 		for (Celda baseActual : bases) {
 			cristales = 0;
 			volcanes = 0;
-			for (int x=baseActual.getX()-RADIO_BASE; x<baseActual.getX()+RADIO_BASE; x++) {
-				for (int y=baseActual.getY()-RADIO_BASE; y<baseActual.getY()+RADIO_BASE; y++) {
+			for (int x=baseActual.getX()-SEMILADO_BASE; x<baseActual.getX()+SEMILADO_BASE + 1; x++) {
+				for (int y=baseActual.getY()-SEMILADO_BASE; y<baseActual.getY()+SEMILADO_BASE + 1; y++) {
 					if (perteneceAlMapa(x, y, mapaNuevo)) {
 						// Inspeccion de la celda
 						recurso = mapaNuevo.getRecurso(new Posicion(x,y));
@@ -127,7 +128,7 @@ public class TestMapa {
 			}
 			
 			Assert.assertTrue(volcanes == 1);
-			Assert.assertTrue(cristales >= 2);
+			Assert.assertTrue(cristales >= MINERALES_POR_BASE);
 		}
 	}
 	

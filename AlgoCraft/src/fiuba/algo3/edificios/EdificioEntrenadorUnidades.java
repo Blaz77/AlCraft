@@ -14,7 +14,7 @@ public abstract class EdificioEntrenadorUnidades extends Edificio implements IEn
 	
 	public EdificioEntrenadorUnidades(Jugador propietario, Posicion posicion) {
 		super(propietario, posicion);
-		this.trabajo = (Trabajo) this.entrenador; //quizas mover esto despues
+		this.estado = (Trabajo) this.entrenador; //quizas mover esto despues
 	}
 	
 	public boolean puedeEntrenarUnidades(){

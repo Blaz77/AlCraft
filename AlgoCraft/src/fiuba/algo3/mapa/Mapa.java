@@ -14,16 +14,14 @@ import fiuba.algo3.terreno.TipoTerreno;
 
 
 public class Mapa {
-	final int DISTANCIA_BORDE = 10;
-	final int DISTANCIA_ENTRE_BASES = 64;
+	final static int DISTANCIA_BORDE = 10;
+	final static int DISTANCIA_ENTRE_BASES = 64;
 	
 	// La base es un territorio cuadrado, del q marcamos su centro
-	final int SEMILADO_BASE = 8; // El lado de una base sera entonces 2 * semilado + 1 (el centro)
+	final static int SEMILADO_BASE = 8; // El lado de una base sera entonces 2 * semilado + 1 (el centro)
 	
-	final int MINERALES_POR_BASE = 6;
-	
-	static int BASES_PARA_MAIN = 5;
-	
+	final static int MINERALES_POR_BASE = 6;
+		
 	private int ancho;
 	private int alto;
 	private Celda[][] mapa;
@@ -238,6 +236,8 @@ public class Mapa {
 	/**********************************************/
 	/**                DEBUG AREA                **/
 	/**********************************************/
+	// A borrar cuando se borre el main
+	final static int BASES_PARA_MAIN = 5;
 	
 	/* Imprime los puntos en formato "x, y: recurso". 
 	 * Achicar constantes antes de usar. */

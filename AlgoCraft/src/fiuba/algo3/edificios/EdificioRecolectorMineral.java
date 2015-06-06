@@ -8,7 +8,7 @@ public abstract class EdificioRecolectorMineral extends Edificio {
 	
 	public EdificioRecolectorMineral(Jugador propietario, Posicion posicion, int recoleccionPorTurno) {
 		super(propietario, posicion);
-		this.trabajo = new TrabajoRecoleccionMineral(recoleccionPorTurno, propietario);
+		this.estado = new TrabajoRecoleccionMineral(recoleccionPorTurno, propietario);
 	}
 
 }

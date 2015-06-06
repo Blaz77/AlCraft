@@ -13,10 +13,10 @@ public abstract class Edificio extends ObjetoVivo {
 	// - Edificio generico con estados internos - modificables, si fuese necesario-
 	// El constructor de unidades va de la mano con estos estados.
 
-	protected Trabajo trabajo = new TrabajoNull(); //En construccion/Trabajando (no se puede accionar) /En espera (permite acciones)
+	protected Trabajo estado = new TrabajoNull(); //En construccion/Trabajando (no se puede accionar) /En espera (permite acciones)
 	
 	public void pasarTurno(){
-		this.trabajo = trabajo.pasarTurno();
+		this.estado = estado.pasarTurno();
 	}
 	
 	//private Trabajo porDefecto;
@@ -32,8 +32,8 @@ public abstract class Edificio extends ObjetoVivo {
 	}
 	
 	public void setTrabajo(Trabajo nuevoTrabajo){
-		nuevoTrabajo.setAnterior(this.trabajo);
-		this.trabajo = nuevoTrabajo;
+		nuevoTrabajo.setAnterior(this.estado);
+		this.estado = nuevoTrabajo;
 	}
 	
 	public void construccionFinalizada() {
