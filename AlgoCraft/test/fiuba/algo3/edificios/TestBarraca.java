@@ -8,6 +8,7 @@ import org.junit.Test;
 import factories.EdificiosTerranFactory;
 import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.excepciones.MineralInsuficiente;
+import fiuba.algo3.excepciones.SuministroInsuficiente;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.unidades.Marine;
 import fiuba.algo3.juego.*;
@@ -80,8 +81,7 @@ public class TestBarraca {
 		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
 		
 		while (jugador.getMinerales() >= 50) {
-			barraca.getUnidadesEntrenables().get(0).crear(jugador);
-			for(int i = 0; i < 3; i++) barraca.pasarTurno(); //Entrenar Marine
+			jugador.agregarMinerales(-10);
 		}
 		try {
 			barraca.getUnidadesEntrenables().get(0).crear(jugador);
@@ -93,5 +93,48 @@ public class TestBarraca {
 		}
 
 	}
+	
+	@Test
+	public void testBarracaEntrenarVariasUnidadesSinColaDeEspera() {
+		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
+		
+		barraca.getUnidadesEntrenables().get(0).crear(jugador);
+		for(int i = 0; i < 3; i++) barraca.pasarTurno();//Entrenar Marine
+		assertEquals(jugador.getUnidades().get(0).getClass(), Marine.class);
+		
+		barraca.getUnidadesEntrenables().get(0).crear(jugador);
+		for(int i = 0; i < 3; i++) barraca.pasarTurno();//Entrenar Marine
+		assertEquals(jugador.getUnidades().get(1).getClass(), Marine.class);
+	}
+	
+	@Test
+	public void testBarracaEntrenarVariasUnidadesConColaDeEspera() {
+		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
+		
+		barraca.getUnidadesEntrenables().get(0).crear(jugador);
+		barraca.getUnidadesEntrenables().get(0).crear(jugador);
+		for(int i = 0; i < 6; i++) barraca.pasarTurno();//Entrenar 2 Marines
+		assertEquals(jugador.getUnidades().get(0).getClass(), Marine.class);
+		assertEquals(jugador.getUnidades().get(1).getClass(), Marine.class);
+	}
 
+	@Test
+	public void testBarracaEntrenaUnidadSinPoblacionDebeFallar() {
+		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
+		
+		while (jugador.getCapacidadPoblacion() > 1) {
+			jugador.aumentarCapacidadPoblacion(-1);
+		}
+		barraca.getUnidadesEntrenables().get(0).crear(jugador);
+		for(int i = 0; i < 3; i++) barraca.pasarTurno();//Entrenar Marine
+		try {
+			barraca.getUnidadesEntrenables().get(0).crear(jugador);
+			fail();
+		}
+		catch (SuministroInsuficiente e) {
+			assertTrue(true);
+			return;
+		}
+
+	}
 }
