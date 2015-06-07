@@ -52,7 +52,7 @@ public class Jugador {
 		this.minerales = MINERALES_INICIAL;
 		this.gasVespeno = VESPENO_INICIAL;
 		this.poblacion = 0;
-		this.mapaPropio = new MapaProxy(mapa);
+		this.mapaPropio = new MapaProxy(mapa, unidades);
 	}
 
 	public Color getColor() {

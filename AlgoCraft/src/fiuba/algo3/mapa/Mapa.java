@@ -6,9 +6,7 @@ import java.util.Random;
 import fiuba.algo3.juego.Ocupante;
 import fiuba.algo3.mapa.recurso.GasVespeno;
 import fiuba.algo3.mapa.recurso.Mineral;
-import fiuba.algo3.mapa.recurso.Recurso;
 import fiuba.algo3.mapa.recurso.TipoOcupante;
-import fiuba.algo3.mapa.recurso.TipoRecurso;
 import fiuba.algo3.terreno.Espacio;
 import fiuba.algo3.terreno.Terreno;
 import fiuba.algo3.terreno.Tierra;
@@ -329,7 +327,7 @@ public class Mapa {
 	}
 
 	/* Mostrar info del mapa de varias formas" */
-	public static void main(String[] args){
+	public static void notMain(String[] args){ //Renombrar a "main" para ejecutar.
 		
 		Mapa miMapa = new Mapa(BASES_PARA_MAIN);
 		
