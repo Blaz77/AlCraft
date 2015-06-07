@@ -1,6 +1,6 @@
 //TODO Clase sin usar!
 
-package factories;
+package fiuba.algo3.factories;
 
 import fiuba.algo3.edificios.Barraca;
 import fiuba.algo3.edificios.CentroDeMineral;

@@ -5,10 +5,10 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import factories.EdificiosTerranFactory;
 import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.SuministroInsuficiente;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
+import fiuba.algo3.factories.EdificiosTerranFactory;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.terreno.TipoTerreno;
 import fiuba.algo3.unidades.Marine;
