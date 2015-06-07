@@ -6,7 +6,7 @@ public class AtributosCentroDeMineral extends
 	public AtributosCentroDeMineral() {
 		this.cantARecolectarPorTurno = 10;
 		this.vidaMaxima = 500;
-		this.nombre = "Centro De Mineral";
+		this.nombre = "Centro de Mineral";
 	}
 
 
