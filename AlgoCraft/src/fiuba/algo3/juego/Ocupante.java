@@ -1,6 +1,7 @@
 package fiuba.algo3.juego;
 
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.mapa.recurso.TipoOcupante;
 
 public abstract class Ocupante {
 	protected String nombre;
@@ -16,4 +17,5 @@ public abstract class Ocupante {
 	}
 
 	public abstract void pasarTurno();
+	public abstract TipoOcupante getTipo();
 }
