@@ -17,18 +17,26 @@ public abstract class AtributosObjetoVivo {
 		return nombre;
 	}
 
-	abstract public boolean tieneEscudo();
-		//return false;
-
+	public boolean tieneEscudo(){
+		return false;
+	}
+	
 	// si no es Aereo, es Terrestre
 	// Bajar a Unidad?
-	abstract public boolean esAereo(); //puedeVolar()
-	
+	public boolean esAereo(){ //puedeVolar()
+		return false;
+	}
 	// El enemigo que me quiere atacar me pasa sus dos rangos
 	// y yo que se como soy, le devuelvo el que funciona 
 	// en el ataque correspondiente.
 	// -> yo soy aereo, entonces devuelvo rangoAire
 	// -> yo soy terrestre, entonces devuelvo rangoTierra.
-	abstract public int getRangoEfectivo(int RangoAire, int RangoTierra);
+	public int getRangoEfectivo(int rangoAire, int rangoTierra){
+		return rangoTierra;
+	}
+
+	public int getDanioEfectivo(int danioAire, int danioTierra) {
+		return danioTierra;
+	}
 
 }

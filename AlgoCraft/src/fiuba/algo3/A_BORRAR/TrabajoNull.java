@@ -1,4 +1,4 @@
-package fiuba.algo3.componentes;
+package fiuba.algo3.A_BORRAR;
 
 public class TrabajoNull implements Trabajo {
 

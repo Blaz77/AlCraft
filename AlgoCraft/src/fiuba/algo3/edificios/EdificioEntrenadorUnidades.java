@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import fiuba.algo3.atributos.AtributosEdificio;
 import fiuba.algo3.atributos.AtributosEdificioEntrenadorUnidades;
-import fiuba.algo3.componentes.Trabajo;
 import fiuba.algo3.excepciones.UnidadFinalizadaException;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;

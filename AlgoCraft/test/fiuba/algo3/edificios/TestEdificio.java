@@ -4,7 +4,6 @@ import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.mapa.recurso.TipoOcupante;
-import fiuba.algo3.mapa.recurso.TipoRecurso;
 import fiuba.algo3.terreno.TipoTerreno;
 
 public abstract class TestEdificio {

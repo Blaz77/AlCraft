@@ -118,7 +118,7 @@ public class TestFabrica extends TestEdificio {
 	public void testFabricaEntrenaUnidad() {
 		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Construccion
 		
-		fabrica.getUnidadesEntrenables().get(0).crear(jugador);
+		fabrica.getUnidadesEntrenables().get(0).crear();
 		
 		for(int i = 0; i < 6; i++) fabrica.pasarTurno();//Entrenar Golliat
 		
@@ -132,7 +132,7 @@ public class TestFabrica extends TestEdificio {
 		int mineralRelativo = jugador.getMinerales();
 		int gasRelativo = jugador.getGasVespeno();
 		
-		fabrica.getUnidadesEntrenables().get(0).crear(jugador);
+		fabrica.getUnidadesEntrenables().get(0).crear();
 		for(int i = 0; i < 6; i++) fabrica.pasarTurno();//Entrenar Golliat
 		
 		assertEquals(jugador.getMinerales(), mineralRelativo - 100);
@@ -148,7 +148,7 @@ public class TestFabrica extends TestEdificio {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			fabrica.getUnidadesEntrenables().get(0).crear(jugador);
+			fabrica.getUnidadesEntrenables().get(0).crear();
 			fail();
 		}
 		catch (MineralInsuficiente e) {
@@ -166,7 +166,7 @@ public class TestFabrica extends TestEdificio {
 			jugador.agregarGasVespeno(-10);
 		}
 		try {
-			fabrica.getUnidadesEntrenables().get(0).crear(jugador);
+			fabrica.getUnidadesEntrenables().get(0).crear();
 			fail();
 		}
 		catch (GasVespenoInsuficiente e) {
@@ -183,11 +183,11 @@ public class TestFabrica extends TestEdificio {
 		// Aseguro recursos
 		jugador.agregarGasVespeno(100);
 		
-		fabrica.getUnidadesEntrenables().get(0).crear(jugador);
+		fabrica.getUnidadesEntrenables().get(0).crear();
 		for(int i = 0; i < 6; i++) fabrica.pasarTurno();//Entrenar Golliat
 		assertEquals(jugador.getUnidades().get(0).getClass(), Golliat.class);
 		
-		fabrica.getUnidadesEntrenables().get(0).crear(jugador);
+		fabrica.getUnidadesEntrenables().get(0).crear();
 		for(int i = 0; i < 6; i++) fabrica.pasarTurno();//Entrenar Golliat
 		assertEquals(jugador.getUnidades().get(1).getClass(), Golliat.class);
 	}
@@ -199,8 +199,8 @@ public class TestFabrica extends TestEdificio {
 		// Aseguro recursos
 		jugador.agregarGasVespeno(100);
 		
-		fabrica.getUnidadesEntrenables().get(0).crear(jugador);
-		fabrica.getUnidadesEntrenables().get(0).crear(jugador);
+		fabrica.getUnidadesEntrenables().get(0).crear();
+		fabrica.getUnidadesEntrenables().get(0).crear();
 		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Entrenar 2 Golliats
 		assertEquals(jugador.getUnidades().get(0).getClass(), Golliat.class);
 		assertEquals(jugador.getUnidades().get(1).getClass(), Golliat.class);
@@ -214,7 +214,7 @@ public class TestFabrica extends TestEdificio {
 			jugador.aumentarCapacidadPoblacion(-1);
 		}
 		try {
-			fabrica.getUnidadesEntrenables().get(0).crear(jugador);
+			fabrica.getUnidadesEntrenables().get(0).crear();
 			fail();
 		}
 		catch (SuministroInsuficiente e) {

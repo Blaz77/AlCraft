@@ -11,9 +11,7 @@ import fiuba.algo3.juego.Ocupante;
 import fiuba.algo3.mapa.Celda;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
-import fiuba.algo3.mapa.recurso.Recurso;
 import fiuba.algo3.mapa.recurso.TipoOcupante;
-import fiuba.algo3.mapa.recurso.TipoRecurso;
 import fiuba.algo3.terreno.TipoTerreno;
 
 public class TestMapa {

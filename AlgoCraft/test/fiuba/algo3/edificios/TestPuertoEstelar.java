@@ -13,8 +13,6 @@ import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.terreno.TipoTerreno;
 import fiuba.algo3.unidades.Espectro;
-import fiuba.algo3.unidades.Golliat;
-import fiuba.algo3.unidades.Marine;
 import fiuba.algo3.unidades.NaveDeCiencia;
 import fiuba.algo3.unidades.NaveDeTransporte;
 import fiuba.algo3.juego.*;
@@ -126,17 +124,17 @@ public class TestPuertoEstelar extends TestEdificio {
 		
 		for(int i = 0; i < 10; i++) puerto.pasarTurno();//Construccion
 		
-		puerto.getUnidadesEntrenables().get(0).crear(jugador);
+		puerto.getUnidadesEntrenables().get(0).crear();
 		
 		for(int i = 0; i < 8; i++) puerto.pasarTurno(); //Entrenar Espectro
 		assertEquals(jugador.getUnidades().get(0).getClass(), Espectro.class);
 
-		puerto.getUnidadesEntrenables().get(1).crear(jugador);
+		puerto.getUnidadesEntrenables().get(1).crear();
 		
 		for(int i = 0; i < 10; i++) puerto.pasarTurno(); //Entrenar NaveDeCiencia
 		assertEquals(jugador.getUnidades().get(1).getClass(), NaveDeCiencia.class);
 		
-		puerto.getUnidadesEntrenables().get(2).crear(jugador);
+		puerto.getUnidadesEntrenables().get(2).crear();
 		
 		for(int i = 0; i < 7; i++) puerto.pasarTurno(); //Entrenar NaveDeTransporte
 		assertEquals(jugador.getUnidades().get(2).getClass(), NaveDeTransporte.class);

@@ -1,6 +1,6 @@
 //TODO Clase sin usar!
 
-package fiuba.algo3.componentes;
+package fiuba.algo3.A_BORRAR;
 
 public class VidaNull implements IVida {
 //

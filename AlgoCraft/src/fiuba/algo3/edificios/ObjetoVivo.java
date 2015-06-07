@@ -66,10 +66,18 @@ public abstract class ObjetoVivo extends Ocupante { //ObjetoVivo / ObjetoInterac
 			//							this.atributo.getRangoEfectivo(
 				//								int RangoAire, int RangoTierra));
 		// rangoAire y rangoTierra de la otra Unidad!
-		
-		//Atributo:
-		//	- puedeVolar/esAereo metodos abstractos, forzar definicion abajo
-		//	- seleccionarRangoEfectivo(aire,tierra) metodo abstracto forzar redef.!
+	}
+	
+	//Esto indica cual es el rango que debe usar mi enemigo para 
+	//saber si me puede atacar.
+	public int getRangoEfectivo(int rangoAire, int rangoTierra){
+		return this.atributos.getRangoEfectivo(rangoAire, rangoTierra);
+	}
+	
+	//Esto indica cual es el danio que debe usar mi enemigo para 
+	//atacarme.
+	public int getDanioEfectivo(int danioAire, int danioTierra){
+		return this.atributos.getDanioEfectivo(danioAire,danioTierra);
 	}
 
 	public void recibirDanio(int puntos) {

@@ -1,6 +1,6 @@
 //TODO Clase sin usar!
 
-package fiuba.algo3.componentes;
+package fiuba.algo3.A_BORRAR;
 
 import java.util.ArrayList;
 
@@ -53,7 +53,8 @@ public class Ataque implements Componente {
 		if (unidad.puedeVolar())
 			return miPosicion.estaEnRango(unidad.getPosicion(), rangoAire);
 		return miPosicion.estaEnRango(unidad.getPosicion(), rangoTierra);
-	}
+		
+		// return unidadEnemiga.esPosibleElAtaqueDesde(pos, rango1, rango2)
 	
 	public void atacarA(Posicion miPosicion, Unidad unidad){
 		if (!puedeAtacarA(miPosicion, unidad))
@@ -82,3 +83,5 @@ public class Ataque implements Componente {
 	}
 
 }
+
+	

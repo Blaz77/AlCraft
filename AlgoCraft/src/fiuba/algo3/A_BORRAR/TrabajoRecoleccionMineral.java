@@ -1,4 +1,4 @@
-package fiuba.algo3.componentes;
+package fiuba.algo3.A_BORRAR;
 
 import fiuba.algo3.juego.Jugador;
 

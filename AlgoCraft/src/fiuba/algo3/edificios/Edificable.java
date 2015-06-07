@@ -3,6 +3,7 @@
 package fiuba.algo3.edificios;
 
 public interface Edificable {
+	//TODO: Todos los que usaban edificable ahora podrian usar Edificio
 	
 	public boolean enTierra();
 	

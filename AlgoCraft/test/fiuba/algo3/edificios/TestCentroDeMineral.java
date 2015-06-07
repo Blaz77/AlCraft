@@ -12,7 +12,6 @@ import fiuba.algo3.excepciones.RecursoAusente;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
 import fiuba.algo3.mapa.recurso.TipoOcupante;
-import fiuba.algo3.mapa.recurso.TipoRecurso;
 import fiuba.algo3.raza.TipoRaza;
 
 public class TestCentroDeMineral extends TestEdificio{

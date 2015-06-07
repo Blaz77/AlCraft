@@ -1,6 +1,5 @@
 package fiuba.algo3.edificios;
 
-import fiuba.algo3.atributos.AtributosEdificioEntrenadorUnidades;
 import fiuba.algo3.atributos.AtributosTerran;
 import fiuba.algo3.componentes.Vida;
 import fiuba.algo3.juego.Jugador;
