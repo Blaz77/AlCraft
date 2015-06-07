@@ -3,7 +3,17 @@ package fiuba.algo3.terreno;
 // La idea de esto es eliminar las clases Terreno e hijas,
 // pues tenian poco comportamiento y nada de estado que
 // ameritara tener instancias de las mismas.
+
+// TODO: creo q esto lo borramos xq no permite agregar moho
+// zerg. Lo dejo comentado x ahora, ya veremos.
 public enum TipoTerreno {
+	
+	
+	TIERRA, ESPACIO //, MOHO
+	
+}
+/*	
+	
 	//      Edificable, Transitable, Sobrevolable
 	TIERRA (      true,        true,         true), 
 	ESPACIO(     false,       false,         true);
@@ -30,4 +40,4 @@ public enum TipoTerreno {
 		return esSobrevolable;
 	}
 	
-}
+} */
