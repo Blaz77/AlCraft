@@ -7,10 +7,12 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import fiuba.algo3.juego.Ocupante;
 import fiuba.algo3.mapa.Celda;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.mapa.recurso.Recurso;
+import fiuba.algo3.mapa.recurso.TipoOcupante;
 import fiuba.algo3.mapa.recurso.TipoRecurso;
 import fiuba.algo3.terreno.TipoTerreno;
 
@@ -108,7 +110,7 @@ public class TestMapa {
 		// y al menos 2 cristales
 		ArrayList<Celda> bases = mapaNuevo.getBases();
 		int cristales, volcanes;
-		Recurso recurso;
+		Ocupante recurso;
 		
 		for (Celda baseActual : bases) {
 			cristales = 0;
@@ -117,11 +119,11 @@ public class TestMapa {
 				for (int y=baseActual.getY()-SEMILADO_BASE; y<baseActual.getY()+SEMILADO_BASE + 1; y++) {
 					if (perteneceAlMapa(x, y, mapaNuevo)) {
 						// Inspeccion de la celda
-						recurso = mapaNuevo.getRecurso(new Posicion(x,y));
+						recurso = mapaNuevo.getOcupante(new Posicion(x,y));
 						if (recurso == null) continue; //Despues sacar si hacemos RecursoNULL
-						if (recurso.getTipo() == TipoRecurso.MINERAL)
+						if (recurso.getTipo() == TipoOcupante.MINERAL)
 							cristales++;
-						if (recurso.getTipo() == TipoRecurso.VESPENO)
+						if (recurso.getTipo() == TipoOcupante.VESPENO)
 							volcanes++;
 					}
 				}

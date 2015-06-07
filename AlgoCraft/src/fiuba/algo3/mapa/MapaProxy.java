@@ -1,4 +1,3 @@
-@@ -1,96 +0,0 @@
 package fiuba.algo3.mapa;
 
 //import fiuba.algo3.excepciones.CeldaNoVisible;

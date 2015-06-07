@@ -6,6 +6,7 @@ import fiuba.algo3.componentes.Movimiento;
 import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.mapa.recurso.TipoOcupante;
 import fiuba.algo3.edificios.ObjetoVivo;
 
 
@@ -31,6 +32,11 @@ public abstract class Unidad extends ObjetoVivo{
 	public void pasarTurno(){
 		super.pasarTurno();
 		this.movimiento = (Movimiento)this.movimiento.pasarTurno();
+	}
+	
+
+	public TipoOcupante getTipo(){
+		return TipoOcupante.UNIDAD;
 	}
 
 	

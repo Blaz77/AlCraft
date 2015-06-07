@@ -3,7 +3,6 @@ package fiuba.algo3.mapa;
 import fiuba.algo3.edificios.Edificable;
 import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.juego.Ocupante;
-import fiuba.algo3.mapa.recurso.NoRecurso;
 import fiuba.algo3.mapa.recurso.Recurso;
 import fiuba.algo3.terreno.Terreno;
 
