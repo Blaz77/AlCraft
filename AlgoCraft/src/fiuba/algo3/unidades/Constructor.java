@@ -1,6 +1,6 @@
 package fiuba.algo3.unidades;
 
-import fiuba.algo3.componentes.EntrenadorUnidades;
+import fiuba.algo3.edificios.EdificioEntrenadorUnidades;
 import fiuba.algo3.excepciones.GasVespenoInsuficiente;
 import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.SuministroInsuficiente;
@@ -24,14 +24,15 @@ public abstract class Constructor {
 	private int turnosRestantes; //OJO ACA!
 	// -> SI SE PERMITE EN SIMULTANEO ES NECESARIO HACER COPIAS
 	// -> ahora funciona porque es de a uno.
-	protected EntrenadorUnidades entrenador;
+	protected EdificioEntrenadorUnidades entrenador;
 
 	abstract public void liberarUnidad(Jugador propietario, Posicion posicion);//aca va un return new Marine()
 	
 	abstract public Constructor copia();
 	
-	public void crear(Jugador propietario){
+	public void crear(){
 		
+		Jugador propietario = entrenador.getPropietario();
 		// Si no hay requisitos, se pasa una excepcion.
 		verificarRequisitos(propietario);
 		
@@ -64,7 +65,7 @@ public abstract class Constructor {
 			throw new GasVespenoInsuficiente();
 	}
 	
-	public void setEntrenador(EntrenadorUnidades entrenador){
+	public void setEdificioEntrenador(EdificioEntrenadorUnidades entrenador){
 		this.entrenador = entrenador;		
 	}
 }

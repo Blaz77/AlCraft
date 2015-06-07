@@ -113,7 +113,7 @@ public class TestBarraca extends TestEdificio {
 	public void testBarracaEntrenaUnidad() {
 		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
 		
-		barraca.getUnidadesEntrenables().get(0).crear(jugador);
+		barraca.getUnidadesEntrenables().get(0).crear();
 		
 		for(int i = 0; i < 3; i++) barraca.pasarTurno();//Entrenar Marine
 		
@@ -126,7 +126,7 @@ public class TestBarraca extends TestEdificio {
 		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
 		int mineralRelativo = jugador.getMinerales();
 		
-		barraca.getUnidadesEntrenables().get(0).crear(jugador);
+		barraca.getUnidadesEntrenables().get(0).crear();
 		for(int i = 0; i < 3; i++) barraca.pasarTurno();//Entrenar Marine
 		
 		assertEquals(jugador.getMinerales(), mineralRelativo - 50);
@@ -141,7 +141,7 @@ public class TestBarraca extends TestEdificio {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			barraca.getUnidadesEntrenables().get(0).crear(jugador);
+			barraca.getUnidadesEntrenables().get(0).crear();
 			fail();
 		}
 		catch (MineralInsuficiente e) {
@@ -155,11 +155,11 @@ public class TestBarraca extends TestEdificio {
 	public void testBarracaEntrenarVariasUnidadesSinColaDeEspera() {
 		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
 		
-		barraca.getUnidadesEntrenables().get(0).crear(jugador);
+		barraca.getUnidadesEntrenables().get(0).crear();
 		for(int i = 0; i < 3; i++) barraca.pasarTurno();//Entrenar Marine
 		assertEquals(jugador.getUnidades().get(0).getClass(), Marine.class);
 		
-		barraca.getUnidadesEntrenables().get(0).crear(jugador);
+		barraca.getUnidadesEntrenables().get(0).crear();
 		for(int i = 0; i < 3; i++) barraca.pasarTurno();//Entrenar Marine
 		assertEquals(jugador.getUnidades().get(1).getClass(), Marine.class);
 	}
@@ -168,8 +168,8 @@ public class TestBarraca extends TestEdificio {
 	public void testBarracaEntrenarVariasUnidadesConColaDeEspera() {
 		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
 		
-		barraca.getUnidadesEntrenables().get(0).crear(jugador);
-		barraca.getUnidadesEntrenables().get(0).crear(jugador);
+		barraca.getUnidadesEntrenables().get(0).crear();
+		barraca.getUnidadesEntrenables().get(0).crear();
 		for(int i = 0; i < 6; i++) barraca.pasarTurno();//Entrenar 2 Marines
 		assertEquals(jugador.getUnidades().get(0).getClass(), Marine.class);
 		assertEquals(jugador.getUnidades().get(1).getClass(), Marine.class);
@@ -182,10 +182,10 @@ public class TestBarraca extends TestEdificio {
 		while (jugador.getCapacidadPoblacion() > 1) {
 			jugador.aumentarCapacidadPoblacion(-1);
 		}
-		barraca.getUnidadesEntrenables().get(0).crear(jugador);
+		barraca.getUnidadesEntrenables().get(0).crear();
 		for(int i = 0; i < 3; i++) barraca.pasarTurno();//Entrenar Marine
 		try {
-			barraca.getUnidadesEntrenables().get(0).crear(jugador);
+			barraca.getUnidadesEntrenables().get(0).crear();
 			fail();
 		}
 		catch (SuministroInsuficiente e) {

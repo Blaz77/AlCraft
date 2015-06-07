@@ -77,8 +77,8 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 		}
 		EdificioEntrenadorUnidades edificio = new Barraca(jugador, posicion);
 		verificarCostosConstruccion(jugador, edificio);
-		Trabajo construccion = new TrabajoConstruccion(12, edificio);
-		edificio.setTrabajo(construccion);
+		//Trabajo construccion = new TrabajoConstruccion(12, edificio);
+		//edificio.setTrabajo(construccion);
 		return edificio;
 	}
 
