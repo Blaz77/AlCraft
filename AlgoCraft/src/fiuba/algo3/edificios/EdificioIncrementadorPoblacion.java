@@ -9,7 +9,6 @@ public abstract class EdificioIncrementadorPoblacion extends Edificio {
 	
 	public EdificioIncrementadorPoblacion(Jugador propietario, Posicion posicion, AtributosEdificioIncrementadorPoblacion atributos) {
 		super(propietario, posicion, atributos);
-		this.atributos = atributos;
 	}
 	
 	public void construccionFinalizada() {
