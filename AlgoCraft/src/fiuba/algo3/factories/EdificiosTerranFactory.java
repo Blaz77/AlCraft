@@ -2,6 +2,7 @@
 
 package fiuba.algo3.factories;
 
+import fiuba.algo3.componentes.EstadoConstruyendoEdificio;
 import fiuba.algo3.edificios.Barraca;
 import fiuba.algo3.edificios.CentroDeMineral;
 import fiuba.algo3.edificios.DepositoDeSuministros;
@@ -40,6 +41,7 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 		}
 		EdificioRecolectorGasVespeno edificio = new Refineria(jugador, posicion);
 		verificarCostosConstruccion(jugador, edificio);
+		edificio.agregarEstado(new EstadoConstruyendoEdificio(6, edificio));
 		return edificio;
 	}
 
@@ -52,8 +54,7 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 		}
 		EdificioRecolectorMineral edificio = new CentroDeMineral(jugador, posicion);
 		verificarCostosConstruccion(jugador, edificio);
-		//Trabajo construccion = new TrabajoConstruccion(4, edificio);
-		//edificio.setTrabajo(construccion);
+		edificio.agregarEstado(new EstadoConstruyendoEdificio(4, edificio));
 		return edificio;
 	}
 
@@ -63,8 +64,7 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 		}
 		EdificioIncrementadorPoblacion edificio = new DepositoDeSuministros(jugador, posicion);
 		verificarCostosConstruccion(jugador, edificio);
-		//Trabajo construccion = new TrabajoConstruccion(6, edificio);
-		//edificio.setTrabajo(construccion);
+		edificio.agregarEstado(new EstadoConstruyendoEdificio(6, edificio));
 		return edificio;
 	}
 
@@ -74,8 +74,7 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 		}
 		EdificioEntrenadorUnidades edificio = new Barraca(jugador, posicion);
 		verificarCostosConstruccion(jugador, edificio);
-		//Trabajo construccion = new TrabajoConstruccion(12, edificio);
-		//edificio.setTrabajo(construccion);
+		edificio.agregarEstado(new EstadoConstruyendoEdificio(12, edificio));
 		return edificio;
 	}
 
@@ -85,8 +84,7 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 		}
 		EdificioEntrenadorUnidades edificio = new Fabrica(jugador, posicion);
 		verificarCostosConstruccion(jugador, edificio);
-		//Trabajo construccion = new TrabajoConstruccion(12, edificio);
-		//edificio.setTrabajo(construccion);
+		edificio.agregarEstado(new EstadoConstruyendoEdificio(12, edificio));
 		return edificio;
 	}
 
@@ -96,8 +94,7 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 		}
 		EdificioEntrenadorUnidades edificio = new PuertoEstelar(jugador, posicion);
 		verificarCostosConstruccion(jugador, edificio);
-		//Trabajo construccion = new TrabajoConstruccion(10, edificio);
-		//edificio.setTrabajo(construccion);
+		edificio.agregarEstado(new EstadoConstruyendoEdificio(10, edificio));
 		return edificio;
 	}
 

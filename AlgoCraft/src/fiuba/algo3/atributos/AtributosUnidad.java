@@ -4,7 +4,8 @@ public abstract class AtributosUnidad extends AtributosObjetoVivo {
 
 	int movPorTuno;
 	int rangoVision;  //quizas pasar a ObjetoVivo, chequear si edificios tienen vision
-		
+	
+	
 	public int getMovPorTurno(){
 		return movPorTuno;
 	}
