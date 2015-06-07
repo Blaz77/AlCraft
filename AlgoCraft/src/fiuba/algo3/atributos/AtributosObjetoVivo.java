@@ -1,14 +1,28 @@
 package fiuba.algo3.atributos;
 
-public abstract class AtributosObjetoVivo {
+public abstract class AtributosObjetoVivo { //AtributosObjetoDeJuego?
 	
-	//Probablemente hacer: AtributosObjetoDelJuego
-	//		- tiene tambien costos asociados!
+	
+	int costoMineral;
+	int costoGasVespeno;
+	int turnosConstruccion;
 	
 	int vidaMaxima;
 	//int escudoMaximo;
 	String nombre;
 
+	public int getCostoMineral(){
+		return costoMineral;
+	}
+	
+	public int getCostoGasVespeno(){
+		return costoGasVespeno;
+	}
+	
+	public int getTurnosConstruccion(){
+		return turnosConstruccion;
+	}
+	
 	public int getVidaMaxima() {
 		return vidaMaxima;
 	}
