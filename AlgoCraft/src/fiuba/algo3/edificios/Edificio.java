@@ -1,24 +1,17 @@
 package fiuba.algo3.edificios;
 
-import fiuba.algo3.componentes.Trabajo;
-import fiuba.algo3.componentes.TrabajoNull;
+import fiuba.algo3.atributos.AtributosEdificio;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.mapa.recurso.TipoOcupante;
 
 public abstract class Edificio extends ObjetoVivo {
-
-	// 2 Opciones: 
-	// - Herencia Edificio -> EdificioConstructor -> Barracas, etc.
 	
-	// - Edificio generico con estados internos - modificables, si fuese necesario-
-	// El constructor de unidades va de la mano con estos estados.
-
-	protected Trabajo estado = new TrabajoNull(); //En construccion/Trabajando (no se puede accionar) /En espera (permite acciones)
-	
-	public void pasarTurno(){
-		this.estado = estado.pasarTurno();
+	public Edificio(Jugador propietario, Posicion posicion,
+			AtributosEdificio atributos) {
+		super(propietario, posicion, atributos);
 	}
+	
 	
 	//private Trabajo porDefecto;
 	//private Ataque ataque;
@@ -30,15 +23,8 @@ public abstract class Edificio extends ObjetoVivo {
 	//public abstract int getVidaMax();
 	//public abstract int getTurnosNecesarios();
 
-	
-	public Edificio(Jugador propietario, Posicion posicion) {
-		super(propietario, posicion);
-		//this.trabajoActual = primerTrabajo; generalmente una Construccion
-	}
-	
-	public void setTrabajo(Trabajo nuevoTrabajo){
-		nuevoTrabajo.setAnterior(this.estado);
-		this.estado = nuevoTrabajo;
+	public TipoOcupante getTipo(){
+		return TipoOcupante.EDIFICIO;
 	}
 	
 	public void construccionFinalizada() {
@@ -49,12 +35,30 @@ public abstract class Edificio extends ObjetoVivo {
 
 	public boolean puedeEntrenarUnidades(){
 		// Devolver true aca implica la obligacion de implementar IEntrenador
-		return false;
+		return ((AtributosEdificio) atributos).puedeEntrenarUnidades();
 	}
 	
-	public TipoOcupante getTipo(){
-		return TipoOcupante.EDIFICIO;
+	public boolean edificableEnTierra(){
+		return ((AtributosEdificio) atributos).edificableEnTierra();
 	}
+	
+	public boolean edificableEnEspacio(){
+		return ((AtributosEdificio) atributos).edificableEnEspacio();
+	}
+	
+	public boolean edificableSobreRecurso(){
+		return ((AtributosEdificio) atributos).edificableSobreRecurso();
+	}
+	
+	public boolean edificableSobreMineral(){
+		return ((AtributosEdificio) atributos).edificableSobreMineral();
+	}
+	
+	public boolean edificableSobreGasVespeno(){
+		return ((AtributosEdificio) atributos).edificableSobreGasVespeno();
+	}
+	
+	
 	
 	//public boolean puedeAlmacenarUnidades(){}
 		

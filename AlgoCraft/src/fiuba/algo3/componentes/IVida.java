@@ -1,6 +1,6 @@
 package fiuba.algo3.componentes;
 
-public interface IVida extends Componente{
+public interface IVida{
 	
 	public int getVida();
 	

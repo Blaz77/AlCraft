@@ -2,6 +2,7 @@ package fiuba.algo3.juego;
 
 import java.util.ArrayList;
 
+import fiuba.algo3.atributos.Atributos;
 import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.MapaProxy;
@@ -56,6 +57,10 @@ public class Jugador {
 
 	public Color getColor() {
 		return color;
+	}
+	
+	public Atributos getAtributos(){
+		return this.raza.getAtributos();
 	}
 
 	public TipoRaza getRaza() {

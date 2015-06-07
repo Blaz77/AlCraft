@@ -1,5 +1,10 @@
 package fiuba.algo3.edificios;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+
+import fiuba.algo3.atributos.AtributosObjetoVivo;
+import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.IVida;
 import fiuba.algo3.excepciones.VidaEnCeroException;
 import fiuba.algo3.juego.Jugador;
@@ -10,10 +15,14 @@ public abstract class ObjetoVivo extends Ocupante { //ObjetoVivo / ObjetoInterac
 
 	protected Jugador propietario;
 	protected IVida vida;
+	protected LinkedList<Estado> estados;
+	protected AtributosObjetoVivo atributos;
 
-	public ObjetoVivo(Jugador propietario, Posicion posicion) {
+	public ObjetoVivo(Jugador propietario, Posicion posicion, AtributosObjetoVivo atributos) {
 		this.propietario = propietario;
 		this.posicion = posicion;
+		this.atributos = atributos;
+		this.estados = new LinkedList<Estado>();
 	}
 
 	public Jugador getPropietario() {
@@ -33,7 +42,7 @@ public abstract class ObjetoVivo extends Ocupante { //ObjetoVivo / ObjetoInterac
 	}
 
 	public String getNombre() {
-		return this.nombre;
+		return this.atributos.getNombre();
 	}
 
 	public boolean tieneEscudo(){
@@ -49,7 +58,18 @@ public abstract class ObjetoVivo extends Ocupante { //ObjetoVivo / ObjetoInterac
 	}
 
 	public int getVidaMaxima() {
-		return this.vida.getVidaMaxima();
+		return this.atributos.getVidaMaxima();
+	}
+	
+	public void puedoRecibirDanioDe(ObjetoVivo objetoVivo){
+		//return this.posicion.estaEnRango(objetoVivo.getPosicion(), 
+			//							this.atributo.getRangoEfectivo(
+				//								int RangoAire, int RangoTierra));
+		// rangoAire y rangoTierra de la otra Unidad!
+		
+		//Atributo:
+		//	- puedeVolar/esAereo metodos abstractos, forzar definicion abajo
+		//	- seleccionarRangoEfectivo(aire,tierra) metodo abstracto forzar redef.!
 	}
 
 	public void recibirDanio(int puntos) {
@@ -70,7 +90,31 @@ public abstract class ObjetoVivo extends Ocupante { //ObjetoVivo / ObjetoInterac
 		//  --p/ej: devolver recursos en EntrenadorUnidades de construcciones no terminadas.
 	}
 
+	public void agregarEstado(Estado estado){
+		this.estados.addLast(estado);
+		estado.activar();
+	}
+	
 	public void pasarTurno(){
-		this.vida = (IVida)this.vida.pasarTurno(); //debe haber solucion mas elegante
+		// Despues sacar ESTO AAAAA
+		//this.vida = (IVida)this.vida.pasarTurno();
+		
+		LinkedList<Estado> aDesactivar = new LinkedList<Estado>();
+		Iterator<Estado> iter = estados.iterator();
+		
+		while (iter.hasNext()){
+			Estado estado = iter.next();
+			try {
+				estado.pasarTurno();
+			} catch (Exception e) {
+				iter.remove();
+				aDesactivar.addLast(estado);
+			}
+		}
+		
+		//Hago esto porque estado al desactivar quizas mete nuevos estados!
+		for (Estado estado : aDesactivar) {
+			estado.desactivar();
+		}
 	}
 }

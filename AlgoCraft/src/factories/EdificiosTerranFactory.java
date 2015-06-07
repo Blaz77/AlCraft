@@ -43,8 +43,6 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 		}
 		EdificioRecolectorGasVespeno edificio = new Refineria(jugador, posicion);
 		verificarCostosConstruccion(jugador, edificio);
-		Trabajo construccion = new TrabajoConstruccion(6, edificio);
-		edificio.setTrabajo(construccion);
 		return edificio;
 	}
 
