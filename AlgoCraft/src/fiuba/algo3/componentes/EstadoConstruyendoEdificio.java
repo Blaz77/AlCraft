@@ -25,8 +25,7 @@ public class EstadoConstruyendoEdificio implements Estado {
 	}
 
 	public void desactivar() {
-		// TODO Auto-generated method stub
-
+		construccion.construccionFinalizada();
 	}
 
 }

@@ -9,12 +9,11 @@ public abstract class EdificioIncrementadorPoblacion extends Edificio {
 	
 	public EdificioIncrementadorPoblacion(Jugador propietario, Posicion posicion, AtributosEdificioIncrementadorPoblacion atributos) {
 		super(propietario, posicion, atributos);
-		//SUPER-HIPER-TEMPORAL: TODO: despues pasa a un estado!
-		this.construccionFinalizada(atributos.getIncrementoDePoblacion());
+		this.atributos = atributos;
 	}
 	
-	public void construccionFinalizada(int cant) {
-		propietario.aumentarPoblacion(cant);
+	public void construccionFinalizada() {
+		propietario.aumentarCapacidadPoblacion(( (AtributosEdificioIncrementadorPoblacion) atributos).getIncrementoDePoblacion());
 	}
 
 }

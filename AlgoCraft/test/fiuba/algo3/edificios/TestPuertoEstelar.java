@@ -78,7 +78,7 @@ public class TestPuertoEstelar extends TestEdificio {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.puerto = terranFactory.crearEntrenadorUnidadesAvanzadas(jugador, new Posicion(2,4));
+			this.puerto = crearEnTierra(jugador, mapa);
 			fail();
 		}
 		catch (MineralInsuficiente e) {
@@ -92,7 +92,7 @@ public class TestPuertoEstelar extends TestEdificio {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.puerto = terranFactory.crearEntrenadorUnidadesAvanzadas(jugador, new Posicion(2,4));
+			this.puerto = crearEnTierra(jugador, mapa);
 			fail();
 		}
 		catch (GasVespenoInsuficiente e) {

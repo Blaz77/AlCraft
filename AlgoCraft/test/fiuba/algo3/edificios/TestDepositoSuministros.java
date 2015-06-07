@@ -93,18 +93,18 @@ public class TestDepositoSuministros extends TestEdificio {
 	
 	@Test
 	public void testDepositoMientrasConstruyeNoAumentaPoblacion() {
-		int poblacionRelativa = jugador.getPoblacion();
+		int poblacionRelativa = jugador.getCapacidadPoblacion();
 		this.depositoSuministros = crearEnTierra(jugador, mapa);
 		
-		assertEquals(poblacionRelativa, jugador.getPoblacion());
+		assertEquals(poblacionRelativa, jugador.getCapacidadPoblacion());
 	}
 
 	@Test
 	public void testDepositoDespuesDeConstruirAumentaPoblacion() {
-		int poblacionRelativa = jugador.getPoblacion();
+		int poblacionRelativa = jugador.getCapacidadPoblacion();
 		this.depositoSuministros = crearEnTierra(jugador, mapa);
 		for(int i = 0; i < 6; i++) depositoSuministros.pasarTurno(); // Construyendo
 		
-		assertEquals(poblacionRelativa + 5, jugador.getPoblacion());
+		assertEquals(poblacionRelativa + 5, jugador.getCapacidadPoblacion());
 	}
 }

@@ -77,7 +77,7 @@ public class TestFabrica extends TestEdificio {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.fabrica = terranFactory.crearEntrenadorUnidadesIntermedias(jugador, new Posicion(2,10));
+			this.fabrica = crearEnTierra(jugador, mapa);
 			fail();
 		}
 		catch (MineralInsuficiente e) {
@@ -92,7 +92,7 @@ public class TestFabrica extends TestEdificio {
 			jugador.agregarGasVespeno(-10);
 		}
 		try {
-			this.fabrica = terranFactory.crearEntrenadorUnidadesIntermedias(jugador, new Posicion(2,4));
+			this.fabrica = crearEnTierra(jugador, mapa);
 			fail();
 		}
 		catch (GasVespenoInsuficiente e) {
