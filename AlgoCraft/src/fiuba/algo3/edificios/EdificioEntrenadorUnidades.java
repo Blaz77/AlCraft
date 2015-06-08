@@ -11,7 +11,7 @@ import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.unidades.Constructor;
 
-public abstract class EdificioEntrenadorUnidades extends Edificio implements IEntrenador{
+public class EdificioEntrenadorUnidades extends Edificio implements IEntrenador{
 	
 	public EdificioEntrenadorUnidades(Jugador propietario, Posicion posicion,
 			AtributosEdificioEntrenadorUnidades atributos) {

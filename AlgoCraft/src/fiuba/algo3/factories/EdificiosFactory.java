@@ -6,6 +6,10 @@ import fiuba.algo3.atributos.AtributosEdificio;
 import fiuba.algo3.componentes.EstadoConstruyendoEdificio;
 import fiuba.algo3.edificios.Barraca;
 import fiuba.algo3.edificios.CentroDeMineral;
+import fiuba.algo3.edificios.Construccion;
+import fiuba.algo3.edificios.ConstruccionEntrenadorUnidades;
+import fiuba.algo3.edificios.ConstruccionIncrementadorPoblacion;
+import fiuba.algo3.edificios.ConstruccionRecolector;
 import fiuba.algo3.edificios.DepositoDeSuministros;
 import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.edificios.EdificioEntrenadorUnidades;
@@ -33,70 +37,58 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 			throw new GasVespenoInsuficiente();
 	}
 	
-	public EdificioRecolectorGasVespeno crearRecolectorGasVespeno(Jugador jugador, Posicion posicion) {
+	public Construccion crearRecolectorGasVespeno(Jugador jugador, Posicion posicion) {
 		if (jugador.getMapa().getOcupante(posicion).getTipo() != TipoOcupante.VESPENO) {
 			throw new RecursoAusente();
 		}
 		if (jugador.getMapa().getTerreno(posicion).getTipo() != TipoTerreno.TIERRA) {
 			throw new TerrenoInadecuado();
 		}
-		EdificioRecolectorGasVespeno edificio = new Refineria(jugador, posicion);
 		verificarCostosConstruccion(jugador, jugador.getAtributos().getRecolectorGasVespeno());
-		edificio.agregarEstado(new EstadoConstruyendoEdificio(edificio));
-		return edificio;
+		return new ConstruccionRecolector(jugador, posicion, jugador.getAtributos().getRecolectorGasVespeno());
 	}
 
-	public EdificioRecolectorMineral crearRecolectorMineral(Jugador jugador, Posicion posicion) {
+	public Construccion crearRecolectorMineral(Jugador jugador, Posicion posicion) {
 		if (jugador.getMapa().getOcupante(posicion).getTipo() != TipoOcupante.MINERAL) {
 			throw new RecursoAusente();
 		}
 		if (jugador.getMapa().getTerreno(posicion).getTipo() != TipoTerreno.TIERRA) {
 			throw new TerrenoInadecuado();
 		}
-		EdificioRecolectorMineral edificio = new CentroDeMineral(jugador, posicion);
 		verificarCostosConstruccion(jugador, jugador.getAtributos().getRecolectorMineral());
-		edificio.agregarEstado(new EstadoConstruyendoEdificio(edificio));
-		return edificio;
+		return new ConstruccionRecolector(jugador, posicion, jugador.getAtributos().getRecolectorMineral());
 	}
 
-	public EdificioIncrementadorPoblacion crearIncrementadorPoblacion(Jugador jugador, Posicion posicion) {
+	public Construccion crearIncrementadorPoblacion(Jugador jugador, Posicion posicion) {
 		if (jugador.getMapa().getTerreno(posicion).getTipo() != TipoTerreno.TIERRA) {
 			throw new TerrenoInadecuado();
 		}
-		EdificioIncrementadorPoblacion edificio = new DepositoDeSuministros(jugador, posicion);
 		verificarCostosConstruccion(jugador, jugador.getAtributos().getIncrementadorPoblacion());
-		edificio.agregarEstado(new EstadoConstruyendoEdificio(edificio));
-		return edificio;
+		return new ConstruccionIncrementadorPoblacion(jugador, posicion, jugador.getAtributos().getIncrementadorPoblacion());
 	}
 
-	public EdificioEntrenadorUnidades crearEntrenadorUnidadesBasicas(Jugador jugador, Posicion posicion) {
+	public Construccion crearEntrenadorUnidadesBasicas(Jugador jugador, Posicion posicion) {
 		if (jugador.getMapa().getTerreno(posicion).getTipo() != TipoTerreno.TIERRA) {
 			throw new TerrenoInadecuado();
 		}
-		EdificioEntrenadorUnidades edificio = new Barraca(jugador, posicion);
 		verificarCostosConstruccion(jugador, jugador.getAtributos().getEntrenadorUnidadesBasicas());
-		edificio.agregarEstado(new EstadoConstruyendoEdificio(edificio));
-		return edificio;
+		return new ConstruccionEntrenadorUnidades(jugador, posicion, jugador.getAtributos().getEntrenadorUnidadesBasicas());
 	}
 
-	public EdificioEntrenadorUnidades crearEntrenadorUnidadesIntermedias(Jugador jugador, Posicion posicion) {
+	public Construccion crearEntrenadorUnidadesIntermedias(Jugador jugador, Posicion posicion) {
 		if (jugador.getMapa().getTerreno(posicion).getTipo() != TipoTerreno.TIERRA) {
 			throw new TerrenoInadecuado();
 		}
-		EdificioEntrenadorUnidades edificio = new Fabrica(jugador, posicion);
 		verificarCostosConstruccion(jugador, jugador.getAtributos().getEntrenadorUnidadesIntermedias());
-		edificio.agregarEstado(new EstadoConstruyendoEdificio(edificio));
-		return edificio;
+		return new ConstruccionEntrenadorUnidades(jugador, posicion, jugador.getAtributos().getEntrenadorUnidadesIntermedias());
 	}
 
-	public EdificioEntrenadorUnidades crearEntrenadorUnidadesAvanzadas(Jugador jugador, Posicion posicion) {
+	public Construccion crearEntrenadorUnidadesAvanzadas(Jugador jugador, Posicion posicion) {
 		if (jugador.getMapa().getTerreno(posicion).getTipo() != TipoTerreno.TIERRA) {
 			throw new TerrenoInadecuado();
 		}
-		EdificioEntrenadorUnidades edificio = new PuertoEstelar(jugador, posicion);
 		verificarCostosConstruccion(jugador, jugador.getAtributos().getEntrenadorUnidadesAvanzadas());
-		edificio.agregarEstado(new EstadoConstruyendoEdificio(edificio));
-		return edificio;
+		return new ConstruccionEntrenadorUnidades(jugador, posicion, jugador.getAtributos().getEntrenadorUnidadesAvanzadas());
 	}
 
 }

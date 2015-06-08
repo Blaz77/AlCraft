@@ -103,6 +103,7 @@ public class TestRefineria extends TestEdificio {
 		for(int i = 0; i < 6; i++) refineria.pasarTurno(); // Construyendo
 		int gasRelativo = jugador.getGasVespeno();
 		
+		this.refineria = ((Construccion)this.refineria).getEdificioTerminado();
 		for(int i = 0; i < 10; i++){
 			gasRelativo += 10;
 			refineria.pasarTurno();

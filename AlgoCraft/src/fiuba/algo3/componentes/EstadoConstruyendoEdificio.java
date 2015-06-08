@@ -1,20 +1,18 @@
 package fiuba.algo3.componentes;
 
-import fiuba.algo3.edificios.Edificio;
+import fiuba.algo3.edificios.Construccion;
 import fiuba.algo3.edificios.ObjetoVivo;
 
 public class EstadoConstruyendoEdificio implements Estado {
 	
 	int cantVidaSumadaPorTurno;
-	Edificio construccion;
+	Construccion construccion;
 	
-	public EstadoConstruyendoEdificio(Edificio construccion) {
-		this.cantVidaSumadaPorTurno = (int) Math.ceil(construccion.getVidaMaxima() / (double) construccion.getTurnosConstruccion());
-		this.construccion = construccion;
-	}
-
 	public void activar(ObjetoVivo portador) {
-		// TODO Auto-generated method stub
+		this.construccion = (Construccion)portador;
+		this.cantVidaSumadaPorTurno = 
+				(int) Math.ceil(construccion.getVidaMaxima() / 
+								(double) construccion.getTurnosConstruccion());
 		
 	}
 

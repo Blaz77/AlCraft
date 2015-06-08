@@ -7,6 +7,10 @@ import fiuba.algo3.mapa.recurso.TipoOcupante;
 
 public abstract class Edificio extends ObjetoVivo {
 	
+	public Edificio(Jugador propietario, Posicion posicion){
+		super(propietario, posicion);
+	}
+	
 	public Edificio(Jugador propietario, Posicion posicion,
 			AtributosEdificio atributos) {
 		super(propietario, posicion, atributos);
@@ -23,12 +27,6 @@ public abstract class Edificio extends ObjetoVivo {
 
 	public TipoOcupante getTipo(){
 		return TipoOcupante.EDIFICIO;
-	}
-	
-	public void construccionFinalizada() {
-		// Se ejecuta al terminar la construccion (Puede dar un aviso,
-		// desbloquear otros edificios o aumentar poblacion)
-		return;
 	}
 
 	public boolean puedeEntrenarUnidades(){

@@ -12,11 +12,4 @@ public abstract class EdificioRecolectorGasVespeno extends Edificio {
 		super(propietario, posicion, atributos);
 	}
 
-	public void pasarTurno(){
-		super.pasarTurno();
-		//LUEGO PASAR LO DE ABAJO A UN ESTADO -> ESTADORECOLECTANDO
-		(this.propietario).agregarGasVespeno(
-				((AtributosEdificioRecolector)atributos).getCantARecolectarPorTurno());
-	}
-
 }

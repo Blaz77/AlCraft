@@ -99,6 +99,7 @@ public class TestCentroDeMineral extends TestEdificio{
 		for(int i = 0; i < 4; i++) centroMineral.pasarTurno();
 		int mineralRelativo = jugador.getMinerales();
 		
+		this.centroMineral = ((Construccion)this.centroMineral).getEdificioTerminado();
 		for(int i = 0; i < 10; i++){
 			mineralRelativo += 10;
 			centroMineral.pasarTurno();
