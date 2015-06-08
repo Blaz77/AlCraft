@@ -23,9 +23,8 @@ import fiuba.algo3.unidades.Unidad;
  */
 public class Jugador {
 	
-
 	private final static int POB_MAX_INICIAL = 5;
-	private final static int POB_MAX_TOTAL = 200;
+	//private final static int POB_MAX_TOTAL = 200;
 	private final static int MINERALES_INICIAL = 200;
 	private final static int VESPENO_INICIAL = 50;
 

@@ -40,7 +40,7 @@ public class VidaConEscudo extends Vida {
 		}
 	}
 	
-	public Componente pasarTurno() {
+	public VidaConEscudo pasarTurno() {
 		//REGENERA 10% POR TURNO, SE PUEDE CAMBIAR, VER BIEN EL REAL
 		this.escudo += (this.escudoMaximo / 10);
 		if (this.escudo > this.escudoMaximo)

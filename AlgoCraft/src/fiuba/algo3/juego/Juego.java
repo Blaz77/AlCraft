@@ -1,10 +1,11 @@
 package fiuba.algo3.juego;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import fiuba.algo3.mapa.Mapa;
 
-public class Juego {
+public class Juego implements Iterable<Jugador>, Iterator<Jugador>{
 	// Algunos atributos posibles:
 	// Turnos
 	// Mapa
@@ -14,31 +15,81 @@ public class Juego {
 	// 
 	
 	private int turnos = 0;
+	private int indiceJugadorActual = 0;
 	//int turnosMAX; // si los hay
 	Mapa mapa;
 	ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
-	
+	ArrayList<Jugador> jugadoresMuertos = new ArrayList<Jugador>();
 	// Metodos:
 	
-	//	- Juego(opciones) 	->		inicializa el juego pero sin jugadores (mas facil
-	//								agregarlos despues).
+	/* Inicializa el juego pero sin jugadores (mas facil 
+	 * agregarlos despues).*/
 	
-	public Juego(int cantidadBases){ 
-		// (Opciones opciones) {
+	public Juego(int cantidadBases, ArrayList<Jugador> listaJugadores){ // (Opciones opciones) {
 		// TODO agregar clase opciones, para encapsular todas las opciones
 		// seleccionadas en los menus previos a jugar (si los hay)
 		mapa = new Mapa(cantidadBases);
 		
+	}
 		
-		
+	// Se fija si queda un jugador vivo nomas.
+	public boolean hayGanador() {
+		return (jugadores.size() == 1);
 	}
 	
-	//	- pasarTurno() 		->		ordena a todas las unidades/edificios que realicen
-	//								su accion de cambio de turno.
-	//	- eliminarJugador() ->		remueve a un jugador del ciclo de turnos si murio
+	/**********************************************/
+	/**             SETTERS, GETTERS             **/
+	/**********************************************/
 	
-	//	- hayGanador() 		->		Se fija si queda un jugador vivo nomas.
+	public int getTurnos(){
+		return turnos;
+	}
 	
+	//TODO: :D
+	public Jugador getJugadorActual(){
+		return jugadores.get(indiceJugadorActual);
+	}
+
+	// Elimina a un jugador del juego!
+	public void eliminarJugador(Jugador jugador){
+		//TODO: Excepciones x errores x aqui
+		jugadores.remove(jugador);
+		indiceJugadorActual = indiceJugadorActual % jugadores.size();
+		
+		//TODO: y por aqui tambien
+		jugadoresMuertos.add(jugador);
+	}		
+	
+	/* Ordena a todas las unidades/edificios del jugador
+	 * que realicen su accion de cambio de turno.*/
+	public void nextJugadorActual() {
+		// cambiamo el orden de estas 2 lineas y cambia cuando
+		// ocurre el cambio de turno. Tiene mas sentido asi creo
+		getJugadorActual().pasarTurno();
+		indiceJugadorActual = (indiceJugadorActual + 1) % jugadores.size();
+		if (indiceJugadorActual == 0) turnos ++;
+	}
+	
+		
+	/**********************************************/
+	/**           ITERATOR (DEPRECATED)          **/
+	/**********************************************/
+	
+	public Iterator<Jugador> iterator() {
+		// TODO Auto-generated method stub
+		return this;
+	}
+
+	public boolean hasNext() {
+		// TODO Auto-generated method stub
+		return jugadores.size() != 0;
+	}
+
+	public Jugador next() {
+		// TODO Auto-generated method stub
+		nextJugadorActual();
+		return getJugadorActual();
+	}
 	
 	//	- de Delegacion (podrian no estar y q de arriba accedan a los objetos directamente):
 	
