@@ -129,12 +129,12 @@ public class TestPuertoEstelar extends TestEdificio {
 		puerto.getUnidadesEntrenables().get(1).crear();
 		
 		for(int i = 0; i < 10; i++) puerto.pasarTurno(); //Entrenar NaveDeCiencia
-		assertEquals(jugador.getUnidades().get(1).getClass(), NaveDeCiencia.class);
+		assertEquals(jugador.getUnidades().get(1).getNombre(), "Nave de ciencia");
 		
 		puerto.getUnidadesEntrenables().get(2).crear();
 		
 		for(int i = 0; i < 7; i++) puerto.pasarTurno(); //Entrenar NaveDeTransporte
-		assertEquals(jugador.getUnidades().get(2).getClass(), NaveDeTransporte.class);
+		assertEquals(jugador.getUnidades().get(2).getNombre(), "Nave de transporte");
 	}
 
 }
