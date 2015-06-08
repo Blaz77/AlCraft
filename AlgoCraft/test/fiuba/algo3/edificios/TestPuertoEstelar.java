@@ -21,18 +21,11 @@ public class TestPuertoEstelar extends TestEdificio {
 	private Jugador jugador;
 	private EdificiosFactory terranFactory;
 	private EdificioEntrenadorUnidades puerto;
+	private Construccion puertoEnConst;
 	
 	@Override
-	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
+	protected Construccion crearEdificio(Jugador jugador, Posicion posicion) {
 		return terranFactory.crearEntrenadorUnidadesAvanzadas(jugador, posicion);
-	}
-	
-	protected EdificioEntrenadorUnidades crearEnTierra(Jugador jugador, Mapa mapa) {
-		return (EdificioEntrenadorUnidades) super.crearEnTierra(jugador, mapa);
-	}
-	
-	protected EdificioEntrenadorUnidades crearFueraDeTierra(Jugador jugador, Mapa mapa) {
-		return (EdificioEntrenadorUnidades) super.crearFueraDeTierra(jugador, mapa);
 	}
 	
 	@Before
@@ -42,8 +35,11 @@ public class TestPuertoEstelar extends TestEdificio {
 		this.terranFactory = new EdificiosFactory();
 		
 		// Aseguro recursos
-		jugador.agregarGasVespeno(50);
-		this.puerto = crearEnTierra(jugador, mapa);
+		jugador.agregarGasVespeno(500);
+		this.puertoEnConst = crearEnTierra(jugador, mapa);
+		for(int i = 0; i < 10; i++) puertoEnConst.pasarTurno();//Construccion
+		this.puerto = (EdificioEntrenadorUnidades)this.puertoEnConst.getEdificioTerminado();
+		this.puertoEnConst = crearEnTierra(jugador, mapa);
 	}
 
 	//TESTS SIN REQUISITOS POR AHORA!!!
@@ -56,7 +52,7 @@ public class TestPuertoEstelar extends TestEdificio {
 	@Test
 	public void testCrearPuertoEstelarFueraDeTierraFalla() {
 		try {
-			this.puerto = crearFueraDeTierra(jugador, mapa);
+			this.puertoEnConst = crearFueraDeTierra(jugador, mapa);
 			fail();
 		}
 		catch (TerrenoInadecuado e) {
@@ -72,7 +68,7 @@ public class TestPuertoEstelar extends TestEdificio {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.puerto = crearEnTierra(jugador, mapa);
+			this.puertoEnConst = crearEnTierra(jugador, mapa);
 			fail();
 		}
 		catch (MineralInsuficiente e) {
@@ -86,7 +82,7 @@ public class TestPuertoEstelar extends TestEdificio {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.puerto = crearEnTierra(jugador, mapa);
+			this.puertoEnConst = crearEnTierra(jugador, mapa);
 			fail();
 		}
 		catch (GasVespenoInsuficiente e) {
@@ -97,12 +93,12 @@ public class TestPuertoEstelar extends TestEdificio {
 	
 	@Test
 	public void testPuertoEstelarSubeVidaDuranteConstruccion() {
-		int vidaRelativa = puerto.getVida();
+		int vidaRelativa = puertoEnConst.getVida();
 		for(int i = 0; i < 10; i++){
-			puerto.pasarTurno();
-			if (puerto.getVida() <= vidaRelativa) 
+			puertoEnConst.pasarTurno();
+			if (puertoEnConst.getVida() <= vidaRelativa) 
 				fail("No aumenta la vida en la Construccion");
-			vidaRelativa = puerto.getVida();
+			vidaRelativa = puertoEnConst.getVida();
 		}
 		assertEquals(vidaRelativa, puerto.getVidaMaxima());
 	}
@@ -114,9 +110,6 @@ public class TestPuertoEstelar extends TestEdificio {
 		jugador.agregarGasVespeno(1000);
 		jugador.agregarMinerales(1000);
 		jugador.aumentarCapacidadPoblacion(10);
-		
-		
-		for(int i = 0; i < 10; i++) puerto.pasarTurno();//Construccion
 		
 		puerto.getUnidadesEntrenables().get(0).crear();
 		

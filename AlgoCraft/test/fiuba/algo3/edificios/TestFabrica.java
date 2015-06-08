@@ -21,21 +21,13 @@ public class TestFabrica extends TestEdificio {
 	private Jugador jugador;
 	private EdificiosFactory terranFactory;
 	private EdificioEntrenadorUnidades fabrica;
+	private Construccion fabricaEnConst;
 	
 	@Override
-	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
+	protected Construccion crearEdificio(Jugador jugador, Posicion posicion) {
 		return terranFactory.crearEntrenadorUnidadesIntermedias(jugador, posicion);
 	}
-	
-	protected EdificioEntrenadorUnidades crearEnTierra(Jugador jugador, Mapa mapa) {
-		return (EdificioEntrenadorUnidades) super.crearEnTierra(jugador, mapa);
-	}
 
-	protected EdificioEntrenadorUnidades crearFueraDeTierra(Jugador jugador, Mapa mapa) {
-		return (EdificioEntrenadorUnidades) super.crearFueraDeTierra(jugador, mapa);
-	}
-	
-	
 	@Before
 	public void setUp() throws Exception {
 		mapa = new Mapa(6);
@@ -43,8 +35,11 @@ public class TestFabrica extends TestEdificio {
 		this.terranFactory = new EdificiosFactory();
 		
 		// Aseguro recursos
-		jugador.agregarGasVespeno(50);
-		this.fabrica = crearEnTierra(jugador, mapa);
+		jugador.agregarGasVespeno(500);
+		this.fabricaEnConst = crearEnTierra(jugador, mapa);
+		for(int i = 0; i < 12; i++) fabricaEnConst.pasarTurno();//Construccion
+		this.fabrica = (EdificioEntrenadorUnidades)this.fabricaEnConst.getEdificioTerminado();
+		this.fabricaEnConst = crearEnTierra(jugador, mapa);
 	}
 
 	//TESTS SIN REQUISITOS POR AHORA!!!
@@ -57,7 +52,7 @@ public class TestFabrica extends TestEdificio {
 	@Test
 	public void testCrearFabricaFueraDeTierraFalla() {
 		try {
-			this.fabrica = crearFueraDeTierra(jugador, mapa);
+			this.fabricaEnConst = crearFueraDeTierra(jugador, mapa);
 			fail();
 		}
 		catch (TerrenoInadecuado e) {
@@ -73,7 +68,7 @@ public class TestFabrica extends TestEdificio {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.fabrica = crearEnTierra(jugador, mapa);
+			this.fabricaEnConst = crearEnTierra(jugador, mapa);
 			fail();
 		}
 		catch (MineralInsuficiente e) {
@@ -88,7 +83,7 @@ public class TestFabrica extends TestEdificio {
 			jugador.agregarGasVespeno(-10);
 		}
 		try {
-			this.fabrica = crearEnTierra(jugador, mapa);
+			this.fabricaEnConst = crearEnTierra(jugador, mapa);
 			fail();
 		}
 		catch (GasVespenoInsuficiente e) {
@@ -99,12 +94,12 @@ public class TestFabrica extends TestEdificio {
 	
 	@Test
 	public void testFabricaSubeVidaDuranteConstruccion() {
-		int vidaRelativa = fabrica.getVida();
+		int vidaRelativa = fabricaEnConst.getVida();
 		for(int i = 0; i < 12; i++){
-			fabrica.pasarTurno();
-			if (fabrica.getVida() <= vidaRelativa) 
+			fabricaEnConst.pasarTurno();
+			if (fabricaEnConst.getVida() <= vidaRelativa) 
 				fail("No aumenta la vida en la Construccion");
-			vidaRelativa = fabrica.getVida();
+			vidaRelativa = fabricaEnConst.getVida();
 		}
 		assertEquals(vidaRelativa, fabrica.getVidaMaxima());
 	}
@@ -112,8 +107,6 @@ public class TestFabrica extends TestEdificio {
 	
 	@Test
 	public void testFabricaEntrenaUnidad() {
-		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Construccion
-		
 		fabrica.getUnidadesEntrenables().get(0).crear();
 		
 		for(int i = 0; i < 6; i++) fabrica.pasarTurno();//Entrenar Golliat
@@ -124,7 +117,6 @@ public class TestFabrica extends TestEdificio {
 
 	@Test
 	public void testFabricaEntrenaUnidadConsumeRecursos() {
-		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Construccion
 		int mineralRelativo = jugador.getMinerales();
 		int gasRelativo = jugador.getGasVespeno();
 		
@@ -138,8 +130,6 @@ public class TestFabrica extends TestEdificio {
 	
 	@Test
 	public void testFabricaEntrenaUnidadSinMineralesDebeFallar() {
-		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Construccion
-		
 		while (jugador.getMinerales() >= 100) {
 			jugador.agregarMinerales(-10);
 		}
@@ -156,8 +146,6 @@ public class TestFabrica extends TestEdificio {
 	
 	@Test
 	public void testFabricaEntrenaUnidadSinGasVespenoDebeFallar() {
-		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Construccion
-		
 		while (jugador.getGasVespeno() >= 50) {
 			jugador.agregarGasVespeno(-10);
 		}
@@ -174,8 +162,6 @@ public class TestFabrica extends TestEdificio {
 	
 	@Test
 	public void testFabricaEntrenarVariasUnidadesSinColaDeEspera() {
-		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Construccion
-		
 		// Aseguro recursos
 		jugador.agregarGasVespeno(100);
 		
@@ -190,8 +176,6 @@ public class TestFabrica extends TestEdificio {
 	
 	@Test
 	public void testFabricaEntrenarVariasUnidadesConColaDeEspera() {
-		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Construccion
-		
 		// Aseguro recursos
 		jugador.agregarGasVespeno(100);
 		
@@ -204,8 +188,6 @@ public class TestFabrica extends TestEdificio {
 
 	@Test
 	public void testFabricaEntrenaUnidadSinPoblacionDebeFallar() {
-		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Construccion
-		
 		while (jugador.getCapacidadPoblacion() > 1) {
 			jugador.aumentarCapacidadPoblacion(-1);
 		}

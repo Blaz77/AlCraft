@@ -22,7 +22,7 @@ public class TestRefineria extends TestEdificio {
 	private Edificio refineria;
 	
 	@Override
-	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
+	protected Construccion crearEdificio(Jugador jugador, Posicion posicion) {
 		return terranFactory.crearRecolectorGasVespeno(jugador, posicion);
 	}
 	

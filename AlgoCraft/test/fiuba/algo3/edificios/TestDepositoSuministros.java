@@ -23,7 +23,7 @@ public class TestDepositoSuministros extends TestEdificio {
 	
 	
 	@Override
-	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
+	protected Construccion crearEdificio(Jugador jugador, Posicion posicion) {
 		return terranFactory.crearIncrementadorPoblacion(jugador, posicion);
 	}
 	

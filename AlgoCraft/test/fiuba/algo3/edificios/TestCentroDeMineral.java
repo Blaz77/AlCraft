@@ -23,7 +23,7 @@ public class TestCentroDeMineral extends TestEdificio{
 	private Edificio centroMineral;
 	
 	@Override
-	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
+	protected Construccion crearEdificio(Jugador jugador, Posicion posicion) {
 		return terranFactory.crearRecolectorMineral(jugador, posicion);
 	}
 	
