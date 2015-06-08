@@ -3,11 +3,15 @@ package fiuba.algo3.atributos;
 public class AtributosMarine extends AtributosUnidadAtaque {
 
 	public AtributosMarine(){
-		//fields de ObjetoVivo:
+		//fields ObjetoVivo:
+		this.costoMineral = 50;
+		this.costoGasVespeno = 0;
+		this.turnosConstruccion = 3;
 		this.vidaMaxima = 40;
 		this.nombre = "Marine";
 		
 		//fields de Unidad:
+		this.costoPoblacion = 1;
 		this.movPorTuno = 1; //?Inventado?!!!
 		this.rangoVision = 7;
 		
