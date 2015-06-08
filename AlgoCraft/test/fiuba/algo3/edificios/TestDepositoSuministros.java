@@ -44,20 +44,13 @@ public class TestDepositoSuministros extends TestEdificio {
 	
 	@Test
 	public void testCrearDepositoSuministrosFueraDeTierraFalla() {
-		for (int y = 0; y < mapa.alto(); y++) {
-			for (int x = 0; x < mapa.ancho(); x++) {
-				Posicion posFueraDeTierra = new Posicion(x, y);
-				if (mapa.getTerreno(posFueraDeTierra).getTipo() != TipoTerreno.TIERRA) {
-					try {
-						this.depositoSuministros = terranFactory.crearIncrementadorPoblacion(jugador, posFueraDeTierra);
-						fail();
-					}
-					catch (TerrenoInadecuado e) {
-						assertTrue(true);
-						return;
-					}
-				}
-			}
+		try {
+			this.depositoSuministros = crearFueraDeTierra(jugador, mapa);
+			fail();
+		}
+		catch (TerrenoInadecuado e) {
+			assertTrue(true);
+			return;
 		}
 		fail();
 	}

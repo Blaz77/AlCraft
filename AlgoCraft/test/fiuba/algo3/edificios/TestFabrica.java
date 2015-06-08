@@ -30,6 +30,10 @@ public class TestFabrica extends TestEdificio {
 	protected EdificioEntrenadorUnidades crearEnTierra(Jugador jugador, Mapa mapa) {
 		return (EdificioEntrenadorUnidades) super.crearEnTierra(jugador, mapa);
 	}
+
+	protected EdificioEntrenadorUnidades crearFueraDeTierra(Jugador jugador, Mapa mapa) {
+		return (EdificioEntrenadorUnidades) super.crearFueraDeTierra(jugador, mapa);
+	}
 	
 	
 	@Before
@@ -52,20 +56,13 @@ public class TestFabrica extends TestEdificio {
 	
 	@Test
 	public void testCrearFabricaFueraDeTierraFalla() {
-		for (int y = 0; y < mapa.alto(); y++) {
-			for (int x = 0; x < mapa.ancho(); x++) {
-				Posicion posFueraDeTierra = new Posicion(x, y);
-				if (mapa.getTerreno(posFueraDeTierra).getTipo() != TipoTerreno.TIERRA) {
-					try {
-						this.fabrica = terranFactory.crearEntrenadorUnidadesIntermedias(jugador, posFueraDeTierra);
-						fail();
-					}
-					catch (TerrenoInadecuado e) {
-						assertTrue(true);
-						return;
-					}
-				}
-			}
+		try {
+			this.fabrica = crearFueraDeTierra(jugador, mapa);
+			fail();
+		}
+		catch (TerrenoInadecuado e) {
+			assertTrue(true);
+			return;
 		}
 		fail();
 	}

@@ -8,6 +8,7 @@ import org.junit.Test;
 import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.RecursoAusente;
+import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
@@ -30,8 +31,12 @@ public class TestCentroDeMineral extends TestEdificio{
 		return crearEnRecurso(jugador, mapa, TipoOcupante.MINERAL);
 	}
 	
+	private Edificio crearFueraDeMineral(Jugador jugador, Mapa mapa) {
+		return crearFueraDeRecurso(jugador, mapa, TipoOcupante.MINERAL);
+	}
+	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		mapa = new Mapa(6);
 		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL, mapa);
 		this.terranFactory = new EdificiosFactory();
@@ -62,20 +67,13 @@ public class TestCentroDeMineral extends TestEdificio{
 	
 	@Test
 	public void testCrearRefineriaFueraDeMineralFalla() {
-		for (int y = 0; y < mapa.alto(); y++) {
-			for (int x = 0; x < mapa.ancho(); x++) {
-				Posicion posSinMineral = new Posicion(x, y);
-				if (mapa.getOcupante(posSinMineral).getTipo() != TipoOcupante.MINERAL) {
-					try {
-						centroMineral = terranFactory.crearRecolectorMineral(jugador, posSinMineral);
-						fail();
-					}
-					catch (RecursoAusente e) {
-						assertTrue(true);
-						return;
-					}
-				}
-			}
+		try {
+			this.centroMineral = crearFueraDeMineral(jugador, mapa);
+			fail();
+		}
+		catch (RecursoAusente e) {
+			assertTrue(true);
+			return;
 		}
 		fail();
 	}

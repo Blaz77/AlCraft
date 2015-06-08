@@ -31,6 +31,10 @@ public class TestPuertoEstelar extends TestEdificio {
 		return (EdificioEntrenadorUnidades) super.crearEnTierra(jugador, mapa);
 	}
 	
+	protected EdificioEntrenadorUnidades crearFueraDeTierra(Jugador jugador, Mapa mapa) {
+		return (EdificioEntrenadorUnidades) super.crearFueraDeTierra(jugador, mapa);
+	}
+	
 	@Before
 	public void setUp() throws Exception {
 		mapa = new Mapa(6);
@@ -51,20 +55,13 @@ public class TestPuertoEstelar extends TestEdificio {
 	
 	@Test
 	public void testCrearPuertoEstelarFueraDeTierraFalla() {
-		for (int y = 0; y < mapa.alto(); y++) {
-			for (int x = 0; x < mapa.ancho(); x++) {
-				Posicion posFueraDeTierra = new Posicion(x, y);
-				if (mapa.getTerreno(posFueraDeTierra).getTipo() != TipoTerreno.TIERRA) {
-					try {
-						this.puerto = terranFactory.crearEntrenadorUnidadesAvanzadas(jugador, posFueraDeTierra);
-						fail();
-					}
-					catch (TerrenoInadecuado e) {
-						assertTrue(true);
-						return;
-					}
-				}
-			}
+		try {
+			this.puerto = crearFueraDeTierra(jugador, mapa);
+			fail();
+		}
+		catch (TerrenoInadecuado e) {
+			assertTrue(true);
+			return;
 		}
 		fail();
 	}

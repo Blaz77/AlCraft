@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.excepciones.MineralInsuficiente;
+import fiuba.algo3.excepciones.RecursoAusente;
 import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
@@ -27,6 +28,10 @@ public class TestRefineria extends TestEdificio {
 	
 	private Edificio crearEnVolcan(Jugador jugador, Mapa mapa) {
 		return crearEnRecurso(jugador, mapa, TipoOcupante.VESPENO);
+	}
+	
+	private Edificio crearFueraDeVolcan(Jugador jugador, Mapa mapa) {
+		return crearFueraDeRecurso(jugador, mapa, TipoOcupante.VESPENO);
 	}
 	
 	@Before
@@ -64,20 +69,13 @@ public class TestRefineria extends TestEdificio {
 	
 	@Test
 	public void testCrearRefineriaFueraDeVolcanFalla() {
-		for (int y = 0; y < mapa.alto(); y++) {
-			for (int x = 0; x < mapa.ancho(); x++) {
-				Posicion posSinVespeno = new Posicion(x, y);
-				if (mapa.getOcupante(posSinVespeno).getTipo() != TipoOcupante.VESPENO) {
-					try {
-						refineria = terranFactory.crearRecolectorGasVespeno(jugador, posSinVespeno);
-						fail();
-					}
-					catch (RuntimeException e) { // Crear excepcion propia
-						assertTrue(true);
-						return;
-					}
-				}
-			}
+		try {
+			this.refineria = crearFueraDeVolcan(jugador, mapa);
+			fail();
+		}
+		catch (RecursoAusente e) {
+			assertTrue(true);
+			return;
 		}
 		fail();
 	}

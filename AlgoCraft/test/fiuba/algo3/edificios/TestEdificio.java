@@ -22,12 +22,36 @@ public abstract class TestEdificio {
 		return null;
 	}
 	
+	protected Edificio crearFueraDeTierra(Jugador jugador, Mapa mapa) {
+		for (int y = 0; y < mapa.alto(); y++) {
+			for (int x = 0; x < mapa.ancho(); x++) {
+				Posicion posFueraDeTierra = new Posicion(x, y);
+				if (mapa.getTerreno(posFueraDeTierra).getTipo() != TipoTerreno.TIERRA) {
+					return crearEdificio(jugador, posFueraDeTierra);
+				}
+			}
+		}
+		return null;
+	}
+	
 	protected Edificio crearEnRecurso(Jugador jugador, Mapa mapa, TipoOcupante recurso) {
 		for (int y = 0; y < mapa.alto(); y++) {
 			for (int x = 0; x < mapa.ancho(); x++) {
 				Posicion posConRecurso = new Posicion(x, y);
 				if (mapa.getOcupante(posConRecurso).getTipo() == recurso) {
 						return crearEdificio(jugador, posConRecurso);
+				}
+			}
+		}
+		return null;
+	}
+	
+	protected Edificio crearFueraDeRecurso(Jugador jugador, Mapa mapa, TipoOcupante recurso) {
+		for (int y = 0; y < mapa.alto(); y++) {
+			for (int x = 0; x < mapa.ancho(); x++) {
+				Posicion posSinRecurso = new Posicion(x, y);
+				if (mapa.getOcupante(posSinRecurso).getTipo() == recurso) {
+						return crearEdificio(jugador, posSinRecurso);
 				}
 			}
 		}
