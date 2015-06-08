@@ -50,7 +50,7 @@ public abstract class TestEdificio {
 		for (int y = 0; y < mapa.alto(); y++) {
 			for (int x = 0; x < mapa.ancho(); x++) {
 				Posicion posSinRecurso = new Posicion(x, y);
-				if (mapa.getOcupante(posSinRecurso).getTipo() == recurso) {
+				if (mapa.getOcupante(posSinRecurso).getTipo() != recurso) {
 						return crearEdificio(jugador, posSinRecurso);
 				}
 			}
