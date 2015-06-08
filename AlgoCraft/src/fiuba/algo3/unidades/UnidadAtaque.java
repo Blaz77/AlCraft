@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import fiuba.algo3.atributos.AtributosUnidadAtaque;
 import fiuba.algo3.edificios.ObjetoVivo;
+import fiuba.algo3.excepciones.EnemigoFueraDeRango;
+import fiuba.algo3.excepciones.NoEsUnEnemigo;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
 
@@ -14,6 +16,7 @@ public class UnidadAtaque extends Unidad {
 
 	public UnidadAtaque(Jugador propietario, Posicion posicion, AtributosUnidadAtaque atributos) {
 		super(propietario, posicion, atributos);
+		this.ataquesRestantes = ((AtributosUnidadAtaque)this.atributos).getAtaquesPorTurno();
 	}
 	
 	public void pasarTurno(){
@@ -28,17 +31,21 @@ public class UnidadAtaque extends Unidad {
 		return ataquesRestantes != 0;
 	}
 	
-	//Doy por sentado que un edificio es terrestre (quizas esta mal)
-	public boolean puedeAtacarA(ObjetoVivo enemigo){
-		//CHEQUEAR SI ES ENEMIGO DE VERDAD!
-		return this.posicion.estaEnRango(enemigo.getPosicion(),enemigo.getRangoEfectivo(
+	private boolean estaEnRangoDeAtaque(ObjetoVivo enemigo){
+		return this.posicion.estaEnRango(
+				enemigo.getPosicion(),enemigo.getRangoEfectivo(
 						((AtributosUnidadAtaque)this.atributos).getRangoAtkAire(),
 						((AtributosUnidadAtaque)this.atributos).getRangoAtkTierra()));
 	}
 	
+	public boolean puedeAtacarA(ObjetoVivo enemigo){
+		return (this.esEnemigoDe(enemigo) && 
+				this.estaEnRangoDeAtaque(enemigo));
+	}
+	
 	public void atacarA(ObjetoVivo enemigo){
-		if (!this.puedeAtacarA(enemigo))
-			throw new RuntimeException();//AtaqueImposible/AtaqueFueraDeRango
+		if (!this.esEnemigoDe(enemigo)) throw new NoEsUnEnemigo();
+		if (!this.estaEnRangoDeAtaque(enemigo)) throw new EnemigoFueraDeRango();
 		enemigo.recibirDanio(enemigo.getDanioEfectivo(
 				((AtributosUnidadAtaque)this.atributos).getDanioAtkAire(),
 				((AtributosUnidadAtaque)this.atributos).getDanioAtkTierra()));

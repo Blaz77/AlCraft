@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import fiuba.algo3.atributos.AtributosObjetoVivo;
 import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.IVida;
+import fiuba.algo3.componentes.Vida;
 import fiuba.algo3.excepciones.VidaEnCeroException;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.juego.Ocupante;
@@ -23,6 +24,7 @@ public abstract class ObjetoVivo extends Ocupante { //ObjetoVivo / ObjetoInterac
 		this.posicion = posicion;
 		this.atributos = atributos;
 		this.estados = new LinkedList<Estado>();
+		this.vida = new Vida(atributos);
 	}
 
 	public Jugador getPropietario() {
@@ -59,6 +61,10 @@ public abstract class ObjetoVivo extends Ocupante { //ObjetoVivo / ObjetoInterac
 
 	public int getVidaMaxima() {
 		return this.atributos.getVidaMaxima();
+	}
+	
+	public boolean esEnemigoDe(ObjetoVivo otro){
+		return this.propietario != otro.propietario;
 	}
 	
 	public void puedoRecibirDanioDe(ObjetoVivo objetoVivo){

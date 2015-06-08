@@ -19,6 +19,7 @@ public abstract class Unidad extends ObjetoVivo{
 		super(propietario, posicion, atributos);
 		//Hacer esto de abajo en los CONSTRUCTORES! NO ACA!:
 		propietario.agregarUnidad(this);
+		this.movRestantes = ((AtributosUnidad)this.atributos).getMovPorTurno();
 	}
 	
 	public void pasarTurno(){
@@ -74,6 +75,10 @@ public abstract class Unidad extends ObjetoVivo{
 	
 	public boolean puedeHacerMagia(){
 		return ((AtributosUnidad)this.atributos).puedeHacerMagia();
+	}
+	
+	public boolean puedeVolar() {//esAereo()
+		return this.atributos.esAereo();		
 	}
 
 }
