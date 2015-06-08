@@ -1,26 +1,20 @@
 package fiuba.algo3.unidades;
 
+import fiuba.algo3.atributos.AtributosTerran;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
 
 public class ConstructorNaveDeCiencia extends Constructor {
-
-	public ConstructorNaveDeCiencia() {
-		this.costoGas = 225;
-		this.costoMinerales = 100;
-		this.costoPoblacion = 2;
-		this.turnosNecesarios = 10;
-	}
 	
 	@Override
 	public void liberarUnidad(Jugador j, Posicion posicion) {
 		new NaveDeCiencia(j, posicion);
-
+		//new UnidadAtaque(j, pos, this.atributos)
 	}
-
+	
 	@Override
-	public Constructor copia() {
-		return new ConstructorNaveDeCiencia();
+	public void setAtributos() {
+		this.atributos = 
+				((AtributosTerran)this.entrenador.getPropietario().getAtributos()).getNaveDeCiencia();		
 	}
-
 }
