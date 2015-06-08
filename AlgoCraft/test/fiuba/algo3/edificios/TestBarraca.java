@@ -19,18 +19,11 @@ public class TestBarraca extends TestEdificio {
 	private Jugador jugador;
 	private EdificiosFactory terranFactory; //EdificiosAbstractFactory
 	private EdificioEntrenadorUnidades barraca;
+	private Construccion barracaEnConst;
 	
 	@Override
-	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
+	protected Construccion crearEdificio(Jugador jugador, Posicion posicion) {
 		return terranFactory.crearEntrenadorUnidadesBasicas(jugador, posicion);
-	}
-	
-	protected EdificioEntrenadorUnidades crearEnTierra(Jugador jugador, Mapa mapa) {
-		return (EdificioEntrenadorUnidades) super.crearEnTierra(jugador, mapa);
-	}
-	
-	protected EdificioEntrenadorUnidades crearFueraDeTierra(Jugador jugador, Mapa mapa) {
-		return (EdificioEntrenadorUnidades) super.crearFueraDeTierra(jugador, mapa);
 	}
 	
 	@Before
@@ -38,7 +31,10 @@ public class TestBarraca extends TestEdificio {
 		mapa = new Mapa(6);
 		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL, mapa);
 		this.terranFactory = new EdificiosFactory();
-		this.barraca = crearEnTierra(jugador, mapa);
+		this.barracaEnConst = crearEnTierra(jugador, mapa);
+		for(int i = 0; i < 12; i++) barracaEnConst.pasarTurno();//Construccion
+		this.barraca = (EdificioEntrenadorUnidades)this.barracaEnConst.getEdificioTerminado();
+		this.barracaEnConst = crearEnTierra(jugador, mapa);
 	}
 
 	//TESTS SIN REQUISITOS POR AHORA!!!
@@ -51,7 +47,7 @@ public class TestBarraca extends TestEdificio {
 	@Test
 	public void testCrearBarracaFueraDeTierraFalla() {
 		try {
-			this.barraca = crearFueraDeTierra(jugador, mapa);
+			this.barracaEnConst = crearFueraDeTierra(jugador, mapa);
 			fail();
 		}
 		catch (TerrenoInadecuado e) {
@@ -67,7 +63,7 @@ public class TestBarraca extends TestEdificio {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.barraca = crearEnTierra(jugador, mapa);
+			this.barracaEnConst = crearEnTierra(jugador, mapa);
 			fail();
 		}
 		catch (MineralInsuficiente e) {
@@ -78,15 +74,15 @@ public class TestBarraca extends TestEdificio {
 	
 	@Test
 	public void testBarracaSubeVidaDuranteConstruccion() {
-		if (barraca.getVida() == barraca.getVidaMaxima())
+		if (barracaEnConst.getVida() == barracaEnConst.getVidaMaxima())
 			fail("La construccion inicio con la vida maxima");
 		
-		int vidaRelativa = barraca.getVida();		
+		int vidaRelativa = barracaEnConst.getVida();		
 		for(int i = 0; i < 12; i++){
-			barraca.pasarTurno();
-			if (barraca.getVida() <= vidaRelativa) 
+			barracaEnConst.pasarTurno();
+			if (barracaEnConst.getVida() <= vidaRelativa) 
 				fail("No aumenta la vida en la Construccion");
-			vidaRelativa = barraca.getVida();
+			vidaRelativa = barracaEnConst.getVida();
 		}
 		assertEquals(vidaRelativa, barraca.getVidaMaxima());
 	}
@@ -94,8 +90,6 @@ public class TestBarraca extends TestEdificio {
 	
 	@Test
 	public void testBarracaEntrenaUnidad() {
-		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
-		
 		barraca.getUnidadesEntrenables().get(0).crear();
 		
 		for(int i = 0; i < 3; i++) barraca.pasarTurno();//Entrenar Marine
@@ -106,7 +100,6 @@ public class TestBarraca extends TestEdificio {
 	
 	@Test
 	public void testBarracaEntrenaUnidadConsumeRecursos() {
-		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
 		int mineralRelativo = jugador.getMinerales();
 		
 		barraca.getUnidadesEntrenables().get(0).crear();
@@ -118,8 +111,6 @@ public class TestBarraca extends TestEdificio {
 	
 	@Test
 	public void testBarracaEntrenaUnidadSinRecursosDebeFallar() {
-		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
-		
 		while (jugador.getMinerales() >= 50) {
 			jugador.agregarMinerales(-10);
 		}
@@ -135,9 +126,7 @@ public class TestBarraca extends TestEdificio {
 	}
 	
 	@Test
-	public void testBarracaEntrenarVariasUnidadesSinColaDeEspera() {
-		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
-		
+	public void testBarracaEntrenarVariasUnidadesSinColaDeEspera() {		
 		barraca.getUnidadesEntrenables().get(0).crear();
 		for(int i = 0; i < 3; i++) barraca.pasarTurno();//Entrenar Marine
 		assertEquals(jugador.getUnidades().get(0).getNombre(), "Marine");
@@ -149,8 +138,6 @@ public class TestBarraca extends TestEdificio {
 	
 	@Test
 	public void testBarracaEntrenarVariasUnidadesConColaDeEspera() {
-		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
-		
 		barraca.getUnidadesEntrenables().get(0).crear();
 		barraca.getUnidadesEntrenables().get(0).crear();
 		for(int i = 0; i < 6; i++) barraca.pasarTurno();//Entrenar 2 Marines
@@ -160,8 +147,6 @@ public class TestBarraca extends TestEdificio {
 
 	@Test
 	public void testBarracaEntrenaUnidadSinPoblacionDebeFallar() {
-		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
-		
 		while (jugador.getCapacidadPoblacion() > 1) {
 			jugador.aumentarCapacidadPoblacion(-1);
 		}
