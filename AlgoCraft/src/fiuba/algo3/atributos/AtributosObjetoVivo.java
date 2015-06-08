@@ -1,7 +1,12 @@
 package fiuba.algo3.atributos;
 
+import java.util.LinkedList;
+
+import fiuba.algo3.componentes.Estado;
+
 public abstract class AtributosObjetoVivo { //AtributosObjetoDeJuego?
 	
+	LinkedList<Estado> estadosIniciales = new LinkedList<Estado>();
 	
 	int costoMineral;
 	int costoGasVespeno;
@@ -21,6 +26,10 @@ public abstract class AtributosObjetoVivo { //AtributosObjetoDeJuego?
 	
 	public int getTurnosConstruccion(){
 		return turnosConstruccion;
+	}
+	
+	public LinkedList<Estado> getEstadosIniciales(){
+		return new LinkedList<Estado>(estadosIniciales);
 	}
 	
 	public int getVidaMaxima() {

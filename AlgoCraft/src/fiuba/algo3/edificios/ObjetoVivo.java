@@ -23,8 +23,11 @@ public abstract class ObjetoVivo extends Ocupante { //ObjetoVivo / ObjetoInterac
 		this.propietario = propietario;
 		this.posicion = posicion;
 		this.atributos = atributos;
-		this.estados = new LinkedList<Estado>();
 		this.vida = new Vida(atributos);
+		this.estados = atributos.getEstadosIniciales();
+		for (Estado estado : estados) {
+			estado.activar(this);
+		}
 	}
 
 	public Jugador getPropietario() {
