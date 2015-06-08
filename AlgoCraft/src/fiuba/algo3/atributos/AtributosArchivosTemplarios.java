@@ -1,6 +1,6 @@
 package fiuba.algo3.atributos;
 
-import fiuba.algo3.unidades.ConstructorGolliat;
+import fiuba.algo3.unidades.ConstructorInfanteriaMagica;
 
 public class AtributosArchivosTemplarios extends AtributosEdificioEntrenadorUnidades {
 
@@ -13,7 +13,7 @@ public class AtributosArchivosTemplarios extends AtributosEdificioEntrenadorUnid
 		this.nombre = "Archivos Templarios";
 		
 		// fields EdificioEntrenadorUnidades:
-		this.unidadesEntrenables.add(new ConstructorGolliat());
+		this.unidadesEntrenables.add(new ConstructorInfanteriaMagica());
 	}
 
 	@Override

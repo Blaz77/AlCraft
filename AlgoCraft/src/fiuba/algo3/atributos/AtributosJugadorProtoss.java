@@ -8,7 +8,7 @@ public class AtributosJugadorProtoss implements AtributosJugador {
 	private AtributosPilon pilon = new AtributosPilon();
 	private AtributosAcceso acceso = new AtributosAcceso();
 	private AtributosArchivosTemplarios archivosTempolarios = new AtributosArchivosTemplarios();
-	private AtributosPuertoEstelar puerto = new AtributosPuertoEstelar();
+	private AtributosPuertoEstelarProtoss puerto = new AtributosPuertoEstelarProtoss();
 	
 	private AtributosMarine zealot = new AtributosMarine();
 	private AtributosGolliat dragon = new AtributosGolliat();
@@ -16,27 +16,27 @@ public class AtributosJugadorProtoss implements AtributosJugador {
 	private AtributosNaveDeCiencia altoTemplario = new AtributosNaveDeCiencia();
 	private AtributosNaveDeTransporte transporte = new AtributosNaveDeTransporte();
 	
-	public AtributosNexoMineral getCentroDeMineral() {
+	public AtributosNexoMineral getRecolectorMineral() {
 		return nexoMineral;
 	}
 	
-	public AtributosAsimilador getRefineria() {
+	public AtributosAsimilador getRecolectorGasVespeno() {
 		return asimilador;
 	}
 	
-	public AtributosPilon getDepositoDeSuministros() {
+	public AtributosPilon getIncrementadorPoblacion() {
 		return pilon;
 	}
 	
-	public AtributosAcceso getBarraca() {
+	public AtributosAcceso getEntrenadorUnidadesBasicas() {
 		return acceso;
 	}
 	
-	public AtributosArchivosTemplarios getFabrica() {
+	public AtributosArchivosTemplarios getEntrenadorUnidadesIntermedias() {
 		return archivosTempolarios;
 	}
 	
-	public AtributosPuertoEstelarProtoss getPuertoEstelar() {
+	public AtributosPuertoEstelarProtoss getEntrenadorUnidadesAvanzadas() {
 		return puerto;
 	}
 	
@@ -59,5 +59,6 @@ public class AtributosJugadorProtoss implements AtributosJugador {
 	public AtributosNaveDeTransporte getNaveDeTransporte(){
 		return transporte;
 	}
+
 
 }

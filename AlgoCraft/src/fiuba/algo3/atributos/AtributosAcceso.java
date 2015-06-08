@@ -1,6 +1,7 @@
 package fiuba.algo3.atributos;
 
-import fiuba.algo3.unidades.ConstructorMarine;
+import fiuba.algo3.unidades.ConstructorInfanteriaLivianaTerrestre;
+import fiuba.algo3.unidades.ConstructorInfanteriaPesadaTerrestre;
 
 public class AtributosAcceso extends AtributosEdificioEntrenadorUnidades {
 
@@ -14,8 +15,9 @@ public class AtributosAcceso extends AtributosEdificioEntrenadorUnidades {
 		this.nombre = "Acceso";
 		
 		// fields EdificioEntrenadorUnidades:
-		this.unidadesEntrenables.add(new ConstructorMarine());
-	}
+		this.unidadesEntrenables.add(new ConstructorInfanteriaLivianaTerrestre());
+		this.unidadesEntrenables.add(new ConstructorInfanteriaPesadaTerrestre());
+		}
 
 	@Override
 	public boolean tieneEscudo() {

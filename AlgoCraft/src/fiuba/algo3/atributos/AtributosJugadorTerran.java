@@ -4,6 +4,9 @@ package fiuba.algo3.atributos;
 // Como mucho para eso seria AtributosRaza*nombre_raza*
 // Tiene mas que ver con la raza
 
+// Pero puede haber 2 jugadores de la misma raza con valores
+// de atributos diferentes
+
 public class AtributosJugadorTerran implements AtributosJugador {
 	
 	private AtributosCentroDeMineral cDeMineral = new AtributosCentroDeMineral();

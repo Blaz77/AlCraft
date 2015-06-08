@@ -7,9 +7,10 @@ public class AtributosDepositoDeSuministros extends
 		this.costoMineral = 100;
 		this.costoGasVespeno = 0;
 		
-		this.incrementoDePoblacion = 5;
 		this.vidaMaxima = 500;
 		this.nombre = "Deposito De Suministros";
+
+		this.incrementoDePoblacion = 5;
 	}
 
 }
