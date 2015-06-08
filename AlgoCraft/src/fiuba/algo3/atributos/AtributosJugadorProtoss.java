@@ -10,53 +10,53 @@ public class AtributosJugadorProtoss implements AtributosJugador {
 	private AtributosArchivosTemplarios archivosTempolarios = new AtributosArchivosTemplarios();
 	private AtributosPuertoEstelarProtoss puerto = new AtributosPuertoEstelarProtoss();
 	
-	private AtributosMarine zealot = new AtributosMarine();
-	private AtributosGolliat dragon = new AtributosGolliat();
-	private AtributosEspectro scout = new AtributosEspectro();
-	private AtributosNaveDeCiencia altoTemplario = new AtributosNaveDeCiencia();
-	private AtributosNaveDeTransporte transporte = new AtributosNaveDeTransporte();
+	private AtributosZealot zealot = new AtributosZealot();
+	private AtributosDragon dragon = new AtributosDragon();
+	private AtributosScout scout = new AtributosScout();
+	private AtributosAltoTemplario altoTemplario = new AtributosAltoTemplario();
+	private AtributosNaveDeTransporteProtoss transporte = new AtributosNaveDeTransporteProtoss();
 	
-	public AtributosNexoMineral getRecolectorMineral() {
+	public AtributosEdificioRecolectorMineral getRecolectorMineral() {
 		return nexoMineral;
 	}
 	
-	public AtributosAsimilador getRecolectorGasVespeno() {
+	public AtributosEdificioRecolectorGasVespeno getRecolectorGasVespeno() {
 		return asimilador;
 	}
 	
-	public AtributosPilon getIncrementadorPoblacion() {
+	public AtributosEdificioIncrementadorPoblacion getIncrementadorPoblacion() {
 		return pilon;
 	}
 	
-	public AtributosAcceso getEntrenadorUnidadesBasicas() {
+	public AtributosEdificioEntrenadorUnidades getEntrenadorUnidadesBasicas() {
 		return acceso;
 	}
 	
-	public AtributosArchivosTemplarios getEntrenadorUnidadesIntermedias() {
+	public AtributosEdificioEntrenadorUnidades getEntrenadorUnidadesIntermedias() {
 		return archivosTempolarios;
 	}
 	
-	public AtributosPuertoEstelarProtoss getEntrenadorUnidadesAvanzadas() {
+	public AtributosEdificioEntrenadorUnidades getEntrenadorUnidadesAvanzadas() {
 		return puerto;
 	}
 	
-	public AtributosMarine getMarine() {
+	public AtributosUnidadAtaque getInfanteriaLivianaTerrestre() {
 		return zealot;
 	}
 	
-	public AtributosGolliat getGolliat() {
+	public AtributosUnidadAtaque getInfanteriaPesadaTerrestre() {
 		return dragon;
 	}
 	
-	public AtributosEspectro getEspectro() {
+	public AtributosUnidadAtaque getInfanteriaPesadaArea() {
 		return scout;
 	}
 
-	public AtributosNaveDeCiencia getNaveDeCiencia(){
+	public AtributosUnidadMagica getInfanteriaMagica(){
 		return altoTemplario;
 	}
 	
-	public AtributosNaveDeTransporte getNaveDeTransporte(){
+	public AtributosUnidadTransporte getTransporte(){
 		return transporte;
 	}
 
