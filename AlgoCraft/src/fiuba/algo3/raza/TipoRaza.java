@@ -1,22 +1,26 @@
 package fiuba.algo3.raza;
 
 public enum TipoRaza {
-	TERRAN, PROTOSS // ZERG :3
 
-	//TERRAN(new CreadorRazaTerran()), PROTOSS(new CreadorRazaProtoss()) // ZERG :3
+	TERRAN {
+		public Raza getRaza() {
+			return new RazaTerran();
+		}
+	},
 	
-	//public TipoRaza(CreadorDeRaza c) {
-		//this.creador = c;
-	//}
+	PROTOSS	{	
+		public Raza getRaza() {
+			return new RazaProtoss();
+		}
+	};
 	
-	//private CreadorDeRaza creador;
+	/*
+	ZERG {	
+		public Raza getRaza() {
+			return new RazaZerg();
+		}
+	};
+	*/
 	
-	//public Raza crearRaza() {
-		//creador.crear();
-	//}
-	
+	public abstract Raza getRaza();
 }
-
-//TipoRaza.TERRAN.crearRaza();
-
-//TipoRaza.values()
