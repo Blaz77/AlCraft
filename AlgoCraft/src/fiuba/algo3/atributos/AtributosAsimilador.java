@@ -6,6 +6,7 @@ public class AtributosAsimilador extends AtributosEdificioRecolectorGasVespeno {
 		// fields ObjetoVivo:
 		this.costoMineral = 100;
 		this.costoGasVespeno = 0;
+		this.turnosConstruccion = 6;
 		this.vidaMaxima = 450;
 		//this.escudoMaximo = 450; ?
 		this.nombre = "Asimilador";

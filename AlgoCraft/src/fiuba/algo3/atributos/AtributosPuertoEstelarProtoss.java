@@ -6,8 +6,10 @@ import fiuba.algo3.unidades.ConstructorTransporte;
 public class AtributosPuertoEstelarProtoss extends AtributosEdificioEntrenadorUnidades {
 
 	public AtributosPuertoEstelarProtoss(){
+		// fields ObjetoVivo:
 		this.costoMineral = 150;
 		this.costoGasVespeno = 100;
+		this.turnosConstruccion = 10;
 		this.vidaMaxima = 600; 
 		//this.escudoMaximo = 600;
 		this.nombre = "Puerto Estelar";
