@@ -8,6 +8,7 @@ public class AtributosArchivosTemplarios extends AtributosEdificioEntrenadorUnid
 		// fields ObjetoVivo:
 		this.costoMineral = 150;
 		this.costoGasVespeno = 200;
+		this.turnosConstruccion = 9;
 		this.vidaMaxima = 500; 
 		//this.escudoMaximo = 500; ?
 		this.nombre = "Archivos Templarios";

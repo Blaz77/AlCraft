@@ -12,7 +12,6 @@ import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.terreno.TipoTerreno;
-import fiuba.algo3.unidades.Golliat;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
 
@@ -122,7 +121,7 @@ public class TestFabrica extends TestEdificio {
 		
 		for(int i = 0; i < 6; i++) fabrica.pasarTurno();//Entrenar Golliat
 		
-		assertEquals(jugador.getUnidades().get(0).getClass(), Golliat.class);
+		assertEquals(jugador.getUnidades().get(0).getNombre(), "Golliat");
 
 	}
 
@@ -185,11 +184,11 @@ public class TestFabrica extends TestEdificio {
 		
 		fabrica.getUnidadesEntrenables().get(0).crear();
 		for(int i = 0; i < 6; i++) fabrica.pasarTurno();//Entrenar Golliat
-		assertEquals(jugador.getUnidades().get(0).getClass(), Golliat.class);
+		assertEquals(jugador.getUnidades().get(0).getNombre(), "Golliat");
 		
 		fabrica.getUnidadesEntrenables().get(0).crear();
 		for(int i = 0; i < 6; i++) fabrica.pasarTurno();//Entrenar Golliat
-		assertEquals(jugador.getUnidades().get(1).getClass(), Golliat.class);
+		assertEquals(jugador.getUnidades().get(1).getNombre(), "Golliat");
 	}
 	
 	@Test
@@ -202,8 +201,8 @@ public class TestFabrica extends TestEdificio {
 		fabrica.getUnidadesEntrenables().get(0).crear();
 		fabrica.getUnidadesEntrenables().get(0).crear();
 		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Entrenar 2 Golliats
-		assertEquals(jugador.getUnidades().get(0).getClass(), Golliat.class);
-		assertEquals(jugador.getUnidades().get(1).getClass(), Golliat.class);
+		assertEquals(jugador.getUnidades().get(0).getNombre(), "Golliat");
+		assertEquals(jugador.getUnidades().get(1).getNombre(), "Golliat");
 	}
 
 	@Test
