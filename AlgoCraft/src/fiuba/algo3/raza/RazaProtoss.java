@@ -2,14 +2,14 @@ package fiuba.algo3.raza;
 
 import fiuba.algo3.atributos.AtributosJugador;
 import fiuba.algo3.atributos.AtributosJugador;
-import fiuba.algo3.atributos.AtributosProtoss;
+import fiuba.algo3.atributos.AtributosJugadorProtoss;
 
 class RazaProtoss implements Raza {
 
-	private AtributosProtoss atributos;
+	private AtributosJugadorProtoss atributos;
 	
 	public RazaProtoss(){
-		this.atributos = new AtributosProtoss();
+		this.atributos = new AtributosJugadorProtoss();
 	}
 	
 	public Object construccionesDisponibles() {
@@ -26,7 +26,7 @@ class RazaProtoss implements Raza {
 		return TipoRaza.PROTOSS;
 	}
 
-	public AtributosProtoss getAtributos() {
+	public AtributosJugadorProtoss getAtributos() {
 		return this.atributos;
 	}
 	
