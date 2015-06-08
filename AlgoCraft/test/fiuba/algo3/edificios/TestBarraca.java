@@ -8,7 +8,7 @@ import org.junit.Test;
 import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.SuministroInsuficiente;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
-import fiuba.algo3.factories.EdificiosTerranFactory;
+import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.terreno.TipoTerreno;
 import fiuba.algo3.unidades.Marine;
@@ -19,7 +19,7 @@ public class TestBarraca extends TestEdificio {
 
 	private Mapa mapa;
 	private Jugador jugador;
-	private EdificiosTerranFactory terranFactory; //EdificiosAbstractFactory
+	private EdificiosFactory terranFactory; //EdificiosAbstractFactory
 	private EdificioEntrenadorUnidades barraca;
 	
 	@Override
@@ -47,7 +47,7 @@ public class TestBarraca extends TestEdificio {
 	public void setUp() {
 		mapa = new Mapa(6);
 		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL, mapa);
-		this.terranFactory = new EdificiosTerranFactory();
+		this.terranFactory = new EdificiosFactory();
 		this.barraca = crearEnTierra(jugador, mapa);
 	}
 

@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.excepciones.MineralInsuficiente;
-import fiuba.algo3.factories.EdificiosTerranFactory;
+import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
 import fiuba.algo3.mapa.recurso.TipoOcupante;
@@ -17,7 +17,7 @@ public class TestRefineria extends TestEdificio {
 
 	private Mapa mapa;
 	private Jugador jugador;
-	private EdificiosTerranFactory terranFactory;
+	private EdificiosFactory terranFactory;
 	private Edificio refineria;
 	
 	@Override
@@ -33,7 +33,7 @@ public class TestRefineria extends TestEdificio {
 	public void setUp() throws Exception {
 		mapa = new Mapa(6);
 		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL, mapa);
-		this.terranFactory = new EdificiosTerranFactory();
+		this.terranFactory = new EdificiosFactory();
 		//this.refineria = terranFactory.crearRecolectorGasVespeno(jugador, 20, 40);
 	}
 

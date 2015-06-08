@@ -61,6 +61,10 @@ public abstract class ObjetoVivo extends Ocupante { //ObjetoVivo / ObjetoInterac
 	public void setVida(IVida vida) {
 		this.vida = vida;		
 	}
+	
+	public int getTurnosConstruccion() {
+		return this.atributos.getTurnosConstruccion();
+	}
 
 	public int getVidaMaxima() {
 		return this.atributos.getVidaMaxima();

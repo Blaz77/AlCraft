@@ -8,8 +8,8 @@ public class EstadoConstruyendoEdificio implements Estado {
 	int cantVidaSumadaPorTurno;
 	Edificio construccion;
 	
-	public EstadoConstruyendoEdificio(int turnosParaCompletar, Edificio construccion) {
-		this.cantVidaSumadaPorTurno = (int) Math.ceil(construccion.getVidaMaxima() / (double) turnosParaCompletar);
+	public EstadoConstruyendoEdificio(Edificio construccion) {
+		this.cantVidaSumadaPorTurno = (int) Math.ceil(construccion.getVidaMaxima() / (double) construccion.getTurnosConstruccion());
 		this.construccion = construccion;
 	}
 

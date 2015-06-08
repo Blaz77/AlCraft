@@ -9,7 +9,7 @@ import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.excepciones.GasVespenoInsuficiente;
 import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
-import fiuba.algo3.factories.EdificiosTerranFactory;
+import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.terreno.TipoTerreno;
 import fiuba.algo3.unidades.Espectro;
@@ -22,7 +22,7 @@ public class TestPuertoEstelar extends TestEdificio {
 
 	private Mapa mapa;
 	private Jugador jugador;
-	private EdificiosTerranFactory terranFactory;
+	private EdificiosFactory terranFactory;
 	private EdificioEntrenadorUnidades puerto;
 	
 	@Override
@@ -38,7 +38,7 @@ public class TestPuertoEstelar extends TestEdificio {
 	public void setUp() throws Exception {
 		mapa = new Mapa(6);
 		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL, mapa);
-		this.terranFactory = new EdificiosTerranFactory();
+		this.terranFactory = new EdificiosFactory();
 		
 		// Aseguro recursos
 		jugador.agregarGasVespeno(50);
