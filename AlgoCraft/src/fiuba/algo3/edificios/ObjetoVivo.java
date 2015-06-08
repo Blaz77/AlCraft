@@ -100,7 +100,7 @@ public abstract class ObjetoVivo extends Ocupante { //ObjetoVivo / ObjetoInterac
 
 	public void agregarEstado(Estado estado){
 		this.estados.addLast(estado);
-		estado.activar();
+		estado.activar(this);
 	}
 	
 	public void pasarTurno(){

@@ -1,5 +1,6 @@
 package fiuba.algo3.unidades;
 
+import fiuba.algo3.atributos.AtributosUnidad;
 import fiuba.algo3.edificios.EdificioEntrenadorUnidades;
 import fiuba.algo3.excepciones.GasVespenoInsuficiente;
 import fiuba.algo3.excepciones.MineralInsuficiente;
@@ -16,19 +17,24 @@ import fiuba.algo3.mapa.Posicion;
 // TODO Permitirle al constructor crear procesos de entrenador multiples
 public abstract class Constructor {
 	
-	protected int costoMinerales;
-	protected int costoGas;
-	protected int costoPoblacion;
-	protected int turnosNecesarios;
-	//
-	private int turnosRestantes; //OJO ACA!
-	// -> SI SE PERMITE EN SIMULTANEO ES NECESARIO HACER COPIAS
-	// -> ahora funciona porque es de a uno.
+	protected AtributosUnidad atributos;
 	protected EdificioEntrenadorUnidades entrenador;
 
-	abstract public void liberarUnidad(Jugador propietario, Posicion posicion);//aca va un return new Marine()
+	//aca va un return new Marine()
+	abstract public void liberarUnidad(Jugador propietario, Posicion posicion);
 	
-	abstract public Constructor copia();
+	//aca debe tomar del jugador el atributo correspondiente para lo que 
+	//se va a entrenar
+	abstract public void setAtributos();
+	
+	public void setEdificioEntrenador(EdificioEntrenadorUnidades entrenador){
+		this.entrenador = entrenador;
+		this.setAtributos();
+	}
+
+	public int getTurnosConstruccion() {
+		return this.atributos.getTurnosConstruccion();
+	}
 	
 	public void crear(){
 		
@@ -36,36 +42,24 @@ public abstract class Constructor {
 		// Si no hay requisitos, se pasa una excepcion.
 		verificarRequisitos(propietario);
 		
-		propietario.agregarMinerales(-this.costoMinerales);
-		propietario.agregarGasVespeno(-this.costoGas);
-		propietario.aumentarPoblacion(this.costoPoblacion);
+		propietario.agregarMinerales(-this.atributos.getCostoMineral());
+		propietario.agregarGasVespeno(-this.atributos.getCostoGasVespeno());
+		propietario.aumentarPoblacion(this.atributos.getCostoPoblacion());
 		
-		this.turnosRestantes = this.turnosNecesarios;
 		entrenador.entrenar(this);
 		
-	}
-	
-	public void pasarTurno(){
-		this.turnosRestantes--;
-		if (this.turnosRestantes == 0) {
-			this.turnosRestantes = this.turnosNecesarios;
-			throw new UnidadFinalizadaException();
-		}
 	}
 	
 	/* Verifica si hay recursos y poblacion necesaria para crear la unidad.
 	 * Si no se cumple, lanza una excepcion
 	 */
 	public void verificarRequisitos(Jugador jugador) {
-		if (jugador.getCapacidadPoblacion() - jugador.getPoblacion() < this.costoPoblacion) 
+		if (jugador.getCapacidadPoblacion() - jugador.getPoblacion() < this.atributos.getCostoPoblacion()) 
 			throw new SuministroInsuficiente();
-		if (jugador.getMinerales() < this.costoMinerales) 
+		if (jugador.getMinerales() < this.atributos.getCostoMineral()) 
 			throw new MineralInsuficiente();
-		if (jugador.getGasVespeno() < this.costoGas) 
+		if (jugador.getGasVespeno() < this.atributos.getCostoGasVespeno()) 
 			throw new GasVespenoInsuficiente();
 	}
-	
-	public void setEdificioEntrenador(EdificioEntrenadorUnidades entrenador){
-		this.entrenador = entrenador;		
-	}
+
 }

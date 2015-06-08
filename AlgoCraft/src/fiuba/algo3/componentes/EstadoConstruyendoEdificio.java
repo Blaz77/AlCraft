@@ -1,6 +1,7 @@
 package fiuba.algo3.componentes;
 
 import fiuba.algo3.edificios.Edificio;
+import fiuba.algo3.edificios.ObjetoVivo;
 
 public class EstadoConstruyendoEdificio implements Estado {
 	
@@ -12,9 +13,9 @@ public class EstadoConstruyendoEdificio implements Estado {
 		this.construccion = construccion;
 	}
 
-	public void activar() {
+	public void activar(ObjetoVivo portador) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	public void pasarTurno() throws Exception {

@@ -2,10 +2,11 @@ package fiuba.algo3.edificios;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 import java.util.Queue;
 
 import fiuba.algo3.atributos.AtributosEdificioEntrenadorUnidades;
-import fiuba.algo3.excepciones.UnidadFinalizadaException;
+import fiuba.algo3.componentes.EstadoEntrenando;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.unidades.Constructor;
@@ -14,32 +15,16 @@ public abstract class EdificioEntrenadorUnidades extends Edificio implements IEn
 	
 	public EdificioEntrenadorUnidades(Jugador propietario, Posicion posicion,
 			AtributosEdificioEntrenadorUnidades atributos) {
-		super(propietario, posicion, atributos);		
+		super(propietario, posicion, atributos);
+		maxEntrenamientosSimultaneos = 1;
+		entrenamientosActuales = 0;
 	}
 	
-	private Constructor actual = null; //Constructor NULL
 	private Queue<Constructor> esperando = new LinkedList<Constructor>();
+	private int maxEntrenamientosSimultaneos;//quizas despues esta en Atributos!
+	private int entrenamientosActuales;
 	
 	//int maxEntrenamientosSimultaneos;
-
-	
-	//TEMPORAL -> DESPUES PASAR A UN ESTADO! -> ESTADOENTRENANDO
-	public void pasarTurno() {
-		super.pasarTurno();
-		
-		if (actual == null) actual = esperando.poll(); //Despues pasar a remove con un try!
-		if (actual != null){
-			try { 
-				actual.pasarTurno();
-			} catch (UnidadFinalizadaException e) {
-				actual.liberarUnidad(this.getPropietario(),
-									 this.getPosicion());
-				actual = null;
-			}
-		}
-		//iterar la cola de los que se entrenan y llamarles .pasarTurno();
-		
-	}
 	
 	//				u otro nombre
 	public ArrayList<Constructor> getUnidadesEntrenables(){
@@ -51,6 +36,23 @@ public abstract class EdificioEntrenadorUnidades extends Edificio implements IEn
 	}
 	
 	public void entrenar(Constructor constructor){
-		esperando.add(constructor);
+		if (entrenamientosActuales < maxEntrenamientosSimultaneos){
+			this.agregarEstado(new EstadoEntrenando(constructor));
+			entrenamientosActuales++;
+		}
+		else{
+			esperando.add(constructor);
+		}
+		
+	}
+
+	public void proximoEntrenamiento() {
+		try {
+			Constructor constructor = esperando.remove();
+			this.agregarEstado(new EstadoEntrenando(constructor));
+		} catch (NoSuchElementException e) {
+			entrenamientosActuales--;
+		}
+		
 	}
 }
