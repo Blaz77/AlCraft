@@ -41,7 +41,7 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 			throw new TerrenoInadecuado();
 		}
 		EdificioRecolectorGasVespeno edificio = new Refineria(jugador, posicion);
-		verificarCostosConstruccion(jugador, jugador.getAtributos().getRefineria());
+		verificarCostosConstruccion(jugador, jugador.getAtributos().getRecolectorGasVespeno());
 		edificio.agregarEstado(new EstadoConstruyendoEdificio(6, edificio));
 		return edificio;
 	}
@@ -54,7 +54,7 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 			throw new TerrenoInadecuado();
 		}
 		EdificioRecolectorMineral edificio = new CentroDeMineral(jugador, posicion);
-		verificarCostosConstruccion(jugador, jugador.getAtributos().getCentroDeMineral());
+		verificarCostosConstruccion(jugador, jugador.getAtributos().getRecolectorMineral());
 		edificio.agregarEstado(new EstadoConstruyendoEdificio(4, edificio));
 		return edificio;
 	}
@@ -64,7 +64,7 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 			throw new TerrenoInadecuado();
 		}
 		EdificioIncrementadorPoblacion edificio = new DepositoDeSuministros(jugador, posicion);
-		verificarCostosConstruccion(jugador, jugador.getAtributos().getDepositoDeSuministros());
+		verificarCostosConstruccion(jugador, jugador.getAtributos().getIncrementadorPoblacion());
 		edificio.agregarEstado(new EstadoConstruyendoEdificio(6, edificio));
 		return edificio;
 	}
@@ -74,7 +74,7 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 			throw new TerrenoInadecuado();
 		}
 		EdificioEntrenadorUnidades edificio = new Barraca(jugador, posicion);
-		verificarCostosConstruccion(jugador, jugador.getAtributos().getBarraca());
+		verificarCostosConstruccion(jugador, jugador.getAtributos().getEntrenadorUnidadesBasicas());
 		edificio.agregarEstado(new EstadoConstruyendoEdificio(12, edificio));
 		return edificio;
 	}
@@ -84,7 +84,7 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 			throw new TerrenoInadecuado();
 		}
 		EdificioEntrenadorUnidades edificio = new Fabrica(jugador, posicion);
-		verificarCostosConstruccion(jugador, jugador.getAtributos().getFabrica());
+		verificarCostosConstruccion(jugador, jugador.getAtributos().getEntrenadorUnidadesIntermedias());
 		edificio.agregarEstado(new EstadoConstruyendoEdificio(12, edificio));
 		return edificio;
 	}
@@ -94,7 +94,7 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 			throw new TerrenoInadecuado();
 		}
 		EdificioEntrenadorUnidades edificio = new PuertoEstelar(jugador, posicion);
-		verificarCostosConstruccion(jugador, jugador.getAtributos().getPuertoEstelar());
+		verificarCostosConstruccion(jugador, jugador.getAtributos().getEntrenadorUnidadesAvanzadas());
 		edificio.agregarEstado(new EstadoConstruyendoEdificio(10, edificio));
 		return edificio;
 	}

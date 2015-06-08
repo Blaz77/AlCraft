@@ -2,7 +2,7 @@ package fiuba.algo3.juego;
 
 import java.util.ArrayList;
 
-import fiuba.algo3.atributos.Atributos;
+import fiuba.algo3.atributos.AtributosJugador;
 import fiuba.algo3.atributos.AtributosJugador;
 import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.mapa.Mapa;

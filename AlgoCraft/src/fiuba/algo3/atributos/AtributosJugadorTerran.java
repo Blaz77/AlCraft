@@ -1,5 +1,9 @@
 package fiuba.algo3.atributos;
 
+// No tiene sentido que se llame AtributosJugador
+// Como mucho para eso seria AtributosRaza*nombre_raza*
+// Tiene mas que ver con la raza
+
 public class AtributosJugadorTerran implements AtributosJugador {
 	
 	private AtributosCentroDeMineral cDeMineral = new AtributosCentroDeMineral();
@@ -15,47 +19,47 @@ public class AtributosJugadorTerran implements AtributosJugador {
 	private AtributosNaveDeCiencia ciencia = new AtributosNaveDeCiencia();
 	private AtributosNaveDeTransporte transp = new AtributosNaveDeTransporte();
 	
-	public AtributosCentroDeMineral getCentroDeMineral(){
+	public AtributosEdificioRecolectorMineral getRecolectorMineral() {
 		return cDeMineral;
 	}
 	
-	public AtributosRefineria getRefineria(){
+	public AtributosEdificioRecolectorGasVespeno getRecolectorGasVespeno() {
 		return refineria;
-	}
-	
-	public AtributosDepositoDeSuministros getDepositoDeSuministros(){
+	}	
+
+	public AtributosEdificioIncrementadorPoblacion getIncrementadorPoblacion() {
 		return deposito;
 	}
-	
-	public AtributosBarraca getBarraca(){
+
+	public AtributosEdificioEntrenadorUnidades getEntrenadorUnidadesBasicas() {
 		return barraca;
 	}
-	
-	public AtributosFabrica getFabrica(){
+
+	public AtributosEdificioEntrenadorUnidades getEntrenadorUnidadesIntermedias() {
 		return fabrica;
 	}
-	
-	public AtributosPuertoEstelar getPuertoEstelar(){
+
+	public AtributosEdificioEntrenadorUnidades getEntrenadorUnidadesAvanzadas() {
 		return puerto;
 	}
-	
-	public AtributosMarine getMarine(){
+
+	public AtributosUnidadAtaque getInfanteriaLivianaTerrestre() {
 		return marine;
 	}
-	
-	public AtributosGolliat getGolliat(){
+
+	public AtributosUnidadAtaque getInfanteriaPesadaTerrestre() {
 		return golliat;
 	}
-	
-	public AtributosEspectro getEspectro(){
+
+	public AtributosUnidadAtaque getInfanteriaPesadaArea() {
 		return espectro;
 	}
 
-	public AtributosNaveDeCiencia getNaveDeCiencia(){
+	public AtributosUnidadMagica getInfanteriaMagica() {
 		return ciencia;
 	}
-	
-	public AtributosNaveDeTransporte getNaveDeTransporte(){
+
+	public AtributosUnidadTransporte getTransporte() {
 		return transp;
 	}
 }

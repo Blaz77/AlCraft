@@ -9,8 +9,10 @@ public class Refineria extends EdificioRecolectorGasVespeno {
 	
 	public Refineria(Jugador propietario, Posicion posicion) {
 		super(propietario, posicion, 
-				((AtributosJugador)propietario.getAtributos()).getRefineria());
-		this.vida = new Vida(0, ((AtributosJugador)propietario.getAtributos()).getRefineria());
+				((AtributosJugador)propietario.getAtributos())
+				.getRecolectorGasVespeno());
+		this.vida = new Vida(0, ((AtributosJugador)propietario.getAtributos())
+				.getRecolectorGasVespeno());
 		this.nombre = "Refineria".intern();
 	}
 

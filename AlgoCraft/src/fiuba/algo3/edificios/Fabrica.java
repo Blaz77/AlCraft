@@ -9,8 +9,10 @@ public class Fabrica extends EdificioEntrenadorUnidades {
 
 	public Fabrica(Jugador propietario, Posicion posicion) {
 		super(propietario, posicion, 
-				((AtributosJugador)propietario.getAtributos()).getFabrica());
-		this.vida = new Vida(0, ((AtributosJugador)propietario.getAtributos()).getFabrica());
+				((AtributosJugador)propietario.getAtributos())
+				.getEntrenadorUnidadesIntermedias());
+		this.vida = new Vida(0, ((AtributosJugador)propietario.getAtributos())
+				.getEntrenadorUnidadesIntermedias());
 		this.nombre = "Fabrica".intern();
 	}
 	

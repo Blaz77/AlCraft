@@ -9,8 +9,10 @@ public class DepositoDeSuministros extends EdificioIncrementadorPoblacion {
 
 	public DepositoDeSuministros(Jugador propietario, Posicion posicion) {
 		super(propietario, posicion, 
-				((AtributosJugador)propietario.getAtributos()).getDepositoDeSuministros());
-		this.vida = new Vida(0, ((AtributosJugador)propietario.getAtributos()).getDepositoDeSuministros());
+				((AtributosJugador)propietario.getAtributos())
+				.getIncrementadorPoblacion());
+		this.vida = new Vida(0, ((AtributosJugador)propietario.getAtributos())
+				.getIncrementadorPoblacion());
 		this.nombre = "Deposito De Suministros".intern();
 	}
 	

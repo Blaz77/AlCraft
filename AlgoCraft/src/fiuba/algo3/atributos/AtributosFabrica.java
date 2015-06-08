@@ -1,6 +1,6 @@
 package fiuba.algo3.atributos;
 
-import fiuba.algo3.unidades.ConstructorGolliat;
+import fiuba.algo3.unidades.ConstructorInfanteriaPesadaTerrestre;
 
 public class AtributosFabrica extends AtributosEdificioEntrenadorUnidades {
 
@@ -9,7 +9,7 @@ public class AtributosFabrica extends AtributosEdificioEntrenadorUnidades {
 		this.costoGasVespeno = 100;
 		this.vidaMaxima = 1250; 
 		this.nombre = "Fabrica";
-		this.unidadesEntrenables.add(new ConstructorGolliat());
+		this.unidadesEntrenables.add(new ConstructorInfanteriaPesadaTerrestre());
 	}
 
 }

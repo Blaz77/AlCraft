@@ -1,6 +1,6 @@
 package fiuba.algo3.raza;
 
-import fiuba.algo3.atributos.Atributos;
+import fiuba.algo3.atributos.AtributosJugador;
 import fiuba.algo3.atributos.AtributosJugador;
 import fiuba.algo3.atributos.AtributosProtoss;
 

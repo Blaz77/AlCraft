@@ -1,4 +1,6 @@
 package fiuba.algo3.unidades;
+//TODO: Probablemente borrar esto.
+
 
 // Trate de encontrar un patron entre las unidades
 // con lo cual se puede hacer esta AbstractFactory

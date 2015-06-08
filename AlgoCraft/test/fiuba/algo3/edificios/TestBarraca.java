@@ -117,7 +117,7 @@ public class TestBarraca extends TestEdificio {
 		
 		for(int i = 0; i < 3; i++) barraca.pasarTurno();//Entrenar Marine
 		
-		assertEquals(jugador.getUnidades().get(0).getClass(), Marine.class);
+		assertEquals(jugador.getUnidades().get(0).getNombre(), "Marine");
 
 	}
 	
@@ -157,11 +157,11 @@ public class TestBarraca extends TestEdificio {
 		
 		barraca.getUnidadesEntrenables().get(0).crear();
 		for(int i = 0; i < 3; i++) barraca.pasarTurno();//Entrenar Marine
-		assertEquals(jugador.getUnidades().get(0).getClass(), Marine.class);
+		assertEquals(jugador.getUnidades().get(0).getNombre(), "Marine");
 		
 		barraca.getUnidadesEntrenables().get(0).crear();
 		for(int i = 0; i < 3; i++) barraca.pasarTurno();//Entrenar Marine
-		assertEquals(jugador.getUnidades().get(1).getClass(), Marine.class);
+		assertEquals(jugador.getUnidades().get(1).getNombre(), "Marine");
 	}
 	
 	@Test
@@ -171,8 +171,8 @@ public class TestBarraca extends TestEdificio {
 		barraca.getUnidadesEntrenables().get(0).crear();
 		barraca.getUnidadesEntrenables().get(0).crear();
 		for(int i = 0; i < 6; i++) barraca.pasarTurno();//Entrenar 2 Marines
-		assertEquals(jugador.getUnidades().get(0).getClass(), Marine.class);
-		assertEquals(jugador.getUnidades().get(1).getClass(), Marine.class);
+		assertEquals(jugador.getUnidades().get(0).getNombre(), "Marine");
+		assertEquals(jugador.getUnidades().get(1).getNombre(), "Marine");
 	}
 
 	@Test

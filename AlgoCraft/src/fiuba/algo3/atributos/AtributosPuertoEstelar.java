@@ -1,8 +1,8 @@
 package fiuba.algo3.atributos;
 
-import fiuba.algo3.unidades.ConstructorEspectro;
-import fiuba.algo3.unidades.ConstructorNaveDeCiencia;
-import fiuba.algo3.unidades.ConstructorNaveDeTransporte;
+import fiuba.algo3.unidades.ConstructorInfanteriaPesadaAerea;
+import fiuba.algo3.unidades.ConstructorInfanteriaMagica;
+import fiuba.algo3.unidades.ConstructorTransporte;
 
 public class AtributosPuertoEstelar extends AtributosEdificioEntrenadorUnidades {
 
@@ -12,9 +12,9 @@ public class AtributosPuertoEstelar extends AtributosEdificioEntrenadorUnidades 
 		
 		this.vidaMaxima = 1300; 
 		this.nombre = "Puerto Estelar";
-		this.unidadesEntrenables.add(new ConstructorEspectro());
-		this.unidadesEntrenables.add(new ConstructorNaveDeCiencia());
-		this.unidadesEntrenables.add(new ConstructorNaveDeTransporte());
+		this.unidadesEntrenables.add(new ConstructorInfanteriaPesadaAerea());
+		this.unidadesEntrenables.add(new ConstructorInfanteriaMagica());
+		this.unidadesEntrenables.add(new ConstructorTransporte());
 	}
 	
 }

@@ -1,6 +1,6 @@
 package fiuba.algo3.atributos;
 
-import fiuba.algo3.unidades.ConstructorMarine;
+import fiuba.algo3.unidades.ConstructorInfanteriaLivianaTerrestre;
 
 public class AtributosBarraca extends AtributosEdificioEntrenadorUnidades {
 
@@ -12,7 +12,7 @@ public class AtributosBarraca extends AtributosEdificioEntrenadorUnidades {
 		this.vidaMaxima = 1000;
 		this.nombre = "Barraca";
 		//fields EdificioEntrenadorUnidades:
-		this.unidadesEntrenables.add(new ConstructorMarine());
+		this.unidadesEntrenables.add(new ConstructorInfanteriaLivianaTerrestre());
 	}
 
 }

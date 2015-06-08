@@ -9,8 +9,10 @@ public class PuertoEstelar extends EdificioEntrenadorUnidades {
 
 	public PuertoEstelar(Jugador propietario, Posicion posicion) {
 		super(propietario, posicion, 
-				((AtributosJugador)propietario.getAtributos()).getPuertoEstelar());
-		this.vida = new Vida(0, ((AtributosJugador)propietario.getAtributos()).getPuertoEstelar());
+				((AtributosJugador)propietario.getAtributos())
+				.getEntrenadorUnidadesAvanzadas());
+		this.vida = new Vida(0, ((AtributosJugador)propietario.getAtributos())
+				.getEntrenadorUnidadesAvanzadas());
 		this.nombre = "Puerto Estelar".intern();
 	}
 	

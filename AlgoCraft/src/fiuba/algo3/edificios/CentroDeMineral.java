@@ -12,8 +12,10 @@ public class CentroDeMineral extends EdificioRecolectorMineral {
 	
 	public CentroDeMineral(Jugador propietario, Posicion posicion) {
 		super(propietario, posicion, 
-				((AtributosJugador)propietario.getAtributos()).getCentroDeMineral());
-		this.vida = new Vida(0, ((AtributosJugador)propietario.getAtributos()).getCentroDeMineral());
+				((AtributosJugador)propietario.getAtributos())
+				.getRecolectorMineral());
+		this.vida = new Vida(0, ((AtributosJugador)propietario.getAtributos())
+				.getRecolectorMineral());
 		this.nombre = "Centro de Mineral".intern();
 	}
 	
