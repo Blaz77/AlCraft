@@ -1,6 +1,6 @@
 package fiuba.algo3.atributos;
 
-public class AtributosTerran implements Atributos {
+public class AtributosJugadorTerran implements AtributosJugador {
 	
 	private AtributosCentroDeMineral cDeMineral = new AtributosCentroDeMineral();
 	private AtributosRefineria refineria = new AtributosRefineria();

@@ -5,6 +5,8 @@ import fiuba.algo3.unidades.ConstructorGolliat;
 public class AtributosFabrica extends AtributosEdificioEntrenadorUnidades {
 
 	public AtributosFabrica(){
+		this.costoMineral = 200;
+		this.costoGasVespeno = 100;
 		this.vidaMaxima = 1250; 
 		this.nombre = "Fabrica";
 		this.unidadesEntrenables.add(new ConstructorGolliat());

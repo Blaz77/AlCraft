@@ -7,6 +7,9 @@ import fiuba.algo3.unidades.ConstructorNaveDeTransporte;
 public class AtributosPuertoEstelar extends AtributosEdificioEntrenadorUnidades {
 
 	public AtributosPuertoEstelar(){
+		this.costoMineral = 150;
+		this.costoGasVespeno = 100;
+		
 		this.vidaMaxima = 1300; 
 		this.nombre = "Puerto Estelar";
 		this.unidadesEntrenables.add(new ConstructorEspectro());

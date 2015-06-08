@@ -2,6 +2,7 @@
 
 package fiuba.algo3.factories;
 
+import fiuba.algo3.atributos.AtributosEdificio;
 import fiuba.algo3.componentes.EstadoConstruyendoEdificio;
 import fiuba.algo3.edificios.Barraca;
 import fiuba.algo3.edificios.CentroDeMineral;
@@ -25,10 +26,10 @@ import fiuba.algo3.terreno.TipoTerreno;
 
 public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 
-	private void verificarCostosConstruccion(Jugador jugador, Edificio edificio) {
-		if (jugador.getMinerales() < edificio.getCostoMineral()) 
+	private void verificarCostosConstruccion(Jugador jugador, AtributosEdificio atributos) {
+		if (jugador.getMinerales() < atributos.getCostoMineral()) 
 			throw new MineralInsuficiente();
-		if (jugador.getGasVespeno() < edificio.getCostoGas()) 
+		if (jugador.getGasVespeno() < atributos.getCostoGasVespeno()) 
 			throw new GasVespenoInsuficiente();
 	}
 	
@@ -40,7 +41,7 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 			throw new TerrenoInadecuado();
 		}
 		EdificioRecolectorGasVespeno edificio = new Refineria(jugador, posicion);
-		verificarCostosConstruccion(jugador, edificio);
+		verificarCostosConstruccion(jugador, jugador.getAtributos().getRefineria());
 		edificio.agregarEstado(new EstadoConstruyendoEdificio(6, edificio));
 		return edificio;
 	}
@@ -53,7 +54,7 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 			throw new TerrenoInadecuado();
 		}
 		EdificioRecolectorMineral edificio = new CentroDeMineral(jugador, posicion);
-		verificarCostosConstruccion(jugador, edificio);
+		verificarCostosConstruccion(jugador, jugador.getAtributos().getCentroDeMineral());
 		edificio.agregarEstado(new EstadoConstruyendoEdificio(4, edificio));
 		return edificio;
 	}
@@ -63,7 +64,7 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 			throw new TerrenoInadecuado();
 		}
 		EdificioIncrementadorPoblacion edificio = new DepositoDeSuministros(jugador, posicion);
-		verificarCostosConstruccion(jugador, edificio);
+		verificarCostosConstruccion(jugador, jugador.getAtributos().getDepositoDeSuministros());
 		edificio.agregarEstado(new EstadoConstruyendoEdificio(6, edificio));
 		return edificio;
 	}
@@ -73,7 +74,7 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 			throw new TerrenoInadecuado();
 		}
 		EdificioEntrenadorUnidades edificio = new Barraca(jugador, posicion);
-		verificarCostosConstruccion(jugador, edificio);
+		verificarCostosConstruccion(jugador, jugador.getAtributos().getBarraca());
 		edificio.agregarEstado(new EstadoConstruyendoEdificio(12, edificio));
 		return edificio;
 	}
@@ -83,7 +84,7 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 			throw new TerrenoInadecuado();
 		}
 		EdificioEntrenadorUnidades edificio = new Fabrica(jugador, posicion);
-		verificarCostosConstruccion(jugador, edificio);
+		verificarCostosConstruccion(jugador, jugador.getAtributos().getFabrica());
 		edificio.agregarEstado(new EstadoConstruyendoEdificio(12, edificio));
 		return edificio;
 	}
@@ -93,7 +94,7 @@ public class EdificiosTerranFactory implements EdificiosAbstractFactory{
 			throw new TerrenoInadecuado();
 		}
 		EdificioEntrenadorUnidades edificio = new PuertoEstelar(jugador, posicion);
-		verificarCostosConstruccion(jugador, edificio);
+		verificarCostosConstruccion(jugador, jugador.getAtributos().getPuertoEstelar());
 		edificio.agregarEstado(new EstadoConstruyendoEdificio(10, edificio));
 		return edificio;
 	}

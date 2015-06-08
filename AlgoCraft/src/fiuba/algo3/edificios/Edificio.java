@@ -18,8 +18,6 @@ public abstract class Edificio extends ObjetoVivo {
 	//private Movimiento mov;
 	//private Almacenador alm;
 	
-	public abstract int getCostoMineral();
-	public abstract int getCostoGas();
 	//public abstract int getVidaMax();
 	//public abstract int getTurnosNecesarios();
 

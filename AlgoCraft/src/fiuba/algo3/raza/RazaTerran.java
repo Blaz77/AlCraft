@@ -1,14 +1,14 @@
 package fiuba.algo3.raza;
 
 import fiuba.algo3.atributos.Atributos;
-import fiuba.algo3.atributos.AtributosTerran;
+import fiuba.algo3.atributos.AtributosJugadorTerran;
 
 class RazaTerran implements Raza {
 	
-	private Atributos atributos;
+	private AtributosJugadorTerran atributos;
 	
 	public RazaTerran(){
-		this.atributos = new AtributosTerran();
+		this.atributos = new AtributosJugadorTerran();
 	}
 
 	public Object construccionesDisponibles() {
@@ -25,7 +25,7 @@ class RazaTerran implements Raza {
 		return TipoRaza.TERRAN;
 	}
 
-	public Atributos getAtributos() {
+	public AtributosJugadorTerran getAtributos() {
 		return this.atributos;
 	}
 	
