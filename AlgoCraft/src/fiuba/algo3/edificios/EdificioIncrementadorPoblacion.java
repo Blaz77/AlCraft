@@ -11,9 +11,8 @@ public class EdificioIncrementadorPoblacion extends Edificio {
 		super(propietario, posicion, atributos);
 	}
 	
-	public void construccionFinalizada() {
-		//PASAR A UN ESTADO! -> TODO
-		propietario.aumentarCapacidadPoblacion(( (AtributosEdificioIncrementadorPoblacion) atributos).getIncrementoDePoblacion());
+	public int getIncrementoDePoblacion(){
+		return ((AtributosEdificioIncrementadorPoblacion)this.atributos).getIncrementoDePoblacion();
 	}
 
 }

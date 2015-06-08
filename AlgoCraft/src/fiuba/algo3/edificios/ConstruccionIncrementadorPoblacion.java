@@ -1,8 +1,6 @@
 package fiuba.algo3.edificios;
 
-import fiuba.algo3.atributos.AtributosEdificio;
 import fiuba.algo3.atributos.AtributosEdificioIncrementadorPoblacion;
-import fiuba.algo3.atributos.AtributosEdificioRecolector;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
 
