@@ -19,10 +19,10 @@ public class TestMarine {
 	private Mapa mapa;
 	private Jugador jugador;
 	private Jugador jugadorEnemigo;
-	private Marine marine;
-	private Marine otroMarine;
-	private Marine marineEnemigo;
-	private Espectro espectroEnemigo;
+	private UnidadAtaque marine;
+	private UnidadAtaque otroMarine;
+	private UnidadAtaque marineEnemigo;
+	private UnidadAtaque espectroEnemigo;
 	private Barraca barraca;
 	private Barraca barracaEnemiga;
 
@@ -30,12 +30,12 @@ public class TestMarine {
 	public void setUp() throws Exception {
 		mapa = new Mapa(6);
 		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL, mapa);
-		this.marine = new Marine(this.jugador, new Posicion(2,4));
-		this.otroMarine = new Marine(this.jugador, new Posicion(1,3));
+		this.marine = new UnidadAtaque(this.jugador, new Posicion(2,4), jugador.getAtributos().getInfanteriaLivianaTerrestre());
+		this.otroMarine = new UnidadAtaque(this.jugador, new Posicion(1,3), jugador.getAtributos().getInfanteriaLivianaTerrestre());
 		this.barraca = new Barraca(this.jugador, new Posicion(2,6));
 		this.jugadorEnemigo = new Jugador(TipoRaza.TERRAN, Color.ROJO, mapa);
-		this.marineEnemigo = new Marine(jugadorEnemigo, new Posicion(5,4));
-		this.espectroEnemigo = new Espectro(jugadorEnemigo, new Posicion(1,2));
+		this.marineEnemigo = new UnidadAtaque(jugadorEnemigo, new Posicion(5,4), jugadorEnemigo.getAtributos().getInfanteriaLivianaTerrestre());
+		this.espectroEnemigo = new UnidadAtaque(jugadorEnemigo, new Posicion(1,2), jugadorEnemigo.getAtributos().getInfanteriaPesadaArea());
 		this.barracaEnemiga = new Barraca(jugadorEnemigo, new Posicion(3,3));		
 	}
 	
@@ -85,13 +85,13 @@ public class TestMarine {
 	
 	@Test
 	public void testPuedeAtacarFueraDeRangoEsFalse() {
-		Marine enemigoFueraDeRango = new Marine(jugadorEnemigo, new Posicion(20,40));
+		UnidadAtaque enemigoFueraDeRango = new UnidadAtaque(jugadorEnemigo, new Posicion(20,40), jugador.getAtributos().getInfanteriaLivianaTerrestre());
 		assertFalse(this.marine.puedeAtacarA(enemigoFueraDeRango));
 	}
 	
 	@Test(expected = EnemigoFueraDeRango.class)
 	public void testAtacarFueraDeRangoLanzaExcepcion() {
-		Marine enemigoFueraDeRango = new Marine(jugadorEnemigo, new Posicion(20,40));
+		UnidadAtaque enemigoFueraDeRango = new UnidadAtaque(jugadorEnemigo, new Posicion(20,40), jugador.getAtributos().getInfanteriaLivianaTerrestre());
 		this.marine.atacarA(enemigoFueraDeRango);
 	}
 	
