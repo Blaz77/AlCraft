@@ -76,17 +76,14 @@ public class Juego implements Iterable<Jugador>, Iterator<Jugador>{
 	/**********************************************/
 	
 	public Iterator<Jugador> iterator() {
-		// TODO Auto-generated method stub
 		return this;
 	}
 
 	public boolean hasNext() {
-		// TODO Auto-generated method stub
 		return jugadores.size() != 0;
 	}
 
 	public Jugador next() {
-		// TODO Auto-generated method stub
 		nextJugadorActual();
 		return getJugadorActual();
 	}
