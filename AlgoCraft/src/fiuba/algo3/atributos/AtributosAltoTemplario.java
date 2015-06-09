@@ -1,5 +1,9 @@
 package fiuba.algo3.atributos;
 
+import fiuba.algo3.componentes.EstadoRegenerandoEscudo;
+import fiuba.algo3.componentes.IVida;
+import fiuba.algo3.componentes.VidaConEscudo;
+
 public class AtributosAltoTemplario extends AtributosUnidadMagica {
 	
 	public AtributosAltoTemplario(){
@@ -7,6 +11,16 @@ public class AtributosAltoTemplario extends AtributosUnidadMagica {
 		this.costoGasVespeno = 150;
 		this.costoPoblacion = 2;
 		this.turnosConstruccion = 7;
+		
+		estadosIniciales.add(new EstadoRegenerandoEscudo());
 	}
-
+	
+	@Override
+	public IVida getVida() {
+		return new VidaConEscudo(this);
+	}
+	@Override
+	public boolean tieneEscudo() {
+		return true;
+	}
 }

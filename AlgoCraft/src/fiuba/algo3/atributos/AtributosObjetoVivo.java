@@ -3,6 +3,8 @@ package fiuba.algo3.atributos;
 import java.util.LinkedList;
 
 import fiuba.algo3.componentes.Estado;
+import fiuba.algo3.componentes.IVida;
+import fiuba.algo3.componentes.Vida;
 
 public abstract class AtributosObjetoVivo { //AtributosObjetoDeJuego?
 	
@@ -13,7 +15,7 @@ public abstract class AtributosObjetoVivo { //AtributosObjetoDeJuego?
 	int turnosConstruccion;
 	
 	int vidaMaxima;
-	//int escudoMaximo;
+	int escudoMaximo; //inicializacion necesaria solo para Protoss!
 	String nombre;
 
 	public int getCostoMineral(){
@@ -32,8 +34,18 @@ public abstract class AtributosObjetoVivo { //AtributosObjetoDeJuego?
 		return new LinkedList<Estado>(estadosIniciales);
 	}
 	
+	//Importante: hacer ovveride de este para Protoss y usar
+	//en cambio VidaConEscudo
+	public IVida getVida() {
+		return new Vida(this);
+	}
+	
 	public int getVidaMaxima() {
 		return vidaMaxima;
+	}
+	
+	public int getEscudoMaximo() {
+		return escudoMaximo;
 	}
 
 	public String getNombre() {

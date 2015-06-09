@@ -1,5 +1,8 @@
 package fiuba.algo3.atributos;
 
+import fiuba.algo3.componentes.EstadoRegenerandoEscudo;
+import fiuba.algo3.componentes.IVida;
+import fiuba.algo3.componentes.VidaConEscudo;
 import fiuba.algo3.unidades.ConstructorInfanteriaPesadaAerea;
 import fiuba.algo3.unidades.ConstructorTransporte;
 
@@ -11,14 +14,20 @@ public class AtributosPuertoEstelarProtoss extends AtributosEdificioEntrenadorUn
 		this.costoGasVespeno = 100;
 		this.turnosConstruccion = 10;
 		this.vidaMaxima = 600; 
-		//this.escudoMaximo = 600;
+		this.escudoMaximo = 600;
 		this.nombre = "Puerto Estelar";
 		
 		// fields EdificioEntrenadorUnidades:
 		this.unidadesEntrenables.add(new ConstructorInfanteriaPesadaAerea());
 		this.unidadesEntrenables.add(new ConstructorTransporte());
+		
+		estadosIniciales.add(new EstadoRegenerandoEscudo());
 	}
 	
+	@Override
+	public IVida getVida() {
+		return new VidaConEscudo(this);
+	}
 	@Override
 	public boolean tieneEscudo() {
 		return true;
