@@ -95,6 +95,19 @@ public class TestRefineria extends TestEdificio {
 	}
 	
 	@Test
+	public void testRefineriaMientrasConstruyeNoRecolecta() {
+		this.refineria = crearEnVolcan(jugador, mapa);
+		int mineralRelativo = jugador.getMinerales();
+		
+		for(int i = 0; i < 6; i++) {
+			refineria.pasarTurno();
+			if (jugador.getMinerales() != mineralRelativo)
+				fail();
+		}
+		assertTrue(true);
+	}
+	
+	@Test
 	public void testRefineriaRecolectaGasVespeno() {
 		refineria = crearEnVolcan(jugador, mapa);
 		

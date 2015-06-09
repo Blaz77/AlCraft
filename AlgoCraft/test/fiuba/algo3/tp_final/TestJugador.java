@@ -24,5 +24,14 @@ public class TestJugador {
 		Assert.assertTrue(jugadorTerran.getRaza() == TipoRaza.TERRAN);
 	}
 	
+	@Test
+	public void testJugadorCreadoDatosIniciales() {
+		Assert.assertEquals(jugadorTerran.getCapacidadPoblacion(), 5);
+		Assert.assertEquals(jugadorTerran.getPoblacion(), 0);
+		Assert.assertEquals(jugadorTerran.getMinerales(), 200);
+		Assert.assertEquals(jugadorTerran.getGasVespeno(), 50);
+
+		Assert.assertTrue(jugadorTerran.getUnidades().isEmpty());
+	}
 
 }

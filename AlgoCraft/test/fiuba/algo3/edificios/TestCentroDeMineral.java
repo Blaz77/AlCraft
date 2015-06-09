@@ -91,6 +91,19 @@ public class TestCentroDeMineral extends TestEdificio{
 	}
 	
 	@Test
+	public void ttestCentroDeMineralMientrasConstruyeNoRecolecta() {
+		this.centroMineral = crearEnMineral(jugador, mapa);
+		int mineralRelativo = jugador.getMinerales();
+		
+		for(int i = 0; i < 4; i++) {
+			centroMineral.pasarTurno();
+			if (jugador.getMinerales() != mineralRelativo)
+				fail();
+		}
+		assertTrue(true);
+	}
+	
+	@Test
 	public void testCentroDeMineralRecolectaMinerales() {
 		this.centroMineral = crearEnMineral(jugador, mapa);
 		for(int i = 0; i < 4; i++) centroMineral.pasarTurno();
