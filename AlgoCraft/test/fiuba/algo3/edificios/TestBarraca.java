@@ -87,6 +87,15 @@ public class TestBarraca extends TestEdificio {
 		assertEquals(vidaRelativa, barraca.getVidaMaxima());
 	}
 	
+	@Test
+	void testBarracaMientrasConstruyeNoPuedeEntrenar() {
+		assertFalse(barracaEnConst.puedeEntrenarUnidades());
+	}
+	
+	@Test
+	void testBarracaTerminadaPuedeEntrenar() {
+		assertTrue(barraca.puedeEntrenarUnidades());
+	}
 	
 	@Test
 	public void testBarracaEntrenaUnidad() {

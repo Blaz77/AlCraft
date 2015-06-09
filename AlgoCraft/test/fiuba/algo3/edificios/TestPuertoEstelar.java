@@ -103,6 +103,15 @@ public class TestPuertoEstelar extends TestEdificio {
 		assertEquals(vidaRelativa, puerto.getVidaMaxima());
 	}
 	
+	@Test
+	void testPuertoEstelarMientrasConstruyeNoPuedeEntrenar() {
+		assertFalse(puertoEnConst.puedeEntrenarUnidades());
+	}
+	
+	@Test
+	void testBarracaTerminadaPuedeEntrenar() {
+		assertTrue(puerto.puedeEntrenarUnidades());
+	}
 	
 	@Test
 	public void testPuertoEstelarEntrenaUnidad() {

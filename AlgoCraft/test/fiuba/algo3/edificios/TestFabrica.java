@@ -104,6 +104,15 @@ public class TestFabrica extends TestEdificio {
 		assertEquals(vidaRelativa, fabrica.getVidaMaxima());
 	}
 	
+	@Test
+	void testFabricaMientrasConstruyeNoPuedeEntrenar() {
+		assertFalse(fabricaEnConst.puedeEntrenarUnidades());
+	}
+	
+	@Test
+	void testBarracaTerminadaPuedeEntrenar() {
+		assertTrue(fabrica.puedeEntrenarUnidades());
+	}
 	
 	@Test
 	public void testFabricaEntrenaUnidad() {
