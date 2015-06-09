@@ -101,8 +101,8 @@ public class MapaProxy {
 	}
 	
 	public Ocupante getOcupante(Posicion posicion) {
-		if (! (getVisibilidad(posicion)).verOcupante())
-			throw new CeldaNoVisible();
+		//if (! (getVisibilidad(posicion)).verOcupante())
+		//	throw new CeldaNoVisible();
 		
 		return mapa.getOcupante(posicion);
 	}

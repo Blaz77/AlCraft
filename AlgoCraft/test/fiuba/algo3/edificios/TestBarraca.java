@@ -88,12 +88,12 @@ public class TestBarraca extends TestEdificio {
 	}
 	
 	@Test
-	void testBarracaMientrasConstruyeNoPuedeEntrenar() {
+	public void testBarracaMientrasConstruyeNoPuedeEntrenar() {
 		assertFalse(barracaEnConst.puedeEntrenarUnidades());
 	}
 	
 	@Test
-	void testBarracaTerminadaPuedeEntrenar() {
+	public void testBarracaTerminadaPuedeEntrenar() {
 		assertTrue(barraca.puedeEntrenarUnidades());
 	}
 	

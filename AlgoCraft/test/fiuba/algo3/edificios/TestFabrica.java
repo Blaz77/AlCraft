@@ -104,12 +104,12 @@ public class TestFabrica extends TestEdificio {
 	}
 	
 	@Test
-	void testFabricaMientrasConstruyeNoPuedeEntrenar() {
+	public void testFabricaMientrasConstruyeNoPuedeEntrenar() {
 		assertFalse(fabricaEnConst.puedeEntrenarUnidades());
 	}
 	
 	@Test
-	void testBarracaTerminadaPuedeEntrenar() {
+	public void testBarracaTerminadaPuedeEntrenar() {
 		assertTrue(fabrica.puedeEntrenarUnidades());
 	}
 	

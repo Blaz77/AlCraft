@@ -102,12 +102,12 @@ public class TestPuertoEstelar extends TestEdificio {
 	}
 	
 	@Test
-	void testPuertoEstelarMientrasConstruyeNoPuedeEntrenar() {
+	public void testPuertoEstelarMientrasConstruyeNoPuedeEntrenar() {
 		assertFalse(puertoEnConst.puedeEntrenarUnidades());
 	}
 	
 	@Test
-	void testBarracaTerminadaPuedeEntrenar() {
+	public void testBarracaTerminadaPuedeEntrenar() {
 		assertTrue(puerto.puedeEntrenarUnidades());
 	}
 	
