@@ -7,8 +7,9 @@ import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.mapa.recurso.TipoOcupante;
 import fiuba.algo3.edificios.ObjetoVivo;
+import fiuba.algo3.excepciones.MovimientoInvalido;
 
-public abstract class Unidad extends ObjetoVivo{
+public abstract class Unidad extends ObjetoVivo {
 	
 	int movRestantes;
 	//O hacer accionesRestantes y que p/ej 1 ataque cueste 2
@@ -34,7 +35,9 @@ public abstract class Unidad extends ObjetoVivo{
 		return TipoOcupante.UNIDAD;
 	}
 
-	
+	public int getRangoVision() {
+		return ((AtributosUnidad) atributos).getRangoVision();
+	}
 	/*
 	 * Lista temporal:
 	 * 
@@ -79,6 +82,15 @@ public abstract class Unidad extends ObjetoVivo{
 	
 	public boolean puedeVolar() {//esAereo()
 		return this.atributos.esAereo();		
+	}
+
+	public void mover(Posicion destino) {
+		
+		if (destino.distancia(this.posicion) > getRangoVision())
+			throw new MovimientoInvalido();
+		
+		this.posicion = destino;
+		
 	}
 
 }

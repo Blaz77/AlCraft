@@ -29,7 +29,7 @@ public class TestBarraca extends TestEdificio {
 	@Before
 	public void setUp() {
 		mapa = new Mapa(6);
-		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL, mapa);
+		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
 		this.terranFactory = new EdificiosFactory();
 		this.barracaEnConst = crearEnTierra(jugador, mapa);
 		for(int i = 0; i < 12; i++) barracaEnConst.pasarTurno();//Construccion

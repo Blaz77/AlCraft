@@ -29,11 +29,11 @@ public class TestMarine {
 	@Before
 	public void setUp() throws Exception {
 		mapa = new Mapa(6);
-		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL, mapa);
+		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
 		this.marine = new UnidadAtaque(this.jugador, new Posicion(2,4), jugador.getAtributos().getInfanteriaLivianaTerrestre());
 		this.otroMarine = new UnidadAtaque(this.jugador, new Posicion(1,3), jugador.getAtributos().getInfanteriaLivianaTerrestre());
 		this.barraca = new Barraca(this.jugador, new Posicion(2,6));
-		this.jugadorEnemigo = new Jugador(TipoRaza.TERRAN, Color.ROJO, mapa);
+		this.jugadorEnemigo = new Jugador("Enemigo", Color.ROJO, TipoRaza.TERRAN, mapa);
 		this.marineEnemigo = new UnidadAtaque(jugadorEnemigo, new Posicion(5,4), jugadorEnemigo.getAtributos().getInfanteriaLivianaTerrestre());
 		this.espectroEnemigo = new UnidadAtaque(jugadorEnemigo, new Posicion(1,2), jugadorEnemigo.getAtributos().getInfanteriaPesadaArea());
 		this.barracaEnemiga = new Barraca(jugadorEnemigo, new Posicion(3,3));		

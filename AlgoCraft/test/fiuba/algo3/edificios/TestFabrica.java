@@ -11,7 +11,6 @@ import fiuba.algo3.excepciones.SuministroInsuficiente;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.raza.TipoRaza;
-import fiuba.algo3.terreno.TipoTerreno;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
 
@@ -31,7 +30,7 @@ public class TestFabrica extends TestEdificio {
 	@Before
 	public void setUp() throws Exception {
 		mapa = new Mapa(6);
-		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL, mapa);
+		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
 		this.terranFactory = new EdificiosFactory();
 		
 		// Aseguro recursos

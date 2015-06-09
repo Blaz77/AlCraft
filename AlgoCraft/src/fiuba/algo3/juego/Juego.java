@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import fiuba.algo3.mapa.Mapa;
+import fiuba.algo3.raza.TipoRaza;
 
 public class Juego implements Iterable<Jugador>, Iterator<Jugador>{
 	// Algunos atributos posibles:
@@ -25,11 +26,19 @@ public class Juego implements Iterable<Jugador>, Iterator<Jugador>{
 	/* Inicializa el juego pero sin jugadores (mas facil 
 	 * agregarlos despues).*/
 	
-	public Juego(int cantidadBases, ArrayList<Jugador> listaJugadores){ // (Opciones opciones) {
+	public Juego(Opciones opciones){ // (Opciones opciones) {
 		// TODO agregar clase opciones, para encapsular todas las opciones
 		// seleccionadas en los menus previos a jugar (si los hay)
-		mapa = new Mapa(cantidadBases);
-		
+		mapa = new Mapa(opciones.getCantidadBases());
+		String nombreJugador;
+		TipoRaza razaJugador;
+		Color colorJugador;
+		for (int n = 1; n <= 2; n++){
+			nombreJugador = opciones.getNombreJugador(n);
+			colorJugador = opciones.getColorJugador(n);
+			razaJugador = opciones.getRazaJugador(n);
+			jugadores.add(new Jugador(nombreJugador, colorJugador, razaJugador, mapa));
+		}
 	}
 		
 	// Se fija si queda un jugador vivo nomas.

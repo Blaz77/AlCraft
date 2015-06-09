@@ -3,6 +3,7 @@ package fiuba.algo3.mapa;
 import java.util.ArrayList;
 import java.util.Random;
 
+import fiuba.algo3.excepciones.MovimientoInvalido;
 import fiuba.algo3.juego.Ocupante;
 import fiuba.algo3.mapa.recurso.GasVespeno;
 import fiuba.algo3.mapa.recurso.Mineral;
@@ -11,6 +12,7 @@ import fiuba.algo3.terreno.Espacio;
 import fiuba.algo3.terreno.Terreno;
 import fiuba.algo3.terreno.Tierra;
 import fiuba.algo3.terreno.TipoTerreno;
+import fiuba.algo3.unidades.Unidad;
 
 
 public class Mapa {
@@ -205,7 +207,7 @@ public class Mapa {
 	
 	public void setOcupante(Ocupante ocupante, Posicion posicion) {
 		this.getCelda(posicion).setOcupante(ocupante);
-	}	
+	}
 	
 	public Ocupante getOcupante(Posicion posicion) {
 		return this.getCelda(posicion).getOcupante();
@@ -215,23 +217,11 @@ public class Mapa {
 		return this.getCelda(posicion).getTerreno();
 	}
 	
-	/*
-	 * public posicionar(Edif/Unid, posicion):
-	 * 	-	En el PROXY:
-	 * 		//Des-Sombreado bruto:
-			// - Desde el eje: posInicial todo el circulo/rombo que se forma 
-			//		con el rangoVision
-	 */
-	
-	/*
-	 * public mover(Edif/Unid, destino):
-	 * 	-	En el PROXY:
-	 * 		//Des-Sombreado Inteligente:
-			//	- Sabiendo la posicion anterior y la nueva posicion
-			//		se puede des-sombrear solamente las posiciones necesarias!
-			// 
-	 */
-
+	 public void mover(Unidad /*ObjetoVivo*/ unidad, Posicion destino){
+		 if (getOcupante(destino).getTipo() != TipoOcupante.CELDA_VACIA)
+			 throw new MovimientoInvalido();
+		 unidad.mover(destino);
+	 }
 	
 	/**********************************************/
 	/**                DEBUG AREA                **/

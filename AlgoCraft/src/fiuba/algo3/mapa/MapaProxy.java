@@ -2,12 +2,15 @@ package fiuba.algo3.mapa;
 
 import java.util.ArrayList;
 
+import fiuba.algo3.atributos.AtributosMarine;
+import fiuba.algo3.excepciones.CeldaNoVisible;
 import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.juego.Ocupante;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.terreno.Terreno;
 import fiuba.algo3.unidades.Unidad;
+import fiuba.algo3.unidades.UnidadAtaque;
 
 public class MapaProxy {
 
@@ -48,7 +51,7 @@ public class MapaProxy {
 	}	
 
 	private void _cambiarIluminacion(Unidad unidad, boolean quieroIluminar){
-		int vision = 4; // unidad.getVision();
+		int vision = unidad.getRangoVision();
 		Posicion centro = unidad.getPosicion();
 		int pos_x, pos_y;
 		Posicion posActual;
@@ -98,8 +101,8 @@ public class MapaProxy {
 	}
 	
 	public Ocupante getOcupante(Posicion posicion) {
-		//if (! (getVisibilidad(posicion)).verOcupante())
-		//	throw new CeldaNoVisible();
+		if (! (getVisibilidad(posicion)).verOcupante())
+			throw new CeldaNoVisible();
 		
 		return mapa.getOcupante(posicion);
 	}
@@ -111,22 +114,11 @@ public class MapaProxy {
 		return mapa.getTerreno(posicion);
 	}
 	
-	/*
-	 * public posicionar(Edif/Unid, posicion):
-	 * 	-	En el PROXY:
-	 * 		//Des-Sombreado bruto:
-			// - Desde el eje: posInicial todo el circulo/rombo que se forma 
-			//		con el rangoVision
-	 */
-	
-	/*
-	 * public mover(Edif/Unid, destino):
-	 * 	-	En el PROXY:
-	 * 		//Des-Sombreado Inteligente:
-			//	- Sabiendo la posicion anterior y la nueva posicion
-			//		se puede des-sombrear solamente las posiciones necesarias!
-			// 
-	 */
+	 public void mover(Unidad /*ObjetoVivo*/ unidad, Posicion destino){
+		 oscurecer(unidad);
+		 mapa.mover(unidad, destino);
+		 iluminar(unidad);
+	 }
 	
 	/**********************************************/
 	/**                DEBUG AREA                **/
@@ -155,12 +147,12 @@ public class MapaProxy {
 		}
 	}
 	
-	public static void notMain(String args[]){ // Cambiar a "main" para ejecutar y probar
+	public static void main(String args[]){ // Cambiar a "main" para ejecutar y probar
 		
 		Mapa mapa = new Mapa(3);
-		Jugador jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL, mapa);
-		Unidad unidad1 = new Marine(jugador, new Posicion(4,0));
-		Unidad unidad2 = new Marine(jugador, new Posicion(0,0));
+		Jugador jugador = new Jugador("Carlitos", Color.AZUL, TipoRaza.TERRAN, mapa);
+		Unidad unidad1 = new UnidadAtaque(jugador, new Posicion(4,0), new AtributosMarine());
+		Unidad unidad2 = new UnidadAtaque(jugador, new Posicion(0,0), new AtributosMarine());
 		ArrayList<Unidad> unidades = new ArrayList<Unidad>();
 		unidades.add(unidad1);
 		MapaProxy mapaProxy = new MapaProxy(mapa, unidades);
