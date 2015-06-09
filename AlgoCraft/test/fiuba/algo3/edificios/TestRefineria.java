@@ -37,7 +37,7 @@ public class TestRefineria extends TestEdificio {
 	@Before
 	public void setUp() throws Exception {
 		mapa = new Mapa(6);
-		this.jugador = new Jugador(TipoRaza.TERRAN, Color.AZUL, mapa);
+		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
 		this.terranFactory = new EdificiosFactory();
 		//this.refineria = terranFactory.crearRecolectorGasVespeno(jugador, 20, 40);
 	}

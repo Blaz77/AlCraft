@@ -3,10 +3,11 @@ package fiuba.algo3.juego;
 import java.util.ArrayList;
 
 import fiuba.algo3.atributos.AtributosJugador;
-import fiuba.algo3.atributos.AtributosJugador;
 import fiuba.algo3.edificios.Edificio;
+import fiuba.algo3.excepciones.UnidadNoPropia;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.MapaProxy;
+import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.raza.Raza;
 import fiuba.algo3.raza.RazaFactory;
 import fiuba.algo3.raza.TipoRaza;
@@ -39,11 +40,10 @@ public class Jugador {
 	private ArrayList<Unidad> unidades = new ArrayList<Unidad>();
 	private ArrayList<Edificio> edificios = new ArrayList<Edificio>();
 
-	public Jugador(TipoRaza raza, Color color, Mapa mapa) { // MapaProxy? 
-		RazaFactory razaFactory = new RazaFactory();
+	public Jugador(String nombre, Color color, TipoRaza raza, Mapa mapa) { // MapaProxy? 
 		
 		this.color = color;
-		this.raza = razaFactory.getRaza(raza);
+		this.raza = RazaFactory.getRaza(raza);
 		
 		// Por ahora estos numeros magicos funcionan, despues se ve si
 		// extraerlos en forma de constantes o pasados x parametro
@@ -112,6 +112,12 @@ public class Jugador {
 
 	public void agregarUnidad(Unidad unidad){
 		this.unidades.add(unidad);
+	}
+	
+	public void mover(Unidad unidad, Posicion destino){
+		if (! unidades.contains(unidad)) // medio lento este chequeo.
+			throw new UnidadNoPropia();
+		mapaPropio.mover(unidad, destino);
 	}
 	
 	public void pasarTurno(){

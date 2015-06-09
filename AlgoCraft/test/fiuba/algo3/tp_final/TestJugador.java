@@ -15,7 +15,7 @@ public class TestJugador {
 	
 	@Before
 	public void setUp() {
-		jugadorTerran = new Jugador(TipoRaza.TERRAN, Color.ROJO, new Mapa(6));
+		jugadorTerran = new Jugador("Prueba", Color.ROJO, TipoRaza.TERRAN, new Mapa(6));
 	}
 
 	@Test
