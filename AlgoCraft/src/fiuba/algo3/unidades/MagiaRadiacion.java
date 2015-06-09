@@ -20,9 +20,9 @@ public class MagiaRadiacion extends MagiaAUnidad {
 	@Override
 	public void ejecutar(Unidad enemiga) {
 		//chequeo si es enemiga (no se si es necesario, pero bueno)
+		if (!this.unidad.esEnemigoDe(enemiga)) throw new NoEsUnEnemigo();
 		if (!this.unidad.estaEnRangoDeMagia(enemiga.getPosicion()))
 			throw new FueraDelRangoPermitido();
-		if (!this.unidad.esEnemigoDe(enemiga)) throw new NoEsUnEnemigo();
 		this.unidad.disminuirEnergia(this.costoDeEjecutar);
 		enemiga.agregarEstado(new EstadoIrradiado());
 	}
