@@ -10,6 +10,15 @@ public class AtributosGolliat extends AtributosUnidadAtaque {
 		this.nombre = "Golliat";
 		
 		this.costoPoblacion = 2;
+		this.movPorTuno = 1; //?Inventado?!!!
+		this.rangoVision = 7;
+		
+		// fields de UnidadAtaque:
+		this.ataquesPorTurno = 1;//?Inventado?!!!
+		this.danioAAire = 10; 
+		this.danioATierra = 12;
+		this.rangoAire = 5;
+		this.rangoTierra = 6;
 		
 	}
 	
