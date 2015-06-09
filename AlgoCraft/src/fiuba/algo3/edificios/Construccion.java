@@ -8,9 +8,6 @@ import fiuba.algo3.mapa.Posicion;
 
 public abstract class Construccion extends Edificio { //EdificioEnConstruccion
 
-	// Luego habria que buscar la forma de que la construccion
-	// haga el new Edificio() y solo recibir los atributos por
-	// parametro.
 	protected Edificio edificio = null;
 	
 	public Construccion(Jugador propietario, Posicion posicion, AtributosEdificio atributos) {
@@ -40,5 +37,12 @@ public abstract class Construccion extends Edificio { //EdificioEnConstruccion
 		else throw new RuntimeException();
 	}
 	
-
+	//OVERRIDEOS De COSAS DE ATRIBUTOS:
+	
+	@Override
+	public boolean puedeEntrenarUnidades(){
+		return false;
+	}
+	
+	
 }
