@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import fiuba.algo3.edificios.Barraca;
-import fiuba.algo3.excepciones.EnemigoFueraDeRango;
+import fiuba.algo3.excepciones.FueraDelRangoPermitido;
 import fiuba.algo3.excepciones.NoEsUnEnemigo;
 import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
@@ -89,7 +89,7 @@ public class TestMarine {
 		assertFalse(this.marine.puedeAtacarA(enemigoFueraDeRango));
 	}
 	
-	@Test(expected = EnemigoFueraDeRango.class)
+	@Test(expected = FueraDelRangoPermitido.class)
 	public void testAtacarFueraDeRangoLanzaExcepcion() {
 		UnidadAtaque enemigoFueraDeRango = new UnidadAtaque(jugadorEnemigo, new Posicion(20,40), jugador.getAtributos().getInfanteriaLivianaTerrestre());
 		this.marine.atacarA(enemigoFueraDeRango);

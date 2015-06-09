@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import fiuba.algo3.atributos.AtributosUnidadAtaque;
 import fiuba.algo3.edificios.ObjetoVivo;
-import fiuba.algo3.excepciones.EnemigoFueraDeRango;
+import fiuba.algo3.excepciones.FueraDelRangoPermitido;
 import fiuba.algo3.excepciones.NoEsUnEnemigo;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
@@ -45,7 +45,7 @@ public class UnidadAtaque extends Unidad {
 	
 	public void atacarA(ObjetoVivo enemigo){
 		if (!this.esEnemigoDe(enemigo)) throw new NoEsUnEnemigo();
-		if (!this.estaEnRangoDeAtaque(enemigo)) throw new EnemigoFueraDeRango();
+		if (!this.estaEnRangoDeAtaque(enemigo)) throw new FueraDelRangoPermitido();
 		enemigo.recibirDanio(enemigo.getDanioEfectivo(
 				((AtributosUnidadAtaque)this.atributos).getDanioAtkAire(),
 				((AtributosUnidadAtaque)this.atributos).getDanioAtkTierra()));
