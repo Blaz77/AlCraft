@@ -6,7 +6,7 @@ import fiuba.algo3.excepciones.VidaEnCeroException;
 //public class Vida implements Lastimable/Atacable/etc
 public class Vida implements IVida {
 
-	private AtributosObjetoVivo atributos;
+	protected AtributosObjetoVivo atributos;
 	private int vida;
 
 	// Para setear especificamente la vida inicial (ej: construccion de edificios)
@@ -18,17 +18,18 @@ public class Vida implements IVida {
 	public Vida(AtributosObjetoVivo atributos) {
 		this(atributos.getVidaMaxima(), atributos);
 	}
-
-	public int getVidaMaxima(){
-		return this.atributos.getVidaMaxima();
-	}
 		
 	public int getVida(){
 		return this.vida;
 	}
 	
+	public int getVidaMaxima(){
+		return this.atributos.getVidaMaxima();
+	}
+	
 	public boolean tieneEscudo() {
 		return atributos.tieneEscudo();
+		//return false;
 	}
 
 	public int getEscudo() {
@@ -39,9 +40,11 @@ public class Vida implements IVida {
 		throw new RuntimeException();
 	}
 	
-	public void regenerar(int vida){
+	public void regenerarEscudo(int cantidad) {}
+	
+	public void regenerarVida(int cantidad){
 		// Si excede la vida maxima, la iguala
-		this.vida += vida;
+		this.vida += cantidad;
 		if (this.vida > atributos.getVidaMaxima()) this.vida = atributos.getVidaMaxima();
 	}
 	

@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import fiuba.algo3.atributos.AtributosObjetoVivo;
 import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.IVida;
-import fiuba.algo3.componentes.Vida;
 import fiuba.algo3.excepciones.VidaEnCeroException;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.juego.Ocupante;
@@ -31,7 +30,7 @@ public abstract class ObjetoVivo extends Ocupante { //ObjetoVivo / ObjetoInterac
 		this.propietario = propietario;
 		this.posicion = posicion;
 		this.atributos = atributos;
-		this.vida = new Vida(atributos);
+		this.vida = atributos.getVida();
 		this.estados = atributos.getEstadosIniciales();
 		for (Estado estado : estados) {
 			estado.activar(this);
@@ -49,9 +48,13 @@ public abstract class ObjetoVivo extends Ocupante { //ObjetoVivo / ObjetoInterac
 	public int getVida() {
 		return this.vida.getVida();
 	}
+	
+	public int getVidaMaxima() {
+		return this.vida.getVidaMaxima();
+	}
 
 	public void regenerarVida(int puntos) {
-		this.vida.regenerar(puntos);
+		this.vida.regenerarVida(puntos);
 	}
 
 	public String getNombre() {
@@ -59,23 +62,23 @@ public abstract class ObjetoVivo extends Ocupante { //ObjetoVivo / ObjetoInterac
 	}
 
 	public boolean tieneEscudo(){
-		return vida.tieneEscudo();
+		return this.vida.tieneEscudo();
 	}
 	
 	public int getEscudo(){
-		return vida.getEscudo();
+		return this.vida.getEscudo();
 	}
 	
-	public void setVida(IVida vida) {
-		this.vida = vida;		
+	public int getEscudoMaximo() {
+		return this.vida.getEscudoMaximo();
+	}
+
+	public void regenerarEscudo(int puntos) {
+		this.vida.regenerarEscudo(puntos);
 	}
 	
 	public int getTurnosConstruccion() {
 		return this.atributos.getTurnosConstruccion();
-	}
-
-	public int getVidaMaxima() {
-		return this.atributos.getVidaMaxima();
 	}
 	
 	public boolean esEnemigoDe(ObjetoVivo otro){

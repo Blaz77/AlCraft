@@ -1,4 +1,3 @@
-//TODO Clase sin usar!
 
 package fiuba.algo3.componentes;
 
@@ -7,45 +6,47 @@ import fiuba.algo3.atributos.AtributosObjetoVivo;
 public class VidaConEscudo extends Vida {
 	
 	private int escudo;
-	private final int escudoMaximo;
 	
 	// Para setear especificamente la vida/escudo inicial (ej: construccion de edificios)
-	public VidaConEscudo(int vidaInicial, AtributosObjetoVivo atributos, int escudoInicial, int escudoMaximo) {
+	public VidaConEscudo(int vidaInicial, int escudoInicial, AtributosObjetoVivo atributos) {
 		super(vidaInicial, atributos);
-		this.escudoMaximo = escudoMaximo;
 		this.escudo = escudoInicial;
 	}
-	/*
-	public VidaConEscudo(int vidaMaxima, int escudoMaximo){
-		this(vidaMaxima, vidaMaxima, escudoMaximo, escudoMaximo);
-	}*/
-
-	public boolean tieneEscudo(){
-		return true;
+	
+	public VidaConEscudo(AtributosObjetoVivo atributos){
+		super(atributos);
+		this.escudo = this.atributos.getEscudoMaximo();
 	}
 
+	@Override
+	public boolean tieneEscudo(){
+		return atributos.tieneEscudo();
+		//return true;
+	}
+
+	@Override
 	public int getEscudo(){
 		return this.escudo;
 	}
 	
+	@Override
 	public int getEscudoMaximo(){
-		return this.escudoMaximo;
+		return this.atributos.getEscudoMaximo();
+	}
+	
+	@Override
+	public void regenerarEscudo(int cantidad) {
+		this.escudo += cantidad;
+		if (this.escudo > atributos.getEscudoMaximo()) 
+			this.escudo = atributos.getEscudoMaximo();
 	}
 	
 	public void recibirDanio(int puntos){
 		this.escudo -= puntos;
 		if (this.escudo < 0){
-			super.recibirDanio(-(this.escudo)); //SUPER lanza la excepcion de muerte
+			super.recibirDanio(Math.abs(this.escudo)); //SUPER lanza la excepcion de muerte
 			this.escudo = 0;
 		}
-	}
-	
-	public VidaConEscudo pasarTurno() {
-		//REGENERA 10% POR TURNO, SE PUEDE CAMBIAR, VER BIEN EL REAL
-		this.escudo += (this.escudoMaximo / 10);
-		if (this.escudo > this.escudoMaximo)
-			this.escudo = this.escudoMaximo;
-		return this;
 	}
 	
 }

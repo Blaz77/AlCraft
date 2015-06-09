@@ -12,7 +12,9 @@ public interface IVida{
 	
 	public int getEscudoMaximo();
 	
-	public void regenerar(int vida);
+	public void regenerarVida(int cantidad);
+	
+	public void regenerarEscudo(int cantidad);
 	
 	public void recibirDanio(int puntos);
 
