@@ -2,6 +2,7 @@ package fiuba.algo3.juego;
 
 import java.util.ArrayList;
 
+import fiuba.algo3.excepciones.NombreInvalido;
 import fiuba.algo3.raza.TipoRaza;
 
 public class Opciones {
@@ -52,13 +53,13 @@ public class Opciones {
 		return cantidadBases;
 	}
 	
-	public void setDatosJugador(int n, String nombre, Color color, TipoRaza tipoRaza) throws Exception {
+	public void setDatosJugador(int n, String nombre, Color color, TipoRaza tipoRaza) {
 		// TODO: crear una buena excepcion para este.
 		if (nombre.length() < 4)
-			throw new Exception();
-		nombresJugadores.set(n, nombre);
-		coloresJugadores.set(n, color);
-		razasJugadores.set(n, tipoRaza);
+			throw new NombreInvalido();
+		nombresJugadores.set(n-1, nombre);
+		coloresJugadores.set(n-1, color);
+		razasJugadores.set(n-1, tipoRaza);
 	}
 
 	public void setCantidadBases(int cantidadBases) {
