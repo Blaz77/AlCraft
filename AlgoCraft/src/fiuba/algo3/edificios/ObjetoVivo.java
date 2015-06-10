@@ -44,6 +44,10 @@ public abstract class ObjetoVivo extends Ocupante { //ObjetoVivo / ObjetoInterac
 	public Posicion getPosicion() {
 		return this.posicion;  //quizas devolver copia!
 	}
+	
+	public void setPosicion(Posicion nuevaPosicion) {
+		this.posicion = nuevaPosicion;		
+	}
 
 	public int getVida() {
 		return this.vida.getVida();

@@ -9,5 +9,7 @@ public class AtributosUnidadTransporte extends AtributosUnidad {
 		return true;
 	}
 	
-	
+	public int getCapacidadAlmacenamiento(){
+		return capacidadAlmacenamiento;
+	}
 }

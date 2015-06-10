@@ -19,6 +19,10 @@ public abstract class AtributosUnidad extends AtributosObjetoVivo {
 	public int getRangoVision(){
 		return rangoVision;
 	}
+	
+	public int getCostoAlmacenamiento(){
+		return costoAlmacenamiento;
+	}
 
 	public boolean puedeSerAlmacenada(){ //puedeSerTransportada
 		return false;

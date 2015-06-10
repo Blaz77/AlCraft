@@ -38,6 +38,10 @@ public abstract class Unidad extends ObjetoVivo {
 	public int getRangoVision() {
 		return ((AtributosUnidad) atributos).getRangoVision();
 	}
+	
+	public int getCostoAlmacenamiento(){
+		return ((AtributosUnidad) atributos).getCostoAlmacenamiento(); 
+	}
 	/*
 	 * Lista temporal:
 	 * 
@@ -54,15 +58,15 @@ public abstract class Unidad extends ObjetoVivo {
 		return (this.movRestantes != 0);
 	}
 	
-	public boolean puedeMoverseA(Posicion inicial, Posicion destino){
-		return inicial.estaEnRango(destino, movRestantes);
+	public boolean puedeMoverseA(Posicion destino){
+		return this.posicion.estaEnRango(destino, movRestantes);
 		//chequear Terreno!!!!!
 	}
 	
-	public void moverA(Posicion inicial, Posicion destino){
-		if (!this.puedeMoverseA(inicial, destino))
+	public void moverA(Posicion destino){
+		if (!this.puedeMoverseA(destino))
 			throw new RuntimeException(); //MovimientoImposibleException?
-		this.movRestantes -= inicial.distancia(destino);
+		this.movRestantes -= this.posicion.distancia(destino);
 		this.posicion = destino;
 	}
 	
@@ -80,17 +84,16 @@ public abstract class Unidad extends ObjetoVivo {
 		return ((AtributosUnidad)this.atributos).puedeHacerMagia();
 	}
 	
+	public boolean puedeSerAlmacenada(){ //puedeSerTransportada
+		return ((AtributosUnidad)this.atributos).puedeSerAlmacenada();
+	}
+		
+	public boolean puedeAlmacenar(){ //puedeTransportar()
+		return ((AtributosUnidad)this.atributos).puedeAlmacenar();
+	}
+	
 	public boolean puedeVolar() {//esAereo()
 		return this.atributos.esAereo();		
-	}
-
-	public void mover(Posicion destino) {
-		
-		if (destino.distancia(this.posicion) > getRangoVision())
-			throw new MovimientoInvalido();
-		
-		this.posicion = destino;
-		
 	}
 
 }
