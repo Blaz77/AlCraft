@@ -99,4 +99,9 @@ public abstract class TestUnidadAtaque extends TestUnidad {
 		assertFalse(this.unidad.puedeHacerMagia());
 	}
 
+	@Test
+	public void testUnidadPuedeMoverse() {
+		assertTrue(this.unidad.puedeMoverse());
+	}
+
 }

@@ -32,7 +32,7 @@ public class TestGolliat extends TestUnidadAtaque {
 	
 	@Test
 	public void testGolliatNoPuedeVolar() {
-		assertFalse(this.unidad.puedeVolar());
+		assertFalse(this.unidad.puedeOcuparEspacio());
 	}
 	
 	

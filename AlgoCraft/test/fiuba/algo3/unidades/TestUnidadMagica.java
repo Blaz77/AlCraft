@@ -23,7 +23,7 @@ public abstract class TestUnidadMagica extends TestUnidad {
 	protected UnidadMagica otraUnidad;
 	protected UnidadAtaque unidadEnemigaTerrestre;
 	protected UnidadAtaque unidadEnemigaAerea;
-	protected UnidadAtaque unidadEnemigaMagica;
+	protected UnidadMagica unidadEnemigaMagica;
 
 
 	@Test
@@ -33,6 +33,11 @@ public abstract class TestUnidadMagica extends TestUnidad {
 	
 	public void testUnidadPuedeHacerMagia() {
 		assertTrue(this.unidad.puedeHacerMagia());
+	}
+
+	@Test
+	public void testUnidadPuedeMoverse() {
+		assertTrue(this.unidad.puedeMoverse());
 	}
 
 	

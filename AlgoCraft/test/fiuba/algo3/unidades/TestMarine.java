@@ -31,7 +31,7 @@ public class TestMarine extends TestUnidadAtaque {
 	
 	@Test
 	public void testMarineNoPuedeVolar() {
-		assertFalse(this.unidad.puedeVolar());
+		assertFalse(this.unidad.puedeOcuparEspacio());
 	}
 	
 	

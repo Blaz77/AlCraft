@@ -1,9 +1,6 @@
 package fiuba.algo3.unidades;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Before;
-import org.junit.Test;
 
 import fiuba.algo3.edificios.EdificioEntrenadorUnidades;
 import fiuba.algo3.juego.Color;
@@ -23,11 +20,6 @@ public class TestUnidad {
 	public void setUp() throws Exception {
 		mapa = new Mapa(6);
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
-	}
-	
-	@Test
-	public void testUnidadPuedeMoverse() {
-		assertTrue(this.unidad.puedeMoverse());
 	}
 
 }

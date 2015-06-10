@@ -27,20 +27,22 @@ public class TestNaveDeCiencia extends TestUnidadMagica {
 		this.unidadEnemigaAerea = new UnidadAtaque(jugadorEnemigo, new Posicion(1,2), jugadorEnemigo.getAtributos().getInfanteriaPesadaArea());
 		this.unidadEnemigaMagica = new UnidadMagica(jugadorEnemigo, new Posicion(1,2), jugadorEnemigo.getAtributos().getInfanteriaMagica());
 		this.edificioEnemigo = new Fabrica(jugadorEnemigo, new Posicion(3,3));	
-
-		this.danioTierra = 8;
-		this.danioAire = 20;
 	}
 	
 	@Test
-	public void testEspectroNoPuedeHacerMagia() {
-		assertFalse(this.unidad.puedeHacerMagia());
+	public void testNaveDeCienciaPuedeVolar() {
+		assertTrue(this.unidad.puedeOcuparEspacio());
 	}
 	
 	@Test
-	public void testEspectroPuedeVolar() {
-		assertTrue(this.unidad.puedeVolar());
+	public void testMagiasConsumenEnergia() {
+		int energiaRelativa = unidad.getEnergia();
+		unidad.getMagiaDeAreaDeEfecto().ejecutar(unidad.getPosicion());
+		assertEquals(energiaRelativa, unidad.getEnergia() - 100);
+		
+		energiaRelativa = unidad.getEnergia();
+		unidad.getMagiaAUnidad().ejecutar(unidadEnemigaTerrestre);
+		assertEquals(energiaRelativa, unidad.getEnergia() - 75);
 	}
-	
 	
 }

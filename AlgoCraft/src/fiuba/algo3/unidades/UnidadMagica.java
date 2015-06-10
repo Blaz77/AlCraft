@@ -12,7 +12,7 @@ public class UnidadMagica extends Unidad {
 	public UnidadMagica(Jugador propietario, Posicion posicion,
 			AtributosUnidadMagica atributos) {
 		super(propietario, posicion, atributos);
-
+		this.energia = this.getEnergiaMaxima();
 	}
 
 	public int getEnergia(){
