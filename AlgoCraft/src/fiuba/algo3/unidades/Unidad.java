@@ -90,9 +90,5 @@ public abstract class Unidad extends ObjetoVivo {
 	public boolean puedeAlmacenar(){ //puedeTransportar()
 		return ((AtributosUnidad)this.atributos).puedeAlmacenar();
 	}
-	
-	public boolean puedeVolar() {//esAereo()
-		return this.atributos.esAereo();		
-	}
 
 }

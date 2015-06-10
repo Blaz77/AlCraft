@@ -5,7 +5,7 @@ public abstract class AtributosEdificioRecolector extends AtributosEdificio {
 	int cantARecolectarPorTurno;
 	
 	@Override
-	public boolean edificableSobreRecurso(){
+	public boolean debeOcuparRecurso(){
 		return true;
 	}
 	

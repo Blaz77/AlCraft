@@ -85,6 +85,31 @@ public abstract class ObjetoVivo extends Ocupante { //ObjetoVivo / ObjetoInterac
 		return this.atributos.getTurnosConstruccion();
 	}
 	
+	public boolean puedeCambiarsePor(Ocupante otroOcupante){
+		return false;
+	}
+	
+	public boolean puedeOcuparTierra(){
+		return this.atributos.puedeOcuparTierra();
+	}
+	
+	public boolean puedeOcuparEspacio(){
+		return this.atributos.puedeOcuparEspacio();
+	}
+	
+	public boolean debeOcuparRecurso(){
+		return this.atributos.debeOcuparRecurso();
+	}
+	
+	public boolean debeOcuparMineral(){
+		return this.atributos.debeOcuparRecurso();
+	}
+	
+	public boolean debeOcuparGasVespeno(){
+		return this.atributos.debeOcuparGasVespeno();
+	}
+	
+	
 	public boolean esEnemigoDe(ObjetoVivo otro){
 		return this.propietario != otro.propietario;
 	}

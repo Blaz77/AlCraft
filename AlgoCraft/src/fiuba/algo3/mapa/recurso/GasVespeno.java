@@ -1,6 +1,7 @@
 package fiuba.algo3.mapa.recurso;
 
 import fiuba.algo3.edificios.Edificable;
+import fiuba.algo3.juego.Ocupante;
 import fiuba.algo3.mapa.Posicion;
 
 public class GasVespeno extends Recurso {
@@ -28,6 +29,12 @@ public class GasVespeno extends Recurso {
 	public void pasarTurno() {
 		return;
 		
+	}
+	
+	@Override
+	public boolean puedeCambiarsePor(Ocupante otroOcupante) {
+		return (super.puedeCambiarsePor(otroOcupante) &&
+				otroOcupante.debeOcuparGasVespeno());
 	}
 	
 }

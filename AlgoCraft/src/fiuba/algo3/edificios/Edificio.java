@@ -34,26 +34,6 @@ public abstract class Edificio extends ObjetoVivo {
 		return ((AtributosEdificio) atributos).puedeEntrenarUnidades();
 	}
 	
-	public boolean edificableEnTierra(){
-		return ((AtributosEdificio) atributos).edificableEnTierra();
-	}
-	
-	public boolean edificableEnEspacio(){
-		return ((AtributosEdificio) atributos).edificableEnEspacio();
-	}
-	
-	public boolean edificableSobreRecurso(){
-		return ((AtributosEdificio) atributos).edificableSobreRecurso();
-	}
-	
-	public boolean edificableSobreMineral(){
-		return ((AtributosEdificio) atributos).edificableSobreMineral();
-	}
-	
-	public boolean edificableSobreGasVespeno(){
-		return ((AtributosEdificio) atributos).edificableSobreGasVespeno();
-	}
-	
 	
 	
 	//public boolean puedeAlmacenarUnidades(){}

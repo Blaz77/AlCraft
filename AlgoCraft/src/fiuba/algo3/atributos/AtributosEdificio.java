@@ -8,26 +8,5 @@ public abstract class AtributosEdificio extends AtributosObjetoVivo {
 	public boolean puedeEntrenarUnidades(){
 		return false;
 	}
-	
-	public boolean edificableEnTierra(){
-		return true;
-	}
-	
-	public boolean edificableEnEspacio(){
-		return false;
-	}
-	
-	// quizas sacar este y dejar solo los dos de abajo, pero por ahora no
-	public boolean edificableSobreRecurso(){
-		return false;
-	}
-	
-	public boolean edificableSobreMineral(){
-		return false;
-	}
-	
-	public boolean edificableSobreGasVespeno(){
-		return false;
-	}
 
 }

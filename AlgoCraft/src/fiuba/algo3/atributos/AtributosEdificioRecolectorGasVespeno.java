@@ -10,7 +10,7 @@ public abstract class AtributosEdificioRecolectorGasVespeno extends AtributosEdi
 
 	
 	@Override
-	public boolean edificableSobreGasVespeno(){
+	public boolean debeOcuparGasVespeno(){
 		return true;
 	}
 	

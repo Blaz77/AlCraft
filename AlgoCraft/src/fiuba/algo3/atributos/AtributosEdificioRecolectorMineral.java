@@ -9,7 +9,7 @@ public abstract class AtributosEdificioRecolectorMineral extends AtributosEdific
 	}
 	
 	@Override
-	public boolean edificableSobreMineral(){
+	public boolean debeOcuparMineral(){
 		return true;
 	}
 	

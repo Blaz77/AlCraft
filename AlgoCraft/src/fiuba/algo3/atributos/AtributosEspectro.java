@@ -24,7 +24,7 @@ public class AtributosEspectro extends AtributosUnidadAtaque {
 	}
 	
 	@Override
-	public boolean esAereo() {
+	public boolean puedeOcuparEspacio() {
 		return true;
 	}
 	

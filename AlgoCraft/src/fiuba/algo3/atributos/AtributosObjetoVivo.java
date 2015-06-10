@@ -56,11 +56,27 @@ public abstract class AtributosObjetoVivo { //AtributosObjetoDeJuego?
 		return false;
 	}
 	
-	// si no es Aereo, es Terrestre
-	// Bajar a Unidad?
-	public boolean esAereo(){ //puedeVolar()
+	public boolean puedeOcuparTierra(){
+		return true;
+	}
+	
+	// esAereo, puedeVolar()
+	public boolean puedeOcuparEspacio(){
 		return false;
 	}
+	
+	public boolean debeOcuparRecurso(){
+		return false;
+	}
+	
+	public boolean debeOcuparMineral(){
+		return false;
+	}
+	
+	public boolean debeOcuparGasVespeno(){
+		return false;
+	}
+	
 	// El enemigo que me quiere atacar me pasa sus dos rangos
 	// y yo que se como soy, le devuelvo el que funciona 
 	// en el ataque correspondiente.
