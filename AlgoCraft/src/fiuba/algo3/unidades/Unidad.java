@@ -64,8 +64,7 @@ public abstract class Unidad extends ObjetoVivo {
 	}
 	
 	public void moverA(Posicion destino){
-		if (!this.puedeMoverseA(destino))
-			throw new RuntimeException(); //MovimientoImposibleException?
+		if (!this.puedeMoverseA(destino)) throw new MovimientoInvalido();
 		this.movRestantes -= this.posicion.distancia(destino);
 		this.posicion = destino;
 	}
