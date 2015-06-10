@@ -8,15 +8,15 @@ import fiuba.algo3.componentes.Vida;
 
 public abstract class AtributosObjetoVivo { //AtributosObjetoDeJuego?
 	
-	LinkedList<Estado> estadosIniciales = new LinkedList<Estado>();
+	protected LinkedList<Estado> estadosIniciales = new LinkedList<Estado>();
 	
-	int costoMineral;
-	int costoGasVespeno;
-	int turnosConstruccion;
+	protected int costoMineral;
+	protected int costoGasVespeno;
+	protected int turnosConstruccion;
 	
-	int vidaMaxima;
-	int escudoMaximo; //inicializacion necesaria solo para Protoss!
-	String nombre;
+	protected int vidaMaxima;
+	protected int escudoMaximo; //inicializacion necesaria solo para Protoss!
+	protected String nombre;
 
 	public int getCostoMineral(){
 		return costoMineral;

@@ -16,6 +16,9 @@ public abstract class Ocupante {
 		return nombre;
 	}
 
-	public abstract void pasarTurno();
+	public void pasarTurno(){
+		return;
+	}
+	
 	public abstract TipoOcupante getTipo();
 }

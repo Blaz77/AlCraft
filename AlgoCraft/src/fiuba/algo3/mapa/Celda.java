@@ -1,9 +1,6 @@
 package fiuba.algo3.mapa;
 
-import fiuba.algo3.edificios.Edificable;
-import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.juego.Ocupante;
-import fiuba.algo3.mapa.recurso.Recurso;
 import fiuba.algo3.terreno.Terreno;
 
 
@@ -18,29 +15,28 @@ import fiuba.algo3.terreno.Terreno;
  */
 public class Celda { //quizas heredar de celda y armar Tierra/Espacio extends Celda
 
-	private Posicion posicion; // Es de utilidad esto aca? XD. Si las unidades/edificios/recursos lo tienen.
-	private Ocupante ocupante = new CeldaVacia();
+	private Ocupante ocupante;
 	private Terreno terreno;
 	
 	public Celda(Posicion posicion, Terreno terreno) {
-		this.posicion = posicion;
 		this.terreno = terreno;
+		this.ocupante = new CeldaVacia(posicion);
 	}
 	
 	public int distancia(Celda other) {
-		return posicion.distancia(other.posicion);
+		return getPosicion().distancia(other.getPosicion());
 	}
 
 	public int getX() {
-		return posicion.getX();
+		return getPosicion().getX();
 	}
 
 	public int getY() {
-		return posicion.getY();
+		return getPosicion().getY();
 	}
 	
 	public Posicion getPosicion(){
-		return posicion;
+		return ocupante.getPosicion();
 	}
 		
 	public void setOcupante(Ocupante ocupante) {

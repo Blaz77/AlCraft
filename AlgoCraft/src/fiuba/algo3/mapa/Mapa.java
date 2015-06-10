@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import fiuba.algo3.excepciones.MovimientoInvalido;
-import fiuba.algo3.juego.Ocupante;
 import fiuba.algo3.mapa.recurso.GasVespeno;
 import fiuba.algo3.mapa.recurso.Mineral;
 import fiuba.algo3.mapa.recurso.TipoOcupante;
+import fiuba.algo3.juego.Ocupante;
 import fiuba.algo3.terreno.Espacio;
 import fiuba.algo3.terreno.Terreno;
 import fiuba.algo3.terreno.Tierra;
@@ -109,7 +109,7 @@ public class Mapa {
 			randPos = celdaRandomEnBase(base);
 			
 			if (yaUbicados.isEmpty()){
-				setOcupante(new Mineral(), randPos);
+				setOcupante(new Mineral(randPos), randPos);
 				yaUbicados.add(getCelda(randPos));
 			}
 			
@@ -119,7 +119,7 @@ public class Mapa {
 			else if (getOcupante(randPos).getTipo() != TipoOcupante.MINERAL)
 				for(Celda conMineral : yaUbicados)
 					if (distancia(randPos, conMineral.getPosicion()) == 1){
-						setOcupante(new Mineral(), randPos);
+						setOcupante(new Mineral(randPos), randPos);
 						yaUbicados.add(getCelda(randPos));
 						break;
 					}
@@ -138,7 +138,7 @@ public class Mapa {
 		do 
 			randPos = celdaRandomEnBase(base);
 		while(getOcupante(randPos).getTipo() == TipoOcupante.MINERAL);
-		setOcupante(new GasVespeno(), randPos);
+		setOcupante(new GasVespeno(randPos), randPos);
 	}
 	
 	/* Inyecta zonas espaciales al mapa.
@@ -220,7 +220,7 @@ public class Mapa {
 	 public void mover(Unidad /*ObjetoVivo*/ unidad, Posicion destino){
 		 if (getOcupante(destino).getTipo() != TipoOcupante.CELDA_VACIA)
 			 throw new MovimientoInvalido();
-		 unidad.mover(destino);
+		 unidad.moverA(destino);
 	 }
 	
 	/**********************************************/
@@ -317,7 +317,7 @@ public class Mapa {
 	}
 
 	/* Mostrar info del mapa de varias formas" */
-	public static void notMain(String[] args){ //Renombrar a "main" para ejecutar.
+	public static void main(String[] args){ //Renombrar a "main" para ejecutar.
 		
 		Mapa miMapa = new Mapa(BASES_PARA_MAIN);
 		

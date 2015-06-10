@@ -3,22 +3,10 @@
 package fiuba.algo3.factories;
 
 import fiuba.algo3.atributos.AtributosEdificio;
-import fiuba.algo3.componentes.EstadoConstruyendoEdificio;
-import fiuba.algo3.edificios.Barraca;
-import fiuba.algo3.edificios.CentroDeMineral;
 import fiuba.algo3.edificios.Construccion;
 import fiuba.algo3.edificios.ConstruccionEntrenadorUnidades;
 import fiuba.algo3.edificios.ConstruccionIncrementadorPoblacion;
 import fiuba.algo3.edificios.ConstruccionRecolector;
-import fiuba.algo3.edificios.DepositoDeSuministros;
-import fiuba.algo3.edificios.Edificio;
-import fiuba.algo3.edificios.EdificioEntrenadorUnidades;
-import fiuba.algo3.edificios.EdificioIncrementadorPoblacion;
-import fiuba.algo3.edificios.EdificioRecolectorGasVespeno;
-import fiuba.algo3.edificios.EdificioRecolectorMineral;
-import fiuba.algo3.edificios.Fabrica;
-import fiuba.algo3.edificios.PuertoEstelar;
-import fiuba.algo3.edificios.Refineria;
 import fiuba.algo3.excepciones.GasVespenoInsuficiente;
 import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.RecursoAusente;
