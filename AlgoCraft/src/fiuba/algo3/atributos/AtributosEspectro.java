@@ -15,4 +15,14 @@ public class AtributosEspectro extends AtributosUnidadAtaque {
 		//this.movPorTuno = 1; //?Inventado?!!!
 		//this.rangoVision = 7;
 	}
+	
+	@Override
+	public boolean esAereo() {
+		return true;
+	}
+	
+	@Override
+	public int getDanioEfectivo(int danioAire, int danioTierra) {
+		return danioAire;
+	}
 }
