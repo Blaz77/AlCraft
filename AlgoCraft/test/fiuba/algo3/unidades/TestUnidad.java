@@ -2,22 +2,29 @@ package fiuba.algo3.unidades;
 
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import fiuba.algo3.edificios.EdificioEntrenadorUnidades;
+import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Mapa;
+import fiuba.algo3.raza.TipoRaza;
 
 public class TestUnidad {
 
 	protected Mapa mapa;
 	protected Jugador jugador;
 	protected Jugador jugadorEnemigo;
-	protected UnidadAtaque unidad;
-	protected UnidadAtaque otraUnidad;
 	protected EdificioEntrenadorUnidades edificioPropio;
 	protected EdificioEntrenadorUnidades edificioEnemigo;
 
+	@Before
+	public void setUp() throws Exception {
+		mapa = new Mapa(6);
+		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
+	}
+	
 	@Test
 	public void testUnidadPuedeMoverse() {
 		assertTrue(this.unidad.puedeMoverse());

@@ -32,11 +32,6 @@ public class TestEspectro extends TestUnidadAtaque {
 	}
 	
 	@Test
-	public void testEspectroNoPuedeHacerMagia() {
-		assertFalse(this.unidad.puedeHacerMagia());
-	}
-	
-	@Test
 	public void testEspectroPuedeVolar() {
 		assertTrue(this.unidad.puedeVolar());
 	}

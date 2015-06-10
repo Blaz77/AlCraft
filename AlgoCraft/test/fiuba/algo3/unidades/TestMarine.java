@@ -30,11 +30,6 @@ public class TestMarine extends TestUnidadAtaque {
 	}
 	
 	@Test
-	public void testMarineNoPuedeHacerMagia() {
-		assertFalse(this.unidad.puedeHacerMagia());
-	}
-	
-	@Test
 	public void testMarineNoPuedeVolar() {
 		assertFalse(this.unidad.puedeVolar());
 	}
