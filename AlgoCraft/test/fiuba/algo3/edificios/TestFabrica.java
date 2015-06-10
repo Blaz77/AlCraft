@@ -35,6 +35,7 @@ public class TestFabrica extends TestEdificio {
 		
 		// Aseguro recursos
 		jugador.agregarGasVespeno(500);
+		jugador.agregarMinerales(500);
 		this.fabricaEnConst = crearEnTierra(jugador, mapa);
 		for(int i = 0; i < 12; i++) fabricaEnConst.pasarTurno();//Construccion
 		this.fabrica = (EdificioEntrenadorUnidades)this.fabricaEnConst.getEdificioTerminado();
@@ -46,6 +47,19 @@ public class TestFabrica extends TestEdificio {
 	@Test
 	public void testCrearFabrica() {
 		assertEquals(fabrica.getNombre(),"Fabrica");
+	}
+	
+	@Test
+	public void testCrearFabricaDisminuyeRecursosJugador() {
+		int mineralRelativo = jugador.getMinerales();
+		int gasRelativo = jugador.getGasVespeno();
+		int costoGas = 100;
+		int costoMineral = 200;
+		
+		this.fabricaEnConst = crearEnTierra(jugador, mapa);
+		
+		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
+		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
 	}
 	
 	@Test

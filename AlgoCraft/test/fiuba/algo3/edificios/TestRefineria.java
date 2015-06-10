@@ -53,6 +53,19 @@ public class TestRefineria extends TestEdificio {
 	}
 	
 	@Test
+	public void testCrearRefineriaDisminuyeRecursosJugador() {
+		int mineralRelativo = jugador.getMinerales();
+		int gasRelativo = jugador.getGasVespeno();
+		int costoGas = 0;
+		int costoMineral = 100;
+		
+		this.refineria = crearEnVolcan(jugador, mapa);
+		
+		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
+		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
+	}
+	
+	@Test
 	public void testCrearRefineriaSinMineralesDebeFallar() {
 		while (jugador.getMinerales() >= 100) {
 			jugador.agregarMinerales(-10);

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import fiuba.algo3.atributos.AtributosJugador;
 import fiuba.algo3.edificios.Edificio;
+import fiuba.algo3.excepciones.GasVespenoInsuficiente;
+import fiuba.algo3.excepciones.MineralInsuficiente;
+import fiuba.algo3.excepciones.SuministroInsuficiente;
 import fiuba.algo3.excepciones.UnidadNoPropia;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.MapaProxy;
@@ -69,6 +72,26 @@ public class Jugador {
 	
 	public int getMinerales(){
 		return this.minerales;
+	}
+	
+	// nombre pendiente de modificacion
+	public void comprar(int costoMineral, int costoGasVespeno){
+		if (this.minerales < costoMineral) throw new MineralInsuficiente();
+		if (this.gasVespeno < costoGasVespeno) throw new GasVespenoInsuficiente();
+		this.minerales -= costoMineral;
+		this.gasVespeno -= costoGasVespeno;
+	}
+	
+	/* Verifica si hay recursos y poblacion necesaria para crear la unidad.
+	 * Si no se cumple, lanza una excepcion
+	 */
+	// nombre pendiente de modificacion
+	public void comprar(int costoMineral, int costoGasVespeno, int costoPoblacion){
+		if ((this.poblacion + costoPoblacion) > this.poblacionCapacidad)
+			throw new SuministroInsuficiente();
+		this.comprar(costoMineral, costoGasVespeno); //hace chequeos
+		//si paso aumento la poblacion:
+		this.poblacion += costoPoblacion;
 	}
 
 	public void agregarMinerales(int cantidad) {

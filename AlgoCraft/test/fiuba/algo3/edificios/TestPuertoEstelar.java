@@ -34,6 +34,7 @@ public class TestPuertoEstelar extends TestEdificio {
 		
 		// Aseguro recursos
 		jugador.agregarGasVespeno(500);
+		jugador.agregarMinerales(500);
 		this.puertoEnConst = crearEnTierra(jugador, mapa);
 		for(int i = 0; i < 10; i++) puertoEnConst.pasarTurno();//Construccion
 		this.puerto = (EdificioEntrenadorUnidades)this.puertoEnConst.getEdificioTerminado();
@@ -45,6 +46,19 @@ public class TestPuertoEstelar extends TestEdificio {
 	@Test
 	public void testCrearPuertoEstelar() {
 		assertEquals(puerto.getNombre(),"Puerto Estelar");
+	}
+	
+	@Test
+	public void testCrearPuertoEstelarDisminuyeRecursosJugador() {
+		int mineralRelativo = jugador.getMinerales();
+		int gasRelativo = jugador.getGasVespeno();
+		int costoGas = 100;
+		int costoMineral = 150;
+		
+		this.puertoEnConst = crearEnTierra(jugador, mapa);
+		
+		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
+		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
 	}
 	
 	@Test

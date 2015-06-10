@@ -2,9 +2,6 @@ package fiuba.algo3.unidades;
 
 import fiuba.algo3.atributos.AtributosUnidad;
 import fiuba.algo3.edificios.EdificioEntrenadorUnidades;
-import fiuba.algo3.excepciones.GasVespenoInsuficiente;
-import fiuba.algo3.excepciones.MineralInsuficiente;
-import fiuba.algo3.excepciones.SuministroInsuficiente;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
 
@@ -19,7 +16,7 @@ public abstract class Constructor {
 	protected AtributosUnidad atributos;
 	protected EdificioEntrenadorUnidades entrenador;
 
-	//aca va un return new Marine()
+	//aca va un return new Unidad*Tipo*()
 	abstract public void liberarUnidad(Jugador propietario, Posicion posicion);
 	
 	//aca debe tomar del jugador el atributo correspondiente para lo que 
@@ -36,29 +33,9 @@ public abstract class Constructor {
 	}
 	
 	public void crear(){
-		
-		Jugador propietario = entrenador.getPropietario();
-		// Si no hay requisitos, se pasa una excepcion.
-		verificarRequisitos(propietario);
-		
-		propietario.agregarMinerales(-this.atributos.getCostoMineral());
-		propietario.agregarGasVespeno(-this.atributos.getCostoGasVespeno());
-		propietario.aumentarPoblacion(this.atributos.getCostoPoblacion());
-		
+		entrenador.getPropietario().comprar(atributos.getCostoMineral(),
+				atributos.getCostoGasVespeno(), atributos.getCostoPoblacion());
 		entrenador.entrenar(this);
-		
-	}
-	
-	/* Verifica si hay recursos y poblacion necesaria para crear la unidad.
-	 * Si no se cumple, lanza una excepcion
-	 */
-	public void verificarRequisitos(Jugador jugador) {
-		if (jugador.getCapacidadPoblacion() - jugador.getPoblacion() < this.atributos.getCostoPoblacion()) 
-			throw new SuministroInsuficiente();
-		if (jugador.getMinerales() < this.atributos.getCostoMineral()) 
-			throw new MineralInsuficiente();
-		if (jugador.getGasVespeno() < this.atributos.getCostoGasVespeno()) 
-			throw new GasVespenoInsuficiente();
 	}
 
 }

@@ -30,6 +30,8 @@ public class TestBarraca extends TestEdificio {
 	public void setUp() {
 		mapa = new Mapa(6);
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
+		this.jugador.agregarMinerales(300);
+		this.jugador.agregarGasVespeno(300);
 		this.terranFactory = new EdificiosFactory();
 		this.barracaEnConst = crearEnTierra(jugador, mapa);
 		for(int i = 0; i < 12; i++) barracaEnConst.pasarTurno();//Construccion
@@ -42,6 +44,19 @@ public class TestBarraca extends TestEdificio {
 	@Test
 	public void testCrearBarraca() {
 		assertEquals(barraca.getNombre(),"Barraca");
+	}
+	
+	@Test
+	public void testCrearBarracaDisminuyeRecursosJugador() {
+		int mineralRelativo = jugador.getMinerales();
+		int gasRelativo = jugador.getGasVespeno();
+		int costoGas = 0;
+		int costoMineral = 150;
+		
+		this.barracaEnConst = crearEnTierra(jugador, mapa);
+		
+		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
+		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
 	}
 	
 	@Test

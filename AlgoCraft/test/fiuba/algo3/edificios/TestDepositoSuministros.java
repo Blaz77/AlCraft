@@ -42,6 +42,19 @@ public class TestDepositoSuministros extends TestEdificio {
 	}
 	
 	@Test
+	public void testCrearDespositoSuministrosDisminuyeRecursosJugador() {
+		int mineralRelativo = jugador.getMinerales();
+		int gasRelativo = jugador.getGasVespeno();
+		int costoGas = 0;
+		int costoMineral = 100;
+		
+		this.depositoSuministros = crearEnTierra(jugador, mapa);
+		
+		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
+		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
+	}
+	
+	@Test
 	public void testCrearDepositoSuministrosFueraDeTierraFalla() {
 		try {
 			this.depositoSuministros = crearFueraDeTierra(jugador, mapa);

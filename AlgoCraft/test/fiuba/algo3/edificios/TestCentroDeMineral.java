@@ -50,6 +50,19 @@ public class TestCentroDeMineral extends TestEdificio{
 	}
 	
 	@Test
+	public void testCrearCentroDeMineralDisminuyeRecursosJugador() {
+		int mineralRelativo = jugador.getMinerales();
+		int gasRelativo = jugador.getGasVespeno();
+		int costoGas = 0;
+		int costoMineral = 50;
+		
+		this.centroMineral = crearEnMineral(jugador, mapa);
+		
+		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
+		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
+	}
+	
+	@Test
 	public void testCrearCentroDeMineralSinRecursosDebeFallar() {
 		while (jugador.getMinerales() >= 50) {
 			jugador.agregarMinerales(-10);
