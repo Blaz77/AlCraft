@@ -3,7 +3,8 @@ package fiuba.algo3.edificios;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
-import fiuba.algo3.mapa.recurso.TipoOcupante;
+import fiuba.algo3.ocupantes.edificios.en_construccion.Construccion;
+import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.terreno.TipoTerreno;
 
 public abstract class TestEdificio {

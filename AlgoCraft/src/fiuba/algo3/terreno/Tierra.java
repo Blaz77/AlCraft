@@ -1,6 +1,6 @@
 package fiuba.algo3.terreno;
 
-import fiuba.algo3.edificios.Edificable;
+import fiuba.algo3.ocupantes.edificios.Edificable;
 
 public class Tierra extends Terreno {
 	

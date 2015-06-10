@@ -3,10 +3,11 @@ package fiuba.algo3.juego;
 import java.util.Scanner;
 
 import fiuba.algo3.raza.TipoRaza;
+import fiuba.algo3.utilidades.Utilidades;
 
 public class InterfazJuego {
 
-	private EstadoDeJuego estadoActual;
+	//private EstadoDeJuego estadoActual;
 	private Opciones opciones = new Opciones();
 	private Scanner scanner = new Scanner(System.in);
 	
@@ -19,7 +20,7 @@ public class InterfazJuego {
 	}
 	
 	private void menuPrincipal() {
-		this.menuOpciones();		
+		this.menuOpciones();
 	}
 
 
@@ -63,7 +64,7 @@ public class InterfazJuego {
 		while (true){
 			System.out.format("Escribe %s del Jugador %d", str2, n);
 			strRazaPJ = scanner.nextLine();
-			if (!isDigit(strRazaPJ)) continue;
+			if (!Utilidades.isDigit(strRazaPJ)) continue;
 			i = Integer.parseInt(strRazaPJ) -1;
 			if (i < tipos.length && i >= 0)
 				return tipos[i];
@@ -81,18 +82,10 @@ public class InterfazJuego {
 
 
 	private void iniciar() {
-		pantallaInicio();		
-	}	
-	
-	private boolean isDigit(String str)
-	{
-	    for (char c : str.toCharArray())
-	    {
-	        if (!Character.isDigit(c)) return false;
-	    }
-	    return true;
+		while (true){
+			pantallaInicio();		
+		}	
 	}
-	
 
 	public static void main(String[] args) {
 		InterfazJuego interfazJuego = new InterfazJuego();

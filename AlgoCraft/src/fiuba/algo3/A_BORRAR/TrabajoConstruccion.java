@@ -1,6 +1,6 @@
 package fiuba.algo3.A_BORRAR;
 
-import fiuba.algo3.edificios.Edificio;
+import fiuba.algo3.ocupantes.edificios.Edificio;
 
 
 // Strategy que, como todo trabajo, implementa el estado y 

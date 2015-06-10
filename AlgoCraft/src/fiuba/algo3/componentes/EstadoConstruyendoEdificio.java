@@ -1,7 +1,7 @@
 package fiuba.algo3.componentes;
 
-import fiuba.algo3.edificios.Construccion;
-import fiuba.algo3.edificios.ObjetoVivo;
+import fiuba.algo3.ocupantes.ObjetoVivo;
+import fiuba.algo3.ocupantes.edificios.en_construccion.Construccion;
 
 public class EstadoConstruyendoEdificio implements Estado {
 	

@@ -2,16 +2,16 @@
 
 package fiuba.algo3.factories;
 
-import fiuba.algo3.atributos.AtributosEdificio;
-import fiuba.algo3.edificios.Construccion;
-import fiuba.algo3.edificios.ConstruccionEntrenadorUnidades;
-import fiuba.algo3.edificios.ConstruccionIncrementadorPoblacion;
-import fiuba.algo3.edificios.ConstruccionRecolector;
+import fiuba.algo3.atributos.edificios.AtributosEdificio;
 import fiuba.algo3.excepciones.RecursoAusente;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.Posicion;
-import fiuba.algo3.mapa.recurso.TipoOcupante;
+import fiuba.algo3.ocupantes.edificios.en_construccion.Construccion;
+import fiuba.algo3.ocupantes.edificios.en_construccion.ConstruccionEntrenadorUnidades;
+import fiuba.algo3.ocupantes.edificios.en_construccion.ConstruccionIncrementadorPoblacion;
+import fiuba.algo3.ocupantes.edificios.en_construccion.ConstruccionRecolector;
+import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.terreno.TipoTerreno;
 
 public class EdificiosFactory implements EdificiosAbstractFactory{

@@ -4,7 +4,7 @@ package fiuba.algo3.A_BORRAR;
 
 import java.util.ArrayList;
 
-import fiuba.algo3.unidades.Constructor;
+import fiuba.algo3.ocupantes.unidades.constructores.Constructor;
 
 public class EntrenadorUnidadesNull extends EntrenadorUnidades {
 

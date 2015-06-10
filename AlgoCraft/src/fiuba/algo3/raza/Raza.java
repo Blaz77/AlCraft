@@ -1,7 +1,6 @@
 package fiuba.algo3.raza;
 
-import fiuba.algo3.atributos.AtributosJugador;
-import fiuba.algo3.atributos.AtributosJugador;
+import fiuba.algo3.atributos.jugador.AtributosJugador;
 
 public interface Raza {
 	public Object construccionesDisponibles();

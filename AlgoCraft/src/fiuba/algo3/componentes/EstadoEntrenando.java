@@ -1,8 +1,8 @@
 package fiuba.algo3.componentes;
 
-import fiuba.algo3.edificios.EdificioEntrenadorUnidades;
-import fiuba.algo3.edificios.ObjetoVivo;
-import fiuba.algo3.unidades.Constructor;
+import fiuba.algo3.ocupantes.edificios.EdificioEntrenadorUnidades;
+import fiuba.algo3.ocupantes.ObjetoVivo;
+import fiuba.algo3.ocupantes.unidades.constructores.Constructor;
 
 public class EstadoEntrenando implements Estado {
 

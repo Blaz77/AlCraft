@@ -7,11 +7,11 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import fiuba.algo3.juego.Ocupante;
 import fiuba.algo3.mapa.Celda;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
-import fiuba.algo3.mapa.recurso.TipoOcupante;
+import fiuba.algo3.ocupantes.Ocupante;
+import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.terreno.TipoTerreno;
 
 public class TestMapa {

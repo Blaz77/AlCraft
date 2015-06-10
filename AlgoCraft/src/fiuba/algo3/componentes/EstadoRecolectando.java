@@ -1,8 +1,8 @@
 package fiuba.algo3.componentes;
 
-import fiuba.algo3.edificios.EdificioRecolector;
-import fiuba.algo3.edificios.ObjetoVivo;
 import fiuba.algo3.juego.Jugador;
+import fiuba.algo3.ocupantes.edificios.EdificioRecolector;
+import fiuba.algo3.ocupantes.ObjetoVivo;
 
 public abstract class EstadoRecolectando implements Estado {
 

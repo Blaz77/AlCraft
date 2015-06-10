@@ -5,13 +5,15 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import fiuba.algo3.edificios.Barraca;
-import fiuba.algo3.edificios.Fabrica;
-import fiuba.algo3.edificios.PuertoEstelar;
 import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.ocupantes.edificios.Barraca;
+import fiuba.algo3.ocupantes.edificios.Fabrica;
+import fiuba.algo3.ocupantes.edificios.PuertoEstelar;
+import fiuba.algo3.ocupantes.unidades.UnidadAtaque;
+import fiuba.algo3.ocupantes.unidades.UnidadMagica;
 import fiuba.algo3.raza.TipoRaza;
 
 public class TestNaveDeCiencia extends TestUnidadMagica {

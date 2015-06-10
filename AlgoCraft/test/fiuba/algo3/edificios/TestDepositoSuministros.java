@@ -5,12 +5,13 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import fiuba.algo3.edificios.Edificio;
 import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
+import fiuba.algo3.ocupantes.edificios.Edificio;
+import fiuba.algo3.ocupantes.edificios.en_construccion.Construccion;
 import fiuba.algo3.raza.TipoRaza;
 
 public class TestDepositoSuministros extends TestEdificio {

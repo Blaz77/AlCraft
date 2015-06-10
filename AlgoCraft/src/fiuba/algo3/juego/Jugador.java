@@ -2,8 +2,7 @@ package fiuba.algo3.juego;
 
 import java.util.ArrayList;
 
-import fiuba.algo3.atributos.AtributosJugador;
-import fiuba.algo3.edificios.Edificio;
+import fiuba.algo3.atributos.jugador.AtributosJugador;
 import fiuba.algo3.excepciones.GasVespenoInsuficiente;
 import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.SuministroInsuficiente;
@@ -11,10 +10,11 @@ import fiuba.algo3.excepciones.UnidadNoPropia;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.MapaProxy;
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.ocupantes.edificios.Edificio;
+import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.raza.Raza;
 import fiuba.algo3.raza.RazaFactory;
 import fiuba.algo3.raza.TipoRaza;
-import fiuba.algo3.unidades.Unidad;
 
 //import java.util.ArrayList;
 

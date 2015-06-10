@@ -2,15 +2,15 @@ package fiuba.algo3.mapa;
 
 import java.util.ArrayList;
 
-import fiuba.algo3.atributos.AtributosMarine;
+import fiuba.algo3.atributos.unidades.terran.AtributosMarine;
 import fiuba.algo3.excepciones.CeldaNoVisible;
 import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
-import fiuba.algo3.juego.Ocupante;
+import fiuba.algo3.ocupantes.Ocupante;
+import fiuba.algo3.ocupantes.unidades.Unidad;
+import fiuba.algo3.ocupantes.unidades.UnidadAtaque;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.terreno.Terreno;
-import fiuba.algo3.unidades.Unidad;
-import fiuba.algo3.unidades.UnidadAtaque;
 
 public class MapaProxy {
 

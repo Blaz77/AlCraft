@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import fiuba.algo3.excepciones.MovimientoInvalido;
-import fiuba.algo3.mapa.recurso.GasVespeno;
-import fiuba.algo3.mapa.recurso.Mineral;
-import fiuba.algo3.mapa.recurso.TipoOcupante;
-import fiuba.algo3.juego.Ocupante;
+import fiuba.algo3.ocupantes.Ocupante;
+import fiuba.algo3.ocupantes.recurso.GasVespeno;
+import fiuba.algo3.ocupantes.recurso.Mineral;
+import fiuba.algo3.ocupantes.recurso.TipoOcupante;
+import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.terreno.Espacio;
 import fiuba.algo3.terreno.Terreno;
 import fiuba.algo3.terreno.Tierra;
 import fiuba.algo3.terreno.TipoTerreno;
-import fiuba.algo3.unidades.Unidad;
 
 
 public class Mapa {

@@ -2,7 +2,7 @@ package fiuba.algo3.mapa;
 
 import java.util.HashSet;
 
-import fiuba.algo3.unidades.Unidad;
+import fiuba.algo3.ocupantes.unidades.Unidad;
 
 // los 3 estados de iluminacion de una celda son:
 //				verTerreno:	verOcupante:	implementacion:

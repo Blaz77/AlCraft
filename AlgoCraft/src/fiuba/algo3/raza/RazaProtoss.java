@@ -1,8 +1,7 @@
 package fiuba.algo3.raza;
 
-import fiuba.algo3.atributos.AtributosJugador;
-import fiuba.algo3.atributos.AtributosJugador;
-import fiuba.algo3.atributos.AtributosJugadorProtoss;
+import fiuba.algo3.atributos.jugador.AtributosJugador;
+import fiuba.algo3.atributos.jugador.AtributosJugadorProtoss;
 
 class RazaProtoss implements Raza {
 

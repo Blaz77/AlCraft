@@ -13,6 +13,8 @@ import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
+import fiuba.algo3.ocupantes.edificios.EdificioEntrenadorUnidades;
+import fiuba.algo3.ocupantes.edificios.en_construccion.Construccion;
 
 public class TestFabrica extends TestEdificio {
 

@@ -1,6 +1,7 @@
 package fiuba.algo3.mapa;
 
-import fiuba.algo3.juego.Ocupante;
+import fiuba.algo3.ocupantes.CeldaVacia;
+import fiuba.algo3.ocupantes.Ocupante;
 import fiuba.algo3.terreno.Terreno;
 
 

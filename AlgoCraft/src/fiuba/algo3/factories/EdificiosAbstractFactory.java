@@ -2,13 +2,9 @@
 
 package fiuba.algo3.factories;
 
-import fiuba.algo3.edificios.Construccion;
-import fiuba.algo3.edificios.EdificioEntrenadorUnidades;
-import fiuba.algo3.edificios.EdificioIncrementadorPoblacion;
-import fiuba.algo3.edificios.EdificioRecolectorGasVespeno;
-import fiuba.algo3.edificios.EdificioRecolectorMineral;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.ocupantes.edificios.en_construccion.Construccion;
 
 public interface EdificiosAbstractFactory {
 	

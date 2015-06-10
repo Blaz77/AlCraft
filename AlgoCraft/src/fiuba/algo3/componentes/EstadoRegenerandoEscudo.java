@@ -1,6 +1,6 @@
 package fiuba.algo3.componentes;
 
-import fiuba.algo3.edificios.ObjetoVivo;
+import fiuba.algo3.ocupantes.ObjetoVivo;
 
 public class EstadoRegenerandoEscudo implements Estado {
 

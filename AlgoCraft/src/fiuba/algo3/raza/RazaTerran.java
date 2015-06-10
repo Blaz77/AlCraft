@@ -1,7 +1,7 @@
 package fiuba.algo3.raza;
 
-import fiuba.algo3.atributos.AtributosJugador;
-import fiuba.algo3.atributos.AtributosJugadorTerran;
+import fiuba.algo3.atributos.jugador.AtributosJugador;
+import fiuba.algo3.atributos.jugador.AtributosJugadorTerran;
 
 class RazaTerran implements Raza {
 	

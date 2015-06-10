@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import fiuba.algo3.edificios.Edificio;
-import fiuba.algo3.edificios.IEntrenador;
 import fiuba.algo3.excepciones.UnidadFinalizadaException;
-import fiuba.algo3.unidades.Constructor;
+import fiuba.algo3.ocupantes.edificios.Edificio;
+import fiuba.algo3.ocupantes.edificios.IEntrenador;
+import fiuba.algo3.ocupantes.unidades.constructores.Constructor;
 
 public class EntrenadorUnidades implements Trabajo,IEntrenador {
 
