@@ -3,7 +3,7 @@ package fiuba.algo3.atributos;
 public abstract class AtributosUnidad extends AtributosObjetoVivo {
 
 	int costoPoblacion;
-	
+	int costoAlmacenamiento; //costoTransporte
 	int movPorTuno;
 	int rangoVision;  //quizas pasar a ObjetoVivo, chequear si edificios tienen vision
 					  //nop, los edificios estan habitados por ciegos parece... logic (?
@@ -20,6 +20,10 @@ public abstract class AtributosUnidad extends AtributosObjetoVivo {
 		return rangoVision;
 	}
 
+	public boolean puedeSerAlmacenada(){ //puedeSerTransportada
+		return false;
+	}
+	
 	public boolean puedeAtacar(){
 		return false;
 	}
@@ -28,4 +32,7 @@ public abstract class AtributosUnidad extends AtributosObjetoVivo {
 		return false;
 	}
 		
+	public boolean puedeAlmacenar(){ //puedeTransportar()
+		return false;
+	}
 }

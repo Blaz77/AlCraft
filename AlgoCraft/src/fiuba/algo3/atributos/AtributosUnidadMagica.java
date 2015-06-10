@@ -11,6 +11,11 @@ public class AtributosUnidadMagica extends AtributosUnidad {
 	MagiaDeAreaDeEfecto magiaAoE;
 	MagiaAUnidad magiaUnidad;
 	
+	@Override
+	public boolean puedeHacerMagia(){
+		return true;
+	}
+	
 	public int getEnergiaMaxima(){
 		return energiaMax;
 	}
@@ -19,16 +24,16 @@ public class AtributosUnidadMagica extends AtributosUnidad {
 		return energiaARegenerarPorTurno;
 	}
 	
+	public int getRangoMagia() {
+		return rangoMagia;
+	}
+	
 	public MagiaDeAreaDeEfecto getMagiaDeAreaDeEfecto(){
 		return magiaAoE;
 	}
 	
 	public MagiaAUnidad getMagiaAUnidad(){
 		return magiaUnidad;
-	}
-
-	public int getRangoMagia() {
-		return rangoMagia;
 	}
 	
 }

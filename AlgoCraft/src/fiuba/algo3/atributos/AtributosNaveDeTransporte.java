@@ -11,6 +11,12 @@ public class AtributosNaveDeTransporte extends AtributosUnidadTransporte {
 		
 		// fields de Unidad:
 		this.costoPoblacion = 2;
+		this.costoAlmacenamiento = 0; //tecnicamente no es almacenable
+		this.movPorTuno = 4; //?
+		this.rangoVision = 8; 
+		
+		// fields de UnidadTransporte:
+		this.capacidadAlmacenamiento = 8;
 	}
 
 }
