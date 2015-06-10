@@ -65,5 +65,9 @@ public class Opciones {
 	public void setCantidadBases(int cantidadBases) {
 		this.cantidadBases = cantidadBases;
 	}
+
+	public int getCantidadJugadores() {
+		return 2; // posiblemente despues permitir mas jugadores? no nos lo piden igual
+	}
 	
 }

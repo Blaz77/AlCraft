@@ -27,13 +27,11 @@ public class Juego implements Iterable<Jugador>, Iterator<Jugador>{
 	 * agregarlos despues).*/
 	
 	public Juego(Opciones opciones){ // (Opciones opciones) {
-		// TODO agregar clase opciones, para encapsular todas las opciones
-		// seleccionadas en los menus previos a jugar (si los hay)
 		mapa = new Mapa(opciones.getCantidadBases());
 		String nombreJugador;
 		TipoRaza razaJugador;
 		Color colorJugador;
-		for (int n = 1; n <= 2; n++){
+		for (int n = 1; n <= opciones.getCantidadJugadores(); n++){
 			nombreJugador = opciones.getNombreJugador(n);
 			colorJugador = opciones.getColorJugador(n);
 			razaJugador = opciones.getRazaJugador(n);
