@@ -38,11 +38,11 @@ public class TestNaveDeCiencia extends TestUnidadMagica {
 	public void testMagiasConsumenEnergia() {
 		int energiaRelativa = unidad.getEnergia();
 		unidad.getMagiaDeAreaDeEfecto().ejecutar(unidad.getPosicion());
-		assertEquals(energiaRelativa, unidad.getEnergia() - 100);
+		assertEquals(energiaRelativa - 100, unidad.getEnergia());
 		
 		energiaRelativa = unidad.getEnergia();
 		unidad.getMagiaAUnidad().ejecutar(unidadEnemigaTerrestre);
-		assertEquals(energiaRelativa, unidad.getEnergia() - 75);
+		assertEquals(energiaRelativa -75, unidad.getEnergia());
 	}
 	
 }
