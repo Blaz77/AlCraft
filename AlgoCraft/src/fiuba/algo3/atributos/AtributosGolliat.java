@@ -9,6 +9,7 @@ public class AtributosGolliat extends AtributosUnidadAtaque {
 		this.turnosConstruccion = 6;
 		this.nombre = "Golliat";
 		
+		// fields de Unidad:
 		this.costoPoblacion = 2;
 		this.movPorTuno = 1; //?Inventado?!!!
 		this.rangoVision = 7;
