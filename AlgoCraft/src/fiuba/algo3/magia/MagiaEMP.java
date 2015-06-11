@@ -21,7 +21,7 @@ public class MagiaEMP extends MagiaDeAreaDeEfecto {
 		if (!this.unidad.estaEnRangoDeMagia(posicionCentral))
 			throw new FueraDelRangoPermitido();
 		this.unidad.disminuirEnergia(this.costoDeEjecutar);
-		//Codigo para efectuar el EMP: TODO
+		for (unidad : )
 	}
 
 }

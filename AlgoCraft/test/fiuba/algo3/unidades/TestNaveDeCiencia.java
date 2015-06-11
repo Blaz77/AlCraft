@@ -47,4 +47,12 @@ public class TestNaveDeCiencia extends TestUnidadMagica {
 		assertEquals(energiaRelativa -75, unidad.getEnergia());
 	}
 	
+	@Test
+	public void testMagiaEMPCausaEfectoAUnidadMagicaCercana() {
+		assertTrue(unidadEnemigaMagica.getEnergia() != 0);
+
+		unidad.getMagiaDeAreaDeEfecto().ejecutar(unidad.getPosicion());
+		assertTrue(unidadEnemigaMagica.getEnergia() == 0);
+	}
+	
 }

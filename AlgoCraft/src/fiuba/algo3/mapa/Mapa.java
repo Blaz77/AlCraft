@@ -237,11 +237,43 @@ public class Mapa {
 		return this.getCelda(posicion).getTerreno();
 	}
 	
-	 public void mover(Unidad /*ObjetoVivo*/ unidad, Posicion destino){
-		 if (getOcupante(destino).getTipo() != TipoOcupante.CELDA_VACIA)
-			 throw new MovimientoInvalido();
-		 unidad.moverA(destino);
-	 }
+	public void mover(Unidad /*ObjetoVivo*/ unidad, Posicion destino){
+		if (getOcupante(destino).getTipo() != TipoOcupante.CELDA_VACIA)
+			throw new MovimientoInvalido();
+		unidad.moverA(destino);
+	}
+	 
+	// Tal vez es mucho para llamarlo getter, reubicar.
+	 
+	/* Recorre el mapa alrededor del centro especificado y devuelve las unidades 
+	 * que se encuentran presentes alrededor dentro del circulo cuyo radio es la 
+	 * distancia dada.
+	 */
+	public ArrayList<Unidad> getUnidadesEnRango(Posicion centro, int distancia) {
+		if (!celdaValida(centro)) throw new RuntimeException(); // _Revisar_
+		
+		ArrayList<Unidad> unidades = new ArrayList<Unidad>();
+		
+		for (int y = centro.getY() - distancia; y < centro.getY() + distancia; y++) {
+			for (int x = centro.getX() - distancia; x < centro.getX() + distancia; x++) {
+				Posicion posActual = new Posicion(x, y);
+				// Dentro del mapa y el circulo
+				if (celdaValida(posActual) && distancia(centro, posActual) <= distancia) {
+					if (mapa[x][y].getOcupante().getTipo() == TipoOcupante.UNIDAD) {
+						if (true) {
+							if (true && !false) {
+								for (int i=0; i<1; i++) {
+									unidades.add((Unidad) mapa[x][y].getOcupante());
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		return null;
+	}
 	
 	/**********************************************/
 	/**                DEBUG AREA                **/
