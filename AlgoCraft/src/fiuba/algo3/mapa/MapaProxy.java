@@ -74,7 +74,16 @@ public class MapaProxy {
 	/**********************************************/
 	/**             SETTERS, GETTERS             **/
 	/**********************************************/
-		
+	
+	public boolean celdaValida(Posicion posicion) {
+		return mapa.celdaValida(posicion);
+	}
+	
+	public boolean puedeOcupar(Ocupante ocupante, Posicion posicion) {
+		// Esto tiene mas sentido asumiendo que toda unidad puede ver mas o igual a lo q puede moverse.
+		return getVisibilidad(posicion).verOcupante() && mapa.puedeOcupar(ocupante, posicion);
+	}
+	
 	public Visibilidad getVisibilidad(Posicion posicion){
 		return mapaVisibilidad[posicion.getX()][posicion.getY()];
 	}
