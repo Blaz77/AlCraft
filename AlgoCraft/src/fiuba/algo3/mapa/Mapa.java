@@ -205,6 +205,16 @@ public class Mapa {
 		return mapa[posicion.getX()][posicion.getY()];
 	}
 	
+	//una opcion para que devuelva booleano
+	public boolean puedeOcupar(Ocupante ocupante, Posicion posicion){
+		return this.getCelda(posicion).puedeSerOcupada(ocupante);
+	}
+	
+	//otra opcion para que lanze excepciones en caso de error, sino nada
+	public void verificarOcupacion(Ocupante ocupante, Posicion posicion){
+		this.getCelda(posicion).verificarOcupacion(ocupante);
+	}
+	
 	public void setOcupante(Ocupante ocupante, Posicion posicion) {
 		this.getCelda(posicion).setOcupante(ocupante);
 	}

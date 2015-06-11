@@ -1,5 +1,7 @@
 package fiuba.algo3.mapa;
 
+import fiuba.algo3.excepciones.RecursoAusente;
+import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.ocupantes.CeldaVacia;
 import fiuba.algo3.ocupantes.Ocupante;
 import fiuba.algo3.terreno.Terreno;
@@ -39,10 +41,25 @@ public class Celda { //quizas heredar de celda y armar Tierra/Espacio extends Ce
 	public Posicion getPosicion(){
 		return ocupante.getPosicion();
 	}
+	
+	public boolean puedeSerOcupada(Ocupante ocupante) {
+		return (this.terreno.puedeSerOcupada(ocupante) &&
+				this.ocupante.puedeCambiarsePor(ocupante));
+	}
+	
+	public void verificarOcupacion(Ocupante ocupante){
+		if (!this.terreno.puedeSerOcupada(ocupante))
+			throw new TerrenoInadecuado();
+		if (!this.ocupante.puedeCambiarsePor(ocupante))
+			throw new RecursoAusente(); //Y si no era un Recurso?!?!?!
+			//TODO: Falta diferenciar de si es recurso o un ocupante distinto!
+			// solucion: que devuelvan ellos la excepcion?
+	}
 		
 	public void setOcupante(Ocupante ocupante) {
+		this.verificarOcupacion(ocupante);
 		this.ocupante = ocupante;
-	}	
+	}
 	
 	public Ocupante getOcupante() {
 		return this.ocupante;

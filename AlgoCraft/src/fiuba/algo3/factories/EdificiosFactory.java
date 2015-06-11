@@ -33,7 +33,7 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 		// Chequeo y compra 
 		comprarEdificio(jugador, jugador.getAtributos().getRecolectorGasVespeno());
 		return new ConstruccionRecolector(jugador, posicion, jugador.getAtributos().getRecolectorGasVespeno());
-		
+		//mapa.setOcupante(construccion, posicion)???
 	}
 
 	public Construccion crearRecolectorMineral(Jugador jugador, Posicion posicion) {

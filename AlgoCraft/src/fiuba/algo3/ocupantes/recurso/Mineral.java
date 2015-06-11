@@ -2,7 +2,6 @@ package fiuba.algo3.ocupantes.recurso;
 
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.Ocupante;
-import fiuba.algo3.ocupantes.edificios.Edificable;
 
 public class Mineral extends Recurso {
 	
@@ -12,10 +11,6 @@ public class Mineral extends Recurso {
 
 	public TipoOcupante getTipo() {
 		return TipoOcupante.MINERAL;
-	}
-	
-	public boolean puedeEdificar(Edificable edif){
-		return edif.sobreMineral();
 	}
 
 	@Override

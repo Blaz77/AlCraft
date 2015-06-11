@@ -1,6 +1,6 @@
 package fiuba.algo3.terreno;
 
-import fiuba.algo3.ocupantes.edificios.Edificable;
+import fiuba.algo3.ocupantes.Ocupante;
 
 public class Tierra extends Terreno {
 	
@@ -8,8 +8,9 @@ public class Tierra extends Terreno {
 		return TipoTerreno.TIERRA;
 	}
 	
-	public boolean puedeEdificar(Edificable edif){
-		return edif.enTierra();
+	@Override
+	public boolean puedeSerOcupada(Ocupante ocupante) {
+		return ocupante.puedeOcuparTierra();
 	}
 
 }

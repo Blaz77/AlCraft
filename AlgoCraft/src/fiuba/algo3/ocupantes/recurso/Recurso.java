@@ -3,7 +3,6 @@ package fiuba.algo3.ocupantes.recurso;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.ObjetoNoVivo;
 import fiuba.algo3.ocupantes.Ocupante;
-import fiuba.algo3.ocupantes.edificios.Edificable;
 
 public abstract class Recurso extends ObjetoNoVivo {
 	
@@ -12,8 +11,6 @@ public abstract class Recurso extends ObjetoNoVivo {
 	public Recurso(Posicion posicion) {
 		super(posicion);
 	}
-
-	public abstract boolean puedeEdificar(Edificable edif);
 	
 	public abstract TipoOcupante getTipo();
 	
