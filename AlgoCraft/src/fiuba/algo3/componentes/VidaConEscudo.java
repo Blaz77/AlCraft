@@ -5,13 +5,11 @@ import fiuba.algo3.atributos.AtributosObjetoVivo;
 public class VidaConEscudo extends Vida {
 	
 	private int escudo;
-	private int escudoMaximo;
-	
+
 	// Para setear especificamente la vida/escudo inicial (ej: construccion de edificios)
 	public VidaConEscudo(int vidaInicial, int escudoInicial, AtributosObjetoVivo atributos) {
 		super(vidaInicial, atributos);
 		this.escudo = escudoInicial;
-		this.escudoMaximo = atributos.getEscudoMaximo();
 	}
 	
 	public VidaConEscudo(AtributosObjetoVivo atributos){
@@ -31,7 +29,7 @@ public class VidaConEscudo extends Vida {
 	
 	@Override
 	public int getEscudoMaximo(){
-		return this.escudoMaximo;
+		return atributos.getEscudoMaximo();
 	}
 	
 	@Override
