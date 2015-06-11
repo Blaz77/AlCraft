@@ -1,5 +1,6 @@
 package fiuba.algo3.magia;
 
+import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
 
 public abstract class MagiaDeAreaDeEfecto extends Magia{
@@ -12,6 +13,6 @@ public abstract class MagiaDeAreaDeEfecto extends Magia{
 	
 	public abstract boolean puedeEjecutar(Posicion posicionCentral);
 	
-	public abstract void ejecutar(Posicion posicionCentral);
+	public abstract void ejecutar(Posicion posicionCentral, Mapa mapa);
 
 }

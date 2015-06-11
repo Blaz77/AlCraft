@@ -1,5 +1,6 @@
 package fiuba.algo3.magia;
 
+import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 
 public abstract class MagiaAUnidad extends Magia{

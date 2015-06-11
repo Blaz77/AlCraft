@@ -29,6 +29,8 @@ public class TestNaveDeCiencia extends TestUnidadMagica {
 		this.unidadEnemigaAerea = new UnidadAtaque(jugadorEnemigo, new Posicion(1,2), jugadorEnemigo.getAtributos().getInfanteriaPesadaArea());
 		this.unidadEnemigaMagica = new UnidadMagica(jugadorEnemigo, new Posicion(1,2), jugadorEnemigo.getAtributos().getInfanteriaMagica());
 		this.edificioEnemigo = new Fabrica(jugadorEnemigo, new Posicion(3,3));	
+	
+		this.mapa.setOcupante(unidadEnemigaMagica, unidadEnemigaMagica.getPosicion());
 	}
 	
 	@Test
@@ -39,7 +41,7 @@ public class TestNaveDeCiencia extends TestUnidadMagica {
 	@Test
 	public void testMagiasConsumenEnergia() {
 		int energiaRelativa = unidad.getEnergia();
-		unidad.getMagiaDeAreaDeEfecto().ejecutar(unidad.getPosicion());
+		unidad.getMagiaDeAreaDeEfecto().ejecutar(unidad.getPosicion(), mapa);
 		assertEquals(energiaRelativa - 100, unidad.getEnergia());
 		
 		energiaRelativa = unidad.getEnergia();
@@ -51,8 +53,16 @@ public class TestNaveDeCiencia extends TestUnidadMagica {
 	public void testMagiaEMPCausaEfectoAUnidadMagicaCercana() {
 		assertTrue(unidadEnemigaMagica.getEnergia() != 0);
 
-		unidad.getMagiaDeAreaDeEfecto().ejecutar(unidad.getPosicion());
+		unidad.getMagiaDeAreaDeEfecto().ejecutar(unidad.getPosicion(), mapa);
 		assertTrue(unidadEnemigaMagica.getEnergia() == 0);
 	}
 	
+	@Test
+	public void testMagiaRadiacionCausaEfectoAUnidadElegida() {
+		int vidaRelativa = unidadEnemigaTerrestre.getVida();
+
+		unidad.getMagiaAUnidad().ejecutar(unidadEnemigaTerrestre);
+		unidadEnemigaTerrestre.pasarTurno();
+		assertTrue(unidadEnemigaTerrestre.getVida() < vidaRelativa);
+	}
 }

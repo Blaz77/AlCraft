@@ -260,19 +260,13 @@ public class Mapa {
 				// Dentro del mapa y el circulo
 				if (celdaValida(posActual) && distancia(centro, posActual) <= distancia) {
 					if (mapa[x][y].getOcupante().getTipo() == TipoOcupante.UNIDAD) {
-						if (true) {
-							if (true && !false) {
-								for (int i=0; i<1; i++) {
-									unidades.add((Unidad) mapa[x][y].getOcupante());
-								}
-							}
-						}
+						unidades.add((Unidad) mapa[x][y].getOcupante());
 					}
 				}
 			}
 		}
 		
-		return null;
+		return unidades;
 	}
 	
 	/**********************************************/
