@@ -205,6 +205,16 @@ public class Mapa {
 		return mapa[posicion.getX()][posicion.getY()];
 	}
 	
+	// Aca prohibo celdas negativas, no en posicion, para no perder la chance
+	// de "sumar" para moverme en direcciones negativas 
+	public boolean celdaValida(Posicion posicion) {
+
+		return	(posicion.getX() >= 0) &&
+				(posicion.getY() >= 0) &&
+				(posicion.getX() < ancho) &&
+				(posicion.getY() < alto);
+	}
+	
 	//una opcion para que devuelva booleano
 	public boolean puedeOcupar(Ocupante ocupante, Posicion posicion){
 		return this.getCelda(posicion).puedeSerOcupada(ocupante);
