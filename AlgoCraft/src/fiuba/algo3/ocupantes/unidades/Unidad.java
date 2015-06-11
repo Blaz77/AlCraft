@@ -1,10 +1,12 @@
 package fiuba.algo3.ocupantes.unidades;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.mapa.MapaProxy;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.excepciones.MovimientoInvalido;
@@ -69,11 +71,30 @@ public abstract class Unidad extends ObjetoVivo {
 		this.posicion = destino;
 	}
 	
-	//esto es una idea nomas, no necesariamente hacerlo
-	public ArrayList<Posicion> getPosiblesMovimientos(){
-		return null;
+	private int getMovPorTurno() {
+		return 6; // TODO: DESPUES AGREGO ESTO
+	}
+
+	//TODO: chequear q funcione!
+	public HashSet<Posicion> getPosiblesMovimientos(MapaProxy mapa){
+		HashSet<Posicion> posiblesMov = new HashSet<Posicion>();
+		int restantes = getMovPorTurno(); // TODO: DESPUES AGREGO ESTO
+		_getPosiblesMovimientos(mapa, posiblesMov, this.posicion, restantes);
+		return posiblesMov;
 		
 	}
+	
+	// TODO: chequear q funcione! Basicamente hago un BFS y agrego todas las unidades a las q llego
+	public void _getPosiblesMovimientos(MapaProxy mapa, HashSet<Posicion> posiblesMov, Posicion posicionActual, int restantes){
+		if (restantes == 0 || posiblesMov.contains(posicionActual)) return;
+		restantes --;
+		posiblesMov.add(posicionActual);
+		ArrayList<Posicion> adyacentes = posicionActual.getAdyacentes();
+		for (Posicion adyacente: adyacentes)
+			if (mapa.celdaValida(adyacente) && mapa.puedeOcupar(this, adyacente))
+				_getPosiblesMovimientos(mapa, posiblesMov, adyacente, restantes);
+	}
+
 	
 	public boolean puedeAtacar(){
 		return ((AtributosUnidad)this.atributos).puedeAtacar();
