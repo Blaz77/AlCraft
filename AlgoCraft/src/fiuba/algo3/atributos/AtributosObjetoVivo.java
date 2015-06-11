@@ -6,6 +6,13 @@ import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.IVida;
 import fiuba.algo3.componentes.Vida;
 
+/*
+  Superclase de los atributos ('stats' en la mayoria de los juegos en ingles)
+  de un tipo de unidad/edificio perteneciente a un jugador.
+  
+  Instanciadas todas las hijas (indirectamente) al crear cada jugador, y referenciadas
+  por éste y por todas sus unidades/edificios.
+ */
 public abstract class AtributosObjetoVivo { //AtributosObjetoDeJuego?
 	
 	protected LinkedList<Estado> estadosIniciales = new LinkedList<Estado>();
