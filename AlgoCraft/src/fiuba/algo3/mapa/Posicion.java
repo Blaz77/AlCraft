@@ -1,5 +1,7 @@
 package fiuba.algo3.mapa;
 
+import java.util.ArrayList;
+
 public class Posicion {
 	private int x;
 	private int y;
@@ -24,6 +26,22 @@ public class Posicion {
 	public boolean estaEnRango(Posicion otraPosicion, int rango) {
 		return (this.distancia(otraPosicion) <= rango);
 	}
+	
+	// No prohibo posiciones negativas con esto, atentos. xq? xq no gano nada aca con hacerlo, 
+	// y el mapa cualquier dia podria pasar a admitir pixeles negativos (es muy comun)
+	public ArrayList<Posicion> getAdyacentes(){
+		ArrayList<Posicion> adyacentes = new ArrayList<Posicion>();
+		adyacentes.add(this.sumar(new Posicion(-1, 0)));
+		adyacentes.add(this.sumar(new Posicion( 1, 0)));
+		adyacentes.add(this.sumar(new Posicion( 0,-1)));
+		adyacentes.add(this.sumar(new Posicion( 0, 1)));
+				
+		return adyacentes;
+	}
+	
+	private Posicion sumar(Posicion other) {
+		return new Posicion(this.x + other.x, this.y + other.y);
+	}	
 
 	@Override
 	public int hashCode() {
