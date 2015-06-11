@@ -11,4 +11,13 @@ public abstract class Magia {
 		this.unidad = unidad;
 	}
 	
+	public boolean esAUnidad(){
+		return false;
+	}
+	
+	public boolean esDeAreaDeEfecto(){
+		return false;
+	}
+	
+	
 }
