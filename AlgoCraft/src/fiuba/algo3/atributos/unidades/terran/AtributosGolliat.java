@@ -1,5 +1,6 @@
 package fiuba.algo3.atributos.unidades.terran;
 
+import fiuba.algo3.atributos.AtributosAtaque;
 import fiuba.algo3.atributos.AtributosCosto;
 import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.unidades.AtributosUnidadAtaque;
@@ -18,11 +19,12 @@ public class AtributosGolliat extends AtributosUnidadAtaque {
 		this.rangoVision = 7;
 		
 		// fields de UnidadAtaque:
-		this.ataquesPorTurno = 1;//?Inventado?!!!
-		this.danioAAire = 10; 
-		this.danioATierra = 12;
-		this.rangoAire = 5;
-		this.rangoTierra = 6;
+		this.ataque = new AtributosAtaque(
+				10, //Danio A Aire
+				12,  //Danio A Tierra
+				5,  //Rango a Aire
+				6,  //Rango a Tierra
+				1); //Ataques por Turno
 		
 	}
 	

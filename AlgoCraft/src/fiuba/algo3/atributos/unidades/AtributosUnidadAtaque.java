@@ -1,31 +1,14 @@
 package fiuba.algo3.atributos.unidades;
 
+import fiuba.algo3.atributos.AtributosAtaque;
+import fiuba.algo3.componentes.Ataque;
+
 public abstract class AtributosUnidadAtaque extends AtributosUnidad {
 
-	protected int ataquesPorTurno;
-	protected int danioAAire; 
-	protected int danioATierra;	
-	protected int rangoAire;
-	protected int rangoTierra;
+	protected AtributosAtaque ataque;
 	
-	public int getAtaquesPorTurno(){
-		return ataquesPorTurno;
-	}
-	
-	public int getDanioAtkAire(){
-		return danioAAire;
-	}
-	
-	public int getDanioAtkTierra(){
-		return danioATierra;
-	}
-	
-	public int getRangoAtkAire(){
-		return rangoAire;
-	}
-	
-	public int getRangoAtkTierra(){
-		return rangoTierra;
+	public Ataque getAtaque(){
+		return new Ataque(this.ataque);
 	}
 	
 	@Override

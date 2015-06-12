@@ -1,5 +1,6 @@
 package fiuba.algo3.atributos.unidades.terran;
 
+import fiuba.algo3.atributos.AtributosAtaque;
 import fiuba.algo3.atributos.AtributosCosto;
 import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.unidades.AtributosUnidadAtaque;
@@ -18,11 +19,12 @@ public class AtributosEspectro extends AtributosUnidadAtaque {
 		//this.rangoVision = 7;
 		
 		// fields de UnidadAtaque:
-		this.ataquesPorTurno = 1;//?Inventado?!!!
-		this.danioAAire = 20; 
-		this.danioATierra = 8;
-		this.rangoAire = 5;
-		this.rangoTierra = 5;
+		this.ataque = new AtributosAtaque(
+				20, //Danio A Aire
+				8,  //Danio A Tierra
+				5,  //Rango a Aire
+				5,  //Rango a Tierra
+				1); //Ataques por Turno
 	}
 	
 	@Override
