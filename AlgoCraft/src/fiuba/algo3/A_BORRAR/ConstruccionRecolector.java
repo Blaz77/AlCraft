@@ -1,6 +1,5 @@
 package fiuba.algo3.A_BORRAR;
 
-import fiuba.algo3.atributos.edificios.AtributosEdificioRecolector;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.edificios.Edificio;
