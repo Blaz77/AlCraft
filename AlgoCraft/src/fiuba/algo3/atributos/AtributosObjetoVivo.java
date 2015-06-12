@@ -24,6 +24,11 @@ public abstract class AtributosObjetoVivo { //AtributosObjetoDeJuego?
 
 	
 	public LinkedList<Estado> getEstadosIniciales(){
+		/*LinkedList<Estado> copiaEstados = new LinkedList<Estado>();
+		for (Estado estado : this.estadosIniciales) {
+			copiaEstados.add(estado.clone());
+		}
+		return copiaEstados;*/
 		return new LinkedList<Estado>(estadosIniciales);
 	}
 	

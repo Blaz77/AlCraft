@@ -14,12 +14,16 @@ public class Ataque implements Estado {
 	private ObjetoVivo portador;
 	
 	//Ataque quizas despues comparte Posicion con el objeto que lo use
-	// -> actualizaciones a Posicion se reflejarian tambien aca!
-		
+	// -> actualizaciones a Posicion se reflejarian tambien aca!	
 	
 	public Ataque(AtributosAtaque atributos){
 		this.atributos = atributos;
 		this.ataquesRestantes = this.atributos.getAtaquesPorTurno();
+	}
+	
+	public Estado clone() {
+		return new Ataque(this.atributos);
+		//poner el portador?
 	}
 	
 	public void activar(ObjetoVivo portador) {
