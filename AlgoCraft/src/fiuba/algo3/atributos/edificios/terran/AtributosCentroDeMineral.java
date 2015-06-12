@@ -1,11 +1,14 @@
 package fiuba.algo3.atributos.edificios.terran;
 
 import fiuba.algo3.atributos.AtributosCosto;
+import fiuba.algo3.atributos.AtributosRecolector;
 import fiuba.algo3.atributos.AtributosVida;
-import fiuba.algo3.atributos.edificios.AtributosEdificioRecolectorMineral;
+import fiuba.algo3.atributos.edificios.AtributosEdificio;
+import fiuba.algo3.componentes.EstadoRecolectandoMineral;
 
-public class AtributosCentroDeMineral extends
-		AtributosEdificioRecolectorMineral {
+public class AtributosCentroDeMineral extends AtributosEdificio {
+	
+	private AtributosRecolector recolectorMineral;
 	
 	public AtributosCentroDeMineral() {
 		// fields ObjetoVivo:
@@ -14,8 +17,19 @@ public class AtributosCentroDeMineral extends
 		this.nombre = "Centro de Mineral";
 
 		// fields EdificioRecolectorMineral
-		this.cantARecolectarPorTurno = 10;
+		this.recolectorMineral = new AtributosRecolector(10);
+		
+		estadosIniciales.add(new EstadoRecolectandoMineral(this.recolectorMineral));
 	}
-
+	
+	@Override
+	public boolean debeOcuparRecurso(){
+		return true;
+	}
+	
+	@Override
+	public boolean debeOcuparMineral(){
+		return true;
+	}
 
 }
