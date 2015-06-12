@@ -13,12 +13,9 @@ import fiuba.algo3.ocupantes.unidades.constructores.Constructor;
 
 public class EdificioEntrenadorUnidades extends Edificio implements IEntrenador{
 	
-	private AtributosEdificioEntrenadorUnidades atributos;
 	public EdificioEntrenadorUnidades(Jugador propietario, Posicion posicion,
 			AtributosEdificioEntrenadorUnidades atributos) {
-		super(propietario, posicion);
-		this.atributos = atributos;
-		inicializar();
+		super(propietario, posicion, atributos);
 		maxEntrenamientosSimultaneos = 1;
 		entrenamientosActuales = 0;
 	}

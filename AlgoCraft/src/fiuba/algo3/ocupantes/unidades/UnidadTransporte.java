@@ -16,14 +16,10 @@ public class UnidadTransporte extends Unidad {
 	private int almacenamientoEnUso = 0; //transporte
 	private LinkedList<Unidad> almacenados = new LinkedList<Unidad>();
 	
-	private AtributosUnidadTransporte atributos;
 	public UnidadTransporte(Jugador propietario, Posicion posicion,
 			AtributosUnidadTransporte atributos) {
-		super(propietario, posicion);
-		this.atributos = atributos;
-		inicializar();
+		super(propietario, posicion, atributos);
 	}
-	
 	
 	private boolean hayLugarPara(Unidad unidad){
 		return (unidad.getCostoAlmacenamiento() <= 

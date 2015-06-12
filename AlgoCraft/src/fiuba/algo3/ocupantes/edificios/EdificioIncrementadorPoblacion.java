@@ -7,11 +7,8 @@ import fiuba.algo3.mapa.Posicion;
 
 public class EdificioIncrementadorPoblacion extends Edificio {
 	
-	private AtributosEdificioIncrementadorPoblacion atributos;
 	public EdificioIncrementadorPoblacion(Jugador propietario, Posicion posicion, AtributosEdificioIncrementadorPoblacion atributos) {
-		super(propietario, posicion);
-		this.atributos = atributos;
-		inicializar();
+		super(propietario, posicion, atributos);
 	}
 	
 	public int getIncrementoDePoblacion(){

@@ -17,22 +17,12 @@ public abstract class Unidad extends ObjetoVivo {
 	//O hacer accionesRestantes y que p/ej 1 ataque cueste 2
 	//									 y 1 movim. cueste 1
 	
-	private AtributosUnidad atributos;
-	public Unidad(Jugador propietario, Posicion posicion){
-		super(propietario, posicion);
-	}
 	
 	public Unidad(Jugador propietario, Posicion posicion, AtributosUnidad atributos){
-		super(propietario, posicion);
-		this.atributos = atributos;
-		inicializar();
-	}
-	
-	protected void inicializar() {
-		super.inicializar();
+		super(propietario, posicion, atributos);
 		//Hacer esto de abajo en los CONSTRUCTORES! NO ACA!:
 		propietario.agregarUnidad(this);
-		this.movRestantes = ((AtributosUnidad)this.atributos).getMovPorTurno();		
+		this.movRestantes = ((AtributosUnidad)this.atributos).getMovPorTurno();
 	}
 	
 	public void pasarTurno(){

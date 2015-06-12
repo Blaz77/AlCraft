@@ -1,6 +1,5 @@
 package fiuba.algo3.ocupantes.unidades;
 
-import fiuba.algo3.atributos.unidades.AtributosUnidadAtaque;
 import fiuba.algo3.atributos.unidades.AtributosUnidadMagica;
 import fiuba.algo3.excepciones.EnergiaInsuficiente;
 import fiuba.algo3.juego.Jugador;
@@ -12,20 +11,12 @@ public class UnidadMagica extends Unidad {
 
 	protected int energia;
 	
-	private AtributosUnidadMagica atributos;
 	public UnidadMagica(Jugador propietario, Posicion posicion,
 			AtributosUnidadMagica atributos) {
-		super(propietario, posicion);
-		this.atributos = atributos;
-		inicializar();
-		
-	}
-
-	@Override
-	protected void inicializar() {
+		super(propietario, posicion, atributos);
 		this.energia = this.getEnergiaMaxima();
 	}
-	
+
 	public int getEnergia(){
 		return this.energia;
 	}
