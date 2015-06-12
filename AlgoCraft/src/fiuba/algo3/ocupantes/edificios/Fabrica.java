@@ -13,7 +13,6 @@ public class Fabrica extends EdificioEntrenadorUnidades {
 				.getEntrenadorUnidadesIntermedias());
 		this.vida = new Vida(0, ((AtributosJugador)propietario.getAtributos())
 				.getEntrenadorUnidadesIntermedias());
-		this.nombre = "Fabrica".intern();
 	}
 	
 }

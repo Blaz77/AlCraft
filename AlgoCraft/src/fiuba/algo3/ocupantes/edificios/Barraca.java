@@ -12,7 +12,6 @@ public class Barraca extends EdificioEntrenadorUnidades {
 				.getEntrenadorUnidadesBasicas());
 		this.vida = new Vida(0, ((AtributosJugador)propietario.getAtributos())
 				.getEntrenadorUnidadesBasicas());
-		this.nombre = "Barraca".intern();
 	}
 	
 }

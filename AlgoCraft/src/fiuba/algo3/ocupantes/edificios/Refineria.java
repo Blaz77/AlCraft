@@ -13,7 +13,6 @@ public class Refineria extends EdificioRecolectorGasVespeno {
 				.getRecolectorGasVespeno());
 		this.vida = new Vida(0, ((AtributosJugador)propietario.getAtributos())
 				.getRecolectorGasVespeno());
-		this.nombre = "Refineria".intern();
 	}
 
 }

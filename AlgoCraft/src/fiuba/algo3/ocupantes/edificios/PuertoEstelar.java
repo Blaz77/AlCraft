@@ -13,7 +13,6 @@ public class PuertoEstelar extends EdificioEntrenadorUnidades {
 				.getEntrenadorUnidadesAvanzadas());
 		this.vida = new Vida(0, ((AtributosJugador)propietario.getAtributos())
 				.getEntrenadorUnidadesAvanzadas());
-		this.nombre = "Puerto Estelar".intern();
 	}
 	
 	

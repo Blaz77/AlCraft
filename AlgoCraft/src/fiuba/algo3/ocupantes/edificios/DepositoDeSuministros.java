@@ -13,7 +13,6 @@ public class DepositoDeSuministros extends EdificioIncrementadorPoblacion {
 				.getIncrementadorPoblacion());
 		this.vida = new Vida(0, ((AtributosJugador)propietario.getAtributos())
 				.getIncrementadorPoblacion());
-		this.nombre = "Deposito De Suministros".intern();
 	}
 	
 }
