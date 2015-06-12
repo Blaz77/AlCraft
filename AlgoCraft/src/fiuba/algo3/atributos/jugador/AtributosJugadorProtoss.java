@@ -1,9 +1,9 @@
 package fiuba.algo3.atributos.jugador;
 
+import fiuba.algo3.A_BORRAR.AtributosEdificioIncrementadorPoblacion;
+import fiuba.algo3.A_BORRAR.AtributosEdificioRecolectorGasVespeno;
+import fiuba.algo3.A_BORRAR.AtributosEdificioRecolectorMineral;
 import fiuba.algo3.atributos.edificios.AtributosEdificioEntrenadorUnidades;
-import fiuba.algo3.atributos.edificios.AtributosEdificioIncrementadorPoblacion;
-import fiuba.algo3.atributos.edificios.AtributosEdificioRecolectorGasVespeno;
-import fiuba.algo3.atributos.edificios.AtributosEdificioRecolectorMineral;
 import fiuba.algo3.atributos.edificios.protoss.AtributosAcceso;
 import fiuba.algo3.atributos.edificios.protoss.AtributosArchivosTemplarios;
 import fiuba.algo3.atributos.edificios.protoss.AtributosAsimilador;
