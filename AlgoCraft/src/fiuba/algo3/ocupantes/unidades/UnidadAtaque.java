@@ -14,8 +14,15 @@ public class UnidadAtaque extends Unidad {
 	int ataquesRestantes;
 	//Quizas pasar a accionesRestantes -> ver comment en Unidad.
 
+	private AtributosUnidadAtaque atributos;
 	public UnidadAtaque(Jugador propietario, Posicion posicion, AtributosUnidadAtaque atributos) {
-		super(propietario, posicion, atributos);
+		super(propietario, posicion);
+		this.atributos = atributos;
+		inicializar();
+	}
+	
+	@Override
+	protected void inicializar() {
 		this.ataquesRestantes = ((AtributosUnidadAtaque)this.atributos).getAtaquesPorTurno();
 	}
 	

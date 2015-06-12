@@ -29,6 +29,11 @@ public abstract class ObjetoVivo extends Ocupante { //ObjetoVivo / ObjetoInterac
 		this.propietario = propietario;
 		this.posicion = posicion;
 		this.atributos = atributos;
+		inicializar();
+	}
+	
+	/* Llamar luego de cargar los atributos */
+	protected void inicializar() {
 		this.vida = atributos.getVida();
 		this.estados = atributos.getEstadosIniciales();
 		for (Estado estado : estados) {

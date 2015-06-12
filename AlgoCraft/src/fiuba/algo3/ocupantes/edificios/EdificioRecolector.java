@@ -6,9 +6,12 @@ import fiuba.algo3.mapa.Posicion;
 
 public class EdificioRecolector extends Edificio {
 		
+	protected AtributosEdificioRecolector atributos;
 	public EdificioRecolector(Jugador propietario, Posicion posicion,
 			AtributosEdificioRecolector atributos) {
-		super(propietario, posicion, atributos);
+		super(propietario, posicion);
+		this.atributos = atributos;
+		inicializar();
 	}
 
 	public int getCantARecolectarPorTurno() {

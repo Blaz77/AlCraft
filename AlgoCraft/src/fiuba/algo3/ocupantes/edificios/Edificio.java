@@ -12,6 +12,7 @@ import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 public abstract class Edificio extends ObjetoVivo {
 	
 	private boolean construccionTerminada;
+	protected AtributosEdificio atributos;
 	public Edificio(Jugador propietario, Posicion posicion){
 		super(propietario, posicion);
 		construccionTerminada = false;
@@ -21,10 +22,15 @@ public abstract class Edificio extends ObjetoVivo {
 			AtributosEdificio atributos) {
 		super(propietario, posicion);
 		this.atributos = atributos;
+		inicializar();
+	}
+	
+	@Override
+	protected void inicializar() {
+		super.inicializar();
 		this.vida = new Vida(0,atributos);
 		this.agregarEstado(new EstadoConstruyendoEdificio());
 	}
-	
 	
 	//private Trabajo porDefecto;
 	//private Ataque ataque;
