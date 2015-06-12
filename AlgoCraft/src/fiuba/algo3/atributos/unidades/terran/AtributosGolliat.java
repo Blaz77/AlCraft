@@ -1,5 +1,6 @@
 package fiuba.algo3.atributos.unidades.terran;
 
+import fiuba.algo3.atributos.AtributosCosto;
 import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.unidades.AtributosUnidadAtaque;
 
@@ -7,9 +8,7 @@ public class AtributosGolliat extends AtributosUnidadAtaque {
 
 	public AtributosGolliat() {
 		// fields ObjetoVivo:
-		this.costoGasVespeno = 50;
-		this.costoMineral = 100;
-		this.turnosConstruccion = 6;
+		this.costo = new AtributosCosto(100, 50, 6);
 		this.vida = new AtributosVida(125);
 		this.nombre = "Golliat";
 		

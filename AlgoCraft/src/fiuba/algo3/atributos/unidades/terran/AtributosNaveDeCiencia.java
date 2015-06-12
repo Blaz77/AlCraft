@@ -1,5 +1,6 @@
 package fiuba.algo3.atributos.unidades.terran;
 
+import fiuba.algo3.atributos.AtributosCosto;
 import fiuba.algo3.atributos.unidades.AtributosUnidadMagica;
 import fiuba.algo3.magia.MagiaEMP;
 import fiuba.algo3.magia.MagiaRadiacion;
@@ -8,9 +9,7 @@ public class AtributosNaveDeCiencia extends AtributosUnidadMagica {
 	
 	public AtributosNaveDeCiencia() {
 		// fields ObjetoVivo:
-		this.costoGasVespeno = 225;
-		this.costoMineral = 100;
-		this.turnosConstruccion = 10;
+		this.costo = new AtributosCosto(100, 225, 10);
 		this.nombre = "Nave de ciencia";
 
 		// fields de Unidad:

@@ -2,6 +2,7 @@ package fiuba.algo3.atributos;
 
 import java.util.LinkedList;
 
+import fiuba.algo3.componentes.Costo;
 import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.IVida;
 import fiuba.algo3.componentes.Vida;
@@ -17,27 +18,17 @@ public abstract class AtributosObjetoVivo { //AtributosObjetoDeJuego?
 	
 	protected LinkedList<Estado> estadosIniciales = new LinkedList<Estado>();
 	protected AtributosVida vida;
-	
-	protected int costoMineral;
-	protected int costoGasVespeno;
-	protected int turnosConstruccion;
+	protected AtributosCosto costo;
 	
 	protected String nombre;
 
-	public int getCostoMineral(){
-		return costoMineral;
-	}
-	
-	public int getCostoGasVespeno(){
-		return costoGasVespeno;
-	}
-	
-	public int getTurnosConstruccion(){
-		return turnosConstruccion;
-	}
 	
 	public LinkedList<Estado> getEstadosIniciales(){
 		return new LinkedList<Estado>(estadosIniciales);
+	}
+	
+	public Costo getCosto() {
+		return new Costo(this.costo);
 	}
 	
 	//Importante: hacer ovveride de este para Protoss y usar

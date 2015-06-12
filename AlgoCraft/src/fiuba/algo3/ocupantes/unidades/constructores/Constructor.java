@@ -29,12 +29,12 @@ public abstract class Constructor {
 	}
 
 	public int getTurnosConstruccion() {
-		return this.atributos.getTurnosConstruccion();
+		return this.atributos.getCosto().getTurnosConstruccion();
 	}
 	
 	public void crear(){
-		entrenador.getPropietario().comprar(atributos.getCostoMineral(),
-				atributos.getCostoGasVespeno(), atributos.getCostoPoblacion());
+		entrenador.getPropietario().comprar(atributos.getCosto().getCostoMineral(),
+				atributos.getCosto().getCostoGasVespeno(), atributos.getCostoPoblacion());
 		entrenador.entrenar(this);
 	}
 

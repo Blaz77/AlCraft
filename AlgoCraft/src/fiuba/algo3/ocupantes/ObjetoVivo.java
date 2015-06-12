@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import fiuba.algo3.atributos.AtributosObjetoVivo;
+import fiuba.algo3.componentes.Costo;
 import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.IVida;
 import fiuba.algo3.excepciones.VidaEnCeroException;
@@ -16,6 +17,7 @@ public abstract class ObjetoVivo extends Ocupante { //ObjetoVivo / ObjetoInterac
 	protected IVida vida;
 	protected LinkedList<Estado> estados;
 	protected AtributosObjetoVivo atributos;
+	protected Costo costo;
 
 	// Constructor para objetos sin inicializacion completa 
 	// ej: Construcciones
@@ -29,6 +31,7 @@ public abstract class ObjetoVivo extends Ocupante { //ObjetoVivo / ObjetoInterac
 		this.propietario = propietario;
 		this.posicion = posicion;
 		this.atributos = atributos;
+		this.costo = atributos.getCosto();
 		this.vida = atributos.getVida();
 		this.estados = atributos.getEstadosIniciales();
 		for (Estado estado : estados) {
@@ -81,7 +84,7 @@ public abstract class ObjetoVivo extends Ocupante { //ObjetoVivo / ObjetoInterac
 	}
 	
 	public int getTurnosConstruccion() {
-		return this.atributos.getTurnosConstruccion();
+		return this.costo.getTurnosConstruccion();
 	}
 	
 	public boolean puedeCambiarsePor(Ocupante otroOcupante){

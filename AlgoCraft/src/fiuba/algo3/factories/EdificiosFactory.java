@@ -18,7 +18,7 @@ import fiuba.algo3.terreno.TipoTerreno;
 public class EdificiosFactory implements EdificiosAbstractFactory{
 
 	private void comprarEdificio(Jugador jugador, AtributosEdificio atributos) {
-		jugador.comprar(atributos.getCostoMineral(), atributos.getCostoGasVespeno()); 
+		jugador.comprar(atributos.getCosto().getCostoMineral(), atributos.getCosto().getCostoGasVespeno()); 
 	}
 	
 	public Edificio crearRecolectorGasVespeno(Jugador jugador, Posicion posicion) {
