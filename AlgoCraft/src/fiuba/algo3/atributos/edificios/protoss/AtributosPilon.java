@@ -1,12 +1,15 @@
 package fiuba.algo3.atributos.edificios.protoss;
 
-import fiuba.algo3.atributos.edificios.AtributosEdificioIncrementadorPoblacion;
+import fiuba.algo3.atributos.AtributosIncrementadorPoblacion;
+import fiuba.algo3.atributos.edificios.AtributosEdificio;
 import fiuba.algo3.componentes.EstadoRegenerandoEscudo;
+import fiuba.algo3.componentes.EstadoSuministrandoPoblacion;
 import fiuba.algo3.componentes.IVida;
 import fiuba.algo3.componentes.VidaConEscudo;
 
-public class AtributosPilon extends 
-					AtributosEdificioIncrementadorPoblacion {
+public class AtributosPilon extends AtributosEdificio {
+	
+	private AtributosIncrementadorPoblacion incrPoblacion;
 	
 	public AtributosPilon() {
 		// fields ObjetoVivo:
@@ -18,7 +21,10 @@ public class AtributosPilon extends
 		this.nombre = "Pilon";
 
 		// fields EdificioIncrementadorPoblacion
-		this.incrementoDePoblacion = 5;
+		this.incrPoblacion = new AtributosIncrementadorPoblacion(5);
+				
+		estadosIniciales.add(new EstadoSuministrandoPoblacion(this.incrPoblacion));
+		
 		estadosIniciales.add(new EstadoRegenerandoEscudo());
 	}
 	
