@@ -11,7 +11,6 @@ import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
 import fiuba.algo3.ocupantes.edificios.Edificio;
-import fiuba.algo3.ocupantes.edificios.en_construccion.Construccion;
 import fiuba.algo3.raza.TipoRaza;
 
 public class TestDepositoSuministros extends TestEdificio {
@@ -23,7 +22,7 @@ public class TestDepositoSuministros extends TestEdificio {
 	
 	
 	@Override
-	protected Construccion crearEdificio(Jugador jugador, Posicion posicion) {
+	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
 		return terranFactory.crearIncrementadorPoblacion(jugador, posicion);
 	}
 	

@@ -3,15 +3,15 @@ package fiuba.algo3.edificios;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
-import fiuba.algo3.ocupantes.edificios.en_construccion.Construccion;
+import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.terreno.TipoTerreno;
 
 public abstract class TestEdificio {
 
-	protected abstract Construccion crearEdificio(Jugador jugador, Posicion posicion);
+	protected abstract Edificio crearEdificio(Jugador jugador, Posicion posicion);
 	
-	protected Construccion crearEnTierra(Jugador jugador, Mapa mapa) {
+	protected Edificio crearEnTierra(Jugador jugador, Mapa mapa) {
 		for (int y = 0; y < mapa.alto(); y++) {
 			for (int x = 0; x < mapa.ancho(); x++) {
 				Posicion posEnTierra = new Posicion(x, y);
@@ -23,7 +23,7 @@ public abstract class TestEdificio {
 		return null;
 	}
 	
-	protected Construccion crearFueraDeTierra(Jugador jugador, Mapa mapa) {
+	protected Edificio crearFueraDeTierra(Jugador jugador, Mapa mapa) {
 		for (int y = 0; y < mapa.alto(); y++) {
 			for (int x = 0; x < mapa.ancho(); x++) {
 				Posicion posFueraDeTierra = new Posicion(x, y);
@@ -35,7 +35,7 @@ public abstract class TestEdificio {
 		return null;
 	}
 	
-	protected Construccion crearEnRecurso(Jugador jugador, Mapa mapa, TipoOcupante recurso) {
+	protected Edificio crearEnRecurso(Jugador jugador, Mapa mapa, TipoOcupante recurso) {
 		for (int y = 0; y < mapa.alto(); y++) {
 			for (int x = 0; x < mapa.ancho(); x++) {
 				Posicion posConRecurso = new Posicion(x, y);
@@ -47,7 +47,7 @@ public abstract class TestEdificio {
 		return null;
 	}
 	
-	protected Construccion crearFueraDeRecurso(Jugador jugador, Mapa mapa, TipoOcupante recurso) {
+	protected Edificio crearFueraDeRecurso(Jugador jugador, Mapa mapa, TipoOcupante recurso) {
 		for (int y = 0; y < mapa.alto(); y++) {
 			for (int x = 0; x < mapa.ancho(); x++) {
 				Posicion posSinRecurso = new Posicion(x, y);

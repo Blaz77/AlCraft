@@ -13,8 +13,8 @@ import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
+import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.ocupantes.edificios.EdificioEntrenadorUnidades;
-import fiuba.algo3.ocupantes.edificios.en_construccion.Construccion;
 
 public class TestFabrica extends TestEdificio {
 
@@ -22,11 +22,19 @@ public class TestFabrica extends TestEdificio {
 	private Jugador jugador;
 	private EdificiosFactory terranFactory;
 	private EdificioEntrenadorUnidades fabrica;
-	private Construccion fabricaEnConst;
+	private EdificioEntrenadorUnidades fabricaEnConst;
 	
 	@Override
-	protected Construccion crearEdificio(Jugador jugador, Posicion posicion) {
+	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
 		return terranFactory.crearEntrenadorUnidadesIntermedias(jugador, posicion);
+	}
+	
+	protected EdificioEntrenadorUnidades crearEnTierra(Jugador jugador, Mapa mapa) {
+		return (EdificioEntrenadorUnidades) super.crearEnTierra(jugador, mapa);
+	}
+
+	protected EdificioEntrenadorUnidades crearFueraDeTierra(Jugador jugador, Mapa mapa) {
+		return (EdificioEntrenadorUnidades) super.crearFueraDeTierra(jugador, mapa);
 	}
 
 	@Before
@@ -38,9 +46,9 @@ public class TestFabrica extends TestEdificio {
 		// Aseguro recursos
 		jugador.agregarGasVespeno(500);
 		jugador.agregarMinerales(500);
-		this.fabricaEnConst = crearEnTierra(jugador, mapa);
-		for(int i = 0; i < 12; i++) fabricaEnConst.pasarTurno();//Construccion
-		this.fabrica = (EdificioEntrenadorUnidades)this.fabricaEnConst.getEdificioTerminado();
+		this.fabrica = crearEnTierra(jugador, mapa);
+		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Construccion
+
 		this.fabricaEnConst = crearEnTierra(jugador, mapa);
 	}
 
@@ -48,7 +56,7 @@ public class TestFabrica extends TestEdificio {
 	
 	@Test
 	public void testCrearFabrica() {
-		assertEquals(fabrica.getNombre(),"Fabrica");
+		assertEquals(fabricaEnConst.getNombre(),"Fabrica");
 	}
 	
 	@Test

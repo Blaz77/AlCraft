@@ -1,6 +1,9 @@
 package fiuba.algo3.ocupantes.edificios;
 
 import fiuba.algo3.atributos.edificios.AtributosEdificio;
+import fiuba.algo3.componentes.Estado;
+import fiuba.algo3.componentes.EstadoConstruyendoEdificio;
+import fiuba.algo3.componentes.Vida;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.ObjetoVivo;
@@ -8,13 +11,18 @@ import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 
 public abstract class Edificio extends ObjetoVivo {
 	
+	private boolean construccionTerminada;
 	public Edificio(Jugador propietario, Posicion posicion){
 		super(propietario, posicion);
+		construccionTerminada = false;
 	}
 	
 	public Edificio(Jugador propietario, Posicion posicion,
 			AtributosEdificio atributos) {
-		super(propietario, posicion, atributos);
+		super(propietario, posicion);
+		this.atributos = atributos;
+		this.vida = new Vida(0,atributos);
+		this.agregarEstado(new EstadoConstruyendoEdificio());
 	}
 	
 	
@@ -32,10 +40,20 @@ public abstract class Edificio extends ObjetoVivo {
 
 	public boolean puedeEntrenarUnidades(){
 		// Devolver true aca implica la obligacion de implementar IEntrenador
-		return ((AtributosEdificio) atributos).puedeEntrenarUnidades();
+		return ((AtributosEdificio) atributos).puedeEntrenarUnidades() &&
+				construccionTerminada;
 	}
 	
 	
+	public void construccionFinalizada() {
+		// Se ejecuta al terminar la construccion (Puede dar un aviso,
+		// desbloquear otros edificios o activar estados iniciales)
+		this.estados = atributos.getEstadosIniciales();
+		construccionTerminada = true;
+		for (Estado estado : estados) {
+			estado.activar(this);
+		}
+	}
 	
 	//public boolean puedeAlmacenarUnidades(){}
 		

@@ -1,4 +1,4 @@
-package fiuba.algo3.ocupantes.edificios.en_construccion;
+package fiuba.algo3.A_BORRAR;
 
 import fiuba.algo3.atributos.edificios.AtributosEdificio;
 import fiuba.algo3.componentes.EstadoConstruyendoEdificio;
@@ -7,7 +7,7 @@ import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 
-public abstract class Construccion extends Edificio { //EdificioEnConstruccion
+public abstract class Consthruccion extends Edificio { //EdificioEnConstruccion
 
 	protected Edificio edificio = null;
 	

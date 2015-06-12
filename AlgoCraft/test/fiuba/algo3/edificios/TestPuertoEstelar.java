@@ -12,8 +12,8 @@ import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
+import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.ocupantes.edificios.EdificioEntrenadorUnidades;
-import fiuba.algo3.ocupantes.edificios.en_construccion.Construccion;
 
 public class TestPuertoEstelar extends TestEdificio {
 
@@ -21,11 +21,19 @@ public class TestPuertoEstelar extends TestEdificio {
 	private Jugador jugador;
 	private EdificiosFactory terranFactory;
 	private EdificioEntrenadorUnidades puerto;
-	private Construccion puertoEnConst;
+	private EdificioEntrenadorUnidades puertoEnConst;
 	
 	@Override
-	protected Construccion crearEdificio(Jugador jugador, Posicion posicion) {
+	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
 		return terranFactory.crearEntrenadorUnidadesAvanzadas(jugador, posicion);
+	}
+	
+	protected EdificioEntrenadorUnidades crearEnTierra(Jugador jugador, Mapa mapa) {
+		return (EdificioEntrenadorUnidades) super.crearEnTierra(jugador, mapa);
+	}
+
+	protected EdificioEntrenadorUnidades crearFueraDeTierra(Jugador jugador, Mapa mapa) {
+		return (EdificioEntrenadorUnidades) super.crearFueraDeTierra(jugador, mapa);
 	}
 	
 	@Before
@@ -37,9 +45,8 @@ public class TestPuertoEstelar extends TestEdificio {
 		// Aseguro recursos
 		jugador.agregarGasVespeno(500);
 		jugador.agregarMinerales(500);
-		this.puertoEnConst = crearEnTierra(jugador, mapa);
-		for(int i = 0; i < 10; i++) puertoEnConst.pasarTurno();//Construccion
-		this.puerto = (EdificioEntrenadorUnidades)this.puertoEnConst.getEdificioTerminado();
+		this.puerto = crearEnTierra(jugador, mapa);
+		for(int i = 0; i < 10; i++) puerto.pasarTurno();//Construccion
 		this.puertoEnConst = crearEnTierra(jugador, mapa);
 	}
 
@@ -47,7 +54,7 @@ public class TestPuertoEstelar extends TestEdificio {
 	
 	@Test
 	public void testCrearPuertoEstelar() {
-		assertEquals(puerto.getNombre(),"Puerto Estelar");
+		assertEquals(puertoEnConst.getNombre(),"Puerto Estelar");
 	}
 	
 	@Test

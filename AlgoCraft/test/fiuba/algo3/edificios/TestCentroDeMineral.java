@@ -11,7 +11,6 @@ import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
 import fiuba.algo3.ocupantes.edificios.Edificio;
-import fiuba.algo3.ocupantes.edificios.en_construccion.Construccion;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.raza.TipoRaza;
 
@@ -23,7 +22,7 @@ public class TestCentroDeMineral extends TestEdificio{
 	private Edificio centroMineral;
 	
 	@Override
-	protected Construccion crearEdificio(Jugador jugador, Posicion posicion) {
+	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
 		return terranFactory.crearRecolectorMineral(jugador, posicion);
 	}
 	
@@ -120,10 +119,9 @@ public class TestCentroDeMineral extends TestEdificio{
 	@Test
 	public void testCentroDeMineralRecolectaMinerales() {
 		this.centroMineral = crearEnMineral(jugador, mapa);
-		for(int i = 0; i < 4; i++) centroMineral.pasarTurno();
+		for(int i = 0; i < 4; i++) centroMineral.pasarTurno(); // Construccion
 		int mineralRelativo = jugador.getMinerales();
 		
-		this.centroMineral = ((Construccion)this.centroMineral).getEdificioTerminado();
 		for(int i = 0; i < 10; i++){
 			mineralRelativo += 10;
 			centroMineral.pasarTurno();

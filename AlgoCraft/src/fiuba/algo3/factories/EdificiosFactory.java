@@ -7,10 +7,11 @@ import fiuba.algo3.excepciones.RecursoAusente;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.Posicion;
-import fiuba.algo3.ocupantes.edificios.en_construccion.Construccion;
-import fiuba.algo3.ocupantes.edificios.en_construccion.ConstruccionEntrenadorUnidades;
-import fiuba.algo3.ocupantes.edificios.en_construccion.ConstruccionIncrementadorPoblacion;
-import fiuba.algo3.ocupantes.edificios.en_construccion.ConstruccionRecolector;
+import fiuba.algo3.ocupantes.edificios.Edificio;
+import fiuba.algo3.ocupantes.edificios.EdificioEntrenadorUnidades;
+import fiuba.algo3.ocupantes.edificios.EdificioIncrementadorPoblacion;
+import fiuba.algo3.ocupantes.edificios.EdificioRecolectorGasVespeno;
+import fiuba.algo3.ocupantes.edificios.EdificioRecolectorMineral;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.terreno.TipoTerreno;
 
@@ -20,7 +21,7 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 		jugador.comprar(atributos.getCostoMineral(), atributos.getCostoGasVespeno()); 
 	}
 	
-	public Construccion crearRecolectorGasVespeno(Jugador jugador, Posicion posicion) {
+	public Edificio crearRecolectorGasVespeno(Jugador jugador, Posicion posicion) {
 		// Chequeo de requisitos de edificio anterior:
 		// TODO
 		// Chequeo de terreno y/o recurso:
@@ -32,11 +33,11 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 		}
 		// Chequeo y compra 
 		comprarEdificio(jugador, jugador.getAtributos().getRecolectorGasVespeno());
-		return new ConstruccionRecolector(jugador, posicion, jugador.getAtributos().getRecolectorGasVespeno());
+		return new EdificioRecolectorGasVespeno(jugador, posicion, jugador.getAtributos().getRecolectorGasVespeno());
 		//mapa.setOcupante(construccion, posicion)???
 	}
 
-	public Construccion crearRecolectorMineral(Jugador jugador, Posicion posicion) {
+	public Edificio crearRecolectorMineral(Jugador jugador, Posicion posicion) {
 		// Chequeo de requisitos de edificio anterior:
 		// TODO
 		// Chequeo de terreno y/o recurso:
@@ -48,10 +49,10 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 		}
 		// Chequeo y compra 
 		comprarEdificio(jugador, jugador.getAtributos().getRecolectorMineral());
-		return new ConstruccionRecolector(jugador, posicion, jugador.getAtributos().getRecolectorMineral());
+		return new EdificioRecolectorMineral(jugador, posicion, jugador.getAtributos().getRecolectorMineral());
 	}
 
-	public Construccion crearIncrementadorPoblacion(Jugador jugador, Posicion posicion) {
+	public Edificio crearIncrementadorPoblacion(Jugador jugador, Posicion posicion) {
 		// Chequeo de requisitos de edificio anterior:
 		// TODO
 		// Chequeo de terreno y/o recurso:
@@ -60,10 +61,10 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 		}
 		// Chequeo y compra 
 		comprarEdificio(jugador, jugador.getAtributos().getIncrementadorPoblacion());
-		return new ConstruccionIncrementadorPoblacion(jugador, posicion, jugador.getAtributos().getIncrementadorPoblacion());
+		return new EdificioIncrementadorPoblacion(jugador, posicion, jugador.getAtributos().getIncrementadorPoblacion());
 	}
 
-	public Construccion crearEntrenadorUnidadesBasicas(Jugador jugador, Posicion posicion) {
+	public Edificio crearEntrenadorUnidadesBasicas(Jugador jugador, Posicion posicion) {
 		// Chequeo de requisitos de edificio anterior:
 		// TODO
 		// Chequeo de terreno y/o recurso:
@@ -71,10 +72,10 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 			throw new TerrenoInadecuado();
 		}
 		comprarEdificio(jugador, jugador.getAtributos().getEntrenadorUnidadesBasicas());
-		return new ConstruccionEntrenadorUnidades(jugador, posicion, jugador.getAtributos().getEntrenadorUnidadesBasicas());
+		return new EdificioEntrenadorUnidades(jugador, posicion, jugador.getAtributos().getEntrenadorUnidadesBasicas());
 	}
 
-	public Construccion crearEntrenadorUnidadesIntermedias(Jugador jugador, Posicion posicion) {
+	public Edificio crearEntrenadorUnidadesIntermedias(Jugador jugador, Posicion posicion) {
 		// Chequeo de requisitos de edificio anterior:
 		// TODO
 		// Chequeo de terreno y/o recurso:
@@ -83,10 +84,10 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 		}
 		// Chequeo y compra 
 		comprarEdificio(jugador, jugador.getAtributos().getEntrenadorUnidadesIntermedias());
-		return new ConstruccionEntrenadorUnidades(jugador, posicion, jugador.getAtributos().getEntrenadorUnidadesIntermedias());
+		return new EdificioEntrenadorUnidades(jugador, posicion, jugador.getAtributos().getEntrenadorUnidadesIntermedias());
 	}
 
-	public Construccion crearEntrenadorUnidadesAvanzadas(Jugador jugador, Posicion posicion) {
+	public Edificio crearEntrenadorUnidadesAvanzadas(Jugador jugador, Posicion posicion) {
 		// Chequeo de requisitos de edificio anterior:
 		// TODO
 		// Chequeo de terreno y/o recurso:
@@ -95,7 +96,7 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 		}
 		// Chequeo y compra 
 		comprarEdificio(jugador, jugador.getAtributos().getEntrenadorUnidadesAvanzadas());
-		return new ConstruccionEntrenadorUnidades(jugador, posicion, jugador.getAtributos().getEntrenadorUnidadesAvanzadas());
+		return new EdificioEntrenadorUnidades(jugador, posicion, jugador.getAtributos().getEntrenadorUnidadesAvanzadas());
 	}
 
 }

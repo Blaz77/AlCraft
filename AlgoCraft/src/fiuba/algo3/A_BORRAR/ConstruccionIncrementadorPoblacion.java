@@ -1,4 +1,4 @@
-package fiuba.algo3.ocupantes.edificios.en_construccion;
+package fiuba.algo3.A_BORRAR;
 
 import fiuba.algo3.atributos.edificios.AtributosEdificioIncrementadorPoblacion;
 import fiuba.algo3.juego.Jugador;

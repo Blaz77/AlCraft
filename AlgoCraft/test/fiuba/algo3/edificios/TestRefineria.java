@@ -11,7 +11,6 @@ import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
 import fiuba.algo3.ocupantes.edificios.Edificio;
-import fiuba.algo3.ocupantes.edificios.en_construccion.Construccion;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.raza.TipoRaza;
 
@@ -23,7 +22,7 @@ public class TestRefineria extends TestEdificio {
 	private Edificio refineria;
 	
 	@Override
-	protected Construccion crearEdificio(Jugador jugador, Posicion posicion) {
+	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
 		return terranFactory.crearRecolectorGasVespeno(jugador, posicion);
 	}
 	
@@ -127,8 +126,7 @@ public class TestRefineria extends TestEdificio {
 		
 		for(int i = 0; i < 6; i++) refineria.pasarTurno(); // Construyendo
 		int gasRelativo = jugador.getGasVespeno();
-		
-		this.refineria = ((Construccion)this.refineria).getEdificioTerminado();
+
 		for(int i = 0; i < 10; i++){
 			gasRelativo += 10;
 			refineria.pasarTurno();
