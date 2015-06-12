@@ -1,5 +1,6 @@
 package fiuba.algo3.atributos.edificios.terran;
 
+import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.edificios.AtributosEdificioEntrenadorUnidades;
 import fiuba.algo3.ocupantes.unidades.constructores.ConstructorInfanteriaLivianaTerrestre;
 
@@ -10,7 +11,7 @@ public class AtributosBarraca extends AtributosEdificioEntrenadorUnidades {
 		this.costoMineral = 150;
 		this.costoGasVespeno = 0;
 		this.turnosConstruccion = 12;
-		this.vidaMaxima = 1000;
+		this.vida = new AtributosVida(1000);
 		this.nombre = "Barraca";
 		
 		// fields EdificioEntrenadorUnidades:

@@ -1,21 +1,21 @@
 package fiuba.algo3.componentes;
 
-import fiuba.algo3.atributos.AtributosObjetoVivo;
+import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.excepciones.VidaEnCeroException;
 
 //public class Vida implements Lastimable/Atacable/etc
 public class Vida implements IVida {
 
-	protected AtributosObjetoVivo atributos;
+	protected AtributosVida atributos;
 	private int vida;
 
 	// Para setear especificamente la vida inicial (ej: construccion de edificios)
-	public Vida(int vidaInicial, AtributosObjetoVivo atributos){
+	public Vida(int vidaInicial, AtributosVida atributos){
 		this.atributos = atributos;
 		this.vida = vidaInicial;
 	}
 	
-	public Vida(AtributosObjetoVivo atributos) {
+	public Vida(AtributosVida atributos) {
 		this(atributos.getVidaMaxima(), atributos);
 	}
 		

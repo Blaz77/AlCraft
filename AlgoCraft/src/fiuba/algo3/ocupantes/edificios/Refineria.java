@@ -12,7 +12,7 @@ public class Refineria extends EdificioRecolectorGasVespeno {
 				((AtributosJugador)propietario.getAtributos())
 				.getRecolectorGasVespeno());
 		this.vida = new Vida(0, ((AtributosJugador)propietario.getAtributos())
-				.getRecolectorGasVespeno());
+				.getRecolectorGasVespeno().getAtributosVida());
 	}
 
 }

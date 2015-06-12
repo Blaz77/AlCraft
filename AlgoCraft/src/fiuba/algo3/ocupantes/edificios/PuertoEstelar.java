@@ -12,7 +12,7 @@ public class PuertoEstelar extends EdificioEntrenadorUnidades {
 				((AtributosJugador)propietario.getAtributos())
 				.getEntrenadorUnidadesAvanzadas());
 		this.vida = new Vida(0, ((AtributosJugador)propietario.getAtributos())
-				.getEntrenadorUnidadesAvanzadas());
+				.getEntrenadorUnidadesAvanzadas().getAtributosVida());
 	}
 	
 	

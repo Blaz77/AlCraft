@@ -1,18 +1,18 @@
 package fiuba.algo3.componentes;
 
-import fiuba.algo3.atributos.AtributosObjetoVivo;
+import fiuba.algo3.atributos.AtributosVida;
 
 public class VidaConEscudo extends Vida {
 	
 	private int escudo;
 
 	// Para setear especificamente la vida/escudo inicial (ej: construccion de edificios)
-	public VidaConEscudo(int vidaInicial, int escudoInicial, AtributosObjetoVivo atributos) {
+	public VidaConEscudo(int vidaInicial, int escudoInicial, AtributosVida atributos) {
 		super(vidaInicial, atributos);
 		this.escudo = escudoInicial;
 	}
 	
-	public VidaConEscudo(AtributosObjetoVivo atributos){
+	public VidaConEscudo(AtributosVida atributos){
 		this(atributos.getVidaMaxima(), atributos.getEscudoMaximo(), atributos);
 	}
 

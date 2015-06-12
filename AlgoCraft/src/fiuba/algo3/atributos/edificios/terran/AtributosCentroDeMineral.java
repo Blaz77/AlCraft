@@ -1,5 +1,6 @@
 package fiuba.algo3.atributos.edificios.terran;
 
+import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.edificios.AtributosEdificioRecolectorMineral;
 
 public class AtributosCentroDeMineral extends
@@ -10,7 +11,7 @@ public class AtributosCentroDeMineral extends
 		this.costoMineral = 50;
 		this.costoGasVespeno = 0;
 		this.turnosConstruccion = 4;
-		this.vidaMaxima = 500;
+		this.vida = new AtributosVida(500);
 		this.nombre = "Centro de Mineral";
 
 		// fields EdificioRecolectorMineral

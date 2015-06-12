@@ -11,7 +11,7 @@ public class Barraca extends EdificioEntrenadorUnidades {
 		super(propietario, posicion, ((AtributosJugador)propietario.getAtributos())
 				.getEntrenadorUnidadesBasicas());
 		this.vida = new Vida(0, ((AtributosJugador)propietario.getAtributos())
-				.getEntrenadorUnidadesBasicas());
+				.getEntrenadorUnidadesBasicas().getAtributosVida());
 	}
 	
 }

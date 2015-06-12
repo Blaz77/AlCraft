@@ -12,7 +12,7 @@ public class Fabrica extends EdificioEntrenadorUnidades {
 				((AtributosJugador)propietario.getAtributos())
 				.getEntrenadorUnidadesIntermedias());
 		this.vida = new Vida(0, ((AtributosJugador)propietario.getAtributos())
-				.getEntrenadorUnidadesIntermedias());
+				.getEntrenadorUnidadesIntermedias().getAtributosVida());
 	}
 	
 }
