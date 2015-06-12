@@ -16,7 +16,7 @@ public class UnidadAtaque extends Unidad {
 	public UnidadAtaque(Jugador propietario, Posicion posicion, AtributosUnidadAtaque atributos) {
 		super(propietario, posicion, atributos);
 		this.ataque = atributos.getAtaque();
-		this.ataque.activar(this);
+		this.agregarEstado(ataque);
 	}
 	
 	//Pensar:
