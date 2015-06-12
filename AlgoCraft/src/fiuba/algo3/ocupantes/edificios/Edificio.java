@@ -20,6 +20,7 @@ public abstract class Edificio extends ObjetoVivo {
 	public Edificio(Jugador propietario, Posicion posicion,
 			AtributosEdificio atributos) {
 		super(propietario, posicion);
+		this.costo = atributos.getCosto();
 		this.atributos = atributos;
 		this.vida = new Vida(0,atributos.getAtributosVida());
 		this.agregarEstado(new EstadoConstruyendoEdificio());
