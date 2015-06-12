@@ -1,5 +1,6 @@
 package fiuba.algo3.atributos.edificios;
 
+import fiuba.algo3.atributos.AtributosIncrementadorPoblacion;
 import fiuba.algo3.atributos.AtributosObjetoVivo;
 
 public abstract class AtributosEdificio extends AtributosObjetoVivo {
