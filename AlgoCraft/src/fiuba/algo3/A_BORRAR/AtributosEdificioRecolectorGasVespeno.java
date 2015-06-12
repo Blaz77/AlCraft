@@ -1,4 +1,4 @@
-package fiuba.algo3.atributos.edificios;
+package fiuba.algo3.A_BORRAR;
 
 import fiuba.algo3.componentes.EstadoRecolectandoGasVespeno;
 
