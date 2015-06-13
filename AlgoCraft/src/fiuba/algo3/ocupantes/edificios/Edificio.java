@@ -9,7 +9,7 @@ import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 
-public abstract class Edificio extends ObjetoVivo {
+public class Edificio extends ObjetoVivo {
 	
 	private boolean construccionTerminada;
 	public Edificio(Jugador propietario, Posicion posicion){

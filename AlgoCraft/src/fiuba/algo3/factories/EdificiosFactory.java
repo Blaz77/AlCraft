@@ -10,9 +10,6 @@ import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.ocupantes.edificios.EdificioEntrenadorUnidades;
-import fiuba.algo3.ocupantes.edificios.EdificioIncrementadorPoblacion;
-import fiuba.algo3.ocupantes.edificios.EdificioRecolectorGasVespeno;
-import fiuba.algo3.ocupantes.edificios.EdificioRecolectorMineral;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.terreno.TipoTerreno;
 
@@ -39,7 +36,7 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 		}
 		// Chequeo y compra 
 		comprarEdificio(jugador, jugador.getAtributos().getRecolectorGasVespeno());
-		return new EdificioRecolectorGasVespeno(jugador, posicion, jugador.getAtributos().getRecolectorGasVespeno());
+		return new Edificio(jugador, posicion, jugador.getAtributos().getRecolectorGasVespeno());
 		//mapa.setOcupante(construccion, posicion)???
 	}
 
@@ -53,7 +50,7 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 		}
 		// Chequeo y compra 
 		comprarEdificio(jugador, jugador.getAtributos().getRecolectorMineral());
-		return new EdificioRecolectorMineral(jugador, posicion, jugador.getAtributos().getRecolectorMineral());
+		return new Edificio(jugador, posicion, jugador.getAtributos().getRecolectorMineral());
 	}
 
 	public Edificio crearIncrementadorPoblacion(Jugador jugador, Posicion posicion) {
@@ -63,7 +60,7 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 		}
 		// Chequeo y compra 
 		comprarEdificio(jugador, jugador.getAtributos().getIncrementadorPoblacion());
-		return new EdificioIncrementadorPoblacion(jugador, posicion, jugador.getAtributos().getIncrementadorPoblacion());
+		return new Edificio(jugador, posicion, jugador.getAtributos().getIncrementadorPoblacion());
 	}
 
 	public Edificio crearEntrenadorUnidadesBasicas(Jugador jugador, Posicion posicion) {

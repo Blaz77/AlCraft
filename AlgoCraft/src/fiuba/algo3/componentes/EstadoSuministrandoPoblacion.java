@@ -2,7 +2,6 @@ package fiuba.algo3.componentes;
 
 import fiuba.algo3.atributos.AtributosIncrementadorPoblacion;
 import fiuba.algo3.juego.Jugador;
-import fiuba.algo3.ocupantes.edificios.EdificioIncrementadorPoblacion;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 
 public class EstadoSuministrandoPoblacion implements Estado {
