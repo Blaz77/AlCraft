@@ -1,8 +1,6 @@
 package fiuba.algo3.atributos.jugador;
 
-import fiuba.algo3.A_BORRAR.AtributosEdificioIncrementadorPoblacion;
-import fiuba.algo3.A_BORRAR.AtributosEdificioRecolectorGasVespeno;
-import fiuba.algo3.A_BORRAR.AtributosEdificioRecolectorMineral;
+import fiuba.algo3.atributos.edificios.AtributosEdificio;
 import fiuba.algo3.atributos.edificios.AtributosEdificioEntrenadorUnidades;
 import fiuba.algo3.atributos.edificios.protoss.AtributosAcceso;
 import fiuba.algo3.atributos.edificios.protoss.AtributosArchivosTemplarios;
@@ -35,15 +33,15 @@ public class AtributosJugadorProtoss implements AtributosJugador {
 	private AtributosAltoTemplario altoTemplario = new AtributosAltoTemplario();
 	private AtributosNaveDeTransporteProtoss transporte = new AtributosNaveDeTransporteProtoss();
 	
-	public AtributosEdificioRecolectorMineral getRecolectorMineral() {
+	public AtributosEdificio getRecolectorMineral() {
 		return nexoMineral;
 	}
 	
-	public AtributosEdificioRecolectorGasVespeno getRecolectorGasVespeno() {
+	public AtributosEdificio getRecolectorGasVespeno() {
 		return asimilador;
 	}
 	
-	public AtributosEdificioIncrementadorPoblacion getIncrementadorPoblacion() {
+	public AtributosEdificio getIncrementadorPoblacion() {
 		return pilon;
 	}
 	

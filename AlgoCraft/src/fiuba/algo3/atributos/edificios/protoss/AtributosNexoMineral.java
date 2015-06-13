@@ -1,6 +1,8 @@
 package fiuba.algo3.atributos.edificios.protoss;
 
+import fiuba.algo3.atributos.AtributosCosto;
 import fiuba.algo3.atributos.AtributosRecolector;
+import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.edificios.AtributosEdificio;
 import fiuba.algo3.componentes.EstadoRecolectandoMineral;
 import fiuba.algo3.componentes.EstadoRegenerandoEscudo;
@@ -13,11 +15,8 @@ public class AtributosNexoMineral extends AtributosEdificio {
 	
 	public AtributosNexoMineral() {
 		// fields ObjetoVivo:
-		this.costoMineral = 50;
-		this.costoGasVespeno = 0;
-		this.turnosConstruccion = 4;
-		this.vidaMaxima = 250;
-		// this.escudoMaximo = 250; ?
+		this.costo = new AtributosCosto(50, 0, 4);
+		this.vida = new AtributosVida(250, 250);
 		this.nombre = "Nexo Mineral";
 		
 		// fields EdificioRecolectorMineral
@@ -30,7 +29,7 @@ public class AtributosNexoMineral extends AtributosEdificio {
 	
 	@Override
 	public IVida getVida() {
-		return new VidaConEscudo(this);
+		return new VidaConEscudo(this.vida);
 	}
 	@Override
 	public boolean tieneEscudo() {

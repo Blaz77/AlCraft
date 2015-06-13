@@ -1,5 +1,7 @@
 package fiuba.algo3.atributos.edificios.protoss;
 
+import fiuba.algo3.atributos.AtributosCosto;
+import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.edificios.AtributosEdificioEntrenadorUnidades;
 import fiuba.algo3.componentes.EstadoRegenerandoEscudo;
 import fiuba.algo3.componentes.IVida;
@@ -10,11 +12,8 @@ public class AtributosArchivosTemplarios extends AtributosEdificioEntrenadorUnid
 
 	public AtributosArchivosTemplarios() {
 		// fields ObjetoVivo:
-		this.costoMineral = 150;
-		this.costoGasVespeno = 200;
-		this.turnosConstruccion = 9;
-		this.vidaMaxima = 500; 
-		//this.escudoMaximo = 500; ?
+		this.costo = new AtributosCosto(150, 200, 9);
+		this.vida = new AtributosVida(500, 500);
 		this.nombre = "Archivos Templarios";
 		
 		// fields EdificioEntrenadorUnidades:
@@ -25,7 +24,7 @@ public class AtributosArchivosTemplarios extends AtributosEdificioEntrenadorUnid
 	
 	@Override
 	public IVida getVida() {
-		return new VidaConEscudo(this);
+		return new VidaConEscudo(this.vida);
 	}
 	@Override
 	public boolean tieneEscudo() {

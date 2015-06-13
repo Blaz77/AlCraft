@@ -1,5 +1,9 @@
 package fiuba.algo3.atributos.unidades.protoss;
 
+import fiuba.algo3.atributos.AtributosAtaque;
+import fiuba.algo3.atributos.AtributosCosto;
+import fiuba.algo3.atributos.AtributosVida;
+import fiuba.algo3.atributos.AtributosVoluntadDelSer;
 import fiuba.algo3.atributos.unidades.AtributosUnidadAtaque;
 import fiuba.algo3.componentes.EstadoRegenerandoEscudo;
 import fiuba.algo3.componentes.IVida;
@@ -7,25 +11,36 @@ import fiuba.algo3.componentes.VidaConEscudo;
 
 public class AtributosScout extends AtributosUnidadAtaque {
 	
-	public AtributosScout(){
+	public AtributosScout() {
 		// fields ObjetoVivo:
-		this.costoMineral = 300;
-		this.costoGasVespeno = 150;
-		this.turnosConstruccion = 9;
-		this.vidaMaxima = 150;
-		this.escudoMaximo = 100;
+		this.costo = new AtributosCosto(
+				300,	// costoMineral
+				150,	// costoGasVespeno
+				9);		// turnosConstruccion
+		this.vida = new AtributosVida(
+				150,	// vidaMaxima
+				100);	// escudoMaximo
 		this.nombre = "Scout";
-		
+
 		// fields de Unidad:
-		this.costoPoblacion = 3;
-		//this.movPorTuno = 1; //?Inventado?!!!
-		//this.rangoVision = 7;
+		this.voluntadDelSer = new AtributosVoluntadDelSer(
+				3,		// costoPoblacion
+				1,		// movPorTuno
+				7);		// rangoVision
+
+		// fields de UnidadAtaque:
+		this.ataque = new AtributosAtaque(
+				14,		// Danio A Aire
+				8,		// Danio A Tierra
+				4,		// Rango a Aire
+				4,		// Rango a Tierra
+				1);		// Ataques por Turno
 		
 		estadosIniciales.add(new EstadoRegenerandoEscudo());
 	}
 	
 	@Override
 	public IVida getVida() {
-		return new VidaConEscudo(this);
+		return new VidaConEscudo(this.vida);
 	}
 }

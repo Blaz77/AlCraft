@@ -1,5 +1,9 @@
 package fiuba.algo3.atributos.unidades.protoss;
 
+import fiuba.algo3.atributos.AtributosAtaque;
+import fiuba.algo3.atributos.AtributosCosto;
+import fiuba.algo3.atributos.AtributosVida;
+import fiuba.algo3.atributos.AtributosVoluntadDelSer;
 import fiuba.algo3.atributos.unidades.AtributosUnidadAtaque;
 import fiuba.algo3.componentes.EstadoRegenerandoEscudo;
 import fiuba.algo3.componentes.IVida;
@@ -9,32 +13,36 @@ import fiuba.algo3.componentes.VidaConEscudo;
 public class AtributosZealot extends AtributosUnidadAtaque {
 
 	public AtributosZealot(){
-		//fields ObjetoVivo:
-		this.costoMineral = 100;
-		this.costoGasVespeno = 0;
-		this.turnosConstruccion = 4;
-		this.vidaMaxima = 100;
-		this.escudoMaximo = 60;
+		// fields ObjetoVivo:
+		this.costo = new AtributosCosto(
+				100,	// costoMineral
+				0,		// costoGasVespeno
+				4);		// turnosConstruccion
+		this.vida = new AtributosVida(
+				100,	// vidaMaxima
+				60);	// escudoMaximo
 		this.nombre = "Zealot";
 		
-		//fields de Unidad:
-		this.costoPoblacion = 2;
-		this.movPorTuno = 1; //?Inventado?!!!
-		this.rangoVision = 7;
+		// fields de Unidad:
+		this.voluntadDelSer = new AtributosVoluntadDelSer(
+				2,		// costoPoblacion
+				1,		// movPorTuno
+				7);		// rangoVision
 		
-		//fields de UnidadAtaque:
-		this.ataquesPorTurno = 1;//?Inventado?!!!
-		this.danioAAire = 8; 
-		this.danioATierra = 0;
-		this.rangoAire = 1;
-		this.rangoTierra = 1;
+		// fields de UnidadAtaque:
+		this.ataque = new AtributosAtaque(
+				0,		// Danio A Aire
+				8,		// Danio A Tierra
+				1,		// Rango a Aire
+				1,		// Rango a Tierra
+				1);		// Ataques por Turno
 		
 		estadosIniciales.add(new EstadoRegenerandoEscudo());
 	}
 	
 	@Override
 	public IVida getVida() {
-		return new VidaConEscudo(this);
+		return new VidaConEscudo(this.vida);
 	}
 	
 

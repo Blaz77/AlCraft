@@ -1,6 +1,8 @@
 package fiuba.algo3.atributos.edificios.protoss;
 
+import fiuba.algo3.atributos.AtributosCosto;
 import fiuba.algo3.atributos.AtributosRecolector;
+import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.edificios.AtributosEdificio;
 import fiuba.algo3.componentes.EstadoRecolectandoGasVespeno;
 import fiuba.algo3.componentes.EstadoRecolectandoMineral;
@@ -14,11 +16,8 @@ public class AtributosAsimilador extends AtributosEdificio {
 	
 	public AtributosAsimilador() {
 		// fields ObjetoVivo:
-		this.costoMineral = 100;
-		this.costoGasVespeno = 0;
-		this.turnosConstruccion = 6;
-		this.vidaMaxima = 450;
-		//this.escudoMaximo = 450; ?
+		this.costo = new AtributosCosto(100, 0, 6);
+		this.vida = new AtributosVida(450, 450);
 		this.nombre = "Asimilador";
 		
 		// fields EdificioRecolectorMineral
@@ -31,7 +30,7 @@ public class AtributosAsimilador extends AtributosEdificio {
 	
 	@Override
 	public IVida getVida() {
-		return new VidaConEscudo(this);
+		return new VidaConEscudo(this.vida);
 	}
 	@Override
 	public boolean tieneEscudo() {

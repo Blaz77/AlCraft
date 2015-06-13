@@ -1,6 +1,8 @@
 package fiuba.algo3.atributos.edificios.protoss;
 
+import fiuba.algo3.atributos.AtributosCosto;
 import fiuba.algo3.atributos.AtributosIncrementadorPoblacion;
+import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.edificios.AtributosEdificio;
 import fiuba.algo3.componentes.EstadoRegenerandoEscudo;
 import fiuba.algo3.componentes.EstadoSuministrandoPoblacion;
@@ -13,11 +15,8 @@ public class AtributosPilon extends AtributosEdificio {
 	
 	public AtributosPilon() {
 		// fields ObjetoVivo:
-		this.costoMineral = 100;
-		this.costoGasVespeno = 0;
-		this.turnosConstruccion = 5;
-		this.vidaMaxima = 300;
-		//this.escudoMaximo = 300; ?
+		this.costo = new AtributosCosto(100, 0, 5);
+		this.vida = new AtributosVida(300, 300);
 		this.nombre = "Pilon";
 
 		// fields EdificioIncrementadorPoblacion
@@ -30,7 +29,7 @@ public class AtributosPilon extends AtributosEdificio {
 	
 	@Override
 	public IVida getVida() {
-		return new VidaConEscudo(this);
+		return new VidaConEscudo(this.vida);
 	}
 	@Override
 	public boolean tieneEscudo() {
