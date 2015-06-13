@@ -1,6 +1,7 @@
 package fiuba.algo3.ocupantes.unidades;
 
 import fiuba.algo3.atributos.unidades.AtributosUnidadMagica;
+import fiuba.algo3.componentes.Energia;
 import fiuba.algo3.excepciones.EnergiaInsuficiente;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.magia.MagiaAUnidad;
@@ -9,44 +10,46 @@ import fiuba.algo3.mapa.Posicion;
 
 public class UnidadMagica extends Unidad {
 
-	protected int energia;
+	protected Energia energia;
+	protected MagiaDeAreaDeEfecto magiaAoE;
+	protected MagiaAUnidad magiaUnidad;
 	
 	public UnidadMagica(Jugador propietario, Posicion posicion,
 			AtributosUnidadMagica atributos) {
 		super(propietario, posicion, atributos);
-		this.energia = this.getEnergiaMaxima();
+		this.energia = atributos.getEnergia();
+		this.magiaAoE = atributos.getMagiaDeAreaDeEfecto();
+		this.magiaUnidad = atributos.getMagiaAUnidad();
 	}
 
-	public int getEnergia(){
-		return this.energia;
+	public int getEnergia() {
+		return this.energia.getEnergia();
 	}
 	
 	public int getEnergiaMaxima(){
-		return ((AtributosUnidadMagica)this.atributos).getEnergiaMaxima();
+		return energia.getEnergiaMaxima();
 	}
 	
 	public int getEnergiaARegenerarPorTurno(){
-		return ((AtributosUnidadMagica)this.atributos).getEnergiaARegenerarPorTurno();
+		return energia.getEnergiaARegenerarPorTurno();
 	}
 	
 	public boolean puedeDisminuirEnergia(int cantidad){
-		return this.energia >= cantidad;
+		return this.energia.getEnergia() >= cantidad;
 	}
 	
 	public void disminuirEnergia(int cantidad){
-		if (!this.puedeDisminuirEnergia(cantidad)) throw new EnergiaInsuficiente();
-		this.energia -= cantidad;
+		//if (!this.puedeDisminuirEnergia(cantidad)) throw new EnergiaInsuficiente();
+		this.energia.disminuirEnergia(cantidad);;
 	}
 	
 	public void regenerarEnergia(int cantRegenerada){
-		this.energia += cantRegenerada;
-		if (this.energia > this.getEnergiaMaxima())
-			this.energia = this.getEnergiaMaxima();
+		this.energia.regenerarEnergia(cantRegenerada);
 	}
 	
 	//Equivalente al rango de ataque pero para magia
 	public int getRangoMagia(){
-		return ((AtributosUnidadMagica)this.atributos).getRangoMagia();
+		return this.energia.getRangoMagia();
 	}
 	
 	public boolean estaEnRangoDeMagia(Posicion otraPosicion){
@@ -54,14 +57,12 @@ public class UnidadMagica extends Unidad {
 	}
 	
 	public MagiaDeAreaDeEfecto getMagiaDeAreaDeEfecto(){
-		MagiaDeAreaDeEfecto magia = ((AtributosUnidadMagica)this.atributos).getMagiaDeAreaDeEfecto();
-		magia.setUnidadMagica(this);
-		return magia;
+		this.magiaAoE.setUnidadMagica(this);
+		return magiaAoE;
 	}
 	
 	public MagiaAUnidad getMagiaAUnidad(){
-		MagiaAUnidad magia = ((AtributosUnidadMagica)this.atributos).getMagiaAUnidad();
-		magia.setUnidadMagica(this);
-		return magia;
+		this.magiaUnidad.setUnidadMagica(this);
+		return magiaUnidad;
 	}
 }
