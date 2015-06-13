@@ -24,6 +24,7 @@ public abstract class Edificio extends ObjetoVivo {
 		this.atributos = atributos;
 		this.vida = new Vida(0,atributos.getAtributosVida());
 		this.agregarEstado(new EstadoConstruyendoEdificio());
+		propietario.agregarEdificio(this);
 	}
 	
 	

@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import fiuba.algo3.excepciones.GasVespenoInsuficiente;
 import fiuba.algo3.excepciones.MineralInsuficiente;
+import fiuba.algo3.excepciones.OrdenConstruccionViolado;
 import fiuba.algo3.excepciones.SuministroInsuficiente;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.factories.EdificiosFactory;
@@ -21,12 +22,18 @@ public class TestFabrica extends TestEdificio {
 	private Mapa mapa;
 	private Jugador jugador;
 	private EdificiosFactory terranFactory;
+	private Edificio barraca;
 	private EdificioEntrenadorUnidades fabrica;
 	private EdificioEntrenadorUnidades fabricaEnConst;
 	
 	@Override
 	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
 		return terranFactory.crearEntrenadorUnidadesIntermedias(jugador, posicion);
+	}
+	
+	@Override
+	protected Edificio crearEdificioRequerido(Jugador jugador, Posicion posicion) {
+		return terranFactory.crearEntrenadorUnidadesBasicas(jugador, posicion);
 	}
 	
 	protected EdificioEntrenadorUnidades crearEnTierra(Jugador jugador, Mapa mapa) {
@@ -45,18 +52,36 @@ public class TestFabrica extends TestEdificio {
 		
 		// Aseguro recursos
 		jugador.agregarGasVespeno(500);
-		jugador.agregarMinerales(500);
+		jugador.agregarMinerales(600);
+		this.barraca = crearRequeridoEnTierra(jugador, mapa);
+		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
 		this.fabrica = crearEnTierra(jugador, mapa);
 		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Construccion
 
 		this.fabricaEnConst = crearEnTierra(jugador, mapa);
 	}
 
-	//TESTS SIN REQUISITOS POR AHORA!!!
 	
 	@Test
 	public void testCrearFabrica() {
 		assertEquals(fabricaEnConst.getNombre(),"Fabrica");
+	}
+	
+	@Test
+	public void testCrearFabricaSinBarracaFalla() {
+		Jugador jugador2 = new Jugador("Prueba2", Color.AZUL, TipoRaza.TERRAN, mapa);
+		// Aseguro recursos
+		jugador2.agregarGasVespeno(500);
+		jugador2.agregarMinerales(600);
+		try {
+			EdificioEntrenadorUnidades fabrica2 = crearEnTierra(jugador2, mapa);
+			fail();
+		}
+		catch (OrdenConstruccionViolado e) {
+			assertTrue(true);
+			return;
+		}
+		fail();
 	}
 	
 	@Test

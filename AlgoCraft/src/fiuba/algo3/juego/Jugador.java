@@ -129,10 +129,18 @@ public class Jugador {
 		return this.gasVespeno;
 	}
 
+	public ArrayList<Edificio> getEdificios() {
+		return this.edificios;
+	}
+	
 	public ArrayList<Unidad> getUnidades() {
 		return this.unidades;
 	}
 
+	public void agregarEdificio(Edificio edificio) {
+		this.edificios.add(edificio);
+	}
+	
 	public void agregarUnidad(Unidad unidad){
 		this.unidades.add(unidad);
 	}

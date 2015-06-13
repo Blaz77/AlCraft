@@ -52,11 +52,11 @@ public class AtributosJugadorProtoss implements AtributosJugador {
 	}
 	
 	public AtributosEdificioEntrenadorUnidades getEntrenadorUnidadesIntermedias() {
-		return archivosTempolarios;
+		return puerto;
 	}
 	
 	public AtributosEdificioEntrenadorUnidades getEntrenadorUnidadesAvanzadas() {
-		return puerto;
+		return archivosTempolarios;
 	}
 	
 	public AtributosUnidadAtaque getInfanteriaLivianaTerrestre() {
