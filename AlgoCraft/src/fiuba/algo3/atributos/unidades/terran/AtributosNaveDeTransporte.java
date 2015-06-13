@@ -1,6 +1,7 @@
 package fiuba.algo3.atributos.unidades.terran;
 
 import fiuba.algo3.atributos.AtributosCosto;
+import fiuba.algo3.atributos.AtributosVoluntadDelSer;
 import fiuba.algo3.atributos.unidades.AtributosUnidadTransporte;
 
 public class AtributosNaveDeTransporte extends AtributosUnidadTransporte {
@@ -11,10 +12,11 @@ public class AtributosNaveDeTransporte extends AtributosUnidadTransporte {
 		this.nombre = "Nave de transporte";
 		
 		// fields de Unidad:
-		this.costoPoblacion = 2;
+		this.voluntadDelSer = new AtributosVoluntadDelSer(
+				2,	//costoPoblacion
+				4,	//movPorTuno
+				8);	//rangoVision
 		this.costoAlmacenamiento = 0; //tecnicamente no es almacenable
-		this.movPorTuno = 4; //?
-		this.rangoVision = 8; 
 		
 		// fields de UnidadTransporte:
 		this.capacidadAlmacenamiento = 8;

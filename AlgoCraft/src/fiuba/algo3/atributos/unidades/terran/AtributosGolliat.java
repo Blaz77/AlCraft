@@ -3,6 +3,7 @@ package fiuba.algo3.atributos.unidades.terran;
 import fiuba.algo3.atributos.AtributosAtaque;
 import fiuba.algo3.atributos.AtributosCosto;
 import fiuba.algo3.atributos.AtributosVida;
+import fiuba.algo3.atributos.AtributosVoluntadDelSer;
 import fiuba.algo3.atributos.unidades.AtributosUnidadAtaque;
 
 public class AtributosGolliat extends AtributosUnidadAtaque {
@@ -14,9 +15,10 @@ public class AtributosGolliat extends AtributosUnidadAtaque {
 		this.nombre = "Golliat";
 		
 		// fields de Unidad:
-		this.costoPoblacion = 2;
-		this.movPorTuno = 1; //?Inventado?!!!
-		this.rangoVision = 7;
+		this.voluntadDelSer = new AtributosVoluntadDelSer(
+				2,	//costoPoblacion
+				1,	//movPorTuno
+				8);	//rangoVision
 		
 		// fields de UnidadAtaque:
 		this.ataque = new AtributosAtaque(

@@ -3,6 +3,7 @@ package fiuba.algo3.atributos.unidades.terran;
 import fiuba.algo3.atributos.AtributosAtaque;
 import fiuba.algo3.atributos.AtributosCosto;
 import fiuba.algo3.atributos.AtributosVida;
+import fiuba.algo3.atributos.AtributosVoluntadDelSer;
 import fiuba.algo3.atributos.unidades.AtributosUnidadAtaque;
 
 public class AtributosMarine extends AtributosUnidadAtaque {
@@ -14,9 +15,10 @@ public class AtributosMarine extends AtributosUnidadAtaque {
 		this.nombre = "Marine";
 		
 		//fields de Unidad:
-		this.costoPoblacion = 1;
-		this.movPorTuno = 1; //?Inventado?!!!
-		this.rangoVision = 7;
+		this.voluntadDelSer = new AtributosVoluntadDelSer(
+				1,	//costoPoblacion
+				1,	//movPorTuno
+				7);	//rangoVision
 		
 		//fields de UnidadAtaque:
 		this.ataque = new AtributosAtaque(
