@@ -34,7 +34,7 @@ public abstract class Constructor {
 	
 	public void crear(){
 		entrenador.getPropietario().comprar(atributos.getCosto().getCostoMineral(),
-				atributos.getCosto().getCostoGasVespeno(), atributos.getCostoPoblacion());
+				atributos.getCosto().getCostoGasVespeno(), atributos.getVoluntadDelSer().getCostoPoblacion());
 		entrenador.entrenar(this);
 	}
 

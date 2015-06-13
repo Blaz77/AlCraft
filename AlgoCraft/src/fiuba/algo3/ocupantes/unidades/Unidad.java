@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
+import fiuba.algo3.componentes.VoluntadDelSer;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.mapa.MapaProxy;
@@ -14,22 +15,24 @@ import fiuba.algo3.excepciones.MovimientoInvalido;
 public abstract class Unidad extends ObjetoVivo {
 	
 	int movRestantes;
+	private VoluntadDelSer voluntad;
 	//O hacer accionesRestantes y que p/ej 1 ataque cueste 2
 	//									 y 1 movim. cueste 1
 	
 	
 	public Unidad(Jugador propietario, Posicion posicion, AtributosUnidad atributos){
 		super(propietario, posicion, atributos);
+		this.voluntad = atributos.getVoluntadDelSer();
 		//Hacer esto de abajo en los CONSTRUCTORES! NO ACA!:
 		propietario.agregarUnidad(this);
-		this.movRestantes = ((AtributosUnidad)this.atributos).getMovPorTurno();
+		this.movRestantes = voluntad.getMovPorTurno();
 	}
 	
 	public void pasarTurno(){
 		super.pasarTurno();
 		//Temp esto aca abajo, quizas puede estar mejor hecho
 		// Un estado quizas ?
-		this.movRestantes = ((AtributosUnidad)this.atributos).getMovPorTurno();
+		this.movRestantes = voluntad.getMovPorTurno();
 	}
 
 	
@@ -38,7 +41,7 @@ public abstract class Unidad extends ObjetoVivo {
 	}
 
 	public int getRangoVision() {
-		return ((AtributosUnidad) atributos).getRangoVision();
+		return voluntad.getRangoVision();
 	}
 	
 	public int getCostoAlmacenamiento(){
