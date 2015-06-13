@@ -6,20 +6,26 @@ import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.ocupantes.unidades.UnidadMagica;
 
-public class MagiaEMP extends MagiaDeAreaDeEfecto {
+public class MagiaEMP implements MagiaDeAreaDeEfecto {
 
+	private int rangoAoE;
+	private int costoDeEjecutar;
+	private UnidadMagica unidad;
+	
 	public MagiaEMP() {
 		this.costoDeEjecutar = 100;
 		this.rangoAoE = 15; //INVENTADO!
 	}
 	
-	@Override
+	public void setUnidadMagica(UnidadMagica unidad) {
+		this.unidad = unidad;
+	}
+	
 	public boolean puedeEjecutar(Posicion posicionCentral) {
 		return (this.unidad.estaEnRangoDeMagia(posicionCentral) &&
 				this.unidad.puedeDisminuirEnergia(this.costoDeEjecutar));
 	}
 
-	@Override
 	public void ejecutar(Posicion posicionCentral, Mapa mapa) {
 		if (!this.unidad.estaEnRangoDeMagia(posicionCentral))
 			throw new FueraDelRangoPermitido();

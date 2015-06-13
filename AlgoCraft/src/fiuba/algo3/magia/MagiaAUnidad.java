@@ -1,16 +1,14 @@
 package fiuba.algo3.magia;
 
-import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.ocupantes.unidades.Unidad;
+import fiuba.algo3.ocupantes.unidades.UnidadMagica;
 
-public abstract class MagiaAUnidad extends Magia{
+public interface MagiaAUnidad {
 	
-	public boolean esAUnidad(){
-		return true;
-	}
+	public void setUnidadMagica(UnidadMagica unidad);
 	
-	public abstract boolean puedeEjecutar(Unidad unidad);
+	public boolean puedeEjecutar(Unidad unidad);
 	
-	public abstract void ejecutar(Unidad unidad);
+	public void ejecutar(Unidad unidad);
 
 }

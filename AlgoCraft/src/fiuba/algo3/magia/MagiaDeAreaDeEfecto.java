@@ -2,17 +2,14 @@ package fiuba.algo3.magia;
 
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.ocupantes.unidades.UnidadMagica;
 
-public abstract class MagiaDeAreaDeEfecto extends Magia{
+public interface MagiaDeAreaDeEfecto {
 	
-	protected int rangoAoE;
+	public void setUnidadMagica(UnidadMagica unidad);
 	
-	public boolean esDeAreaDeEfecto(){
-		return true;
-	}
+	public boolean puedeEjecutar(Posicion posicionCentral);
 	
-	public abstract boolean puedeEjecutar(Posicion posicionCentral);
-	
-	public abstract void ejecutar(Posicion posicionCentral, Mapa mapa);
+	public void ejecutar(Posicion posicionCentral, Mapa mapa);
 
 }

@@ -2,6 +2,7 @@ package fiuba.algo3.atributos.unidades.terran;
 
 import fiuba.algo3.atributos.AtributosCosto;
 import fiuba.algo3.atributos.AtributosEnergia;
+import fiuba.algo3.atributos.AtributosMagia;
 import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.AtributosVoluntadDelSer;
 import fiuba.algo3.atributos.unidades.AtributosUnidadMagica;
@@ -23,12 +24,12 @@ public class AtributosNaveDeCiencia extends AtributosUnidadMagica {
 				10);//rangoVision
 		
 		// fields de UnidadMagica
-		this.energia = new AtributosEnergia(
+		this.magia = new AtributosMagia(
 				200,	//energiaMaxima
-				10,		//energiaARegenerarPorTurno)
-				10);	//rangoDeMagia
-		this.magiaAoE = new MagiaEMP();
-		this.magiaUnidad = new MagiaRadiacion();
+				10,		//energiaARegenerarPorTurno
+				10,		//rangoDeMagia
+				new MagiaEMP(),
+				new MagiaRadiacion());
 	}
 
 	@Override
