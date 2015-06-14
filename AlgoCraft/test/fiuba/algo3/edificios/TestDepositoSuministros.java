@@ -32,8 +32,6 @@ public class TestDepositoSuministros extends TestEdificio {
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
 		this.terranFactory = new EdificiosFactory();
 	}
-
-	//TESTS SIN REQUISITOS POR AHORA!!!
 	
 	@Test
 	public void testCrearDepositoSuministros() {

@@ -128,6 +128,34 @@ public class TestNexoMineral extends TestEdificio{
 		}
 	}
 
-
+	@Test
+	public void testNexoMineralMientrasConstruyeNoTieneEscudo() {
+		this.nexoMineral = crearEnMineral(jugador, mapa);
+		
+		assertEquals(nexoMineral.getEscudo(), 0);
+	}
+	
+	@Test
+	public void testNexoMineralRecienConstruidoNoTieneEscudo() {
+		this.nexoMineral = crearEnMineral(jugador, mapa);
+		for(int i = 0; i < 4; i++) nexoMineral.pasarTurno(); // Construyendo
+		
+		assertEquals(nexoMineral.getEscudo(), 0);
+	}
+	
+	@Test
+	public void testNexoMineralSubeEscudoLuegoDeConstruir() {
+		this.nexoMineral = crearEnMineral(jugador, mapa);
+		for(int i = 0; i < 4; i++) nexoMineral.pasarTurno(); // Construyendo
+		
+		int escudoRelativo = nexoMineral.getEscudo();
+		for(int i = 0; i < 10; i++){
+			nexoMineral.pasarTurno();
+			if (nexoMineral.getEscudo() <= escudoRelativo) 
+				fail("No aumenta el escudo luego de construir");
+			escudoRelativo = nexoMineral.getEscudo();
+		}
+		assertEquals(escudoRelativo, nexoMineral.getEscudoMaximo());
+	}
 
 }

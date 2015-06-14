@@ -22,7 +22,8 @@ public class Edificio extends ObjetoVivo {
 		super(propietario, posicion);
 		this.costo = atributos.getCosto();
 		this.atributos = atributos;
-		this.vida = new Vida(0,atributos.getAtributosVida());
+		//this.vida = new Vida(0,atributos.getAtributosVida());
+		this.vida = atributos.getVida();
 		this.agregarEstado(new EstadoConstruyendoEdificio());
 		propietario.agregarEdificio(this);
 	}

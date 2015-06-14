@@ -26,7 +26,7 @@ public class AtributosPuertoEstelarProtoss extends AtributosEdificioEntrenadorUn
 	
 	@Override
 	public IVida getVida() {
-		return new VidaConEscudo(this.vida);
+		return new VidaConEscudo(0, 0, this.vida);
 	}
 	@Override
 	public boolean tieneEscudo() {
