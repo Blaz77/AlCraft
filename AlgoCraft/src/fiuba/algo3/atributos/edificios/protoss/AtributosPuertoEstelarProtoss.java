@@ -13,7 +13,7 @@ public class AtributosPuertoEstelarProtoss extends AtributosEdificioEntrenadorUn
 
 	public AtributosPuertoEstelarProtoss(){
 		// fields ObjetoVivo:
-		this.costo = new AtributosCosto(150, 100, 10);
+		this.costo = new AtributosCosto(150, 150, 10);
 		this.vida = new AtributosVida(600, 600);
 		this.nombre = "Puerto Estelar";
 		

@@ -13,32 +13,27 @@ import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
+import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.ocupantes.edificios.EdificioEntrenadorUnidades;
 
-public class TestPuertoEstelar extends TestEdificio {
+public class TestPuertoEstelarProtoss extends TestEdificio {
 
 	private Mapa mapa;
 	private Jugador jugador;
-	private EdificiosFactory terranFactory;
-	private Edificio fabrica;
-	private Edificio barraca;
+	private EdificiosFactory protossFactory;
+	private Edificio acceso;
 	private EdificioEntrenadorUnidades puerto;
 	private EdificioEntrenadorUnidades puertoEnConst;
 	
 	@Override
 	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
-		return terranFactory.crearEntrenadorUnidadesAvanzadas(jugador, posicion);
+		return protossFactory.crearEntrenadorUnidadesIntermedias(jugador, posicion);
 	}
 	
 	@Override
 	protected Edificio crearEdificioRequerido(Jugador jugador, Posicion posicion) {
-		return terranFactory.crearEntrenadorUnidadesBasicas(jugador, posicion);
-	}
-	
-	@Override
-	protected Edificio crearEdificioRequeridoNivel2(Jugador jugador, Posicion posicion) {
-		return terranFactory.crearEntrenadorUnidadesIntermedias(jugador, posicion);
+		return protossFactory.crearEntrenadorUnidadesBasicas(jugador, posicion);
 	}
 	
 	protected EdificioEntrenadorUnidades crearEnTierra(Jugador jugador, Mapa mapa) {
@@ -52,16 +47,14 @@ public class TestPuertoEstelar extends TestEdificio {
 	@Before
 	public void setUp() throws Exception {
 		mapa = new Mapa(6);
-		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
-		this.terranFactory = new EdificiosFactory();
+		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.PROTOSS, mapa);
+		this.protossFactory = new EdificiosFactory();
 		
 		// Aseguro recursos
-		jugador.agregarGasVespeno(600);
-		jugador.agregarMinerales(850);
-		this.barraca = crearRequeridoEnTierra(jugador, mapa);
-		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
-		this.fabrica = crearRequeridoNivel2EnTierra(jugador, mapa);
-		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Construccion
+		jugador.agregarGasVespeno(500);
+		jugador.agregarMinerales(500);
+		this.acceso = crearRequeridoEnTierra(jugador, mapa);
+		for(int i = 0; i < 8; i++) acceso.pasarTurno();//Construccion
 		this.puerto = crearEnTierra(jugador, mapa);
 		for(int i = 0; i < 10; i++) puerto.pasarTurno();//Construccion
 		this.puertoEnConst = crearEnTierra(jugador, mapa);
@@ -73,13 +66,11 @@ public class TestPuertoEstelar extends TestEdificio {
 	}
 	
 	@Test
-	public void testCrearPuertoEstelarSinFabricaFalla() {
-		Jugador jugador2 = new Jugador("Prueba2", Color.AZUL, TipoRaza.TERRAN, mapa);
+	public void testCrearPuertoEstelarSinAccesoFalla() {
+		Jugador jugador2 = new Jugador("Prueba2", Color.AZUL, TipoRaza.PROTOSS, mapa);
 		// Aseguro recursos
 		jugador2.agregarGasVespeno(500);
-		jugador2.agregarMinerales(600);
-		Edificio barraca2 = crearRequeridoEnTierra(jugador2, mapa);
-		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
+		jugador2.agregarMinerales(500);
 		try {
 			EdificioEntrenadorUnidades puerto2 = crearEnTierra(jugador2, mapa);
 			fail();
@@ -95,7 +86,7 @@ public class TestPuertoEstelar extends TestEdificio {
 	public void testCrearPuertoEstelarDisminuyeRecursosJugador() {
 		int mineralRelativo = jugador.getMinerales();
 		int gasRelativo = jugador.getGasVespeno();
-		int costoGas = 100;
+		int costoGas = 150;
 		int costoMineral = 150;
 		
 		this.puertoEnConst = crearEnTierra(jugador, mapa);
@@ -177,18 +168,34 @@ public class TestPuertoEstelar extends TestEdificio {
 		
 		puerto.getUnidadesEntrenables().get(0).crear();
 		
-		for(int i = 0; i < 8; i++) puerto.pasarTurno(); //Entrenar Espectro
-		assertEquals(jugador.getUnidades().get(0).getNombre(), "Espectro");
+		for(int i = 0; i < 9; i++) puerto.pasarTurno(); //Entrenar Scout
+		assertEquals(jugador.getUnidades().get(0).getNombre(), "Scout");
 
 		puerto.getUnidadesEntrenables().get(1).crear();
 		
-		for(int i = 0; i < 10; i++) puerto.pasarTurno(); //Entrenar NaveDeCiencia
-		assertEquals(jugador.getUnidades().get(1).getNombre(), "Nave de ciencia");
-		
-		puerto.getUnidadesEntrenables().get(2).crear();
-		
-		for(int i = 0; i < 7; i++) puerto.pasarTurno(); //Entrenar NaveDeTransporte
-		assertEquals(jugador.getUnidades().get(2).getNombre(), "Nave de transporte");
+		for(int i = 0; i < 8; i++) puerto.pasarTurno(); //Entrenar NaveDeTransporte
+		assertEquals(jugador.getUnidades().get(1).getNombre(), "Nave de transporte");
 	}
 
+	@Test
+	public void testNexoMineralMientrasConstruyeNoTieneEscudo() {
+		assertEquals(puertoEnConst.getEscudo(), 0);
+	}
+	
+	@Test
+	public void testNexoMineralRecienConstruidoNoTieneEscudo() {
+		assertEquals(puerto.getEscudo(), 0);
+	}
+	
+	@Test
+	public void testNexoMineralSubeEscudoLuegoDeConstruir() {
+		int escudoRelativo = puerto.getEscudo();
+		for(int i = 0; i < 10; i++){
+			puerto.pasarTurno();
+			if (puerto.getEscudo() <= escudoRelativo) 
+				fail("No aumenta el escudo luego de construir");
+			escudoRelativo = puerto.getEscudo();
+		}
+		assertEquals(escudoRelativo, puerto.getEscudoMaximo());
+	}
 }

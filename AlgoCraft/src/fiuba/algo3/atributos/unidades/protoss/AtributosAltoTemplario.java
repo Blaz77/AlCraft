@@ -24,7 +24,7 @@ public class AtributosAltoTemplario extends AtributosUnidadMagica {
 		this.vida = new AtributosVida(
 				40,		// vidaMaxima
 				40);	// escudoMaximo
-		this.nombre = "Alto templario";
+		this.nombre = "Alto Templario";
 		
 		// fields de Unidad:
 		this.voluntadDelSer = new AtributosVoluntadDelSer(
