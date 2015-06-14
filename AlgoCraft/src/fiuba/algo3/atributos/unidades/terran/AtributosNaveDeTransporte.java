@@ -3,9 +3,14 @@ package fiuba.algo3.atributos.unidades.terran;
 import fiuba.algo3.atributos.AtributosCosto;
 import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.AtributosVoluntadDelSer;
-import fiuba.algo3.atributos.unidades.AtributosUnidadTransporte;
+import fiuba.algo3.atributos.AtributosTransporte;
+import fiuba.algo3.atributos.unidades.AtributosUnidad;
+import fiuba.algo3.componentes.ITransporte;
+import fiuba.algo3.componentes.Transporte;
 
-public class AtributosNaveDeTransporte extends AtributosUnidadTransporte {
+public class AtributosNaveDeTransporte extends AtributosUnidad {
+	
+	private AtributosTransporte transporte;
 	
 	public AtributosNaveDeTransporte() {
 		// fields ObjetoVivo:
@@ -21,6 +26,10 @@ public class AtributosNaveDeTransporte extends AtributosUnidadTransporte {
 		this.costoAlmacenamiento = 0; //tecnicamente no es almacenable
 		
 		// fields de UnidadTransporte:
-		this.capacidadAlmacenamiento = 8;
+		this.transporte = new AtributosTransporte(8); //capac.Almac.
+	}
+	
+	public ITransporte getTransporte() {
+		return new Transporte(this.transporte);
 	}
 }

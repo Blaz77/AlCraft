@@ -6,6 +6,7 @@ import java.util.HashSet;
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.IAtaque;
 import fiuba.algo3.componentes.IMagia;
+import fiuba.algo3.componentes.ITransporte;
 import fiuba.algo3.componentes.VoluntadDelSer;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.magia.MagiaAUnidad;
@@ -22,6 +23,7 @@ public class Unidad extends ObjetoVivo {
 	private VoluntadDelSer voluntad;
 	private IAtaque ataque;
 	private IMagia magia;
+	private ITransporte transporte;
 	//O hacer accionesRestantes y que p/ej 1 ataque cueste 2
 	//									 y 1 movim. cueste 1
 	
@@ -36,6 +38,8 @@ public class Unidad extends ObjetoVivo {
 		this.ataque.setPortador(this);
 		this.magia = atributos.getMagia();
 		//this.magia.setPortador(this);
+		this.transporte = atributos.getTransporte();
+		//this.transporte.setPortador(this);
 	}
 	
 	public void pasarTurno(){
@@ -188,12 +192,33 @@ public class Unidad extends ObjetoVivo {
 		return this.magia.getMagiaAUnidad(this);
 	}
 	
+	/*
+	 * TRANSPORTE:
+	 * 
+	 * */
+	
 	public boolean puedeSerAlmacenada(){ //puedeSerTransportada
 		return ((AtributosUnidad)this.atributos).puedeSerAlmacenada();
 	}
 		
 	public boolean puedeAlmacenar(){ //puedeTransportar()
-		return ((AtributosUnidad)this.atributos).puedeAlmacenar();
+		return this.transporte.puedeAlmacenar();
+	}
+	
+	public boolean puedeAlmacenarA(Unidad unidad){
+		return this.transporte.puedeAlmacenarA(this, unidad);
+	}
+	
+	public void almacenarA(Unidad unidad){
+		this.transporte.almacenarA(this, unidad);
+	}
+	
+	public ArrayList<Pasajero> getUnidadesAlmacenadas(){
+		return this.transporte.getUnidadesAlmacenadas();
+	}
+	
+	public void liberarUnidad(Unidad unidadAlmacenada){
+		this.transporte.liberarUnidad(unidadAlmacenada);
 	}
 
 }

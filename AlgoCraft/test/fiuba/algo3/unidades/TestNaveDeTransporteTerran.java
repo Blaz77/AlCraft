@@ -23,7 +23,7 @@ public class TestNaveDeTransporteTerran extends TestUnidadTransporte {
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		this.transportador = new UnidadTransporte(this.jugador, new Posicion(2,4), jugador.getAtributos().getTransporte());
+		this.transportador = new Unidad(this.jugador, new Posicion(2,4), jugador.getAtributos().getTransporte());
 		this.pasajero = new Unidad(this.jugador, new Posicion(1,3), jugador.getAtributos().getInfanteriaLivianaTerrestre());
 		this.unidadVoladora = new Unidad(this.jugador, new Posicion(2,3), jugador.getAtributos().getInfanteriaPesadaArea());
 		this.edificioPropio = new Barraca(this.jugador, new Posicion(2,6));
@@ -75,6 +75,11 @@ public class TestNaveDeTransporteTerran extends TestUnidadTransporte {
 		transportador.almacenarA(unidadVoladora);
 	}
 	
+	
+	/*
+	 * No tiene sentido: el chequeo de tipos ya cierra esta posibilidad
+	 * Si no: se puede pasar todo a ObjetoVivo.
+	 * 
 	@Test
 	public void testNoPuedeAlmacenarAEdificio() {
 		assertFalse(transportador.puedeAlmacenarA(edificioPropio));
@@ -84,4 +89,6 @@ public class TestNaveDeTransporteTerran extends TestUnidadTransporte {
 	public void testAlmacenarAEdificioDebeFallar() {
 		transportador.almacenarA(edificioPropio);
 	}
+	
+	*/
 }

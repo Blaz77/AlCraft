@@ -83,7 +83,7 @@ public class AtributosJugadorTerran implements AtributosJugador {
 		return ciencia;
 	}
 
-	public AtributosUnidadTransporte getTransporte() {
+	public AtributosUnidad getTransporte() {
 		return transp;
 	}
 }

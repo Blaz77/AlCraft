@@ -50,10 +50,6 @@ public abstract class AtributosObjetoVivo { //AtributosObjetoDeJuego?
 	public String getNombre() {
 		return nombre;
 	}
-
-	public boolean tieneEscudo(){
-		return false;
-	}
 	
 	public boolean puedeOcuparTierra(){
 		return true;

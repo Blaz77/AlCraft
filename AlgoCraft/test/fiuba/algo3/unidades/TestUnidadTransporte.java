@@ -22,7 +22,7 @@ import fiuba.algo3.raza.TipoRaza;
 public abstract class TestUnidadTransporte extends TestUnidad {
 	protected int capacidad;
 
-	protected UnidadTransporte transportador;
+	protected Unidad transportador;
 	protected Unidad pasajero;
 	protected Unidad unidadVoladora;
 	protected Unidad unidadEnemigaTerrestre;

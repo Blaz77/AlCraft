@@ -43,7 +43,7 @@ public interface AtributosJugador {
 	public AtributosUnidad getInfanteriaMagica(); //Elite, Spell Casters
 	// Protoss: High Templar, Terran: Science Vessel, Zerg: Queen
 	
-	public AtributosUnidadTransporte getTransporte();
+	public AtributosUnidad getTransporte();
 	// Protoss/Terran: Nave Transporte, Zerg: Amo Supremo
 	
 }

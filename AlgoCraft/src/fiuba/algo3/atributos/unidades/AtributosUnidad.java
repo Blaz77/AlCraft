@@ -5,7 +5,9 @@ import fiuba.algo3.atributos.AtributosVoluntadDelSer;
 import fiuba.algo3.componentes.AtaqueNull;
 import fiuba.algo3.componentes.IAtaque;
 import fiuba.algo3.componentes.IMagia;
+import fiuba.algo3.componentes.ITransporte;
 import fiuba.algo3.componentes.MagiaNull;
+import fiuba.algo3.componentes.TransporteNull;
 import fiuba.algo3.componentes.VoluntadDelSer;
 
 public abstract class AtributosUnidad extends AtributosObjetoVivo {
@@ -26,19 +28,16 @@ public abstract class AtributosUnidad extends AtributosObjetoVivo {
 		return new MagiaNull();
 	}
 	
+	public ITransporte getTransporte() {
+		return new TransporteNull();
+	}
+	
 	public int getCostoAlmacenamiento(){
 		return costoAlmacenamiento;
 	}
-
+	
 	public boolean puedeSerAlmacenada(){ //puedeSerTransportada
 		return false;
 	}
 	
-	public boolean puedeHacerMagia(){
-		return false;
-	}
-		
-	public boolean puedeAlmacenar(){ //puedeTransportar()
-		return false;
-	}
 }

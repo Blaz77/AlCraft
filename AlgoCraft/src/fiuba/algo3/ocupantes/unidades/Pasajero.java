@@ -1,17 +1,19 @@
 package fiuba.algo3.ocupantes.unidades;
 
+import fiuba.algo3.componentes.ITransporte;
+
 public class Pasajero {
 	
 	private Unidad pasajero;
-	private UnidadTransporte almacenador;
+	private ITransporte transporte;
 	
-	public Pasajero(Unidad unidad, UnidadTransporte almacenador){
+	public Pasajero(Unidad unidad, ITransporte transporte){
 		this.pasajero = unidad;
-		this.almacenador = almacenador;
+		this.transporte = transporte;
 	}
 
 	public void salir(){ //definir aca una Posicion?
-		almacenador.liberarUnidad(pasajero);
+		this.transporte.liberarUnidad(pasajero);
 	}
 	
 }
