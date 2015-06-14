@@ -4,14 +4,18 @@ import fiuba.algo3.atributos.AtributosAtaque;
 import fiuba.algo3.atributos.AtributosCosto;
 import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.AtributosVoluntadDelSer;
-import fiuba.algo3.atributos.unidades.AtributosUnidadAtaque;
+import fiuba.algo3.atributos.unidades.AtributosUnidad;
+import fiuba.algo3.componentes.Ataque;
 import fiuba.algo3.componentes.EstadoRegenerandoEscudo;
+import fiuba.algo3.componentes.IAtaque;
 import fiuba.algo3.componentes.IVida;
 import fiuba.algo3.componentes.Vida;
 import fiuba.algo3.componentes.VidaConEscudo;
 
-public class AtributosZealot extends AtributosUnidadAtaque {
+public class AtributosZealot extends AtributosUnidad {
 
+	private AtributosAtaque ataque;
+	
 	public AtributosZealot(){
 		// fields ObjetoVivo:
 		this.costo = new AtributosCosto(
@@ -44,6 +48,12 @@ public class AtributosZealot extends AtributosUnidadAtaque {
 	public IVida getVida() {
 		return new VidaConEscudo(this.vida);
 	}
+	
+	@Override
+	public IAtaque getAtaque(){
+		return new Ataque(this.ataque);
+	}
+	
 	
 
 }

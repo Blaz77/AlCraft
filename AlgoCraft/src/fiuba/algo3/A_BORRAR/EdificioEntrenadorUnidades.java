@@ -1,4 +1,4 @@
-package fiuba.algo3.ocupantes.edificios;
+package fiuba.algo3.A_BORRAR;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -6,12 +6,13 @@ import java.util.NoSuchElementException;
 import java.util.Queue;
 
 import fiuba.algo3.atributos.edificios.AtributosEdificioEntrenadorUnidades;
-import fiuba.algo3.componentes.EstadoEntrenando;
+import fiuba.algo3.componentes.EstadoEntrenandoUnidad;
+import fiuba.algo3.componentes.IEntrenadorUnidades;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.unidades.constructores.Constructor;
 
-public class EdificioEntrenadorUnidades extends Edificio implements IEntrenador{
+public class EdificioEntrenadorUnidades extends Edificio implements IEntrenadorUnidades{
 	
 	public EdificioEntrenadorUnidades(Jugador propietario, Posicion posicion,
 			AtributosEdificioEntrenadorUnidades atributos) {
@@ -37,7 +38,7 @@ public class EdificioEntrenadorUnidades extends Edificio implements IEntrenador{
 	
 	public void entrenar(Constructor constructor){
 		if (entrenamientosActuales < maxEntrenamientosSimultaneos){
-			this.agregarEstado(new EstadoEntrenando(constructor));
+			this.agregarEstado(new EstadoEntrenandoUnidad(constructor));
 			entrenamientosActuales++;
 		}
 		else{
@@ -49,7 +50,7 @@ public class EdificioEntrenadorUnidades extends Edificio implements IEntrenador{
 	public void proximoEntrenamiento() {
 		try {
 			Constructor constructor = esperando.remove();
-			this.agregarEstado(new EstadoEntrenando(constructor));
+			this.agregarEstado(new EstadoEntrenandoUnidad(constructor));
 		} catch (NoSuchElementException e) {
 			entrenamientosActuales--;
 		}

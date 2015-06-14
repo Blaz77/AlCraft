@@ -1,4 +1,4 @@
-package fiuba.algo3.ocupantes.unidades.constructores;
+package fiuba.algo3.A_BORRAR;
 
 import fiuba.algo3.atributos.jugador.AtributosJugador;
 

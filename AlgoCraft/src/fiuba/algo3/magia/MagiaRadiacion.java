@@ -4,7 +4,6 @@ import fiuba.algo3.componentes.EstadoIrradiado;
 import fiuba.algo3.excepciones.FueraDelRangoPermitido;
 import fiuba.algo3.excepciones.NoEsUnEnemigo;
 import fiuba.algo3.ocupantes.unidades.Unidad;
-import fiuba.algo3.ocupantes.unidades.UnidadMagica;
 
 public class MagiaRadiacion implements MagiaAUnidad {
 

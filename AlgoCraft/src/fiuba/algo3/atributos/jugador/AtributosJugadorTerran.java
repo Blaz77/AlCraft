@@ -1,10 +1,6 @@
 package fiuba.algo3.atributos.jugador;
 
-import fiuba.algo3.A_BORRAR.AtributosEdificioIncrementadorPoblacion;
-import fiuba.algo3.A_BORRAR.AtributosEdificioRecolectorGasVespeno;
-import fiuba.algo3.A_BORRAR.AtributosEdificioRecolectorMineral;
 import fiuba.algo3.atributos.edificios.AtributosEdificio;
-import fiuba.algo3.atributos.edificios.AtributosEdificioEntrenadorUnidades;
 import fiuba.algo3.atributos.edificios.terran.AtributosBarraca;
 import fiuba.algo3.atributos.edificios.terran.AtributosCentroDeMineral;
 import fiuba.algo3.atributos.edificios.terran.AtributosDepositoDeSuministros;
@@ -12,9 +8,6 @@ import fiuba.algo3.atributos.edificios.terran.AtributosFabrica;
 import fiuba.algo3.atributos.edificios.terran.AtributosPuertoEstelar;
 import fiuba.algo3.atributos.edificios.terran.AtributosRefineria;
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
-import fiuba.algo3.atributos.unidades.AtributosUnidadAtaque;
-import fiuba.algo3.atributos.unidades.AtributosUnidadMagica;
-import fiuba.algo3.atributos.unidades.AtributosUnidadTransporte;
 import fiuba.algo3.atributos.unidades.terran.AtributosEspectro;
 import fiuba.algo3.atributos.unidades.terran.AtributosGolliat;
 import fiuba.algo3.atributos.unidades.terran.AtributosMarine;

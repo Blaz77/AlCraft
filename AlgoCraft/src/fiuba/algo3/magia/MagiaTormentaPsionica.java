@@ -5,7 +5,7 @@ import fiuba.algo3.excepciones.FueraDelRangoPermitido;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.unidades.Unidad;
-import fiuba.algo3.ocupantes.unidades.UnidadMagica;
+
 //TEMPORAL SOLO PARA PROBAR
 public class MagiaTormentaPsionica implements MagiaDeAreaDeEfecto {
 

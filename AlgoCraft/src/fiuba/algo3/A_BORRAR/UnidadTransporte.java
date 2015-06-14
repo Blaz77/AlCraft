@@ -1,4 +1,4 @@
-package fiuba.algo3.ocupantes.unidades;
+package fiuba.algo3.A_BORRAR;
 
 import java.util.ArrayList;
 import java.util.Iterator;

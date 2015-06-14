@@ -35,9 +35,11 @@ public class AtributosGolliat extends AtributosUnidad {
 		
 	}
 	
+	@Override
 	public IAtaque getAtaque(){
 		return new Ataque(this.ataque);
 	}
+	
 	
 	public boolean puedeSerAlmacenada(){ //puedeSerTransportada
 		return true;

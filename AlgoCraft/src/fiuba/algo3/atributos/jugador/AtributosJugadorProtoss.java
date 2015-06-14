@@ -1,7 +1,6 @@
 package fiuba.algo3.atributos.jugador;
 
 import fiuba.algo3.atributos.edificios.AtributosEdificio;
-import fiuba.algo3.atributos.edificios.AtributosEdificioEntrenadorUnidades;
 import fiuba.algo3.atributos.edificios.protoss.AtributosAcceso;
 import fiuba.algo3.atributos.edificios.protoss.AtributosArchivosTemplarios;
 import fiuba.algo3.atributos.edificios.protoss.AtributosAsimilador;
@@ -9,9 +8,6 @@ import fiuba.algo3.atributos.edificios.protoss.AtributosNexoMineral;
 import fiuba.algo3.atributos.edificios.protoss.AtributosPilon;
 import fiuba.algo3.atributos.edificios.protoss.AtributosPuertoEstelarProtoss;
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
-import fiuba.algo3.atributos.unidades.AtributosUnidadAtaque;
-import fiuba.algo3.atributos.unidades.AtributosUnidadMagica;
-import fiuba.algo3.atributos.unidades.AtributosUnidadTransporte;
 import fiuba.algo3.atributos.unidades.protoss.AtributosAltoTemplario;
 import fiuba.algo3.atributos.unidades.protoss.AtributosDragon;
 import fiuba.algo3.atributos.unidades.protoss.AtributosNaveDeTransporteProtoss;

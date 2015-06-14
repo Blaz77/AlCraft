@@ -1,14 +1,19 @@
 package fiuba.algo3.atributos.unidades.protoss;
 
 import fiuba.algo3.atributos.AtributosCosto;
+import fiuba.algo3.atributos.AtributosTransporte;
 import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.AtributosVoluntadDelSer;
-import fiuba.algo3.atributos.unidades.AtributosUnidadTransporte;
+import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.EstadoRegenerandoEscudo;
+import fiuba.algo3.componentes.ITransporte;
 import fiuba.algo3.componentes.IVida;
+import fiuba.algo3.componentes.Transporte;
 import fiuba.algo3.componentes.VidaConEscudo;
 
-public class AtributosNaveDeTransporteProtoss extends AtributosUnidadTransporte {
+public class AtributosNaveDeTransporteProtoss extends AtributosUnidad {
+	
+	private AtributosTransporte transporte;
 	
 	public AtributosNaveDeTransporteProtoss() {
 		// fields ObjetoVivo:
@@ -29,8 +34,8 @@ public class AtributosNaveDeTransporteProtoss extends AtributosUnidadTransporte 
 		this.costoAlmacenamiento = 0; //tecnicamente no es almacenable
 		
 		// fields de UnidadTransporte:
-		this.capacidadAlmacenamiento = 8;
-		
+		this.transporte = new AtributosTransporte(8); //capac.Almac.
+	
 		estadosIniciales.add(new EstadoRegenerandoEscudo());
 	}
 	
@@ -38,5 +43,9 @@ public class AtributosNaveDeTransporteProtoss extends AtributosUnidadTransporte 
 	public IVida getVida() {
 		return new VidaConEscudo(this.vida);
 	}
-	
+
+	@Override
+	public ITransporte getTransporte() {
+		return new Transporte(this.transporte);
+	}
 }

@@ -6,7 +6,6 @@ import fiuba.algo3.magia.MagiaAUnidad;
 import fiuba.algo3.magia.MagiaDeAreaDeEfecto;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.unidades.Unidad;
-import fiuba.algo3.ocupantes.unidades.UnidadMagica;
 
 public class Magia implements IMagia{ //,Estado
 	

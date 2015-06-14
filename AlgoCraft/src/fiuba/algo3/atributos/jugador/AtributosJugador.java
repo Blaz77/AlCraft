@@ -1,14 +1,7 @@
 package fiuba.algo3.atributos.jugador;
 
-import fiuba.algo3.A_BORRAR.AtributosEdificioIncrementadorPoblacion;
-import fiuba.algo3.A_BORRAR.AtributosEdificioRecolectorGasVespeno;
-import fiuba.algo3.A_BORRAR.AtributosEdificioRecolectorMineral;
 import fiuba.algo3.atributos.edificios.AtributosEdificio;
-import fiuba.algo3.atributos.edificios.AtributosEdificioEntrenadorUnidades;
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
-import fiuba.algo3.atributos.unidades.AtributosUnidadAtaque;
-import fiuba.algo3.atributos.unidades.AtributosUnidadMagica;
-import fiuba.algo3.atributos.unidades.AtributosUnidadTransporte;
 
 //No tiene sentido que se llame AtributosJugador
 //Como mucho para eso seria AtributosRaza*nombre_raza*

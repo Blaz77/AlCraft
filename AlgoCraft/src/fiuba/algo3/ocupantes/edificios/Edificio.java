@@ -1,17 +1,11 @@
 package fiuba.algo3.ocupantes.edificios;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.NoSuchElementException;
-import java.util.Queue;
 
 import fiuba.algo3.atributos.edificios.AtributosEdificio;
-import fiuba.algo3.atributos.edificios.AtributosEdificioEntrenadorUnidades;
 import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.EstadoConstruyendoEdificio;
-import fiuba.algo3.componentes.EstadoEntrenandoUnidad;
 import fiuba.algo3.componentes.IEntrenadorUnidades;
-import fiuba.algo3.componentes.Vida;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.ObjetoVivo;
@@ -56,7 +50,7 @@ public class Edificio extends ObjetoVivo {
 	}
 
 	public boolean puedeEntrenarUnidades(){
-		return this.entrenador.puedeEntrenarUnidades();
+		return construccionTerminada && this.entrenador.puedeEntrenarUnidades();
 	}
 	
 	//				u otro nombre

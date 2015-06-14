@@ -4,16 +4,18 @@ import fiuba.algo3.atributos.AtributosCosto;
 import fiuba.algo3.atributos.AtributosMagia;
 import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.AtributosVoluntadDelSer;
-import fiuba.algo3.atributos.unidades.AtributosUnidadMagica;
+import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.EstadoRegenerandoEscudo;
+import fiuba.algo3.componentes.IMagia;
 import fiuba.algo3.componentes.IVida;
+import fiuba.algo3.componentes.Magia;
 import fiuba.algo3.componentes.VidaConEscudo;
 import fiuba.algo3.magia.MagiaAlucinacion;
-import fiuba.algo3.magia.MagiaEMP;
-import fiuba.algo3.magia.MagiaRadiacion;
 import fiuba.algo3.magia.MagiaTormentaPsionica;
 
-public class AtributosAltoTemplario extends AtributosUnidadMagica {
+public class AtributosAltoTemplario extends AtributosUnidad {
+	
+	private AtributosMagia magia;
 	
 	public AtributosAltoTemplario() {
 		// fields ObjetoVivo:
@@ -46,6 +48,11 @@ public class AtributosAltoTemplario extends AtributosUnidadMagica {
 	@Override
 	public IVida getVida() {
 		return new VidaConEscudo(this.vida);
+	}
+	
+	@Override
+	public IMagia getMagia() {
+		return new Magia(this.magia);
 	}
 	
 }

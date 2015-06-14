@@ -15,7 +15,6 @@ import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.edificios.Edificio;
-import fiuba.algo3.ocupantes.edificios.EdificioEntrenadorUnidades;
 
 public class TestPuertoEstelarProtoss extends TestEdificio {
 

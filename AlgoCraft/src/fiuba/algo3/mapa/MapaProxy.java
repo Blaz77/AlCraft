@@ -8,7 +8,6 @@ import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.ocupantes.Ocupante;
 import fiuba.algo3.ocupantes.unidades.Unidad;
-import fiuba.algo3.ocupantes.unidades.UnidadAtaque;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.terreno.Terreno;
 
@@ -160,8 +159,8 @@ public class MapaProxy {
 		
 		Mapa mapa = new Mapa(3);
 		Jugador jugador = new Jugador("Carlitos", Color.AZUL, TipoRaza.TERRAN, mapa);
-		Unidad unidad1 = new UnidadAtaque(jugador, new Posicion(4,0), new AtributosMarine());
-		Unidad unidad2 = new UnidadAtaque(jugador, new Posicion(0,0), new AtributosMarine());
+		Unidad unidad1 = new Unidad(jugador, new Posicion(4,0), new AtributosMarine());
+		Unidad unidad2 = new Unidad(jugador, new Posicion(0,0), new AtributosMarine());
 		ArrayList<Unidad> unidades = new ArrayList<Unidad>();
 		unidades.add(unidad1);
 		MapaProxy mapaProxy = new MapaProxy(mapa, unidades);
