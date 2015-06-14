@@ -8,6 +8,7 @@ import fiuba.algo3.atributos.edificios.protoss.AtributosAsimilador;
 import fiuba.algo3.atributos.edificios.protoss.AtributosNexoMineral;
 import fiuba.algo3.atributos.edificios.protoss.AtributosPilon;
 import fiuba.algo3.atributos.edificios.protoss.AtributosPuertoEstelarProtoss;
+import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.atributos.unidades.AtributosUnidadAtaque;
 import fiuba.algo3.atributos.unidades.AtributosUnidadMagica;
 import fiuba.algo3.atributos.unidades.AtributosUnidadTransporte;
@@ -19,19 +20,21 @@ import fiuba.algo3.atributos.unidades.protoss.AtributosZealot;
 
 public class AtributosJugadorProtoss implements AtributosJugador {
 
-
-	private AtributosNexoMineral nexoMineral = new AtributosNexoMineral();
-	private AtributosAsimilador asimilador = new AtributosAsimilador();
-	private AtributosPilon pilon = new AtributosPilon();
-	private AtributosAcceso acceso = new AtributosAcceso();
-	private AtributosArchivosTemplarios archivosTempolarios = new AtributosArchivosTemplarios();
-	private AtributosPuertoEstelarProtoss puerto = new AtributosPuertoEstelarProtoss();
-	
 	private AtributosZealot zealot = new AtributosZealot();
 	private AtributosDragon dragon = new AtributosDragon();
 	private AtributosScout scout = new AtributosScout();
 	private AtributosAltoTemplario altoTemplario = new AtributosAltoTemplario();
 	private AtributosNaveDeTransporteProtoss transporte = new AtributosNaveDeTransporteProtoss();
+
+	private AtributosNexoMineral nexoMineral = new AtributosNexoMineral();
+	private AtributosAsimilador asimilador = new AtributosAsimilador();
+	private AtributosPilon pilon = new AtributosPilon();
+	private AtributosAcceso acceso = new AtributosAcceso(zealot, dragon);
+	private AtributosArchivosTemplarios archivosTemplarios = 
+			new AtributosArchivosTemplarios(altoTemplario);
+	private AtributosPuertoEstelarProtoss puerto = 
+			new AtributosPuertoEstelarProtoss(scout, transporte);
+	
 	
 	public AtributosEdificio getRecolectorMineral() {
 		return nexoMineral;
@@ -45,35 +48,35 @@ public class AtributosJugadorProtoss implements AtributosJugador {
 		return pilon;
 	}
 	
-	public AtributosEdificioEntrenadorUnidades getEntrenadorUnidadesBasicas() {
+	public AtributosEdificio getEntrenadorUnidadesBasicas() {
 		return acceso;
 	}
 	
-	public AtributosEdificioEntrenadorUnidades getEntrenadorUnidadesIntermedias() {
+	public AtributosEdificio getEntrenadorUnidadesIntermedias() {
 		return puerto;
 	}
 	
-	public AtributosEdificioEntrenadorUnidades getEntrenadorUnidadesAvanzadas() {
-		return archivosTempolarios;
+	public AtributosEdificio getEntrenadorUnidadesAvanzadas() {
+		return archivosTemplarios;
 	}
 	
-	public AtributosUnidadAtaque getInfanteriaLivianaTerrestre() {
+	public AtributosUnidad getInfanteriaLivianaTerrestre() {
 		return zealot;
 	}
 	
-	public AtributosUnidadAtaque getInfanteriaPesadaTerrestre() {
+	public AtributosUnidad getInfanteriaPesadaTerrestre() {
 		return dragon;
 	}
 	
-	public AtributosUnidadAtaque getInfanteriaPesadaArea() {
+	public AtributosUnidad getInfanteriaPesadaArea() {
 		return scout;
 	}
 
-	public AtributosUnidadMagica getInfanteriaMagica(){
+	public AtributosUnidad getInfanteriaMagica(){
 		return altoTemplario;
 	}
 	
-	public AtributosUnidadTransporte getTransporte(){
+	public AtributosUnidad getTransporte(){
 		return transporte;
 	}
 

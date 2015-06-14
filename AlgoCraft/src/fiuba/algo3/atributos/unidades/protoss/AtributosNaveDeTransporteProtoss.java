@@ -38,8 +38,5 @@ public class AtributosNaveDeTransporteProtoss extends AtributosUnidadTransporte 
 	public IVida getVida() {
 		return new VidaConEscudo(this.vida);
 	}
-	@Override
-	public boolean tieneEscudo() {
-		return true;
-	}
+	
 }

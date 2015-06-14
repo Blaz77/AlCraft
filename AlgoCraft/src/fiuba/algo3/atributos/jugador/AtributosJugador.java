@@ -22,13 +22,13 @@ public interface AtributosJugador {
 	
 	public AtributosEdificio getIncrementadorPoblacion();
 	
-	public AtributosEdificioEntrenadorUnidades getEntrenadorUnidadesBasicas();
+	public AtributosEdificio getEntrenadorUnidadesBasicas();
 	// Unidades Tier 1
 	
-	public AtributosEdificioEntrenadorUnidades getEntrenadorUnidadesIntermedias();
+	public AtributosEdificio getEntrenadorUnidadesIntermedias();
 	// Unidades Tier 2 
 	
-	public AtributosEdificioEntrenadorUnidades getEntrenadorUnidadesAvanzadas();
+	public AtributosEdificio getEntrenadorUnidadesAvanzadas();
 	// Unidades Tier 3
 
 	public AtributosUnidad getInfanteriaLivianaTerrestre();

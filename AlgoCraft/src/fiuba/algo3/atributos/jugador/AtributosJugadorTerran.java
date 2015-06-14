@@ -30,18 +30,18 @@ import fiuba.algo3.atributos.unidades.terran.AtributosNaveDeTransporte;
 
 public class AtributosJugadorTerran implements AtributosJugador {
 	
-	private AtributosCentroDeMineral cDeMineral = new AtributosCentroDeMineral();
-	private AtributosRefineria refineria = new AtributosRefineria();
-	private AtributosDepositoDeSuministros deposito = new AtributosDepositoDeSuministros();
-	private AtributosBarraca barraca = new AtributosBarraca();
-	private AtributosFabrica fabrica = new AtributosFabrica();
-	private AtributosPuertoEstelar puerto = new AtributosPuertoEstelar();
-	
 	private AtributosMarine marine = new AtributosMarine();
 	private AtributosGolliat golliat = new AtributosGolliat();
 	private AtributosEspectro espectro = new AtributosEspectro();
 	private AtributosNaveDeCiencia ciencia = new AtributosNaveDeCiencia();
 	private AtributosNaveDeTransporte transp = new AtributosNaveDeTransporte();
+	
+	private AtributosCentroDeMineral cDeMineral = new AtributosCentroDeMineral();
+	private AtributosRefineria refineria = new AtributosRefineria();
+	private AtributosDepositoDeSuministros deposito = new AtributosDepositoDeSuministros();
+	private AtributosBarraca barraca = new AtributosBarraca(marine);
+	private AtributosFabrica fabrica = new AtributosFabrica(golliat);
+	private AtributosPuertoEstelar puerto = new AtributosPuertoEstelar(espectro, ciencia, transp);
 	
 	public AtributosEdificio getRecolectorMineral() {
 		return cDeMineral;
@@ -55,15 +55,15 @@ public class AtributosJugadorTerran implements AtributosJugador {
 		return deposito;
 	}
 
-	public AtributosEdificioEntrenadorUnidades getEntrenadorUnidadesBasicas() {
+	public AtributosEdificio getEntrenadorUnidadesBasicas() {
 		return barraca;
 	}
 
-	public AtributosEdificioEntrenadorUnidades getEntrenadorUnidadesIntermedias() {
+	public AtributosEdificio getEntrenadorUnidadesIntermedias() {
 		return fabrica;
 	}
 
-	public AtributosEdificioEntrenadorUnidades getEntrenadorUnidadesAvanzadas() {
+	public AtributosEdificio getEntrenadorUnidadesAvanzadas() {
 		return puerto;
 	}
 

@@ -23,8 +23,8 @@ public class TestPuertoEstelar extends TestEdificio {
 	private EdificiosFactory terranFactory;
 	private Edificio fabrica;
 	private Edificio barraca;
-	private EdificioEntrenadorUnidades puerto;
-	private EdificioEntrenadorUnidades puertoEnConst;
+	private Edificio puerto;
+	private Edificio puertoEnConst;
 	
 	@Override
 	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
@@ -39,14 +39,6 @@ public class TestPuertoEstelar extends TestEdificio {
 	@Override
 	protected Edificio crearEdificioRequeridoNivel2(Jugador jugador, Posicion posicion) {
 		return terranFactory.crearEntrenadorUnidadesIntermedias(jugador, posicion);
-	}
-	
-	protected EdificioEntrenadorUnidades crearEnTierra(Jugador jugador, Mapa mapa) {
-		return (EdificioEntrenadorUnidades) super.crearEnTierra(jugador, mapa);
-	}
-
-	protected EdificioEntrenadorUnidades crearFueraDeTierra(Jugador jugador, Mapa mapa) {
-		return (EdificioEntrenadorUnidades) super.crearFueraDeTierra(jugador, mapa);
 	}
 	
 	@Before
@@ -81,7 +73,7 @@ public class TestPuertoEstelar extends TestEdificio {
 		Edificio barraca2 = crearRequeridoEnTierra(jugador2, mapa);
 		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
 		try {
-			EdificioEntrenadorUnidades puerto2 = crearEnTierra(jugador2, mapa);
+			Edificio puerto2 = crearEnTierra(jugador2, mapa);
 			fail();
 		}
 		catch (OrdenConstruccionViolado e) {

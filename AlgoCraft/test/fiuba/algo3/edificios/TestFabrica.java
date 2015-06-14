@@ -23,8 +23,8 @@ public class TestFabrica extends TestEdificio {
 	private Jugador jugador;
 	private EdificiosFactory terranFactory;
 	private Edificio barraca;
-	private EdificioEntrenadorUnidades fabrica;
-	private EdificioEntrenadorUnidades fabricaEnConst;
+	private Edificio fabrica;
+	private Edificio fabricaEnConst;
 	
 	@Override
 	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
@@ -36,14 +36,6 @@ public class TestFabrica extends TestEdificio {
 		return terranFactory.crearEntrenadorUnidadesBasicas(jugador, posicion);
 	}
 	
-	protected EdificioEntrenadorUnidades crearEnTierra(Jugador jugador, Mapa mapa) {
-		return (EdificioEntrenadorUnidades) super.crearEnTierra(jugador, mapa);
-	}
-
-	protected EdificioEntrenadorUnidades crearFueraDeTierra(Jugador jugador, Mapa mapa) {
-		return (EdificioEntrenadorUnidades) super.crearFueraDeTierra(jugador, mapa);
-	}
-
 	@Before
 	public void setUp() throws Exception {
 		mapa = new Mapa(6);
@@ -74,7 +66,7 @@ public class TestFabrica extends TestEdificio {
 		jugador2.agregarGasVespeno(500);
 		jugador2.agregarMinerales(600);
 		try {
-			EdificioEntrenadorUnidades fabrica2 = crearEnTierra(jugador2, mapa);
+			Edificio fabrica2 = crearEnTierra(jugador2, mapa);
 			fail();
 		}
 		catch (OrdenConstruccionViolado e) {

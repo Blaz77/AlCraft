@@ -20,21 +20,14 @@ public class TestAcceso extends TestEdificio {
 	private Mapa mapa;
 	private Jugador jugador;
 	private EdificiosFactory protossFactory; //EdificiosAbstractFactory
-	private EdificioEntrenadorUnidades acceso;
-	private EdificioEntrenadorUnidades accesoEnConst;
+	private Edificio acceso;
+	private Edificio accesoEnConst;
 	
 	@Override
 	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
 		return protossFactory.crearEntrenadorUnidadesBasicas(jugador, posicion);
 	}
 	
-	protected EdificioEntrenadorUnidades crearEnTierra(Jugador jugador, Mapa mapa) {
-		return (EdificioEntrenadorUnidades) super.crearEnTierra(jugador, mapa);
-	}
-
-	protected EdificioEntrenadorUnidades crearFueraDeTierra(Jugador jugador, Mapa mapa) {
-		return (EdificioEntrenadorUnidades) super.crearFueraDeTierra(jugador, mapa);
-	}
 	
 	@Before
 	public void setUp() {

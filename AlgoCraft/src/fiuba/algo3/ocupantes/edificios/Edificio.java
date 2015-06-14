@@ -1,15 +1,26 @@
 package fiuba.algo3.ocupantes.edificios;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
+import java.util.Queue;
+
 import fiuba.algo3.atributos.edificios.AtributosEdificio;
+import fiuba.algo3.atributos.edificios.AtributosEdificioEntrenadorUnidades;
 import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.EstadoConstruyendoEdificio;
+import fiuba.algo3.componentes.EstadoEntrenandoUnidad;
+import fiuba.algo3.componentes.IEntrenadorUnidades;
 import fiuba.algo3.componentes.Vida;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
+import fiuba.algo3.ocupantes.unidades.constructores.Constructor;
 
 public class Edificio extends ObjetoVivo {
+	
+	private IEntrenadorUnidades entrenador;
 	
 	private boolean construccionTerminada;
 	public Edificio(Jugador propietario, Posicion posicion){
@@ -26,6 +37,9 @@ public class Edificio extends ObjetoVivo {
 		this.vida = atributos.getVida();
 		this.agregarEstado(new EstadoConstruyendoEdificio());
 		propietario.agregarEdificio(this);
+		//
+		this.entrenador = atributos.getEntrenadorUnidades();
+		this.entrenador.setPortador(this);
 	}
 	
 	
@@ -42,11 +56,13 @@ public class Edificio extends ObjetoVivo {
 	}
 
 	public boolean puedeEntrenarUnidades(){
-		// Devolver true aca implica la obligacion de implementar IEntrenador
-		return ((AtributosEdificio) atributos).puedeEntrenarUnidades() &&
-				construccionTerminada;
+		return this.entrenador.puedeEntrenarUnidades();
 	}
 	
+	//				u otro nombre
+	public ArrayList<Constructor> getUnidadesEntrenables(){
+		return this.entrenador.getUnidadesEntrenables();
+	}
 	
 	public void construccionFinalizada() {
 		// Se ejecuta al terminar la construccion (Puede dar un aviso,

@@ -20,20 +20,12 @@ public class TestBarraca extends TestEdificio {
 	private Mapa mapa;
 	private Jugador jugador;
 	private EdificiosFactory terranFactory; //EdificiosAbstractFactory
-	private EdificioEntrenadorUnidades barraca;
-	private EdificioEntrenadorUnidades barracaEnConst;
+	private Edificio barraca;
+	private Edificio barracaEnConst;
 	
 	@Override
 	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
 		return terranFactory.crearEntrenadorUnidadesBasicas(jugador, posicion);
-	}
-	
-	protected EdificioEntrenadorUnidades crearEnTierra(Jugador jugador, Mapa mapa) {
-		return (EdificioEntrenadorUnidades) super.crearEnTierra(jugador, mapa);
-	}
-
-	protected EdificioEntrenadorUnidades crearFueraDeTierra(Jugador jugador, Mapa mapa) {
-		return (EdificioEntrenadorUnidades) super.crearFueraDeTierra(jugador, mapa);
 	}
 	
 	@Before

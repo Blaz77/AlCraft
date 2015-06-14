@@ -5,7 +5,7 @@ import org.junit.Before;
 import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Mapa;
-import fiuba.algo3.ocupantes.edificios.EdificioEntrenadorUnidades;
+import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.raza.TipoRaza;
 
 public class TestUnidad {
@@ -13,8 +13,8 @@ public class TestUnidad {
 	protected Mapa mapa;
 	protected Jugador jugador;
 	protected Jugador jugadorEnemigo;
-	protected EdificioEntrenadorUnidades edificioPropio;
-	protected EdificioEntrenadorUnidades edificioEnemigo;
+	protected Edificio edificioPropio;
+	protected Edificio edificioEnemigo;
 
 	@Before
 	public void setUp() throws Exception {

@@ -47,8 +47,5 @@ public class AtributosAltoTemplario extends AtributosUnidadMagica {
 	public IVida getVida() {
 		return new VidaConEscudo(this.vida);
 	}
-	@Override
-	public boolean tieneEscudo() {
-		return true;
-	}
+	
 }

@@ -24,8 +24,8 @@ public class TestArchivosTemplarios extends TestEdificio {
 	private EdificiosFactory protossFactory;
 	private Edificio acceso;
 	private Edificio puerto;
-	private EdificioEntrenadorUnidades archivos;
-	private EdificioEntrenadorUnidades archivosEnConst;
+	private Edificio archivos;
+	private Edificio archivosEnConst;
 	
 	@Override
 	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
@@ -40,14 +40,6 @@ public class TestArchivosTemplarios extends TestEdificio {
 	@Override
 	protected Edificio crearEdificioRequeridoNivel2(Jugador jugador, Posicion posicion) {
 		return protossFactory.crearEntrenadorUnidadesIntermedias(jugador, posicion);
-	}
-	
-	protected EdificioEntrenadorUnidades crearEnTierra(Jugador jugador, Mapa mapa) {
-		return (EdificioEntrenadorUnidades) super.crearEnTierra(jugador, mapa);
-	}
-
-	protected EdificioEntrenadorUnidades crearFueraDeTierra(Jugador jugador, Mapa mapa) {
-		return (EdificioEntrenadorUnidades) super.crearFueraDeTierra(jugador, mapa);
 	}
 
 	@Before
@@ -84,7 +76,7 @@ public class TestArchivosTemplarios extends TestEdificio {
 		Edificio acceso2 = crearRequeridoEnTierra(jugador2, mapa);
 		for(int i = 0; i < 8; i++) acceso.pasarTurno();//Construccion
 		try {
-			EdificioEntrenadorUnidades archivos2 = crearEnTierra(jugador2, mapa);
+			Edificio archivos2 = crearEnTierra(jugador2, mapa);
 			fail();
 		}
 		catch (OrdenConstruccionViolado e) {

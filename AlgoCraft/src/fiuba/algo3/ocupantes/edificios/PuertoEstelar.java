@@ -5,7 +5,7 @@ import fiuba.algo3.componentes.Vida;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
 
-public class PuertoEstelar extends EdificioEntrenadorUnidades {
+public class PuertoEstelar extends Edificio {
 
 	public PuertoEstelar(Jugador propietario, Posicion posicion) {
 		super(propietario, posicion, 

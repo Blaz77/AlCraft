@@ -9,7 +9,6 @@ import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.edificios.Edificio;
-import fiuba.algo3.ocupantes.edificios.EdificioEntrenadorUnidades;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.terreno.TipoTerreno;
 
@@ -69,7 +68,7 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 			throw new TerrenoInadecuado();
 		}
 		comprarEdificio(jugador, jugador.getAtributos().getEntrenadorUnidadesBasicas());
-		return new EdificioEntrenadorUnidades(jugador, posicion, jugador.getAtributos().getEntrenadorUnidadesBasicas());
+		return new Edificio(jugador, posicion, jugador.getAtributos().getEntrenadorUnidadesBasicas());
 	}
 
 	public Edificio crearEntrenadorUnidadesIntermedias(Jugador jugador, Posicion posicion) {
@@ -82,7 +81,7 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 			throw new OrdenConstruccionViolado();
 		}
 		comprarEdificio(jugador, jugador.getAtributos().getEntrenadorUnidadesIntermedias());
-		return new EdificioEntrenadorUnidades(jugador, posicion, jugador.getAtributos().getEntrenadorUnidadesIntermedias());
+		return new Edificio(jugador, posicion, jugador.getAtributos().getEntrenadorUnidadesIntermedias());
 	}
 
 	public Edificio crearEntrenadorUnidadesAvanzadas(Jugador jugador, Posicion posicion) {
@@ -95,7 +94,7 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 			throw new OrdenConstruccionViolado();
 		}
 		comprarEdificio(jugador, jugador.getAtributos().getEntrenadorUnidadesAvanzadas());
-		return new EdificioEntrenadorUnidades(jugador, posicion, jugador.getAtributos().getEntrenadorUnidadesAvanzadas());
+		return new Edificio(jugador, posicion, jugador.getAtributos().getEntrenadorUnidadesAvanzadas());
 	}
 
 }

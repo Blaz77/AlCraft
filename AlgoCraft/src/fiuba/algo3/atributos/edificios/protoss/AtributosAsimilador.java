@@ -32,10 +32,6 @@ public class AtributosAsimilador extends AtributosEdificio {
 	public IVida getVida() {
 		return new VidaConEscudo(0, 0, this.vida);
 	}
-	@Override
-	public boolean tieneEscudo() {
-		return true;
-	}
 	
 	@Override
 	public boolean debeOcuparRecurso(){

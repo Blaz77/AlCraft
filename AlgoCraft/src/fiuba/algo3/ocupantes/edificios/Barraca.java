@@ -5,7 +5,7 @@ import fiuba.algo3.componentes.Vida;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
 
-public class Barraca extends EdificioEntrenadorUnidades {
+public class Barraca extends Edificio {
 		
 	public Barraca(Jugador propietario, Posicion posicion) {
 		super(propietario, posicion, ((AtributosJugador)propietario.getAtributos())

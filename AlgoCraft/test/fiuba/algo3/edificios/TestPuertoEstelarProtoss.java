@@ -23,8 +23,8 @@ public class TestPuertoEstelarProtoss extends TestEdificio {
 	private Jugador jugador;
 	private EdificiosFactory protossFactory;
 	private Edificio acceso;
-	private EdificioEntrenadorUnidades puerto;
-	private EdificioEntrenadorUnidades puertoEnConst;
+	private Edificio puerto;
+	private Edificio puertoEnConst;
 	
 	@Override
 	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
@@ -34,14 +34,6 @@ public class TestPuertoEstelarProtoss extends TestEdificio {
 	@Override
 	protected Edificio crearEdificioRequerido(Jugador jugador, Posicion posicion) {
 		return protossFactory.crearEntrenadorUnidadesBasicas(jugador, posicion);
-	}
-	
-	protected EdificioEntrenadorUnidades crearEnTierra(Jugador jugador, Mapa mapa) {
-		return (EdificioEntrenadorUnidades) super.crearEnTierra(jugador, mapa);
-	}
-
-	protected EdificioEntrenadorUnidades crearFueraDeTierra(Jugador jugador, Mapa mapa) {
-		return (EdificioEntrenadorUnidades) super.crearFueraDeTierra(jugador, mapa);
 	}
 	
 	@Before
@@ -72,7 +64,7 @@ public class TestPuertoEstelarProtoss extends TestEdificio {
 		jugador2.agregarGasVespeno(500);
 		jugador2.agregarMinerales(500);
 		try {
-			EdificioEntrenadorUnidades puerto2 = crearEnTierra(jugador2, mapa);
+			Edificio puerto2 = crearEnTierra(jugador2, mapa);
 			fail();
 		}
 		catch (OrdenConstruccionViolado e) {

@@ -14,7 +14,6 @@ import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.edificios.Barraca;
-import fiuba.algo3.ocupantes.edificios.EdificioEntrenadorUnidades;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.ocupantes.unidades.UnidadAtaque;
 import fiuba.algo3.ocupantes.unidades.UnidadMagica;
