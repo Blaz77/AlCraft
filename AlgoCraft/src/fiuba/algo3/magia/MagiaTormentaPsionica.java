@@ -1,5 +1,6 @@
 package fiuba.algo3.magia;
 
+import fiuba.algo3.componentes.EstadoAtormentando;
 import fiuba.algo3.excepciones.FueraDelRangoPermitido;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
@@ -13,7 +14,7 @@ public class MagiaTormentaPsionica implements MagiaDeAreaDeEfecto {
 	private UnidadMagica unidad;
 	
 	public MagiaTormentaPsionica() {
-		this.costoDeEjecutar = 100;
+		this.costoDeEjecutar = 75;
 		this.rangoAoE = 15; //INVENTADO!
 	}
 	
@@ -30,13 +31,7 @@ public class MagiaTormentaPsionica implements MagiaDeAreaDeEfecto {
 		if (!this.unidad.estaEnRangoDeMagia(posicionCentral))
 			throw new FueraDelRangoPermitido();
 		this.unidad.disminuirEnergia(this.costoDeEjecutar);
-		
-		for (Unidad unidad : mapa.getUnidadesEnRango(posicionCentral, rangoAoE)) {
-			if (unidad.puedeHacerMagia()) {
-				UnidadMagica unidadAfectada = (UnidadMagica) unidad;
-				unidadAfectada.disminuirEnergia(unidadAfectada.getEnergia());
-			}
-		}
+		unidad.agregarEstado(new EstadoAtormentando(posicionCentral, mapa, rangoAoE));
 	}
 
 }
