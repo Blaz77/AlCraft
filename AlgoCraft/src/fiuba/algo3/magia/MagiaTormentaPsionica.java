@@ -11,14 +11,14 @@ public class MagiaTormentaPsionica implements MagiaDeAreaDeEfecto {
 
 	private int rangoAoE;
 	private int costoDeEjecutar;
-	private UnidadMagica unidad;
+	private Unidad unidad;
 	
 	public MagiaTormentaPsionica() {
 		this.costoDeEjecutar = 75;
 		this.rangoAoE = 15; //INVENTADO!
 	}
 	
-	public void setUnidadMagica(UnidadMagica unidad) {
+	public void setUnidad(Unidad unidad) {
 		this.unidad = unidad;
 	}
 	

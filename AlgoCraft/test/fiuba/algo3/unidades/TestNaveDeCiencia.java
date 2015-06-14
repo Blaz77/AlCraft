@@ -22,13 +22,13 @@ public class TestNaveDeCiencia extends TestUnidadMagica {
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		this.unidad = new UnidadMagica(this.jugador, new Posicion(2,4), jugador.getAtributos().getInfanteriaMagica());
-		this.otraUnidad = new UnidadMagica(this.jugador, new Posicion(1,3), jugador.getAtributos().getInfanteriaMagica());
+		this.unidad = new Unidad(this.jugador, new Posicion(2,4), jugador.getAtributos().getInfanteriaMagica());
+		this.otraUnidad = new Unidad(this.jugador, new Posicion(1,3), jugador.getAtributos().getInfanteriaMagica());
 		this.edificioPropio = new PuertoEstelar(this.jugador, new Posicion(2,6));
 		this.jugadorEnemigo = new Jugador("Enemigo", Color.ROJO, TipoRaza.TERRAN, mapa);
 		this.unidadEnemigaTerrestre = new Unidad(jugadorEnemigo, new Posicion(5,4), jugadorEnemigo.getAtributos().getInfanteriaPesadaTerrestre());
 		this.unidadEnemigaAerea = new Unidad(jugadorEnemigo, new Posicion(1,2), jugadorEnemigo.getAtributos().getInfanteriaPesadaArea());
-		this.unidadEnemigaMagica = new UnidadMagica(jugadorEnemigo, new Posicion(1,2), jugadorEnemigo.getAtributos().getInfanteriaMagica());
+		this.unidadEnemigaMagica = new Unidad(jugadorEnemigo, new Posicion(1,2), jugadorEnemigo.getAtributos().getInfanteriaMagica());
 		this.edificioEnemigo = new Fabrica(jugadorEnemigo, new Posicion(3,3));	
 	
 		this.mapa.setOcupante(unidadEnemigaMagica, unidadEnemigaMagica.getPosicion());

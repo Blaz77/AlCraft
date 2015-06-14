@@ -22,11 +22,11 @@ import fiuba.algo3.raza.TipoRaza;
 
 public abstract class TestUnidadMagica extends TestUnidad {
 	
-	protected UnidadMagica unidad;
-	protected UnidadMagica otraUnidad;
+	protected Unidad unidad;
+	protected Unidad otraUnidad;
 	protected Unidad unidadEnemigaTerrestre;
 	protected Unidad unidadEnemigaAerea;
-	protected UnidadMagica unidadEnemigaMagica;
+	protected Unidad unidadEnemigaMagica;
 
 
 	@Test

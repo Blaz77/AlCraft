@@ -1,15 +1,18 @@
 package fiuba.algo3.atributos.unidades.terran;
 
 import fiuba.algo3.atributos.AtributosCosto;
-import fiuba.algo3.atributos.AtributosEnergia;
 import fiuba.algo3.atributos.AtributosMagia;
 import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.AtributosVoluntadDelSer;
-import fiuba.algo3.atributos.unidades.AtributosUnidadMagica;
+import fiuba.algo3.atributos.unidades.AtributosUnidad;
+import fiuba.algo3.componentes.IMagia;
+import fiuba.algo3.componentes.Magia;
 import fiuba.algo3.magia.MagiaEMP;
 import fiuba.algo3.magia.MagiaRadiacion;
 
-public class AtributosNaveDeCiencia extends AtributosUnidadMagica {
+public class AtributosNaveDeCiencia extends AtributosUnidad {
+	
+	private AtributosMagia magia;
 	
 	public AtributosNaveDeCiencia() {
 		// fields ObjetoVivo:
@@ -31,6 +34,11 @@ public class AtributosNaveDeCiencia extends AtributosUnidadMagica {
 				10,		//rangoDeMagia
 				new MagiaEMP(),
 				new MagiaRadiacion());
+	}
+	
+	@Override
+	public IMagia getMagia() {
+		return new Magia(this.magia);
 	}
 	
 	public boolean puedeSerAlmacenada(){ //puedeSerTransportada

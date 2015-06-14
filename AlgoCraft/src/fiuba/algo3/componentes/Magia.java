@@ -5,9 +5,10 @@ import fiuba.algo3.excepciones.EnergiaInsuficiente;
 import fiuba.algo3.magia.MagiaAUnidad;
 import fiuba.algo3.magia.MagiaDeAreaDeEfecto;
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.ocupantes.unidades.UnidadMagica;
 
-public class Magia {
+public class Magia implements IMagia{ //,Estado
 	
 	private int energia;
 	private AtributosMagia atributos;
@@ -16,6 +17,10 @@ public class Magia {
 		this.atributos = atributos;
 		this.energia = this.getEnergiaMaxima(); //o una energia inicial
 		// TODO: Las unidades magicas de Terran y Protoss comienzan con 50 de energia
+	}
+	
+	public boolean puedeHacerMagia() {
+		return true;
 	}
 
 	public int getEnergia(){
@@ -51,19 +56,19 @@ public class Magia {
 		return this.atributos.getRangoMagia();
 	}
 	
-	public boolean estaEnRangoDeMagia(UnidadMagica efectuador, Posicion otraPosicion){
+	public boolean estaEnRangoDeMagia(Unidad efectuador, Posicion otraPosicion){
 		return efectuador.getPosicion().estaEnRango(otraPosicion, this.getRangoMagia());
 	}
 	
-	public MagiaDeAreaDeEfecto getMagiaDeAreaDeEfecto(UnidadMagica efectuador){
+	public MagiaDeAreaDeEfecto getMagiaDeAreaDeEfecto(Unidad efectuador){
 		MagiaDeAreaDeEfecto magia = this.atributos.getMagiaDeAreaDeEfecto();
-		magia.setUnidadMagica(efectuador);
+		magia.setUnidad(efectuador);
 		return magia;
 	}
 	
-	public MagiaAUnidad getMagiaAUnidad(UnidadMagica efectuador){
+	public MagiaAUnidad getMagiaAUnidad(Unidad efectuador){
 		MagiaAUnidad magia = this.atributos.getMagiaAUnidad();
-		magia.setUnidadMagica(efectuador);
+		magia.setUnidad(efectuador);
 		return magia;
 	}
 

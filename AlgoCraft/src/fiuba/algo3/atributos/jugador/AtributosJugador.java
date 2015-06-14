@@ -40,7 +40,7 @@ public interface AtributosJugador {
 	public AtributosUnidad getInfanteriaPesadaArea();
 	// Protoss: Scout, Terran: Ghost/Spectre, Zerg: Mutalisk
 	
-	public AtributosUnidadMagica getInfanteriaMagica(); //Elite, Spell Casters
+	public AtributosUnidad getInfanteriaMagica(); //Elite, Spell Casters
 	// Protoss: High Templar, Terran: Science Vessel, Zerg: Queen
 	
 	public AtributosUnidadTransporte getTransporte();

@@ -4,6 +4,8 @@ import fiuba.algo3.atributos.AtributosObjetoVivo;
 import fiuba.algo3.atributos.AtributosVoluntadDelSer;
 import fiuba.algo3.componentes.AtaqueNull;
 import fiuba.algo3.componentes.IAtaque;
+import fiuba.algo3.componentes.IMagia;
+import fiuba.algo3.componentes.MagiaNull;
 import fiuba.algo3.componentes.VoluntadDelSer;
 
 public abstract class AtributosUnidad extends AtributosObjetoVivo {
@@ -18,6 +20,10 @@ public abstract class AtributosUnidad extends AtributosObjetoVivo {
 	
 	public IAtaque getAtaque() {
 		return new AtaqueNull();
+	}
+	
+	public IMagia getMagia() {
+		return new MagiaNull();
 	}
 	
 	public int getCostoAlmacenamiento(){

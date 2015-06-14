@@ -5,8 +5,11 @@ import java.util.HashSet;
 
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.IAtaque;
+import fiuba.algo3.componentes.IMagia;
 import fiuba.algo3.componentes.VoluntadDelSer;
 import fiuba.algo3.juego.Jugador;
+import fiuba.algo3.magia.MagiaAUnidad;
+import fiuba.algo3.magia.MagiaDeAreaDeEfecto;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.mapa.MapaProxy;
 import fiuba.algo3.ocupantes.ObjetoVivo;
@@ -18,6 +21,7 @@ public class Unidad extends ObjetoVivo {
 	int movRestantes;
 	private VoluntadDelSer voluntad;
 	private IAtaque ataque;
+	private IMagia magia;
 	//O hacer accionesRestantes y que p/ej 1 ataque cueste 2
 	//									 y 1 movim. cueste 1
 	
@@ -30,6 +34,8 @@ public class Unidad extends ObjetoVivo {
 		this.movRestantes = voluntad.getMovPorTurno();
 		this.ataque = atributos.getAtaque();
 		this.ataque.setPortador(this);
+		this.magia = atributos.getMagia();
+		//this.magia.setPortador(this);
 	}
 	
 	public void pasarTurno(){
@@ -58,6 +64,11 @@ public class Unidad extends ObjetoVivo {
 	 * Moverse
 	 * Descargar Unidades alojadas
 	 * Meterse dentro de transporte
+	 * */	
+	
+	/*
+	 * 	MOVIMIENTO:
+	 * 
 	 * */	
 
 	//Pensar:
@@ -102,6 +113,11 @@ public class Unidad extends ObjetoVivo {
 				_getPosiblesMovimientos(mapa, posiblesMov, adyacente, restantes);
 	}
 
+/*
+ * 	ATAQUE:
+ * 
+ * */	
+	
 	//Pensar:
 	// - Habria que diferenciar los que no pueden atacar nunca
 	// 	 de los que terminaron sus turnos?
@@ -122,8 +138,54 @@ public class Unidad extends ObjetoVivo {
 		return ataque.getPosiblesObjetivos();
 	}
 	
-	public boolean puedeHacerMagia(){
-		return ((AtributosUnidad)this.atributos).puedeHacerMagia();
+	/*
+	 * 	MAGIA:
+	 * 
+	 * */	
+	
+	public boolean puedeHacerMagia() {
+		return this.magia.puedeHacerMagia();
+	}
+
+	public int getEnergia() {
+		return this.magia.getEnergia();
+	}
+	
+	public int getEnergiaMaxima(){
+		return this.magia.getEnergiaMaxima();
+	}
+	
+	public int getEnergiaARegenerarPorTurno(){
+		return this.magia.getEnergiaARegenerarPorTurno();
+	}
+	
+	public boolean puedeDisminuirEnergia(int cantidad){
+		return this.magia.puedeDisminuirEnergia(cantidad);
+	}
+	
+	public void disminuirEnergia(int cantidad){
+		this.magia.disminuirEnergia(cantidad);
+	}
+	
+	public void regenerarEnergia(int cantRegenerada){
+		this.magia.regenerarEnergia(cantRegenerada);
+	}
+	
+	//Equivalente al rango de ataque pero para magia
+	public int getRangoMagia(){
+		return this.magia.getRangoMagia();
+	}
+	
+	public boolean estaEnRangoDeMagia(Posicion otraPosicion){
+		return this.magia.estaEnRangoDeMagia(this, otraPosicion);
+	}
+	
+	public MagiaDeAreaDeEfecto getMagiaDeAreaDeEfecto(){
+		return this.magia.getMagiaDeAreaDeEfecto(this);
+	}
+	
+	public MagiaAUnidad getMagiaAUnidad(){
+		return this.magia.getMagiaAUnidad(this);
 	}
 	
 	public boolean puedeSerAlmacenada(){ //puedeSerTransportada

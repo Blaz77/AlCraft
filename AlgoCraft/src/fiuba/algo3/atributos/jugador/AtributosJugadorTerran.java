@@ -79,7 +79,7 @@ public class AtributosJugadorTerran implements AtributosJugador {
 		return espectro;
 	}
 
-	public AtributosUnidadMagica getInfanteriaMagica() {
+	public AtributosUnidad getInfanteriaMagica() {
 		return ciencia;
 	}
 

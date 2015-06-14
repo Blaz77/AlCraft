@@ -8,14 +8,14 @@ import fiuba.algo3.ocupantes.unidades.UnidadMagica;
 
 public class MagiaRadiacion implements MagiaAUnidad {
 
-	private UnidadMagica unidad;
+	private Unidad unidad;
 	private int costoDeEjecutar;
 	
 	public MagiaRadiacion() {
 		this.costoDeEjecutar = 75;
 	}
 	
-	public void setUnidadMagica(UnidadMagica unidad) {
+	public void setUnidad(Unidad unidad) {
 		this.unidad = unidad;		
 	}
 	

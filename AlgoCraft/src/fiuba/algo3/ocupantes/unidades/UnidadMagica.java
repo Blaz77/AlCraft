@@ -1,7 +1,7 @@
 package fiuba.algo3.ocupantes.unidades;
 
 import fiuba.algo3.atributos.unidades.AtributosUnidadMagica;
-import fiuba.algo3.componentes.Magia;
+import fiuba.algo3.componentes.IMagia;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.magia.MagiaAUnidad;
 import fiuba.algo3.magia.MagiaDeAreaDeEfecto;
@@ -9,12 +9,16 @@ import fiuba.algo3.mapa.Posicion;
 
 public class UnidadMagica extends Unidad {
 
-	protected Magia magia;
+	protected IMagia magia;
 	
 	public UnidadMagica(Jugador propietario, Posicion posicion,
 			AtributosUnidadMagica atributos) {
 		super(propietario, posicion, atributos);
 		this.magia = atributos.getMagia();
+	}
+	
+	public boolean puedeHacerMagia() {
+		return this.magia.puedeHacerMagia();
 	}
 
 	public int getEnergia() {

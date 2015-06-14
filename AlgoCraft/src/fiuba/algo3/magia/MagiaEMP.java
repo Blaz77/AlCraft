@@ -10,14 +10,14 @@ public class MagiaEMP implements MagiaDeAreaDeEfecto {
 
 	private int rangoAoE;
 	private int costoDeEjecutar;
-	private UnidadMagica unidad;
+	private Unidad unidad;
 	
 	public MagiaEMP() {
 		this.costoDeEjecutar = 100;
 		this.rangoAoE = 15; //INVENTADO!
 	}
 	
-	public void setUnidadMagica(UnidadMagica unidad) {
+	public void setUnidad(Unidad unidad) {
 		this.unidad = unidad;
 	}
 	
@@ -32,10 +32,7 @@ public class MagiaEMP implements MagiaDeAreaDeEfecto {
 		this.unidad.disminuirEnergia(this.costoDeEjecutar);
 		
 		for (Unidad unidad : mapa.getUnidadesEnRango(posicionCentral, rangoAoE)) {
-			if (unidad.puedeHacerMagia()) {
-				UnidadMagica unidadAfectada = (UnidadMagica) unidad;
-				unidadAfectada.disminuirEnergia(unidadAfectada.getEnergia());
-			}
+			unidad.disminuirEnergia(unidad.getEnergia());
 		}
 	}
 
