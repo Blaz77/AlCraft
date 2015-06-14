@@ -1,6 +1,7 @@
 package fiuba.algo3.ocupantes.unidades.constructores;
 
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
+import fiuba.algo3.componentes.IEntrenadorUnidades;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.edificios.EdificioEntrenadorUnidades;
@@ -11,31 +12,22 @@ import fiuba.algo3.ocupantes.edificios.EdificioEntrenadorUnidades;
  * */
 
 // TODO Permitirle al constructor crear procesos de entrenador multiples
-public abstract class Constructor {
+public class Constructor {
 	
-	protected AtributosUnidad atributos;
-	protected EdificioEntrenadorUnidades entrenador;
-
-	//aca va un return new Unidad*Tipo*()
-	abstract public void liberarUnidad(Jugador propietario, Posicion posicion);
+	private AtributosUnidad atributos;
+	private IEntrenadorUnidades entrenador;
 	
-	//aca debe tomar del jugador el atributo correspondiente para lo que 
-	//se va a entrenar
-	abstract public void setAtributos();
-	
-	public void setEdificioEntrenador(EdificioEntrenadorUnidades entrenador){
+	public Constructor(IEntrenadorUnidades entrenador, AtributosUnidad atributos) {
+		this.atributos = atributos;
 		this.entrenador = entrenador;
-		this.setAtributos();
 	}
-
-	public int getTurnosConstruccion() {
-		return this.atributos.getCosto().getTurnosConstruccion();
+	
+	public boolean puedeCrear() { // puedeComprar / verificarCostos
+		return this.entrenador.puedeEntrenar(this.atributos);
 	}
 	
 	public void crear(){
-		entrenador.getPropietario().comprar(atributos.getCosto().getCostoMineral(),
-				atributos.getCosto().getCostoGasVespeno(), atributos.getVoluntadDelSer().getCostoPoblacion());
-		entrenador.entrenar(this);
+		this.entrenador.entrenar(this.atributos);
 	}
 
 }
