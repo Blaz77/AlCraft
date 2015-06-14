@@ -41,8 +41,6 @@ public class TestRefineria extends TestEdificio {
 		this.terranFactory = new EdificiosFactory();
 		//this.refineria = terranFactory.crearRecolectorGasVespeno(jugador, 20, 40);
 	}
-
-	//TESTS SIN REQUISITOS POR AHORA!!!
 	
 	@Test
 	public void testCrearRefineriaEnVolcan() {
