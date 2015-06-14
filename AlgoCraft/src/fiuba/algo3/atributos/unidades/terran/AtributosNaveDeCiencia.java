@@ -22,6 +22,7 @@ public class AtributosNaveDeCiencia extends AtributosUnidadMagica {
 				2,	//costoPoblacion
 				1,	//movPorTuno
 				10);//rangoVision
+		this.costoAlmacenamiento = 0;
 		
 		// fields de UnidadMagica
 		this.magia = new AtributosMagia(
@@ -30,6 +31,10 @@ public class AtributosNaveDeCiencia extends AtributosUnidadMagica {
 				10,		//rangoDeMagia
 				new MagiaEMP(),
 				new MagiaRadiacion());
+	}
+	
+	public boolean puedeSerAlmacenada(){ //puedeSerTransportada
+		return false;
 	}
 
 	@Override

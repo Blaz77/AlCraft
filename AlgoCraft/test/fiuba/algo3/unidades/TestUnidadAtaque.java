@@ -31,7 +31,7 @@ public abstract class TestUnidadAtaque extends TestUnidad {
 	public void testUnidadPuedeAtacar() {
 		assertTrue(this.unidad.puedeAtacar());
 	}
-
+	
 	@Test
 	public void testAtacarUnidadEnemiga() {
 		int vidaInicial = unidadEnemigaTerrestre.getVida();
@@ -96,7 +96,7 @@ public abstract class TestUnidadAtaque extends TestUnidad {
 	}
 
 	@Test
-	public void testGolliatNoPuedeHacerMagia() {
+	public void testUnidadNoPuedeHacerMagia() {
 		assertFalse(this.unidad.puedeHacerMagia());
 	}
 

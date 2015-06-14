@@ -23,5 +23,4 @@ public class AtributosNaveDeTransporte extends AtributosUnidadTransporte {
 		// fields de UnidadTransporte:
 		this.capacidadAlmacenamiento = 8;
 	}
-
 }

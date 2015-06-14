@@ -132,9 +132,10 @@ public class TestPuertoEstelar extends TestEdificio {
 		}
 	}
 	
+	@Test
 	public void testCrearPuertoEstelarSinGasVespenoDebeFallar() {
-		while (jugador.getMinerales() >= 100) {
-			jugador.agregarMinerales(-10);
+		while (jugador.getGasVespeno() >= 100) {
+			jugador.agregarGasVespeno(-10);
 		}
 		try {
 			this.puertoEnConst = crearEnTierra(jugador, mapa);

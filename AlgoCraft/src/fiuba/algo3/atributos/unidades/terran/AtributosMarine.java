@@ -9,18 +9,19 @@ import fiuba.algo3.atributos.unidades.AtributosUnidadAtaque;
 public class AtributosMarine extends AtributosUnidadAtaque {
 
 	public AtributosMarine(){
-		//fields ObjetoVivo:
+		// fields ObjetoVivo:
 		this.costo = new AtributosCosto(50, 0, 3);
 		this.vida = new AtributosVida(40);
 		this.nombre = "Marine";
 		
-		//fields de Unidad:
+		// fields de Unidad:
 		this.voluntadDelSer = new AtributosVoluntadDelSer(
 				1,	//costoPoblacion
 				1,	//movPorTuno
 				7);	//rangoVision
+		this.costoAlmacenamiento = 1;
 		
-		//fields de UnidadAtaque:
+		// fields de UnidadAtaque:
 		this.ataque = new AtributosAtaque(
 				6, //Danio A Aire
 				6,  //Danio A Tierra
@@ -29,5 +30,8 @@ public class AtributosMarine extends AtributosUnidadAtaque {
 				1); //Ataques por Turno
 	}
 	
+	public boolean puedeSerAlmacenada(){ //puedeSerTransportada
+		return true;
+	}
 
 }

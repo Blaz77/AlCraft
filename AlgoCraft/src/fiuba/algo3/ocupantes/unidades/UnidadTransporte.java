@@ -10,6 +10,7 @@ import fiuba.algo3.excepciones.NoEsUnAliado;
 import fiuba.algo3.excepciones.UnidadNoEsAlmacenable;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.ocupantes.edificios.Edificio;
 
 public class UnidadTransporte extends Unidad {
 
@@ -41,6 +42,14 @@ public class UnidadTransporte extends Unidad {
 		unidad.setPosicion(this.posicion);
 		//SACAR DEL MAPA!, QUIZAS TAMBIEN DEL JUGADOR TEMPORALMENTE
 		this.almacenamientoEnUso += unidad.getCostoAlmacenamiento();
+	}
+	
+	public boolean puedeAlmacenarA(Edificio edificio){
+		return false;
+	}
+	
+	public void almacenarA(Edificio edificio){
+		throw new UnidadNoEsAlmacenable();
 	}
 	
 	public ArrayList<Pasajero> getUnidadesAlmacenadas(){

@@ -19,6 +19,7 @@ public class AtributosEspectro extends AtributosUnidadAtaque {
 				2,	//costoPoblacion
 				1,	//movPorTuno
 				7);	//rangoVision
+		this.costoAlmacenamiento = 0;
 		
 		// fields de UnidadAtaque:
 		this.ataque = new AtributosAtaque(
@@ -32,6 +33,10 @@ public class AtributosEspectro extends AtributosUnidadAtaque {
 	@Override
 	public boolean puedeOcuparEspacio() {
 		return true;
+	}
+	
+	public boolean puedeSerAlmacenada(){ //puedeSerTransportada
+		return false;
 	}
 	
 	@Override

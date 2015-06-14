@@ -9,6 +9,10 @@ public class AtributosUnidadTransporte extends AtributosUnidad {
 		return true;
 	}
 	
+	public boolean puedeSerAlmacenada(){ //puedeSerTransportada
+		return false;
+	}
+	
 	public int getCapacidadAlmacenamiento(){
 		return capacidadAlmacenamiento;
 	}

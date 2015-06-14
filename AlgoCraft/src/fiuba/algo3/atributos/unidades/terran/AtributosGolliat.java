@@ -19,6 +19,7 @@ public class AtributosGolliat extends AtributosUnidadAtaque {
 				2,	//costoPoblacion
 				1,	//movPorTuno
 				8);	//rangoVision
+		this.costoAlmacenamiento = 2;
 		
 		// fields de UnidadAtaque:
 		this.ataque = new AtributosAtaque(
@@ -28,6 +29,10 @@ public class AtributosGolliat extends AtributosUnidadAtaque {
 				6,  //Rango a Tierra
 				1); //Ataques por Turno
 		
+	}
+	
+	public boolean puedeSerAlmacenada(){ //puedeSerTransportada
+		return true;
 	}
 	
 }

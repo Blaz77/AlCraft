@@ -33,6 +33,7 @@ public abstract class TestUnidadMagica extends TestUnidad {
 		assertFalse(this.unidad.puedeAtacar());
 	}
 	
+	@Test
 	public void testUnidadPuedeHacerMagia() {
 		assertTrue(this.unidad.puedeHacerMagia());
 	}
