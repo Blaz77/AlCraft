@@ -102,7 +102,7 @@ public class TestAcceso extends TestEdificio {
 			fail("La construccion inicio con la vida maxima");
 		
 		int vidaRelativa = accesoEnConst.getVida();		
-		for(int i = 0; i < 12; i++){
+		for(int i = 0; i < 8; i++){
 			accesoEnConst.pasarTurno();
 			if (accesoEnConst.getVida() <= vidaRelativa) 
 				fail("No aumenta la vida en la Construccion");
@@ -125,7 +125,7 @@ public class TestAcceso extends TestEdificio {
 	public void testAccesoEntrenaZealot() {
 		acceso.getUnidadesEntrenables().get(0).crear();
 		
-		for(int i = 0; i < 3; i++) acceso.pasarTurno();//Entrenar Zealot
+		for(int i = 0; i < 4; i++) acceso.pasarTurno();//Entrenar Zealot
 		
 		assertEquals(jugador.getUnidades().get(0).getNombre(), "Zealot");
 
@@ -135,7 +135,7 @@ public class TestAcceso extends TestEdificio {
 	public void testAccesoEntrenaDragon() {
 		acceso.getUnidadesEntrenables().get(1).crear();
 		
-		for(int i = 0; i < 3; i++) acceso.pasarTurno();//Entrenar Dragon
+		for(int i = 0; i < 6; i++) acceso.pasarTurno();//Entrenar Dragon
 		
 		assertEquals(jugador.getUnidades().get(0).getNombre(), "Dragon");
 
@@ -146,15 +146,15 @@ public class TestAcceso extends TestEdificio {
 		int mineralRelativo = jugador.getMinerales();
 		
 		acceso.getUnidadesEntrenables().get(0).crear();
-		for(int i = 0; i < 3; i++) acceso.pasarTurno();//Entrenar Zealot
+		for(int i = 0; i < 4; i++) acceso.pasarTurno();//Entrenar Zealot
 		
-		assertEquals(jugador.getMinerales(), mineralRelativo - 50);
+		assertEquals(jugador.getMinerales(), mineralRelativo - 100);
 
 	}
 	
 	@Test
 	public void testAccesoEntrenaUnidadSinRecursosDebeFallar() {
-		while (jugador.getMinerales() >= 50) {
+		while (jugador.getMinerales() >= 100) {
 			jugador.agregarMinerales(-10);
 		}
 		try {
@@ -171,11 +171,11 @@ public class TestAcceso extends TestEdificio {
 	@Test
 	public void testAccesoEntrenarVariasUnidadesSinColaDeEspera() {		
 		acceso.getUnidadesEntrenables().get(0).crear();
-		for(int i = 0; i < 3; i++) acceso.pasarTurno();//Entrenar Zealot
+		for(int i = 0; i < 4; i++) acceso.pasarTurno();//Entrenar Zealot
 		assertEquals(jugador.getUnidades().get(0).getNombre(), "Zealot");
 		
 		acceso.getUnidadesEntrenables().get(0).crear();
-		for(int i = 0; i < 3; i++) acceso.pasarTurno();//Entrenar Zealot
+		for(int i = 0; i < 4; i++) acceso.pasarTurno();//Entrenar Zealot
 		assertEquals(jugador.getUnidades().get(1).getNombre(), "Zealot");
 	}
 	
@@ -183,7 +183,7 @@ public class TestAcceso extends TestEdificio {
 	public void testAccesoEntrenarVariasUnidadesConColaDeEspera() {
 		acceso.getUnidadesEntrenables().get(0).crear();
 		acceso.getUnidadesEntrenables().get(0).crear();
-		for(int i = 0; i < 6; i++) acceso.pasarTurno();//Entrenar 2 Zealots
+		for(int i = 0; i < 8; i++) acceso.pasarTurno();//Entrenar 2 Zealots
 		assertEquals(jugador.getUnidades().get(0).getNombre(), "Zealot");
 		assertEquals(jugador.getUnidades().get(1).getNombre(), "Zealot");
 	}
@@ -193,8 +193,6 @@ public class TestAcceso extends TestEdificio {
 		while (jugador.getCapacidadPoblacion() > 1) {
 			jugador.aumentarCapacidadPoblacion(-1);
 		}
-		acceso.getUnidadesEntrenables().get(0).crear();
-		for(int i = 0; i < 3; i++) acceso.pasarTurno();//Entrenar Zealot
 		try {
 			acceso.getUnidadesEntrenables().get(0).crear();
 			fail();

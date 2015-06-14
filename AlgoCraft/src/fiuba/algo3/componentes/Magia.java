@@ -15,6 +15,7 @@ public class Magia {
 	public Magia(AtributosMagia atributos) {
 		this.atributos = atributos;
 		this.energia = this.getEnergiaMaxima(); //o una energia inicial
+		// TODO: Las unidades magicas de Terran y Protoss comienzan con 50 de energia
 	}
 
 	public int getEnergia(){

@@ -14,16 +14,16 @@ import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.raza.TipoRaza;
 
-public class TestCentroDeMineral extends TestEdificio{
+public class TestNexoMineral extends TestEdificio{
 
 	private Mapa mapa;
 	private Jugador jugador;
-	private EdificiosFactory terranFactory;
-	private Edificio centroMineral;
+	private EdificiosFactory protossFactory;
+	private Edificio nexoMineral;
 	
 	@Override
 	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
-		return terranFactory.crearRecolectorMineral(jugador, posicion);
+		return protossFactory.crearRecolectorMineral(jugador, posicion);
 	}
 	
 	private Edificio crearEnMineral(Jugador jugador, Mapa mapa) {
@@ -37,36 +37,36 @@ public class TestCentroDeMineral extends TestEdificio{
 	@Before
 	public void setUp() {
 		mapa = new Mapa(6);
-		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
-		this.terranFactory = new EdificiosFactory();
+		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.PROTOSS, mapa);
+		this.protossFactory = new EdificiosFactory();
 	}
 	
 	@Test
-	public void testCrearCentroDeMineral() {
-		this.centroMineral = crearEnMineral(jugador, mapa);
-		assertEquals(centroMineral.getNombre(),"Centro de Mineral");
+	public void testCrearNexoMineral() {
+		this.nexoMineral = crearEnMineral(jugador, mapa);
+		assertEquals(nexoMineral.getNombre(),"Nexo Mineral");
 	}
 	
 	@Test
-	public void testCrearCentroDeMineralDisminuyeRecursosJugador() {
+	public void testCrearNexoMineralDisminuyeRecursosJugador() {
 		int mineralRelativo = jugador.getMinerales();
 		int gasRelativo = jugador.getGasVespeno();
 		int costoGas = 0;
 		int costoMineral = 50;
 		
-		this.centroMineral = crearEnMineral(jugador, mapa);
+		this.nexoMineral = crearEnMineral(jugador, mapa);
 		
 		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
 		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
 	}
 	
 	@Test
-	public void testCrearCentroDeMineralSinRecursosDebeFallar() {
+	public void testCrearNexoMineralSinRecursosDebeFallar() {
 		while (jugador.getMinerales() >= 50) {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.centroMineral = crearEnMineral(jugador, mapa);
+			this.nexoMineral = crearEnMineral(jugador, mapa);
 			fail();
 		}
 		catch (MineralInsuficiente e) {
@@ -76,9 +76,9 @@ public class TestCentroDeMineral extends TestEdificio{
 	}
 	
 	@Test
-	public void testCrearCentroDeMineralFueraDeMineralFalla() {
+	public void testCrearNexoMineralFueraDeMineralFalla() {
 		try {
-			this.centroMineral = crearFueraDeMineral(jugador, mapa);
+			this.nexoMineral = crearFueraDeMineral(jugador, mapa);
 			fail();
 		}
 		catch (RecursoAusente e) {
@@ -89,25 +89,25 @@ public class TestCentroDeMineral extends TestEdificio{
 	}
 	
 	@Test
-	public void testCentroDeMineralSubeVidaDuranteConstruccion() {
-		this.centroMineral = crearEnMineral(jugador, mapa);
-		int vidaRelativa = centroMineral.getVida();
+	public void testNexoMineralSubeVidaDuranteConstruccion() {
+		this.nexoMineral = crearEnMineral(jugador, mapa);
+		int vidaRelativa = nexoMineral.getVida();
 		for(int i = 0; i < 4; i++){
-			centroMineral.pasarTurno();
-			if (centroMineral.getVida() <= vidaRelativa) 
+			nexoMineral.pasarTurno();
+			if (nexoMineral.getVida() <= vidaRelativa) 
 				fail("No aumenta la vida en la Construccion");
-			vidaRelativa = centroMineral.getVida();
+			vidaRelativa = nexoMineral.getVida();
 		}
-		assertEquals(vidaRelativa, centroMineral.getVidaMaxima());
+		assertEquals(vidaRelativa, nexoMineral.getVidaMaxima());
 	}
 	
 	@Test
-	public void testCentroDeMineralMientrasConstruyeNoRecolecta() {
-		this.centroMineral = crearEnMineral(jugador, mapa);
+	public void testNexoMineralMientrasConstruyeNoRecolecta() {
+		this.nexoMineral = crearEnMineral(jugador, mapa);
 		int mineralRelativo = jugador.getMinerales();
 		
 		for(int i = 0; i < 4; i++) {
-			centroMineral.pasarTurno();
+			nexoMineral.pasarTurno();
 			if (jugador.getMinerales() != mineralRelativo)
 				fail();
 		}
@@ -115,14 +115,14 @@ public class TestCentroDeMineral extends TestEdificio{
 	}
 	
 	@Test
-	public void testCentroDeMineralRecolectaMinerales() {
-		this.centroMineral = crearEnMineral(jugador, mapa);
-		for(int i = 0; i < 4; i++) centroMineral.pasarTurno(); // Construccion
+	public void testNexoMineralRecolectaMinerales() {
+		this.nexoMineral = crearEnMineral(jugador, mapa);
+		for(int i = 0; i < 4; i++) nexoMineral.pasarTurno(); // Construccion
 		int mineralRelativo = jugador.getMinerales();
 		
 		for(int i = 0; i < 10; i++){
 			mineralRelativo += 10;
-			centroMineral.pasarTurno();
+			nexoMineral.pasarTurno();
 			if (jugador.getMinerales() != mineralRelativo)
 				fail("El centro de Minerales no esta recolectando Minerales (de a 10)");
 		}
