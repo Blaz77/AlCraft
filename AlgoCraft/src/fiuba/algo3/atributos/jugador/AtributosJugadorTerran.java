@@ -11,6 +11,7 @@ import fiuba.algo3.atributos.edificios.terran.AtributosDepositoDeSuministros;
 import fiuba.algo3.atributos.edificios.terran.AtributosFabrica;
 import fiuba.algo3.atributos.edificios.terran.AtributosPuertoEstelar;
 import fiuba.algo3.atributos.edificios.terran.AtributosRefineria;
+import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.atributos.unidades.AtributosUnidadAtaque;
 import fiuba.algo3.atributos.unidades.AtributosUnidadMagica;
 import fiuba.algo3.atributos.unidades.AtributosUnidadTransporte;
@@ -66,15 +67,15 @@ public class AtributosJugadorTerran implements AtributosJugador {
 		return puerto;
 	}
 
-	public AtributosUnidadAtaque getInfanteriaLivianaTerrestre() {
+	public AtributosUnidad getInfanteriaLivianaTerrestre() {
 		return marine;
 	}
 
-	public AtributosUnidadAtaque getInfanteriaPesadaTerrestre() {
+	public AtributosUnidad getInfanteriaPesadaTerrestre() {
 		return golliat;
 	}
 
-	public AtributosUnidadAtaque getInfanteriaPesadaArea() {
+	public AtributosUnidad getInfanteriaPesadaArea() {
 		return espectro;
 	}
 

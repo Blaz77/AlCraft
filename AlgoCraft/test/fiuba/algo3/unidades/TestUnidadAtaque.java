@@ -14,6 +14,7 @@ import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.edificios.Barraca;
+import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.ocupantes.unidades.UnidadAtaque;
 import fiuba.algo3.raza.TipoRaza;
 
@@ -21,10 +22,10 @@ public abstract class TestUnidadAtaque extends TestUnidad {
 	protected int danioTierra;
 	protected int danioAire;
 
-	protected UnidadAtaque unidad;
-	protected UnidadAtaque otraUnidad;
-	protected UnidadAtaque unidadEnemigaTerrestre;
-	protected UnidadAtaque unidadEnemigaAerea;
+	protected Unidad unidad;
+	protected Unidad otraUnidad;
+	protected Unidad unidadEnemigaTerrestre;
+	protected Unidad unidadEnemigaAerea;
 	
 
 	@Test
@@ -55,13 +56,13 @@ public abstract class TestUnidadAtaque extends TestUnidad {
 
 	@Test
 	public void testPuedeAtacarFueraDeRangoEsFalse() {
-		UnidadAtaque enemigoFueraDeRango = new UnidadAtaque(jugadorEnemigo, new Posicion(20,40), jugador.getAtributos().getInfanteriaLivianaTerrestre());
+		Unidad enemigoFueraDeRango = new Unidad(jugadorEnemigo, new Posicion(20,40), jugador.getAtributos().getInfanteriaLivianaTerrestre());
 		assertFalse(this.unidad.puedeAtacarA(enemigoFueraDeRango));
 	}
 
 	@Test(expected = FueraDelRangoPermitido.class)
 	public void testAtacarFueraDeRangoLanzaExcepcion() {
-		UnidadAtaque enemigoFueraDeRango = new UnidadAtaque(jugadorEnemigo, new Posicion(20,40), jugador.getAtributos().getInfanteriaLivianaTerrestre());
+		Unidad enemigoFueraDeRango = new Unidad(jugadorEnemigo, new Posicion(20,40), jugador.getAtributos().getInfanteriaLivianaTerrestre());
 		this.unidad.atacarA(enemigoFueraDeRango);
 	}
 

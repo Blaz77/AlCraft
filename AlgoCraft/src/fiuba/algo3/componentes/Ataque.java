@@ -7,7 +7,7 @@ import fiuba.algo3.excepciones.FueraDelRangoPermitido;
 import fiuba.algo3.excepciones.NoEsUnEnemigo;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 
-public class Ataque implements Estado {
+public class Ataque implements IAtaque, Estado {
 	
 	private int ataquesRestantes;
 	private AtributosAtaque atributos;
@@ -21,15 +21,18 @@ public class Ataque implements Estado {
 		this.ataquesRestantes = this.atributos.getAtaquesPorTurno();
 	}
 	
+	public void setPortador(ObjetoVivo portador) {
+		this.portador = portador;
+		portador.agregarEstado(this);
+	}
+	
 	public Estado clone() {
 		return new Ataque(this.atributos);
 		//poner el portador?
 	}
 	
-	public void activar(ObjetoVivo portador) {
-		this.portador = portador;
-	}
-
+	public void activar(ObjetoVivo portador) {}
+	
 	public void desactivar() {}
 	
 	public void pasarTurno(){

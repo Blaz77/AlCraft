@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
+import fiuba.algo3.componentes.IAtaque;
 import fiuba.algo3.componentes.VoluntadDelSer;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
@@ -12,10 +13,11 @@ import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.excepciones.MovimientoInvalido;
 
-public abstract class Unidad extends ObjetoVivo {
+public class Unidad extends ObjetoVivo {
 	
 	int movRestantes;
 	private VoluntadDelSer voluntad;
+	private IAtaque ataque;
 	//O hacer accionesRestantes y que p/ej 1 ataque cueste 2
 	//									 y 1 movim. cueste 1
 	
@@ -26,6 +28,8 @@ public abstract class Unidad extends ObjetoVivo {
 		//Hacer esto de abajo en los CONSTRUCTORES! NO ACA!:
 		propietario.agregarUnidad(this);
 		this.movRestantes = voluntad.getMovPorTurno();
+		this.ataque = atributos.getAtaque();
+		this.ataque.setPortador(this);
 	}
 	
 	public void pasarTurno(){
@@ -98,9 +102,24 @@ public abstract class Unidad extends ObjetoVivo {
 				_getPosiblesMovimientos(mapa, posiblesMov, adyacente, restantes);
 	}
 
-	
+	//Pensar:
+	// - Habria que diferenciar los que no pueden atacar nunca
+	// 	 de los que terminaron sus turnos?
 	public boolean puedeAtacar(){
-		return ((AtributosUnidad)this.atributos).puedeAtacar();
+		return ataque.puedeAtacar();
+	}
+		
+	public boolean puedeAtacarA(ObjetoVivo enemigo){
+		return ataque.puedeAtacarA(enemigo);
+	}
+	
+	public void atacarA(ObjetoVivo enemigo){
+		ataque.atacarA(enemigo);
+	}
+		
+	//esto es una idea nomas, no necesariamente hacerlo
+	public ArrayList<ObjetoVivo> getPosiblesObjetivos(){
+		return ataque.getPosiblesObjetivos();
 	}
 	
 	public boolean puedeHacerMagia(){

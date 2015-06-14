@@ -5,6 +5,7 @@ import fiuba.algo3.A_BORRAR.AtributosEdificioRecolectorGasVespeno;
 import fiuba.algo3.A_BORRAR.AtributosEdificioRecolectorMineral;
 import fiuba.algo3.atributos.edificios.AtributosEdificio;
 import fiuba.algo3.atributos.edificios.AtributosEdificioEntrenadorUnidades;
+import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.atributos.unidades.AtributosUnidadAtaque;
 import fiuba.algo3.atributos.unidades.AtributosUnidadMagica;
 import fiuba.algo3.atributos.unidades.AtributosUnidadTransporte;
@@ -30,13 +31,13 @@ public interface AtributosJugador {
 	public AtributosEdificioEntrenadorUnidades getEntrenadorUnidadesAvanzadas();
 	// Unidades Tier 3
 
-	public AtributosUnidadAtaque getInfanteriaLivianaTerrestre();
+	public AtributosUnidad getInfanteriaLivianaTerrestre();
 	// Protoss: Zealot, Terran: Marine, Zerg: Zergling
 	
-	public AtributosUnidadAtaque getInfanteriaPesadaTerrestre();
+	public AtributosUnidad getInfanteriaPesadaTerrestre();
 	// Protoss: Dragoon, Terran: Goliath, Zerg: Hydralisk
 	
-	public AtributosUnidadAtaque getInfanteriaPesadaArea();
+	public AtributosUnidad getInfanteriaPesadaArea();
 	// Protoss: Scout, Terran: Ghost/Spectre, Zerg: Mutalisk
 	
 	public AtributosUnidadMagica getInfanteriaMagica(); //Elite, Spell Casters

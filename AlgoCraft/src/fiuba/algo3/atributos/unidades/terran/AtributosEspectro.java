@@ -4,9 +4,13 @@ import fiuba.algo3.atributos.AtributosAtaque;
 import fiuba.algo3.atributos.AtributosCosto;
 import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.AtributosVoluntadDelSer;
-import fiuba.algo3.atributos.unidades.AtributosUnidadAtaque;
+import fiuba.algo3.atributos.unidades.AtributosUnidad;
+import fiuba.algo3.componentes.Ataque;
+import fiuba.algo3.componentes.IAtaque;
 
-public class AtributosEspectro extends AtributosUnidadAtaque {
+public class AtributosEspectro extends AtributosUnidad {
+	
+	private AtributosAtaque ataque;
 	
 	public AtributosEspectro(){
 		// fields ObjetoVivo:
@@ -28,6 +32,10 @@ public class AtributosEspectro extends AtributosUnidadAtaque {
 				5,  //Rango a Aire
 				5,  //Rango a Tierra
 				1); //Ataques por Turno
+	}
+	
+	public IAtaque getAtaque(){
+		return new Ataque(this.ataque);
 	}
 	
 	@Override

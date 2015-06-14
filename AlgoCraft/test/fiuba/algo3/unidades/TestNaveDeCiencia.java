@@ -12,6 +12,7 @@ import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.edificios.Barraca;
 import fiuba.algo3.ocupantes.edificios.Fabrica;
 import fiuba.algo3.ocupantes.edificios.PuertoEstelar;
+import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.ocupantes.unidades.UnidadAtaque;
 import fiuba.algo3.ocupantes.unidades.UnidadMagica;
 import fiuba.algo3.raza.TipoRaza;
@@ -25,8 +26,8 @@ public class TestNaveDeCiencia extends TestUnidadMagica {
 		this.otraUnidad = new UnidadMagica(this.jugador, new Posicion(1,3), jugador.getAtributos().getInfanteriaMagica());
 		this.edificioPropio = new PuertoEstelar(this.jugador, new Posicion(2,6));
 		this.jugadorEnemigo = new Jugador("Enemigo", Color.ROJO, TipoRaza.TERRAN, mapa);
-		this.unidadEnemigaTerrestre = new UnidadAtaque(jugadorEnemigo, new Posicion(5,4), jugadorEnemigo.getAtributos().getInfanteriaPesadaTerrestre());
-		this.unidadEnemigaAerea = new UnidadAtaque(jugadorEnemigo, new Posicion(1,2), jugadorEnemigo.getAtributos().getInfanteriaPesadaArea());
+		this.unidadEnemigaTerrestre = new Unidad(jugadorEnemigo, new Posicion(5,4), jugadorEnemigo.getAtributos().getInfanteriaPesadaTerrestre());
+		this.unidadEnemigaAerea = new Unidad(jugadorEnemigo, new Posicion(1,2), jugadorEnemigo.getAtributos().getInfanteriaPesadaArea());
 		this.unidadEnemigaMagica = new UnidadMagica(jugadorEnemigo, new Posicion(1,2), jugadorEnemigo.getAtributos().getInfanteriaMagica());
 		this.edificioEnemigo = new Fabrica(jugadorEnemigo, new Posicion(3,3));	
 	

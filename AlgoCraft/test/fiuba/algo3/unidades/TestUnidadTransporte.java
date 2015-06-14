@@ -14,6 +14,7 @@ import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.edificios.Barraca;
+import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.ocupantes.unidades.UnidadAtaque;
 import fiuba.algo3.ocupantes.unidades.UnidadTransporte;
 import fiuba.algo3.raza.TipoRaza;
@@ -22,10 +23,10 @@ public abstract class TestUnidadTransporte extends TestUnidad {
 	protected int capacidad;
 
 	protected UnidadTransporte transportador;
-	protected UnidadAtaque pasajero;
-	protected UnidadAtaque unidadVoladora;
-	protected UnidadAtaque unidadEnemigaTerrestre;
-	protected UnidadAtaque unidadEnemigaAerea;
+	protected Unidad pasajero;
+	protected Unidad unidadVoladora;
+	protected Unidad unidadEnemigaTerrestre;
+	protected Unidad unidadEnemigaAerea;
 	
 
 	@Test

@@ -4,9 +4,13 @@ import fiuba.algo3.atributos.AtributosAtaque;
 import fiuba.algo3.atributos.AtributosCosto;
 import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.AtributosVoluntadDelSer;
-import fiuba.algo3.atributos.unidades.AtributosUnidadAtaque;
+import fiuba.algo3.atributos.unidades.AtributosUnidad;
+import fiuba.algo3.componentes.Ataque;
+import fiuba.algo3.componentes.IAtaque;
 
-public class AtributosGolliat extends AtributosUnidadAtaque {
+public class AtributosGolliat extends AtributosUnidad {
+	
+	private AtributosAtaque ataque;
 
 	public AtributosGolliat() {
 		// fields ObjetoVivo:
@@ -29,6 +33,10 @@ public class AtributosGolliat extends AtributosUnidadAtaque {
 				6,  //Rango a Tierra
 				1); //Ataques por Turno
 		
+	}
+	
+	public IAtaque getAtaque(){
+		return new Ataque(this.ataque);
 	}
 	
 	public boolean puedeSerAlmacenada(){ //puedeSerTransportada
