@@ -13,7 +13,6 @@ import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
-import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 
 public class TestPuertoEstelarProtoss extends TestEdificio {
@@ -44,16 +43,18 @@ public class TestPuertoEstelarProtoss extends TestEdificio {
 		// Aseguro recursos
 		jugador.agregarGasVespeno(500);
 		jugador.agregarMinerales(500);
-		this.acceso = crearRequeridoEnTierra(jugador, mapa);
+		this.acceso = crearRequeridoEnTierra(jugador, mapa, new Posicion(0,0));
 		for(int i = 0; i < 8; i++) acceso.pasarTurno();//Construccion
-		this.puerto = crearEnTierra(jugador, mapa);
+		this.acceso = (Edificio) mapa.getOcupante(acceso.getPosicion());
+		this.puerto = crearEnTierra(jugador, mapa, posRelativa(acceso, 1, 1));
 		for(int i = 0; i < 10; i++) puerto.pasarTurno();//Construccion
-		this.puertoEnConst = crearEnTierra(jugador, mapa);
+		this.puerto = (Edificio) mapa.getOcupante(puerto.getPosicion());
+		this.puertoEnConst = crearEnTierra(jugador, mapa, posRelativa(puerto, 1, 1));
 	}
 	
 	@Test
 	public void testCrearPuertoEstelar() {
-		assertEquals(puertoEnConst.getNombre(),"Puerto Estelar");
+		assertEquals(puerto.getNombre(),"Puerto Estelar");
 	}
 	
 	@Test
@@ -63,7 +64,7 @@ public class TestPuertoEstelarProtoss extends TestEdificio {
 		jugador2.agregarGasVespeno(500);
 		jugador2.agregarMinerales(500);
 		try {
-			Edificio puerto2 = crearEnTierra(jugador2, mapa);
+			Edificio puerto2 = crearEnTierra(jugador2, mapa, posRelativa(puertoEnConst, 1, 1));
 			fail();
 		}
 		catch (OrdenConstruccionViolado e) {
@@ -80,7 +81,7 @@ public class TestPuertoEstelarProtoss extends TestEdificio {
 		int costoGas = 150;
 		int costoMineral = 150;
 		
-		this.puertoEnConst = crearEnTierra(jugador, mapa);
+		this.puertoEnConst = crearEnTierra(jugador, mapa, posRelativa(puertoEnConst, 1,1));
 		
 		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
 		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
@@ -89,7 +90,7 @@ public class TestPuertoEstelarProtoss extends TestEdificio {
 	@Test
 	public void testCrearPuertoEstelarFueraDeTierraFalla() {
 		try {
-			this.puertoEnConst = crearFueraDeTierra(jugador, mapa);
+			this.puertoEnConst = crearFueraDeTierra(jugador, mapa, new Posicion(0,0));
 			fail();
 		}
 		catch (TerrenoInadecuado e) {
@@ -105,7 +106,7 @@ public class TestPuertoEstelarProtoss extends TestEdificio {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.puertoEnConst = crearEnTierra(jugador, mapa);
+			this.puertoEnConst = crearEnTierra(jugador, mapa, new Posicion(0,0));
 			fail();
 		}
 		catch (MineralInsuficiente e) {
@@ -119,7 +120,7 @@ public class TestPuertoEstelarProtoss extends TestEdificio {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.puertoEnConst = crearEnTierra(jugador, mapa);
+			this.puertoEnConst = crearEnTierra(jugador, mapa, new Posicion(0,0));
 			fail();
 		}
 		catch (GasVespenoInsuficiente e) {
@@ -146,7 +147,7 @@ public class TestPuertoEstelarProtoss extends TestEdificio {
 	}
 	
 	@Test
-	public void testBarracaTerminadaPuedeEntrenar() {
+	public void testPuertoEstelarTerminadoPuedeEntrenar() {
 		assertTrue(puerto.puedeEntrenarUnidades());
 	}
 	
@@ -169,17 +170,17 @@ public class TestPuertoEstelarProtoss extends TestEdificio {
 	}
 
 	@Test
-	public void testNexoMineralMientrasConstruyeNoTieneEscudo() {
+	public void testPuertoEstelarMientrasConstruyeNoTieneEscudo() {
 		assertEquals(puertoEnConst.getEscudo(), 0);
 	}
 	
 	@Test
-	public void testNexoMineralRecienConstruidoNoTieneEscudo() {
+	public void testPuertoEstelarRecienConstruidoNoTieneEscudo() {
 		assertEquals(puerto.getEscudo(), 0);
 	}
 	
 	@Test
-	public void testNexoMineralSubeEscudoLuegoDeConstruir() {
+	public void testPuertoEstelarSubeEscudoLuegoDeConstruir() {
 		int escudoRelativo = puerto.getEscudo();
 		for(int i = 0; i < 10; i++){
 			puerto.pasarTurno();
