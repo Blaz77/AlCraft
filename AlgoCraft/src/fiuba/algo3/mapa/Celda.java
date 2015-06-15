@@ -51,9 +51,7 @@ public class Celda { //quizas heredar de celda y armar Tierra/Espacio extends Ce
 		if (!this.terreno.puedeSerOcupada(ocupante))
 			throw new TerrenoInadecuado();
 		if (!this.ocupante.puedeCambiarsePor(ocupante))
-			throw new RecursoAusente(); //Y si no era un Recurso?!?!?!
-			//TODO: Falta diferenciar de si es recurso o un ocupante distinto!
-			// solucion: que devuelvan ellos la excepcion?
+			this.ocupante.lanzarExcepcionDeCambio();
 	}
 		
 	public void setOcupante(Ocupante ocupante) {
@@ -65,6 +63,18 @@ public class Celda { //quizas heredar de celda y armar Tierra/Espacio extends Ce
 		return this.ocupante;
 	}
 	
+	public Ocupante removerOcupante(){
+		Ocupante oc = this.ocupante;
+		this.ocupante = new CeldaVacia(this.ocupante.getPosicion());
+		return oc;
+	}
+	
+	public Ocupante reemplazar(Ocupante reemplazante){
+		Ocupante oc = this.ocupante;
+		this.ocupante = reemplazante;
+		return oc;
+	}
+
 	public Terreno getTerreno(){
 		return this.terreno;
 	}

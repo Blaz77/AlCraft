@@ -89,8 +89,11 @@ public class Unidad extends ObjetoVivo {
 	
 	public void moverA(Posicion destino){
 		if (!this.puedeMoverseA(destino)) throw new MovimientoInvalido();
+		propietario.getMapa().verificarOcupacion(this, destino);
+		
 		this.movRestantes -= this.posicion.distancia(destino);
 		this.posicion = destino;
+		propietario.getMapa().mover(this, destino);
 	}
 	
 	private int getMovPorTurno() {

@@ -75,7 +75,7 @@ public class TestArchivosTemplarios extends TestEdificio {
 		// Aseguro recursos
 		jugador2.agregarGasVespeno(500);
 		jugador2.agregarMinerales(600);
-		Edificio acceso2 = crearRequeridoEnTierra(jugador2, mapa, posRelativa(archivos, 1, 1));
+		Edificio acceso2 = crearRequeridoEnTierra(jugador2, mapa, posRelativa(archivosEnConst, 1, 1));
 		for(int i = 0; i < 8; i++) acceso.pasarTurno();//Construccion
 		try {
 			Edificio archivos2 = crearEnTierra(jugador2, mapa, new Posicion(0,0));
@@ -104,7 +104,7 @@ public class TestArchivosTemplarios extends TestEdificio {
 	@Test
 	public void testCrearArchivosFueraDeTierraFalla() {
 		try {
-			this.archivosEnConst = crearFueraDeTierra(jugador, mapa, new Posicion(0,0));
+			this.archivosEnConst = crearFueraDeTierra(jugador, mapa, posRelativa(archivosEnConst, 1, 1));
 			fail();
 		}
 		catch (TerrenoInadecuado e) {
@@ -120,7 +120,7 @@ public class TestArchivosTemplarios extends TestEdificio {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.archivosEnConst = crearEnTierra(jugador, mapa, new Posicion(0,0));
+			this.archivosEnConst = crearEnTierra(jugador, mapa, posRelativa(archivosEnConst, 1, 1));
 			fail();
 		}
 		catch (MineralInsuficiente e) {
@@ -135,7 +135,7 @@ public class TestArchivosTemplarios extends TestEdificio {
 			jugador.agregarGasVespeno(-10);
 		}
 		try {
-			this.archivosEnConst = crearEnTierra(jugador, mapa, new Posicion(0,0));
+			this.archivosEnConst = crearEnTierra(jugador, mapa, posRelativa(archivosEnConst, 1, 1));
 			fail();
 		}
 		catch (GasVespenoInsuficiente e) {

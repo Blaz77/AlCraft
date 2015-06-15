@@ -1,51 +1,52 @@
 package fiuba.algo3.ocupantes;
 
+import fiuba.algo3.excepciones.RecursoAusente;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 
 // CeldaVacia == RecursoNull
-public class CeldaVacia extends ObjetoNoVivo {
+public class CeldaVacia implements Ocupante {
 
+	private Posicion posicion;
+	
 	public CeldaVacia(Posicion posicion){
-		super(posicion);
+		this.posicion = posicion;
 	}
 	
-	@Override
 	public TipoOcupante getTipo() {
 		return TipoOcupante.CELDA_VACIA;
 	}
+	
+	public Posicion getPosicion() {
+		return posicion;
+	}
 
-	@Override
 	public boolean puedeCambiarsePor(Ocupante otroOcupante) {
 		return !otroOcupante.debeOcuparRecurso();
 	}
+	
+	public void lanzarExcepcionDeCambio() {
+		throw new RecursoAusente();
+	}
 
-	@Override
 	public boolean puedeOcuparTierra() {
 		return true;
 	}
 
-	@Override
 	public boolean puedeOcuparEspacio() {
 		return true;
 	}
 
-	@Override
 	public boolean debeOcuparRecurso() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public boolean debeOcuparMineral() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public boolean debeOcuparGasVespeno() {
-		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
 }

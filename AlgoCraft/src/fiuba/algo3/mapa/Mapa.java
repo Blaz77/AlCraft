@@ -33,6 +33,10 @@ public interface Mapa {
 	public void setOcupante(Ocupante ocupante, Posicion posicion);
 	
 	public Ocupante getOcupante(Posicion posicion);
+	
+	public Ocupante removerOcupante(Posicion posicion);
+	
+	public Ocupante reemplazar(Posicion posicion, Ocupante reemplazante);
 
 	public Terreno getTerreno(Posicion posicion);
 	

@@ -6,6 +6,7 @@ import fiuba.algo3.atributos.unidades.terran.AtributosMarine;
 import fiuba.algo3.excepciones.CeldaNoVisible;
 import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
+import fiuba.algo3.ocupantes.CeldaVacia;
 import fiuba.algo3.ocupantes.Ocupante;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.raza.TipoRaza;
@@ -122,6 +123,14 @@ public class MapaProxy implements Mapa {
 		return mapa.getTerreno(posicion);
 	}
 	
+	public Ocupante removerOcupante(Posicion posicion){
+		return mapa.removerOcupante(posicion);
+	}
+	
+	public Ocupante reemplazar(Posicion posicion, Ocupante reemplazante){
+		return mapa.reemplazar(posicion, reemplazante);
+	}
+
 	public void mover(Unidad /*ObjetoVivo*/ unidad, Posicion destino){
 		oscurecer(unidad);
 		mapa.mover(unidad, destino);

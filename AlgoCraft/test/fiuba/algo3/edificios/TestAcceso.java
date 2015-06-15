@@ -55,7 +55,7 @@ public class TestAcceso extends TestEdificio {
 		int costoGas = 0;
 		int costoMineral = 150;
 		
-		this.acceso = crearEnTierra(jugador, mapa, posRelativa(acceso, 1, 1));
+		this.acceso = crearEnTierra(jugador, mapa, posRelativa(accesoEnConst, 1, 1));
 		
 		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
 		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
@@ -64,7 +64,7 @@ public class TestAcceso extends TestEdificio {
 	@Test
 	public void testCrearAccesoFueraDeTierraFalla() {
 		try {
-			this.acceso = crearFueraDeTierra(jugador, mapa, posRelativa(acceso, 1, 1));
+			this.acceso = crearFueraDeTierra(jugador, mapa, posRelativa(accesoEnConst, 1, 1));
 			fail();
 		}
 		catch (TerrenoInadecuado e) {
@@ -80,7 +80,7 @@ public class TestAcceso extends TestEdificio {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.acceso = crearEnTierra(jugador, mapa, posRelativa(acceso, 1, 1));
+			this.acceso = crearEnTierra(jugador, mapa, posRelativa(accesoEnConst, 1, 1));
 			fail();
 		}
 		catch (MineralInsuficiente e) {

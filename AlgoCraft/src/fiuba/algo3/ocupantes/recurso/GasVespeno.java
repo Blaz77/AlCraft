@@ -21,12 +21,6 @@ public class GasVespeno extends Recurso {
 	}
 	
 	@Override
-	public void pasarTurno() {
-		return;
-		
-	}
-	
-	@Override
 	public boolean puedeCambiarsePor(Ocupante otroOcupante) {
 		return (super.puedeCambiarsePor(otroOcupante) &&
 				otroOcupante.debeOcuparGasVespeno());

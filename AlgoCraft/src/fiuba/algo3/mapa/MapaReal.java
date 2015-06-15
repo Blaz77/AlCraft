@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import fiuba.algo3.excepciones.MovimientoInvalido;
+import fiuba.algo3.ocupantes.CeldaVacia;
 import fiuba.algo3.ocupantes.Ocupante;
 import fiuba.algo3.ocupantes.recurso.GasVespeno;
 import fiuba.algo3.ocupantes.recurso.Mineral;
@@ -233,17 +234,26 @@ public class MapaReal implements Mapa {
 	public Ocupante getOcupante(Posicion posicion) {
 		return this.getCelda(posicion).getOcupante();
 	}
+	
+	// pone por defecto celda vacia
+	public Ocupante removerOcupante(Posicion posicion){
+		return this.getCelda(posicion).removerOcupante();
+	}
+	
+	// NO HACE CHEQUEOS DEL REEMPLAZANTE: (pensado para construcciones)
+	// ver bien depues alguna mejor solucion
+	public Ocupante reemplazar(Posicion posicion, Ocupante reemplazante){
+		return this.getCelda(posicion).reemplazar(reemplazante);
+	}
+	
+	public void mover(Unidad /*ObjetoVivo*/ unidad, Posicion destino){
+		setOcupante(removerOcupante(unidad.getPosicion()), destino);
+	}
 
 	public Terreno getTerreno(Posicion posicion){
 		return this.getCelda(posicion).getTerreno();
 	}
-	
-	public void mover(Unidad /*ObjetoVivo*/ unidad, Posicion destino){
-		if (getOcupante(destino).getTipo() != TipoOcupante.CELDA_VACIA)
-			throw new MovimientoInvalido();
-		unidad.moverA(destino);
-	}
-	 
+		 
 	// Tal vez es mucho para llamarlo getter, reubicar.
 	 
 	/* Recorre el mapa alrededor del centro especificado y devuelve las unidades 

@@ -79,7 +79,8 @@ public abstract class TestEdificio {
 		for (int y = posInicial.getY(); y < mapa.alto(); y++) {
 			for (int x = posInicial.getX(); x < mapa.ancho(); x++) {
 				Posicion posConRecurso = new Posicion(x, y);
-				if (mapa.getOcupante(posConRecurso).getTipo() == recurso) {
+				if (mapa.getTerreno(posConRecurso).getTipo() == TipoTerreno.TIERRA
+					&&	mapa.getOcupante(posConRecurso).getTipo() == recurso) {
 						return crearEdificio(jugador, posConRecurso);
 				}
 			}
@@ -91,7 +92,8 @@ public abstract class TestEdificio {
 		for (int y = posInicial.getY(); y < mapa.alto(); y++) {
 			for (int x = posInicial.getX(); x < mapa.ancho(); x++) {
 				Posicion posSinRecurso = new Posicion(x, y);
-				if (mapa.getOcupante(posSinRecurso).getTipo() != recurso) {
+				if (mapa.getTerreno(posSinRecurso).getTipo() == TipoTerreno.TIERRA
+					&&	mapa.getOcupante(posSinRecurso).getTipo() != recurso) {
 						return crearEdificio(jugador, posSinRecurso);
 				}
 			}

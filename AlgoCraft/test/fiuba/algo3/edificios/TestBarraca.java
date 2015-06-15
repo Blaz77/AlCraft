@@ -54,7 +54,7 @@ public class TestBarraca extends TestEdificio {
 		int costoGas = 0;
 		int costoMineral = 150;
 		
-		this.barraca = crearEnTierra(jugador, mapa, new Posicion(0,0));
+		this.barraca = crearEnTierra(jugador, mapa, posRelativa(barracaEnConst, 1, 1));
 		
 		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
 		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
@@ -63,7 +63,7 @@ public class TestBarraca extends TestEdificio {
 	@Test
 	public void testCrearBarracaFueraDeTierraFalla() {
 		try {
-			this.barraca = crearFueraDeTierra(jugador, mapa, new Posicion(0,0));
+			this.barraca = crearFueraDeTierra(jugador, mapa, posRelativa(barracaEnConst, 1, 1));
 			fail();
 		}
 		catch (TerrenoInadecuado e) {
@@ -79,7 +79,7 @@ public class TestBarraca extends TestEdificio {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.barraca = crearEnTierra(jugador, mapa, new Posicion(0,0));
+			this.barraca = crearEnTierra(jugador, mapa, posRelativa(barracaEnConst, 1, 1));
 			fail();
 		}
 		catch (MineralInsuficiente e) {

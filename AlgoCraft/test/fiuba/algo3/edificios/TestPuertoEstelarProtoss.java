@@ -90,7 +90,7 @@ public class TestPuertoEstelarProtoss extends TestEdificio {
 	@Test
 	public void testCrearPuertoEstelarFueraDeTierraFalla() {
 		try {
-			this.puertoEnConst = crearFueraDeTierra(jugador, mapa, new Posicion(0,0));
+			this.puertoEnConst = crearFueraDeTierra(jugador, mapa, posRelativa(puertoEnConst, 1,1));
 			fail();
 		}
 		catch (TerrenoInadecuado e) {
@@ -106,7 +106,7 @@ public class TestPuertoEstelarProtoss extends TestEdificio {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.puertoEnConst = crearEnTierra(jugador, mapa, new Posicion(0,0));
+			this.puertoEnConst = crearEnTierra(jugador, mapa, posRelativa(puertoEnConst, 1,1));
 			fail();
 		}
 		catch (MineralInsuficiente e) {
@@ -120,7 +120,7 @@ public class TestPuertoEstelarProtoss extends TestEdificio {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.puertoEnConst = crearEnTierra(jugador, mapa, new Posicion(0,0));
+			this.puertoEnConst = crearEnTierra(jugador, mapa, posRelativa(puertoEnConst, 1,1));
 			fail();
 		}
 		catch (GasVespenoInsuficiente e) {
