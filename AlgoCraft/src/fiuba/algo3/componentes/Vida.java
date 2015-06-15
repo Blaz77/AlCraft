@@ -28,16 +28,15 @@ public class Vida implements IVida {
 	}
 	
 	public boolean tieneEscudo() {
-		//return atributos.tieneEscudo();
-		return false; // Esto TIENE que ser false, no queda otra!
+		return false;
 	}
 
 	public int getEscudo() {
-		throw new RuntimeException();
+		return 0;
 	}
 
 	public int getEscudoMaximo() {
-		throw new RuntimeException();
+		return 0;
 	}
 	
 	public void regenerarEscudo(int cantidad) {}

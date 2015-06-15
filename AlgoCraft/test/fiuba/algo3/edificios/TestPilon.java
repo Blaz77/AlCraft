@@ -35,7 +35,10 @@ public class TestPilon extends TestEdificio {
 	
 	@Test
 	public void testCrearPilon() {
-		this.pilon = crearEnTierra(jugador, mapa);
+		this.pilon = crearEnTierra(jugador, mapa, new Posicion(0,0));
+		for(int i = 0; i < 5; i++) pilon.pasarTurno(); //Construccion
+		this.pilon = (Edificio) mapa.getOcupante(pilon.getPosicion());
+		
 		assertEquals(pilon.getNombre(),"Pilon");
 	}
 	
@@ -46,7 +49,7 @@ public class TestPilon extends TestEdificio {
 		int costoGas = 0;
 		int costoMineral = 100;
 		
-		this.pilon = crearEnTierra(jugador, mapa);
+		this.pilon = crearEnTierra(jugador, mapa, new Posicion(0,0));
 		
 		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
 		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
@@ -55,7 +58,7 @@ public class TestPilon extends TestEdificio {
 	@Test
 	public void testCrearPilonFueraDeTierraFalla() {
 		try {
-			this.pilon = crearFueraDeTierra(jugador, mapa);
+			this.pilon = crearFueraDeTierra(jugador, mapa, new Posicion(0,0));
 			fail();
 		}
 		catch (TerrenoInadecuado e) {
@@ -71,7 +74,7 @@ public class TestPilon extends TestEdificio {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.pilon = crearEnTierra(jugador, mapa);
+			this.pilon = crearEnTierra(jugador, mapa, new Posicion(0,0));
 			fail();
 		}
 		catch (MineralInsuficiente e) {
@@ -82,7 +85,7 @@ public class TestPilon extends TestEdificio {
 	
 	@Test
 	public void testPilonSubeVidaDuranteConstruccion() {
-		this.pilon = crearEnTierra(jugador, mapa);
+		this.pilon = crearEnTierra(jugador, mapa, new Posicion(0,0));
 		
 		int vidaRelativa = pilon.getVida();
 		for(int i = 0; i < 5; i++){
@@ -97,7 +100,7 @@ public class TestPilon extends TestEdificio {
 	@Test
 	public void testPilonMientrasConstruyeNoAumentaPoblacion() {
 		int poblacionRelativa = jugador.getCapacidadPoblacion();
-		this.pilon = crearEnTierra(jugador, mapa);
+		this.pilon = crearEnTierra(jugador, mapa, new Posicion(0,0));
 		
 		assertEquals(poblacionRelativa, jugador.getCapacidadPoblacion());
 	}
@@ -105,31 +108,35 @@ public class TestPilon extends TestEdificio {
 	@Test
 	public void testPilonDespuesDeConstruirAumentaPoblacion() {
 		int poblacionRelativa = jugador.getCapacidadPoblacion();
-		this.pilon = crearEnTierra(jugador, mapa);
+		this.pilon = crearEnTierra(jugador, mapa, new Posicion(0,0));
 		for(int i = 0; i < 5; i++) pilon.pasarTurno(); // Construyendo
+		this.pilon = (Edificio) mapa.getOcupante(pilon.getPosicion());
 		
 		assertEquals(poblacionRelativa + 5, jugador.getCapacidadPoblacion());
 	}
 	
-	@Test
+	@Test // se podria hacer que 
+		  // suba el escudo durante la construccion
 	public void testPilonMientrasConstruyeNoTieneEscudo() {
-		this.pilon = crearEnTierra(jugador, mapa);
+		this.pilon = crearEnTierra(jugador, mapa, new Posicion(0,0));
 		
 		assertEquals(pilon.getEscudo(), 0);
 	}
 	
-	@Test
+	@Test //VER!!: Esta bien esto? TODO
 	public void testPilonRecienConstruidoNoTieneEscudo() {
-		this.pilon = crearEnTierra(jugador, mapa);
+		this.pilon = crearEnTierra(jugador, mapa, new Posicion(0,0));
 		for(int i = 0; i < 5; i++) pilon.pasarTurno(); // Construyendo
+		this.pilon = (Edificio) mapa.getOcupante(pilon.getPosicion());
 		
 		assertEquals(pilon.getEscudo(), 0);
 	}
 	
 	@Test
 	public void testPilonSubeEscudoLuegoDeConstruir() {
-		this.pilon = crearEnTierra(jugador, mapa);
+		this.pilon = crearEnTierra(jugador, mapa, new Posicion(0,0));
 		for(int i = 0; i < 5; i++) pilon.pasarTurno(); // Construyendo
+		this.pilon = (Edificio) mapa.getOcupante(pilon.getPosicion());
 		
 		int escudoRelativo = pilon.getEscudo();
 		for(int i = 0; i < 10; i++){

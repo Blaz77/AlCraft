@@ -26,12 +26,12 @@ public class TestRefineria extends TestEdificio {
 		return terranFactory.crearRecolectorGasVespeno(jugador, posicion);
 	}
 	
-	private Edificio crearEnVolcan(Jugador jugador, Mapa mapa) {
-		return crearEnRecurso(jugador, mapa, TipoOcupante.VESPENO);
+	private Edificio crearEnVolcan(Jugador jugador, Mapa mapa, Posicion inicial) {
+		return crearEnRecurso(jugador, mapa, TipoOcupante.VESPENO, inicial);
 	}
 	
-	private Edificio crearFueraDeVolcan(Jugador jugador, Mapa mapa) {
-		return crearFueraDeRecurso(jugador, mapa, TipoOcupante.VESPENO);
+	private Edificio crearFueraDeVolcan(Jugador jugador, Mapa mapa, Posicion inicial) {
+		return crearFueraDeRecurso(jugador, mapa, TipoOcupante.VESPENO, inicial);
 	}
 	
 	@Before
@@ -44,7 +44,9 @@ public class TestRefineria extends TestEdificio {
 	
 	@Test
 	public void testCrearRefineriaEnVolcan() {
-		refineria = crearEnVolcan(jugador, mapa);
+		refineria = crearEnVolcan(jugador, mapa, new Posicion(0,0));
+		for(int i = 0; i < 6; i++) refineria.pasarTurno(); // Construyendo
+		refineria = (Edificio) mapa.getOcupante(refineria.getPosicion());
 		
 		assertNotNull(refineria);
 		assertEquals(refineria.getNombre(),"Refineria");
@@ -57,7 +59,7 @@ public class TestRefineria extends TestEdificio {
 		int costoGas = 0;
 		int costoMineral = 100;
 		
-		this.refineria = crearEnVolcan(jugador, mapa);
+		this.refineria = crearEnVolcan(jugador, mapa, new Posicion(0,0));
 		
 		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
 		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
@@ -69,7 +71,7 @@ public class TestRefineria extends TestEdificio {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			refineria = crearEnVolcan(jugador, mapa);
+			refineria = crearEnVolcan(jugador, mapa, new Posicion(0,0));
 			fail();
 		}
 		catch (MineralInsuficiente e) {
@@ -81,7 +83,7 @@ public class TestRefineria extends TestEdificio {
 	@Test
 	public void testCrearRefineriaFueraDeVolcanFalla() {
 		try {
-			this.refineria = crearFueraDeVolcan(jugador, mapa);
+			this.refineria = crearFueraDeVolcan(jugador, mapa, new Posicion(0,0));
 			fail();
 		}
 		catch (RecursoAusente e) {
@@ -93,7 +95,7 @@ public class TestRefineria extends TestEdificio {
 	
 	@Test
 	public void testRefineriaSubeVidaDuranteConstruccion() {
-		refineria = crearEnVolcan(jugador, mapa);
+		refineria = crearEnVolcan(jugador, mapa, new Posicion(0,0));
 		
 		int vidaRelativa = refineria.getVida();
 		for(int i = 0; i < 6; i++){
@@ -107,7 +109,7 @@ public class TestRefineria extends TestEdificio {
 	
 	@Test
 	public void testRefineriaMientrasConstruyeNoRecolecta() {
-		this.refineria = crearEnVolcan(jugador, mapa);
+		this.refineria = crearEnVolcan(jugador, mapa, new Posicion(0,0));
 		int mineralRelativo = jugador.getMinerales();
 		
 		for(int i = 0; i < 6; i++) {
@@ -120,9 +122,10 @@ public class TestRefineria extends TestEdificio {
 	
 	@Test
 	public void testRefineriaRecolectaGasVespeno() {
-		refineria = crearEnVolcan(jugador, mapa);
-		
+		refineria = crearEnVolcan(jugador, mapa, new Posicion(0,0));
 		for(int i = 0; i < 6; i++) refineria.pasarTurno(); // Construyendo
+		refineria = (Edificio) mapa.getOcupante(refineria.getPosicion());
+		
 		int gasRelativo = jugador.getGasVespeno();
 
 		for(int i = 0; i < 10; i++){
