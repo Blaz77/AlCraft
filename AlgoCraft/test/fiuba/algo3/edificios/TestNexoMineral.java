@@ -27,11 +27,11 @@ public class TestNexoMineral extends TestEdificio{
 	}
 	
 	private Edificio crearEnMineral(Jugador jugador, Mapa mapa) {
-		return crearEnRecurso(jugador, mapa, TipoOcupante.MINERAL);
+		return crearEnRecurso(jugador, mapa, TipoOcupante.MINERAL, new Posicion(0,0));
 	}
 	
 	private Edificio crearFueraDeMineral(Jugador jugador, Mapa mapa) {
-		return crearFueraDeRecurso(jugador, mapa, TipoOcupante.MINERAL);
+		return crearFueraDeRecurso(jugador, mapa, TipoOcupante.MINERAL, new Posicion(0,0));
 	}
 	
 	@Before
@@ -44,6 +44,9 @@ public class TestNexoMineral extends TestEdificio{
 	@Test
 	public void testCrearNexoMineral() {
 		this.nexoMineral = crearEnMineral(jugador, mapa);
+		for(int i = 0; i < 4; i++) nexoMineral.pasarTurno();
+		this.nexoMineral = (Edificio) mapa.getOcupante(nexoMineral.getPosicion());
+		
 		assertEquals(nexoMineral.getNombre(),"Nexo Mineral");
 	}
 	
@@ -118,6 +121,8 @@ public class TestNexoMineral extends TestEdificio{
 	public void testNexoMineralRecolectaMinerales() {
 		this.nexoMineral = crearEnMineral(jugador, mapa);
 		for(int i = 0; i < 4; i++) nexoMineral.pasarTurno(); // Construccion
+		this.nexoMineral = (Edificio) mapa.getOcupante(nexoMineral.getPosicion());
+		
 		int mineralRelativo = jugador.getMinerales();
 		
 		for(int i = 0; i < 10; i++){
@@ -139,6 +144,7 @@ public class TestNexoMineral extends TestEdificio{
 	public void testNexoMineralRecienConstruidoNoTieneEscudo() {
 		this.nexoMineral = crearEnMineral(jugador, mapa);
 		for(int i = 0; i < 4; i++) nexoMineral.pasarTurno(); // Construyendo
+		this.nexoMineral = (Edificio) mapa.getOcupante(nexoMineral.getPosicion());
 		
 		assertEquals(nexoMineral.getEscudo(), 0);
 	}
@@ -147,6 +153,7 @@ public class TestNexoMineral extends TestEdificio{
 	public void testNexoMineralSubeEscudoLuegoDeConstruir() {
 		this.nexoMineral = crearEnMineral(jugador, mapa);
 		for(int i = 0; i < 4; i++) nexoMineral.pasarTurno(); // Construyendo
+		this.nexoMineral = (Edificio) mapa.getOcupante(nexoMineral.getPosicion());
 		
 		int escudoRelativo = nexoMineral.getEscudo();
 		for(int i = 0; i < 10; i++){

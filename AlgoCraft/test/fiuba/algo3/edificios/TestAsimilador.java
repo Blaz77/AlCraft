@@ -27,11 +27,11 @@ public class TestAsimilador extends TestEdificio {
 	}
 	
 	private Edificio crearEnVolcan(Jugador jugador, Mapa mapa) {
-		return crearEnRecurso(jugador, mapa, TipoOcupante.VESPENO);
+		return crearEnRecurso(jugador, mapa, TipoOcupante.VESPENO, new Posicion(0,0));
 	}
 	
 	private Edificio crearFueraDeVolcan(Jugador jugador, Mapa mapa) {
-		return crearFueraDeRecurso(jugador, mapa, TipoOcupante.VESPENO);
+		return crearFueraDeRecurso(jugador, mapa, TipoOcupante.VESPENO, new Posicion(0,0));
 	}
 	
 	@Before
@@ -44,6 +44,8 @@ public class TestAsimilador extends TestEdificio {
 	@Test
 	public void testCrearAsimiladorEnVolcan() {
 		asimilador = crearEnVolcan(jugador, mapa);
+		for(int i = 0; i < 6; i++) asimilador.pasarTurno(); // Construyendo
+		this.asimilador = (Edificio) mapa.getOcupante(asimilador.getPosicion());
 		
 		assertNotNull(asimilador);
 		assertEquals(asimilador.getNombre(),"Asimilador");
@@ -120,8 +122,9 @@ public class TestAsimilador extends TestEdificio {
 	@Test
 	public void testAsimiladorRecolectaGasVespeno() {
 		asimilador = crearEnVolcan(jugador, mapa);
-		
 		for(int i = 0; i < 6; i++) asimilador.pasarTurno(); // Construyendo
+		this.asimilador = (Edificio) mapa.getOcupante(asimilador.getPosicion());
+		
 		int gasRelativo = jugador.getGasVespeno();
 
 		for(int i = 0; i < 10; i++){
@@ -143,6 +146,7 @@ public class TestAsimilador extends TestEdificio {
 	public void testAsimiladorRecienConstruidoNoTieneEscudo() {
 		this.asimilador = crearEnVolcan(jugador, mapa);
 		for(int i = 0; i < 6; i++) asimilador.pasarTurno(); // Construyendo
+		this.asimilador = (Edificio) mapa.getOcupante(asimilador.getPosicion());
 		
 		assertEquals(asimilador.getEscudo(), 0);
 	}
@@ -151,6 +155,7 @@ public class TestAsimilador extends TestEdificio {
 	public void testAsimiladorSubeEscudoLuegoDeConstruir() {
 		this.asimilador = crearEnVolcan(jugador, mapa);
 		for(int i = 0; i < 6; i++) asimilador.pasarTurno(); // Construyendo
+		this.asimilador = (Edificio) mapa.getOcupante(asimilador.getPosicion());
 		
 		int escudoRelativo = asimilador.getEscudo();
 		for(int i = 0; i < 10; i++){
