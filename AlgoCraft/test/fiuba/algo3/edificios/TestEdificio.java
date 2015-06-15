@@ -18,12 +18,12 @@ public abstract class TestEdificio {
 	
 	protected Edificio crearEdificioRequerido(Jugador jugador, Posicion posicion) {
 		// Si no hay requerido, no redefinir
-		return null;
+		throw new RuntimeException();
 	}
 	
 	protected Edificio crearEdificioRequeridoNivel2(Jugador jugador, Posicion posicion) {
 		// Si no hay requerido, no redefinir
-		return null;
+		throw new RuntimeException();
 	}
 	
 	protected Edificio crearEnTierra(Jugador jugador, Mapa mapa, Posicion posInicial) {
@@ -35,7 +35,7 @@ public abstract class TestEdificio {
 				}
 			}
 		}
-		return null;
+		throw new RuntimeException();
 	}
 	
 	protected Edificio crearRequeridoEnTierra(Jugador jugador, Mapa mapa, Posicion posInicial) {
@@ -47,7 +47,7 @@ public abstract class TestEdificio {
 				}
 			}
 		}
-		return null;
+		throw new RuntimeException();
 	}
 	
 	// Perdon por este horror, si se les ocurre algo mejor, bienvenido
@@ -60,7 +60,7 @@ public abstract class TestEdificio {
 				}
 			}
 		}
-		return null;
+		throw new RuntimeException();
 	}
 	
 	protected Edificio crearFueraDeTierra(Jugador jugador, Mapa mapa, Posicion posInicial) {
@@ -72,7 +72,7 @@ public abstract class TestEdificio {
 				}
 			}
 		}
-		return null;
+		throw new RuntimeException();
 	}
 	
 	protected Edificio crearEnRecurso(Jugador jugador, Mapa mapa, TipoOcupante recurso, Posicion posInicial) {
@@ -84,7 +84,7 @@ public abstract class TestEdificio {
 				}
 			}
 		}
-		return null;
+		throw new RuntimeException();
 	}
 	
 	protected Edificio crearFueraDeRecurso(Jugador jugador, Mapa mapa, TipoOcupante recurso, Posicion posInicial) {
@@ -96,7 +96,7 @@ public abstract class TestEdificio {
 				}
 			}
 		}
-		return null;
+		throw new RuntimeException();
 	}
 	
 }

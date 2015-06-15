@@ -49,18 +49,21 @@ public class TestPuertoEstelar extends TestEdificio {
 		// Aseguro recursos
 		jugador.agregarGasVespeno(600);
 		jugador.agregarMinerales(850);
-		this.barraca = crearRequeridoEnTierra(jugador, mapa);
+		this.barraca = crearRequeridoEnTierra(jugador, mapa, new Posicion(0,0));
 		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
-		this.fabrica = crearRequeridoNivel2EnTierra(jugador, mapa);
+		this.barraca = (Edificio) mapa.getOcupante(barraca.getPosicion());
+		this.fabrica = crearRequeridoNivel2EnTierra(jugador, mapa, posRelativa(barraca, 1, 1));
 		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Construccion
-		this.puerto = crearEnTierra(jugador, mapa);
+		this.fabrica = (Edificio) mapa.getOcupante(fabrica.getPosicion());
+		this.puerto = crearEnTierra(jugador, mapa, posRelativa(fabrica, 1, 1));
 		for(int i = 0; i < 10; i++) puerto.pasarTurno();//Construccion
-		this.puertoEnConst = crearEnTierra(jugador, mapa);
+		this.puerto = (Edificio) mapa.getOcupante(puerto.getPosicion());
+		this.puertoEnConst = crearEnTierra(jugador, mapa, posRelativa(puerto, 1, 1));
 	}
 	
 	@Test
 	public void testCrearPuertoEstelar() {
-		assertEquals(puertoEnConst.getNombre(),"Puerto Estelar");
+		assertEquals(puerto.getNombre(),"Puerto Estelar");
 	}
 	
 	@Test
@@ -69,10 +72,10 @@ public class TestPuertoEstelar extends TestEdificio {
 		// Aseguro recursos
 		jugador2.agregarGasVespeno(500);
 		jugador2.agregarMinerales(600);
-		Edificio barraca2 = crearRequeridoEnTierra(jugador2, mapa);
+		Edificio barraca2 = crearRequeridoEnTierra(jugador2, mapa, new Posicion(16, 16));
 		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
 		try {
-			Edificio puerto2 = crearEnTierra(jugador2, mapa);
+			Edificio puerto2 = crearEnTierra(jugador2, mapa, new Posicion(16, 16));
 			fail();
 		}
 		catch (OrdenConstruccionViolado e) {
@@ -89,7 +92,7 @@ public class TestPuertoEstelar extends TestEdificio {
 		int costoGas = 100;
 		int costoMineral = 150;
 		
-		this.puertoEnConst = crearEnTierra(jugador, mapa);
+		this.puertoEnConst = crearEnTierra(jugador, mapa, new Posicion(16, 16));
 		
 		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
 		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
@@ -98,7 +101,7 @@ public class TestPuertoEstelar extends TestEdificio {
 	@Test
 	public void testCrearPuertoEstelarFueraDeTierraFalla() {
 		try {
-			this.puertoEnConst = crearFueraDeTierra(jugador, mapa);
+			this.puertoEnConst = crearFueraDeTierra(jugador, mapa, new Posicion(16, 16));
 			fail();
 		}
 		catch (TerrenoInadecuado e) {
@@ -114,7 +117,7 @@ public class TestPuertoEstelar extends TestEdificio {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.puertoEnConst = crearEnTierra(jugador, mapa);
+			this.puertoEnConst = crearEnTierra(jugador, mapa, new Posicion(16, 16));
 			fail();
 		}
 		catch (MineralInsuficiente e) {
@@ -129,7 +132,7 @@ public class TestPuertoEstelar extends TestEdificio {
 			jugador.agregarGasVespeno(-10);
 		}
 		try {
-			this.puertoEnConst = crearEnTierra(jugador, mapa);
+			this.puertoEnConst = crearEnTierra(jugador, mapa, new Posicion(16, 16));
 			fail();
 		}
 		catch (GasVespenoInsuficiente e) {
@@ -156,7 +159,7 @@ public class TestPuertoEstelar extends TestEdificio {
 	}
 	
 	@Test
-	public void testBarracaTerminadaPuedeEntrenar() {
+	public void testPuertoEstelarTerminadoPuedeEntrenar() {
 		assertTrue(puerto.puedeEntrenarUnidades());
 	}
 	
