@@ -16,7 +16,7 @@ import fiuba.algo3.raza.TipoRaza;
 
 public class TestNexoMineral extends TestEdificio{
 
-	private Mapa mapa;
+	private MapaReal mapa;
 	private Jugador jugador;
 	private EdificiosFactory protossFactory;
 	private Edificio nexoMineral;
@@ -26,17 +26,17 @@ public class TestNexoMineral extends TestEdificio{
 		return protossFactory.crearRecolectorMineral(jugador, posicion);
 	}
 	
-	private Edificio crearEnMineral(Jugador jugador, Mapa mapa) {
+	private Edificio crearEnMineral(Jugador jugador, MapaReal mapa) {
 		return crearEnRecurso(jugador, mapa, TipoOcupante.MINERAL, new Posicion(0,0));
 	}
 	
-	private Edificio crearFueraDeMineral(Jugador jugador, Mapa mapa) {
+	private Edificio crearFueraDeMineral(Jugador jugador, MapaReal mapa) {
 		return crearFueraDeRecurso(jugador, mapa, TipoOcupante.MINERAL, new Posicion(0,0));
 	}
 	
 	@Before
 	public void setUp() {
-		mapa = new Mapa(6);
+		mapa = new MapaReal(6);
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.PROTOSS, mapa);
 		this.protossFactory = new EdificiosFactory();
 	}

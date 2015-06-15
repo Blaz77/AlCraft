@@ -8,6 +8,7 @@ import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.SuministroInsuficiente;
 import fiuba.algo3.excepciones.UnidadNoPropia;
 import fiuba.algo3.mapa.Mapa;
+import fiuba.algo3.mapa.MapaReal;
 import fiuba.algo3.mapa.MapaProxy;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.edificios.Edificio;
@@ -39,11 +40,11 @@ public class Jugador {
 	private int gasVespeno;
 	private int poblacion;
 	private int poblacionCapacidad; // Depende de los edificios correspondientes.
-	private MapaProxy mapaPropio;
+	private Mapa mapaPropio;
 	private ArrayList<Unidad> unidades = new ArrayList<Unidad>();
 	private ArrayList<Edificio> edificios = new ArrayList<Edificio>();
 
-	public Jugador(String nombre, Color color, TipoRaza raza, Mapa mapa) { // MapaProxy? 
+	public Jugador(String nombre, Color color, TipoRaza raza, MapaReal mapa) { // MapaProxy? 
 		
 		this.color = color;
 		this.raza = RazaFactory.getRaza(raza);
@@ -121,7 +122,7 @@ public class Jugador {
 		return this.poblacionCapacidad;
 	}
 	
-	public MapaProxy getMapa() {
+	public Mapa getMapa() {
 		return this.mapaPropio;
 	}
 

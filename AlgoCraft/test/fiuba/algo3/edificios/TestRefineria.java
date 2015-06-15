@@ -16,7 +16,7 @@ import fiuba.algo3.raza.TipoRaza;
 
 public class TestRefineria extends TestEdificio {
 
-	private Mapa mapa;
+	private MapaReal mapa;
 	private Jugador jugador;
 	private EdificiosFactory terranFactory;
 	private Edificio refineria;
@@ -26,17 +26,17 @@ public class TestRefineria extends TestEdificio {
 		return terranFactory.crearRecolectorGasVespeno(jugador, posicion);
 	}
 	
-	private Edificio crearEnVolcan(Jugador jugador, Mapa mapa, Posicion inicial) {
+	private Edificio crearEnVolcan(Jugador jugador, MapaReal mapa, Posicion inicial) {
 		return crearEnRecurso(jugador, mapa, TipoOcupante.VESPENO, inicial);
 	}
 	
-	private Edificio crearFueraDeVolcan(Jugador jugador, Mapa mapa, Posicion inicial) {
+	private Edificio crearFueraDeVolcan(Jugador jugador, MapaReal mapa, Posicion inicial) {
 		return crearFueraDeRecurso(jugador, mapa, TipoOcupante.VESPENO, inicial);
 	}
 	
 	@Before
 	public void setUp() throws Exception {
-		mapa = new Mapa(6);
+		mapa = new MapaReal(6);
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
 		this.terranFactory = new EdificiosFactory();
 		//this.refineria = terranFactory.crearRecolectorGasVespeno(jugador, 20, 40);

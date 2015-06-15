@@ -15,7 +15,7 @@ import fiuba.algo3.raza.TipoRaza;
 
 public class TestPilon extends TestEdificio {
 
-	private Mapa mapa;
+	private MapaReal mapa;
 	private Jugador jugador;
 	private EdificiosFactory protossFactory;
 	private Edificio pilon;
@@ -28,7 +28,7 @@ public class TestPilon extends TestEdificio {
 	
 	@Before
 	public void setUp() {
-		mapa = new Mapa(6);
+		mapa = new MapaReal(6);
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.PROTOSS, mapa);
 		this.protossFactory = new EdificiosFactory();
 	}

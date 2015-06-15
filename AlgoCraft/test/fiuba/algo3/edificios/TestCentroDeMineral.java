@@ -16,7 +16,7 @@ import fiuba.algo3.raza.TipoRaza;
 
 public class TestCentroDeMineral extends TestEdificio{
 
-	private Mapa mapa;
+	private MapaReal mapa;
 	private Jugador jugador;
 	private EdificiosFactory terranFactory;
 	private Edificio centroMineral;
@@ -26,17 +26,17 @@ public class TestCentroDeMineral extends TestEdificio{
 		return terranFactory.crearRecolectorMineral(jugador, posicion);
 	}
 	
-	private Edificio crearEnMineral(Jugador jugador, Mapa mapa, Posicion inicial) {
+	private Edificio crearEnMineral(Jugador jugador, MapaReal mapa, Posicion inicial) {
 		return crearEnRecurso(jugador, mapa, TipoOcupante.MINERAL, inicial);
 	}
 	
-	private Edificio crearFueraDeMineral(Jugador jugador, Mapa mapa, Posicion inicial) {
+	private Edificio crearFueraDeMineral(Jugador jugador, MapaReal mapa, Posicion inicial) {
 		return crearFueraDeRecurso(jugador, mapa, TipoOcupante.MINERAL, inicial);
 	}
 	
 	@Before
 	public void setUp() {
-		mapa = new Mapa(6);
+		mapa = new MapaReal(6);
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
 		this.terranFactory = new EdificiosFactory();
 	}

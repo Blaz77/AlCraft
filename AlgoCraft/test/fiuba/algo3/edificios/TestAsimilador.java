@@ -16,7 +16,7 @@ import fiuba.algo3.raza.TipoRaza;
 
 public class TestAsimilador extends TestEdificio {
 
-	private Mapa mapa;
+	private MapaReal mapa;
 	private Jugador jugador;
 	private EdificiosFactory protossFactory;
 	private Edificio asimilador;
@@ -26,17 +26,17 @@ public class TestAsimilador extends TestEdificio {
 		return protossFactory.crearRecolectorGasVespeno(jugador, posicion);
 	}
 	
-	private Edificio crearEnVolcan(Jugador jugador, Mapa mapa) {
+	private Edificio crearEnVolcan(Jugador jugador, MapaReal mapa) {
 		return crearEnRecurso(jugador, mapa, TipoOcupante.VESPENO, new Posicion(0,0));
 	}
 	
-	private Edificio crearFueraDeVolcan(Jugador jugador, Mapa mapa) {
+	private Edificio crearFueraDeVolcan(Jugador jugador, MapaReal mapa) {
 		return crearFueraDeRecurso(jugador, mapa, TipoOcupante.VESPENO, new Posicion(0,0));
 	}
 	
 	@Before
 	public void setUp() throws Exception {
-		mapa = new Mapa(6);
+		mapa = new MapaReal(6);
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.PROTOSS, mapa);
 		this.protossFactory = new EdificiosFactory();
 	}

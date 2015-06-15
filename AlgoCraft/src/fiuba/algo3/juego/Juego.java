@@ -3,7 +3,7 @@ package fiuba.algo3.juego;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import fiuba.algo3.mapa.Mapa;
+import fiuba.algo3.mapa.MapaReal;
 import fiuba.algo3.raza.TipoRaza;
 
 public class Juego implements Iterable<Jugador>, Iterator<Jugador>{
@@ -18,7 +18,7 @@ public class Juego implements Iterable<Jugador>, Iterator<Jugador>{
 	private int turnos = 0;
 	private int indiceJugadorActual = 0;
 	//int turnosMAX; // si los hay
-	Mapa mapa;
+	MapaReal mapa;
 	ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
 	ArrayList<Jugador> jugadoresMuertos = new ArrayList<Jugador>();
 	// Metodos:
@@ -27,7 +27,7 @@ public class Juego implements Iterable<Jugador>, Iterator<Jugador>{
 	 * agregarlos despues).*/
 	
 	public Juego(Opciones opciones){ // (Opciones opciones) {
-		mapa = new Mapa(opciones.getCantidadBases());
+		mapa = new MapaReal(opciones.getCantidadBases());
 		String nombreJugador;
 		TipoRaza razaJugador;
 		Color colorJugador;

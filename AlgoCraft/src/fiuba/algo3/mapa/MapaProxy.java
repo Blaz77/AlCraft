@@ -11,9 +11,9 @@ import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.terreno.Terreno;
 
-public class MapaProxy {
+public class MapaProxy implements Mapa {
 
-	Mapa mapa;
+	MapaReal mapa;
 	ArrayList<Unidad> unidadesJugador;
 	Visibilidad[][] mapaVisibilidad;
 	
@@ -24,7 +24,7 @@ public class MapaProxy {
 	/* Genera un mapa aleatorio para 2 jugadores, con la cantidad 
 	 * de bases especificada
 	 */
-	public MapaProxy(Mapa mapa, ArrayList<Unidad> unidades){
+	public MapaProxy(MapaReal mapa, ArrayList<Unidad> unidades){
 		int ancho, alto;
 		
 		this.mapa = mapa;
@@ -122,11 +122,19 @@ public class MapaProxy {
 		return mapa.getTerreno(posicion);
 	}
 	
-	 public void mover(Unidad /*ObjetoVivo*/ unidad, Posicion destino){
-		 oscurecer(unidad);
-		 mapa.mover(unidad, destino);
-		 iluminar(unidad);
-	 }
+	public void mover(Unidad /*ObjetoVivo*/ unidad, Posicion destino){
+		oscurecer(unidad);
+		mapa.mover(unidad, destino);
+		iluminar(unidad);
+	}
+	 
+	public void verificarOcupacion(Ocupante ocupante, Posicion posicion) {
+		this.mapa.verificarOcupacion(ocupante, posicion);		
+	}
+	public ArrayList<Unidad> getUnidadesEnRango(Posicion centro, int distancia) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	/**********************************************/
 	/**                DEBUG AREA                **/
@@ -157,7 +165,7 @@ public class MapaProxy {
 	
 	public static void main(String args[]){ // Cambiar a "main" para ejecutar y probar
 		
-		Mapa mapa = new Mapa(3);
+		MapaReal mapa = new MapaReal(3);
 		Jugador jugador = new Jugador("Carlitos", Color.AZUL, TipoRaza.TERRAN, mapa);
 		Unidad unidad1 = new Unidad(jugador, new Posicion(4,0), new AtributosMarine());
 		Unidad unidad2 = new Unidad(jugador, new Posicion(0,0), new AtributosMarine());

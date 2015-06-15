@@ -1,7 +1,7 @@
 package fiuba.algo3.edificios;
 
 import fiuba.algo3.juego.Jugador;
-import fiuba.algo3.mapa.Mapa;
+import fiuba.algo3.mapa.MapaReal;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.edificios.Edificio;
@@ -26,7 +26,7 @@ public abstract class TestEdificio {
 		throw new RuntimeException();
 	}
 	
-	protected Edificio crearEnTierra(Jugador jugador, Mapa mapa, Posicion posInicial) {
+	protected Edificio crearEnTierra(Jugador jugador, MapaReal mapa, Posicion posInicial) {
 		for (int y = posInicial.getY(); y < mapa.alto(); y++) {
 			for (int x = posInicial.getX(); x < mapa.ancho(); x++) {
 				Posicion posEnTierra = new Posicion(x, y);
@@ -38,7 +38,7 @@ public abstract class TestEdificio {
 		throw new RuntimeException();
 	}
 	
-	protected Edificio crearRequeridoEnTierra(Jugador jugador, Mapa mapa, Posicion posInicial) {
+	protected Edificio crearRequeridoEnTierra(Jugador jugador, MapaReal mapa, Posicion posInicial) {
 		for (int y = posInicial.getY(); y < mapa.alto(); y++) {
 			for (int x = posInicial.getX(); x < mapa.ancho(); x++) {
 				Posicion posEnTierra = new Posicion(x, y);
@@ -51,7 +51,7 @@ public abstract class TestEdificio {
 	}
 	
 	// Perdon por este horror, si se les ocurre algo mejor, bienvenido
-	protected Edificio crearRequeridoNivel2EnTierra(Jugador jugador, Mapa mapa, Posicion posInicial) {
+	protected Edificio crearRequeridoNivel2EnTierra(Jugador jugador, MapaReal mapa, Posicion posInicial) {
 		for (int y = posInicial.getY(); y < mapa.alto(); y++) {
 			for (int x = posInicial.getX(); x < mapa.ancho(); x++) {
 				Posicion posEnTierra = new Posicion(x, y);
@@ -63,7 +63,7 @@ public abstract class TestEdificio {
 		throw new RuntimeException();
 	}
 	
-	protected Edificio crearFueraDeTierra(Jugador jugador, Mapa mapa, Posicion posInicial) {
+	protected Edificio crearFueraDeTierra(Jugador jugador, MapaReal mapa, Posicion posInicial) {
 		for (int y = posInicial.getY(); y < mapa.alto(); y++) {
 			for (int x = posInicial.getX(); x < mapa.ancho(); x++) {
 				Posicion posFueraDeTierra = new Posicion(x, y);
@@ -75,7 +75,7 @@ public abstract class TestEdificio {
 		throw new RuntimeException();
 	}
 	
-	protected Edificio crearEnRecurso(Jugador jugador, Mapa mapa, TipoOcupante recurso, Posicion posInicial) {
+	protected Edificio crearEnRecurso(Jugador jugador, MapaReal mapa, TipoOcupante recurso, Posicion posInicial) {
 		for (int y = posInicial.getY(); y < mapa.alto(); y++) {
 			for (int x = posInicial.getX(); x < mapa.ancho(); x++) {
 				Posicion posConRecurso = new Posicion(x, y);
@@ -87,7 +87,7 @@ public abstract class TestEdificio {
 		throw new RuntimeException();
 	}
 	
-	protected Edificio crearFueraDeRecurso(Jugador jugador, Mapa mapa, TipoOcupante recurso, Posicion posInicial) {
+	protected Edificio crearFueraDeRecurso(Jugador jugador, MapaReal mapa, TipoOcupante recurso, Posicion posInicial) {
 		for (int y = posInicial.getY(); y < mapa.alto(); y++) {
 			for (int x = posInicial.getX(); x < mapa.ancho(); x++) {
 				Posicion posSinRecurso = new Posicion(x, y);

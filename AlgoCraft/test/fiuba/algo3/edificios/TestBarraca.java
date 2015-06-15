@@ -16,7 +16,7 @@ import fiuba.algo3.ocupantes.edificios.Edificio;
 
 public class TestBarraca extends TestEdificio {
 
-	private Mapa mapa;
+	private MapaReal mapa;
 	private Jugador jugador;
 	private EdificiosFactory terranFactory; //EdificiosAbstractFactory
 	private Edificio barraca;
@@ -29,7 +29,7 @@ public class TestBarraca extends TestEdificio {
 	
 	@Before
 	public void setUp() {
-		mapa = new Mapa(6);
+		mapa = new MapaReal(6);
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
 		this.jugador.agregarMinerales(300);
 		this.jugador.agregarGasVespeno(300);

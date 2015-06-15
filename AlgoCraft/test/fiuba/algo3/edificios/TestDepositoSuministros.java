@@ -15,7 +15,7 @@ import fiuba.algo3.raza.TipoRaza;
 
 public class TestDepositoSuministros extends TestEdificio {
 
-	private Mapa mapa;
+	private MapaReal mapa;
 	private Jugador jugador;
 	private EdificiosFactory terranFactory;
 	private Edificio depositoSuministros;
@@ -28,7 +28,7 @@ public class TestDepositoSuministros extends TestEdificio {
 	
 	@Before
 	public void setUp() {
-		mapa = new Mapa(6);
+		mapa = new MapaReal(6);
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
 		this.terranFactory = new EdificiosFactory();
 	}

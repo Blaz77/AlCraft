@@ -18,7 +18,7 @@ import fiuba.algo3.ocupantes.edificios.Edificio;
 
 public class TestArchivosTemplarios extends TestEdificio {
 
-	private Mapa mapa;
+	private MapaReal mapa;
 	private Jugador jugador;
 	private EdificiosFactory protossFactory;
 	private Edificio acceso;
@@ -43,7 +43,7 @@ public class TestArchivosTemplarios extends TestEdificio {
 
 	@Before
 	public void setUp() throws Exception {
-		mapa = new Mapa(6);
+		mapa = new MapaReal(6);
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.PROTOSS, mapa);
 		this.protossFactory = new EdificiosFactory();
 		

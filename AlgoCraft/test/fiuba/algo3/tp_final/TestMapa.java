@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import fiuba.algo3.mapa.Celda;
-import fiuba.algo3.mapa.Mapa;
+import fiuba.algo3.mapa.MapaReal;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.Ocupante;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
@@ -19,7 +19,7 @@ public class TestMapa {
 	final int SEMILADO_BASE = 8;
 	final int MINERALES_POR_BASE = 6;
 
-	private Mapa mapaNuevo;
+	private MapaReal mapaNuevo;
 
 	/* Metodos auxiliares */
 	
@@ -36,7 +36,7 @@ public class TestMapa {
 		return suma;
 	}
 	
-	private boolean perteneceAlMapa(int x, int y, Mapa mapa) {
+	private boolean perteneceAlMapa(int x, int y, MapaReal mapa) {
 		if (x < 0 || y < 0)
 			return false;
 		if (x > mapa.ancho() - 1 || y > mapa.alto() - 1)
@@ -49,7 +49,7 @@ public class TestMapa {
 	
 	@Before
 	public void setUp() {
-		mapaNuevo = new Mapa(cantidadBases);
+		mapaNuevo = new MapaReal(cantidadBases);
 	}
 	
 	@Test

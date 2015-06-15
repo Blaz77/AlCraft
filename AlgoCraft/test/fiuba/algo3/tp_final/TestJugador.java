@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
-import fiuba.algo3.mapa.Mapa;
+import fiuba.algo3.mapa.MapaReal;
 import fiuba.algo3.raza.TipoRaza;
 
 public class TestJugador {
@@ -15,7 +15,7 @@ public class TestJugador {
 	
 	@Before
 	public void setUp() {
-		jugadorTerran = new Jugador("Prueba", Color.ROJO, TipoRaza.TERRAN, new Mapa(6));
+		jugadorTerran = new Jugador("Prueba", Color.ROJO, TipoRaza.TERRAN, new MapaReal(6));
 	}
 
 	@Test
