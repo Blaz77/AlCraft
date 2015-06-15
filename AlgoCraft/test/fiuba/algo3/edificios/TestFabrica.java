@@ -44,18 +44,18 @@ public class TestFabrica extends TestEdificio {
 		// Aseguro recursos
 		jugador.agregarGasVespeno(500);
 		jugador.agregarMinerales(600);
-		this.barraca = crearRequeridoEnTierra(jugador, mapa);
+		this.barraca = crearRequeridoEnTierra(jugador, mapa, new Posicion(0,0));
 		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
-		this.fabrica = crearEnTierra(jugador, mapa);
+		this.fabrica = crearEnTierra(jugador, mapa, posRelativa(barraca, 1, 1));
 		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Construccion
-
-		this.fabricaEnConst = crearEnTierra(jugador, mapa);
+		this.fabrica = (Edificio) mapa.getOcupante(fabrica.getPosicion());
+		this.fabricaEnConst = crearEnTierra(jugador, mapa, posRelativa(fabrica, 1, 1));
 	}
 
 	
 	@Test
 	public void testCrearFabrica() {
-		assertEquals(fabricaEnConst.getNombre(),"Fabrica");
+		assertEquals(fabrica.getNombre(),"Fabrica");
 	}
 	
 	@Test
@@ -65,7 +65,7 @@ public class TestFabrica extends TestEdificio {
 		jugador2.agregarGasVespeno(500);
 		jugador2.agregarMinerales(600);
 		try {
-			Edificio fabrica2 = crearEnTierra(jugador2, mapa);
+			Edificio fabrica2 = crearEnTierra(jugador2, mapa, new Posicion(0,0));
 			fail();
 		}
 		catch (OrdenConstruccionViolado e) {
@@ -82,7 +82,7 @@ public class TestFabrica extends TestEdificio {
 		int costoGas = 100;
 		int costoMineral = 200;
 		
-		this.fabricaEnConst = crearEnTierra(jugador, mapa);
+		this.fabricaEnConst = crearEnTierra(jugador, mapa, new Posicion(32,32));
 		
 		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
 		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
@@ -91,7 +91,7 @@ public class TestFabrica extends TestEdificio {
 	@Test
 	public void testCrearFabricaFueraDeTierraFalla() {
 		try {
-			this.fabricaEnConst = crearFueraDeTierra(jugador, mapa);
+			this.fabricaEnConst = crearFueraDeTierra(jugador, mapa, new Posicion(32,32));
 			fail();
 		}
 		catch (TerrenoInadecuado e) {
@@ -107,7 +107,7 @@ public class TestFabrica extends TestEdificio {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.fabricaEnConst = crearEnTierra(jugador, mapa);
+			this.fabricaEnConst = crearEnTierra(jugador, mapa, new Posicion(32,32));
 			fail();
 		}
 		catch (MineralInsuficiente e) {
@@ -122,7 +122,7 @@ public class TestFabrica extends TestEdificio {
 			jugador.agregarGasVespeno(-10);
 		}
 		try {
-			this.fabricaEnConst = crearEnTierra(jugador, mapa);
+			this.fabricaEnConst = crearEnTierra(jugador, mapa, new Posicion(32,32));
 			fail();
 		}
 		catch (GasVespenoInsuficiente e) {

@@ -3,8 +3,6 @@ package fiuba.algo3.ocupantes.edificios;
 import java.util.ArrayList;
 
 import fiuba.algo3.atributos.edificios.AtributosEdificio;
-import fiuba.algo3.componentes.Estado;
-import fiuba.algo3.componentes.EstadoConstruyendoEdificio;
 import fiuba.algo3.componentes.IEntrenadorUnidades;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
@@ -16,22 +14,9 @@ public class Edificio extends ObjetoVivo {
 	
 	private IEntrenadorUnidades entrenador;
 	
-	private boolean construccionTerminada;
-	public Edificio(Jugador propietario, Posicion posicion){
-		super(propietario, posicion);
-		construccionTerminada = false;
-	}
-	
-	public Edificio(Jugador propietario, Posicion posicion,
-			AtributosEdificio atributos) {
-		super(propietario, posicion);
-		this.costo = atributos.getCosto();
-		this.atributos = atributos;
-		//this.vida = new Vida(0,atributos.getAtributosVida());
-		this.vida = atributos.getVida();
-		this.agregarEstado(new EstadoConstruyendoEdificio());
-		propietario.agregarEdificio(this);
-		//
+	public Edificio(Jugador propietario, Posicion posicion, 
+								AtributosEdificio atributos){
+		super(propietario, posicion, atributos);
 		this.entrenador = atributos.getEntrenadorUnidades();
 		this.entrenador.setPortador(this);
 	}
@@ -42,30 +27,17 @@ public class Edificio extends ObjetoVivo {
 	//private Movimiento mov;
 	//private Almacenador alm;
 	
-	//public abstract int getVidaMax();
-	//public abstract int getTurnosNecesarios();
-
 	public TipoOcupante getTipo(){
 		return TipoOcupante.EDIFICIO;
 	}
 
 	public boolean puedeEntrenarUnidades(){
-		return construccionTerminada && this.entrenador.puedeEntrenarUnidades();
+		return this.entrenador.puedeEntrenarUnidades();
 	}
 	
 	//				u otro nombre
 	public ArrayList<Constructor> getUnidadesEntrenables(){
 		return this.entrenador.getUnidadesEntrenables();
-	}
-	
-	public void construccionFinalizada() {
-		// Se ejecuta al terminar la construccion (Puede dar un aviso,
-		// desbloquear otros edificios o activar estados iniciales)
-		this.estados = atributos.getEstadosIniciales();
-		construccionTerminada = true;
-		for (Estado estado : estados) {
-			estado.activar(this);
-		}
 	}
 	
 	//public boolean puedeAlmacenarUnidades(){}

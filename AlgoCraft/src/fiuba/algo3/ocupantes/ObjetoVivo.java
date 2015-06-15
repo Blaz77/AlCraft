@@ -18,14 +18,6 @@ public abstract class ObjetoVivo extends Ocupante { //ObjetoVivo / ObjetoInterac
 	protected LinkedList<Estado> estados;
 	protected AtributosObjetoVivo atributos;
 	protected Costo costo;
-
-	// Constructor para objetos sin inicializacion completa 
-	// ej: Construcciones
-	public ObjetoVivo(Jugador propietario, Posicion posicion) {
-		this.propietario = propietario;
-		this.posicion = posicion;
-		this.estados = new LinkedList<Estado>();
-	}
 	
 	public ObjetoVivo(Jugador propietario, Posicion posicion, AtributosObjetoVivo atributos) {
 		this.propietario = propietario;

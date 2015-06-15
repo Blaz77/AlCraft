@@ -2,6 +2,7 @@
 
 package fiuba.algo3.factories;
 
+import fiuba.algo3.atributos.edificios.AtributosConstruccion;
 import fiuba.algo3.atributos.edificios.AtributosEdificio;
 import fiuba.algo3.excepciones.OrdenConstruccionViolado;
 import fiuba.algo3.excepciones.RecursoAusente;
@@ -35,7 +36,8 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 		}
 		// Chequeo y compra 
 		comprarEdificio(jugador, jugador.getAtributos().getRecolectorGasVespeno());
-		return new Edificio(jugador, posicion, jugador.getAtributos().getRecolectorGasVespeno());
+		AtributosConstruccion construccion = new AtributosConstruccion(jugador.getAtributos().getRecolectorGasVespeno());
+		return new Edificio(jugador, posicion, construccion);
 		//mapa.setOcupante(construccion, posicion)???
 	}
 
@@ -49,7 +51,8 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 		}
 		// Chequeo y compra 
 		comprarEdificio(jugador, jugador.getAtributos().getRecolectorMineral());
-		return new Edificio(jugador, posicion, jugador.getAtributos().getRecolectorMineral());
+		AtributosConstruccion construccion = new AtributosConstruccion(jugador.getAtributos().getRecolectorMineral());
+		return new Edificio(jugador, posicion, construccion);
 	}
 
 	public Edificio crearIncrementadorPoblacion(Jugador jugador, Posicion posicion) {
@@ -59,7 +62,8 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 		}
 		// Chequeo y compra 
 		comprarEdificio(jugador, jugador.getAtributos().getIncrementadorPoblacion());
-		return new Edificio(jugador, posicion, jugador.getAtributos().getIncrementadorPoblacion());
+		AtributosConstruccion construccion = new AtributosConstruccion(jugador.getAtributos().getIncrementadorPoblacion());
+		return new Edificio(jugador, posicion, construccion);
 	}
 
 	public Edificio crearEntrenadorUnidadesBasicas(Jugador jugador, Posicion posicion) {
@@ -68,7 +72,8 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 			throw new TerrenoInadecuado();
 		}
 		comprarEdificio(jugador, jugador.getAtributos().getEntrenadorUnidadesBasicas());
-		return new Edificio(jugador, posicion, jugador.getAtributos().getEntrenadorUnidadesBasicas());
+		AtributosConstruccion construccion = new AtributosConstruccion(jugador.getAtributos().getEntrenadorUnidadesBasicas());
+		return new Edificio(jugador, posicion, construccion);
 	}
 
 	public Edificio crearEntrenadorUnidadesIntermedias(Jugador jugador, Posicion posicion) {
@@ -81,7 +86,8 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 			throw new OrdenConstruccionViolado();
 		}
 		comprarEdificio(jugador, jugador.getAtributos().getEntrenadorUnidadesIntermedias());
-		return new Edificio(jugador, posicion, jugador.getAtributos().getEntrenadorUnidadesIntermedias());
+		AtributosConstruccion construccion = new AtributosConstruccion(jugador.getAtributos().getEntrenadorUnidadesIntermedias());
+		return new Edificio(jugador, posicion, construccion);
 	}
 
 	public Edificio crearEntrenadorUnidadesAvanzadas(Jugador jugador, Posicion posicion) {
@@ -94,7 +100,8 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 			throw new OrdenConstruccionViolado();
 		}
 		comprarEdificio(jugador, jugador.getAtributos().getEntrenadorUnidadesAvanzadas());
-		return new Edificio(jugador, posicion, jugador.getAtributos().getEntrenadorUnidadesAvanzadas());
+		AtributosConstruccion construccion = new AtributosConstruccion(jugador.getAtributos().getEntrenadorUnidadesAvanzadas());
+		return new Edificio(jugador, posicion, construccion);
 	}
 
 }

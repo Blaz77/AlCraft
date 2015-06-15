@@ -1,30 +1,39 @@
 package fiuba.algo3.componentes;
 
+import fiuba.algo3.atributos.edificios.AtributosEdificio;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 
 public class EstadoConstruyendoEdificio implements Estado {
 	
-	int cantVidaSumadaPorTurno;
-	Edificio edificio;
+	private int cantVidaSumadaPorTurno;
+	private ObjetoVivo portador;
+	private AtributosEdificio atributos;
+	
+	public EstadoConstruyendoEdificio(AtributosEdificio atributos){
+		this.atributos = atributos;
+	}
 	
 	public void activar(ObjetoVivo portador) {
-		this.edificio = (Edificio) portador;
+		this.portador = portador;
 		this.cantVidaSumadaPorTurno = 
-				(int) Math.ceil(edificio.getVidaMaxima() / 
-								(double) edificio.getTurnosConstruccion());
+				(int) Math.ceil(portador.getVidaMaxima() / 
+								(double) portador.getTurnosConstruccion());
 		
 	}
 
 	public void pasarTurno() throws Exception {
-		edificio.regenerarVida(cantVidaSumadaPorTurno);
-		if (edificio.getVida() == edificio.getVidaMaxima()) {
+		portador.regenerarVida(cantVidaSumadaPorTurno);
+		if (portador.getVida() == portador.getVidaMaxima()) {
 			throw new Exception();
 		}
 	}
 
 	public void desactivar() {
-		edificio.construccionFinalizada();
+		Edificio edificio = new Edificio(portador.getPropietario() ,portador.getPosicion(), this.atributos);
+		portador.destruir();
+		portador.getPropietario().getMapa().setOcupante(edificio, portador.getPosicion());
+		portador.getPropietario().agregarEdificio(edificio);
 	}
 
 }
