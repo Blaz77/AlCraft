@@ -35,7 +35,9 @@ public class TestDepositoSuministros extends TestEdificio {
 	
 	@Test
 	public void testCrearDepositoSuministros() {
-		this.depositoSuministros = crearEnTierra(jugador, mapa);
+		this.depositoSuministros = crearEnTierra(jugador, mapa, new Posicion(0,0));
+		for(int i = 0; i < 6; i++) depositoSuministros.pasarTurno();
+		this.depositoSuministros = (Edificio) mapa.getOcupante(depositoSuministros.getPosicion());
 		assertEquals(depositoSuministros.getNombre(),"Deposito De Suministros");
 	}
 	
@@ -46,7 +48,7 @@ public class TestDepositoSuministros extends TestEdificio {
 		int costoGas = 0;
 		int costoMineral = 100;
 		
-		this.depositoSuministros = crearEnTierra(jugador, mapa);
+		this.depositoSuministros = crearEnTierra(jugador, mapa, new Posicion(0,0));
 		
 		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
 		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
@@ -55,7 +57,7 @@ public class TestDepositoSuministros extends TestEdificio {
 	@Test
 	public void testCrearDepositoSuministrosFueraDeTierraFalla() {
 		try {
-			this.depositoSuministros = crearFueraDeTierra(jugador, mapa);
+			this.depositoSuministros = crearFueraDeTierra(jugador, mapa, new Posicion(0,0));
 			fail();
 		}
 		catch (TerrenoInadecuado e) {
@@ -71,7 +73,7 @@ public class TestDepositoSuministros extends TestEdificio {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.depositoSuministros = crearEnTierra(jugador, mapa);
+			this.depositoSuministros = crearEnTierra(jugador, mapa, new Posicion(0,0));
 			fail();
 		}
 		catch (MineralInsuficiente e) {
@@ -82,7 +84,7 @@ public class TestDepositoSuministros extends TestEdificio {
 	
 	@Test
 	public void testDepositoSubeVidaDuranteConstruccion() {
-		this.depositoSuministros = crearEnTierra(jugador, mapa);
+		this.depositoSuministros = crearEnTierra(jugador, mapa, new Posicion(0,0));
 		
 		int vidaRelativa = depositoSuministros.getVida();
 		for(int i = 0; i < 6; i++){
@@ -97,7 +99,7 @@ public class TestDepositoSuministros extends TestEdificio {
 	@Test
 	public void testDepositoMientrasConstruyeNoAumentaPoblacion() {
 		int poblacionRelativa = jugador.getCapacidadPoblacion();
-		this.depositoSuministros = crearEnTierra(jugador, mapa);
+		this.depositoSuministros = crearEnTierra(jugador, mapa, new Posicion(0,0));
 		
 		assertEquals(poblacionRelativa, jugador.getCapacidadPoblacion());
 	}
@@ -105,7 +107,7 @@ public class TestDepositoSuministros extends TestEdificio {
 	@Test
 	public void testDepositoDespuesDeConstruirAumentaPoblacion() {
 		int poblacionRelativa = jugador.getCapacidadPoblacion();
-		this.depositoSuministros = crearEnTierra(jugador, mapa);
+		this.depositoSuministros = crearEnTierra(jugador, mapa, new Posicion(0,0));
 		for(int i = 0; i < 6; i++) depositoSuministros.pasarTurno(); // Construyendo
 		
 		assertEquals(poblacionRelativa + 5, jugador.getCapacidadPoblacion());
