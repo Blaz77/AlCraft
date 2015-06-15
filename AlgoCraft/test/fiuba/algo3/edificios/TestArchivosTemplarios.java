@@ -50,20 +50,23 @@ public class TestArchivosTemplarios extends TestEdificio {
 		// Aseguro recursos
 		jugador.agregarGasVespeno(800);
 		jugador.agregarMinerales(600);
-		this.acceso = crearRequeridoEnTierra(jugador, mapa);
+		this.acceso = crearRequeridoEnTierra(jugador, mapa, new Posicion(0,0));
 		for(int i = 0; i < 8; i++) acceso.pasarTurno();//Construccion
-		this.puerto = crearRequeridoNivel2EnTierra(jugador, mapa);
+		this.acceso = (Edificio) mapa.getOcupante(acceso.getPosicion());
+		this.puerto = crearRequeridoNivel2EnTierra(jugador, mapa, posRelativa(acceso, 1, 1));
 		for(int i = 0; i < 10; i++) puerto.pasarTurno();//Construccion
-		this.archivos = crearEnTierra(jugador, mapa);
+		this.puerto = (Edificio) mapa.getOcupante(puerto.getPosicion());
+		this.archivos = crearEnTierra(jugador, mapa, posRelativa(puerto, 1, 1));
 		for(int i = 0; i < 9; i++) archivos.pasarTurno();//Construccion
+		this.archivos = (Edificio) mapa.getOcupante(archivos.getPosicion());
 
-		this.archivosEnConst = crearEnTierra(jugador, mapa);
+		this.archivosEnConst = crearEnTierra(jugador, mapa, posRelativa(archivos, 1, 1));
 	}
 
 	
 	@Test
 	public void testCrearArchivos() {
-		assertEquals(archivosEnConst.getNombre(),"Archivos Templarios");
+		assertEquals(archivos.getNombre(),"Archivos Templarios");
 	}
 	
 	@Test
@@ -72,10 +75,10 @@ public class TestArchivosTemplarios extends TestEdificio {
 		// Aseguro recursos
 		jugador2.agregarGasVespeno(500);
 		jugador2.agregarMinerales(600);
-		Edificio acceso2 = crearRequeridoEnTierra(jugador2, mapa);
+		Edificio acceso2 = crearRequeridoEnTierra(jugador2, mapa, posRelativa(archivos, 1, 1));
 		for(int i = 0; i < 8; i++) acceso.pasarTurno();//Construccion
 		try {
-			Edificio archivos2 = crearEnTierra(jugador2, mapa);
+			Edificio archivos2 = crearEnTierra(jugador2, mapa, new Posicion(0,0));
 			fail();
 		}
 		catch (OrdenConstruccionViolado e) {
@@ -92,7 +95,7 @@ public class TestArchivosTemplarios extends TestEdificio {
 		int costoGas = 200;
 		int costoMineral = 150;
 		
-		this.archivosEnConst = crearEnTierra(jugador, mapa);
+		this.archivosEnConst = crearEnTierra(jugador, mapa, posRelativa(archivosEnConst, 1, 1));
 		
 		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
 		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
@@ -101,7 +104,7 @@ public class TestArchivosTemplarios extends TestEdificio {
 	@Test
 	public void testCrearArchivosFueraDeTierraFalla() {
 		try {
-			this.archivosEnConst = crearFueraDeTierra(jugador, mapa);
+			this.archivosEnConst = crearFueraDeTierra(jugador, mapa, new Posicion(0,0));
 			fail();
 		}
 		catch (TerrenoInadecuado e) {
@@ -117,7 +120,7 @@ public class TestArchivosTemplarios extends TestEdificio {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.archivosEnConst = crearEnTierra(jugador, mapa);
+			this.archivosEnConst = crearEnTierra(jugador, mapa, new Posicion(0,0));
 			fail();
 		}
 		catch (MineralInsuficiente e) {
@@ -132,7 +135,7 @@ public class TestArchivosTemplarios extends TestEdificio {
 			jugador.agregarGasVespeno(-10);
 		}
 		try {
-			this.archivosEnConst = crearEnTierra(jugador, mapa);
+			this.archivosEnConst = crearEnTierra(jugador, mapa, new Posicion(0,0));
 			fail();
 		}
 		catch (GasVespenoInsuficiente e) {
@@ -174,7 +177,7 @@ public class TestArchivosTemplarios extends TestEdificio {
 	}
 
 	@Test
-	public void testArchivosaEntrenaUnidadConsumeRecursos() {
+	public void testArchivosEntrenaUnidadConsumeRecursos() {
 		int mineralRelativo = jugador.getMinerales();
 		int gasRelativo = jugador.getGasVespeno();
 		
@@ -203,7 +206,7 @@ public class TestArchivosTemplarios extends TestEdificio {
 	}
 	
 	@Test
-	public void testFabricaEntrenaUnidadSinGasVespenoDebeFallar() {
+	public void testArchivosEntrenaUnidadSinGasVespenoDebeFallar() {
 		while (jugador.getGasVespeno() >= 150) {
 			jugador.agregarGasVespeno(-10);
 		}
@@ -219,7 +222,7 @@ public class TestArchivosTemplarios extends TestEdificio {
 	}
 	
 	@Test
-	public void testFabricaEntrenarVariasUnidadesSinColaDeEspera() {
+	public void testArchivosEntrenarVariasUnidadesSinColaDeEspera() {
 		// Aseguro recursos
 		jugador.agregarGasVespeno(100);
 		
@@ -233,7 +236,7 @@ public class TestArchivosTemplarios extends TestEdificio {
 	}
 	
 	@Test
-	public void testFabricaEntrenarVariasUnidadesConColaDeEspera() {
+	public void testArchivosEntrenarVariasUnidadesConColaDeEspera() {
 		// Aseguro recursos
 		jugador.agregarGasVespeno(300);
 		
@@ -245,7 +248,7 @@ public class TestArchivosTemplarios extends TestEdificio {
 	}
 
 	@Test
-	public void testFabricaEntrenaUnidadSinPoblacionDebeFallar() {
+	public void testArchviosEntrenaUnidadSinPoblacionDebeFallar() {
 		while (jugador.getCapacidadPoblacion() > 1) {
 			jugador.aumentarCapacidadPoblacion(-1);
 		}
@@ -261,17 +264,17 @@ public class TestArchivosTemplarios extends TestEdificio {
 	}
 	
 	@Test
-	public void testNexoMineralMientrasConstruyeNoTieneEscudo() {
+	public void testArchivosMientrasConstruyeNoTieneEscudo() {
 		assertEquals(archivosEnConst.getEscudo(), 0);
 	}
 	
 	@Test
-	public void testNexoMineralRecienConstruidoNoTieneEscudo() {
+	public void testArchivosRecienConstruidoNoTieneEscudo() {
 		assertEquals(archivos.getEscudo(), 0);
 	}
 	
 	@Test
-	public void testNexoMineralSubeEscudoLuegoDeConstruir() {
+	public void testArchivosSubeEscudoLuegoDeConstruir() {
 		int escudoRelativo = archivos.getEscudo();
 		for(int i = 0; i < 10; i++){
 			archivos.pasarTurno();
