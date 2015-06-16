@@ -107,6 +107,20 @@ public class TestAsimilador extends TestEdificio {
 	}
 	
 	@Test
+	public void testAsimiliadorSubeEscudoDuranteConstruccion() {
+		asimilador = crearEnVolcan(jugador, mapa);
+		
+		int escudoRelativo = asimilador.getEscudo();
+		for(int i = 0; i < 6; i++){
+			asimilador.pasarTurno();
+			if (asimilador.getEscudo() <= escudoRelativo) 
+				fail("No aumenta el escudo en la construccion");
+			escudoRelativo = asimilador.getEscudo();
+		}
+		assertEquals(escudoRelativo, asimilador.getEscudoMaximo());
+	}
+	
+	@Test
 	public void testAsimiladorMientrasConstruyeNoRecolecta() {
 		this.asimilador = crearEnVolcan(jugador, mapa);
 		int mineralRelativo = jugador.getMinerales();
@@ -134,36 +148,5 @@ public class TestAsimilador extends TestEdificio {
 				fail("La refineria no esta recolectando gas (de a 10)");
 		}
 	}
-
-	@Test
-	public void testAsimiladorMientrasConstruyeNoTieneEscudo() {
-		this.asimilador = crearEnVolcan(jugador, mapa);
-		
-		assertEquals(asimilador.getEscudo(), 0);
-	}
 	
-	@Test
-	public void testAsimiladorRecienConstruidoNoTieneEscudo() {
-		this.asimilador = crearEnVolcan(jugador, mapa);
-		for(int i = 0; i < 6; i++) asimilador.pasarTurno(); // Construyendo
-		this.asimilador = (Edificio) mapa.getOcupante(asimilador.getPosicion());
-		
-		assertEquals(asimilador.getEscudo(), 0);
-	}
-	
-	@Test
-	public void testAsimiladorSubeEscudoLuegoDeConstruir() {
-		this.asimilador = crearEnVolcan(jugador, mapa);
-		for(int i = 0; i < 6; i++) asimilador.pasarTurno(); // Construyendo
-		this.asimilador = (Edificio) mapa.getOcupante(asimilador.getPosicion());
-		
-		int escudoRelativo = asimilador.getEscudo();
-		for(int i = 0; i < 10; i++){
-			asimilador.pasarTurno();
-			if (asimilador.getEscudo() <= escudoRelativo) 
-				fail("No aumenta el escudo luego de construir");
-			escudoRelativo = asimilador.getEscudo();
-		}
-		assertEquals(escudoRelativo, asimilador.getEscudoMaximo());
-	}
 }

@@ -112,4 +112,15 @@ public class TestDepositoSuministros extends TestEdificio {
 		
 		assertEquals(poblacionRelativa + 5, jugador.getCapacidadPoblacion());
 	}
+	
+	@Test
+	public void testDespositoAlDestruirDisminuyePoblacion() {		
+		int poblacionRelativa = jugador.getCapacidadPoblacion();
+		this.depositoSuministros = crearEnTierra(jugador, mapa, new Posicion(0,0));
+		for(int i = 0; i < 6; i++) depositoSuministros.pasarTurno(); // Construyendo
+		this.depositoSuministros = (Edificio) mapa.getOcupante(depositoSuministros.getPosicion());
+		
+		this.depositoSuministros.destruir();
+		assertEquals(poblacionRelativa, jugador.getCapacidadPoblacion());
+	}
 }

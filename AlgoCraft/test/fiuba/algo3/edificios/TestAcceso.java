@@ -105,6 +105,18 @@ public class TestAcceso extends TestEdificio {
 	}
 	
 	@Test
+	public void testAccesoSubeEscudoDuranteConstruccion() {
+		int escudoRelativo = accesoEnConst.getEscudo();
+		for(int i = 0; i < 8; i++){
+			accesoEnConst.pasarTurno();
+			if (accesoEnConst.getEscudo() <= escudoRelativo) 
+				fail("No aumenta el escudo en la construccion");
+			escudoRelativo = accesoEnConst.getEscudo();
+		}
+		assertEquals(escudoRelativo, accesoEnConst.getEscudoMaximo());
+	}
+	
+	@Test
 	public void testAccesoMientrasConstruyeNoPuedeEntrenar() {
 		assertFalse(accesoEnConst.puedeEntrenarUnidades());
 	}
@@ -195,28 +207,6 @@ public class TestAcceso extends TestEdificio {
 			return;
 		}
 
-	}
-	
-	@Test
-	public void testNexoMineralMientrasConstruyeNoTieneEscudo() {
-		assertEquals(accesoEnConst.getEscudo(), 0);
-	}
-	
-	@Test
-	public void testNexoMineralRecienConstruidoNoTieneEscudo() {
-		assertEquals(acceso.getEscudo(), 0);
-	}
-	
-	@Test
-	public void testNexoMineralSubeEscudoLuegoDeConstruir() {
-		int escudoRelativo = acceso.getEscudo();
-		for(int i = 0; i < 10; i++){
-			acceso.pasarTurno();
-			if (acceso.getEscudo() <= escudoRelativo) 
-				fail("No aumenta el escudo luego de construir");
-			escudoRelativo = acceso.getEscudo();
-		}
-		assertEquals(escudoRelativo, acceso.getEscudoMaximo());
 	}
 
 }

@@ -157,6 +157,18 @@ public class TestArchivosTemplarios extends TestEdificio {
 	}
 	
 	@Test
+	public void testArchivosSubeEscudoDuranteConstruccion() {
+		int escudoRelativo = archivosEnConst.getEscudo();
+		for(int i = 0; i < 9; i++){
+			archivosEnConst.pasarTurno();
+			if (archivosEnConst.getEscudo() <= escudoRelativo) 
+				fail("No aumenta el escudo en la construccion");
+			escudoRelativo = archivosEnConst.getEscudo();
+		}
+		assertEquals(escudoRelativo, archivosEnConst.getEscudoMaximo());
+	}
+	
+	@Test
 	public void testArchivosMientrasConstruyeNoPuedeEntrenar() {
 		assertFalse(archivosEnConst.puedeEntrenarUnidades());
 	}
@@ -263,25 +275,4 @@ public class TestArchivosTemplarios extends TestEdificio {
 
 	}
 	
-	@Test
-	public void testArchivosMientrasConstruyeNoTieneEscudo() {
-		assertEquals(archivosEnConst.getEscudo(), 0);
-	}
-	
-	@Test
-	public void testArchivosRecienConstruidoNoTieneEscudo() {
-		assertEquals(archivos.getEscudo(), 0);
-	}
-	
-	@Test
-	public void testArchivosSubeEscudoLuegoDeConstruir() {
-		int escudoRelativo = archivos.getEscudo();
-		for(int i = 0; i < 10; i++){
-			archivos.pasarTurno();
-			if (archivos.getEscudo() <= escudoRelativo) 
-				fail("No aumenta el escudo luego de construir");
-			escudoRelativo = archivos.getEscudo();
-		}
-		assertEquals(escudoRelativo, archivos.getEscudoMaximo());
-	}
 }

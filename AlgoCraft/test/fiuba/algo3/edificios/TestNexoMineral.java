@@ -105,6 +105,19 @@ public class TestNexoMineral extends TestEdificio{
 	}
 	
 	@Test
+	public void testPuertoEstelarSubeEscudoDuranteConstruccion() {
+		this.nexoMineral = crearEnMineral(jugador, mapa);
+		int escudoRelativo = nexoMineral.getEscudo();
+		for(int i = 0; i < 4; i++){
+			nexoMineral.pasarTurno();
+			if (nexoMineral.getEscudo() <= escudoRelativo) 
+				fail("No aumenta el escudo en la construccion");
+			escudoRelativo = nexoMineral.getEscudo();
+		}
+		assertEquals(escudoRelativo, nexoMineral.getEscudoMaximo());
+	}
+	
+	@Test
 	public void testNexoMineralMientrasConstruyeNoRecolecta() {
 		this.nexoMineral = crearEnMineral(jugador, mapa);
 		int mineralRelativo = jugador.getMinerales();
@@ -131,38 +144,6 @@ public class TestNexoMineral extends TestEdificio{
 			if (jugador.getMinerales() != mineralRelativo)
 				fail("El centro de Minerales no esta recolectando Minerales (de a 10)");
 		}
-	}
-
-	@Test
-	public void testNexoMineralMientrasConstruyeNoTieneEscudo() {
-		this.nexoMineral = crearEnMineral(jugador, mapa);
-		
-		assertEquals(nexoMineral.getEscudo(), 0);
-	}
-	
-	@Test
-	public void testNexoMineralRecienConstruidoNoTieneEscudo() {
-		this.nexoMineral = crearEnMineral(jugador, mapa);
-		for(int i = 0; i < 4; i++) nexoMineral.pasarTurno(); // Construyendo
-		this.nexoMineral = (Edificio) mapa.getOcupante(nexoMineral.getPosicion());
-		
-		assertEquals(nexoMineral.getEscudo(), 0);
-	}
-	
-	@Test
-	public void testNexoMineralSubeEscudoLuegoDeConstruir() {
-		this.nexoMineral = crearEnMineral(jugador, mapa);
-		for(int i = 0; i < 4; i++) nexoMineral.pasarTurno(); // Construyendo
-		this.nexoMineral = (Edificio) mapa.getOcupante(nexoMineral.getPosicion());
-		
-		int escudoRelativo = nexoMineral.getEscudo();
-		for(int i = 0; i < 10; i++){
-			nexoMineral.pasarTurno();
-			if (nexoMineral.getEscudo() <= escudoRelativo) 
-				fail("No aumenta el escudo luego de construir");
-			escudoRelativo = nexoMineral.getEscudo();
-		}
-		assertEquals(escudoRelativo, nexoMineral.getEscudoMaximo());
 	}
 
 }

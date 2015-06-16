@@ -2,9 +2,7 @@ package fiuba.algo3.componentes;
 
 import fiuba.algo3.ocupantes.ObjetoVivo;
 
-public interface Estado{ //Efecto
-	
-	//public Estado clone();
+public interface Estado{
 	
 	//A llamar cuando ingresa en un Edificio/Unidad
 	public void activar(ObjetoVivo portador);

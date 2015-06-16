@@ -7,7 +7,6 @@ import fiuba.algo3.componentes.Costo;
 import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.EstadoConstruyendoEdificio;
 import fiuba.algo3.componentes.IVida;
-import fiuba.algo3.componentes.Vida;
 
 public class AtributosConstruccion extends AtributosEdificio {
 	
@@ -20,7 +19,9 @@ public class AtributosConstruccion extends AtributosEdificio {
 
 	@Override
 	public IVida getVida() {
-		return new Vida(0, atributosEdificio.getAtributosVida());
+		IVida vida = atributosEdificio.getVida();
+		vida.recibirDanio(vida.getEscudoMaximo() + vida.getVidaMaxima() - 1);
+		return vida;
 	}
 	
 	@Override

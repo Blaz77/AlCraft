@@ -23,6 +23,6 @@ public abstract class AtributosEdificio extends AtributosObjetoVivo {
 
 	@Override
 	public IVida getVida() {
-		return new Vida(0, this.vida);
+		return new Vida(this.vida);
 	}
 }

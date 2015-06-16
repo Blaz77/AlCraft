@@ -142,6 +142,18 @@ public class TestPuertoEstelarProtoss extends TestEdificio {
 	}
 	
 	@Test
+	public void testPuertoEstelarSubeEscudoDuranteConstruccion() {
+		int escudoRelativo = puertoEnConst.getEscudo();
+		for(int i = 0; i < 10; i++){
+			puertoEnConst.pasarTurno();
+			if (puertoEnConst.getEscudo() <= escudoRelativo) 
+				fail("No aumenta el escudo en la construccion");
+			escudoRelativo = puertoEnConst.getEscudo();
+		}
+		assertEquals(escudoRelativo, puertoEnConst.getEscudoMaximo());
+	}
+	
+	@Test
 	public void testPuertoEstelarMientrasConstruyeNoPuedeEntrenar() {
 		assertFalse(puertoEnConst.puedeEntrenarUnidades());
 	}
@@ -169,25 +181,4 @@ public class TestPuertoEstelarProtoss extends TestEdificio {
 		assertEquals(jugador.getUnidades().get(1).getNombre(), "Nave de transporte");
 	}
 
-	@Test
-	public void testPuertoEstelarMientrasConstruyeNoTieneEscudo() {
-		assertEquals(puertoEnConst.getEscudo(), 0);
-	}
-	
-	@Test
-	public void testPuertoEstelarRecienConstruidoNoTieneEscudo() {
-		assertEquals(puerto.getEscudo(), 0);
-	}
-	
-	@Test
-	public void testPuertoEstelarSubeEscudoLuegoDeConstruir() {
-		int escudoRelativo = puerto.getEscudo();
-		for(int i = 0; i < 10; i++){
-			puerto.pasarTurno();
-			if (puerto.getEscudo() <= escudoRelativo) 
-				fail("No aumenta el escudo luego de construir");
-			escudoRelativo = puerto.getEscudo();
-		}
-		assertEquals(escudoRelativo, puerto.getEscudoMaximo());
-	}
 }

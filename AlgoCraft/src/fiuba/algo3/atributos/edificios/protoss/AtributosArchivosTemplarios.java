@@ -38,7 +38,7 @@ public class AtributosArchivosTemplarios extends AtributosEdificio {
 	
 	@Override
 	public IVida getVida() {
-		return new VidaConEscudo(0, 0, this.vida);
+		return new VidaConEscudo(this.vida);
 	}
 	
 	@Override

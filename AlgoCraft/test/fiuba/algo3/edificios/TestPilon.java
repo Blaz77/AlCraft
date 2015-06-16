@@ -98,6 +98,20 @@ public class TestPilon extends TestEdificio {
 	}
 	
 	@Test
+	public void testPilonSubeEscudoDuranteConstruccion() {
+		this.pilon = crearEnTierra(jugador, mapa, new Posicion(0,0));
+		
+		int escudoRelativo = pilon.getEscudo();
+		for(int i = 0; i < 5; i++){
+			pilon.pasarTurno();
+			if (pilon.getEscudo() <= escudoRelativo) 
+				fail("No aumenta el escudo en la construccion");
+			escudoRelativo = pilon.getEscudo();
+		}
+		assertEquals(escudoRelativo, pilon.getEscudoMaximo());
+	}
+	
+	@Test
 	public void testPilonMientrasConstruyeNoAumentaPoblacion() {
 		int poblacionRelativa = jugador.getCapacidadPoblacion();
 		this.pilon = crearEnTierra(jugador, mapa, new Posicion(0,0));
@@ -115,36 +129,15 @@ public class TestPilon extends TestEdificio {
 		assertEquals(poblacionRelativa + 5, jugador.getCapacidadPoblacion());
 	}
 	
-	@Test // se podria hacer que 
-		  // suba el escudo durante la construccion
-	public void testPilonMientrasConstruyeNoTieneEscudo() {
-		this.pilon = crearEnTierra(jugador, mapa, new Posicion(0,0));
-		
-		assertEquals(pilon.getEscudo(), 0);
-	}
-	
-	@Test //VER!!: Esta bien esto? TODO
-	public void testPilonRecienConstruidoNoTieneEscudo() {
-		this.pilon = crearEnTierra(jugador, mapa, new Posicion(0,0));
-		for(int i = 0; i < 5; i++) pilon.pasarTurno(); // Construyendo
-		this.pilon = (Edificio) mapa.getOcupante(pilon.getPosicion());
-		
-		assertEquals(pilon.getEscudo(), 0);
-	}
-	
 	@Test
-	public void testPilonSubeEscudoLuegoDeConstruir() {
+	public void testPilonAlDestruirDisminuyePoblacion() {
+		int poblacionRelativa = jugador.getCapacidadPoblacion();
 		this.pilon = crearEnTierra(jugador, mapa, new Posicion(0,0));
 		for(int i = 0; i < 5; i++) pilon.pasarTurno(); // Construyendo
 		this.pilon = (Edificio) mapa.getOcupante(pilon.getPosicion());
 		
-		int escudoRelativo = pilon.getEscudo();
-		for(int i = 0; i < 10; i++){
-			pilon.pasarTurno();
-			if (pilon.getEscudo() <= escudoRelativo) 
-				fail("No aumenta el escudo luego de construir");
-			escudoRelativo = pilon.getEscudo();
-		}
-		assertEquals(escudoRelativo, pilon.getEscudoMaximo());
+		this.pilon.destruir();
+		assertEquals(poblacionRelativa, jugador.getCapacidadPoblacion());
 	}
+	
 }
