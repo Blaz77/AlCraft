@@ -32,6 +32,8 @@ public interface Mapa {
 	
 	public void setOcupante(Ocupante ocupante, Posicion posicion);
 	
+	public Posicion setOcupanteEnCercania(Ocupante ocupante, Posicion posicion);
+	
 	public Ocupante getOcupante(Posicion posicion);
 	
 	public Ocupante removerOcupante(Posicion posicion);

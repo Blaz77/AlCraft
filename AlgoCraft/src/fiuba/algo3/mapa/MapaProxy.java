@@ -109,6 +109,10 @@ public class MapaProxy implements Mapa {
 		mapa.setOcupante(ocupante, posicion);
 	}
 	
+	public Posicion setOcupanteEnCercania(Ocupante ocupante, Posicion posicion){
+		return mapa.setOcupanteEnCercania(ocupante, posicion);
+	}
+	
 	public Ocupante getOcupante(Posicion posicion) {
 		//if (! (getVisibilidad(posicion)).verOcupante())
 		//	throw new CeldaNoVisible();

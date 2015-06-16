@@ -231,6 +231,49 @@ public class MapaReal implements Mapa {
 		this.getCelda(posicion).setOcupante(ocupante);
 	}
 	
+	private boolean puedeOcupar(Ocupante ocupante, int x, int y){
+		try {
+			return mapa[x][y].puedeSerOcupada(ocupante);
+		} catch (IndexOutOfBoundsException e) {
+			return false;
+		}
+	}
+	
+	public Posicion setOcupanteEnCercania(Ocupante ocupante, Posicion posicion){
+		int x = posicion.getX();
+		int y = posicion.getY();
+		
+		for(int offset = 0; true; offset++){
+			
+			//recorre los cuadrados
+			//pasa dos veces por cada esquina por ahora (mala leche)
+			
+			for (int diff = -offset; diff <= offset; diff++){
+				//linea vertical a la derecha
+				if (puedeOcupar(ocupante, x+offset, y+diff)){
+					mapa[x+offset][y+diff].setOcupante(ocupante);
+					return new Posicion(x+offset, y+diff);
+				}
+				//linea vertical a la izquierda
+				if (puedeOcupar(ocupante, x-offset, y+diff)){
+					mapa[x-offset][y+diff].setOcupante(ocupante);
+					return new Posicion(x-offset, y+diff);
+				}
+				//linea horizontal arriba
+				if (puedeOcupar(ocupante, x+diff, y+offset)){
+					mapa[x+diff][y+offset].setOcupante(ocupante);
+					return new Posicion(x+diff, y+offset);
+				}
+				//linea horizontal abajo
+				if (puedeOcupar(ocupante, x+diff, y-offset)){
+					mapa[x+diff][y-offset].setOcupante(ocupante);
+					return new Posicion(x+diff, y-offset);
+				}
+			}
+			
+		}
+	}
+	
 	public Ocupante getOcupante(Posicion posicion) {
 		return this.getCelda(posicion).getOcupante();
 	}
