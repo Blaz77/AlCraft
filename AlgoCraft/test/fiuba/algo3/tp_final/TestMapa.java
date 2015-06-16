@@ -7,11 +7,18 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import fiuba.algo3.atributos.unidades.terran.AtributosMarine;
+import fiuba.algo3.excepciones.PosicionOcupada;
+import fiuba.algo3.juego.Color;
+import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Celda;
 import fiuba.algo3.mapa.MapaReal;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.Ocupante;
+import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
+import fiuba.algo3.ocupantes.unidades.Unidad;
+import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.terreno.TipoTerreno;
 
 public class TestMapa {
@@ -161,4 +168,27 @@ public class TestMapa {
 		Assert.assertTrue(hayAreasEspaciales);
 	}
 	
+	/* Test de superposicion */
+	
+	@Test(expected = PosicionOcupada.class)
+	public void testCrearVariasUnidadesEnUnaCeldaDebeFallar() {
+		Jugador jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapaNuevo);
+		
+		Unidad unidad = new Unidad(jugador, new Posicion(5, 5), jugador.getAtributos().getInfanteriaLivianaTerrestre());
+		Unidad otraUnidad = new Unidad(jugador, new Posicion(5, 5), jugador.getAtributos().getInfanteriaLivianaTerrestre());
+		
+		mapaNuevo.setOcupante(unidad, new Posicion(5, 5));
+		mapaNuevo.setOcupante(otraUnidad, new Posicion(5, 5));
+	}
+	
+	@Test(expected = PosicionOcupada.class)
+	public void testCrearVariosEdificiosEnUnaCeldaDebeFallar() {
+		Jugador jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapaNuevo);
+		
+		Edificio edificio = new Edificio(jugador, new Posicion(5, 5), jugador.getAtributos().getIncrementadorPoblacion());
+		Edificio otroEdificio = new Edificio(jugador, new Posicion(5, 5), jugador.getAtributos().getIncrementadorPoblacion());
+		
+		mapaNuevo.setOcupante(edificio, new Posicion(5, 5));
+		mapaNuevo.setOcupante(otroEdificio, new Posicion(5, 5));
+	}
 }
