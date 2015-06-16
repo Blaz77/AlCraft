@@ -2,12 +2,14 @@ package fiuba.algo3interfaz;
 
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 
+import fiuba.algo3interfaz.states.GameState;
+import fiuba.algo3interfaz.states.MenuState;
+import fiuba.algo3interfaz.input.KeyManager;
+import fiuba.algo3interfaz.input.MouseManager;
 import fiuba.algo3interfaz.display.Display;
-import fiuba.algo3interfaz.gfx.ImageLoader;
-import fiuba.algo3interfaz.gfx.MapaVista;
 import fiuba.algo3interfaz.gfx.SpriteSheet;
+import fiuba.algo3interfaz.states.State;
 
 public class Game implements Runnable { // Permite correr un thread
 	
@@ -25,37 +27,52 @@ public class Game implements Runnable { // Permite correr un thread
 	// Nuestro pincel magico :D
 	private Graphics g;
 	
-	/** Atributos para cargar imagenes/sprites **/
-	private BufferedImage test;
-	private MapaVista mapaVista;
+	/** States **/
+	private State gameState;
+	private State menuState;
+	
+	/** Input **/
+	private KeyManager keyManager;
+	private MouseManager mouseManager;
 	
 	/** Constructor **/
 	public Game(String tituloVentana, int anchoVentana, int altoVentana){
 		this.anchoVentana = anchoVentana;
 		this.altoVentana = altoVentana;
 		this.tituloVentana = tituloVentana;
+		keyManager = new KeyManager();
+		mouseManager = new MouseManager();
 	}
 	
 	// Solo se corre una vez esto, en el run.
 	// Preparamos los graficos y eso
 	private void inicializar(){
-		
-		mapaVista = new MapaVista(10, 10);
 		display = new Display(tituloVentana, anchoVentana, altoVentana);
-		test = ImageLoader.loadImage("/textures/tierra.png");
-		new SpriteSheet(test);
+		
+		display.getFrame().addKeyListener(keyManager);
+		display.getCanvas().addMouseListener(mouseManager);
+
+		SpriteSheet.inicializar();
+		
+		gameState = new GameState(this);
+		menuState = new MenuState(this);
+		State.setState(gameState);
 		
 	}
 	
 	// Tipico nombre para updatear todo en el game loop. Tambien llamado
 	// "update"
-	private void actualizar(){
-
+	private void tick(){
+		keyManager.tick();
+		mouseManager.tick();
+		
+		if (State.getState() != null)
+			State.getState().tick();
 	}
 	
 	// Muestra todo de nuevo. Se supone que si actualizar no hizo nada,
 	// esto deberia hacer lo mismo q en el instante anterior.
-	private void dibujar(){
+	private void render(){
 		
 		/** 1. Obtengo el buffer, y su Graphics. **/
 		// Un 'buffer' es un banco de memoria auxiliar al q guarda lo q muestra la pantalla.
@@ -65,7 +82,7 @@ public class Game implements Runnable { // Permite correr un thread
 			return;
 		}
 		g = bs.getDrawGraphics(); // Obtenemos el graphics del buffer actual.
-		
+
 		/** 2. Limpio el buffer. **/
 		// Limpia la parte de la pantalla marcada (en este caso todo)
 		// Si no se hace esto, parpadea a lo loco.
@@ -73,19 +90,12 @@ public class Game implements Runnable { // Permite correr un thread
 		
 		
 		/** 3. Dibujo el buffer con Graphics. */
-		dibujarMapaStarcraft();
+		if (State.getState() != null)
+			State.getState().render(g);
 		
 		/** 4. Muestro en pantalla y cierro el Graphics */
 		bs.show(); // Hacemos que el buffer q modificamos pase a ser el q muestre en pantalla.
 		g.dispose(); // Desinicializamos el graphics (no se xq, pero parece q es importante)
-	}
-
-	private void dibujarMapaStarcraft() {
-		for (int y = 0; y < 10; y++)
-			for (int x = 0; x < 10; x++){
-				// Dibujo el en la celda x,y el sprite indicado en mapaGrafico[x][y]
-				g.drawImage(mapaVista.obtenerSprite(x, y), 5+32*x, 5+32*y, null);
-			}
 	}
 
 	// drawRect dibuja un cuadrado sin relleno
@@ -100,10 +110,25 @@ public class Game implements Runnable { // Permite correr un thread
 		
 		inicializar();
 		
+		int fps = 60;
+		double timePerTick = 1000000000 / fps; // 1 second = 1000000000 nanoseconds
+		double delta = 0; // whut.
+		long now;
+		long lastTime = System.nanoTime(); // tiempo actual de la pc en nanos
+		
+		
 		// Game loop basico:
 		while(running){
-			actualizar(); 	// Actualizar variables
-			dibujar(); 	// Dibujarlas
+			
+			now = System.nanoTime();
+			delta += (now - lastTime) / timePerTick;
+			lastTime = now;
+			if (delta >= 1){
+				tick(); 	// Actualizar variables
+				render(); 	// Dibujarlas
+				delta --;
+			}
+			
 		}
 		
 		stop();
@@ -127,6 +152,16 @@ public class Game implements Runnable { // Permite correr un thread
 			e.printStackTrace();
 		}
 	}
+	
+	public KeyManager getKeyManager(){
+		return keyManager;
+	}
+	
+	public  MouseManager getMouseManager(){
+		return mouseManager;
+	}
+	
+	
 }
 
 
