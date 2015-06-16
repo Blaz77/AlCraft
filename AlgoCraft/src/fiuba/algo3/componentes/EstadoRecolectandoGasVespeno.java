@@ -2,10 +2,13 @@ package fiuba.algo3.componentes;
 
 import fiuba.algo3.atributos.AtributosRecolector;
 import fiuba.algo3.juego.Jugador;
+import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.ObjetoVivo;
+import fiuba.algo3.ocupantes.recurso.GasVespeno;
 
 public class EstadoRecolectandoGasVespeno implements Estado {
 	
+	private Posicion posicion;
 	private Jugador beneficiario;
 	private AtributosRecolector atributos;
 	
@@ -15,6 +18,7 @@ public class EstadoRecolectandoGasVespeno implements Estado {
 	
 	public void activar(ObjetoVivo portador) {
 		this.beneficiario = portador.getPropietario();
+		this.posicion = portador.getPosicion();
 	}
 
 	public void pasarTurno() throws Exception {
@@ -22,6 +26,8 @@ public class EstadoRecolectandoGasVespeno implements Estado {
 				this.atributos.getCantARecolectarPorTurno());
 	}
 	
-	public void desactivar() {}
+	public void desactivar() {
+		this.beneficiario.getMapa().reemplazar(this.posicion, new GasVespeno(this.posicion));
+	}
 
 }

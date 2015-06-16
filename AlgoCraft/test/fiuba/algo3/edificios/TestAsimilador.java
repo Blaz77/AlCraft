@@ -149,4 +149,14 @@ public class TestAsimilador extends TestEdificio {
 		}
 	}
 	
+	@Test
+	public void testAsimiladorAlDestruirseDejaGasVespenoEnMapa() {
+		this.asimilador = crearEnVolcan(jugador, mapa);
+		for(int i = 0; i < 6; i++) asimilador.pasarTurno(); // Construccion
+		this.asimilador = (Edificio) mapa.getOcupante(asimilador.getPosicion());
+		
+		this.asimilador.destruir();
+		assertEquals(TipoOcupante.VESPENO, mapa.getOcupante(asimilador.getPosicion()).getTipo());
+	}
+	
 }

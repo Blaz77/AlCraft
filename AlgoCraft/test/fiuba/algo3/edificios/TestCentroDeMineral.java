@@ -131,6 +131,16 @@ public class TestCentroDeMineral extends TestEdificio{
 				fail("El centro de Minerales no esta recolectando Minerales (de a 10)");
 		}
 	}
+	
+	@Test
+	public void testCentroDeMineralAlDestruirseDejaMineralEnMapa() {
+		this.centroMineral = crearEnMineral(jugador, mapa, new Posicion(0, 0));
+		for(int i = 0; i < 4; i++) centroMineral.pasarTurno(); // Construccion
+		this.centroMineral = (Edificio) mapa.getOcupante(centroMineral.getPosicion());
+		
+		this.centroMineral.destruir();
+		assertEquals(TipoOcupante.MINERAL, mapa.getOcupante(centroMineral.getPosicion()).getTipo());
+	}
 
 
 

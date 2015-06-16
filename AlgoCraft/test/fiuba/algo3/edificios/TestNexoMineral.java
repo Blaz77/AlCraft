@@ -12,6 +12,7 @@ import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
+import fiuba.algo3.ocupantes.recurso.TipoRecurso;
 import fiuba.algo3.raza.TipoRaza;
 
 public class TestNexoMineral extends TestEdificio{
@@ -144,6 +145,16 @@ public class TestNexoMineral extends TestEdificio{
 			if (jugador.getMinerales() != mineralRelativo)
 				fail("El centro de Minerales no esta recolectando Minerales (de a 10)");
 		}
+	}
+	
+	@Test
+	public void testNexoMineralAlDestruirseDejaMineralEnMapa() {
+		this.nexoMineral = crearEnMineral(jugador, mapa);
+		for(int i = 0; i < 4; i++) nexoMineral.pasarTurno(); // Construccion
+		this.nexoMineral = (Edificio) mapa.getOcupante(nexoMineral.getPosicion());
+		
+		this.nexoMineral.destruir();
+		assertEquals(TipoOcupante.MINERAL, mapa.getOcupante(nexoMineral.getPosicion()).getTipo());
 	}
 
 }

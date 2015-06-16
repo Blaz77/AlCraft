@@ -135,5 +135,15 @@ public class TestRefineria extends TestEdificio {
 				fail("La refineria no esta recolectando gas (de a 10)");
 		}
 	}
+	
+	@Test
+	public void testRefineriaAlDestruirseDejaGasVespenoEnMapa() {
+		this.refineria = crearEnVolcan(jugador, mapa, new Posicion(0, 0));
+		for(int i = 0; i < 6; i++) refineria.pasarTurno(); // Construccion
+		this.refineria = (Edificio) mapa.getOcupante(refineria.getPosicion());
+		
+		this.refineria.destruir();
+		assertEquals(TipoOcupante.VESPENO, mapa.getOcupante(refineria.getPosicion()).getTipo());
+	}
 
 }
