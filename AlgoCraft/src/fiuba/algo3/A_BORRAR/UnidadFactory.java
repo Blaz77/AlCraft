@@ -1,10 +1,12 @@
-package fiuba.algo3.ocupantes.unidades;
+package fiuba.algo3.A_BORRAR;
+
+import fiuba.algo3.ocupantes.unidades.Unidad;
 //TODO: Probablemente borrar esto.
 
 
 // Trate de encontrar un patron entre las unidades
 // con lo cual se puede hacer esta AbstractFactory
-public interface UnidadFactory {
+rublic interface UnidadFactory {
 	//faltaran parametros en estos metodos
 	
 	public Unidad crearInfanteriaLivianaTerrestre();
