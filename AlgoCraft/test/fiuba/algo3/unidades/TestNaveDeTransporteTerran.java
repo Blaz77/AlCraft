@@ -19,6 +19,7 @@ public class TestNaveDeTransporteTerran extends TestUnidadTransporte {
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
+		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
 		this.transportador = new Unidad(this.jugador, new Posicion(2,4), jugador.getAtributos().getTransporte());
 		this.pasajero = new Unidad(this.jugador, new Posicion(1,3), jugador.getAtributos().getInfanteriaLivianaTerrestre());
 		this.unidadVoladora = new Unidad(this.jugador, new Posicion(2,3), jugador.getAtributos().getInfanteriaPesadaArea());

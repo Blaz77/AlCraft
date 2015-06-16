@@ -19,7 +19,6 @@ public class TestUnidad {
 	@Before
 	public void setUp() throws Exception {
 		mapa = new MapaReal(6);
-		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
 	}
 
 }

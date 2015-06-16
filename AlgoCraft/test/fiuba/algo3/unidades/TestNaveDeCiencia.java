@@ -18,6 +18,7 @@ public class TestNaveDeCiencia extends TestUnidadMagica {
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
+		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
 		this.unidad = new Unidad(this.jugador, new Posicion(2,4), jugador.getAtributos().getInfanteriaMagica());
 		this.otraUnidad = new Unidad(this.jugador, new Posicion(1,3), jugador.getAtributos().getInfanteriaMagica());
 		this.edificioPropio = new PuertoEstelar(this.jugador, new Posicion(2,6));
