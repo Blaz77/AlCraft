@@ -62,4 +62,8 @@ public class AtributosAltoTemplario extends AtributosUnidad {
 		return new Magia(this.magia);
 	}
 	
+	@Override
+	public boolean puedeOcuparEspacio() {
+		return true;
+	}
 }

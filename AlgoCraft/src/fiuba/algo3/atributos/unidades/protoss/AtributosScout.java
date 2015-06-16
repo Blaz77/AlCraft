@@ -60,4 +60,9 @@ public class AtributosScout extends AtributosUnidad {
 		return new Ataque(this.ataque);
 	}
 	
+	@Override
+	public boolean puedeOcuparEspacio() {
+		return true;
+	}
+	
 }
