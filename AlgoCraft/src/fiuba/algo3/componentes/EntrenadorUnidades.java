@@ -7,6 +7,7 @@ import java.util.Queue;
 
 import fiuba.algo3.atributos.AtributosEntrenadorUnidades;
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
+import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.ocupantes.unidades.constructores.Constructor;
@@ -58,8 +59,10 @@ public class EntrenadorUnidades implements IEntrenadorUnidades { //, Estado
 	
 	public void liberarUnidad(AtributosUnidad atrUnidad) {
 		// liberarUnidad
-		new Unidad(portador.getPropietario(), portador.getPosicion(), atrUnidad);
-		//poner en el mapa!??!?!
+		Unidad u = new Unidad(portador.getPropietario(), portador.getPosicion(), atrUnidad);
+		Posicion pos = portador.getPropietario().getMapa().setOcupanteEnCercania(u, portador.getPosicion());
+		u.setPosicion(pos);
+		portador.getPropietario().agregarUnidad(u);
 	}
 
 	public void proximoEntrenamiento() {

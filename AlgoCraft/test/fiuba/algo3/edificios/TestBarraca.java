@@ -13,6 +13,7 @@ import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
 import fiuba.algo3.ocupantes.edificios.Edificio;
+import fiuba.algo3.ocupantes.unidades.Unidad;
 
 public class TestBarraca extends TestEdificio {
 
@@ -120,6 +121,19 @@ public class TestBarraca extends TestEdificio {
 		for(int i = 0; i < 3; i++) barraca.pasarTurno();//Entrenar Marine
 		
 		assertEquals(jugador.getUnidades().get(0).getNombre(), "Marine");
+
+	}
+	
+	@Test
+	public void testBarracaEntrenaUnidadDejaEnElMapa() {
+		barraca.getUnidadesEntrenables().get(0).crear();
+		
+		for(int i = 0; i < 3; i++) barraca.pasarTurno();//Entrenar Marine
+		
+		Unidad marine = jugador.getUnidades().get(0);
+		Posicion posEnMapa = marine.getPosicion();
+		
+		assertEquals(marine, mapa.getOcupante(posEnMapa));
 
 	}
 	

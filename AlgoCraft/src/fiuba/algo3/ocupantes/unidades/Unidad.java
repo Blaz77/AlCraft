@@ -31,8 +31,6 @@ public class Unidad extends ObjetoVivo {
 	public Unidad(Jugador propietario, Posicion posicion, AtributosUnidad atributos){
 		super(propietario, posicion, atributos);
 		this.voluntad = atributos.getVoluntadDelSer();
-		//Hacer esto de abajo en los CONSTRUCTORES! NO ACA!:
-		propietario.agregarUnidad(this);
 		this.movRestantes = voluntad.getMovPorTurno();
 		this.ataque = atributos.getAtaque();
 		this.ataque.setPortador(this);
