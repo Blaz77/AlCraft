@@ -143,6 +143,10 @@ public abstract class ObjetoVivo implements Ocupante { //ObjetoVivo / ObjetoInte
 	
 	public void destruir(){
 		propietario.getMapa().removerOcupante(posicion);
+		
+		for (Estado estado : estados) {
+			estado.desactivar();
+		}
 		//Codigo para limpiar la existencia de Unidad o Edificio:
 		//- eliminar del mapa
 		//- eliminar de la lista del jugador
