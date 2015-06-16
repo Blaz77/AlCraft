@@ -1,6 +1,7 @@
 package fiuba.algo3.atributos;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 import fiuba.algo3.componentes.Costo;
 import fiuba.algo3.componentes.Estado;
@@ -16,20 +17,14 @@ import fiuba.algo3.componentes.Vida;
  */
 public abstract class AtributosObjetoVivo { //AtributosObjetoDeJuego?
 	
-	protected LinkedList<Estado> estadosIniciales = new LinkedList<Estado>();
 	protected AtributosVida vida;
 	protected AtributosCosto costo;
 	
 	protected String nombre;
 
 	
-	public LinkedList<Estado> getEstadosIniciales(){
-		/*LinkedList<Estado> copiaEstados = new LinkedList<Estado>();
-		for (Estado estado : this.estadosIniciales) {
-			copiaEstados.add(estado.clone());
-		}
-		return copiaEstados;*/
-		return new LinkedList<Estado>(estadosIniciales);
+	public List<Estado> getEstadosIniciales(){
+		return new ArrayList<Estado>();
 	}
 	
 	public Costo getCosto() {

@@ -1,9 +1,13 @@
 package fiuba.algo3.atributos.edificios.protoss;
 
+import java.util.Arrays;
+import java.util.List;
+
 import fiuba.algo3.atributos.AtributosCosto;
 import fiuba.algo3.atributos.AtributosRecolector;
 import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.edificios.AtributosEdificio;
+import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.EstadoRecolectandoMineral;
 import fiuba.algo3.componentes.EstadoRegenerandoEscudo;
 import fiuba.algo3.componentes.IVida;
@@ -21,10 +25,12 @@ public class AtributosNexoMineral extends AtributosEdificio {
 		
 		// fields EdificioRecolectorMineral
 		this.recolectorMineral = new AtributosRecolector(10);
-				
-		estadosIniciales.add(new EstadoRecolectandoMineral(this.recolectorMineral));
-		
-		estadosIniciales.add(new EstadoRegenerandoEscudo());
+	}
+	
+	@Override
+	public List<Estado> getEstadosIniciales(){
+		return Arrays.asList(new EstadoRegenerandoEscudo(),
+				new EstadoRecolectandoMineral(this.recolectorMineral));
 	}
 	
 	@Override

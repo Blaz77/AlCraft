@@ -1,10 +1,14 @@
 package fiuba.algo3.atributos.unidades.protoss;
 
+import java.util.Arrays;
+import java.util.List;
+
 import fiuba.algo3.atributos.AtributosCosto;
 import fiuba.algo3.atributos.AtributosTransporte;
 import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.AtributosVoluntadDelSer;
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
+import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.EstadoRegenerandoEscudo;
 import fiuba.algo3.componentes.ITransporte;
 import fiuba.algo3.componentes.IVida;
@@ -36,7 +40,11 @@ public class AtributosNaveDeTransporteProtoss extends AtributosUnidad {
 		// fields de UnidadTransporte:
 		this.transporte = new AtributosTransporte(8); //capac.Almac.
 	
-		estadosIniciales.add(new EstadoRegenerandoEscudo());
+	}
+	
+	@Override
+	public List<Estado> getEstadosIniciales(){
+		return Arrays.asList((Estado)new EstadoRegenerandoEscudo());
 	}
 	
 	@Override

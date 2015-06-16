@@ -1,11 +1,15 @@
 package fiuba.algo3.atributos.unidades.protoss;
 
+import java.util.Arrays;
+import java.util.List;
+
 import fiuba.algo3.atributos.AtributosAtaque;
 import fiuba.algo3.atributos.AtributosCosto;
 import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.AtributosVoluntadDelSer;
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.Ataque;
+import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.EstadoRegenerandoEscudo;
 import fiuba.algo3.componentes.IAtaque;
 import fiuba.algo3.componentes.IVida;
@@ -40,8 +44,11 @@ public class AtributosZealot extends AtributosUnidad {
 				1,		// Rango a Aire
 				1,		// Rango a Tierra
 				1);		// Ataques por Turno
-		
-		estadosIniciales.add(new EstadoRegenerandoEscudo());
+	}
+	
+	@Override
+	public List<Estado> getEstadosIniciales(){
+		return Arrays.asList((Estado)new EstadoRegenerandoEscudo());
 	}
 	
 	@Override

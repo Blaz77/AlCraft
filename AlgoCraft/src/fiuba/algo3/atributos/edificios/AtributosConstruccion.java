@@ -1,6 +1,10 @@
 package fiuba.algo3.atributos.edificios;
 
+import java.util.Arrays;
+import java.util.List;
+
 import fiuba.algo3.componentes.Costo;
+import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.EstadoConstruyendoEdificio;
 import fiuba.algo3.componentes.IVida;
 import fiuba.algo3.componentes.Vida;
@@ -12,13 +16,16 @@ public class AtributosConstruccion extends AtributosEdificio {
 	public AtributosConstruccion(AtributosEdificio atrEdificio){
 		this.atributosEdificio = atrEdificio;
 		this.nombre = "Construccion";
-		
-		this.estadosIniciales.add(new EstadoConstruyendoEdificio(atrEdificio));
 	}
 
 	@Override
 	public IVida getVida() {
 		return new Vida(0, atributosEdificio.getAtributosVida());
+	}
+	
+	@Override
+	public List<Estado> getEstadosIniciales(){
+		return Arrays.asList((Estado)new EstadoConstruyendoEdificio(atributosEdificio));
 	}
 	
 	public Costo getCosto() {

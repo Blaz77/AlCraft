@@ -1,9 +1,13 @@
 package fiuba.algo3.atributos.edificios.terran;
 
+import java.util.Arrays;
+import java.util.List;
+
 import fiuba.algo3.atributos.AtributosCosto;
 import fiuba.algo3.atributos.AtributosRecolector;
 import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.edificios.AtributosEdificio;
+import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.EstadoRecolectandoGasVespeno;
 
 public class AtributosRefineria extends AtributosEdificio {
@@ -19,8 +23,11 @@ public class AtributosRefineria extends AtributosEdificio {
 
 		// fields EdificioRecolectorMineral
 		this.recolectorGas = new AtributosRecolector(10);
-		
-		estadosIniciales.add(new EstadoRecolectandoGasVespeno(this.recolectorGas));
+	}
+	
+	@Override
+	public List<Estado> getEstadosIniciales(){
+		return Arrays.asList((Estado)new EstadoRecolectandoGasVespeno(this.recolectorGas));
 	}
 	
 	@Override

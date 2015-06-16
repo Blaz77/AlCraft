@@ -26,9 +26,9 @@ public abstract class ObjetoVivo implements Ocupante { //ObjetoVivo / ObjetoInte
 		this.atributos = atributos;
 		//this.costo = atributos.getCosto();
 		this.vida = atributos.getVida();
-		this.estados = atributos.getEstadosIniciales();
-		for (Estado estado : estados) {
-			estado.activar(this);
+		this.estados = new LinkedList<Estado>();
+		for (Estado estado : atributos.getEstadosIniciales()) {
+			this.agregarEstado(estado);
 		}
 	}
 

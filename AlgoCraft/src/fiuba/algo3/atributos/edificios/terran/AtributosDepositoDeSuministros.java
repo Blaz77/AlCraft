@@ -1,9 +1,13 @@
 package fiuba.algo3.atributos.edificios.terran;
 
+import java.util.Arrays;
+import java.util.List;
+
 import fiuba.algo3.atributos.AtributosCosto;
 import fiuba.algo3.atributos.AtributosIncrementadorPoblacion;
 import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.edificios.AtributosEdificio;
+import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.EstadoSuministrandoPoblacion;
 
 public class AtributosDepositoDeSuministros extends AtributosEdificio {
@@ -18,8 +22,10 @@ public class AtributosDepositoDeSuministros extends AtributosEdificio {
 
 		// fields EdificioIncrementadorPoblacion
 		this.incrPoblacion = new AtributosIncrementadorPoblacion(5);
-		
-		estadosIniciales.add(new EstadoSuministrandoPoblacion(this.incrPoblacion));
 	}
 
+	@Override
+	public List<Estado> getEstadosIniciales(){
+		return Arrays.asList((Estado)new EstadoSuministrandoPoblacion(this.incrPoblacion));
+	}
 }
