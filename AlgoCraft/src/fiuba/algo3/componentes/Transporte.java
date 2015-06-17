@@ -34,19 +34,23 @@ public class Transporte implements ITransporte{
 	//							ObjetoVivo obj.
 	public boolean puedeAlmacenarA(Unidad transporte, Unidad unidad){
 		return (unidad.puedeSerAlmacenada() &&
-				!transporte.esEnemigoDe(unidad)   &&
+				!transporte.esEnemigoDe(unidad) &&
 				this.hayLugarPara(unidad));
 	}
 	
 	// los edificios tendrian que implementar puedeSerAlmacenada()
 	//							ObjetoVivo obj.
 	public void almacenarA(Unidad transporte, Unidad unidad){
+		//Chequeos:
 		if (!unidad.puedeSerAlmacenada()) throw new UnidadNoEsAlmacenable();
 		if (transporte.esEnemigoDe(unidad)) throw new NoEsUnAliado();
 		if (!this.hayLugarPara(unidad)) throw new CapacidadAlmacenamientoInsuficente();
-		this.almacenados.add(unidad);
+		// Sacar del mapa:
+		transporte.getPropietario().getMapa().removerOcupante(unidad.getPosicion());
+		// Compartir posicion con el transporte (se actualiza solo):
 		unidad.setPosicion(transporte.getPosicion());
-		//SACAR DEL MAPA!, QUIZAS TAMBIEN DEL JUGADOR TEMPORALMENTE
+		// Agregar a mi lista:
+		this.almacenados.add(unidad);
 		this.almacenamientoEnUso += unidad.getCostoAlmacenamiento();
 	}
 	
@@ -66,9 +70,12 @@ public class Transporte implements ITransporte{
 		while (iter.hasNext()){
 			Unidad unidad = iter.next();
 			if (unidad == unidadAlmacenada)
+				// Posicionar en el mapa:
+				unidad.setPosicion(unidad.getPropietario().getMapa()
+						.setOcupanteEnCercania(unidad, unidad.getPosicion()));
+				// Sacar de mi lista:
 				iter.remove();
 				this.almacenamientoEnUso -= unidad.getCostoAlmacenamiento();
-				//PONER EN EL MAPA, DEVOLVER AL JUGADOR
 				break;
 		}
 	}
