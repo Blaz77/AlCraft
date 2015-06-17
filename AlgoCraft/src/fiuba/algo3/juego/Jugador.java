@@ -40,7 +40,8 @@ public class Jugador {
 	private int gasVespeno;
 	private int poblacion;
 	private int poblacionCapacidad; // Depende de los edificios correspondientes.
-	private Mapa mapaPropio;
+	private MapaProxy mapaPropio;
+	private Posicion posicionInicial;
 	private ArrayList<Unidad> unidades = new ArrayList<Unidad>();
 	private ArrayList<Edificio> edificios = new ArrayList<Edificio>();
 
@@ -122,8 +123,12 @@ public class Jugador {
 		return this.poblacionCapacidad;
 	}
 	
-	public Mapa getMapa() {
+	public MapaProxy getMapa() {
 		return this.mapaPropio;
+	}
+	
+	public Posicion getPosicionInicial() {
+		return this.posicionInicial;
 	}
 
 	public int getGasVespeno() {
@@ -157,5 +162,9 @@ public class Jugador {
 			unidad.pasarTurno();
 		for (Edificio edificio: edificios)
 			edificio.pasarTurno();
+	}
+
+	public void setPosicionInicial(Posicion posicionInicial) {
+		this.posicionInicial = posicionInicial;
 	}
 }

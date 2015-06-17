@@ -36,6 +36,7 @@ public class Juego implements Iterable<Jugador>, Iterator<Jugador>{
 			colorJugador = opciones.getColorJugador(n);
 			razaJugador = opciones.getRazaJugador(n);
 			jugadores.add(new Jugador(nombreJugador, colorJugador, razaJugador, mapa));
+			jugadores.get(n-1).setPosicionInicial(mapa.obtenerBaseDeJugador(n).getPosicion());
 		}
 	}
 		

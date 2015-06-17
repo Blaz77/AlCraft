@@ -38,6 +38,8 @@ public class MapaProxy implements Mapa {
 			for (int y = 0; y < alto; y++)
 				mapaVisibilidad[x][y] = new Visibilidad();
 		
+		// Visibilidad inicial: Un cuadrado alrededor de la base del jugador
+		
 		for (Unidad unidad: unidadesJugador)
 			iluminar(unidad);
 	
