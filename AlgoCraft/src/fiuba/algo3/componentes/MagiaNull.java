@@ -3,10 +3,13 @@ package fiuba.algo3.componentes;
 import fiuba.algo3.magia.MagiaAUnidad;
 import fiuba.algo3.magia.MagiaDeAreaDeEfecto;
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 
 public class MagiaNull implements IMagia {
 
+	public void setPortador(ObjetoVivo portador) {}
+	
 	public boolean puedeHacerMagia() {
 		return false;
 	}

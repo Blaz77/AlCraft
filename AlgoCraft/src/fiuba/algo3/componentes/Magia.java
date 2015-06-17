@@ -5,18 +5,32 @@ import fiuba.algo3.excepciones.EnergiaInsuficiente;
 import fiuba.algo3.magia.MagiaAUnidad;
 import fiuba.algo3.magia.MagiaDeAreaDeEfecto;
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 
-public class Magia implements IMagia{ //,Estado
+public class Magia implements IMagia, Estado{
 	
 	private int energia;
 	private AtributosMagia atributos;
+	private ObjetoVivo portador;
 	
 	public Magia(AtributosMagia atributos) {
 		this.atributos = atributos;
-		this.energia = this.getEnergiaMaxima(); //o una energia inicial
-		// TODO: Las unidades magicas de Terran y Protoss comienzan con 50 de energia
+		this.energia = this.atributos.getEnergiaInicial();
 	}
+	
+	public void setPortador(ObjetoVivo portador) {
+		this.portador = portador;
+		portador.agregarEstado(this);
+	}
+	
+	public void activar(ObjetoVivo portador) {}
+
+	public void pasarTurno() throws Exception {
+		this.regenerarEnergia(this.atributos.getEnergiaARegenerarPorTurno());		
+	}
+
+	public void desactivar() {}
 	
 	public boolean puedeHacerMagia() {
 		return true;

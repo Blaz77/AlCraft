@@ -35,7 +35,7 @@ public class Unidad extends ObjetoVivo {
 		this.ataque = atributos.getAtaque();
 		this.ataque.setPortador(this);
 		this.magia = atributos.getMagia();
-		//this.magia.setPortador(this);
+		this.magia.setPortador(this);
 		this.transporte = atributos.getTransporte();
 		//this.transporte.setPortador(this);
 	}
