@@ -17,18 +17,19 @@ public class TestAltoTemplario extends TestUnidadMagica {
 	final int DANIO_TORMENTA = 100;
 	final int COSTO_TORMENTA = 75;
 	
+	
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.PROTOSS, mapa);
-		this.unidad = new Unidad(this.jugador, new Posicion(2,4), jugador.getAtributos().getInfanteriaMagica());
-		this.otraUnidad = new Unidad(this.jugador, new Posicion(1,3), jugador.getAtributos().getInfanteriaMagica());
-		this.edificioPropio = new PuertoEstelar(this.jugador, new Posicion(2,6));
+		this.unidad = new Unidad(this.jugador, POSICION_A, jugador.getAtributos().getInfanteriaMagica());
+		this.otraUnidad = new Unidad(this.jugador, POSICION_B, jugador.getAtributos().getInfanteriaMagica());
+		this.edificioPropio = new PuertoEstelar(this.jugador, POSICION_C);
 		this.jugadorEnemigo = new Jugador("Enemigo", Color.ROJO, TipoRaza.TERRAN, mapa);
-		this.unidadEnemigaTerrestre = new Unidad(jugadorEnemigo, new Posicion(5,4), jugadorEnemigo.getAtributos().getInfanteriaPesadaTerrestre());
-		this.unidadEnemigaAerea = new Unidad(jugadorEnemigo, new Posicion(1,2), jugadorEnemigo.getAtributos().getInfanteriaPesadaArea());
-		this.unidadEnemigaMagica = new Unidad(jugadorEnemigo, new Posicion(1,2), jugadorEnemigo.getAtributos().getInfanteriaMagica());
-		this.edificioEnemigo = new Fabrica(jugadorEnemigo, new Posicion(3,3));	
+		this.unidadEnemigaTerrestre = new Unidad(jugadorEnemigo, POSICION_D, jugadorEnemigo.getAtributos().getInfanteriaPesadaTerrestre());
+		this.unidadEnemigaAerea = new Unidad(jugadorEnemigo, POSICION_E, jugadorEnemigo.getAtributos().getInfanteriaPesadaArea());
+		this.unidadEnemigaMagica = new Unidad(jugadorEnemigo, POSICION_F, jugadorEnemigo.getAtributos().getInfanteriaMagica());
+		this.edificioEnemigo = new Fabrica(jugadorEnemigo, POSICION_G);	
 	
 		//this.mapa.setOcupante(unidad, unidad.getPosicion());
 		this.mapa.setOcupante(otraUnidad, otraUnidad.getPosicion());

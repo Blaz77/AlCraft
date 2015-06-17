@@ -170,25 +170,27 @@ public class TestMapa {
 	
 	/* Test de superposicion */
 	
+	// Zona libre cerca del (32, 10)
+	
 	@Test(expected = PosicionOcupada.class)
 	public void testCrearVariasUnidadesEnUnaCeldaDebeFallar() {
 		Jugador jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapaNuevo);
 		
-		Unidad unidad = new Unidad(jugador, new Posicion(5, 5), jugador.getAtributos().getInfanteriaLivianaTerrestre());
-		Unidad otraUnidad = new Unidad(jugador, new Posicion(5, 5), jugador.getAtributos().getInfanteriaLivianaTerrestre());
+		Unidad unidad = new Unidad(jugador, new Posicion(32, 10), jugador.getAtributos().getInfanteriaLivianaTerrestre());
+		Unidad otraUnidad = new Unidad(jugador, new Posicion(32, 10), jugador.getAtributos().getInfanteriaLivianaTerrestre());
 		
-		mapaNuevo.setOcupante(unidad, new Posicion(5, 5));
-		mapaNuevo.setOcupante(otraUnidad, new Posicion(5, 5));
+		mapaNuevo.setOcupante(unidad, new Posicion(32, 10));
+		mapaNuevo.setOcupante(otraUnidad, new Posicion(32, 10));
 	}
 	
 	@Test(expected = PosicionOcupada.class)
 	public void testCrearVariosEdificiosEnUnaCeldaDebeFallar() {
 		Jugador jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapaNuevo);
 		
-		Edificio edificio = new Edificio(jugador, new Posicion(5, 5), jugador.getAtributos().getIncrementadorPoblacion());
-		Edificio otroEdificio = new Edificio(jugador, new Posicion(5, 5), jugador.getAtributos().getIncrementadorPoblacion());
+		Edificio edificio = new Edificio(jugador, new Posicion(32, 10), jugador.getAtributos().getIncrementadorPoblacion());
+		Edificio otroEdificio = new Edificio(jugador, new Posicion(32, 10), jugador.getAtributos().getIncrementadorPoblacion());
 		
-		mapaNuevo.setOcupante(edificio, new Posicion(5, 5));
-		mapaNuevo.setOcupante(otroEdificio, new Posicion(5, 5));
+		mapaNuevo.setOcupante(edificio, new Posicion(32, 10));
+		mapaNuevo.setOcupante(otroEdificio, new Posicion(32, 10));
 	}
 }

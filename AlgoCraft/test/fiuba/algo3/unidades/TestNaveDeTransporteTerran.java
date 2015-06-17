@@ -20,14 +20,14 @@ public class TestNaveDeTransporteTerran extends TestUnidadTransporte {
 	public void setUp() throws Exception {
 		super.setUp();
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
-		this.transportador = new Unidad(this.jugador, new Posicion(2,4), jugador.getAtributos().getTransporte());
-		this.pasajero = new Unidad(this.jugador, new Posicion(1,3), jugador.getAtributos().getInfanteriaLivianaTerrestre());
-		this.unidadVoladora = new Unidad(this.jugador, new Posicion(2,3), jugador.getAtributos().getInfanteriaPesadaArea());
-		this.edificioPropio = new Barraca(this.jugador, new Posicion(2,6));
+		this.transportador = new Unidad(this.jugador, POSICION_A, jugador.getAtributos().getTransporte());
+		this.pasajero = new Unidad(this.jugador, POSICION_B, jugador.getAtributos().getInfanteriaLivianaTerrestre());
+		this.unidadVoladora = new Unidad(this.jugador, POSICION_C, jugador.getAtributos().getInfanteriaPesadaArea());
+		this.edificioPropio = new Barraca(this.jugador, POSICION_D);
 		this.jugadorEnemigo = new Jugador("Enemigo", Color.ROJO, TipoRaza.TERRAN, mapa);
-		this.unidadEnemigaTerrestre = new Unidad(jugadorEnemigo, new Posicion(5,4), jugadorEnemigo.getAtributos().getInfanteriaLivianaTerrestre());
-		this.unidadEnemigaAerea = new Unidad(jugadorEnemigo, new Posicion(1,2), jugadorEnemigo.getAtributos().getInfanteriaPesadaArea());
-		this.edificioEnemigo = new Barraca(jugadorEnemigo, new Posicion(3,3));	
+		this.unidadEnemigaTerrestre = new Unidad(jugadorEnemigo, POSICION_E, jugadorEnemigo.getAtributos().getInfanteriaLivianaTerrestre());
+		this.unidadEnemigaAerea = new Unidad(jugadorEnemigo, POSICION_F, jugadorEnemigo.getAtributos().getInfanteriaPesadaArea());
+		this.edificioEnemigo = new Barraca(jugadorEnemigo, POSICION_G);	
 		
 		this.capacidad = 8;
 	}
