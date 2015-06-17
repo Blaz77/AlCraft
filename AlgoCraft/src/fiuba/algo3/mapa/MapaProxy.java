@@ -71,6 +71,15 @@ public class MapaProxy implements Mapa {
 			}
 	}
 	
+	/* Visibiliza un cuadrado de mapa */
+	private void _visibilizar_area(Posicion posInicial, Posicion posFinal) {
+		for (int y=posInicial.getY(); y < posFinal.getY(); y++) {
+			for (int x=posInicial.getX(); x < posFinal.getX(); x++) {
+				mapaVisibilidad[x][y].forzarIluminacion();
+			}
+		}
+	}
+	
 	/**********************************************/
 	/**             SETTERS, GETTERS             **/
 	/**********************************************/
@@ -136,8 +145,11 @@ public class MapaProxy implements Mapa {
 	}
 	
 	public void setPuntoOrigen(Posicion posicionInicial) {
-		// Iluminar un cuadrado alrededor del punto
-		// en forma irrevocable
+		// Proximamente esto en el constructor
+		final int SEMILADO = 5; //Arbitrario
+		
+		this._visibilizar_area(new Posicion(posicionInicial.getX() - SEMILADO, posicionInicial.getY() - SEMILADO), 
+							new Posicion(posicionInicial.getX() + SEMILADO, posicionInicial.getY() + SEMILADO));
 	}
 
 	public void mover(Unidad /*ObjetoVivo*/ unidad, Posicion destino){
