@@ -166,5 +166,6 @@ public class Jugador {
 
 	public void setPosicionInicial(Posicion posicionInicial) {
 		this.posicionInicial = posicionInicial;
+		this.mapaPropio.setPuntoOrigen(posicionInicial);
 	}
 }
