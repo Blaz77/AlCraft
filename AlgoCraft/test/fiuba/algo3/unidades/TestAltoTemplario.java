@@ -46,6 +46,34 @@ public class TestAltoTemplario extends TestUnidadMagica {
 	}
 	
 	@Test
+	public void testAltoTemplarioCreadoTiene50Energia() {
+		assertEquals(50, this.unidad.getEnergia());
+	}
+	
+	@Test
+	public void testAltoTemplarioRegeneraEnergiaDeA15() {
+		int energiaARegen = 15;
+		
+		for (int i = 0; i < 5; i++){
+			int energiaRelativa = unidad.getEnergia();
+			unidad.pasarTurno();
+			assertEquals(energiaRelativa + energiaARegen, this.unidad.getEnergia());
+		}
+	}
+	
+	@Test
+	public void testAltoTemplarioRegeneraHasta200() {
+		for (int i = 0; i < 100; i++){
+			int energiaRelativa = unidad.getEnergia();
+			unidad.pasarTurno();
+			if (energiaRelativa == 200)
+				assertTrue(energiaRelativa == unidad.getEnergia());
+			else
+				assertTrue(energiaRelativa < unidad.getEnergia());
+		}
+	}
+	
+	@Test
 	public void testMagiasConsumenEnergia() {
 		int energiaRelativa = unidad.getEnergia();
 		unidad.getMagiaDeAreaDeEfecto().ejecutar(unidad.getPosicion(), mapa);
