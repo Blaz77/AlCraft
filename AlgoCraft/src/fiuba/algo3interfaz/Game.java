@@ -1,121 +1,74 @@
 package fiuba.algo3interfaz;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.image.BufferStrategy;
+import java.awt.event.KeyListener;
 
-import fiuba.algo3interfaz.states.GameState;
-import fiuba.algo3interfaz.states.MenuState;
-import fiuba.algo3interfaz.input.KeyManager;
-import fiuba.algo3interfaz.input.MouseManager;
-import fiuba.algo3interfaz.display.Display;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import fiuba.algo3.juego.Juego;
+import fiuba.algo3.juego.Opciones;
+import fiuba.algo3interfaz.states.State.StateEnum;
 import fiuba.algo3interfaz.gfx.SpriteSheet;
 import fiuba.algo3interfaz.states.State;
 
-public class Game implements Runnable { // Permite correr un thread
+public class Game extends JPanel implements Runnable { // Permite correr un thread
+
+	private static final int FRAMES_PER_SECOND = 60;
 	
-	private Display display;
-	public int anchoVentana, altoVentana;
-	public String tituloVentana;
-	
+	/** Atributos del Thread **/
 	private boolean running = false;
 	private Thread thread;
+
+	/** Frame (el JPanel es si mismo y despues se añade) **/
+	private JFrame frame = new JFrame("AlgoCraft");
 	
+	private Opciones opciones = new Opciones();
 	
-	/** Atributos del render **/
-	// Le dice a la pc como dibujar cosas en el buffer (creo?)
-	private BufferStrategy bs;
-	// Nuestro pincel magico :D
-	private Graphics g;
-	
+	private Juego modeloJuego = new Juego(getOpciones());
 	/** States **/
-	private State gameState;
-	private State menuState;
-	
-	/** Input **/
-	private KeyManager keyManager;
-	private MouseManager mouseManager;
 	
 	/** Constructor **/
-	public Game(String tituloVentana, int anchoVentana, int altoVentana){
-		this.anchoVentana = anchoVentana;
-		this.altoVentana = altoVentana;
-		this.tituloVentana = tituloVentana;
-		keyManager = new KeyManager();
-		mouseManager = new MouseManager();
-	}
-	
-	// Solo se corre una vez esto, en el run.
-	// Preparamos los graficos y eso
-	private void inicializar(){
-		display = new Display(tituloVentana, anchoVentana, altoVentana);
-		
-		display.getFrame().addKeyListener(keyManager);
-		display.getCanvas().addMouseListener(mouseManager);
-
+	public Game(int anchoVentana, int altoVentana){
+			
+		// Inicializar los datos requeridos
 		SpriteSheet.inicializar();
-		
-		gameState = new GameState(this);
-		menuState = new MenuState(this);
-		State.setState(gameState);
-		
-	}
-	
-	// Tipico nombre para updatear todo en el game loop. Tambien llamado
-	// "update"
-	private void tick(){
-		keyManager.tick();
-		mouseManager.tick();
-		
-		if (State.getState() != null)
-			State.getState().tick();
-	}
-	
-	// Muestra todo de nuevo. Se supone que si actualizar no hizo nada,
-	// esto deberia hacer lo mismo q en el instante anterior.
-	private void render(){
-		
-		/** 1. Obtengo el buffer, y su Graphics. **/
-		// Un 'buffer' es un banco de memoria auxiliar al q guarda lo q muestra la pantalla.
-		bs = display.getCanvas().getBufferStrategy();
-		if (bs == null) {
-			display.getCanvas().createBufferStrategy(3); // 3 = cantidad de buffers.
-			return;
-		}
-		g = bs.getDrawGraphics(); // Obtenemos el graphics del buffer actual.
+		//MusicaAlgunDia.inicializar();
+		State.inicializar(this);
+		State.setState(StateEnum.GAMESTATE);
 
-		/** 2. Limpio el buffer. **/
-		// Limpia la parte de la pantalla marcada (en este caso todo)
-		// Si no se hace esto, parpadea a lo loco.
-		g.clearRect(0, 0, anchoVentana, altoVentana);
-		
-		
-		/** 3. Dibujo el buffer con Graphics. */
-		if (State.getState() != null)
-			State.getState().render(g);
-		
-		/** 4. Muestro en pantalla y cierro el Graphics */
-		bs.show(); // Hacemos que el buffer q modificamos pase a ser el q muestre en pantalla.
-		g.dispose(); // Desinicializamos el graphics (no se xq, pero parece q es importante)
+		// Inicializo el frame y el JPanel
+		inicializarPanel(anchoVentana, altoVentana);
+        inicializarFrame(anchoVentana, altoVentana);
 	}
 
-	// drawRect dibuja un cuadrado sin relleno
-	// fillRect dibuja un cuadrado con relleno del color elegido
-	// setColor... bueno, eso
-	public void rectangulosLindos() {
-		g.drawRect(80, 80, 10, 10);
+
+	private void inicializarPanel(int anchoVentana, int altoVentana) {
+		setDoubleBuffered(true);
+        setPreferredSize(new Dimension(anchoVentana, altoVentana));
+		setMaximumSize(new Dimension(anchoVentana, altoVentana));
+		setMinimumSize(new Dimension(anchoVentana, altoVentana));
+	}
+
+
+	private void inicializarFrame(int anchoVentana, int altoVentana) {
+		frame.setResizable(false); // o true quien sabe
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(anchoVentana, altoVentana);
+        frame.add(this);
+        frame.pack();
+        frame.setVisible(true);
 	}
 	
 	// Basico juego hermoso :D
 	public void run(){
-		
-		inicializar();
-		
-		int fps = 60;
+				
+		int fps = FRAMES_PER_SECOND;
 		double timePerTick = 1000000000 / fps; // 1 second = 1000000000 nanoseconds
 		double delta = 0; // whut.
 		long now;
 		long lastTime = System.nanoTime(); // tiempo actual de la pc en nanos
-		
 		
 		// Game loop basico:
 		while(running){
@@ -124,13 +77,11 @@ public class Game implements Runnable { // Permite correr un thread
 			delta += (now - lastTime) / timePerTick;
 			lastTime = now;
 			if (delta >= 1){
-				tick(); 	// Actualizar variables
-				render(); 	// Dibujarlas
+				repaint();
 				delta --;
 			}
 			
 		}
-		
 		stop();
 	}
 	
@@ -153,15 +104,24 @@ public class Game implements Runnable { // Permite correr un thread
 		}
 	}
 	
-	public KeyManager getKeyManager(){
-		return keyManager;
+    public void update(long elapsedTime){
+		if (State.getState() != null)
+			State.getState().tick();
+    }
+	
+    public void paint(Graphics g){
+    	State.getState().render(g);
+    }
+   
+    public void addKeyListener(KeyListener keyListener){
+    	frame.addKeyListener(keyListener);
+    }
+    
+    public Juego getModelo(){
+    	return modeloJuego;
+    }
+    
+    public Opciones getOpciones(){
+    	return opciones;
 	}
-	
-	public  MouseManager getMouseManager(){
-		return mouseManager;
-	}
-	
-	
 }
-
-

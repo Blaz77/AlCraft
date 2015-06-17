@@ -1,5 +1,7 @@
 package fiuba.algo3interfaz.display;
 
+// DEPRECATED
+
 import java.awt.Canvas;
 import java.awt.Dimension;
 
@@ -8,28 +10,28 @@ import javax.swing.JFrame;
 public class Display {
 	
 	private JFrame frame; // Ventana de windows?
-	private Canvas canvas; // Lienzo.. queda mal xD
+	private Canvas canvas;
 	
 	// Necesita estos 3 el frame:
-	private String titulo;
-	private int ancho, alto; // En pixels.
+	private String title;
+	private int width, height; // En pixels.
 	
-	public Display(String titulo, int ancho, int alto){
+	public Display(String title, int width, int height){
 		
-		this.titulo = titulo;
-		this.ancho = ancho;
-		this.alto = alto;
+		this.title = title;
+		this.width = width;
+		this.height = height;
 		
-		crearDisplay(); // Creamos el JFrame aca
+		createDisplay(); // Creamos el JFrame aca
 	}
 	
-	private void crearDisplay() {
+	private void createDisplay() {
 		
 		// Creamos el objeto, obviamente... despues vienen las opciones
-		frame = new JFrame(titulo);
+		frame = new JFrame(title);
 		
 		// Tamanio de la ventana, en pixeles x pixeles.
-		frame.setSize(ancho, alto);
+		frame.setSize(width, height);
 		
 		// Permite cerrar la ventana con la 'X' IMPORTANTISIMA!
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,11 +52,12 @@ public class Display {
 		canvas = new Canvas();
 		
 		// Canvas se labura con dimension, lo quieran o no.
-		canvas.setPreferredSize(new Dimension(ancho, alto));
+		canvas.setPreferredSize(new Dimension(width, height));
 		
 		// Asi nos aseguramos q se quede siempre con este tamanio.
-		canvas.setMaximumSize(new Dimension(ancho, alto));
-		canvas.setMinimumSize(new Dimension(ancho, alto));
+		canvas.setMaximumSize(new Dimension(width, height));
+		canvas.setMinimumSize(new Dimension(width, height));
+		canvas.setFocusable(false); // ni idea q hace
 		
 		frame.add(canvas);
 		
@@ -65,9 +68,9 @@ public class Display {
 	public Canvas getCanvas(){
 		return canvas;
 	}
-
+	
 	public JFrame getFrame(){
 		return frame;
 	}
-	
+
 }

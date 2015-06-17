@@ -4,26 +4,36 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-import fiuba.algo3interfaz.input.KeyManager;
-import fiuba.algo3interfaz.input.MouseManager;
+import fiuba.algo3.mapa.Mapa;
+import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.terreno.TipoTerreno;
 
 public class MapaVista {
 	private CeldaVista[][] mapaVista;
 	private int ancho;
 	private int alto;
-	private KeyManager keyManager;
-	private MouseManager mouseManager;
 	
-	private int cor_x, cor_y;
-	private int filaMarca = 0;
-	private int columnaMarca = 0;
+	private int filSeleccionada = 0;
+	private int colSeleccionada = 0;
+	private Mapa datosMapa;
+	
+	public MapaVista(Mapa mapa){
 		
-	public MapaVista(int ancho, int alto, KeyManager keyManager, MouseManager mouseManager){
+		this.ancho = mapa.ancho();
+		this.alto = mapa.alto();
+		this.datosMapa = mapa;
+		this.mapaVista = new CeldaVista[ancho][alto];
+		
+		Random miRNG = new Random();
+		for (int j = 0; j < this.alto; j++)
+			for (int i = 0; i < this.ancho; i++)
+				mapaVista[i][j] = new CeldaVista(miRNG.nextInt());
+	}
+	
+	public MapaVista(int ancho, int alto){
 		this.mapaVista = new CeldaVista[ancho][alto];
 		this.ancho = ancho;
 		this.alto = alto;
-		this.keyManager = keyManager;
-		this.mouseManager = mouseManager;
 		
 		Random miRNG = new Random();
 		for (int j = 0; j < this.alto; j++)
@@ -32,11 +42,35 @@ public class MapaVista {
 	}
 	
 	public BufferedImage obtenerSprite(int x, int y){
+		int randomIndex = (mapaVista[x][y].getIndex()) % SpriteSheet.CANTIDAD_SPRITES;
+		if (datosMapa.getTerreno(new Posicion(x, y)).getTipo() == TipoTerreno.TIERRA)
+			return SpriteSheet.spritesTierra[randomIndex];
 		
-		return SpriteSheet.spritesTierra[(mapaVista[x][y].getIndex()) % SpriteSheet.CANTIDAD_SPRITES];
-		// descomenten este de aca para ver el espacio, esta super feo aviso xD
-		//return spritesEspacio.crop(0, 32*mapa[x][y], 32, 32);
+		int indexEspacio = getIndexHibrido(x, y);
+
+		if (indexEspacio == -1)
+			return SpriteSheet.spritesEspacio[randomIndex];
 		
+		return SpriteSheet.spritesHibrido[indexEspacio];
+		
+	}
+
+	// Horrible :D
+	private int getIndexHibrido(int x, int y) {
+		int indexEspacio = 0;
+		Posicion posicionAMirar = new Posicion(x+1, y);
+		if (datosMapa.celdaValida(posicionAMirar) && datosMapa.getTerreno(posicionAMirar).getTipo() != TipoTerreno.ESPACIO)
+			indexEspacio = indexEspacio + 1;
+		posicionAMirar = new Posicion(x, y-1);
+		if (datosMapa.celdaValida(posicionAMirar) && datosMapa.getTerreno(posicionAMirar).getTipo() != TipoTerreno.ESPACIO)
+			indexEspacio = indexEspacio + 2;
+		posicionAMirar = new Posicion(x-1, y);
+		if (datosMapa.celdaValida(posicionAMirar) && datosMapa.getTerreno(posicionAMirar).getTipo() != TipoTerreno.ESPACIO)
+			indexEspacio = indexEspacio + 4;
+		posicionAMirar = new Posicion(x, y+1);
+		if (datosMapa.celdaValida(posicionAMirar) && datosMapa.getTerreno(posicionAMirar).getTipo() != TipoTerreno.ESPACIO)
+			indexEspacio = indexEspacio + 8;
+		return indexEspacio - 1;
 	}
 
 	public void tick() {
@@ -54,52 +88,31 @@ public class MapaVista {
 				g.drawImage(obtenerSprite(x, y), borde + anchoSprite * x, borde + altoSprite * y, null);
 		
 		// Lindo terran :D
-		g.drawImage(ImageLoader.loadImage("/textures/terran.png"), 0, 0, null);
-		
-		mouseInput();
-		keyInput();
-		
+		//g.drawImage(ImageLoader.loadImage("/textures/terran.png"), 0, 0, null);
+				
 		ubicarMarcaMapaEn(g);
 	}
 
-	private void keyInput() {
-		if(keyManager.up)
-			columnaMarca -= 1;
-		if(keyManager.down)
-			columnaMarca += 1;
-		if(keyManager.left)
-			filaMarca -= 1;
-		if(keyManager.right)
-			filaMarca += 1;
-	}
-
-	private void mouseInput() {
-		if (mouseManager.isClicked()) {
-			cor_x = mouseManager.getX();
-			cor_y = mouseManager.getY();
-			filaMarca = obtenerFila(cor_x);
-			columnaMarca = obtenerColumna(cor_y);
-			mouseManager.setClicked(false);
-		}
-	}
-
-	
 	
 	private void ubicarMarcaMapaEn(Graphics g) {
 		BufferedImage bi = ImageLoader.loadImage("/textures/marcaMapa.png");
-		g.drawImage(bi, filaMarca * SpriteSheet.ANCHO_SPRITE, columnaMarca * SpriteSheet.ALTO_SPRITE, null);
+		
+		g.drawImage(bi, filSeleccionada * SpriteSheet.ANCHO_SPRITE, colSeleccionada * SpriteSheet.ALTO_SPRITE, null);
 	}
 
-	private int obtenerFila(int cor_x) {
-
-		return cor_x / SpriteSheet.ANCHO_SPRITE;
-	}
-	private int obtenerColumna(int cor_y) {
-
-		return cor_y / SpriteSheet.ALTO_SPRITE;
+	public void setCeldaSeleccionada(int x, int y) {
+		this.filSeleccionada = x / SpriteSheet.ANCHO_SPRITE;
+		this.colSeleccionada = y / SpriteSheet.ALTO_SPRITE;
 	}
 	
-
-	
-	
+	public void moverCeldaSeleccionada(int i, int j) {
+		
+		this.filSeleccionada += i;
+		if (filSeleccionada < 0) filSeleccionada = 0;
+		if (filSeleccionada >= ancho) filSeleccionada = ancho - 1;
+		
+		this.colSeleccionada += j;
+		if (colSeleccionada < 0) colSeleccionada = 0;
+		if (colSeleccionada >= alto) colSeleccionada = alto - 1;
+	}	
 }

@@ -79,7 +79,7 @@ public class Juego implements Iterable<Jugador>, Iterator<Jugador>{
 	
 		
 	/**********************************************/
-	/**           ITERATOR (DEPRECATED)          **/
+	/**            ITERATOR (SIN CICLO)          **/
 	/**********************************************/
 	
 	public Iterator<Jugador> iterator() {
@@ -87,12 +87,17 @@ public class Juego implements Iterable<Jugador>, Iterator<Jugador>{
 	}
 
 	public boolean hasNext() {
-		return jugadores.size() != 0;
+		return getJugadorActual() != jugadores.get(jugadores.size() - 1);
 	}
 
 	public Jugador next() {
 		nextJugadorActual();
 		return getJugadorActual();
+	}
+
+	public Jugador getJugador(int i) {
+		return jugadores.get(i - 1);
+		
 	}
 	
 	//	- de Delegacion (podrian no estar y q de arriba accedan a los objetos directamente):
