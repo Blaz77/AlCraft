@@ -28,14 +28,13 @@ public class TestNaveDeCiencia extends TestUnidadMagica {
 		this.unidadEnemigaMagica = new Unidad(jugadorEnemigo, POSICION_F, jugadorEnemigo.getAtributos().getInfanteriaMagica());
 		this.edificioEnemigo = new Fabrica(jugadorEnemigo, POSICION_G);	
 	
-		//Proximamente
 		this.mapa.setOcupante(unidad, unidad.getPosicion());
-		//this.mapa.setOcupante(otraUnidad, otraUnidad.getPosicion());
-		//this.mapa.setOcupante(edificioPropio, edificioPropio.getPosicion());
-		//this.mapa.setOcupante(unidadEnemigaTerrestre, unidadEnemigaTerrestre.getPosicion());
-		//this.mapa.setOcupante(unidadEnemigaAerea, unidadEnemigaAerea.getPosicion());
+		this.mapa.setOcupante(otraUnidad, otraUnidad.getPosicion());
+		this.mapa.setOcupante(edificioPropio, edificioPropio.getPosicion());
+		this.mapa.setOcupante(unidadEnemigaTerrestre, unidadEnemigaTerrestre.getPosicion());
+		this.mapa.setOcupante(unidadEnemigaAerea, unidadEnemigaAerea.getPosicion());
 		this.mapa.setOcupante(unidadEnemigaMagica, unidadEnemigaMagica.getPosicion());
-		//this.mapa.setOcupante(edificioEnemigo, edificioEnemigo.getPosicion());
+		this.mapa.setOcupante(edificioEnemigo, edificioEnemigo.getPosicion());
 	}
 	
 	@Test
@@ -60,6 +59,15 @@ public class TestNaveDeCiencia extends TestUnidadMagica {
 
 		unidad.getMagiaDeAreaDeEfecto().ejecutar(unidad.getPosicion(), mapa);
 		assertTrue(unidadEnemigaMagica.getEnergia() == 0);
+	}
+	
+	@Test
+	public void testMagiaEMPNoAfectaAUnidadesAliadas() {
+		int energiaRelativa = otraUnidad.getEnergia();
+		assertTrue(energiaRelativa != 0);
+
+		unidad.getMagiaDeAreaDeEfecto().ejecutar(unidad.getPosicion(), mapa);
+		assertEquals(otraUnidad.getEnergia(), energiaRelativa);
 	}
 	
 	@Test

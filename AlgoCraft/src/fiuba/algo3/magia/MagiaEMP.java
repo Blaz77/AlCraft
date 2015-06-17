@@ -31,7 +31,9 @@ public class MagiaEMP implements MagiaDeAreaDeEfecto {
 		this.unidad.disminuirEnergia(this.costoDeEjecutar);
 		
 		for (Unidad unidad : mapa.getUnidadesEnRango(posicionCentral, rangoAoE)) {
-			unidad.disminuirEnergia(unidad.getEnergia());
+			if (unidad.getPropietario() != this.unidad.getPropietario()) {
+				unidad.disminuirEnergia(unidad.getEnergia());
+			}
 		}
 	}
 

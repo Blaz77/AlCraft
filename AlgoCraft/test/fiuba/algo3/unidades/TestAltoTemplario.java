@@ -33,11 +33,11 @@ public class TestAltoTemplario extends TestUnidadMagica {
 	
 		this.mapa.setOcupante(unidad, unidad.getPosicion());
 		this.mapa.setOcupante(otraUnidad, otraUnidad.getPosicion());
-		//this.mapa.setOcupante(edificioPropio, edificioPropio.getPosicion());
+		this.mapa.setOcupante(edificioPropio, edificioPropio.getPosicion());
 		this.mapa.setOcupante(unidadEnemigaTerrestre, unidadEnemigaTerrestre.getPosicion());
-		//this.mapa.setOcupante(unidadEnemigaAerea, unidadEnemigaAerea.getPosicion());
-		//this.mapa.setOcupante(unidadEnemigaMagica, unidadEnemigaMagica.getPosicion());
-		//this.mapa.setOcupante(edificioEnemigo, edificioEnemigo.getPosicion());
+		this.mapa.setOcupante(unidadEnemigaAerea, unidadEnemigaAerea.getPosicion());
+		this.mapa.setOcupante(unidadEnemigaMagica, unidadEnemigaMagica.getPosicion());
+		this.mapa.setOcupante(edificioEnemigo, edificioEnemigo.getPosicion());
 	}
 	
 	@Test
@@ -76,6 +76,24 @@ public class TestAltoTemplario extends TestUnidadMagica {
 		unidadEnemigaTerrestre.regenerarVida(DANIO_TORMENTA);
 		unidad.pasarTurno();
 		assertEquals(unidadEnemigaTerrestre.getVida(), vidaRelativa);
+	}
+	
+	@Test
+	public void testMagiaTormentaPsionicaNoCausaDanioAUnidadAliada() {
+		int vidaRelativa = otraUnidad.getVida();
+		assertTrue(vidaRelativa != 0);
+
+		unidad.getMagiaDeAreaDeEfecto().ejecutar(unidad.getPosicion(), mapa);
+		assertEquals(otraUnidad.getVida(), vidaRelativa);
+		
+		unidad.pasarTurno();
+		assertEquals(otraUnidad.getVida(), vidaRelativa);
+		unidad.pasarTurno();
+		assertEquals(otraUnidad.getVida(), vidaRelativa);
+		
+		// Ya deberia pasar el efecto de la magia
+		unidad.pasarTurno();
+		assertEquals(otraUnidad.getVida(), vidaRelativa);
 	}
 	
 	@Test

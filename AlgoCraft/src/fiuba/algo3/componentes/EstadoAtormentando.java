@@ -26,7 +26,9 @@ public class EstadoAtormentando implements Estado {
 
 	public void pasarTurno() throws Exception {
 		for (Unidad unidad : mapa.getUnidadesEnRango(posicionCentral, rangoTormenta)) {
-			unidad.recibirDanio(100); // Es mucho, pero es lo que dice el enunciado
+			if (unidad.getPropietario() != portador.getPropietario()) {
+				unidad.recibirDanio(100); // Es mucho, pero es lo que dice el enunciado
+			}
 		}
 		this.turnosRestantes -= 1;
 		if (turnosRestantes == 0) {
