@@ -31,6 +31,11 @@ public abstract class ObjetoVivo implements Ocupante { //ObjetoVivo / ObjetoInte
 			this.agregarEstado(estado);
 		}
 	}
+	
+	public AtributosObjetoVivo getAtributos(){
+		return this.atributos;
+	}
+	
 
 	public Jugador getPropietario() {
 		return this.propietario;
