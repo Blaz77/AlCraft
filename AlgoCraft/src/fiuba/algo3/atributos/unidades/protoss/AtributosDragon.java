@@ -60,6 +60,8 @@ public class AtributosDragon extends AtributosUnidad {
 		return new Ataque(this.ataque);
 	}
 	
-	
+	public boolean puedeSerAlmacenada(){ //puedeSerTransportada
+		return true;
+	}
 	
 }

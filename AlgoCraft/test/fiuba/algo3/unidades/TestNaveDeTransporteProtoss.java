@@ -14,14 +14,14 @@ import fiuba.algo3.ocupantes.edificios.Barraca;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.raza.TipoRaza;
 
-public class TestNaveDeTransporteTerran extends TestUnidadTransporte {
+public class TestNaveDeTransporteProtoss extends TestUnidadTransporte {
 	
 	// this.unidad es el transportador
 	
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
+		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.PROTOSS, mapa);
 		this.unidad = new Unidad(this.jugador, POSICION_A, jugador.getAtributos().getTransporte());
 		this.pasajero = new Unidad(this.jugador, POSICION_B, jugador.getAtributos().getInfanteriaLivianaTerrestre());
 		this.unidadVoladora = new Unidad(this.jugador, POSICION_C, jugador.getAtributos().getInfanteriaPesadaArea());
@@ -78,7 +78,7 @@ public class TestNaveDeTransporteTerran extends TestUnidadTransporte {
 	
 	
 	/*
-	 * No tiene sentido: el chequeo de tipos ya cierra esta posibilidad
+	 * -No tiene sentido: el chequeo de tipos ya cierra esta posibilidad
 	 * Si no: se puede pasar todo a ObjetoVivo.
 	 * -Pero si el usuario selecciona un edificio el modelo debe poder responder
 	 * de alguna forma
@@ -94,4 +94,39 @@ public class TestNaveDeTransporteTerran extends TestUnidadTransporte {
 	}
 	
 	*/
+	
+	@Test
+	public void testTieneEscudo() {
+		assertTrue(this.unidad.tieneEscudo());
+	}
+	
+	@Test
+	public void testAlrecibirDanioBajaEscudo() {
+		int vidaRelativa = this.unidad.getVida();
+		int escudoRelativo = this.unidad.getEscudo();
+		
+		this.unidad.recibirDanio(8);
+		assertEquals(this.unidad.getEscudo(), escudoRelativo - 8);
+		assertEquals(this.unidad.getVida(), vidaRelativa);
+	}
+	
+	@Test
+	public void testRegeneraEscudoLuegoDeRecibirDanio() {
+		this.unidad.recibirDanio(8);
+		int escudoRelativo = this.unidad.getEscudo();
+		
+		this.unidad.pasarTurno();
+		
+		assertTrue(this.unidad.getEscudo() > escudoRelativo);
+	}
+	
+	@Test
+	public void testAlrecibirMuchoDanioBajaVida() {
+		int vidaRelativa = this.unidad.getVida();
+		int escudoRelativo = this.unidad.getEscudo();
+		
+		this.unidad.recibirDanio(escudoRelativo + 10);
+		assertEquals(this.unidad.getEscudo(), 0);
+		assertEquals(this.unidad.getVida(), vidaRelativa - 10);
+	}
 }
