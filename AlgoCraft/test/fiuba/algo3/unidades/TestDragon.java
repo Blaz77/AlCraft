@@ -28,6 +28,8 @@ public class TestDragon extends TestUnidadAtaque {
 
 		this.danioTierra = 20;
 		this.danioAire = 20;
+		
+		this.mapa.setOcupante(unidad, unidad.getPosicion());
 	}
 	
 	@Test

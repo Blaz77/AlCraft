@@ -9,7 +9,6 @@ import fiuba.algo3.ocupantes.unidades.Unidad;
 
 public abstract class TestUnidadMagica extends TestUnidad {
 	
-	protected Unidad unidad;
 	protected Unidad otraUnidad;
 	protected Unidad unidadEnemigaTerrestre;
 	protected Unidad unidadEnemigaAerea;
@@ -25,12 +24,5 @@ public abstract class TestUnidadMagica extends TestUnidad {
 	public void testUnidadPuedeHacerMagia() {
 		assertTrue(this.unidad.puedeHacerMagia());
 	}
-
-	@Test
-	public void testUnidadPuedeMoverse() {
-		assertTrue(this.unidad.puedeMoverse());
-	}
-
-	
 
 }

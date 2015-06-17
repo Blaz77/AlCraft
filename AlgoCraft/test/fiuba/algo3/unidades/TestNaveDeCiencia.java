@@ -29,7 +29,7 @@ public class TestNaveDeCiencia extends TestUnidadMagica {
 		this.edificioEnemigo = new Fabrica(jugadorEnemigo, POSICION_G);	
 	
 		//Proximamente
-		//this.mapa.setOcupante(unidad, unidad.getPosicion());
+		this.mapa.setOcupante(unidad, unidad.getPosicion());
 		//this.mapa.setOcupante(otraUnidad, otraUnidad.getPosicion());
 		//this.mapa.setOcupante(edificioPropio, edificioPropio.getPosicion());
 		//this.mapa.setOcupante(unidadEnemigaTerrestre, unidadEnemigaTerrestre.getPosicion());

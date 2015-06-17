@@ -16,11 +16,13 @@ import fiuba.algo3.raza.TipoRaza;
 
 public class TestNaveDeTransporteTerran extends TestUnidadTransporte {
 	
+	// this.unidad es el transportador
+	
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
-		this.transportador = new Unidad(this.jugador, POSICION_A, jugador.getAtributos().getTransporte());
+		this.unidad = new Unidad(this.jugador, POSICION_A, jugador.getAtributos().getTransporte());
 		this.pasajero = new Unidad(this.jugador, POSICION_B, jugador.getAtributos().getInfanteriaLivianaTerrestre());
 		this.unidadVoladora = new Unidad(this.jugador, POSICION_C, jugador.getAtributos().getInfanteriaPesadaArea());
 		this.edificioPropio = new Barraca(this.jugador, POSICION_D);
@@ -30,46 +32,48 @@ public class TestNaveDeTransporteTerran extends TestUnidadTransporte {
 		this.edificioEnemigo = new Barraca(jugadorEnemigo, POSICION_G);	
 		
 		this.capacidad = 8;
+		
+		this.mapa.setOcupante(unidad, unidad.getPosicion());
 	}
 	
 	@Test
 	public void testAlmacenarUnidadAliada() {
-		transportador.almacenarA(pasajero);
-		assertTrue(transportador.getUnidadesAlmacenadas().size() == 1);
+		unidad.almacenarA(pasajero);
+		assertTrue(unidad.getUnidadesAlmacenadas().size() == 1);
 	}
 	
 	@Test
 	public void testAlmacenarYLiberarUnidad() {
-		transportador.almacenarA(pasajero);
-		assertTrue(transportador.getUnidadesAlmacenadas().size() == 1);
-		transportador.liberarUnidad(pasajero);
-		assertTrue(transportador.getUnidadesAlmacenadas().isEmpty());
+		unidad.almacenarA(pasajero);
+		assertTrue(unidad.getUnidadesAlmacenadas().size() == 1);
+		unidad.liberarUnidad(pasajero);
+		assertTrue(unidad.getUnidadesAlmacenadas().isEmpty());
 		
 		// Otra forma
-		transportador.almacenarA(pasajero);
-		assertTrue(transportador.getUnidadesAlmacenadas().size() == 1);
-		transportador.getUnidadesAlmacenadas().get(0).salir();
-		assertTrue(transportador.getUnidadesAlmacenadas().isEmpty());
+		unidad.almacenarA(pasajero);
+		assertTrue(unidad.getUnidadesAlmacenadas().size() == 1);
+		unidad.getUnidadesAlmacenadas().get(0).salir();
+		assertTrue(unidad.getUnidadesAlmacenadas().isEmpty());
 	}
 	
 	@Test
 	public void testNoPuedeAlmacenarAUnidadEnemiga() {
-		assertFalse(transportador.puedeAlmacenarA(unidadEnemigaTerrestre));
+		assertFalse(unidad.puedeAlmacenarA(unidadEnemigaTerrestre));
 	}
 	
 	@Test(expected = NoEsUnAliado.class)
 	public void testAlmacenarAUnidadEnemigaDebeFallar() {
-		transportador.almacenarA(unidadEnemigaTerrestre);
+		unidad.almacenarA(unidadEnemigaTerrestre);
 	}
 	
 	@Test
 	public void testNoPuedeAlmacenarAUnidadVoladora() {
-		assertFalse(transportador.puedeAlmacenarA(unidadVoladora));
+		assertFalse(unidad.puedeAlmacenarA(unidadVoladora));
 	}
 	
 	@Test(expected = UnidadNoEsAlmacenable.class)
 	public void testAlmacenarAUnidadVoladoraDebeFallar() {
-		transportador.almacenarA(unidadVoladora);
+		unidad.almacenarA(unidadVoladora);
 	}
 	
 	

@@ -28,6 +28,8 @@ public class TestGolliat extends TestUnidadAtaque {
 
 		this.danioTierra = 12;
 		this.danioAire = 10;
+		
+		this.mapa.setOcupante(unidad, unidad.getPosicion());
 	}
 	
 	@Test

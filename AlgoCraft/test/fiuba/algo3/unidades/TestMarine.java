@@ -28,6 +28,8 @@ public class TestMarine extends TestUnidadAtaque {
 		
 		this.danioTierra = 6;
 		this.danioAire = 6;
+		
+		this.mapa.setOcupante(unidad, unidad.getPosicion());
 	}
 	
 	@Test

@@ -11,7 +11,6 @@ import fiuba.algo3.ocupantes.unidades.Unidad;
 public abstract class TestUnidadTransporte extends TestUnidad {
 	protected int capacidad;
 
-	protected Unidad transportador;
 	protected Unidad pasajero;
 	protected Unidad unidadVoladora;
 	protected Unidad unidadEnemigaTerrestre;
@@ -20,32 +19,27 @@ public abstract class TestUnidadTransporte extends TestUnidad {
 
 	@Test
 	public void testUnidadNoPuedeAtacar() {
-		assertFalse(this.transportador.puedeAtacar());
+		assertFalse(this.unidad.puedeAtacar());
 	}
 
 	@Test
 	public void testGolliatNoPuedeHacerMagia() {
-		assertFalse(this.transportador.puedeHacerMagia());
+		assertFalse(this.unidad.puedeHacerMagia());
 	}
 
 	@Test
-	public void testUnidadPuedeMoverse() {
-		assertTrue(this.transportador.puedeMoverse());
-	}
-	
-	@Test
 	public void testUnidadPuedeTransportar() {
-		assertTrue(this.transportador.puedeAlmacenar());
+		assertTrue(this.unidad.puedeAlmacenar());
 	}
 	
 	@Test
 	public void testUnidadNoPuedeSerTransportado() {
-		assertFalse(this.transportador.puedeSerAlmacenada());
+		assertFalse(this.unidad.puedeSerAlmacenada());
 	}
 	
 	@Test
 	public void testUnidadRecienCreadaEstaVacia() {
-		assertTrue(this.transportador.getUnidadesAlmacenadas().isEmpty());
+		assertTrue(this.unidad.getUnidadesAlmacenadas().isEmpty());
 	}
 
 

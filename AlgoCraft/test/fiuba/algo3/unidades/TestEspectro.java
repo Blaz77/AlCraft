@@ -29,6 +29,8 @@ public class TestEspectro extends TestUnidadAtaque {
 
 		this.danioTierra = 8;
 		this.danioAire = 20;
+		
+		this.mapa.setOcupante(unidad, unidad.getPosicion());
 	}
 	
 	@Test

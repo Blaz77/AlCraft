@@ -90,8 +90,8 @@ public class Unidad extends ObjetoVivo {
 		propietario.getMapa().verificarOcupacion(this, destino);
 		
 		this.movRestantes -= this.posicion.distancia(destino);
-		this.posicion = destino;
 		propietario.getMapa().mover(this, destino);
+		this.posicion = destino;
 	}
 	
 	private int getMovPorTurno() {

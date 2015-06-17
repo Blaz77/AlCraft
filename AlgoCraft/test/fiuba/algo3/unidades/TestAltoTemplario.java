@@ -31,7 +31,7 @@ public class TestAltoTemplario extends TestUnidadMagica {
 		this.unidadEnemigaMagica = new Unidad(jugadorEnemigo, POSICION_F, jugadorEnemigo.getAtributos().getInfanteriaMagica());
 		this.edificioEnemigo = new Fabrica(jugadorEnemigo, POSICION_G);	
 	
-		//this.mapa.setOcupante(unidad, unidad.getPosicion());
+		this.mapa.setOcupante(unidad, unidad.getPosicion());
 		this.mapa.setOcupante(otraUnidad, otraUnidad.getPosicion());
 		//this.mapa.setOcupante(edificioPropio, edificioPropio.getPosicion());
 		this.mapa.setOcupante(unidadEnemigaTerrestre, unidadEnemigaTerrestre.getPosicion());

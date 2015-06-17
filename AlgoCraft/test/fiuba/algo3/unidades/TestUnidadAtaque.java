@@ -15,7 +15,6 @@ public abstract class TestUnidadAtaque extends TestUnidad {
 	protected int danioTierra;
 	protected int danioAire;
 
-	protected Unidad unidad;
 	protected Unidad otraUnidad;
 	protected Unidad unidadEnemigaTerrestre;
 	protected Unidad unidadEnemigaAerea;
@@ -92,11 +91,6 @@ public abstract class TestUnidadAtaque extends TestUnidad {
 	@Test
 	public void testUnidadNoPuedeHacerMagia() {
 		assertFalse(this.unidad.puedeHacerMagia());
-	}
-
-	@Test
-	public void testUnidadPuedeMoverse() {
-		assertTrue(this.unidad.puedeMoverse());
 	}
 
 }

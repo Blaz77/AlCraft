@@ -1,19 +1,24 @@
 package fiuba.algo3.unidades;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
+import org.junit.Test;
 
 import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.MapaReal;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.edificios.Edificio;
+import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.raza.TipoRaza;
 
-public class TestUnidad {
+public abstract class TestUnidad {
 
 	protected MapaReal mapa;
 	protected Jugador jugador;
 	protected Jugador jugadorEnemigo;
+	protected Unidad unidad;
 	protected Edificio edificioPropio;
 	protected Edificio edificioEnemigo;
 	
@@ -37,6 +42,19 @@ public class TestUnidad {
 	@Before
 	public void setUp() throws Exception {
 		mapa = new MapaReal(6);
+	}
+
+	@Test
+	public void testUnidadPuedeMoverse() {
+		assertTrue(this.unidad.puedeMoverse());
+	}
+	
+	@Test
+	public void testUnidadMoverAPosicionValida() {
+		assertTrue(unidad.puedeMoverseA(new Posicion(33, 10)));
+		unidad.moverA(new Posicion(33, 10));
+		
+		assertTrue(mapa.getOcupante(new Posicion(33, 10)).equals(unidad));
 	}
 
 }

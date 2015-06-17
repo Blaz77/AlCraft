@@ -28,6 +28,8 @@ public class TestZealot extends TestUnidadAtaque {
 		
 		this.danioTierra = 8;
 		this.danioAire = 0;
+		
+		this.mapa.setOcupante(unidad, unidad.getPosicion());
 	}
 	
 	@Test
