@@ -17,7 +17,6 @@ public class TestAltoTemplario extends TestUnidadMagica {
 	final int DANIO_TORMENTA = 100;
 	final int COSTO_TORMENTA = 75;
 	
-	
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
@@ -38,6 +37,10 @@ public class TestAltoTemplario extends TestUnidadMagica {
 		this.mapa.setOcupante(unidadEnemigaAerea, unidadEnemigaAerea.getPosicion());
 		this.mapa.setOcupante(unidadEnemigaMagica, unidadEnemigaMagica.getPosicion());
 		this.mapa.setOcupante(edificioEnemigo, edificioEnemigo.getPosicion());
+	}
+	
+	private void llenarEnergia(){
+		while (unidad.getEnergia() < 200) unidad.pasarTurno();
 	}
 	
 	@Test
@@ -75,6 +78,7 @@ public class TestAltoTemplario extends TestUnidadMagica {
 	
 	@Test
 	public void testMagiasConsumenEnergia() {
+		this.llenarEnergia();
 		int energiaRelativa = unidad.getEnergia();
 		unidad.getMagiaDeAreaDeEfecto().ejecutar(unidad.getPosicion(), mapa);
 		assertEquals(energiaRelativa - COSTO_TORMENTA, unidad.getEnergia());
@@ -86,6 +90,8 @@ public class TestAltoTemplario extends TestUnidadMagica {
 	
 	@Test
 	public void testMagiaTormentaPsionicaCausaDanioAUnidadCercana() {
+		this.llenarEnergia();
+		
 		assertTrue(unidadEnemigaTerrestre.getVida() != 0);
 		int vidaRelativa = unidadEnemigaTerrestre.getVida();
 
@@ -108,6 +114,8 @@ public class TestAltoTemplario extends TestUnidadMagica {
 	
 	@Test
 	public void testMagiaTormentaPsionicaNoCausaDanioAUnidadAliada() {
+		this.llenarEnergia();
+		
 		int vidaRelativa = otraUnidad.getVida();
 		assertTrue(vidaRelativa != 0);
 
