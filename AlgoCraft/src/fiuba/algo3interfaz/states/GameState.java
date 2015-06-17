@@ -5,23 +5,22 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 
-import fiuba.algo3.juego.Juego;
 import fiuba.algo3.juego.Jugador;
-import fiuba.algo3.juego.Opciones;
-import fiuba.algo3interfaz.Game;
 import fiuba.algo3interfaz.gfx.MapaVista;
 
 public class GameState extends State {
 
+	private static final int MOV_CAMARA = 10;
 	private MapaVista mapaActual;
 	private HashMap<Jugador, MapaVista> mapas = new HashMap<Jugador, MapaVista>();
-	private int j;
-	private int i;
+	private int i,j;
+	private int iCamara,jCamara;
+
 	
 	public GameState(){
 		
 		for (Jugador jugador: game.getModelo())
-			mapas.put(jugador, new MapaVista(jugador.getMapa()));
+			mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getAncho(), game.getAlto()));
 		
 		mapaActual = mapas.get(game.getModelo().getJugadorActual());
 	}
@@ -29,7 +28,7 @@ public class GameState extends State {
 	@Override
 	public void tick() {
 		mapaActual = mapas.get(game.getModelo().getJugadorActual());
-		mapaActual.tick();		
+		mapaActual.tick();
 	}
 
 	@Override
@@ -57,22 +56,32 @@ public class GameState extends State {
 	public void keyPressed(KeyEvent e) {
 		int keyPressed = e.getKeyCode();
 		
-		if(keyPressed == KeyEvent.VK_W)	j = -1;
-		if(keyPressed == KeyEvent.VK_S) j = 1;
-		if(keyPressed == KeyEvent.VK_A)	i = -1;
+				
+		if(keyPressed == KeyEvent.VK_W)j = -1;
+		if(keyPressed == KeyEvent.VK_S)j = 1;
+		if(keyPressed == KeyEvent.VK_A)i = -1;
 		if(keyPressed == KeyEvent.VK_D)i = 1;
-			
+		
+		if(keyPressed == KeyEvent.VK_UP)jCamara = -MOV_CAMARA;
+		if(keyPressed == KeyEvent.VK_DOWN)jCamara = MOV_CAMARA;
+		if(keyPressed == KeyEvent.VK_LEFT)iCamara = -MOV_CAMARA;
+		if(keyPressed == KeyEvent.VK_RIGHT)iCamara = MOV_CAMARA;
+		
 		mapaActual.moverCeldaSeleccionada(i, j);
+		mapaActual.moverCamara(iCamara, jCamara);
 
 	}
 
 	public void keyReleased(KeyEvent e) {
-		int keyPressed = e.getKeyCode();
-
+		int keyReleased = e.getKeyCode();
 		
-		if(keyPressed == KeyEvent.VK_W || keyPressed == KeyEvent.VK_S) j = 0;
-		if(keyPressed == KeyEvent.VK_A || keyPressed == KeyEvent.VK_D) i = 0;
+		j = 0;
+		i = 0;
 		
+		if(keyReleased == KeyEvent.VK_UP)jCamara = 0;
+		if(keyReleased == KeyEvent.VK_DOWN)jCamara = 0;
+		if(keyReleased == KeyEvent.VK_LEFT)iCamara = 0;
+		if(keyReleased == KeyEvent.VK_RIGHT)iCamara = 0;
 	}
 
 }

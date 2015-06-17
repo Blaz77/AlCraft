@@ -7,7 +7,6 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import fiuba.algo3.atributos.unidades.terran.AtributosMarine;
 import fiuba.algo3.excepciones.PosicionOcupada;
 import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
@@ -19,7 +18,7 @@ import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.raza.TipoRaza;
-import fiuba.algo3.terreno.TipoTerreno;
+import fiuba.algo3.terreno.Terreno;
 
 public class TestMapa {
 	final int cantidadBases = 6;
@@ -149,7 +148,7 @@ public class TestMapa {
 			for (int x = 0; x < mapaNuevo.ancho(); x++){
 				// O es terrestre, o no tiene base, y punto (cuac)
 				Posicion pos = new Posicion(x,y);
-				Assert.assertTrue(mapaNuevo.getTerreno(pos).getTipo() == TipoTerreno.TIERRA || !(mapaNuevo.esBase(pos)));
+				Assert.assertTrue(mapaNuevo.getTerreno(pos)== Terreno.TIERRA || !(mapaNuevo.esBase(pos)));
 			}
 	}
 	
@@ -159,7 +158,7 @@ public class TestMapa {
 		
 		for (int y = 0; y < mapaNuevo.alto(); y++)
 			for (int x = 0; x < mapaNuevo.ancho(); x++){
-				if (mapaNuevo.getTerreno(new Posicion(x,y)).getTipo() == TipoTerreno.ESPACIO) {
+				if (mapaNuevo.getTerreno(new Posicion(x,y)) == Terreno.ESPACIO) {
 					hayAreasEspaciales = true;
 					break;
 			}

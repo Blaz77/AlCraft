@@ -1,5 +1,7 @@
 package fiuba.algo3.terreno;
 
+import fiuba.algo3.ocupantes.Ocupante;
+
 // La idea de esto es eliminar las clases Terreno e hijas,
 // pues tenian poco comportamiento y nada de estado que
 // ameritara tener instancias de las mismas.
@@ -9,35 +11,34 @@ package fiuba.algo3.terreno;
 public enum TipoTerreno {
 	
 	
-	TIERRA, ESPACIO //, MOHO
+	TIERRA {
+		public boolean puedeSerOcupada(Ocupante ocupante) {
+			return ocupante.puedeOcuparTierra();
+		}
+	}, 
+	ESPACIO {
+		public boolean puedeSerOcupada(Ocupante ocupante) {
+			return ocupante.puedeOcuparEspacio();
+		}
+	},
+	
+	/*
+	MOHO {
+		
+		public boolean puedeSerOcupada(Ocupante ocupante) {
+			return ocupante.puedeOcuparMoho();
+		}
+
+	},
+	*/	
+	
+	SOMBRA{
+		
+		public boolean puedeSerOcupada(Ocupante ocupante){
+			return false;
+		}
+	};
+	
+	public abstract boolean puedeSerOcupada(Ocupante ocupante);
 	
 }
-/*	
-	
-	//      Edificable, Transitable, Sobrevolable
-	TIERRA (      true,        true,         true), 
-	ESPACIO(     false,       false,         true);
-	
-	private boolean esEdificable;
-	private boolean esTransitable;
-	private boolean esSobrevolable;
-
-	private TipoTerreno(boolean ed, boolean tr, boolean sv){
-		this.esEdificable = ed;
-		this.esTransitable = tr;
-		this.esSobrevolable = sv;
-	}
-
-	public boolean esEdificable() {
-		return esEdificable;
-	}
-	
-	public boolean esTransitable() {
-		return esTransitable;
-	}
-	
-	public boolean esSobrevolable() {
-		return esSobrevolable;
-	}
-	
-} */

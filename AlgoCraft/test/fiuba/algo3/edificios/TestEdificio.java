@@ -6,7 +6,7 @@ import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
-import fiuba.algo3.terreno.TipoTerreno;
+import fiuba.algo3.terreno.Terreno;
 
 public abstract class TestEdificio {
 	
@@ -30,7 +30,7 @@ public abstract class TestEdificio {
 		for (int y = posInicial.getY(); y < mapa.alto(); y++) {
 			for (int x = posInicial.getX(); x < mapa.ancho(); x++) {
 				Posicion posEnTierra = new Posicion(x, y);
-				if (mapa.getTerreno(posEnTierra).getTipo() == TipoTerreno.TIERRA) {
+				if (mapa.getTerreno(posEnTierra) == Terreno.TIERRA) {
 					return crearEdificio(jugador, posEnTierra);
 				}
 			}
@@ -42,7 +42,7 @@ public abstract class TestEdificio {
 		for (int y = posInicial.getY(); y < mapa.alto(); y++) {
 			for (int x = posInicial.getX(); x < mapa.ancho(); x++) {
 				Posicion posEnTierra = new Posicion(x, y);
-				if (mapa.getTerreno(posEnTierra).getTipo() == TipoTerreno.TIERRA) {
+				if (mapa.getTerreno(posEnTierra) == Terreno.TIERRA) {
 					return crearEdificioRequerido(jugador, posEnTierra);
 				}
 			}
@@ -55,7 +55,7 @@ public abstract class TestEdificio {
 		for (int y = posInicial.getY(); y < mapa.alto(); y++) {
 			for (int x = posInicial.getX(); x < mapa.ancho(); x++) {
 				Posicion posEnTierra = new Posicion(x, y);
-				if (mapa.getTerreno(posEnTierra).getTipo() == TipoTerreno.TIERRA) {
+				if (mapa.getTerreno(posEnTierra) == Terreno.TIERRA) {
 					return crearEdificioRequeridoNivel2(jugador, posEnTierra);
 				}
 			}
@@ -67,7 +67,7 @@ public abstract class TestEdificio {
 		for (int y = posInicial.getY(); y < mapa.alto(); y++) {
 			for (int x = posInicial.getX(); x < mapa.ancho(); x++) {
 				Posicion posFueraDeTierra = new Posicion(x, y);
-				if (mapa.getTerreno(posFueraDeTierra).getTipo() != TipoTerreno.TIERRA) {
+				if (mapa.getTerreno(posFueraDeTierra) != Terreno.TIERRA) {
 					return crearEdificio(jugador, posFueraDeTierra);
 				}
 			}
@@ -79,7 +79,7 @@ public abstract class TestEdificio {
 		for (int y = posInicial.getY(); y < mapa.alto(); y++) {
 			for (int x = posInicial.getX(); x < mapa.ancho(); x++) {
 				Posicion posConRecurso = new Posicion(x, y);
-				if (mapa.getTerreno(posConRecurso).getTipo() == TipoTerreno.TIERRA
+				if (mapa.getTerreno(posConRecurso) == Terreno.TIERRA
 					&&	mapa.getOcupante(posConRecurso).getTipo() == recurso) {
 						return crearEdificio(jugador, posConRecurso);
 				}
@@ -92,7 +92,7 @@ public abstract class TestEdificio {
 		for (int y = posInicial.getY(); y < mapa.alto(); y++) {
 			for (int x = posInicial.getX(); x < mapa.ancho(); x++) {
 				Posicion posSinRecurso = new Posicion(x, y);
-				if (mapa.getTerreno(posSinRecurso).getTipo() == TipoTerreno.TIERRA
+				if (mapa.getTerreno(posSinRecurso) == Terreno.TIERRA
 					&&	mapa.getOcupante(posSinRecurso).getTipo() != recurso) {
 						return crearEdificio(jugador, posSinRecurso);
 				}

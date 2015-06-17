@@ -20,9 +20,9 @@ public class SpriteSheet {
 	public static final BufferedImage[] spritesHibrido = new BufferedImage[CANTIDAD_SPRITES];
 	
 	public static BufferedImage[] spritesTerreno(Terreno terreno){
-		if (terreno.getTipo() == TipoTerreno.TIERRA)
-			return spritesTierra;
-		if (terreno.getTipo() == TipoTerreno.ESPACIO)
+		if (terreno == Terreno.TIERRA)
+			return spritesTierra;  // Podria meter esto en  terreno... tal vez, no se si se permite en MVC
+		if (terreno == Terreno.ESPACIO)
 			return spritesEspacio;
 		throw new RuntimeException();
 	}

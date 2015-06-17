@@ -23,6 +23,8 @@ public class Game extends JPanel implements Runnable { // Permite correr un thre
 
 	/** Frame (el JPanel es si mismo y despues se añade) **/
 	private JFrame frame = new JFrame("AlgoCraft");
+	int ancho;
+	int alto;
 	
 	private Opciones opciones = new Opciones();
 	
@@ -32,6 +34,9 @@ public class Game extends JPanel implements Runnable { // Permite correr un thre
 	/** Constructor **/
 	public Game(int anchoVentana, int altoVentana){
 			
+		this.ancho = anchoVentana;
+		this.alto = altoVentana;
+		
 		// Inicializar los datos requeridos
 		SpriteSheet.inicializar();
 		//MusicaAlgunDia.inicializar();
@@ -41,6 +46,16 @@ public class Game extends JPanel implements Runnable { // Permite correr un thre
 		// Inicializo el frame y el JPanel
 		inicializarPanel(anchoVentana, altoVentana);
         inicializarFrame(anchoVentana, altoVentana);
+	}
+
+
+	public int getAncho() {
+		return ancho;
+	}
+
+
+	public int getAlto() {
+		return alto;
 	}
 
 
@@ -77,6 +92,7 @@ public class Game extends JPanel implements Runnable { // Permite correr un thre
 			delta += (now - lastTime) / timePerTick;
 			lastTime = now;
 			if (delta >= 1){
+				tick();
 				repaint();
 				delta --;
 			}
@@ -105,11 +121,12 @@ public class Game extends JPanel implements Runnable { // Permite correr un thre
 	}
 	
     public void update(long elapsedTime){
-		if (State.getState() != null)
-			State.getState().tick();
     }
-	
+    public void tick(){
+    	State.getState().tick();
+    }
     public void paint(Graphics g){
+		g.clearRect(0, 0, ancho, alto);
     	State.getState().render(g);
     }
    

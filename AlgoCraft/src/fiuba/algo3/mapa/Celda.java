@@ -1,6 +1,5 @@
 package fiuba.algo3.mapa;
 
-import fiuba.algo3.excepciones.RecursoAusente;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.ocupantes.CeldaVacia;
 import fiuba.algo3.ocupantes.Ocupante;

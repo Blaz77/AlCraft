@@ -3,18 +3,12 @@ package fiuba.algo3.mapa;
 import java.util.ArrayList;
 import java.util.Random;
 
-import fiuba.algo3.excepciones.MovimientoInvalido;
-import fiuba.algo3.ocupantes.CeldaVacia;
 import fiuba.algo3.ocupantes.Ocupante;
 import fiuba.algo3.ocupantes.recurso.GasVespeno;
 import fiuba.algo3.ocupantes.recurso.Mineral;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.ocupantes.unidades.Unidad;
-import fiuba.algo3.terreno.Espacio;
 import fiuba.algo3.terreno.Terreno;
-import fiuba.algo3.terreno.Tierra;
-import fiuba.algo3.terreno.TipoTerreno;
-// DATO PARA LAS PRUEBAS: ZONA LIBRE CERCA DEL (32, 10)
 
 public class MapaReal implements Mapa {
 	final static int DISTANCIA_BORDE = 10;
@@ -70,7 +64,7 @@ public class MapaReal implements Mapa {
 		for (int x = 0; x < ancho; x++){
 			for (int y = 0; y < alto; y++){
 				pos = new Posicion(x, y);
-				setCelda(pos, new Tierra());
+				setCelda(pos, Terreno.TIERRA);
 			}
 		}		
 	}
@@ -154,8 +148,8 @@ public class MapaReal implements Mapa {
 				posAnterior = new Posicion(x, y-1);
 				pos = new Posicion(x, y);
 				if (miRNG.nextBoolean() && (y == 0 || 
-						getTerreno(posAnterior).getTipo() == TipoTerreno.ESPACIO))
-					setCelda(pos, new Espacio());
+						getTerreno(posAnterior) == Terreno.ESPACIO))
+					setCelda(pos, Terreno.ESPACIO);
 			}		
 		
 		// y esto al de abajo
@@ -164,8 +158,8 @@ public class MapaReal implements Mapa {
 				posAnterior = new Posicion(x, y+1);
 				pos = new Posicion(x, y);
 				if (miRNG.nextBoolean() && (((y == alto-1) || 
-						getTerreno(posAnterior).getTipo() == TipoTerreno.ESPACIO)))
-					setCelda(pos, new Espacio());
+						getTerreno(posAnterior) == Terreno.ESPACIO)))
+					setCelda(pos, Terreno.ESPACIO);
 			}
 		
 		
@@ -294,6 +288,7 @@ public class MapaReal implements Mapa {
 	}
 
 	public Terreno getTerreno(Posicion posicion){
+
 		return this.getCelda(posicion).getTerreno();
 	}
 		 
@@ -406,7 +401,7 @@ public class MapaReal implements Mapa {
 						System.out.print("G");
 					else if(elRecurso != null && elRecurso.getTipo() == TipoOcupante.MINERAL)
 							System.out.print("M");
-					else if(getTerreno(new Posicion(x2, y2)).getTipo() == TipoTerreno.ESPACIO)
+					else if(getTerreno(new Posicion(x2, y2)) == Terreno.ESPACIO)
 						System.out.print(" ");
 					else
 						System.out.print(".");
