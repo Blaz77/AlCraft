@@ -29,6 +29,7 @@ public class AtributosNaveDeCiencia extends AtributosUnidad {
 		
 		// fields de UnidadMagica
 		this.magia = new AtributosMagia(
+				50,		//energiaInicial
 				200,	//energiaMaxima
 				10,		//energiaARegenerarPorTurno
 				10,		//rangoDeMagia

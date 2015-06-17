@@ -40,6 +40,7 @@ public class AtributosAltoTemplario extends AtributosUnidad {
 		
 		// fields de UnidadMagica
 		this.magia = new AtributosMagia(
+				50,		//energiaInicial
 				200,	//energiaMaxima
 				15,		//energiaARegenerarPorTurno
 				10,		//rangoDeMagia
