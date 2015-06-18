@@ -47,6 +47,11 @@ public class Unidad extends ObjetoVivo {
 		this.movRestantes = voluntad.getMovPorTurno();
 	}
 
+	@Override
+	public void destruir() {
+		super.destruir();
+		this.propietario.removerUnidad(this);
+	}
 	
 	public TipoOcupante getTipo(){
 		return TipoOcupante.UNIDAD;

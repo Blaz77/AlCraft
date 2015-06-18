@@ -30,7 +30,8 @@ public abstract class TestEdificio {
 		for (int y = posInicial.getY(); y < mapa.alto(); y++) {
 			for (int x = posInicial.getX(); x < mapa.ancho(); x++) {
 				Posicion posEnTierra = new Posicion(x, y);
-				if (mapa.getTerreno(posEnTierra) == Terreno.TIERRA) {
+				if (mapa.getTerreno(posEnTierra) == Terreno.TIERRA
+						&&	mapa.getOcupante(posEnTierra).getTipo() == TipoOcupante.CELDA_VACIA) {
 					return crearEdificio(jugador, posEnTierra);
 				}
 			}

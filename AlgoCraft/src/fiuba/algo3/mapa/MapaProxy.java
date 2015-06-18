@@ -146,7 +146,7 @@ public class MapaProxy implements Mapa {
 	
 	public void setPuntoOrigen(Posicion posicionInicial) {
 		// Proximamente esto en el constructor
-		final int SEMILADO = 5; //Arbitrario
+		final int SEMILADO = 8; //Arbitrario
 		
 		this._visibilizar_area(new Posicion(posicionInicial.getX() - SEMILADO, posicionInicial.getY() - SEMILADO), 
 							new Posicion(posicionInicial.getX() + SEMILADO, posicionInicial.getY() + SEMILADO));

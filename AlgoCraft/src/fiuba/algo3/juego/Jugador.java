@@ -150,6 +150,14 @@ public class Jugador {
 	public void agregarUnidad(Unidad unidad){
 		this.unidades.add(unidad);
 	}
+
+	public void removerEdificio(Edificio edificio) {
+		this.edificios.remove(edificio);
+	}
+	
+	public void removerUnidad(Unidad unidad) {
+		this.unidades.remove(unidad);
+	}
 	
 	public void mover(Unidad unidad, Posicion destino){
 		if (! unidades.contains(unidad)) // medio lento este chequeo.
@@ -168,4 +176,5 @@ public class Jugador {
 		this.posicionInicial = posicionInicial;
 		this.mapaPropio.setPuntoOrigen(posicionInicial);
 	}
+
 }

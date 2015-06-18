@@ -35,6 +35,12 @@ public class Edificio extends ObjetoVivo {
 		return this.entrenador.puedeEntrenarUnidades();
 	}
 	
+	@Override
+	public void destruir() {
+		super.destruir();
+		this.propietario.removerEdificio(this);
+	}
+	
 	//				u otro nombre
 	public ArrayList<Constructor> getUnidadesEntrenables(){
 		return this.entrenador.getUnidadesEntrenables();
