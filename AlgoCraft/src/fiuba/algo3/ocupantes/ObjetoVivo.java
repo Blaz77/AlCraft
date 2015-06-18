@@ -10,6 +10,8 @@ import fiuba.algo3.excepciones.PosicionOcupada;
 import fiuba.algo3.excepciones.VidaEnCeroException;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.ocupantes.recurso.GasVespeno;
+import fiuba.algo3.ocupantes.recurso.Mineral;
 
 public abstract class ObjetoVivo implements Ocupante { //ObjetoVivo / ObjetoInteractuable / etc.
 
@@ -106,7 +108,7 @@ public abstract class ObjetoVivo implements Ocupante { //ObjetoVivo / ObjetoInte
 	}
 	
 	public boolean debeOcuparMineral(){
-		return this.atributos.debeOcuparRecurso();
+		return this.atributos.debeOcuparMineral();
 	}
 	
 	public boolean debeOcuparGasVespeno(){
@@ -147,7 +149,16 @@ public abstract class ObjetoVivo implements Ocupante { //ObjetoVivo / ObjetoInte
 	}
 	
 	public void destruir(){
-		propietario.getMapa().removerOcupante(posicion);
+		// Alguna idea para evitar la cadena de IFs?
+		if (this.debeOcuparMineral()) {
+			propietario.getMapa().reemplazar(posicion, new Mineral(posicion));
+		}
+		else if (this.debeOcuparGasVespeno()) {
+			propietario.getMapa().reemplazar(posicion, new GasVespeno(posicion));
+		}
+		else {
+			propietario.getMapa().removerOcupante(posicion);
+		}
 		
 		for (Estado estado : estados) {
 			estado.desactivar();
