@@ -18,7 +18,7 @@ public class Juego implements Iterable<Jugador>, Iterator<Jugador>{
 	private int turnos = 0;
 	private int indiceJugadorActual = 0;
 	//int turnosMAX; // si los hay
-	MapaReal mapa;
+	private MapaReal mapa;
 	ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
 	ArrayList<Jugador> jugadoresMuertos = new ArrayList<Jugador>();
 	// Metodos:

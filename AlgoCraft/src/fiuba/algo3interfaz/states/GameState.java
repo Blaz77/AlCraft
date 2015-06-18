@@ -23,10 +23,12 @@ public class GameState extends State {
 	
 	public GameState(){
 		
-		for (Jugador jugador: game.getModelo()) {
-			mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getAncho(), game.getAlto() - 100));
-			huds.put(jugador, new HUD(jugador, game.getAncho(), game.getAlto()));
-		}
+		Jugador jugador = game.getModelo().getJugador(1);
+		mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getAncho(), game.getAlto() - 100));
+		huds.put(jugador, new HUD(jugador, game.getAncho(), game.getAlto()));
+		jugador = game.getModelo().getJugador(2);
+		mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getAncho(), game.getAlto() - 100));
+		huds.put(jugador, new HUD(jugador, game.getAncho(), game.getAlto()));
 			
 		mapaActual = mapas.get(game.getModelo().getJugadorActual());
 		this.hudActual =  huds.get(game.getModelo().getJugadorActual());
