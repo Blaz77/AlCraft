@@ -9,6 +9,7 @@ import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.raza.TipoRaza;
 
 
@@ -72,8 +73,11 @@ public class HUD {
 				120, 420);
 	}
 
+	private static BufferedImage picConstruir = ImageLoader.loadImage("/textures/construir.png");
 	private void dibujarAccionesPosibles(Graphics g) {
-		// TODO Auto-generated method stub
+		if (this.mapaVisible.getOcupante(this.celdaSeleccionada).getTipo() == TipoOcupante.CELDA_VACIA) {
+			g.drawImage(picConstruir, 400, 400, null);
+		}
 		
 	}
 	

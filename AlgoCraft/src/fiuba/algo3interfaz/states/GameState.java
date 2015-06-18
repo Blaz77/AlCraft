@@ -10,7 +10,7 @@ import fiuba.algo3interfaz.gfx.HUD;
 import fiuba.algo3interfaz.gfx.MapaVista;
 
 public class GameState extends State {
-	final int HUD_INICIO_Y = 500;
+	final int HUD_INICIO_Y = 360;
 
 	private static final int MOV_CAMARA = 50;
 	private MapaVista mapaActual;
@@ -25,10 +25,10 @@ public class GameState extends State {
 	public GameState(){
 		
 		Jugador jugador = game.getModelo().getJugador(1);
-		mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getAncho(), game.getAlto() - 100));
+		mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getAncho(), game.getAlto() - 120));
 		huds.put(jugador, new HUD(jugador, game.getAncho(), game.getAlto()));
 		jugador = game.getModelo().getJugador(2);
-		mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getAncho(), game.getAlto() - 100));
+		mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getAncho(), game.getAlto() - 150));
 		huds.put(jugador, new HUD(jugador, game.getAncho(), game.getAlto()));
 			
 		mapaActual = mapas.get(game.getModelo().getJugadorActual());
@@ -62,8 +62,10 @@ public class GameState extends State {
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		mapaActual.setCeldaSeleccionada(e.getX(), e.getY());
-		hudActual.actualizar(mapaActual.getPosicionCeldaSeleccionada());
+		if (e.getY() < HUD_INICIO_Y) {
+			mapaActual.setCeldaSeleccionada(e.getX(), e.getY());
+			hudActual.actualizar(mapaActual.getPosicionCeldaSeleccionada());
+		}
 		//System.out.println("Released!");
 	}
 
