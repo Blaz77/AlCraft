@@ -137,6 +137,11 @@ public class MapaVista {
 				filSeleccionada * SpriteSheet.ANCHO_SPRITE - camara.getxOffset(), 
 				colSeleccionada * SpriteSheet.ALTO_SPRITE - camara.getyOffset(), null);
 	}
+	
+	public Posicion getPosicionCeldaSeleccionada() {
+		// Deberia ser al reves
+		return new Posicion(this.filSeleccionada, this.colSeleccionada);
+	}
 
 	public void setCeldaSeleccionada(int x, int y) {
 		this.filSeleccionada = (x + camara.getxOffset()) / SpriteSheet.ANCHO_SPRITE;

@@ -10,6 +10,7 @@ import fiuba.algo3interfaz.gfx.HUD;
 import fiuba.algo3interfaz.gfx.MapaVista;
 
 public class GameState extends State {
+	final int HUD_INICIO_Y = 500;
 
 	private static final int MOV_CAMARA = 50;
 	private MapaVista mapaActual;
@@ -49,17 +50,25 @@ public class GameState extends State {
 	}
 
 	public void mousePressed(MouseEvent e) {
-		mapaActual.setCeldaSeleccionada(e.getX(), e.getY());
+		// TODO: Mejorar
+		if (e.getY() < HUD_INICIO_Y) {
+			mapaActual.setCeldaSeleccionada(e.getX(), e.getY());
+			hudActual.actualizar(mapaActual.getPosicionCeldaSeleccionada());
+		}
+		else {
+			hudActual.recibirClick(e.getX(), e.getY());
+		}
 		//System.out.println("Pressed!");
 	}
 
 	public void mouseReleased(MouseEvent e) {
 		mapaActual.setCeldaSeleccionada(e.getX(), e.getY());
+		hudActual.actualizar(mapaActual.getPosicionCeldaSeleccionada());
 		//System.out.println("Released!");
 	}
 
 	public void mouseDragged(MouseEvent e) {
-		mapaActual.setCeldaSeleccionada(e.getX(), e.getY());
+		//mapaActual.setCeldaSeleccionada(e.getX(), e.getY());
 		//System.out.println("Dragged!");
 	}
 

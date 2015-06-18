@@ -138,8 +138,8 @@ public class MapaProxy implements Mapa {
 	}
 
 	public Terreno getTerreno(Posicion posicion){
-		//if (! (getVisibilidad(posicion)).verTerreno())
-		//	throw new CeldaNoVisible();
+		if (! (getVisibilidad(posicion)).verTerreno())
+			return Terreno.SOMBRA;
 			
 		return mapa.getTerreno(posicion);
 	}
