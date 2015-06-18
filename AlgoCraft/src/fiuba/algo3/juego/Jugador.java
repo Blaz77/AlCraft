@@ -166,9 +166,9 @@ public class Jugador {
 	}
 	
 	public void pasarTurno(){
-		for (Unidad unidad: unidades)
+		for (Unidad unidad: new ArrayList<Unidad>(unidades))
 			unidad.pasarTurno();
-		for (Edificio edificio: edificios)
+		for (Edificio edificio: new ArrayList<Edificio>(edificios))
 			edificio.pasarTurno();
 	}
 
