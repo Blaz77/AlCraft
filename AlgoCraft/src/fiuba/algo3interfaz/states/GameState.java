@@ -11,7 +11,7 @@ import fiuba.algo3interfaz.gfx.MapaVista;
 
 public class GameState extends State {
 
-	private static final int MOV_CAMARA = 10;
+	private static final int MOV_CAMARA = 50;
 	private MapaVista mapaActual;
 	private HashMap<Jugador, MapaVista> mapas = new HashMap<Jugador, MapaVista>();
 	private int i,j;

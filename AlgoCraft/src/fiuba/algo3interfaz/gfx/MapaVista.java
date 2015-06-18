@@ -32,7 +32,7 @@ public class MapaVista {
 		this.alto = mapa.alto();
 		this.datosMapa = mapa;
 		this.mapaVista = new CeldaVista[ancho][alto];
-		this.camara = new Camara(0, 0, 0, 0, anchoVentana, altoVentana);
+		this.camara = new Camara(0, 0, 0, 0, ancho*32 - anchoVentana, alto*32 - altoVentana);
 		
 		Random miRNG = new Random();
 		for (int j = 0; j < this.alto; j++)
@@ -91,7 +91,7 @@ public class MapaVista {
 				BufferedImage spriteTerreno = spriteTerreno(x, y);
 				
 				if (datosMapa.getOcupante(new Posicion(x,y)).getTipo() == TipoOcupante.DESCONOCIDO)
-					g2.drawImage(spriteTerreno, new RescaleOp(0.5f, 0, null), 
+					g2.drawImage(spriteTerreno, new RescaleOp(0.1f, 0, null), 
 							anchoSprite * x - camara.getxOffset(), altoSprite * y - camara.getyOffset());
 				else{
 					g.drawImage(spriteTerreno, 
