@@ -32,10 +32,10 @@ public class MapaProxy implements Mapa {
 		this.mapa = mapa;
 		this.unidadesJugador = unidades;
 				
-		unidades.add(new Unidad(null, new Posicion(12,12), new AtributosMarine()));
-		unidades.add(new Unidad(null, new Posicion(20,12), new AtributosMarine()));
-		unidades.add(new Unidad(null, new Posicion(12,20), new AtributosMarine()));
-		unidades.add(new Unidad(null, new Posicion(20,20), new AtributosMarine()));
+		//unidades.add(new Unidad(null, new Posicion(12,12), new AtributosMarine()));
+		//unidades.add(new Unidad(null, new Posicion(20,12), new AtributosMarine()));
+		//unidades.add(new Unidad(null, new Posicion(12,20), new AtributosMarine()));
+		//unidades.add(new Unidad(null, new Posicion(20,20), new AtributosMarine()));
 		//System.out.format("%s%n", mapa.getOcupante(new Posicion(12, 12)));
 		
 		ancho = mapa.ancho();
