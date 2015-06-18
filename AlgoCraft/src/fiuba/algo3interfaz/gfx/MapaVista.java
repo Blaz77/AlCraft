@@ -104,9 +104,18 @@ public class MapaVista {
 		//g.drawImage(ImageLoader.loadImage("/textures/terran.png"), 0, 0, null);
 				
 		ubicarMarcaMapaEn(g);
+		
+		dibujarHUD(g);
 	}
 
-	
+	private static BufferedImage hudTest = ImageLoader.loadImage("/HUDs/HUDterran2.png"); //HUDzerg2.png, HUDprotoss2.png
+	private void dibujarHUD(Graphics g) {
+		
+		g.drawImage(hudTest, 0, this.altoVentana - hudTest.getHeight(), null);
+		
+		
+	}
+
 	private void dibujarOcupante(Graphics g, int x, int y) {
 		
 		TipoOcupante tipoOcupante = datosMapa.getOcupante(new Posicion(x, y)).getTipo();

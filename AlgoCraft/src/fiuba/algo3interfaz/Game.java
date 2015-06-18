@@ -72,6 +72,7 @@ public class Game extends JPanel implements Runnable { // Permite correr un thre
 		frame.setResizable(false); // o true quien sabe
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(anchoVentana, altoVentana);
+		frame.setLocationRelativeTo(null);
         frame.add(this);
         frame.pack();
         frame.setVisible(true);
