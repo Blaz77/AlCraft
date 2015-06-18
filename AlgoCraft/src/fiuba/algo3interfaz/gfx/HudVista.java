@@ -13,7 +13,7 @@ import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.raza.TipoRaza;
 
 
-public class HUD {
+public class HudVista {
 	
 	private TipoRaza raza;
 	private Color color;
@@ -25,7 +25,7 @@ public class HUD {
 	private int anchoVentana;
 	private int altoVentana;
 
-	public HUD(Jugador jugador, int anchoVentana, int altoVentana){
+	public HudVista(Jugador jugador, int anchoVentana, int altoVentana){
 		this.raza = jugador.getRaza();
 		this.color = jugador.getColor();
 		this.jugador = jugador;

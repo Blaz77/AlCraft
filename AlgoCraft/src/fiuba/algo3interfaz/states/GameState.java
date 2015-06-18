@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 import java.util.HashMap;
 
 import fiuba.algo3.juego.Jugador;
-import fiuba.algo3interfaz.gfx.HUD;
+import fiuba.algo3interfaz.gfx.HudVista;
 import fiuba.algo3interfaz.gfx.MapaVista;
 
 public class GameState extends State {
@@ -17,8 +17,8 @@ public class GameState extends State {
 	private HashMap<Jugador, MapaVista> mapas = new HashMap<Jugador, MapaVista>();
 	private int i,j;
 	private int iCamara,jCamara;
-	private HashMap<Jugador, HUD> huds = new HashMap<Jugador, HUD>();
-	private HUD hudActual;
+	private HashMap<Jugador, HudVista> huds = new HashMap<Jugador, HudVista>();
+	private HudVista hudActual;
 	
 
 	
@@ -26,10 +26,10 @@ public class GameState extends State {
 		
 		Jugador jugador = game.getModelo().getJugador(1);
 		mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getAncho(), game.getAlto() - 120));
-		huds.put(jugador, new HUD(jugador, game.getAncho(), game.getAlto()));
+		huds.put(jugador, new HudVista(jugador, game.getAncho(), game.getAlto()));
 		jugador = game.getModelo().getJugador(2);
 		mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getAncho(), game.getAlto() - 150));
-		huds.put(jugador, new HUD(jugador, game.getAncho(), game.getAlto()));
+		huds.put(jugador, new HudVista(jugador, game.getAncho(), game.getAlto()));
 			
 		mapaActual = mapas.get(game.getModelo().getJugadorActual());
 		this.hudActual =  huds.get(game.getModelo().getJugadorActual());
