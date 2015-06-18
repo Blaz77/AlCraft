@@ -11,6 +11,7 @@ import fiuba.algo3.juego.Juego;
 import fiuba.algo3.juego.Opciones;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.raza.TipoRaza;
 
@@ -90,10 +91,32 @@ public class TestSoloTerran {
 		
 		assertTrue(juego.getJugadorActual().getEdificios().size() == 2);
 		
-		/* Unidades militares */
+		/* Creacion de unidades militares */
 		destino = buscarOcupante(juego.getJugadorActual().getMapa(), posInicial, 8, TipoOcupante.CELDA_VACIA);
 		edificador.crearEntrenadorUnidadesBasicas(juego.getJugadorActual(), destino);
 		
+		// 15 turnos mas tarde...
+		for (int i=0; i<15; i++) {
+			juego.nextJugadorActual();
+			juego.nextJugadorActual();
+		}
+		
+		assertTrue(juego.getJugadorActual().getEdificios().size() == 3);
+		Edificio barraca = juego.getJugadorActual().getEdificios().get(2);
+		barraca.getUnidadesEntrenables().get(0).crear();
+		barraca.getUnidadesEntrenables().get(0).crear();
+		barraca.getUnidadesEntrenables().get(0).crear();
+		barraca.getUnidadesEntrenables().get(0).crear();
+		
+		// 15 turnos mas tarde...
+		for (int i=0; i<15; i++) {
+			juego.nextJugadorActual();
+			juego.nextJugadorActual();
+		}
+		
+		assertTrue(juego.getJugadorActual().getUnidades().size() == 4);
+
+		/* Movimientos */
 		
 	}
 }
