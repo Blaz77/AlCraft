@@ -44,11 +44,13 @@ public class Jugador {
 	private Posicion posicionInicial;
 	private ArrayList<Unidad> unidades = new ArrayList<Unidad>();
 	private ArrayList<Edificio> edificios = new ArrayList<Edificio>();
+	private String nombre;
 
 	public Jugador(String nombre, Color color, TipoRaza raza, MapaReal mapa) { // MapaProxy? 
 		
 		this.color = color;
 		this.raza = RazaFactory.getRaza(raza);
+		this.nombre = nombre;
 		
 		// Por ahora estos numeros magicos funcionan, despues se ve si
 		// extraerlos en forma de constantes o pasados x parametro
@@ -70,6 +72,10 @@ public class Jugador {
 
 	public TipoRaza getRaza() {
 		return raza.getTipoRaza();
+	}
+	
+	public String getNombre() {
+		return this.nombre;
 	}
 	
 	public int getMinerales(){

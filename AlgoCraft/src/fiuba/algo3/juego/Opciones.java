@@ -21,7 +21,7 @@ public class Opciones {
 	private ArrayList<Color> coloresJugadores = new ArrayList<Color>();
 	
 	//private int cantidadJugadores = 2; // eventualmente poder implementar n jugadores? XD
-	private int cantidadBases = 2;
+	private int cantidadBases = 6;
 	// otras opciones
 	
 	public Opciones() {

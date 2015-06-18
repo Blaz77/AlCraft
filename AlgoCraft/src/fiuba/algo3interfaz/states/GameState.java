@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.util.HashMap;
 
 import fiuba.algo3.juego.Jugador;
+import fiuba.algo3interfaz.gfx.HUD;
 import fiuba.algo3interfaz.gfx.MapaVista;
 
 public class GameState extends State {
@@ -15,25 +16,34 @@ public class GameState extends State {
 	private HashMap<Jugador, MapaVista> mapas = new HashMap<Jugador, MapaVista>();
 	private int i,j;
 	private int iCamara,jCamara;
+	private HashMap<Jugador, HUD> huds = new HashMap<Jugador, HUD>();
+	private HUD hudActual;
+	
 
 	
 	public GameState(){
 		
-		for (Jugador jugador: game.getModelo())
-			mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getAncho(), game.getAlto()));
-		
+		for (Jugador jugador: game.getModelo()) {
+			mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getAncho(), game.getAlto() - 100));
+			huds.put(jugador, new HUD(jugador, game.getAncho(), game.getAlto()));
+		}
+			
 		mapaActual = mapas.get(game.getModelo().getJugadorActual());
+		this.hudActual =  huds.get(game.getModelo().getJugadorActual());
 	}
 	
 	@Override
 	public void tick() {
 		mapaActual = mapas.get(game.getModelo().getJugadorActual());
+		hudActual = huds.get(game.getModelo().getJugadorActual());
 		mapaActual.tick();
+		hudActual.tick();
 	}
 
 	@Override
 	public void render(Graphics g) {
 		mapaActual.render(g);
+		hudActual.render(g);
 	}
 
 	public void mousePressed(MouseEvent e) {
