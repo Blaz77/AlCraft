@@ -1,13 +1,15 @@
 package fiuba.algo3interfaz.gfx;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.awt.image.RescaleOp;
 import java.util.Random;
 
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.terreno.Terreno;
-import fiuba.algo3.terreno.TipoTerreno;
 
 public class MapaVista {
 	private CeldaVista[][] mapaVista;
@@ -40,23 +42,37 @@ public class MapaVista {
 	}
 		
 	public BufferedImage spriteTerreno(int x, int y){
+		BufferedImage bi = null;
 		int randomIndex = (mapaVista[x][y].getIndex()) % SpriteSheet.CANTIDAD_SPRITES;
-		if (datosMapa.getTerreno(new Posicion(x, y)) == Terreno.TIERRA)
-			return SpriteSheet.spritesTierra[randomIndex];
+		int indexEspacio;
+		Terreno terreno = datosMapa.getTerreno(new Posicion(x, y));
 		
-		int indexEspacio = getIndexHibrido(x, y);
+		
+		if (terreno == Terreno.SOMBRA)
+			return SpriteSheet.spritesEspacio[1];
+		
+		
+		if (terreno == Terreno.ESPACIO) {
+			indexEspacio = getIndexHibrido(x, y);
+			if (indexEspacio == -1) 
+				bi = SpriteSheet.spritesEspacio[randomIndex];
+			else
+				bi = SpriteSheet.spritesHibrido[indexEspacio];
+		}
+				
+		if (terreno == Terreno.TIERRA)
+			bi =  SpriteSheet.spritesTierra[randomIndex];
+		
 
-		if (indexEspacio == -1)
-			return SpriteSheet.spritesEspacio[randomIndex];
-		
-		return SpriteSheet.spritesHibrido[indexEspacio];
+		return bi;
+		//return oscurecer(bi);
 		
 	}
 
 	public void tick() {
 
 	}
-		
+	
 	public void render(Graphics g) {
 		int anchoSprite = SpriteSheet.ANCHO_SPRITE;
 		int altoSprite = SpriteSheet.ALTO_SPRITE;
@@ -68,12 +84,21 @@ public class MapaVista {
 		int yInicio = Math.max(0, camara.getyOffset() / altoSprite);
 		int yFin = Math.min(alto, 1 + (camara.getyOffset() + altoVentana) / altoSprite);
 		
+		
+		Graphics2D g2 = (Graphics2D) g;
 		for (int y = yInicio; y < yFin; y++)
 			for (int x = xInicio; x < xFin; x++){
 				BufferedImage spriteTerreno = spriteTerreno(x, y);
-				//datosMapa.getVisibilidad();
-				g.drawImage(spriteTerreno, anchoSprite * x - camara.getxOffset(), 
-						altoSprite * y - camara.getyOffset(), null);
+				
+				if (datosMapa.getOcupante(new Posicion(x,y)).getTipo() == TipoOcupante.DESCONOCIDO)
+					g2.drawImage(spriteTerreno, new RescaleOp(0.5f, 0, null), 
+							anchoSprite * x - camara.getxOffset(), altoSprite * y - camara.getyOffset());
+				else{
+					g.drawImage(spriteTerreno, 
+							anchoSprite * x - camara.getxOffset(), 	altoSprite * y - camara.getyOffset(), null);
+					
+					dibujarOcupante(g, x, y);
+				}
 			}
 		// Lindo terran :D
 		//g.drawImage(ImageLoader.loadImage("/textures/terran.png"), 0, 0, null);
@@ -82,6 +107,27 @@ public class MapaVista {
 	}
 
 	
+	private void dibujarOcupante(Graphics g, int x, int y) {
+		
+		TipoOcupante tipoOcupante = datosMapa.getOcupante(new Posicion(x, y)).getTipo();
+		if (tipoOcupante == TipoOcupante.CELDA_VACIA)
+			return;
+
+		if (tipoOcupante == TipoOcupante.MINERAL)
+			g.drawImage(ImageLoader.loadImage("/textures/cristal2.png"), 
+					SpriteSheet.ANCHO_SPRITE * x - camara.getxOffset(), 	SpriteSheet.ALTO_SPRITE * y - camara.getyOffset(), null);
+			
+		else if (tipoOcupante == TipoOcupante.VESPENO)
+			g.drawImage(ImageLoader.loadImage("/textures/volcan2.png"), 
+					SpriteSheet.ANCHO_SPRITE * x - camara.getxOffset(), 	SpriteSheet.ALTO_SPRITE * y - camara.getyOffset(), null);
+		else
+			
+		g.drawImage(ImageLoader.loadImage("/textures/terran.png"), 
+				SpriteSheet.ANCHO_SPRITE * x - camara.getxOffset(), 	SpriteSheet.ALTO_SPRITE * y - camara.getyOffset(), null);
+
+		
+	}
+
 	private void ubicarMarcaMapaEn(Graphics g) {
 		BufferedImage bi = ImageLoader.loadImage("/textures/marcaMapa.png");
 		

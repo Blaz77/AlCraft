@@ -8,6 +8,7 @@ import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.ocupantes.CeldaVacia;
 import fiuba.algo3.ocupantes.Ocupante;
+import fiuba.algo3.ocupantes.OcupanteDesconocido;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.terreno.Terreno;
@@ -30,6 +31,13 @@ public class MapaProxy implements Mapa {
 		
 		this.mapa = mapa;
 		this.unidadesJugador = unidades;
+				
+		unidades.add(new Unidad(null, new Posicion(12,12), new AtributosMarine()));
+		unidades.add(new Unidad(null, new Posicion(20,12), new AtributosMarine()));
+		unidades.add(new Unidad(null, new Posicion(12,20), new AtributosMarine()));
+		unidades.add(new Unidad(null, new Posicion(20,20), new AtributosMarine()));
+		//System.out.format("%s%n", mapa.getOcupante(new Posicion(12, 12)));
+		
 		ancho = mapa.ancho();
 		alto = mapa.alto();
 		
@@ -123,8 +131,8 @@ public class MapaProxy implements Mapa {
 	}
 	
 	public Ocupante getOcupante(Posicion posicion) {
-		//if (! (getVisibilidad(posicion)).verOcupante())
-		//	throw new CeldaNoVisible();
+		if (! (getVisibilidad(posicion)).verOcupante())
+			return OcupanteDesconocido.getInstance();
 		
 		return mapa.getOcupante(posicion);
 	}

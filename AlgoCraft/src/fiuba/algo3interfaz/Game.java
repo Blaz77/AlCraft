@@ -15,7 +15,7 @@ import fiuba.algo3interfaz.states.State;
 
 public class Game extends JPanel implements Runnable { // Permite correr un thread
 
-	private static final int FRAMES_PER_SECOND = 60;
+	private static final int FRAMES_PER_SECOND = 30;
 	
 	/** Atributos del Thread **/
 	private boolean running = false;
@@ -33,7 +33,8 @@ public class Game extends JPanel implements Runnable { // Permite correr un thre
 	
 	/** Constructor **/
 	public Game(int anchoVentana, int altoVentana){
-			
+		
+		
 		this.ancho = anchoVentana;
 		this.alto = altoVentana;
 		
