@@ -14,7 +14,7 @@ public class MenuState extends State{
 	
 	public MenuState() {
 		this.menu = new MenuVista(game.getAncho(), game.getAlto(), game);
-		game.add(menu);
+		game.getPanel().add(menu);
 		menu.setVisible(true);
 	}
 
@@ -30,7 +30,7 @@ public class MenuState extends State{
 	
 	public void terminar() {
 		menu.setVisible(false);
-		game.remove(menu);
+		game.getPanel().remove(menu);
 		
 	}
 

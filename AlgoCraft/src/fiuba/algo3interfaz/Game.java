@@ -13,7 +13,7 @@ import fiuba.algo3interfaz.states.State.StateEnum;
 import fiuba.algo3interfaz.gfx.SpriteSheet;
 import fiuba.algo3interfaz.states.State;
 
-public class Game extends JPanel implements Runnable { // Permite correr un thread
+public class Game implements Runnable { // Permite correr un thread
 
 	private static final int FRAMES_PER_SECOND = 3;
 	
@@ -23,6 +23,13 @@ public class Game extends JPanel implements Runnable { // Permite correr un thre
 
 	/** Frame (el JPanel es si mismo y despues se añade) **/
 	private JFrame frame = new JFrame("AlgoCraft");
+	private JPanel panel = new JPanel() {
+		public void paintComponent(Graphics g){
+			g.clearRect(0, 0, ancho, alto);
+			State.getState().render(g);
+		}
+	};
+	
 	int ancho;
 	int alto;
 	
@@ -62,12 +69,12 @@ public class Game extends JPanel implements Runnable { // Permite correr un thre
 
 
 	private void inicializarPanel(int anchoVentana, int altoVentana) {
-		setDoubleBuffered(true);
-        setPreferredSize(new Dimension(anchoVentana, altoVentana));
-		setMaximumSize(new Dimension(anchoVentana, altoVentana));
-		setMinimumSize(new Dimension(anchoVentana, altoVentana));
+		panel.setDoubleBuffered(true);
+        panel.setPreferredSize(new Dimension(anchoVentana, altoVentana));
+		panel.setMaximumSize(new Dimension(anchoVentana, altoVentana));
+		panel.setMinimumSize(new Dimension(anchoVentana, altoVentana));
 		
-		setFocusable(true);
+		panel.setFocusable(true);
 	}
 
 
@@ -76,7 +83,7 @@ public class Game extends JPanel implements Runnable { // Permite correr un thre
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(anchoVentana, altoVentana);
 		frame.setLocationRelativeTo(null);
-        frame.add(this);
+        frame.add(panel);
         frame.pack();
         frame.setVisible(true);
 	}
@@ -91,7 +98,7 @@ public class Game extends JPanel implements Runnable { // Permite correr un thre
 		long lastTime = System.nanoTime(); // tiempo actual de la pc en nanos
 		
 		tick();
-		repaint();
+		panel.repaint();
 		// Game loop basico:
 		while(running){
 			
@@ -100,7 +107,7 @@ public class Game extends JPanel implements Runnable { // Permite correr un thre
 			lastTime = now;
 			if (delta >= 1){
 				//tick();
-				repaint();
+				panel.repaint();
 				delta --;
 			}
 			
@@ -132,10 +139,6 @@ public class Game extends JPanel implements Runnable { // Permite correr un thre
     public void tick(){
     	State.getState().tick();
     }
-    public void paintComponent(Graphics g){
-		g.clearRect(0, 0, ancho, alto);
-    	State.getState().render(g);
-    }
    
    /* public void addKeyListener(KeyListener keyListener){
     	frame.addKeyListener(keyListener);
@@ -155,5 +158,10 @@ public class Game extends JPanel implements Runnable { // Permite correr un thre
 		this.modeloJuego = new Juego(this.opciones);
 		
 		State.cambiarStateAJuego();
+	}
+
+
+	public JPanel getPanel() {
+		return panel;
 	}
 }

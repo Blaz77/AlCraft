@@ -47,9 +47,9 @@ public abstract class State implements MouseListener, MouseMotionListener, KeyLi
 		// PArche feo
 		if (state == null) state = gameState;
 		
-		game.addKeyListener(state);
-		game.addMouseListener(state);
-		game.addMouseMotionListener(state);
+		game.getPanel().addKeyListener(state);
+		game.getPanel().addMouseListener(state);
+		game.getPanel().addMouseMotionListener(state);
 		
 		stateStack.add(state);
 	}
@@ -61,14 +61,13 @@ public abstract class State implements MouseListener, MouseMotionListener, KeyLi
 	public static void removeState(State state){
 		if (stateStack.getLast() != state)
 			throw new StateError();
-		
-		game.removeKeyListener(state);
-		game.removeMouseListener(state);
-		game.removeMouseMotionListener(state);
-		
+		game.getPanel().removeKeyListener(state);
+		game.getPanel().removeMouseListener(state);
+		game.getPanel().removeMouseMotionListener(state);
 		stateStack.pop();
 	}
 	
+
 	public static void inicializar(Game _game){
 		game = _game;
 		menuState = new MenuState();
@@ -86,12 +85,9 @@ public abstract class State implements MouseListener, MouseMotionListener, KeyLi
 	public State(){
 
 	}
-	
 	public abstract void tick();
 	
 	public abstract void render(Graphics g);
-
-	
 	
 	// Implemento todos los attr de los eventListener asi 
 	// si algun state no los usa no tiene q implementarlos
