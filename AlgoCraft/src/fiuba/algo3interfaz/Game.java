@@ -26,9 +26,10 @@ public class Game extends JPanel implements Runnable { // Permite correr un thre
 	int ancho;
 	int alto;
 	
-	private Opciones opciones = new Opciones();
+	/** Modelo de juego armado segun el MenuState **/
+	private Opciones opciones;
+	private Juego modeloJuego;
 	
-	private Juego modeloJuego = new Juego(getOpciones());
 	/** States **/
 	
 	/** Constructor **/
@@ -42,7 +43,7 @@ public class Game extends JPanel implements Runnable { // Permite correr un thre
 		SpriteSheet.inicializar();
 		//MusicaAlgunDia.inicializar();
 		State.inicializar(this);
-		State.setState(StateEnum.GAMESTATE);
+		State.setState(StateEnum.MENUSTATE);
 
 		// Inicializo el frame y el JPanel
 		inicializarPanel(anchoVentana, altoVentana);
@@ -146,5 +147,13 @@ public class Game extends JPanel implements Runnable { // Permite correr un thre
     
     public Opciones getOpciones(){
     	return opciones;
+	}
+
+
+	public void comenzarJuego(Opciones opciones) {
+		this.opciones = opciones;
+		this.modeloJuego = new Juego(this.opciones);
+		
+		State.cambiarStateAJuego();
 	}
 }

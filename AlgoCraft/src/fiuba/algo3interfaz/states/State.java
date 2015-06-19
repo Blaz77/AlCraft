@@ -15,7 +15,7 @@ import fiuba.algo3interfaz.Game;
 public abstract class State implements MouseListener, MouseMotionListener, KeyListener{
 	
 	
-	public enum StateEnum {
+	public  enum StateEnum {
 		
 		GAMESTATE (gameState),
 		MENUSTATE (menuState);
@@ -29,6 +29,10 @@ public abstract class State implements MouseListener, MouseMotionListener, KeyLi
 		public State getState(){
 			return state;
 		}
+		
+		public void setState(State state) {
+			this.state = state;
+		}
 	}
 	
 	/** State Machine **/	
@@ -40,6 +44,8 @@ public abstract class State implements MouseListener, MouseMotionListener, KeyLi
 	
 	public static void setState(StateEnum stateEnum){
 		State state = stateEnum.getState();
+		// PArche feo
+		if (state == null) state = gameState;
 		
 		game.addKeyListener(state);
 		game.addMouseListener(state);
@@ -65,10 +71,16 @@ public abstract class State implements MouseListener, MouseMotionListener, KeyLi
 	
 	public static void inicializar(Game _game){
 		game = _game;
-		game.getModelo().getJugador(1);
-
-		gameState = new GameState();
 		menuState = new MenuState();
+	}
+	
+	// Llamar luego de inicializar el modelo de juego
+	public static void cambiarStateAJuego() {
+		menuState.terminar();
+		removeState(getState());
+		
+		gameState = new GameState();
+		State.setState(StateEnum.GAMESTATE);
 	}
 		
 	public State(){

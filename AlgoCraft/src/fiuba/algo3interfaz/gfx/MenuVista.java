@@ -11,10 +11,12 @@ import javax.swing.JPanel;
 
 import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
+import fiuba.algo3.juego.Opciones;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.raza.TipoRaza;
+import fiuba.algo3interfaz.Game;
 import fiuba.algo3interfaz.input.btnConstruirEdificioIncrementadorPoblacionMouseListener;
 import fiuba.algo3interfaz.input.btnConstruirEdificioRecolectorGasVespenoMouseListener;
 import fiuba.algo3interfaz.input.btnConstruirEdificioRecolectorMineralMouseListener;
@@ -30,7 +32,8 @@ public class MenuVista extends JPanel {
 	private Jugador jugador; // dale que va, esto ya es cualquier cosa
 	private Mapa mapaVisible;
 	private Posicion celdaSeleccionada = new Posicion(0,0);
-	
+
+	private Game game;
 
 	private int anchoVentana;
 	private int altoVentana;
@@ -38,8 +41,10 @@ public class MenuVista extends JPanel {
 	private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton btnJugar;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JCheckBox chkNombreColorJugador2;
+    private javax.swing.JCheckBox chkNombreColorJugador1;
+    private javax.swing.JComboBox cboColorJugador1;
+    private javax.swing.JComboBox cboColorJugador2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -57,12 +62,12 @@ public class MenuVista extends JPanel {
     private javax.swing.JTextField txtNombreJugador2;
     private javax.swing.JTextField txtNombreJugador1;
 
-	public MenuVista(int anchoVentana, int altoVentana, JPanel panel){
-		//this.panel = panel; //Experimental
+	public MenuVista(int anchoVentana, int altoVentana, Game game){
+		this.game = game; //Dudoso
 		
 		this.anchoVentana = anchoVentana;
 		this.altoVentana = altoVentana;
-		this.setVisible(false);
+		//this.setVisible(false);
 		
 		
 		buttonGroup1 = new javax.swing.ButtonGroup();
@@ -79,59 +84,41 @@ public class MenuVista extends JPanel {
         radRazaTerranJugador2 = new javax.swing.JRadioButton();
         radRazaProtossJugador2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
-        jComboBox1 = new javax.swing.JComboBox();
+        cboColorJugador1 = new javax.swing.JComboBox();
         radRazaTerranJugador1 = new javax.swing.JRadioButton();
         radRazaProtossJugador1 = new javax.swing.JRadioButton();
         jRadioButton6 = new javax.swing.JRadioButton();
-        jComboBox2 = new javax.swing.JComboBox();
+        cboColorJugador2 = new javax.swing.JComboBox();
         txtNombreJugador1 = new javax.swing.JTextField();
         btnJugar = new javax.swing.JButton();
-
-        this.setLayout(null);
+        chkNombreColorJugador1 = new javax.swing.JCheckBox();
+        chkNombreColorJugador2 = new javax.swing.JCheckBox();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Jugador 1");
-        this.add(jLabel1);
-        jLabel1.setBounds(30, 160, 105, 29);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setText("Jugador 2");
-        this.add(jLabel2);
-        jLabel2.setBounds(340, 160, 105, 29);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Raza");
-        this.add(jLabel3);
-        jLabel3.setBounds(340, 250, 24, 15);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Color");
-        this.add(jLabel4);
-        jLabel4.setBounds(340, 280, 27, 15);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Nombre");
-        this.add(jLabel5);
-        jLabel5.setBounds(340, 220, 43, 15);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Raza");
-        this.add(jLabel6);
-        jLabel6.setBounds(30, 250, 24, 15);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("Color");
-        this.add(jLabel7);
-        jLabel7.setBounds(30, 280, 27, 15);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setText("Nombre");
-        this.add(jLabel8);
-        jLabel8.setBounds(30, 220, 43, 15);
 
         txtNombreJugador2.setText("Nombre");
-        this.add(txtNombreJugador2);
-        txtNombreJugador2.setBounds(410, 210, 190, 30);
 
         buttonGroup1.add(radRazaTerranJugador2);
         radRazaTerranJugador2.setText("Terran");
@@ -140,8 +127,6 @@ public class MenuVista extends JPanel {
                 radRazaTerranJugador2ActionPerformed(evt);
             }
         });
-        this.add(radRazaTerranJugador2);
-        radRazaTerranJugador2.setBounds(410, 250, 57, 23);
 
         buttonGroup1.add(radRazaProtossJugador2);
         radRazaProtossJugador2.setText("Protoss");
@@ -150,8 +135,6 @@ public class MenuVista extends JPanel {
                 radRazaProtossJugador2ActionPerformed(evt);
             }
         });
-        this.add(radRazaProtossJugador2);
-        radRazaProtossJugador2.setBounds(470, 250, 61, 23);
 
         buttonGroup1.add(jRadioButton3);
         jRadioButton3.setText("Zerg");
@@ -161,12 +144,8 @@ public class MenuVista extends JPanel {
                 jRadioButton3ActionPerformed(evt);
             }
         });
-        this.add(jRadioButton3);
-        jRadioButton3.setBounds(550, 250, 47, 23);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ROJO", "AZUL", "AZUL_TEAL", "PURPURA", "NARANJA", "MARRON", "BLANCO", "AMARILLO" }));
-        this.add(jComboBox1);
-        jComboBox1.setBounds(410, 280, 190, 20);
+        cboColorJugador2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ROJO", "AZUL", "AZUL_TEAL", "PURPURA", "NARANJA", "MARRON", "BLANCO", "AMARILLO" }));
 
         buttonGroup2.add(radRazaTerranJugador1);
         radRazaTerranJugador1.setText("Terran");
@@ -175,8 +154,6 @@ public class MenuVista extends JPanel {
                 radRazaTerranJugador1ActionPerformed(evt);
             }
         });
-        this.add(radRazaTerranJugador1);
-        radRazaTerranJugador1.setBounds(100, 250, 57, 23);
 
         buttonGroup2.add(radRazaProtossJugador1);
         radRazaProtossJugador1.setText("Protoss");
@@ -185,8 +162,6 @@ public class MenuVista extends JPanel {
                 radRazaProtossJugador1ActionPerformed(evt);
             }
         });
-        this.add(radRazaProtossJugador1);
-        radRazaProtossJugador1.setBounds(170, 250, 61, 23);
 
         buttonGroup2.add(jRadioButton6);
         jRadioButton6.setText("Zerg");
@@ -196,25 +171,130 @@ public class MenuVista extends JPanel {
                 jRadioButton6ActionPerformed(evt);
             }
         });
-        this.add(jRadioButton6);
-        jRadioButton6.setBounds(240, 250, 47, 23);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ROJO", "AZUL", "AZUL_TEAL", "PURPURA", "NARANJA", "MARRON", "BLANCO", "AMARILLO" }));
-        this.add(jComboBox2);
-        jComboBox2.setBounds(100, 280, 190, 20);
+        cboColorJugador1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ROJO", "AZUL", "AZUL_TEAL", "PURPURA", "NARANJA", "MARRON", "BLANCO", "AMARILLO" }));
 
         txtNombreJugador1.setText("Nombre");
-        this.add(txtNombreJugador1);
-        txtNombreJugador1.setBounds(100, 210, 190, 30);
 
         btnJugar.setText("JUGAR");
+        btnJugar.setName(""); // NOI18N
         btnJugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnJugarActionPerformed(evt);
             }
         });
-        this.add(btnJugar);
-        btnJugar.setBounds(160, 330, 300, 40);
+
+        chkNombreColorJugador2.setText("Usar nombre del color");
+        chkNombreColorJugador2.setName("chkNombreColorJugador2"); // NOI18N
+        chkNombreColorJugador2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkNombreColorJugador2ActionPerformed(evt);
+            }
+        });
+
+        chkNombreColorJugador1.setText("Usar nombre del color");
+        chkNombreColorJugador1.setName("chkNombreColorJugador1"); // NOI18N
+        chkNombreColorJugador1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkNombreColorJugador1ActionPerformed(evt);
+            }
+        });
+        
+        setOpaque(false);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel1)
+                .addGap(205, 205, 205)
+                .addComponent(jLabel2))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel8)
+                .addGap(27, 27, 27)
+                .addComponent(txtNombreJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(jLabel5)
+                .addGap(27, 27, 27)
+                .addComponent(txtNombreJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel6)
+                .addGap(46, 46, 46)
+                .addComponent(radRazaTerranJugador1)
+                .addGap(13, 13, 13)
+                .addComponent(radRazaProtossJugador1)
+                .addGap(9, 9, 9)
+                .addComponent(jRadioButton6)
+                .addGap(53, 53, 53)
+                .addComponent(jLabel3)
+                .addGap(46, 46, 46)
+                .addComponent(radRazaTerranJugador2)
+                .addGap(3, 3, 3)
+                .addComponent(radRazaProtossJugador2)
+                .addGap(19, 19, 19)
+                .addComponent(jRadioButton3))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel7)
+                .addGap(43, 43, 43)
+                .addComponent(cboColorJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(jLabel4)
+                .addGap(43, 43, 43)
+                .addComponent(cboColorJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(100, 100, 100)
+                .addComponent(chkNombreColorJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(120, 120, 120)
+                .addComponent(chkNombreColorJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(170, 170, 170)
+                .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(160, 160, 160)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNombreJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombreJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel5))))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(radRazaTerranJugador1)
+                    .addComponent(radRazaProtossJugador1)
+                    .addComponent(jRadioButton6)
+                    .addComponent(jLabel3)
+                    .addComponent(radRazaTerranJugador2)
+                    .addComponent(radRazaProtossJugador2)
+                    .addComponent(jRadioButton3))
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(cboColorJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(cboColorJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(chkNombreColorJugador1)
+                    .addComponent(chkNombreColorJugador2))
+                .addGap(7, 7, 7)
+                .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
 	}
 	
 	private void radRazaTerranJugador2ActionPerformed(java.awt.event.ActionEvent evt) {                                              
@@ -242,15 +322,31 @@ public class MenuVista extends JPanel {
     }                                             
 
     private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+        // Por ahora no hace nada
+    	Opciones opciones = new Opciones();
+    	
+    	this.game.comenzarJuego(opciones);
     }          
+    
+    private void chkNombreColorJugador1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        if (this.chkNombreColorJugador1.isSelected()) {
+        	
+        }
+    }                                          
+
+    private void chkNombreColorJugador2ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+    }                    
 	
 	public void tick(){
 		
 	}
 	
+	private static BufferedImage logo = ImageLoader.loadImage("/AlgoCraft.png"); //HUDzerg2.png, HUDprotoss2.png
+	
 	public void render(Graphics g) {
-		
+		g.drawImage(logo, 0, 0, null);
+
 	}
 	
 	
