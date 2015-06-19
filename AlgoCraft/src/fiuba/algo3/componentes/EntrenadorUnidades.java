@@ -47,7 +47,7 @@ public class EntrenadorUnidades implements IEntrenadorUnidades { //, Estado
 	
 	public void entrenar(AtributosUnidad atrUnidad){
 		portador.getPropietario().comprar(atrUnidad.getCosto().getCostoMineral(),
-				atrUnidad.getCosto().getCostoGasVespeno(), atrUnidad.getVoluntadDelSer().getCostoPoblacion());
+				atrUnidad.getCosto().getCostoGasVespeno(), atrUnidad.getCosto().getCostoPoblacion());
 		
 		if (entrenamientosActuales < this.atributos.getMaxEntrenamientosSimultaneos()){
 			portador.agregarEstado(new EstadoEntrenandoUnidad(this, atrUnidad));

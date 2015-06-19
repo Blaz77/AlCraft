@@ -8,7 +8,6 @@ import fiuba.algo3.componentes.IAtaque;
 import fiuba.algo3.componentes.IMagia;
 import fiuba.algo3.componentes.IMovimiento;
 import fiuba.algo3.componentes.ITransporte;
-import fiuba.algo3.componentes.VoluntadDelSer;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.magia.MagiaAUnidad;
 import fiuba.algo3.magia.MagiaDeAreaDeEfecto;
@@ -16,7 +15,6 @@ import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.mapa.MapaProxy;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
-import fiuba.algo3.excepciones.MovimientoInvalido;
 
 public class Unidad extends ObjetoVivo {
 	

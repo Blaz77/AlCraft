@@ -20,4 +20,8 @@ public class Costo {
 	public int getTurnosConstruccion(){
 		return this.atributos.getTurnosConstruccion();
 	}
+	
+	public int getCostoPoblacion(){
+		return this.atributos.getCostoPoblacion();
+	}
 }
