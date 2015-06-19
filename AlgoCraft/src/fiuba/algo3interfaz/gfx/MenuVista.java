@@ -23,8 +23,10 @@ import fiuba.algo3interfaz.input.btnConstruirMouseListener;
 
 public class MenuVista extends JPanel {
 	
-	private TipoRaza raza;
-	private Color color;
+	private TipoRaza razaJugador1;
+	private TipoRaza razaJugador2;
+	private Color colorJugador1;
+	private Color colorJugador2;
 	private Jugador jugador; // dale que va, esto ya es cualquier cosa
 	private Mapa mapaVisible;
 	private Posicion celdaSeleccionada = new Posicion(0,0);
@@ -35,7 +37,7 @@ public class MenuVista extends JPanel {
 	
 	private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnJugar;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
@@ -46,14 +48,14 @@ public class MenuVista extends JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton radRazaTerranJugador2;
+    private javax.swing.JRadioButton radRazaProtossJugador2;
     private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
+    private javax.swing.JRadioButton radRazaTerranJugador1;
+    private javax.swing.JRadioButton radRazaProtossJugador1;
     private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField txtNombreJugador2;
+    private javax.swing.JTextField txtNombreJugador1;
 
 	public MenuVista(int anchoVentana, int altoVentana, JPanel panel){
 		//this.panel = panel; //Experimental
@@ -73,17 +75,17 @@ public class MenuVista extends JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        txtNombreJugador2 = new javax.swing.JTextField();
+        radRazaTerranJugador2 = new javax.swing.JRadioButton();
+        radRazaProtossJugador2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
         jComboBox1 = new javax.swing.JComboBox();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
+        radRazaTerranJugador1 = new javax.swing.JRadioButton();
+        radRazaProtossJugador1 = new javax.swing.JRadioButton();
         jRadioButton6 = new javax.swing.JRadioButton();
         jComboBox2 = new javax.swing.JComboBox();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtNombreJugador1 = new javax.swing.JTextField();
+        btnJugar = new javax.swing.JButton();
 
         this.setLayout(null);
 
@@ -127,29 +129,29 @@ public class MenuVista extends JPanel {
         this.add(jLabel8);
         jLabel8.setBounds(30, 220, 43, 15);
 
-        jTextField1.setText("Nombre");
-        this.add(jTextField1);
-        jTextField1.setBounds(410, 210, 190, 30);
+        txtNombreJugador2.setText("Nombre");
+        this.add(txtNombreJugador2);
+        txtNombreJugador2.setBounds(410, 210, 190, 30);
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Terran");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(radRazaTerranJugador2);
+        radRazaTerranJugador2.setText("Terran");
+        radRazaTerranJugador2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                radRazaTerranJugador2ActionPerformed(evt);
             }
         });
-        this.add(jRadioButton1);
-        jRadioButton1.setBounds(410, 250, 57, 23);
+        this.add(radRazaTerranJugador2);
+        radRazaTerranJugador2.setBounds(410, 250, 57, 23);
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Protoss");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(radRazaProtossJugador2);
+        radRazaProtossJugador2.setText("Protoss");
+        radRazaProtossJugador2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                radRazaProtossJugador2ActionPerformed(evt);
             }
         });
-        this.add(jRadioButton2);
-        jRadioButton2.setBounds(470, 250, 61, 23);
+        this.add(radRazaProtossJugador2);
+        radRazaProtossJugador2.setBounds(470, 250, 61, 23);
 
         buttonGroup1.add(jRadioButton3);
         jRadioButton3.setText("Zerg");
@@ -166,25 +168,25 @@ public class MenuVista extends JPanel {
         this.add(jComboBox1);
         jComboBox1.setBounds(410, 280, 190, 20);
 
-        buttonGroup2.add(jRadioButton4);
-        jRadioButton4.setText("Terran");
-        jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup2.add(radRazaTerranJugador1);
+        radRazaTerranJugador1.setText("Terran");
+        radRazaTerranJugador1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton4ActionPerformed(evt);
+                radRazaTerranJugador1ActionPerformed(evt);
             }
         });
-        this.add(jRadioButton4);
-        jRadioButton4.setBounds(100, 250, 57, 23);
+        this.add(radRazaTerranJugador1);
+        radRazaTerranJugador1.setBounds(100, 250, 57, 23);
 
-        buttonGroup2.add(jRadioButton5);
-        jRadioButton5.setText("Protoss");
-        jRadioButton5.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup2.add(radRazaProtossJugador1);
+        radRazaProtossJugador1.setText("Protoss");
+        radRazaProtossJugador1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton5ActionPerformed(evt);
+                radRazaProtossJugador1ActionPerformed(evt);
             }
         });
-        this.add(jRadioButton5);
-        jRadioButton5.setBounds(170, 250, 61, 23);
+        this.add(radRazaProtossJugador1);
+        radRazaProtossJugador1.setBounds(170, 250, 61, 23);
 
         buttonGroup2.add(jRadioButton6);
         jRadioButton6.setText("Zerg");
@@ -201,45 +203,45 @@ public class MenuVista extends JPanel {
         this.add(jComboBox2);
         jComboBox2.setBounds(100, 280, 190, 20);
 
-        jTextField2.setText("Nombre");
-        this.add(jTextField2);
-        jTextField2.setBounds(100, 210, 190, 30);
+        txtNombreJugador1.setText("Nombre");
+        this.add(txtNombreJugador1);
+        txtNombreJugador1.setBounds(100, 210, 190, 30);
 
-        jButton1.setText("JUGAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnJugar.setText("JUGAR");
+        btnJugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnJugarActionPerformed(evt);
             }
         });
-        this.add(jButton1);
-        jButton1.setBounds(160, 330, 300, 40);
+        this.add(btnJugar);
+        btnJugar.setBounds(160, 330, 300, 40);
 	}
 	
-	private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // TODO add your handling code here:
+	private void radRazaTerranJugador2ActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        razaJugador2 = TipoRaza.TERRAN;
     }                                             
 
-    private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // TODO add your handling code here:
+    private void radRazaTerranJugador1ActionPerformed(java.awt.event.ActionEvent evt) {                                              
+    	razaJugador1 = TipoRaza.TERRAN;
     }                                             
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // TODO add your handling code here:
+    private void radRazaProtossJugador2ActionPerformed(java.awt.event.ActionEvent evt) {                                              
+    	razaJugador2 = TipoRaza.PROTOSS;
     }                                             
 
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
     }                                             
 
-    private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // TODO add your handling code here:
+    private void radRazaProtossJugador1ActionPerformed(java.awt.event.ActionEvent evt) {                                              
+    	razaJugador1 = TipoRaza.PROTOSS;
     }                                             
 
     private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
     }                                             
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
     }          
 	
