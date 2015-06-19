@@ -149,17 +149,8 @@ public abstract class ObjetoVivo implements Ocupante { //ObjetoVivo / ObjetoInte
 	}
 	
 	public void destruir(){
-		// Alguna idea para evitar la cadena de IFs?
-		if (this.debeOcuparMineral()) {
-			propietario.getMapa().reemplazar(posicion, new Mineral(posicion));
-		}
-		else if (this.debeOcuparGasVespeno()) {
-			propietario.getMapa().reemplazar(posicion, new GasVespeno(posicion));
-		}
-		else {
-			propietario.getMapa().removerOcupante(posicion);
-		}
-		
+		propietario.getMapa().removerOcupante(posicion);
+			
 		for (Estado estado : estados) {
 			estado.desactivar();
 		}

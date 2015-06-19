@@ -36,7 +36,7 @@ public class EstadoConstruyendoEdificio implements Estado {
 	public void desactivar() {
 		Edificio edificio = new Edificio(portador.getPropietario() ,portador.getPosicion(), this.atributos);
 		portador.destruir();
-		portador.getPropietario().getMapa().setOcupante(edificio, portador.getPosicion());
+		portador.getPropietario().getMapa().reemplazar(portador.getPosicion(), edificio);
 		portador.getPropietario().agregarEdificio(edificio);
 	}
 
