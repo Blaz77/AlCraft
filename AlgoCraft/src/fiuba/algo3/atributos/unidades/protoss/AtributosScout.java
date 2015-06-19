@@ -6,7 +6,7 @@ import java.util.List;
 import fiuba.algo3.atributos.AtributosAtaque;
 import fiuba.algo3.atributos.AtributosCosto;
 import fiuba.algo3.atributos.AtributosVida;
-import fiuba.algo3.atributos.AtributosVoluntadDelSer;
+import fiuba.algo3.atributos.AtributosMovimiento;
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.Ataque;
 import fiuba.algo3.componentes.Estado;
@@ -24,18 +24,21 @@ public class AtributosScout extends AtributosUnidad {
 		this.costo = new AtributosCosto(
 				300,	// costoMineral
 				150,	// costoGasVespeno
-				9);		// turnosConstruccion
+				9,		// turnosConstruccion
+				3);		// costoPoblacion
+		
 		this.vida = new AtributosVida(
 				150,	// vidaMaxima
 				100);	// escudoMaximo
+		
 		this.nombre = "Scout";
 
 		// fields de Unidad:
-		this.voluntadDelSer = new AtributosVoluntadDelSer(
-				3,		// costoPoblacion
+		this.movimiento = new AtributosMovimiento(
 				1,		// movPorTuno
-				7);		// rangoVision
-
+				7,		// rangoVision
+				0);		// costoAlmacenamiento
+		
 		// fields de UnidadAtaque:
 		this.ataque = new AtributosAtaque(
 				14,		// Danio A Aire

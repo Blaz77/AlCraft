@@ -1,23 +1,22 @@
 package fiuba.algo3.atributos.unidades;
 
+import fiuba.algo3.atributos.AtributosMovimiento;
 import fiuba.algo3.atributos.AtributosObjetoVivo;
-import fiuba.algo3.atributos.AtributosVoluntadDelSer;
 import fiuba.algo3.componentes.AtaqueNull;
 import fiuba.algo3.componentes.IAtaque;
 import fiuba.algo3.componentes.IMagia;
+import fiuba.algo3.componentes.IMovimiento;
 import fiuba.algo3.componentes.ITransporte;
 import fiuba.algo3.componentes.MagiaNull;
+import fiuba.algo3.componentes.Movimiento;
 import fiuba.algo3.componentes.TransporteNull;
-import fiuba.algo3.componentes.VoluntadDelSer;
 
 public abstract class AtributosUnidad extends AtributosObjetoVivo {
-
-	protected AtributosVoluntadDelSer voluntadDelSer;
-	protected int costoAlmacenamiento; //costoTransporte
 	
+	protected AtributosMovimiento movimiento;
 	
-	public VoluntadDelSer getVoluntadDelSer(){
-		return new VoluntadDelSer(this.voluntadDelSer);
+	public IMovimiento getMovimiento(){
+		return new Movimiento(this.movimiento);
 	}
 	
 	public IAtaque getAtaque() {
@@ -30,14 +29,6 @@ public abstract class AtributosUnidad extends AtributosObjetoVivo {
 	
 	public ITransporte getTransporte() {
 		return new TransporteNull();
-	}
-	
-	public int getCostoAlmacenamiento(){
-		return costoAlmacenamiento;
-	}
-	
-	public boolean puedeSerAlmacenada(){ //puedeSerTransportada
-		return false;
 	}
 	
 }

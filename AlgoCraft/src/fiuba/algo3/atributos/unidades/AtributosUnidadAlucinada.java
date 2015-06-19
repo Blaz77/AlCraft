@@ -7,12 +7,12 @@ import fiuba.algo3.componentes.Costo;
 import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.IAtaque;
 import fiuba.algo3.componentes.IMagia;
+import fiuba.algo3.componentes.IMovimiento;
 import fiuba.algo3.componentes.ITransporte;
 import fiuba.algo3.componentes.IVida;
 import fiuba.algo3.componentes.MagiaNull;
 import fiuba.algo3.componentes.TransporteNull;
 import fiuba.algo3.componentes.VidaAlucinada;
-import fiuba.algo3.componentes.VoluntadDelSer;
 
 public class AtributosUnidadAlucinada extends AtributosUnidad {
 
@@ -32,10 +32,6 @@ public class AtributosUnidadAlucinada extends AtributosUnidad {
 		return new AtaqueAlucinado(atributosUnidad.getAtaque());
 	}
 	
-	public VoluntadDelSer getVoluntadDelSer(){
-		return atributosUnidad.getVoluntadDelSer();
-	}
-	
 	public IMagia getMagia() {
 		return new MagiaNull();
 	}
@@ -44,12 +40,8 @@ public class AtributosUnidadAlucinada extends AtributosUnidad {
 		return new TransporteNull();
 	}
 	
-	public int getCostoAlmacenamiento(){
-		return atributosUnidad.getCostoAlmacenamiento();
-	}
-	
-	public boolean puedeSerAlmacenada(){ //puedeSerTransportada
-		return atributosUnidad.puedeSerAlmacenada();
+	public IMovimiento getMovimiento(){
+		return atributosUnidad.getMovimiento();
 	}
 	
 	public List<Estado> getEstadosIniciales(){

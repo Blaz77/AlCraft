@@ -2,8 +2,8 @@ package fiuba.algo3.atributos.unidades.terran;
 
 import fiuba.algo3.atributos.AtributosAtaque;
 import fiuba.algo3.atributos.AtributosCosto;
+import fiuba.algo3.atributos.AtributosMovimiento;
 import fiuba.algo3.atributos.AtributosVida;
-import fiuba.algo3.atributos.AtributosVoluntadDelSer;
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.Ataque;
 import fiuba.algo3.componentes.IAtaque;
@@ -14,16 +14,20 @@ public class AtributosEspectro extends AtributosUnidad {
 	
 	public AtributosEspectro(){
 		// fields ObjetoVivo:
-		this.costo = new AtributosCosto(150, 100, 8);
+		this.costo = new AtributosCosto(
+				150,	// costoMineral
+				100,	// costoGasVespeno
+				8,		// turnosConstruccion
+				2);		// costoPoblacion
+		
 		this.vida = new AtributosVida(120);
 		this.nombre = "Espectro";
 		
 		// fields de Unidad:
-		this.voluntadDelSer = new AtributosVoluntadDelSer(
-				2,	//costoPoblacion
-				1,	//movPorTuno
-				7);	//rangoVision
-		this.costoAlmacenamiento = 0;
+		this.movimiento = new AtributosMovimiento(
+				1,		// movPorTuno
+				7,		// rangoVision
+				0);		// costoAlmacenamiento
 		
 		// fields de UnidadAtaque:
 		this.ataque = new AtributosAtaque(
@@ -34,6 +38,7 @@ public class AtributosEspectro extends AtributosUnidad {
 				1); //Ataques por Turno
 	}
 	
+	@Override
 	public IAtaque getAtaque(){
 		return new Ataque(this.ataque);
 	}
@@ -41,10 +46,6 @@ public class AtributosEspectro extends AtributosUnidad {
 	@Override
 	public boolean puedeOcuparEspacio() {
 		return true;
-	}
-	
-	public boolean puedeSerAlmacenada(){ //puedeSerTransportada
-		return false;
 	}
 	
 	@Override

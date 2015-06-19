@@ -6,7 +6,7 @@ import java.util.List;
 import fiuba.algo3.atributos.AtributosCosto;
 import fiuba.algo3.atributos.AtributosTransporte;
 import fiuba.algo3.atributos.AtributosVida;
-import fiuba.algo3.atributos.AtributosVoluntadDelSer;
+import fiuba.algo3.atributos.AtributosMovimiento;
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.EstadoRegenerandoEscudo;
@@ -24,18 +24,20 @@ public class AtributosNaveDeTransporteProtoss extends AtributosUnidad {
 		this.costo = new AtributosCosto(
 				200,	// costoMineral
 				0,		// costoGasVespeno
-				8);		// turnosConstruccion
+				8,		// turnosConstruccion
+				2);		// costoPoblacion
+		
 		this.vida = new AtributosVida(
 				80,		// vidaMaxima
 				60);	// escudoMaximo
+		
 		this.nombre = "Nave de transporte";
 		
 		// fields de Unidad:
-		this.voluntadDelSer = new AtributosVoluntadDelSer(
-				2,	//costoPoblacion
-				4,	//movPorTuno
-				7);	//rangoVision
-		this.costoAlmacenamiento = 0; //tecnicamente no es almacenable
+		this.movimiento = new AtributosMovimiento(
+				4,		// movPorTuno
+				7,		// rangoVision
+				0);		// costoAlmacenamiento
 		
 		// fields de UnidadTransporte:
 		this.transporte = new AtributosTransporte(8); //capac.Almac.

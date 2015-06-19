@@ -2,8 +2,8 @@ package fiuba.algo3.atributos.unidades.terran;
 
 import fiuba.algo3.atributos.AtributosAtaque;
 import fiuba.algo3.atributos.AtributosCosto;
+import fiuba.algo3.atributos.AtributosMovimiento;
 import fiuba.algo3.atributos.AtributosVida;
-import fiuba.algo3.atributos.AtributosVoluntadDelSer;
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.Ataque;
 import fiuba.algo3.componentes.IAtaque;
@@ -14,16 +14,20 @@ public class AtributosMarine extends AtributosUnidad {
 	
 	public AtributosMarine(){
 		// fields ObjetoVivo:
-		this.costo = new AtributosCosto(50, 0, 3);
+		this.costo = new AtributosCosto(
+				50,		// costoMineral
+				0,		// costoGasVespeno
+				3,		// turnosConstruccion
+				1);		// costoPoblacion
+		
 		this.vida = new AtributosVida(40);
 		this.nombre = "Marine";
 		
 		// fields de Unidad:
-		this.voluntadDelSer = new AtributosVoluntadDelSer(
-				1,	//costoPoblacion
-				1,	//movPorTuno
-				7);	//rangoVision
-		this.costoAlmacenamiento = 1;
+		this.movimiento = new AtributosMovimiento(
+				1,		// movPorTuno
+				7,		// rangoVision
+				1);		// costoAlmacenamiento
 		
 		// fields de UnidadAtaque:
 		this.ataque = new AtributosAtaque(
@@ -38,8 +42,4 @@ public class AtributosMarine extends AtributosUnidad {
 		return new Ataque(this.ataque);
 	}
 	
-	public boolean puedeSerAlmacenada(){ //puedeSerTransportada
-		return true;
-	}
-
 }

@@ -5,8 +5,8 @@ import java.util.List;
 
 import fiuba.algo3.atributos.AtributosCosto;
 import fiuba.algo3.atributos.AtributosMagia;
+import fiuba.algo3.atributos.AtributosMovimiento;
 import fiuba.algo3.atributos.AtributosVida;
-import fiuba.algo3.atributos.AtributosVoluntadDelSer;
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.EstadoRegenerandoEscudo;
@@ -26,17 +26,20 @@ public class AtributosAltoTemplario extends AtributosUnidad {
 		this.costo = new AtributosCosto(
 				50,		// costoMineral
 				150,	// costoGasVespeno
-				7);		// turnosConstruccion
+				7,		// turnosConstruccion
+				2);		// costoPoblacion
+		
 		this.vida = new AtributosVida(
 				40,		// vidaMaxima
 				40);	// escudoMaximo
+		
 		this.nombre = "Alto Templario";
 		
 		// fields de Unidad:
-		this.voluntadDelSer = new AtributosVoluntadDelSer(
-				2,		// costoPoblacion
+		this.movimiento = new AtributosMovimiento(
 				1,		// movPorTuno
-				7);		// rangoVision
+				7,		// rangoVision
+				2);		// costoAlmacenamiento
 		
 		// fields de UnidadMagica
 		this.magia = new AtributosMagia(
@@ -63,8 +66,4 @@ public class AtributosAltoTemplario extends AtributosUnidad {
 		return new Magia(this.magia);
 	}
 	
-	@Override
-	public boolean puedeOcuparEspacio() {
-		return true;
-	}
 }

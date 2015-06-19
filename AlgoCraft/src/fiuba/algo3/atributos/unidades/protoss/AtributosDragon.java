@@ -5,8 +5,8 @@ import java.util.List;
 
 import fiuba.algo3.atributos.AtributosAtaque;
 import fiuba.algo3.atributos.AtributosCosto;
+import fiuba.algo3.atributos.AtributosMovimiento;
 import fiuba.algo3.atributos.AtributosVida;
-import fiuba.algo3.atributos.AtributosVoluntadDelSer;
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.Ataque;
 import fiuba.algo3.componentes.Estado;
@@ -24,17 +24,20 @@ public class AtributosDragon extends AtributosUnidad {
 		this.costo = new AtributosCosto(
 				125,	// costoMineral
 				50,		// costoGasVespeno
-				6);		// turnosConstruccion
+				6,		// turnosConstruccion
+				2);		// costoPoblacion
+		
 		this.vida = new AtributosVida(
 				100,	// vidaMaxima
 				80);	// escudoMaximo
+		
 		this.nombre = "Dragon";
 
 		// fields de Unidad:
-		this.voluntadDelSer = new AtributosVoluntadDelSer(
-				2,		// costoPoblacion
+		this.movimiento = new AtributosMovimiento(
 				1,		// movPorTuno
-				8);		// rangoVision
+				8,		// rangoVision
+				4);		// costoAlmacenamiento
 
 		// fields de UnidadAtaque:
 		this.ataque = new AtributosAtaque(
@@ -58,10 +61,6 @@ public class AtributosDragon extends AtributosUnidad {
 	@Override
 	public IAtaque getAtaque(){
 		return new Ataque(this.ataque);
-	}
-	
-	public boolean puedeSerAlmacenada(){ //puedeSerTransportada
-		return true;
 	}
 	
 }

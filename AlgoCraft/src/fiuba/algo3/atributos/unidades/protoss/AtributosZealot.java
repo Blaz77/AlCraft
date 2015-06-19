@@ -5,15 +5,14 @@ import java.util.List;
 
 import fiuba.algo3.atributos.AtributosAtaque;
 import fiuba.algo3.atributos.AtributosCosto;
+import fiuba.algo3.atributos.AtributosMovimiento;
 import fiuba.algo3.atributos.AtributosVida;
-import fiuba.algo3.atributos.AtributosVoluntadDelSer;
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.Ataque;
 import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.EstadoRegenerandoEscudo;
 import fiuba.algo3.componentes.IAtaque;
 import fiuba.algo3.componentes.IVida;
-import fiuba.algo3.componentes.Vida;
 import fiuba.algo3.componentes.VidaConEscudo;
 
 public class AtributosZealot extends AtributosUnidad {
@@ -25,17 +24,20 @@ public class AtributosZealot extends AtributosUnidad {
 		this.costo = new AtributosCosto(
 				100,	// costoMineral
 				0,		// costoGasVespeno
-				4);		// turnosConstruccion
+				4,		// turnosConstruccion
+				2);		// costoPoblacion
+		
 		this.vida = new AtributosVida(
 				100,	// vidaMaxima
 				60);	// escudoMaximo
+		
 		this.nombre = "Zealot";
 		
 		// fields de Unidad:
-		this.voluntadDelSer = new AtributosVoluntadDelSer(
-				2,		// costoPoblacion
+		this.movimiento = new AtributosMovimiento(
 				1,		// movPorTuno
-				7);		// rangoVision
+				7,		// rangoVision
+				2);		// costoAlmacenamiento
 		
 		// fields de UnidadAtaque:
 		this.ataque = new AtributosAtaque(
@@ -59,10 +61,6 @@ public class AtributosZealot extends AtributosUnidad {
 	@Override
 	public IAtaque getAtaque(){
 		return new Ataque(this.ataque);
-	}
-	
-	public boolean puedeSerAlmacenada(){ //puedeSerTransportada
-		return true;
 	}
 
 }
