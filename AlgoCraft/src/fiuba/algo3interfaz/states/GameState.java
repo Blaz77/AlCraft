@@ -5,6 +5,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 
+import javax.swing.SwingUtilities;
+
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3interfaz.gfx.HudVista;
 import fiuba.algo3interfaz.gfx.MapaVista;
@@ -12,14 +14,17 @@ import fiuba.algo3interfaz.gfx.MapaVista;
 public class GameState extends State {
 	final int HUD_INICIO_Y = 360;
 
-	private static final int MOV_CAMARA = 50;
+	private static final int MOV_CAMARA = 16;
 	private MapaVista mapaActual;
 	private HashMap<Jugador, MapaVista> mapas = new HashMap<Jugador, MapaVista>();
 	private int i,j;
 	private int iCamara,jCamara;
 	private HashMap<Jugador, HudVista> huds = new HashMap<Jugador, HudVista>();
 	private HudVista hudActual;
-	
+
+	private int previous_x;
+	private int previous_y;
+
 
 	
 	public GameState(){
@@ -60,6 +65,13 @@ public class GameState extends State {
 
 	public void mousePressed(MouseEvent e) {
 		// TODO: Mejorar
+				
+	    if(SwingUtilities.isMiddleMouseButton(e)){
+	    	this.previous_x = e.getX();
+			this.previous_y = e.getY();
+
+	    }
+		
 		if (e.getY() < HUD_INICIO_Y) {
 			mapaActual.setCeldaSeleccionada(e.getX(), e.getY());
 			hudActual.actualizar(mapaActual.getPosicionCeldaSeleccionada());
@@ -80,9 +92,20 @@ public class GameState extends State {
 		//System.out.println("Released!");
 	}
 
+	
+	
+	
 	public void mouseDragged(MouseEvent e) {
-		//mapaActual.setCeldaSeleccionada(e.getX(), e.getY());
-		//System.out.println("Dragged!");
+		
+		
+	    if(SwingUtilities.isMiddleMouseButton(e)){
+	    	mapaActual.moverCamara((this.previous_x - e.getX()) * MOV_CAMARA, (this.previous_y - e.getY()) * MOV_CAMARA);
+	    	this.previous_x = e.getX();
+	    	this.previous_y = e.getY();
+
+	    }
+	    
+		game.getPanel().repaint();
 	}
 
 	/** Key Pressings **/
@@ -121,4 +144,5 @@ public class GameState extends State {
 		game.getPanel().repaint();
 	}
 
+	
 }

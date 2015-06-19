@@ -1,7 +1,11 @@
 package fiuba.algo3interfaz.gfx;
 
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.IndexColorModel;
+import java.awt.image.WritableRaster;
 import java.util.HashMap;
+import java.util.Hashtable;
 
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.terreno.Terreno;
@@ -17,12 +21,12 @@ public class SpriteSheet {
 
     public static final BufferedImage spriteMarcaMapa = ImageLoader.loadImage(MARCA_MAPA_PATH);
     
-	public static final SpriteSheet spritesTierra = new SpriteSheet(TIERRA_PATH);
-	public static final SpriteSheet spritesEspacio = new SpriteSheet(ESPACIO_PATH);
-	public static final SpriteSheet spritesHibrido = new SpriteSheet(HIBRIDO_PATH);
+	public static SpriteSheet spritesTierra = new SpriteSheet(TIERRA_PATH);
+	public static SpriteSheet spritesEspacio = new SpriteSheet(ESPACIO_PATH);
+	public static SpriteSheet spritesHibrido = new SpriteSheet(HIBRIDO_PATH);
 	
-	public static final SpriteSheet spritesMineral = new SpriteSheet(MINERAL_PATH);
-	public static final SpriteSheet spritesVespeno = new SpriteSheet(VESPENO_PATH);
+	public static SpriteSheet spritesMineral = new SpriteSheet(MINERAL_PATH);
+	public static SpriteSheet spritesVespeno = new SpriteSheet(VESPENO_PATH);
     
 	private static HashMap<Object, SpriteSheet> Sprites = new HashMap<Object, SpriteSheet>(){
         {
@@ -68,6 +72,16 @@ public class SpriteSheet {
 	}	
 	
 	public static void inicializar() {
+		for (int i = 0; i < spritesTierra.cantidad; i++){
+			
+			BufferedImage sprite = spritesTierra.sheet[i];
+			
+			byte[] g = {0,0,0,0};
+			ColorModel icm2 = spritesEspacio.sheet[(i+ 1) % spritesTierra.cantidad].getColorModel();
+			WritableRaster wr = spritesTierra.sheet[(i+ 1) % spritesTierra.cantidad].getRaster();
+			boolean bAlphaPremultiplied = sprite.isAlphaPremultiplied();
+			spritesTierra.sheet[i] = new BufferedImage(icm2, wr, bAlphaPremultiplied, new Hashtable());
+		}
 	}
 	
 	/** Clase **/
