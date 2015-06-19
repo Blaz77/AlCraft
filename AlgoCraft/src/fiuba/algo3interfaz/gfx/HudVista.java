@@ -18,7 +18,7 @@ import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3interfaz.input.btnConstruirMouseListener;
 
 
-public class HudVista {
+public class HudVista extends JPanel {
 	
 	private TipoRaza raza;
 	private Color color;
@@ -46,14 +46,14 @@ public class HudVista {
 		
 		this.anchoVentana = anchoVentana;
 		this.altoVentana = altoVentana;
-		
+		this.setVisible(false);
 		
 		
 		/* Botones utiles inicialmente invisibles */
 		btnConstruir = new JButton(new ImageIcon(picConstruir));
 		btnConstruir.addMouseListener(new btnConstruirMouseListener());
-		btnConstruir.setVisible(false);
-		panel.add(btnConstruir);
+		btnConstruir.setVisible(true);
+		add(btnConstruir);
 	}
 	
 	public void tick(){

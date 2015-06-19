@@ -7,7 +7,7 @@ public class btnConstruirMouseListener implements MouseListener {
 
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-
+		System.out.println("Hola");
 	}
 
 	public void mouseEntered(MouseEvent arg0) {

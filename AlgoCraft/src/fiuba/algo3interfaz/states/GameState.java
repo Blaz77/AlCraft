@@ -27,18 +27,23 @@ public class GameState extends State {
 		Jugador jugador = game.getModelo().getJugador(1);
 		mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getAncho(), game.getAlto() - 120));
 		huds.put(jugador, new HudVista(jugador, game.getAncho(), game.getAlto(), game));
+		game.add(huds.get(jugador));
 		jugador = game.getModelo().getJugador(2);
 		mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getAncho(), game.getAlto() - 150));
 		huds.put(jugador, new HudVista(jugador, game.getAncho(), game.getAlto(), game));
+		game.add(huds.get(jugador));
 			
 		mapaActual = mapas.get(game.getModelo().getJugadorActual());
-		this.hudActual =  huds.get(game.getModelo().getJugadorActual());
+		hudActual =  huds.get(game.getModelo().getJugadorActual());
+		hudActual.setVisible(true);
 	}
 	
 	@Override
 	public void tick() {
+		hudActual.setVisible(false);
 		mapaActual = mapas.get(game.getModelo().getJugadorActual());
 		hudActual = huds.get(game.getModelo().getJugadorActual());
+		hudActual.setVisible(true);
 		mapaActual.tick();
 		hudActual.tick();
 	}
