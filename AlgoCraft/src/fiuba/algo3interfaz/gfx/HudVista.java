@@ -51,9 +51,11 @@ public class HudVista extends JPanel {
 		
 		/* Botones utiles inicialmente invisibles */
 		btnConstruir = new JButton(new ImageIcon(picConstruir));
-		btnConstruir.addMouseListener(new btnConstruirMouseListener());
+		btnConstruir.addMouseListener(new btnConstruirMouseListener(this));
 		btnConstruir.setVisible(true);
 		add(btnConstruir);
+		
+		// Edificios construibles
 	}
 	
 	public void tick(){
@@ -107,6 +109,11 @@ public class HudVista extends JPanel {
 
 
 	public void recibirClick(int x, int y) {
+		// Obsoleto
+	}
+
+	public void mostrarOpcionesConstruccion() {
+		
 		
 	}
 }

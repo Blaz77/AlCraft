@@ -22,11 +22,6 @@ public class Edificio extends ObjetoVivo {
 	}
 	
 	
-	//private Trabajo porDefecto;
-	//private Ataque ataque;
-	//private Movimiento mov;
-	//private Almacenador alm;
-	
 	public TipoOcupante getTipo(){
 		return TipoOcupante.EDIFICIO;
 	}
