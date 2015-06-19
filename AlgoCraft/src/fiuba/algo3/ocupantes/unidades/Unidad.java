@@ -12,7 +12,7 @@ import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.magia.MagiaAUnidad;
 import fiuba.algo3.magia.MagiaDeAreaDeEfecto;
 import fiuba.algo3.mapa.Posicion;
-import fiuba.algo3.mapa.MapaProxy;
+import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 
@@ -70,7 +70,7 @@ public class Unidad extends ObjetoVivo {
 	}
 
 	//TODO: chequear q funcione!
-	public HashSet<Posicion> getPosiblesMovimientos(MapaProxy mapa){
+	public HashSet<Posicion> getPosiblesMovimientos(Mapa mapa){
 		return this.movimiento.getPosiblesMovimientos(mapa);
 	}
 

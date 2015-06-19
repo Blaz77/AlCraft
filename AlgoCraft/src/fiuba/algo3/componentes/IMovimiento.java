@@ -2,7 +2,7 @@ package fiuba.algo3.componentes;
 
 import java.util.HashSet;
 
-import fiuba.algo3.mapa.MapaProxy;
+import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 
@@ -20,7 +20,7 @@ public interface IMovimiento {
 		public void moverA(Posicion destino);
 
 		//TODO: chequear q funcione!
-		public HashSet<Posicion> getPosiblesMovimientos(MapaProxy mapa);
+		public HashSet<Posicion> getPosiblesMovimientos(Mapa mapa);
 
 		public int getRangoVision();
 

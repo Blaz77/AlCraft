@@ -2,22 +2,18 @@ package fiuba.algo3.mapa;
 
 import java.util.ArrayList;
 
-import fiuba.algo3.atributos.unidades.terran.AtributosMarine;
 import fiuba.algo3.excepciones.CeldaNoVisible;
-import fiuba.algo3.juego.Color;
-import fiuba.algo3.juego.Jugador;
-import fiuba.algo3.ocupantes.CeldaVacia;
 import fiuba.algo3.ocupantes.Ocupante;
 import fiuba.algo3.ocupantes.OcupanteDesconocido;
 import fiuba.algo3.ocupantes.unidades.Unidad;
-import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.terreno.Terreno;
 
 public class MapaProxy implements Mapa {
 
-	MapaReal mapa;
-	ArrayList<Unidad> unidadesJugador;
-	Visibilidad[][] mapaVisibilidad;
+	private Mapa mapa;
+	//private ArrayList<Unidad> unidadesJugador;
+	private Visibilidad[][] mapaVisibilidad;
+	private Posicion posicionInicial;
 	
 /**********************************************/
 /**              INICIALIZACION              **/
@@ -26,11 +22,11 @@ public class MapaProxy implements Mapa {
 	/* Genera un mapa aleatorio para 2 jugadores, con la cantidad 
 	 * de bases especificada
 	 */
-	public MapaProxy(MapaReal mapa, ArrayList<Unidad> unidades){
+	public MapaProxy(Mapa mapa, Posicion origen){
 		int ancho, alto;
 		
+		this.posicionInicial = origen;
 		this.mapa = mapa;
-		this.unidadesJugador = unidades;
 				
 		//unidades.add(new Unidad(null, new Posicion(12,12), new AtributosMarine()));
 		//unidades.add(new Unidad(null, new Posicion(20,12), new AtributosMarine()));
@@ -46,10 +42,18 @@ public class MapaProxy implements Mapa {
 			for (int y = 0; y < alto; y++)
 				mapaVisibilidad[x][y] = new Visibilidad();
 		
-		for (Unidad unidad: unidadesJugador)
-			iluminar(unidad);
+		setPuntoOrigen(origen);
 	
 	}
+	
+	private void setPuntoOrigen(Posicion posicionInicial) {
+		// Proximamente esto en el constructor
+		final int SEMILADO = 8; //Arbitrario
+		
+		this._visibilizar_area(new Posicion(posicionInicial.getX() - SEMILADO, posicionInicial.getY() - SEMILADO), 
+							new Posicion(posicionInicial.getX() + SEMILADO, posicionInicial.getY() + SEMILADO));
+	}
+	
 	private void iluminar(Unidad unidad){
 		_cambiarIluminacion(unidad, true);
 	}
@@ -92,6 +96,10 @@ public class MapaProxy implements Mapa {
 	/**             SETTERS, GETTERS             **/
 	/**********************************************/
 	
+	public Posicion getPosicionInicial() {
+		return this.posicionInicial;
+	}
+	
 	public boolean celdaValida(Posicion posicion) {
 		return mapa.celdaValida(posicion);
 	}
@@ -120,8 +128,8 @@ public class MapaProxy implements Mapa {
 	}
 	
 	public void setOcupante(Ocupante ocupante, Posicion posicion) {
-		//if (! (getVisibilidad(posicion)).verOcupante())
-		//	throw new CeldaNoVisible();
+		if (! (getVisibilidad(posicion)).verOcupante())
+			throw new CeldaNoVisible();
 		
 		mapa.setOcupante(ocupante, posicion);
 	}
@@ -150,14 +158,6 @@ public class MapaProxy implements Mapa {
 	
 	public Ocupante reemplazar(Posicion posicion, Ocupante reemplazante){
 		return mapa.reemplazar(posicion, reemplazante);
-	}
-	
-	public void setPuntoOrigen(Posicion posicionInicial) {
-		// Proximamente esto en el constructor
-		final int SEMILADO = 8; //Arbitrario
-		
-		this._visibilizar_area(new Posicion(posicionInicial.getX() - SEMILADO, posicionInicial.getY() - SEMILADO), 
-							new Posicion(posicionInicial.getX() + SEMILADO, posicionInicial.getY() + SEMILADO));
 	}
 
 	public void mover(Unidad /*ObjetoVivo*/ unidad, Posicion destino){
@@ -201,7 +201,7 @@ public class MapaProxy implements Mapa {
 		}
 	}
 	
-	public static void main(String args[]){ // Cambiar a "main" para ejecutar y probar
+	/*public static void main(String args[]){ // Cambiar a "main" para ejecutar y probar
 		
 		MapaReal mapa = new MapaReal(3);
 		Jugador jugador = new Jugador("Carlitos", Color.AZUL, TipoRaza.TERRAN, mapa);
@@ -220,6 +220,6 @@ public class MapaProxy implements Mapa {
 		
 		
 		mapaProxy.imprimirMapaConReferencias();
-	}
+	}*/
 
 }

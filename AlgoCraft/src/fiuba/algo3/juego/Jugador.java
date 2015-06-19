@@ -8,8 +8,6 @@ import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.SuministroInsuficiente;
 import fiuba.algo3.excepciones.UnidadNoPropia;
 import fiuba.algo3.mapa.Mapa;
-import fiuba.algo3.mapa.MapaReal;
-import fiuba.algo3.mapa.MapaProxy;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.ocupantes.unidades.Unidad;
@@ -40,13 +38,13 @@ public class Jugador {
 	private int gasVespeno;
 	private int poblacion;
 	private int poblacionCapacidad; // Depende de los edificios correspondientes.
-	private MapaProxy mapaPropio;
+	private Mapa mapaPropio;
 	private Posicion posicionInicial;
 	private ArrayList<Unidad> unidades = new ArrayList<Unidad>();
 	private ArrayList<Edificio> edificios = new ArrayList<Edificio>();
 	private String nombre;
 
-	public Jugador(String nombre, Color color, TipoRaza raza, MapaReal mapa) { // MapaProxy? 
+	public Jugador(String nombre, Color color, TipoRaza raza, Mapa mapa) { // MapaProxy? 
 		
 		this.color = color;
 		this.raza = RazaFactory.getRaza(raza);
@@ -59,7 +57,7 @@ public class Jugador {
 		this.minerales = MINERALES_INICIAL;
 		this.gasVespeno = VESPENO_INICIAL;
 		this.poblacion = 0;
-		this.mapaPropio = new MapaProxy(mapa, unidades);
+		this.mapaPropio = mapa;
 	}
 
 	public Color getColor() {
@@ -129,12 +127,8 @@ public class Jugador {
 		return this.poblacionCapacidad;
 	}
 	
-	public MapaProxy getMapa() {
+	public Mapa getMapa() {
 		return this.mapaPropio;
-	}
-	
-	public Posicion getPosicionInicial() {
-		return this.posicionInicial;
 	}
 
 	public int getGasVespeno() {
@@ -178,9 +172,9 @@ public class Jugador {
 			edificio.pasarTurno();
 	}
 
-	public void setPosicionInicial(Posicion posicionInicial) {
+	/*public void setPosicionInicial(Posicion posicionInicial) {
 		this.posicionInicial = posicionInicial;
 		this.mapaPropio.setPuntoOrigen(posicionInicial);
-	}
+	}*/
 
 }

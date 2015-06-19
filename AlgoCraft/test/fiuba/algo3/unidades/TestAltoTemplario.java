@@ -46,8 +46,8 @@ public class TestAltoTemplario extends TestUnidadMagica {
 	}
 	
 	@Test
-	public void testAltoTemplarioPuedeVolar() {
-		assertTrue(this.unidad.puedeOcuparEspacio());
+	public void testAltoTemplarioNoPuedeVolar() {
+		assertFalse(this.unidad.puedeOcuparEspacio());
 	}
 	
 	@Test

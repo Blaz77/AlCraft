@@ -10,6 +10,7 @@ import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Juego;
 import fiuba.algo3.juego.Opciones;
 import fiuba.algo3.mapa.Mapa;
+import fiuba.algo3.mapa.MapaProxy;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
@@ -34,6 +35,10 @@ public class TestSoloTerran {
 		return null;
 	}
 	
+	private MapaProxy getProxy(){
+		return (MapaProxy) juego.getJugadorActual().getMapa();
+	}
+	
 	@Before
 	public void setUp() {
 		Opciones opciones = new Opciones();
@@ -54,18 +59,18 @@ public class TestSoloTerran {
 		assertEquals(juego.getJugadorActual().getCapacidadPoblacion(), SUMINISTRO_INICIAL);
 		
 		/* Conocimiento parcial del mapa */
-		Posicion posInicial = juego.getJugadorActual().getPosicionInicial();
+		Posicion posInicial = getProxy().getPosicionInicial();
 		
-		assertTrue(juego.getJugadorActual().getMapa().getVisibilidad(
+		assertTrue(getProxy().getVisibilidad(
 				posInicial).verTerreno()
 				);
-		assertTrue(juego.getJugadorActual().getMapa().getVisibilidad(
+		assertTrue(getProxy().getVisibilidad(
 				posInicial).verOcupante()
 				);
-		assertFalse(juego.getJugadorActual().getMapa().getVisibilidad(
+		assertFalse(getProxy().getVisibilidad(
 				new Posicion(50, 10)).verTerreno()
 				);
-		assertFalse(juego.getJugadorActual().getMapa().getVisibilidad(
+		assertFalse(getProxy().getVisibilidad(
 				new Posicion(50, 10)).verOcupante()
 				);
 		

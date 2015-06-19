@@ -3,6 +3,7 @@ package fiuba.algo3.juego;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import fiuba.algo3.mapa.MapaProxy;
 import fiuba.algo3.mapa.MapaReal;
 import fiuba.algo3.raza.TipoRaza;
 
@@ -35,8 +36,9 @@ public class Juego implements Iterable<Jugador>, Iterator<Jugador>{
 			nombreJugador = opciones.getNombreJugador(n);
 			colorJugador = opciones.getColorJugador(n);
 			razaJugador = opciones.getRazaJugador(n);
-			jugadores.add(new Jugador(nombreJugador, colorJugador, razaJugador, mapa));
-			jugadores.get(n-1).setPosicionInicial(mapa.obtenerBaseDeJugador(n).getPosicion());
+			MapaProxy proxy = new MapaProxy(mapa, mapa.obtenerBaseDeJugador(n).getPosicion());
+			jugadores.add(new Jugador(nombreJugador, colorJugador, razaJugador, proxy));
+			//jugadores.get(n-1).setPosicionInicial(mapa.obtenerBaseDeJugador(n).getPosicion());
 		}
 	}
 		

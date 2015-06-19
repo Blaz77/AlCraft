@@ -5,7 +5,7 @@ import java.util.HashSet;
 
 import fiuba.algo3.atributos.AtributosMovimiento;
 import fiuba.algo3.excepciones.MovimientoInvalido;
-import fiuba.algo3.mapa.MapaProxy;
+import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.unidades.Unidad;
@@ -68,7 +68,7 @@ public class Movimiento implements IMovimiento, Estado {
 	}
 
 	//TODO: chequear q funcione!
-	public HashSet<Posicion> getPosiblesMovimientos(MapaProxy mapa){
+	public HashSet<Posicion> getPosiblesMovimientos(Mapa mapa){
 		HashSet<Posicion> posiblesMov = new HashSet<Posicion>();
 		_getPosiblesMovimientos(mapa, posiblesMov, portador.getPosicion(), movRestantes);
 		return posiblesMov;
@@ -76,7 +76,7 @@ public class Movimiento implements IMovimiento, Estado {
 	}
 	
 	// TODO: chequear q funcione! Basicamente hago un BFS y agrego todas las unidades a las q llego
-	public void _getPosiblesMovimientos(MapaProxy mapa, HashSet<Posicion> posiblesMov, Posicion posicionActual, int restantes){
+	public void _getPosiblesMovimientos(Mapa mapa, HashSet<Posicion> posiblesMov, Posicion posicionActual, int restantes){
 		if (restantes == 0 || posiblesMov.contains(posicionActual)) return;
 		restantes --;
 		posiblesMov.add(posicionActual);
