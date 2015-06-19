@@ -15,7 +15,7 @@ import fiuba.algo3interfaz.states.State;
 
 public class Game extends JPanel implements Runnable { // Permite correr un thread
 
-	private static final int FRAMES_PER_SECOND = 30;
+	private static final int FRAMES_PER_SECOND = 3;
 	
 	/** Atributos del Thread **/
 	private boolean running = false;
@@ -89,6 +89,8 @@ public class Game extends JPanel implements Runnable { // Permite correr un thre
 		long now;
 		long lastTime = System.nanoTime(); // tiempo actual de la pc en nanos
 		
+		tick();
+		repaint();
 		// Game loop basico:
 		while(running){
 			
@@ -96,7 +98,7 @@ public class Game extends JPanel implements Runnable { // Permite correr un thre
 			delta += (now - lastTime) / timePerTick;
 			lastTime = now;
 			if (delta >= 1){
-				tick();
+				//tick();
 				repaint();
 				delta --;
 			}

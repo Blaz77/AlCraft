@@ -63,6 +63,7 @@ public class GameState extends State {
 		else {
 			hudActual.recibirClick(e.getX(), e.getY());
 		}
+		game.repaint();
 		//System.out.println("Pressed!");
 	}
 
@@ -71,6 +72,7 @@ public class GameState extends State {
 			mapaActual.setCeldaSeleccionada(e.getX(), e.getY());
 			hudActual.actualizar(mapaActual.getPosicionCeldaSeleccionada());
 		}
+		game.repaint();
 		//System.out.println("Released!");
 	}
 
@@ -98,6 +100,7 @@ public class GameState extends State {
 		mapaActual.moverCeldaSeleccionada(i, j);
 		mapaActual.moverCamara(iCamara, jCamara);
 
+		game.repaint();
 	}
 
 	public void keyReleased(KeyEvent e) {
@@ -110,6 +113,8 @@ public class GameState extends State {
 		if(keyReleased == KeyEvent.VK_DOWN)jCamara = 0;
 		if(keyReleased == KeyEvent.VK_LEFT)iCamara = 0;
 		if(keyReleased == KeyEvent.VK_RIGHT)iCamara = 0;
+		
+		game.repaint();
 	}
 
 }
