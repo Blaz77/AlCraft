@@ -7,8 +7,6 @@ import java.awt.image.BufferedImageOp;
 import java.awt.image.RescaleOp;
 import java.util.Random;
 
-import javax.swing.JPanel;
-
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.MapaReal;
 import fiuba.algo3.mapa.Posicion;
@@ -23,6 +21,8 @@ public class MapaVista {
 	private CeldaVista[][] mapaVista;
 	private int ancho;
 	private int alto;
+	private int anchoVentana;
+	private int altoVentana;
 	
 	private int filSeleccionada = 0;
 	private int colSeleccionada = 0;
@@ -30,16 +30,17 @@ public class MapaVista {
 	private Camara camara;
 	
 	private BufferedImage marcaMapa = SpriteSheet.getSpriteMarcaMapa();
-	private JPanel panel;
 	
-	public MapaVista(Mapa mapa, JPanel panel){
+	public MapaVista(Mapa mapa, int anchoVentana, int altoVentana){
 		
+		this.anchoVentana = anchoVentana;
+		this.altoVentana = altoVentana;
 		this.datosMapa = mapa;
-		this.panel = panel;
+
 		this.ancho = datosMapa.ancho();
 		this.alto = datosMapa.alto();
 		this.mapaVista = new CeldaVista[ancho][alto];
-		this.camara = new Camara(0, 0, 0, 0, ancho*32 - panel.getWidth(), alto*32 - panel.getHeight());
+		this.camara = new Camara(0, 0, 0, 0, ancho*32 - anchoVentana, alto*32 - altoVentana);
 		
 		Random miRNG = new Random();
 		for (int j = 0; j < this.alto; j++)
@@ -88,9 +89,9 @@ public class MapaVista {
 		
 		// Para renderizar nomas lo q podemos ver
 		int xInicio = Math.max(0, camara.getxOffset() / anchoSprite);
-		int xFin = Math.min(ancho, 1 + (camara.getxOffset() + panel.getWidth()) / anchoSprite);
+		int xFin = Math.min(ancho, 1 + (camara.getxOffset() + anchoVentana) / anchoSprite);
 		int yInicio = Math.max(0, camara.getyOffset() / altoSprite);
-		int yFin = Math.min(alto, 1 + (camara.getyOffset() + panel.getHeight()) / altoSprite);
+		int yFin = Math.min(alto, 1 + (camara.getyOffset() + altoVentana) / altoSprite);
 		
 		
 		Graphics2D g2 = (Graphics2D) g;

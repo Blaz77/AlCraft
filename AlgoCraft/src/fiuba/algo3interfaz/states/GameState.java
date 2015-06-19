@@ -25,13 +25,13 @@ public class GameState extends State {
 	public GameState(){
 		
 		Jugador jugador = game.getModelo().getJugador(1);
-		mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getPanel()));
-		huds.put(jugador, new HudVista(jugador, game.getAncho(), game.getAlto(), game.getPanel()));
-		game.getPanel().add(huds.get(jugador));
+		mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getAncho(), game.getAlto() - 120));
+		huds.put(jugador, new HudVista(jugador, game.getAncho(), game.getAlto(), game));
+		game.add(huds.get(jugador));
 		jugador = game.getModelo().getJugador(2);
-		mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getPanel()));
-		huds.put(jugador, new HudVista(jugador, game.getAncho(), game.getAlto(), game.getPanel()));
-		game.getPanel().add(huds.get(jugador));
+		mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getAncho(), game.getAlto() - 150));
+		huds.put(jugador, new HudVista(jugador, game.getAncho(), game.getAlto(), game));
+		game.add(huds.get(jugador));
 			
 		mapaActual = mapas.get(game.getModelo().getJugadorActual());
 		hudActual =  huds.get(game.getModelo().getJugadorActual());
@@ -63,7 +63,7 @@ public class GameState extends State {
 		else {
 			hudActual.recibirClick(e.getX(), e.getY());
 		}
-		game.getPanel().repaint();
+		game.repaint();
 		//System.out.println("Pressed!");
 	}
 
@@ -72,7 +72,7 @@ public class GameState extends State {
 			mapaActual.setCeldaSeleccionada(e.getX(), e.getY());
 			hudActual.actualizar(mapaActual.getPosicionCeldaSeleccionada());
 		}
-		game.getPanel().repaint();
+		game.repaint();
 		//System.out.println("Released!");
 	}
 
@@ -100,7 +100,7 @@ public class GameState extends State {
 		mapaActual.moverCeldaSeleccionada(i, j);
 		mapaActual.moverCamara(iCamara, jCamara);
 
-		game.getPanel().repaint();
+		game.repaint();
 	}
 
 	public void keyReleased(KeyEvent e) {
@@ -114,7 +114,7 @@ public class GameState extends State {
 		if(keyReleased == KeyEvent.VK_LEFT)iCamara = 0;
 		if(keyReleased == KeyEvent.VK_RIGHT)iCamara = 0;
 		
-		game.getPanel().repaint();
+		game.repaint();
 	}
 
 }

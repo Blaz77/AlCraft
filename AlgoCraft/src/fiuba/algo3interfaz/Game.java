@@ -3,8 +3,6 @@ package fiuba.algo3interfaz;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,9 +13,9 @@ import fiuba.algo3interfaz.states.State.StateEnum;
 import fiuba.algo3interfaz.gfx.SpriteSheet;
 import fiuba.algo3interfaz.states.State;
 
-public class Game implements Runnable { // Permite correr un thread
+public class Game extends JPanel implements Runnable { // Permite correr un thread
 
-	private static final int FRAMES_PER_SECOND = 60;
+	private static final int FRAMES_PER_SECOND = 3;
 	
 	/** Atributos del Thread **/
 	private boolean running = false;
@@ -25,17 +23,6 @@ public class Game implements Runnable { // Permite correr un thread
 
 	/** Frame (el JPanel es si mismo y despues se añade) **/
 	private JFrame frame = new JFrame("AlgoCraft");
-	private JPanel panel = new JPanel() {
-		public void paint(Graphics g) {
-			super.paintComponent(g);
-	    	State.getState().render(g);
-		}
-	};
-	
-	
-	
-	
-	
 	int ancho;
 	int alto;
 	
@@ -52,51 +39,46 @@ public class Game implements Runnable { // Permite correr un thread
 		this.ancho = anchoVentana;
 		this.alto = altoVentana;
 		
-		// Inicializo el frame y el JPanel
-		inicializarPanel(anchoVentana, altoVentana);
-        inicializarFrame(anchoVentana, altoVentana);
-        
 		// Inicializar los datos requeridos
 		SpriteSheet.inicializar();
 		//MusicaAlgunDia.inicializar();
 		State.inicializar(this);
 		State.setState(StateEnum.MENUSTATE);
 
-        
-        frame.setVisible(true);
+		// Inicializo el frame y el JPanel
+		inicializarPanel(anchoVentana, altoVentana);
+        inicializarFrame(anchoVentana, altoVentana);
 	}
 
 
 	public int getAncho() {
-		
-		return panel.getWidth();
+		return ancho;
 	}
 
 
 	public int getAlto() {
-		
-		return panel.getHeight();
+		return alto;
 	}
 
 
 	private void inicializarPanel(int anchoVentana, int altoVentana) {
-		panel.setDoubleBuffered(true);
-		panel.setSize(anchoVentana, altoVentana);
-		panel.setPreferredSize(new Dimension(anchoVentana, altoVentana));
-		panel.setMaximumSize(new Dimension(anchoVentana, altoVentana));
-		panel.setMinimumSize(new Dimension(anchoVentana, altoVentana));
+		setDoubleBuffered(true);
+        setPreferredSize(new Dimension(anchoVentana, altoVentana));
+		setMaximumSize(new Dimension(anchoVentana, altoVentana));
+		setMinimumSize(new Dimension(anchoVentana, altoVentana));
 		
-		panel.setFocusable(true);
+		setFocusable(true);
 	}
 
 
 	private void inicializarFrame(int anchoVentana, int altoVentana) {
-		frame.setResizable(true); // o true quien sabe
+		frame.setResizable(false); // o true quien sabe
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(anchoVentana, altoVentana);
 		frame.setLocationRelativeTo(null);
-        frame.add(panel);
+        frame.add(this);
         frame.pack();
+        frame.setVisible(true);
 	}
 	
 	// Basico juego hermoso :D
@@ -109,7 +91,7 @@ public class Game implements Runnable { // Permite correr un thread
 		long lastTime = System.nanoTime(); // tiempo actual de la pc en nanos
 		
 		tick();
-		panel.repaint();
+		repaint();
 		// Game loop basico:
 		while(running){
 			
@@ -117,8 +99,8 @@ public class Game implements Runnable { // Permite correr un thread
 			delta += (now - lastTime) / timePerTick;
 			lastTime = now;
 			if (delta >= 1){
-				tick();
-				panel.repaint();
+				//tick();
+				repaint();
 				delta --;
 			}
 			
@@ -168,52 +150,10 @@ public class Game implements Runnable { // Permite correr un thread
 	}
 
 
-<<<<<<< HEAD
 	public void comenzarJuego(Opciones opciones) {
 		this.opciones = opciones;
 		this.modeloJuego = new Juego(this.opciones);
 		
 		State.cambiarStateAJuego();
-=======
-	public void addKeyListener(KeyListener listener) {
-		panel.addKeyListener(listener);
-		
-	}
-
-
-	public void addMouseListener(MouseListener listener) {
-		panel.addMouseListener(listener);
-		
-	}
-
-
-	public void addMouseMotionListener(MouseMotionListener listener) {
-		panel.addMouseMotionListener(listener);
-		
-	}
-
-
-	public void removeKeyListener(KeyListener listener) {
-		panel.removeKeyListener(listener);
-		
-	}
-
-
-	public void removeMouseListener(MouseListener listener) {
-		panel.removeMouseListener(listener);
-		
-	}
-
-
-	public void removeMouseMotionListener(MouseMotionListener listener) {
-		panel.removeMouseMotionListener(listener);
-		
-	}
-
-
-	public JPanel getPanel() {
-		// TODO Auto-generated method stub
-		return panel;
->>>>>>> branch-xq-la-cague
 	}
 }

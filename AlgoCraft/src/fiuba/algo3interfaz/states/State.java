@@ -9,6 +9,7 @@ import java.awt.event.MouseMotionListener;
 import java.util.LinkedList;
 
 import fiuba.algo3.excepciones.StateError;
+import fiuba.algo3.juego.Jugador;
 import fiuba.algo3interfaz.Game;
 
 public abstract class State implements MouseListener, MouseMotionListener, KeyListener{
@@ -70,13 +71,6 @@ public abstract class State implements MouseListener, MouseMotionListener, KeyLi
 	
 	public static void inicializar(Game _game){
 		game = _game;
-<<<<<<< HEAD
-=======
-
-		game.getModelo().getJugador(1);
-
-		gameState = new GameState();
->>>>>>> branch-xq-la-cague
 		menuState = new MenuState();
 	}
 	
