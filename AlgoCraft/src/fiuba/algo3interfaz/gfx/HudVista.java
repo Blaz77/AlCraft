@@ -15,6 +15,9 @@ import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.raza.TipoRaza;
+import fiuba.algo3interfaz.input.btnConstruirEdificioIncrementadorPoblacionMouseListener;
+import fiuba.algo3interfaz.input.btnConstruirEdificioRecolectorGasVespenoMouseListener;
+import fiuba.algo3interfaz.input.btnConstruirEdificioRecolectorMineralMouseListener;
 import fiuba.algo3interfaz.input.btnConstruirMouseListener;
 
 
@@ -32,6 +35,9 @@ public class HudVista extends JPanel {
 	
 	private JButton btnConstruir;
 	private JPanel panel;
+	private JButton btnConstruirEdificioRecolectorMineral;
+	private JButton btnConstruirEdificioRecolectorGasVespeno;
+	private JButton btnConstruirEdificioIncrementadorPoblacion;
 	
 	/* Precarga de imagenes */
 	private static BufferedImage picConstruir = ImageLoader.loadImage("/textures/construir.png");
@@ -56,6 +62,25 @@ public class HudVista extends JPanel {
 		add(btnConstruir);
 		
 		// Edificios construibles
+		btnConstruirEdificioRecolectorMineral = new JButton(new ImageIcon(
+				/* Extraer de sprite con el diccionario de sprites de los atributos del jugador */));
+		btnConstruirEdificioRecolectorMineral.addMouseListener(new btnConstruirEdificioRecolectorMineralMouseListener(this));
+		btnConstruirEdificioRecolectorMineral.setVisible(false);
+		add(btnConstruirEdificioRecolectorMineral);
+		
+		btnConstruirEdificioRecolectorGasVespeno = new JButton(new ImageIcon(
+				/* Extraer de sprite con el diccionario de sprites de los atributos del jugador */));
+		btnConstruirEdificioRecolectorGasVespeno.addMouseListener(new btnConstruirEdificioRecolectorGasVespenoMouseListener(this));
+		btnConstruirEdificioRecolectorGasVespeno.setVisible(false);
+		add(btnConstruirEdificioRecolectorGasVespeno);
+		
+		btnConstruirEdificioIncrementadorPoblacion = new JButton(new ImageIcon(
+				/* Extraer de sprite con el diccionario de sprites de los atributos del jugador */));
+		btnConstruirEdificioIncrementadorPoblacion.addMouseListener(new btnConstruirEdificioIncrementadorPoblacionMouseListener(this));
+		btnConstruirEdificioIncrementadorPoblacion.setVisible(false);
+		add(btnConstruirEdificioIncrementadorPoblacion);
+		
+		// por ahora hasta ahi...
 	}
 	
 	public void tick(){
@@ -113,7 +138,14 @@ public class HudVista extends JPanel {
 	}
 
 	public void mostrarOpcionesConstruccion() {
+		btnConstruir.setVisible(false);
+		btnConstruirEdificioRecolectorMineral.setVisible(true);
+		btnConstruirEdificioRecolectorGasVespeno.setVisible(true);
+		btnConstruirEdificioIncrementadorPoblacion.setVisible(true);
+	}
+
+	public void mostrarOpcionesColocacion() {
 		
-		
+		// btnCancelar ?
 	}
 }
