@@ -72,7 +72,7 @@ public class SpriteSheet {
 	
 	/** Clase **/
 	
-	private BufferedImage sheet;
+	private BufferedImage[] sheet;
 	private int anchoSprite;
 	private int altoSprite;
 	private int cantidad;
@@ -81,14 +81,16 @@ public class SpriteSheet {
 		this(ImageLoader.loadImage(path));
 	}
 	
-	public SpriteSheet(BufferedImage sheet){
+	public SpriteSheet(BufferedImage bi){
 		
-		this.sheet = sheet;
-		this.anchoSprite = sheet.getWidth();
-		this.altoSprite = this.anchoSprite;
-		this.cantidad = sheet.getHeight() / this.altoSprite;
-				
-		if ((sheet.getHeight() % this.altoSprite) != 0)
+		this.anchoSprite = this.altoSprite = bi.getWidth();
+		this.cantidad = bi.getHeight() / this.altoSprite;
+		
+		this.sheet = new BufferedImage[this.cantidad];
+		for (int i = 0; i < this.cantidad; i++)
+			this.sheet[i] = crop(bi, i);
+		
+		if ((bi.getHeight() % this.altoSprite) != 0)
 			throw new RuntimeException();
 	}
 
@@ -102,12 +104,11 @@ public class SpriteSheet {
 	}
 
 	public BufferedImage get(int index){
-		return sheet.getSubimage(0, (index % cantidad) * altoSprite, anchoSprite, altoSprite);
+		return sheet[index % cantidad];
 	}
 	
-	// Corta un sprite del sheet
-	public BufferedImage crop(int x, int y, int ancho, int alto){
-		return sheet.getSubimage(x, y, ancho, alto);
+	private BufferedImage crop(BufferedImage bi, int index){
+		return bi.getSubimage(0, (index % cantidad) * altoSprite, anchoSprite, altoSprite);
 	}
 
 }

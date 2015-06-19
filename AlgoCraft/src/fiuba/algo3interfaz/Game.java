@@ -25,7 +25,7 @@ public class Game implements Runnable { // Permite correr un thread
 	private JFrame frame = new JFrame("AlgoCraft");
 	private JPanel panel = new JPanel() {
 		public void paintComponent(Graphics g){
-			g.clearRect(0, 0, ancho, alto);
+			super.paintComponent(g);
 			State.getState().render(g);
 		}
 	};

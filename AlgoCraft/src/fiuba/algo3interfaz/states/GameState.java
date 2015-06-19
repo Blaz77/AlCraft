@@ -39,6 +39,10 @@ public class GameState extends State {
 	}
 	
 	@Override
+	public void init() {
+		game.getPanel().setBackground(java.awt.Color.BLACK);
+	}
+	@Override
 	public void tick() {
 		hudActual.setVisible(false);
 		mapaActual = mapas.get(game.getModelo().getJugadorActual());

@@ -50,10 +50,11 @@ public abstract class State implements MouseListener, MouseMotionListener, KeyLi
 		game.getPanel().addKeyListener(state);
 		game.getPanel().addMouseListener(state);
 		game.getPanel().addMouseMotionListener(state);
-		
+		state.init();
 		stateStack.add(state);
 	}
 	
+
 	public static State getState(){
 		return stateStack.getFirst();
 	}
@@ -85,6 +86,10 @@ public abstract class State implements MouseListener, MouseMotionListener, KeyLi
 	public State(){
 
 	}
+	public void init() {
+		
+	}
+
 	public abstract void tick();
 	
 	public abstract void render(Graphics g);

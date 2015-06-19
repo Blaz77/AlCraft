@@ -57,7 +57,7 @@ public class MapaVista {
 		
 		
 		if (terreno == Terreno.SOMBRA)
-			return SpriteSheet.spritesEspacio.get(1);
+			return null;
 		
 		
 		if (terreno == Terreno.ESPACIO) {
