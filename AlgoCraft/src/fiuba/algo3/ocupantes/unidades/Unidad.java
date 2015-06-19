@@ -6,6 +6,7 @@ import java.util.HashSet;
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.IAtaque;
 import fiuba.algo3.componentes.IMagia;
+import fiuba.algo3.componentes.IMovimiento;
 import fiuba.algo3.componentes.ITransporte;
 import fiuba.algo3.componentes.VoluntadDelSer;
 import fiuba.algo3.juego.Jugador;
@@ -19,8 +20,7 @@ import fiuba.algo3.excepciones.MovimientoInvalido;
 
 public class Unidad extends ObjetoVivo {
 	
-	int movRestantes;
-	private VoluntadDelSer voluntad;
+	private IMovimiento movimiento;
 	private IAtaque ataque;
 	private IMagia magia;
 	private ITransporte transporte;
@@ -30,21 +30,14 @@ public class Unidad extends ObjetoVivo {
 	
 	public Unidad(Jugador propietario, Posicion posicion, AtributosUnidad atributos){
 		super(propietario, posicion, atributos);
-		this.voluntad = atributos.getVoluntadDelSer();
-		this.movRestantes = voluntad.getMovPorTurno();
 		this.ataque = atributos.getAtaque();
 		this.ataque.setPortador(this);
 		this.magia = atributos.getMagia();
 		this.magia.setPortador(this);
 		this.transporte = atributos.getTransporte();
 		//this.transporte.setPortador(this);
-	}
-	
-	public void pasarTurno(){
-		super.pasarTurno();
-		//Temp esto aca abajo, quizas puede estar mejor hecho
-		// Un estado quizas ?
-		this.movRestantes = voluntad.getMovPorTurno();
+		this.movimiento = atributos.getMovimiento();
+		this.movimiento.setPortador(this);
 	}
 
 	@Override
@@ -56,22 +49,7 @@ public class Unidad extends ObjetoVivo {
 	public TipoOcupante getTipo(){
 		return TipoOcupante.UNIDAD;
 	}
-
-	public int getRangoVision() {
-		return voluntad.getRangoVision();
-	}
 	
-	public int getCostoAlmacenamiento(){
-		return ((AtributosUnidad) atributos).getCostoAlmacenamiento(); 
-	}
-	/*
-	 * Lista temporal:
-	 * 
-	 * Atacar / Magia
-	 * Moverse
-	 * Descargar Unidades alojadas
-	 * Meterse dentro de transporte
-	 * */	
 	
 	/*
 	 * 	MOVIMIENTO:
@@ -82,47 +60,34 @@ public class Unidad extends ObjetoVivo {
 	// - Habria que diferenciar los que no se pueden mover nunca
 	// 	 de los que terminaron sus turnos?
 	public boolean puedeMoverse(){
-		return (this.movRestantes != 0);
+		return this.movimiento.puedeMoverse();
 	}
 	
 	public boolean puedeMoverseA(Posicion destino){
-		return this.posicion.estaEnRango(destino, movRestantes);
-		//chequear Terreno!!!!!
+		return this.movimiento.puedeMoverseA(destino);
 	}
 	
 	public void moverA(Posicion destino){
-		if (!this.puedeMoverseA(destino)) throw new MovimientoInvalido();
-		propietario.getMapa().verificarOcupacion(this, destino);
-		
-		this.movRestantes -= this.posicion.distancia(destino);
-		propietario.getMapa().mover(this, destino);
-		this.posicion = destino;
-	}
-	
-	private int getMovPorTurno() {
-		return 6; // TODO: DESPUES AGREGO ESTO
+		this.movimiento.moverA(destino);
 	}
 
 	//TODO: chequear q funcione!
 	public HashSet<Posicion> getPosiblesMovimientos(MapaProxy mapa){
-		HashSet<Posicion> posiblesMov = new HashSet<Posicion>();
-		int restantes = getMovPorTurno(); // TODO: DESPUES AGREGO ESTO
-		_getPosiblesMovimientos(mapa, posiblesMov, this.posicion, restantes);
-		return posiblesMov;
-		
-	}
-	
-	// TODO: chequear q funcione! Basicamente hago un BFS y agrego todas las unidades a las q llego
-	public void _getPosiblesMovimientos(MapaProxy mapa, HashSet<Posicion> posiblesMov, Posicion posicionActual, int restantes){
-		if (restantes == 0 || posiblesMov.contains(posicionActual)) return;
-		restantes --;
-		posiblesMov.add(posicionActual);
-		ArrayList<Posicion> adyacentes = posicionActual.getAdyacentes();
-		for (Posicion adyacente: adyacentes)
-			if (mapa.celdaValida(adyacente) && mapa.puedeOcupar(this, adyacente))
-				_getPosiblesMovimientos(mapa, posiblesMov, adyacente, restantes);
+		return this.movimiento.getPosiblesMovimientos(mapa);
 	}
 
+	public int getRangoVision() {
+		return this.movimiento.getRangoVision();
+	}
+	
+	public int getCostoAlmacenamiento(){
+		return this.movimiento.getCostoAlmacenamiento(); 
+	}
+
+	public boolean puedeSerAlmacenada(){ //puedeSerTransportada
+		return this.movimiento.puedeSerAlmacenada();
+	}
+	
 /*
  * 	ATAQUE:
  * 
@@ -202,10 +167,6 @@ public class Unidad extends ObjetoVivo {
 	 * TRANSPORTE:
 	 * 
 	 * */
-	
-	public boolean puedeSerAlmacenada(){ //puedeSerTransportada
-		return ((AtributosUnidad)this.atributos).puedeSerAlmacenada();
-	}
 		
 	public boolean puedeAlmacenar(){ //puedeTransportar()
 		return this.transporte.puedeAlmacenar();
