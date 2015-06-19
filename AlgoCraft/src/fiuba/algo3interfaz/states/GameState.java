@@ -26,10 +26,10 @@ public class GameState extends State {
 		
 		Jugador jugador = game.getModelo().getJugador(1);
 		mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getAncho(), game.getAlto() - 120));
-		huds.put(jugador, new HudVista(jugador, game.getAncho(), game.getAlto()));
+		huds.put(jugador, new HudVista(jugador, game.getAncho(), game.getAlto(), game));
 		jugador = game.getModelo().getJugador(2);
 		mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getAncho(), game.getAlto() - 150));
-		huds.put(jugador, new HudVista(jugador, game.getAncho(), game.getAlto()));
+		huds.put(jugador, new HudVista(jugador, game.getAncho(), game.getAlto(), game));
 			
 		mapaActual = mapas.get(game.getModelo().getJugadorActual());
 		this.hudActual =  huds.get(game.getModelo().getJugadorActual());

@@ -65,6 +65,8 @@ public class Game extends JPanel implements Runnable { // Permite correr un thre
         setPreferredSize(new Dimension(anchoVentana, altoVentana));
 		setMaximumSize(new Dimension(anchoVentana, altoVentana));
 		setMinimumSize(new Dimension(anchoVentana, altoVentana));
+		
+		setFocusable(true);
 	}
 
 
@@ -127,14 +129,14 @@ public class Game extends JPanel implements Runnable { // Permite correr un thre
     public void tick(){
     	State.getState().tick();
     }
-    public void paint(Graphics g){
+    public void paintComponent(Graphics g){
 		g.clearRect(0, 0, ancho, alto);
     	State.getState().render(g);
     }
    
-    public void addKeyListener(KeyListener keyListener){
+   /* public void addKeyListener(KeyListener keyListener){
     	frame.addKeyListener(keyListener);
-    }
+    }*/
     
     public Juego getModelo(){
     	return modeloJuego;

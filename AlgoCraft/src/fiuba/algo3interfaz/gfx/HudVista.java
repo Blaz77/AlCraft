@@ -5,12 +5,17 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
 import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.raza.TipoRaza;
+import fiuba.algo3interfaz.input.btnConstruirMouseListener;
 
 
 public class HudVista {
@@ -24,15 +29,31 @@ public class HudVista {
 
 	private int anchoVentana;
 	private int altoVentana;
+	
+	private JButton btnConstruir;
+	private JPanel panel;
+	
+	/* Precarga de imagenes */
+	private static BufferedImage picConstruir = ImageLoader.loadImage("/textures/construir.png");
 
-	public HudVista(Jugador jugador, int anchoVentana, int altoVentana){
+
+	public HudVista(Jugador jugador, int anchoVentana, int altoVentana, JPanel panel){
 		this.raza = jugador.getRaza();
 		this.color = jugador.getColor();
 		this.jugador = jugador;
+		this.panel = panel; //Experimental
 		this.mapaVisible = jugador.getMapa();
 		
 		this.anchoVentana = anchoVentana;
 		this.altoVentana = altoVentana;
+		
+		
+		
+		/* Botones utiles inicialmente invisibles */
+		btnConstruir = new JButton(new ImageIcon(picConstruir));
+		btnConstruir.addMouseListener(new btnConstruirMouseListener());
+		btnConstruir.setVisible(false);
+		panel.add(btnConstruir);
 	}
 	
 	public void tick(){
@@ -73,7 +94,6 @@ public class HudVista {
 				120, 420);
 	}
 
-	private static BufferedImage picConstruir = ImageLoader.loadImage("/textures/construir.png");
 	private void dibujarAccionesPosibles(Graphics g) {
 		if (this.mapaVisible.getOcupante(this.celdaSeleccionada).getTipo() == TipoOcupante.CELDA_VACIA) {
 			g.drawImage(picConstruir, 400, 400, null);
