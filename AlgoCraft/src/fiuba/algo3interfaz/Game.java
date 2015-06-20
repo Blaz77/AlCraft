@@ -79,7 +79,7 @@ public class Game implements Runnable { // Permite correr un thread
 
 
 	private void inicializarFrame(int anchoVentana, int altoVentana) {
-		frame.setResizable(false); // o true quien sabe
+		frame.setResizable(true); // o true quien sabe
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(anchoVentana, altoVentana);
 		frame.setLocationRelativeTo(null);

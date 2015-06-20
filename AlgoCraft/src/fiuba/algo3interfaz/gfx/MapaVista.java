@@ -7,6 +7,8 @@ import java.awt.image.BufferedImageOp;
 import java.awt.image.RescaleOp;
 import java.util.Random;
 
+import javax.swing.JPanel;
+
 import fiuba.algo3.juego.Color;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.MapaReal;
@@ -16,27 +18,28 @@ import fiuba.algo3.terreno.Terreno;
 
 public class MapaVista {
 
+	private static final int ANCHO_CELDA = SpriteSheet.spritesTierra.getAncho();
+	private static final int ALTO_CELDA = SpriteSheet.spritesTierra.getAlto();
 	private static final float RESCALE_FACTOR = 0.1f;
 	private static final BufferedImageOp RESCALE_OP = new RescaleOp(RESCALE_FACTOR, 0, null);
 	
 	private CeldaVista[][] mapaVista;
 	private int ancho;
 	private int alto;
-	private int anchoVentana;
-	private int altoVentana;
 	
 	private int filSeleccionada = 0;
 	private int colSeleccionada = 0;
 	private Mapa datosMapa;
+	private JPanel panel;
+
 	private Camara camara;
 	
 	private BufferedImage marcaMapa = SpriteSheet.getSpriteMarcaMapa();
 	
-	public MapaVista(Mapa mapa, int anchoVentana, int altoVentana){
+	public MapaVista(Mapa mapa, int anchoVentana, int altoVentana, JPanel panel){
 		
-		this.anchoVentana = anchoVentana;
-		this.altoVentana = altoVentana;
-		this.datosMapa = mapa;
+		this.datosMapa = new MapaReal(2);
+		this.panel = panel;
 
 		this.ancho = datosMapa.ancho();
 		this.alto = datosMapa.alto();
@@ -90,9 +93,9 @@ public class MapaVista {
 		
 		// Para renderizar nomas lo q podemos ver
 		int xInicio = Math.max(0, camara.getxOffset() / anchoSprite);
-		int xFin = Math.min(ancho, 1 + (camara.getxOffset() + anchoVentana) / anchoSprite);
+		int xFin = Math.min(ancho, 1 + (camara.getxOffset() + panel.getWidth()) / anchoSprite);
 		int yInicio = Math.max(0, camara.getyOffset() / altoSprite);
-		int yFin = Math.min(alto, 1 + (camara.getyOffset() + altoVentana) / altoSprite);
+		int yFin = Math.min(alto, 1 + (camara.getyOffset() + panel.getHeight()) / altoSprite);
 		
 		
 		Graphics2D g2 = (Graphics2D) g;
@@ -106,40 +109,36 @@ public class MapaVista {
 					g2.drawImage(spriteTerreno, RESCALE_OP, 
 							anchoSprite * x - camara.getxOffset(), altoSprite * y - camara.getyOffset());
 				else{
-					g.drawImage(spriteTerreno, 
-							anchoSprite * x - camara.getxOffset(), 	altoSprite * y - camara.getyOffset(), null);
+					dibujarEnCelda(g, spriteTerreno, x, y);
 				
 					dibujarOcupante(g, x, y);
 				}
 			}
 		// Lindo terran :D
 		BufferedImage terran = ImageLoader.loadImage("/textures/terran.png");
-		g.drawImage(terran, 0, 0, null);
-
-		for (int i = 0; i < Color.values().length; i++){
-			terran = ImageLoader.loadImage("/textures/terran.png");
-			SpriteSheet.swapColors(terran, Color.values()[i]);
-			g.drawImage(terran, 32*(i+1), 0, null);
-		}
+		dibujarEnCelda(g, terran, ancho-1, alto-1);
 				
 		ubicarMarcaMapaEn(g);
 		
 	}
 
+	private void dibujarEnCelda(Graphics g, BufferedImage sprite, int x, int y) {
+
+		g.drawImage(sprite, 
+				ANCHO_CELDA * x - camara.getxOffset() + (ANCHO_CELDA - sprite.getWidth())/2, 
+				ALTO_CELDA  * y - camara.getyOffset() +  (ALTO_CELDA - sprite.getHeight())/2, null);
+	}
+
 	
 
 	private void dibujarOcupante(Graphics g, int x, int y) {
-		
-		int anchoSprite = SpriteSheet.spritesTierra.getAncho();
-		int altoSprite = SpriteSheet.spritesTierra.getAlto();
-		
+				
 		TipoOcupante tipoOcupante = datosMapa.getOcupante(new Posicion(x, y)).getTipo();
 		if (tipoOcupante == TipoOcupante.CELDA_VACIA)
 			return;
 
 		BufferedImage bi = SpriteSheet.getSprites(tipoOcupante).get(mapaVista[x][y].getIndex());
-		g.drawImage(bi,	anchoSprite * x - camara.getxOffset(), 	altoSprite * y - camara.getyOffset(), null);
-		
+		dibujarEnCelda(g, bi, x, y);
 		//g.drawImage(ImageLoader.loadImage("/textures/terran.png"), 
 		//		anchoSprite * x - camara.getxOffset(), 	altoSprite * y - camara.getyOffset(), null);
 
@@ -165,10 +164,10 @@ public class MapaVista {
 	public void moverCeldaSeleccionada(int i, int j) {
 		
 		int x = this.filSeleccionada;
-		this.filSeleccionada = Math.min(Math.max(x + i, 0), ancho);
+		this.filSeleccionada = Math.min(Math.max(x + i, 0), ancho-1);
 		
 		int y = this.colSeleccionada;
-		this.colSeleccionada = Math.min(Math.max(y + j, 0), alto);
+		this.colSeleccionada = Math.min(Math.max(y + j, 0), alto-1);
 		
 	}
 	
