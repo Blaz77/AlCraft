@@ -11,6 +11,7 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -33,7 +34,6 @@ public class HudVista extends JPanel {
 	private Jugador jugador; // dale que va, esto ya es cualquier cosa
 	private Mapa mapaVisible;
 	private Posicion celdaSeleccionada = new Posicion(0,0);
-	
 
 	private int anchoVentana;
 	private int altoVentana;
@@ -60,6 +60,7 @@ public class HudVista extends JPanel {
 		this.anchoVentana = anchoVentana;
 		this.altoVentana = altoVentana;
 		this.setPreferredSize(new Dimension(640, 480));
+		this.setFocusable(false);
 		this.setVisible(false);
 		this.setOpaque(false);
 		
@@ -81,7 +82,7 @@ public class HudVista extends JPanel {
 		// Edificios construibles
 		btnConstruirEdificioRecolectorMineral = new JButton(new ImageIcon(
 				CopyOfSpriteSheet.spritesTerran.get(jugador.getAtributos().getRecolectorMineral().getEspecie().ordinal())));
-		btnConstruirEdificioRecolectorMineral.addMouseListener(new btnConstruirEdificioRecolectorMineralMouseListener(this));
+		btnConstruirEdificioRecolectorMineral.addMouseListener(new btnConstruirEdificioRecolectorMineralMouseListener(this, this.jugador));
 		btnConstruirEdificioRecolectorMineral.setVisible(false);
 		btnConstruirEdificioRecolectorMineral.setBorder(null);
 		btnConstruirEdificioRecolectorMineral.setFocusPainted(false);
@@ -109,6 +110,11 @@ public class HudVista extends JPanel {
 		// por ahora hasta ahi...
 	}
 	
+	// Al mejor estilo VisualBasic
+	private void msgbox(String s){
+	   JOptionPane.showMessageDialog(null, s);
+	}
+	
 	public void tick(){
 		
 	}
@@ -119,7 +125,6 @@ public class HudVista extends JPanel {
 		dibujarDatosJugador(g);
 		//dibujarMinimapa(g); Tal vez en otra vista
 		dibujarDatosCeldaSeleccionada(g);
-		dibujarAccionesPosibles(g);
 	}
 	
 	private static BufferedImage hudTest = ImageLoader.loadImage("/HUDs/HUDterran2.png"); //HUDzerg2.png, HUDprotoss2.png
@@ -146,18 +151,14 @@ public class HudVista extends JPanel {
 		g.drawString(this.mapaVisible.getOcupante(celdaSeleccionada).getTipo().name(),
 				120, 420);
 	}
-
-	private void dibujarAccionesPosibles(Graphics g) {
-		if (this.mapaVisible.getOcupante(this.celdaSeleccionada).getTipo() == TipoOcupante.CELDA_VACIA) {
-			g.drawImage(picConstruir, 400, 400, null);
-		}
-		
-	}
 	
-	public void actualizar(Posicion nuevaCeldaSeleccionada) {
+	public void actualizarCeldaSeleccionada(Posicion nuevaCeldaSeleccionada) {
 		this.celdaSeleccionada = nuevaCeldaSeleccionada;
 	}
 
+	public Posicion getCeldaSeleccionada() {
+		return celdaSeleccionada;
+	}
 
 	public void recibirClick(int x, int y) {
 		// Obsoleto
@@ -173,5 +174,19 @@ public class HudVista extends JPanel {
 	public void mostrarOpcionesColocacion() {
 		
 		// btnCancelar ?
+	}
+
+	public void mostrarMensaje(String mensaje) {
+		msgbox(mensaje);
+	}
+
+	public void restablecerOpciones() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void requestFocus() {
+		this.panel.requestFocus();
 	}
 }

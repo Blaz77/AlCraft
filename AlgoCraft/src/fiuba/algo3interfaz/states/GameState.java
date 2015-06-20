@@ -74,7 +74,7 @@ public class GameState extends State {
 		
 		if (e.getY() < HUD_INICIO_Y) {
 			mapaActual.setCeldaSeleccionada(e.getX(), e.getY());
-			hudActual.actualizar(mapaActual.getPosicionCeldaSeleccionada());
+			hudActual.actualizarCeldaSeleccionada(mapaActual.getPosicionCeldaSeleccionada());
 		}
 		else {
 			hudActual.recibirClick(e.getX(), e.getY());
@@ -86,7 +86,7 @@ public class GameState extends State {
 	public void mouseReleased(MouseEvent e) {
 		if (e.getY() < HUD_INICIO_Y) {
 			mapaActual.setCeldaSeleccionada(e.getX(), e.getY());
-			hudActual.actualizar(mapaActual.getPosicionCeldaSeleccionada());
+			hudActual.actualizarCeldaSeleccionada(mapaActual.getPosicionCeldaSeleccionada());
 		}
 		game.getPanel().repaint();
 		//System.out.println("Released!");

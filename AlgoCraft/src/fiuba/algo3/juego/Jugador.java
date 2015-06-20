@@ -7,6 +7,7 @@ import fiuba.algo3.excepciones.GasVespenoInsuficiente;
 import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.SuministroInsuficiente;
 import fiuba.algo3.excepciones.UnidadNoPropia;
+import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.edificios.Edificio;
@@ -32,6 +33,8 @@ public class Jugador {
 	private final static int MINERALES_INICIAL = 200;
 	private final static int VESPENO_INICIAL = 50;
 
+	private final EdificiosFactory edificador = new EdificiosFactory();
+	
 	private Color color;
 	private Raza raza;
 	private int minerales;
@@ -172,9 +175,7 @@ public class Jugador {
 			edificio.pasarTurno();
 	}
 
-	/*public void setPosicionInicial(Posicion posicionInicial) {
-		this.posicionInicial = posicionInicial;
-		this.mapaPropio.setPuntoOrigen(posicionInicial);
-	}*/
-
+	public EdificiosFactory getEdificador() {
+		return this.edificador;
+	}
 }

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import javax.imageio.ImageIO;
 
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
+import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.terreno.Terreno;
 
 public class CopyOfSpriteSheet {
@@ -21,7 +22,7 @@ public class CopyOfSpriteSheet {
 	private final static String MARCA_MAPA_PATH = "/textures/marcaMapa.png";
 	private static final String PLAYER_PALETTE_PATH = "/palettes/player_palette.png";
 	private static final String TERRAN_PATH = "/textures/edificios_terran_V.png";
-	
+	private static final String PROTOSS_PATH = "/textures/edificios_terran_V.png";
 	
     public static final BufferedImage spriteMarcaMapa = ImageLoader.loadImage(MARCA_MAPA_PATH);
 
@@ -35,18 +36,13 @@ public class CopyOfSpriteSheet {
 	public static CopyOfSpriteSheet spritesVespeno = new CopyOfSpriteSheet(VESPENO_PATH);
 	
 	public static CopyOfSpriteSheet spritesTerran = new CopyOfSpriteSheet(TERRAN_PATH);
+	public static CopyOfSpriteSheet spritesProtoss = new CopyOfSpriteSheet(PROTOSS_PATH);
 
     
-	private static HashMap<Object, CopyOfSpriteSheet> Sprites = new HashMap<Object, CopyOfSpriteSheet>(){
-        {
-            put(Terreno.TIERRA, spritesTierra);
-            put(Terreno.ESPACIO, spritesEspacio);
-            //put(Terreno.SOMBRA, spritesSombra);
-            
-            put(TipoOcupante.MINERAL, spritesMineral);
-            put(TipoOcupante.VESPENO, spritesVespeno);
-            
-            //put(TipoEdificio.PUERTO_ESTELAR_TERRAN, spritesPuertoEstelarTerran);
+	private static HashMap<TipoRaza, CopyOfSpriteSheet> Sprites = new HashMap<TipoRaza, CopyOfSpriteSheet>(){
+        		{
+            put(TipoRaza.TERRAN, spritesTerran);
+            put(TipoRaza.PROTOSS, spritesProtoss);
             
         }
     };	

@@ -7,6 +7,7 @@ import fiuba.algo3.componentes.Costo;
 import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.EstadoConstruyendoEdificio;
 import fiuba.algo3.componentes.IVida;
+import fiuba.algo3.ocupantes.recurso.TipoObjetoVivo;
 
 public class AtributosConstruccion extends AtributosEdificio {
 	
@@ -15,6 +16,7 @@ public class AtributosConstruccion extends AtributosEdificio {
 	public AtributosConstruccion(AtributosEdificio atrEdificio){
 		this.atributosEdificio = atrEdificio;
 		this.nombre = "Construccion";
+		this.especie = TipoObjetoVivo.CENTRO_DE_MINERAL; //MegaTemporal
 	}
 
 	@Override

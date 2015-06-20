@@ -13,6 +13,7 @@ import fiuba.algo3.juego.Color;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.MapaReal;
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.terreno.Terreno;
 
@@ -38,7 +39,7 @@ public class MapaVista {
 	
 	public MapaVista(Mapa mapa, int anchoVentana, int altoVentana, JPanel panel){
 		
-		this.datosMapa = new MapaReal(2);
+		this.datosMapa = mapa; // new MapaReal(2); Con razon andaba todo mal!
 		this.panel = panel;
 
 		this.ancho = datosMapa.ancho();
@@ -144,6 +145,14 @@ public class MapaVista {
 		if (tipoOcupante == TipoOcupante.CELDA_VACIA)
 			return;
 
+		if (tipoOcupante == TipoOcupante.EDIFICIO) {
+			Edificio edificio = (Edificio) datosMapa.getOcupante(new Posicion(x, y));
+			BufferedImage bi = CopyOfSpriteSheet.getSprites(edificio.getPropietario().getRaza())
+					.get(edificio.getEspecie().ordinal());
+			dibujarEnCelda(g, bi, x, y);
+			return;
+		}
+		
 		BufferedImage bi = SpriteSheet.getSprites(tipoOcupante).get(mapaVista[x][y].getIndex());
 		dibujarEnCelda(g, bi, x, y);
 		//g.drawImage(ImageLoader.loadImage("/textures/terran.png"), 
