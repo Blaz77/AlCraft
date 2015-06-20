@@ -78,7 +78,7 @@ public class HudVista extends JPanel {
 		
 		btnConstruir = new JButton(new ImageIcon(picConstruir));
 		btnConstruir.addMouseListener(new btnConstruirMouseListener(this));
-		btnConstruir.setVisible(true);
+		btnConstruir.setVisible(false);
 		btnConstruir.setBorder(null);
 		btnConstruir.setFocusPainted(false);
 		btnConstruir.setContentAreaFilled(false);
@@ -180,6 +180,17 @@ public class HudVista extends JPanel {
 	
 	public void actualizarCeldaSeleccionada(Posicion nuevaCeldaSeleccionada) {
 		this.celdaSeleccionada = nuevaCeldaSeleccionada;
+		restablecerOpciones();
+		mostrarOpcionesSegunCelda();
+	}
+
+	private void mostrarOpcionesSegunCelda() {
+		TipoOcupante tipoOcupante = mapaVisible.getOcupante(this.celdaSeleccionada).getTipo();
+		if (tipoOcupante == TipoOcupante.CELDA_VACIA || 
+				tipoOcupante == TipoOcupante.MINERAL ||
+				tipoOcupante == TipoOcupante.VESPENO) {
+			btnConstruir.setVisible(true);
+		}
 	}
 
 	public Posicion getCeldaSeleccionada() {
@@ -214,7 +225,9 @@ public class HudVista extends JPanel {
 				huecosLabel[i].setVisible(false);
 		}
 		btnCancelar.setVisible(false);
-		btnConstruir.setVisible(true);
+		btnConstruir.setVisible(false);
+		
+		mostrarOpcionesSegunCelda();
 	}
 	
 	@Override
