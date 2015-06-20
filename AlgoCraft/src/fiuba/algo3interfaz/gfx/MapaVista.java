@@ -116,10 +116,10 @@ public class MapaVista {
 		BufferedImage terran = ImageLoader.loadImage("/textures/terran.png");
 		g.drawImage(terran, 0, 0, null);
 
-		for (int i = 1; i < Color.values().length; i++){
+		for (int i = 0; i < Color.values().length; i++){
 			terran = ImageLoader.loadImage("/textures/terran.png");
 			SpriteSheet.swapColors(terran, Color.values()[i]);
-			g.drawImage(terran, 32*i, 0, null);
+			g.drawImage(terran, 32*(i+1), 0, null);
 		}
 				
 		ubicarMarcaMapaEn(g);
