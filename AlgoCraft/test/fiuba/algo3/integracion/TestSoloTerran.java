@@ -51,6 +51,7 @@ public class TestSoloTerran {
 	}
 	
 	@Test
+	//TODO: 
 	public void testDesarrolloSinBatallas() {
 		/* Datos iniciales */
 		assertEquals(juego.getJugadorActual().getColor(), Color.AZUL);
@@ -77,11 +78,11 @@ public class TestSoloTerran {
 		/* Recoleccion */
 		
 		Posicion destino = buscarOcupante(juego.getJugadorActual().getMapa(), posInicial, 8, TipoOcupante.MINERAL);
-		assertNotNull(destino);
+		assertNotNull(destino); // TODO: explota aca si el mapaProxy te tapa los cristales
 		edificador.crearRecolectorMineral(juego.getJugadorActual(), destino);
 		
 		destino = buscarOcupante(juego.getJugadorActual().getMapa(), posInicial, 8, TipoOcupante.VESPENO);
-		assertNotNull(destino);
+		assertNotNull(destino); // TODO: explota aca si el mapaProxy te tapa el volcan
 		edificador.crearRecolectorGasVespeno(juego.getJugadorActual(), destino);
 		
 		// 20 turnos mas tarde...

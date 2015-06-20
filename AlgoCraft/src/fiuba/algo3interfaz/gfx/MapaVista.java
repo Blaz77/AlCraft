@@ -115,8 +115,15 @@ public class MapaVista {
 				}
 			}
 		// Lindo terran :D
-		BufferedImage terran = ImageLoader.loadImage("/textures/terran.png");
-		dibujarEnCelda(g, terran, ancho-1, alto-1);
+		SpriteSheet terranSprites = new SpriteSheet("/textures/unidadesTerran.png");
+		for (int c = 0; c < 8; c++)
+			for (int u = 0; u < 5; u++){
+				SpriteSheet.swapColors(terranSprites.get(u), Color.values()[c]);
+				dibujarEnCelda(g, terranSprites.get(u), 2*c, 2*u);
+				terranSprites = new SpriteSheet("/textures/unidadesTerran.png");
+
+			}
+		//dibujarEnCelda(g, terran, ancho-1, alto-1);
 				
 		ubicarMarcaMapaEn(g);
 		
