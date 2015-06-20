@@ -7,7 +7,10 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
@@ -29,9 +32,8 @@ public class MenuVista extends JPanel {
 	private TipoRaza razaJugador2;
 	private Color colorJugador1;
 	private Color colorJugador2;
-	private Jugador jugador; // dale que va, esto ya es cualquier cosa
-	private Mapa mapaVisible;
-	private Posicion celdaSeleccionada = new Posicion(0,0);
+	private String nombreJugador1;
+	private String nombreJugador2;
 
 	private Game game;
 
@@ -61,6 +63,16 @@ public class MenuVista extends JPanel {
     private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JTextField txtNombreJugador2;
     private javax.swing.JTextField txtNombreJugador1;
+    
+    private String definirNombreJugador(JCheckBox chkNombreColor, JTextField txtNombre, JComboBox cboColor, TipoRaza raza) {
+    	if ( ! chkNombreColor.isSelected()) {
+    		return txtNombre.getText();
+    	}
+    	else {
+    		// El poder de los Enums
+    		return Color.values()[cboColor.getSelectedIndex()].getNombrePorDefecto(raza);
+    	}
+    }
 
 	public MenuVista(int anchoVentana, int altoVentana, Game game){
 		this.game = game; //Dudoso
@@ -127,6 +139,7 @@ public class MenuVista extends JPanel {
                 radRazaTerranJugador2ActionPerformed(evt);
             }
         });
+        radRazaTerranJugador2.doClick();
 
         buttonGroup1.add(radRazaProtossJugador2);
         radRazaProtossJugador2.setText("Protoss");
@@ -154,6 +167,7 @@ public class MenuVista extends JPanel {
                 radRazaTerranJugador1ActionPerformed(evt);
             }
         });
+        radRazaTerranJugador1.doClick();
 
         buttonGroup2.add(radRazaProtossJugador1);
         radRazaProtossJugador1.setText("Protoss");
@@ -324,18 +338,21 @@ public class MenuVista extends JPanel {
     private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // Por ahora no hace nada
     	Opciones opciones = new Opciones();
+    	opciones.setCantidadBases(6);
+    	nombreJugador1 = definirNombreJugador(chkNombreColorJugador1, txtNombreJugador1, cboColorJugador1, razaJugador1);
+    	nombreJugador2 = definirNombreJugador(chkNombreColorJugador2, txtNombreJugador2, cboColorJugador2, razaJugador2);
+    	opciones.setDatosJugador(1, nombreJugador1, Color.values()[cboColorJugador1.getSelectedIndex()], razaJugador1);
+    	opciones.setDatosJugador(2, nombreJugador2, Color.values()[cboColorJugador2.getSelectedIndex()], razaJugador2);
     	
     	this.game.comenzarJuego(opciones);
     }          
     
     private void chkNombreColorJugador1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        if (this.chkNombreColorJugador1.isSelected()) {
-        	
-        }
+        txtNombreJugador1.setEnabled( ! chkNombreColorJugador1.isSelected());
     }                                          
 
     private void chkNombreColorJugador2ActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
+    	txtNombreJugador2.setEnabled( ! chkNombreColorJugador2.isSelected());
     }                    
 	
 	public void tick(){
