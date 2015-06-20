@@ -23,6 +23,7 @@ public class btnConstruirEdificioRecolectorMineralMouseListener implements Mouse
 		//vista.mostrarOpcionesColocacion();
 		try {
 			jugador.getEdificador().crearRecolectorMineral(jugador, vista.getCeldaSeleccionada());
+			vista.restablecerOpciones();
 		}
 		catch (TerrenoInadecuado e) {
 			vista.mostrarMensaje("Debe construir sobre tierra");
@@ -36,7 +37,6 @@ public class btnConstruirEdificioRecolectorMineralMouseListener implements Mouse
 		finally {
 			vista.requestFocus();
 		}
-		vista.restablecerOpciones();
 	}
 
 	public void mouseEntered(MouseEvent arg0) {

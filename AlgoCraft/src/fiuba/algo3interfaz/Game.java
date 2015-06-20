@@ -103,7 +103,7 @@ public class Game implements Runnable { // Permite correr un thread
 		while(running){
 			panel.repaint();
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

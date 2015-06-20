@@ -76,9 +76,6 @@ public class GameState extends State {
 			mapaActual.setCeldaSeleccionada(e.getX(), e.getY());
 			hudActual.actualizarCeldaSeleccionada(mapaActual.getPosicionCeldaSeleccionada());
 		}
-		else {
-			hudActual.recibirClick(e.getX(), e.getY());
-		}
 		game.getPanel().repaint();
 		//System.out.println("Pressed!");
 	}

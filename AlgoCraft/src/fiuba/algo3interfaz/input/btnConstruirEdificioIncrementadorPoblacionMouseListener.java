@@ -24,6 +24,7 @@ public class btnConstruirEdificioIncrementadorPoblacionMouseListener implements 
 		//vista.mostrarOpcionesColocacion();
 		try {
 			jugador.getEdificador().crearIncrementadorPoblacion(jugador, vista.getCeldaSeleccionada());
+			vista.restablecerOpciones();
 		}
 		catch (TerrenoInadecuado e) {
 			vista.mostrarMensaje("Debe construir sobre tierra");
@@ -37,7 +38,6 @@ public class btnConstruirEdificioIncrementadorPoblacionMouseListener implements 
 		finally {
 			vista.requestFocus();
 		}
-		vista.restablecerOpciones();
 	}
 
 	public void mouseEntered(MouseEvent arg0) {

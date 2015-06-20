@@ -24,6 +24,7 @@ public class btnConstruirEdificioRecolectorGasVespenoMouseListener implements Mo
 		//vista.mostrarOpcionesColocacion();
 		try {
 			jugador.getEdificador().crearRecolectorGasVespeno(jugador, vista.getCeldaSeleccionada());
+			vista.restablecerOpciones();
 		}
 		catch (TerrenoInadecuado e) {
 			vista.mostrarMensaje("Debe construir sobre tierra");
@@ -40,7 +41,6 @@ public class btnConstruirEdificioRecolectorGasVespenoMouseListener implements Mo
 		finally {
 			vista.requestFocus();
 		}
-		vista.restablecerOpciones();
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
