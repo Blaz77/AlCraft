@@ -61,21 +61,24 @@ public class HudVista extends JPanel {
 		btnConstruir.setVisible(true);
 		add(btnConstruir);
 		
+		setLayout(null);
+		
 		// Edificios construibles
 		btnConstruirEdificioRecolectorMineral = new JButton(new ImageIcon(
-				/* Extraer de sprite con el diccionario de sprites de los atributos del jugador */));
+				CopyOfSpriteSheet.spritesTerran.get(jugador.getAtributos().getRecolectorMineral().getEspecie().ordinal())));
 		btnConstruirEdificioRecolectorMineral.addMouseListener(new btnConstruirEdificioRecolectorMineralMouseListener(this));
 		btnConstruirEdificioRecolectorMineral.setVisible(false);
+		btnConstruirEdificioRecolectorMineral.setLocation(400, 3001);
 		add(btnConstruirEdificioRecolectorMineral);
 		
 		btnConstruirEdificioRecolectorGasVespeno = new JButton(new ImageIcon(
-				/* Extraer de sprite con el diccionario de sprites de los atributos del jugador */));
+				CopyOfSpriteSheet.spritesTerran.get(jugador.getAtributos().getRecolectorGasVespeno().getEspecie().ordinal())));
 		btnConstruirEdificioRecolectorGasVespeno.addMouseListener(new btnConstruirEdificioRecolectorGasVespenoMouseListener(this));
 		btnConstruirEdificioRecolectorGasVespeno.setVisible(false);
 		add(btnConstruirEdificioRecolectorGasVespeno);
 		
 		btnConstruirEdificioIncrementadorPoblacion = new JButton(new ImageIcon(
-				/* Extraer de sprite con el diccionario de sprites de los atributos del jugador */));
+				CopyOfSpriteSheet.spritesTerran.get(jugador.getAtributos().getIncrementadorPoblacion().getEspecie().ordinal())));
 		btnConstruirEdificioIncrementadorPoblacion.addMouseListener(new btnConstruirEdificioIncrementadorPoblacionMouseListener(this));
 		btnConstruirEdificioIncrementadorPoblacion.setVisible(false);
 		add(btnConstruirEdificioIncrementadorPoblacion);

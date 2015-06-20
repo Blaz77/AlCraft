@@ -3,7 +3,7 @@ package fiuba.algo3.ocupantes.recurso;
 public enum TipoObjetoVivo {
 
 	// Edificios Terran
-	CENTRO_DE_MINERAL, BARRACA, DEPOSITO_SUMINISTRO, REFINERIA,
+	CENTRO_DE_MINERAL, REFINERIA, DEPOSITO_SUMINISTRO, BARRACA,
 	FABRICA, PUERTO_ESTELAR_TERRAN,
 		
 	// Edificios Protoss

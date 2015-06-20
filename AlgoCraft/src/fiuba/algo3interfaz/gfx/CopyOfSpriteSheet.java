@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.terreno.Terreno;
 
-public class SpriteSheet {
+public class CopyOfSpriteSheet {
 
 	private final static String TIERRA_PATH = "/textures/tierra.png";
 	private final static String ESPACIO_PATH = "/textures/espacio.png";
@@ -20,20 +20,24 @@ public class SpriteSheet {
 	private final static String VESPENO_PATH = "/textures/volcan2.png";
 	private final static String MARCA_MAPA_PATH = "/textures/marcaMapa.png";
 	private static final String PLAYER_PALETTE_PATH = "/palettes/player_palette.png";
-
+	private static final String TERRAN_PATH = "/textures/edificios_terran_V.png";
 	
 	
     public static final BufferedImage spriteMarcaMapa = ImageLoader.loadImage(MARCA_MAPA_PATH);
+
 	private static java.awt.Color[] playerPalette = new Color[72];// = ImageLoader.loadImage(PLAYER_PALETTE_PATH).getRGB(0, 0, 9, 8, null, 0, 9);
     
-	public static SpriteSheet spritesTierra = new SpriteSheet(TIERRA_PATH);
-	public static SpriteSheet spritesEspacio = new SpriteSheet(ESPACIO_PATH);
-	public static SpriteSheet spritesHibrido = new SpriteSheet(HIBRIDO_PATH);
+	public static CopyOfSpriteSheet spritesTierra = new CopyOfSpriteSheet(TIERRA_PATH);
+	public static CopyOfSpriteSheet spritesEspacio = new CopyOfSpriteSheet(ESPACIO_PATH);
+	public static CopyOfSpriteSheet spritesHibrido = new CopyOfSpriteSheet(HIBRIDO_PATH);
 	
-	public static SpriteSheet spritesMineral = new SpriteSheet(MINERAL_PATH);
-	public static SpriteSheet spritesVespeno = new SpriteSheet(VESPENO_PATH);
+	public static CopyOfSpriteSheet spritesMineral = new CopyOfSpriteSheet(MINERAL_PATH);
+	public static CopyOfSpriteSheet spritesVespeno = new CopyOfSpriteSheet(VESPENO_PATH);
+	
+	public static CopyOfSpriteSheet spritesTerran = new CopyOfSpriteSheet(TERRAN_PATH);
+
     
-	private static HashMap<Object, SpriteSheet> Sprites = new HashMap<Object, SpriteSheet>(){
+	private static HashMap<Object, CopyOfSpriteSheet> Sprites = new HashMap<Object, CopyOfSpriteSheet>(){
         {
             put(Terreno.TIERRA, spritesTierra);
             put(Terreno.ESPACIO, spritesEspacio);
@@ -45,34 +49,38 @@ public class SpriteSheet {
             //put(TipoEdificio.PUERTO_ESTELAR_TERRAN, spritesPuertoEstelarTerran);
             
         }
-    };
+    };	
 	
 	
 	public static BufferedImage getSpriteMarcaMapa() {
 		return spriteMarcaMapa;
 	}
 
-	public static SpriteSheet getSpritestierra() {
+	public static CopyOfSpriteSheet getSpritestierra() {
 		return spritesTierra;
 	}
 
-	public static SpriteSheet getSpritesEspacio() {
+	public static CopyOfSpriteSheet getSpritesEspacio() {
 		return spritesEspacio;
 	}
 
-	public static SpriteSheet getSpritesHibrido() {
+	public static CopyOfSpriteSheet getSpritesHibrido() {
 		return spritesHibrido;
 	}
 
-	public static SpriteSheet getSpritesMineral() {
+	public static CopyOfSpriteSheet getSpritesMineral() {
 		return spritesMineral;
 	}
 
-	public static SpriteSheet getSpritesVespeno() {
+	public static CopyOfSpriteSheet getSpritesVespeno() {
 		return spritesVespeno;
 	}
+	
+	public static CopyOfSpriteSheet getSpritesTerran() {
+		return spritesTerran;
+	}
 
-	public static SpriteSheet getSprites(Object object) {
+	public static CopyOfSpriteSheet getSprites(Object object) {
 		return Sprites.get(object);
 	}	
 	
@@ -147,11 +155,11 @@ public class SpriteSheet {
 	private int altoSprite;
 	private int cantidad;
 	
-	public SpriteSheet(String path){
+	public CopyOfSpriteSheet(String path){
 		this(ImageLoader.loadImage(path));
 	}
 	
-	public SpriteSheet(BufferedImage bi){
+	public CopyOfSpriteSheet(BufferedImage bi){
 		
 		this.anchoSprite = this.altoSprite = bi.getWidth();
 		this.cantidad = bi.getHeight() / this.altoSprite;
