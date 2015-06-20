@@ -101,15 +101,21 @@ public class Game implements Runnable { // Permite correr un thread
 		panel.repaint();
 		// Game loop basico:
 		while(running){
-			
-			now = System.nanoTime();
+			panel.repaint();
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			/*now = System.nanoTime();
 			delta += (now - lastTime) / timePerTick;
 			lastTime = now;
 			if (delta >= 1){
 				//tick();
-				panel.repaint();
+				//panel.repaint();
 				delta --;
-			}
+			}*/
 			
 		}
 		stop();
