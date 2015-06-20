@@ -1,12 +1,8 @@
 package fiuba.algo3interfaz.gfx;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
-import java.awt.image.IndexColorModel;
-import java.awt.image.WritableRaster;
 import java.util.HashMap;
-import java.util.Hashtable;
-
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.terreno.Terreno;
 
@@ -18,8 +14,12 @@ public class SpriteSheet {
 	private final static String MINERAL_PATH = "/textures/cristal2.png";
 	private final static String VESPENO_PATH = "/textures/volcan2.png";
 	private final static String MARCA_MAPA_PATH = "/textures/marcaMapa.png";
+	private static final String PLAYER_PALETTE_PATH = "/palettes/player_palette.png";
 
+	
+	
     public static final BufferedImage spriteMarcaMapa = ImageLoader.loadImage(MARCA_MAPA_PATH);
+	private static java.awt.Color[] playerPalette = new Color[72];// = ImageLoader.loadImage(PLAYER_PALETTE_PATH).getRGB(0, 0, 9, 8, null, 0, 9);
     
 	public static SpriteSheet spritesTierra = new SpriteSheet(TIERRA_PATH);
 	public static SpriteSheet spritesEspacio = new SpriteSheet(ESPACIO_PATH);
@@ -72,7 +72,15 @@ public class SpriteSheet {
 	}	
 	
 	public static void inicializar() {
-		for (int i = 0; i < spritesTierra.cantidad; i++){
+		
+		int[] paletteImg = ImageLoader.loadImage(PLAYER_PALETTE_PATH).getRGB(0, 0, 9, 8, null, 0, 9);
+		for (int i = 0; i < playerPalette.length; i++){
+			Color c = new Color(paletteImg[i], true);
+			playerPalette[i] = new Color(c.getRed(), c.getGreen(), c.getBlue(), 255);
+			System.out.format("new Color(%d, %d, %d, %d)%n", c.getRed(), c.getGreen(), c.getBlue(), 255);
+		}
+		
+		/*for (int i = 0; i < spritesTierra.cantidad; i++){
 			
 			BufferedImage sprite = spritesTierra.sheet[i];
 			
@@ -81,8 +89,52 @@ public class SpriteSheet {
 			WritableRaster wr = spritesTierra.sheet[(i+ 1) % spritesTierra.cantidad].getRaster();
 			boolean bAlphaPremultiplied = sprite.isAlphaPremultiplied();
 			spritesTierra.sheet[i] = new BufferedImage(icm2, wr, bAlphaPremultiplied, new Hashtable());
-		}
+		}*/
 	}
+	
+	private static fiuba.algo3.juego.Color[] colores = fiuba.algo3.juego.Color.values();
+	
+	private static Color[] mapeo = new Color[]{
+		new Color(255, 0, 255), new Color(247, 15, 15),
+		new Color(222, 0, 222), new Color(191, 23, 23),
+		new Color(189, 0, 189), new Color(191, 23, 23),
+		new Color(156, 0, 156), new Color(162, 15, 15),
+		new Color(124, 0, 124), new Color(130, 0, 0),
+		new Color(91, 0, 91), new Color(107, 0, 0),
+		new Color(58, 0, 58), new Color(85, 0, 0),
+		new Color(25, 0, 25), new Color(38, 0, 0)
+	};
+	
+    public static void swapColors( BufferedImage img, fiuba.algo3.juego.Color color ){
+    	fiuba.algo3.juego.Color[] colores = fiuba.algo3.juego.Color.values();
+    	int colorIndex = 0;
+    	for (int i = 0; i < colores.length; i++  ){
+    		if (colores[i] == color){
+    			colorIndex = i+1;
+    			break;
+    		}
+    	}
+    	_swapColors(img,  1, playerPalette);
+    }
+    	
+    public static void _swapColors( BufferedImage img, int colorIndex, Color... mapping ){
+    
+        int[] pixels = img.getRGB( 0, 0, img.getWidth(), img.getHeight(), null, 0, img.getWidth() );
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>(); 
+        for( int i = 0; i < mapping.length/2; i++ ){
+            map.put( mapping[2*i].getRGB(), mapping[2*i+1].getRGB() ); 
+        }
+
+
+        for( int i = 0; i < pixels.length; i++ ){
+            if( map.containsKey( pixels[i] ) )
+                pixels[i] =  map.get( pixels[i] ); 
+        }
+
+        img.setRGB( 0, 0, img.getWidth(), img.getHeight(), pixels, 0, img.getWidth() );  
+    }
+
+	
 	
 	/** Clase **/
 	
