@@ -16,7 +16,7 @@ public class AtributosConstruccion extends AtributosEdificio {
 	public AtributosConstruccion(AtributosEdificio atrEdificio){
 		this.atributosEdificio = atrEdificio;
 		this.nombre = "Construccion";
-		this.especie = atrEdificio.getEspecie();
+		this.tipo = atrEdificio.getTipo();
 	}
 
 	@Override

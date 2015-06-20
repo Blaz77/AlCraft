@@ -13,7 +13,9 @@ public abstract class Recurso implements Ocupante {
 		this.posicion = posicion;
 	}
 	
-	public abstract TipoOcupante getTipo();
+	public abstract Tipo getTipo();
+	
+	public abstract TipoOcupante getTipoOcupante();
 
 	public Posicion getPosicion() {
 		return posicion;

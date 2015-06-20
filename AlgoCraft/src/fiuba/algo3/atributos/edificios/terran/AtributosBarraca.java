@@ -9,6 +9,7 @@ import fiuba.algo3.atributos.edificios.AtributosEdificio;
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.EntrenadorUnidades;
 import fiuba.algo3.componentes.IEntrenadorUnidades;
+import fiuba.algo3.ocupantes.recurso.Tipo;
 import fiuba.algo3.ocupantes.recurso.TipoObjetoVivo;
 
 public class AtributosBarraca extends AtributosEdificio {
@@ -20,7 +21,7 @@ public class AtributosBarraca extends AtributosEdificio {
 		this.costo = new AtributosCosto(150, 0, 12);
 		this.vida = new AtributosVida(1000);
 		this.nombre = "Barraca";
-		this.especie = TipoObjetoVivo.BARRACA;
+		this.tipo = Tipo.BARRACA;
 		
 		// fields EdificioEntrenadorUnidades:
 		this.entrenador = new AtributosEntrenadorUnidades(

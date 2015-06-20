@@ -44,11 +44,6 @@ public class Unidad extends ObjetoVivo {
 		this.propietario.removerUnidad(this);
 	}
 	
-	public TipoOcupante getTipo(){
-		return TipoOcupante.UNIDAD;
-	}
-	
-	
 	/*
 	 * 	MOVIMIENTO:
 	 * 

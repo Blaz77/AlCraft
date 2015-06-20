@@ -2,6 +2,7 @@ package fiuba.algo3.ocupantes;
 
 import fiuba.algo3.excepciones.RecursoAusente;
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.ocupantes.recurso.Tipo;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 
 // CeldaVacia == RecursoNull
@@ -13,8 +14,12 @@ public class CeldaVacia implements Ocupante {
 		this.posicion = posicion;
 	}
 	
-	public TipoOcupante getTipo() {
-		return TipoOcupante.CELDA_VACIA;
+	public Tipo getTipo() {
+		return Tipo.CELDA_VACIA;
+	}
+
+	public TipoOcupante getTipoOcupante() {
+		return Tipo.CELDA_VACIA.getTipoOcupante();
 	}
 	
 	public Posicion getPosicion() {

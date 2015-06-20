@@ -9,6 +9,7 @@ import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.edificios.AtributosEdificio;
 import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.EstadoRecolectandoMineral;
+import fiuba.algo3.ocupantes.recurso.Tipo;
 import fiuba.algo3.ocupantes.recurso.TipoObjetoVivo;
 
 public class AtributosCentroDeMineral extends AtributosEdificio {
@@ -20,7 +21,7 @@ public class AtributosCentroDeMineral extends AtributosEdificio {
 		this.costo = new AtributosCosto(50, 0, 4);
 		this.vida = new AtributosVida(500);
 		this.nombre = "Centro de Mineral";
-		this.especie = TipoObjetoVivo.CENTRO_DE_MINERAL;
+		this.tipo = Tipo.CENTRO_DE_MINERAL;
 
 		// fields EdificioRecolectorMineral
 		this.recolectorMineral = new AtributosRecolector(10);

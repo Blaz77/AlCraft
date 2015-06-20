@@ -1,6 +1,7 @@
 package fiuba.algo3.ocupantes;
 
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.ocupantes.recurso.Tipo;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 
 
@@ -15,9 +16,13 @@ public class OcupanteDesconocido implements Ocupante {
 		}
 		return instancia;
 	}
+	
+	public Tipo getTipo() {
+		return Tipo.DESCONOCIDO;
+	}
 		
-	public TipoOcupante getTipo() {
-		return TipoOcupante.DESCONOCIDO;
+	public TipoOcupante getTipoOcupante() {
+		return Tipo.DESCONOCIDO.getTipoOcupante();
 	}
 
 	public Posicion getPosicion() {

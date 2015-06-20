@@ -9,6 +9,7 @@ import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.edificios.AtributosEdificio;
 import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.EstadoSuministrandoPoblacion;
+import fiuba.algo3.ocupantes.recurso.Tipo;
 import fiuba.algo3.ocupantes.recurso.TipoObjetoVivo;
 
 public class AtributosDepositoDeSuministros extends AtributosEdificio {
@@ -20,7 +21,7 @@ public class AtributosDepositoDeSuministros extends AtributosEdificio {
 		this.costo = new AtributosCosto(100, 0, 6);
 		this.vida = new AtributosVida(500);
 		this.nombre = "Deposito De Suministros";
-		this.especie = TipoObjetoVivo.DEPOSITO_SUMINISTRO;
+		this.tipo = Tipo.DEPOSITO_SUMINISTRO;
 
 		// fields EdificioIncrementadorPoblacion
 		this.incrPoblacion = new AtributosIncrementadorPoblacion(5);

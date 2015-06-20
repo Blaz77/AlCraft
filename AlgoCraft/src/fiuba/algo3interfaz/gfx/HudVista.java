@@ -20,6 +20,7 @@ import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.ocupantes.recurso.Tipo;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3interfaz.input.btnCancelarMouseListener;
@@ -87,7 +88,7 @@ public class HudVista extends JPanel {
 		
 		// Edificios construibles
 		btnConstruirEdificioRecolectorMineral = new JButton(new ImageIcon(
-				CopyOfSpriteSheet.spritesTerran.get(jugador.getAtributos().getRecolectorMineral().getEspecie().ordinal())));
+				CopyOfSpriteSheet.spritesTerran.get(jugador.getAtributos().getRecolectorMineral().getTipo().ordinal())));
 		btnConstruirEdificioRecolectorMineral.setToolTipText(jugador.getAtributos().getRecolectorMineral().getNombre());
 		btnConstruirEdificioRecolectorMineral.addMouseListener(new btnConstruirEdificioRecolectorMineralMouseListener(this, this.jugador));
 		btnConstruirEdificioRecolectorMineral.setVisible(false);
@@ -97,7 +98,7 @@ public class HudVista extends JPanel {
 		botonera.add(btnConstruirEdificioRecolectorMineral);
 		
 		btnConstruirEdificioRecolectorGasVespeno = new JButton(new ImageIcon(
-				CopyOfSpriteSheet.spritesTerran.get(jugador.getAtributos().getRecolectorGasVespeno().getEspecie().ordinal())));
+				CopyOfSpriteSheet.spritesTerran.get(jugador.getAtributos().getRecolectorGasVespeno().getTipo().ordinal())));
 		btnConstruirEdificioRecolectorGasVespeno.setToolTipText(jugador.getAtributos().getRecolectorGasVespeno().getNombre());
 		btnConstruirEdificioRecolectorGasVespeno.addMouseListener(new btnConstruirEdificioRecolectorGasVespenoMouseListener(this, this.jugador));
 		btnConstruirEdificioRecolectorGasVespeno.setVisible(false);
@@ -107,7 +108,7 @@ public class HudVista extends JPanel {
 		botonera.add(btnConstruirEdificioRecolectorGasVespeno);
 		
 		btnConstruirEdificioIncrementadorPoblacion = new JButton(new ImageIcon(
-				CopyOfSpriteSheet.spritesTerran.get(jugador.getAtributos().getIncrementadorPoblacion().getEspecie().ordinal())));
+				CopyOfSpriteSheet.spritesTerran.get(jugador.getAtributos().getIncrementadorPoblacion().getTipo().ordinal())));
 		btnConstruirEdificioIncrementadorPoblacion.setToolTipText(jugador.getAtributos().getIncrementadorPoblacion().getNombre());
 		btnConstruirEdificioIncrementadorPoblacion.addMouseListener(new btnConstruirEdificioIncrementadorPoblacionMouseListener(this, this.jugador));
 		btnConstruirEdificioIncrementadorPoblacion.setVisible(false);
@@ -185,12 +186,13 @@ public class HudVista extends JPanel {
 	}
 
 	private void mostrarOpcionesSegunCelda() {
-		TipoOcupante tipoOcupante = mapaVisible.getOcupante(this.celdaSeleccionada).getTipo();
-		if (tipoOcupante == TipoOcupante.CELDA_VACIA || 
-				tipoOcupante == TipoOcupante.MINERAL ||
-				tipoOcupante == TipoOcupante.VESPENO) {
+		Tipo tipo = mapaVisible.getOcupante(this.celdaSeleccionada).getTipo();
+		if (tipo == Tipo.CELDA_VACIA || 
+				tipo == Tipo.MINERAL ||
+				tipo == Tipo.VESPENO) {
 			btnConstruir.setVisible(true);
 		}
+		// if (tipoOcupante == TipoOcupante.RECURSO) .... es equivalente a los de arriba
 	}
 
 	public Posicion getCeldaSeleccionada() {

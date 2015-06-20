@@ -14,6 +14,7 @@ import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.MapaReal;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.edificios.Edificio;
+import fiuba.algo3.ocupantes.recurso.Tipo;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.terreno.Terreno;
 
@@ -104,7 +105,7 @@ public class MapaVista {
 			for (int x = xInicio; x < xFin; x++){
 				BufferedImage spriteTerreno = spriteTerreno(x, y);
 				
-				boolean celdaDesconocida = datosMapa.getOcupante(new Posicion(x,y)).getTipo() == TipoOcupante.DESCONOCIDO;
+				boolean celdaDesconocida = datosMapa.getOcupante(new Posicion(x,y)).getTipoOcupante() == TipoOcupante.DESCONOCIDO;
 				
 				if (celdaDesconocida)
 					g2.drawImage(spriteTerreno, RESCALE_OP, 
@@ -141,19 +142,19 @@ public class MapaVista {
 
 	private void dibujarOcupante(Graphics g, int x, int y) {
 				
-		TipoOcupante tipoOcupante = datosMapa.getOcupante(new Posicion(x, y)).getTipo();
-		if (tipoOcupante == TipoOcupante.CELDA_VACIA)
+		Tipo tipo = datosMapa.getOcupante(new Posicion(x, y)).getTipo();
+		if (tipo == Tipo.CELDA_VACIA)
 			return;
 
-		if (tipoOcupante == TipoOcupante.EDIFICIO) {
+		if (tipo.getTipoOcupante() == TipoOcupante.EDIFICIO) {
 			Edificio edificio = (Edificio) datosMapa.getOcupante(new Posicion(x, y));
 			BufferedImage bi = CopyOfSpriteSheet.getSprites(edificio.getPropietario().getRaza())
-					.get(edificio.getEspecie().ordinal());
+					.get(edificio.getTipo().ordinal());
 			dibujarEnCelda(g, bi, x, y);
 			return;
 		}
 		
-		BufferedImage bi = SpriteSheet.getSprites(tipoOcupante).get(mapaVista[x][y].getIndex());
+		BufferedImage bi = SpriteSheet.getSprites(tipo).get(mapaVista[x][y].getIndex());
 		dibujarEnCelda(g, bi, x, y);
 		//g.drawImage(ImageLoader.loadImage("/textures/terran.png"), 
 		//		anchoSprite * x - camara.getxOffset(), 	altoSprite * y - camara.getyOffset(), null);

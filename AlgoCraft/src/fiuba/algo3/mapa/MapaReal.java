@@ -6,6 +6,7 @@ import java.util.Random;
 import fiuba.algo3.ocupantes.Ocupante;
 import fiuba.algo3.ocupantes.recurso.GasVespeno;
 import fiuba.algo3.ocupantes.recurso.Mineral;
+import fiuba.algo3.ocupantes.recurso.Tipo;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.terreno.Terreno;
@@ -111,7 +112,7 @@ public class MapaReal implements Mapa {
 			// La idea es que todos los nodos de mineral esten conectados.
 			// Asi que pongo minerales en puntos aleatorios conectados a minerales ya
 			// colocados.
-			else if (getOcupante(randPos).getTipo() != TipoOcupante.MINERAL)
+			else if (getOcupante(randPos).getTipo() != Tipo.MINERAL)
 				for(Celda conMineral : yaUbicados)
 					if (distancia(randPos, conMineral.getPosicion()) == 1){
 						setOcupante(new Mineral(randPos), randPos);
@@ -132,7 +133,7 @@ public class MapaReal implements Mapa {
 		Posicion randPos;
 		do 
 			randPos = celdaRandomEnBase(base);
-		while(getOcupante(randPos).getTipo() == TipoOcupante.MINERAL);
+		while(getOcupante(randPos).getTipo() == Tipo.MINERAL);
 		setOcupante(new GasVespeno(randPos), randPos);
 	}
 	
@@ -308,7 +309,7 @@ public class MapaReal implements Mapa {
 				Posicion posActual = new Posicion(x, y);
 				// Dentro del mapa y el circulo
 				if (celdaValida(posActual) && distancia(centro, posActual) <= distancia) {
-					if (mapa[x][y].getOcupante().getTipo() == TipoOcupante.UNIDAD) {
+					if (mapa[x][y].getOcupante().getTipoOcupante() == TipoOcupante.UNIDAD) {
 						unidades.add((Unidad) mapa[x][y].getOcupante());
 					}
 				}
@@ -357,15 +358,15 @@ public class MapaReal implements Mapa {
 			for (int x = 0; x < ancho(); x++) {
 				pos = new Posicion(x, y);
 				if (distancia(pos, posJ1) < SEMILADO_BASE * 2) {
-					if (getOcupante(pos) != null && getOcupante(pos).getTipo() == TipoOcupante.MINERAL)
+					if (getOcupante(pos) != null && getOcupante(pos).getTipo() == Tipo.MINERAL)
 						mineralesJ1++;
-					else if (getOcupante(pos) != null && getOcupante(pos).getTipo() == TipoOcupante.VESPENO)
+					else if (getOcupante(pos) != null && getOcupante(pos).getTipo() == Tipo.VESPENO)
 						vespenoJ1++;
 				}
 				else if (distancia(pos, posJ2) < SEMILADO_BASE * 2) {
-					if (getOcupante(pos) != null && getOcupante(pos).getTipo() == TipoOcupante.MINERAL)
+					if (getOcupante(pos) != null && getOcupante(pos).getTipo() == Tipo.MINERAL)
 						mineralesJ2++;
-					else if (getOcupante(pos) != null && getOcupante(pos).getTipo() == TipoOcupante.VESPENO)
+					else if (getOcupante(pos) != null && getOcupante(pos).getTipo() == Tipo.VESPENO)
 						vespenoJ2++;
 				}
 			}
@@ -397,9 +398,9 @@ public class MapaReal implements Mapa {
 					System.out.print("B");
 				else {
 					elRecurso = getOcupante(new Posicion(x2, y2));
-					if(elRecurso != null && elRecurso.getTipo() == TipoOcupante.VESPENO)
+					if(elRecurso != null && elRecurso.getTipo() == Tipo.VESPENO)
 						System.out.print("G");
-					else if(elRecurso != null && elRecurso.getTipo() == TipoOcupante.MINERAL)
+					else if(elRecurso != null && elRecurso.getTipo() == Tipo.MINERAL)
 							System.out.print("M");
 					else if(getTerreno(new Posicion(x2, y2)) == Terreno.ESPACIO)
 						System.out.print(" ");

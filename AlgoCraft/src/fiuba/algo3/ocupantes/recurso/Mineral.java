@@ -9,8 +9,13 @@ public class Mineral extends Recurso {
 		super(posicion);
 	}
 
-	public TipoOcupante getTipo() {
-		return TipoOcupante.MINERAL;
+	public Tipo getTipo() {
+		return Tipo.MINERAL;
+	}
+	
+	@Override
+	public TipoOcupante getTipoOcupante() {
+		return Tipo.MINERAL.getTipoOcupante();
 	}
 
 	@Override
@@ -18,5 +23,7 @@ public class Mineral extends Recurso {
 		return (super.puedeCambiarsePor(otroOcupante) &&
 				otroOcupante.debeOcuparMineral());
 	}
+
+	
 
 }

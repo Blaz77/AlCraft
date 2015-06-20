@@ -11,8 +11,13 @@ public class GasVespeno extends Recurso {
 		super(posicion);
 	}
 	
-	public TipoOcupante getTipo() {
-		return TipoOcupante.VESPENO;
+	public Tipo getTipo() {
+		return Tipo.VESPENO;
+	}
+	
+	@Override
+	public TipoOcupante getTipoOcupante() {
+		return Tipo.VESPENO.getTipoOcupante();
 	}
 	
 	// Este metodo despues se borra :3 es para los print y probar cosas

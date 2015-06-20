@@ -1,12 +1,15 @@
 package fiuba.algo3.ocupantes;
 
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.ocupantes.recurso.Tipo;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 
 public interface Ocupante {
 	
-	public TipoOcupante getTipo();
+	public Tipo getTipo();
 	
+	public TipoOcupante getTipoOcupante();
+
 	public Posicion getPosicion();
 	
 	//public String toString();

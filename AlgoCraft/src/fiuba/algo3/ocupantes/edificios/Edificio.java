@@ -20,11 +20,6 @@ public class Edificio extends ObjetoVivo {
 		this.entrenador = atributos.getEntrenadorUnidades();
 		this.entrenador.setPortador(this);
 	}
-	
-	
-	public TipoOcupante getTipo(){
-		return TipoOcupante.EDIFICIO;
-	}
 
 	public boolean puedeEntrenarUnidades(){
 		return this.entrenador.puedeEntrenarUnidades();

@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
+import fiuba.algo3.ocupantes.recurso.Tipo;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.terreno.Terreno;
 
@@ -39,8 +40,8 @@ public class SpriteSheet {
             put(Terreno.ESPACIO, spritesEspacio);
             //put(Terreno.SOMBRA, spritesSombra);
             
-            put(TipoOcupante.MINERAL, spritesMineral);
-            put(TipoOcupante.VESPENO, spritesVespeno);
+            put(Tipo.MINERAL, spritesMineral);
+            put(Tipo.VESPENO, spritesVespeno);
             
             //put(TipoEdificio.PUERTO_ESTELAR_TERRAN, spritesPuertoEstelarTerran);
             

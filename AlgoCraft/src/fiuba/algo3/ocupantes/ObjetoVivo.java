@@ -12,7 +12,8 @@ import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.recurso.GasVespeno;
 import fiuba.algo3.ocupantes.recurso.Mineral;
-import fiuba.algo3.ocupantes.recurso.TipoObjetoVivo;
+import fiuba.algo3.ocupantes.recurso.Tipo;
+import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 
 public abstract class ObjetoVivo implements Ocupante { //ObjetoVivo / ObjetoInteractuable / etc.
 
@@ -39,6 +40,13 @@ public abstract class ObjetoVivo implements Ocupante { //ObjetoVivo / ObjetoInte
 		return this.atributos;
 	}
 	
+	public Tipo getTipo() {
+		return this.atributos.getTipo();
+	}
+
+	public TipoOcupante getTipoOcupante() {
+		return this.atributos.getTipo().getTipoOcupante();
+	}
 
 	public Jugador getPropietario() {
 		return this.propietario;
@@ -66,10 +74,6 @@ public abstract class ObjetoVivo implements Ocupante { //ObjetoVivo / ObjetoInte
 
 	public String getNombre() {
 		return this.atributos.getNombre();
-	}
-	
-	public TipoObjetoVivo getEspecie() {
-		return this.atributos.getEspecie();
 	}
 
 	public boolean tieneEscudo(){
