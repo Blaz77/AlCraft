@@ -91,7 +91,7 @@ public class HudVista extends JPanel {
 		
 		btnConstruirEdificioRecolectorGasVespeno = new JButton(new ImageIcon(
 				CopyOfSpriteSheet.spritesTerran.get(jugador.getAtributos().getRecolectorGasVespeno().getEspecie().ordinal())));
-		btnConstruirEdificioRecolectorGasVespeno.addMouseListener(new btnConstruirEdificioRecolectorGasVespenoMouseListener(this));
+		btnConstruirEdificioRecolectorGasVespeno.addMouseListener(new btnConstruirEdificioRecolectorGasVespenoMouseListener(this, this.jugador));
 		btnConstruirEdificioRecolectorGasVespeno.setVisible(false);
 		btnConstruirEdificioRecolectorGasVespeno.setBorder(null);
 		btnConstruirEdificioRecolectorGasVespeno.setFocusPainted(false);
@@ -100,7 +100,7 @@ public class HudVista extends JPanel {
 		
 		btnConstruirEdificioIncrementadorPoblacion = new JButton(new ImageIcon(
 				CopyOfSpriteSheet.spritesTerran.get(jugador.getAtributos().getIncrementadorPoblacion().getEspecie().ordinal())));
-		btnConstruirEdificioIncrementadorPoblacion.addMouseListener(new btnConstruirEdificioIncrementadorPoblacionMouseListener(this));
+		btnConstruirEdificioIncrementadorPoblacion.addMouseListener(new btnConstruirEdificioIncrementadorPoblacionMouseListener(this, this.jugador));
 		btnConstruirEdificioIncrementadorPoblacion.setVisible(false);
 		btnConstruirEdificioIncrementadorPoblacion.setBorder(null);
 		btnConstruirEdificioIncrementadorPoblacion.setFocusPainted(false);

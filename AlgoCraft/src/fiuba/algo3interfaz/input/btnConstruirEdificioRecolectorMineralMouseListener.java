@@ -3,6 +3,7 @@ package fiuba.algo3interfaz.input;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.RecursoAusente;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.juego.Jugador;
@@ -28,6 +29,9 @@ public class btnConstruirEdificioRecolectorMineralMouseListener implements Mouse
 		}
 		catch (RecursoAusente e) {
 			vista.mostrarMensaje("Debe construir sobre mineral");
+		}
+		catch (MineralInsuficiente e) {
+			vista.mostrarMensaje("Mineral insuficiente");
 		}
 		finally {
 			vista.requestFocus();
