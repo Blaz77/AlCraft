@@ -117,12 +117,12 @@ public class MapaVista {
 				}
 			}
 		// Lindo terran :D
-		SpriteSheet terranSprites = new SpriteSheet("/textures/unidadesTerran.png");
+		SpriteSheet terranSprites = new SpriteSheet("/textures/edificiosTerran.png");
 		for (int c = 0; c < 8; c++)
-			for (int u = 0; u < 5; u++){
+			for (int u = 0; u < 6; u++){
 				SpriteSheet.swapColors(terranSprites.get(u), Color.values()[c]);
 				dibujarEnCelda(g, terranSprites.get(u), 2*c, 2*u);
-				terranSprites = new SpriteSheet("/textures/unidadesTerran.png");
+				terranSprites = new SpriteSheet("/textures/edificiosTerran.png");
 
 			}
 		//dibujarEnCelda(g, terran, ancho-1, alto-1);
