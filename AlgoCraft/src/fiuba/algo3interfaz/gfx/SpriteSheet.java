@@ -2,7 +2,12 @@ package fiuba.algo3interfaz.gfx;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
+
+import javax.imageio.ImageIO;
+
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.terreno.Terreno;
 
@@ -77,7 +82,6 @@ public class SpriteSheet {
 		for (int i = 0; i < playerPalette.length; i++){
 			Color c = new Color(paletteImg[i], true);
 			playerPalette[i] = new Color(c.getRed(), c.getGreen(), c.getBlue(), 255);
-			System.out.format("new Color(%d, %d, %d, %d)%n", c.getRed(), c.getGreen(), c.getBlue(), 255);
 		}
 		
 		/*for (int i = 0; i < spritesTierra.cantidad; i++){
@@ -114,24 +118,24 @@ public class SpriteSheet {
     			break;
     		}
     	}
-    	_swapColors(img,  1, playerPalette);
+    	_swapColors(img,  colorIndex, playerPalette);
     }
     	
     public static void _swapColors( BufferedImage img, int colorIndex, Color... mapping ){
     
         int[] pixels = img.getRGB( 0, 0, img.getWidth(), img.getHeight(), null, 0, img.getWidth() );
         HashMap<Integer, Integer> map = new HashMap<Integer, Integer>(); 
-        for( int i = 0; i < mapping.length/2; i++ ){
-            map.put( mapping[2*i].getRGB(), mapping[2*i+1].getRGB() ); 
+        for( int i = 0; i < 8; i++ ){
+            map.put( mapping[9*i].getRGB(), mapping[9*i+colorIndex].getRGB() ); 
         }
 
 
         for( int i = 0; i < pixels.length; i++ ){
-            if( map.containsKey( pixels[i] ) )
-                pixels[i] =  map.get( pixels[i] ); 
+            if(map.containsKey( pixels[i] ) )
+                pixels[i] = map.get( pixels[i] ); 
         }
 
-        img.setRGB( 0, 0, img.getWidth(), img.getHeight(), pixels, 0, img.getWidth() );  
+        img.setRGB( 0, 0, img.getWidth(), img.getHeight(), pixels, 0, img.getWidth() );
     }
 
 	

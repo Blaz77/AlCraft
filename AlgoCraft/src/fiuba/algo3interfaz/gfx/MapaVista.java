@@ -7,6 +7,7 @@ import java.awt.image.BufferedImageOp;
 import java.awt.image.RescaleOp;
 import java.util.Random;
 
+import fiuba.algo3.juego.Color;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.MapaReal;
 import fiuba.algo3.mapa.Posicion;
@@ -112,7 +113,14 @@ public class MapaVista {
 				}
 			}
 		// Lindo terran :D
-		//g.drawImage(ImageLoader.loadImage("/textures/terran.png"), 0, 0, null);
+		BufferedImage terran = ImageLoader.loadImage("/textures/terran.png");
+		g.drawImage(terran, 0, 0, null);
+
+		for (int i = 1; i < Color.values().length; i++){
+			terran = ImageLoader.loadImage("/textures/terran.png");
+			SpriteSheet.swapColors(terran, Color.values()[i]);
+			g.drawImage(terran, 32*i, 0, null);
+		}
 				
 		ubicarMarcaMapaEn(g);
 		

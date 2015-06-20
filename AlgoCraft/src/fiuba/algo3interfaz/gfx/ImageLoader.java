@@ -1,5 +1,6 @@
 package fiuba.algo3interfaz.gfx;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -9,7 +10,12 @@ public class ImageLoader {
 	
 	public static BufferedImage loadImage(String path){
 		try {
-			return ImageIO.read(ImageLoader.class.getResource(path));
+			BufferedImage src = ImageIO.read(ImageLoader.class.getResource(path));
+			java.awt.image.ColorConvertOp cco = new java.awt.image.ColorConvertOp(null);
+			BufferedImage dest = new BufferedImage(src.getWidth(), src.getHeight(), BufferedImage.TYPE_INT_ARGB);
+			dest = cco.filter(src, dest);
+			return dest;
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(1);
