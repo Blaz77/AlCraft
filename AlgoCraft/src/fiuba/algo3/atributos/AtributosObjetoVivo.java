@@ -7,6 +7,7 @@ import fiuba.algo3.componentes.Costo;
 import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.IVida;
 import fiuba.algo3.componentes.Vida;
+import fiuba.algo3.ocupantes.recurso.TipoObjetoVivo;
 
 /*
   Superclase de los atributos ('stats' en la mayoria de los juegos en ingles)
@@ -21,6 +22,7 @@ public abstract class AtributosObjetoVivo { //AtributosObjetoDeJuego?
 	protected AtributosCosto costo;
 	
 	protected String nombre;
+	protected TipoObjetoVivo especie;
 
 	
 	public List<Estado> getEstadosIniciales(){
@@ -78,6 +80,10 @@ public abstract class AtributosObjetoVivo { //AtributosObjetoDeJuego?
 
 	public int getDanioEfectivo(int danioAire, int danioTierra) {
 		return danioTierra;
+	}
+
+	public TipoObjetoVivo getEspecie() {
+		return this.especie;
 	}
 
 }

@@ -12,6 +12,7 @@ import fiuba.algo3.componentes.EstadoRecolectandoMineral;
 import fiuba.algo3.componentes.EstadoRegenerandoEscudo;
 import fiuba.algo3.componentes.IVida;
 import fiuba.algo3.componentes.VidaConEscudo;
+import fiuba.algo3.ocupantes.recurso.TipoObjetoVivo;
 
 public class AtributosNexoMineral extends AtributosEdificio {
 	
@@ -22,6 +23,7 @@ public class AtributosNexoMineral extends AtributosEdificio {
 		this.costo = new AtributosCosto(50, 0, 4);
 		this.vida = new AtributosVida(250, 250);
 		this.nombre = "Nexo Mineral";
+		this.especie = TipoObjetoVivo.NEXO_MINERAL;
 		
 		// fields EdificioRecolectorMineral
 		this.recolectorMineral = new AtributosRecolector(10);

@@ -9,6 +9,7 @@ import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.edificios.AtributosEdificio;
 import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.EstadoRecolectandoGasVespeno;
+import fiuba.algo3.ocupantes.recurso.TipoObjetoVivo;
 
 public class AtributosRefineria extends AtributosEdificio {
 
@@ -19,6 +20,7 @@ public class AtributosRefineria extends AtributosEdificio {
 		this.costo = new AtributosCosto(100, 0, 6);
 		this.vida = new AtributosVida(750);
 		this.nombre = "Refineria";
+		this.especie = TipoObjetoVivo.REFINERIA;
 
 
 		// fields EdificioRecolectorMineral

@@ -14,6 +14,7 @@ import fiuba.algo3.componentes.EstadoRegenerandoEscudo;
 import fiuba.algo3.componentes.IEntrenadorUnidades;
 import fiuba.algo3.componentes.IVida;
 import fiuba.algo3.componentes.VidaConEscudo;
+import fiuba.algo3.ocupantes.recurso.TipoObjetoVivo;
 
 public class AtributosArchivosTemplarios extends AtributosEdificio {
 	
@@ -24,6 +25,7 @@ public class AtributosArchivosTemplarios extends AtributosEdificio {
 		this.costo = new AtributosCosto(150, 200, 9);
 		this.vida = new AtributosVida(500, 500);
 		this.nombre = "Archivos Templarios";
+		this.especie = TipoObjetoVivo.ARCHIVOS_TEMPLARIOS;
 		
 		// fields EdificioEntrenadorUnidades:
 		this.entrenador = new AtributosEntrenadorUnidades(
