@@ -1,13 +1,18 @@
 package fiuba.algo3interfaz.gfx;
 
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
@@ -35,9 +40,11 @@ public class HudVista extends JPanel {
 	
 	private JButton btnConstruir;
 	private JPanel panel;
+	private JPanel botonera;
 	private JButton btnConstruirEdificioRecolectorMineral;
 	private JButton btnConstruirEdificioRecolectorGasVespeno;
 	private JButton btnConstruirEdificioIncrementadorPoblacion;
+	private boolean laidOut = false;
 	
 	/* Precarga de imagenes */
 	private static BufferedImage picConstruir = ImageLoader.loadImage("/textures/construir.png");
@@ -52,36 +59,52 @@ public class HudVista extends JPanel {
 		
 		this.anchoVentana = anchoVentana;
 		this.altoVentana = altoVentana;
+		this.setPreferredSize(new Dimension(640, 480));
 		this.setVisible(false);
+		this.setOpaque(false);
 		
+		setLayout(new FlowLayout(FlowLayout.RIGHT, 8, 354));
+		botonera = new JPanel(new InvisibleGridLayout(0, 3, 14, 14));
+		botonera.setOpaque(false);
+		add(botonera);
 		
 		/* Botones utiles inicialmente invisibles */
 		btnConstruir = new JButton(new ImageIcon(picConstruir));
 		btnConstruir.addMouseListener(new btnConstruirMouseListener(this));
 		btnConstruir.setVisible(true);
-		add(btnConstruir);
+		btnConstruir.setBorder(null);
+		btnConstruir.setFocusPainted(false);
+		btnConstruir.setContentAreaFilled(false);
+		botonera.add(btnConstruir);
 		
-		setLayout(null);
 		
 		// Edificios construibles
 		btnConstruirEdificioRecolectorMineral = new JButton(new ImageIcon(
 				CopyOfSpriteSheet.spritesTerran.get(jugador.getAtributos().getRecolectorMineral().getEspecie().ordinal())));
 		btnConstruirEdificioRecolectorMineral.addMouseListener(new btnConstruirEdificioRecolectorMineralMouseListener(this));
 		btnConstruirEdificioRecolectorMineral.setVisible(false);
-		btnConstruirEdificioRecolectorMineral.setLocation(400, 3001);
-		add(btnConstruirEdificioRecolectorMineral);
+		btnConstruirEdificioRecolectorMineral.setBorder(null);
+		btnConstruirEdificioRecolectorMineral.setFocusPainted(false);
+		btnConstruirEdificioRecolectorMineral.setContentAreaFilled(false);
+		botonera.add(btnConstruirEdificioRecolectorMineral);
 		
 		btnConstruirEdificioRecolectorGasVespeno = new JButton(new ImageIcon(
 				CopyOfSpriteSheet.spritesTerran.get(jugador.getAtributos().getRecolectorGasVespeno().getEspecie().ordinal())));
 		btnConstruirEdificioRecolectorGasVespeno.addMouseListener(new btnConstruirEdificioRecolectorGasVespenoMouseListener(this));
 		btnConstruirEdificioRecolectorGasVespeno.setVisible(false);
-		add(btnConstruirEdificioRecolectorGasVespeno);
+		btnConstruirEdificioRecolectorGasVespeno.setBorder(null);
+		btnConstruirEdificioRecolectorGasVespeno.setFocusPainted(false);
+		btnConstruirEdificioRecolectorGasVespeno.setContentAreaFilled(false);
+		botonera.add(btnConstruirEdificioRecolectorGasVespeno);
 		
 		btnConstruirEdificioIncrementadorPoblacion = new JButton(new ImageIcon(
 				CopyOfSpriteSheet.spritesTerran.get(jugador.getAtributos().getIncrementadorPoblacion().getEspecie().ordinal())));
 		btnConstruirEdificioIncrementadorPoblacion.addMouseListener(new btnConstruirEdificioIncrementadorPoblacionMouseListener(this));
 		btnConstruirEdificioIncrementadorPoblacion.setVisible(false);
-		add(btnConstruirEdificioIncrementadorPoblacion);
+		btnConstruirEdificioIncrementadorPoblacion.setBorder(null);
+		btnConstruirEdificioIncrementadorPoblacion.setFocusPainted(false);
+		btnConstruirEdificioIncrementadorPoblacion.setContentAreaFilled(false);
+		botonera.add(btnConstruirEdificioIncrementadorPoblacion);
 		
 		// por ahora hasta ahi...
 	}
