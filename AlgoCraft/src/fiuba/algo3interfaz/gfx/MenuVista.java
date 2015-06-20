@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -27,6 +28,11 @@ import fiuba.algo3interfaz.input.btnConstruirMouseListener;
 
 
 public class MenuVista extends JPanel {
+	
+	// Al mejor estilo VisualBasic
+	private void msgbox(String s){
+	   JOptionPane.showMessageDialog(null, s);
+	}
 	
 	private TipoRaza razaJugador1;
 	private TipoRaza razaJugador2;
@@ -63,6 +69,16 @@ public class MenuVista extends JPanel {
     private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JTextField txtNombreJugador2;
     private javax.swing.JTextField txtNombreJugador1;
+    
+    private boolean validarCampos() {
+    	if ((txtNombreJugador1.isEnabled() && txtNombreJugador1.getText() == "") || 
+    		(txtNombreJugador1.isEnabled() && txtNombreJugador2.getText() == "")) {
+    		msgbox("Debe especificar el nombre del jugador");
+        	return false;
+    	}
+    	
+    	return true;
+    }
     
     private String definirNombreJugador(JCheckBox chkNombreColor, JTextField txtNombre, JComboBox cboColor, TipoRaza raza) {
     	if ( ! chkNombreColor.isSelected()) {
@@ -336,7 +352,8 @@ public class MenuVista extends JPanel {
     }                                             
 
     private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // Por ahora no hace nada
+    	if (! validarCampos()) return;
+
     	Opciones opciones = new Opciones();
     	opciones.setCantidadBases(6);
     	nombreJugador1 = definirNombreJugador(chkNombreColorJugador1, txtNombreJugador1, cboColorJugador1, razaJugador1);
