@@ -1,5 +1,6 @@
 package fiuba.algo3interfaz.gfx;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -51,8 +52,12 @@ public class HudVista extends JPanel {
 	private JButton btnConstruirEdificioRecolectorGasVespeno;
 	private JButton btnConstruirEdificioIncrementadorPoblacion;
 	private JButton btnConstruirEdificioEntrenadorUnidadesBasicas;
+	private JPanel ubicadorBotonera;
+	private JPanel centrante;
 	
 	/* Precarga de imagenes */
+	private static BufferedImage hudTest = ImageLoader.loadImage("/HUDs/HUDterran2.png"); //HUDzerg2.png, HUDprotoss2.png
+
 	private static BufferedImage picConstruir = ImageLoader.loadImage("/textures/construir.png");
 	private static BufferedImage picCancelar = ImageLoader.loadImage("/textures/cancelar.png");
 
@@ -66,16 +71,25 @@ public class HudVista extends JPanel {
 		
 		this.anchoVentana = anchoVentana;
 		this.altoVentana = altoVentana;
-		this.setPreferredSize(new Dimension(640, 480));
 		this.setFocusable(false);
 		this.setVisible(false);
 		this.setOpaque(false);
 		
-		setLayout(new FlowLayout(FlowLayout.RIGHT, 8, 354));
+		setLayout(new BorderLayout());
+		this.setPreferredSize(new Dimension(hudTest.getWidth(), hudTest.getHeight()));
+		
+		centrante = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		centrante.setOpaque(false);
+		add(centrante, java.awt.BorderLayout.SOUTH);
+		
+		ubicadorBotonera = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 70));
+		ubicadorBotonera.setPreferredSize(new Dimension(hudTest.getWidth(), hudTest.getHeight()));
+		ubicadorBotonera.setOpaque(false);
+		centrante.add(ubicadorBotonera);
+		
 		botonera = new JPanel(new InvisibleGridLayout(0, 3, 14, 8));
 		botonera.setOpaque(false);
-		add(botonera);
-		
+		ubicadorBotonera.add(botonera);
 		
 		/* Botones utiles inicialmente invisibles */
 		
@@ -164,7 +178,6 @@ public class HudVista extends JPanel {
 		dibujarDatosCeldaSeleccionada(g);
 	}
 	
-	private static BufferedImage hudTest = ImageLoader.loadImage("/HUDs/HUDterran2.png"); //HUDzerg2.png, HUDprotoss2.png
 	private void dibujarHUD(Graphics g) {
 		
 		g.drawImage(hudTest, (panel.getWidth() - hudTest.getWidth())/2, panel.getHeight() - hudTest.getHeight(), null);
@@ -173,9 +186,9 @@ public class HudVista extends JPanel {
 	
 	private void dibujarDatosJugador(Graphics g) {
 
-		g.setFont(new Font("Serif", Font.PLAIN, 36));
+		g.setFont(new Font("SansSerif", Font.PLAIN, 36));
 		g.setColor(java.awt.Color.WHITE);
-		g.drawString(this.jugador.getNombre(), 120, 380);
+		g.drawString(this.jugador.getNombre(), 50, 36);
 		
 	}
 	
@@ -184,9 +197,9 @@ public class HudVista extends JPanel {
 		g.setColor(java.awt.Color.WHITE);
 		
 		g.drawString(this.mapaVisible.getTerreno(celdaSeleccionada).name(),
-				120, 400);
+				panel.getWidth() / 2 - 140, panel.getHeight() - 50);
 		g.drawString(this.mapaVisible.getOcupante(celdaSeleccionada).getTipo().name(),
-				120, 420);
+				panel.getWidth() / 2 - 140, panel.getHeight() - 30);
 	}
 	
 	public void actualizarCeldaSeleccionada(Posicion nuevaCeldaSeleccionada) {

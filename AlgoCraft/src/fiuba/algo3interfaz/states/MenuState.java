@@ -1,5 +1,6 @@
 package fiuba.algo3interfaz.states;
 
+import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -31,7 +32,6 @@ public class MenuState extends State{
 	public void terminar() {
 		menu.setVisible(false);
 		game.getPanel().remove(menu);
-		
 	}
 
 }

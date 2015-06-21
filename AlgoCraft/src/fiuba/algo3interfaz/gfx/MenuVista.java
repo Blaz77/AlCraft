@@ -231,6 +231,7 @@ public class MenuVista extends JPanel {
         });
         
         setOpaque(false);
+        setPreferredSize(new java.awt.Dimension(640, 480));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
