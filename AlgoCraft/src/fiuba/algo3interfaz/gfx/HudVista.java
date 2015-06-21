@@ -28,6 +28,7 @@ import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.TipoOcupante;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3interfaz.Game;
+import fiuba.algo3interfaz.input.BotonBotonera;
 import fiuba.algo3interfaz.input.btnCancelarMouseListener;
 import fiuba.algo3interfaz.input.btnConstruirEdificioEntrenadorUnidadesBasicasMouseListener;
 import fiuba.algo3interfaz.input.btnConstruirEdificioIncrementadorPoblacionMouseListener;
@@ -44,15 +45,17 @@ public class HudVista extends JPanel {
 	private Mapa mapaVisible;
 	private Posicion celdaSeleccionada = new Posicion(0,0);
 
-	private JButton btnCancelar;
-	private JButton btnConstruir;
+	private BotonBotonera btnCancelar;
+	private BotonBotonera btnConstruir;
 	private JPanel panel;
-	private JPanel botonera;
+	private Botonera botoneraActual;
+	private Botonera botoneraConstrucciones;
+	private Botonera botoneraCeldaVacia;
 	private JLabel[] huecosLabel;
-	private JButton btnConstruirEdificioRecolectorMineral;
-	private JButton btnConstruirEdificioRecolectorGasVespeno;
-	private JButton btnConstruirEdificioIncrementadorPoblacion;
-	private JButton btnConstruirEdificioEntrenadorUnidadesBasicas;
+	private BotonBotonera btnConstruirEdificioRecolectorMineral;
+	private BotonBotonera btnConstruirEdificioRecolectorGasVespeno;
+	private BotonBotonera btnConstruirEdificioIncrementadorPoblacion;
+	private BotonBotonera btnConstruirEdificioEntrenadorUnidadesBasicas;
 	private JPanel ubicadorBotonera;
 	private JPanel centrante;
 	private JButton btnPasarTurno;
@@ -125,9 +128,9 @@ public class HudVista extends JPanel {
 		ubicadorBotonera.addMouseListener(new MouseAdapter() {} );
 		centrante.add(ubicadorBotonera);
 		
-		botonera = new JPanel(new InvisibleGridLayout(0, 3, 14, 8));
+		/*botonera = new JPanel(new InvisibleGridLayout(0, 3, 14, 8));
 		botonera.setOpaque(false);
-		ubicadorBotonera.add(botonera);
+		ubicadorBotonera.add(botonera);*/
 		
 		btnPasarTurno = new JButton("PASAR TURNO");
 		btnPasarTurno.addActionListener(new java.awt.event.ActionListener() {
@@ -139,17 +142,49 @@ public class HudVista extends JPanel {
 		
 		/* Botones utiles inicialmente invisibles */
 		
-		btnConstruir = new JButton(new ImageIcon(picConstruir));
+		/*btnConstruir = new JButton(new ImageIcon(picConstruir));
 		btnConstruir.addMouseListener(new btnConstruirMouseListener(this));
 		btnConstruir.setVisible(false);
 		btnConstruir.setBorder(null);
 		btnConstruir.setFocusPainted(false);
 		btnConstruir.setContentAreaFilled(false);
-		botonera.add(btnConstruir);
+		botonera.add(btnConstruir);*/
 		
+		btnConstruir = new BotonBotonera(new ImageIcon(picConstruir), new btnConstruirMouseListener(this));
+		
+		this.botoneraCeldaVacia = new Botonera(btnConstruir);
+		
+		btnConstruirEdificioRecolectorMineral = new BotonBotonera(new ImageIcon(
+				CopyOfSpriteSheet.spritesTerran.get(jugador.getAtributos().getRecolectorMineral().getTipo().ordinal())), 
+				new btnConstruirEdificioRecolectorMineralMouseListener(this, this.jugador));
+		
+		btnConstruirEdificioRecolectorGasVespeno = new BotonBotonera(new ImageIcon(
+				CopyOfSpriteSheet.spritesTerran.get(jugador.getAtributos().getRecolectorGasVespeno().getTipo().ordinal())), 
+				new btnConstruirEdificioRecolectorGasVespenoMouseListener(this, this.jugador));
+		
+		
+		btnConstruirEdificioIncrementadorPoblacion = new BotonBotonera(new ImageIcon(
+				CopyOfSpriteSheet.spritesTerran.get(jugador.getAtributos().getIncrementadorPoblacion().getTipo().ordinal())), 
+				new btnConstruirEdificioIncrementadorPoblacionMouseListener(this, this.jugador));
+		
+		btnConstruirEdificioEntrenadorUnidadesBasicas = new BotonBotonera(new ImageIcon(
+				CopyOfSpriteSheet.spritesTerran.get(jugador.getAtributos().getEntrenadorUnidadesBasicas().getTipo().ordinal())), 
+				new btnConstruirEdificioEntrenadorUnidadesBasicasMouseListener(this, this.jugador));
+		
+		
+		this.botoneraConstrucciones = new Botonera(btnConstruirEdificioRecolectorMineral, 
+													btnConstruirEdificioRecolectorGasVespeno,
+													btnConstruirEdificioIncrementadorPoblacion,
+													btnConstruirEdificioEntrenadorUnidadesBasicas);
+		
+		btnCancelar = new BotonBotonera(new ImageIcon(picCancelar), new btnCancelarMouseListener(this));
+		
+		this.botoneraConstrucciones.agregarCancelable(btnCancelar);
+		
+		//ubicadorBotonera.add(this.botoneraConstrucciones);
 		
 		// Edificios construibles
-		btnConstruirEdificioRecolectorMineral = new JButton(new ImageIcon(
+		/*btnConstruirEdificioRecolectorMineral = new JButton(new ImageIcon(
 				CopyOfSpriteSheet.spritesTerran.get(jugador.getAtributos().getRecolectorMineral().getTipo().ordinal())));
 		btnConstruirEdificioRecolectorMineral.setToolTipText(jugador.getAtributos().getRecolectorMineral().getNombre());
 		btnConstruirEdificioRecolectorMineral.addMouseListener(new btnConstruirEdificioRecolectorMineralMouseListener(this, this.jugador));
@@ -189,7 +224,7 @@ public class HudVista extends JPanel {
 		btnConstruirEdificioEntrenadorUnidadesBasicas.setContentAreaFilled(false);
 		botonera.add(btnConstruirEdificioEntrenadorUnidadesBasicas);
 		
-		/* Huecos para estilizar el layout */
+		/* Huecos para estilizar el layout *//*
 		huecosLabel = new JLabel[9];
 		for (int i=0; i<9; i++) {
 			huecosLabel[i] = new JLabel();
@@ -204,7 +239,7 @@ public class HudVista extends JPanel {
 		btnCancelar.setBorder(null);
 		btnCancelar.setFocusPainted(false);
 		btnCancelar.setContentAreaFilled(false);
-		botonera.add(btnCancelar);
+		botonera.add(newbtnCancelar);*/
 	}
 	
 	private void btnPasarTurnoActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -263,7 +298,8 @@ public class HudVista extends JPanel {
 	
 	public void actualizarCeldaSeleccionada(Posicion nuevaCeldaSeleccionada) {
 		this.celdaSeleccionada = nuevaCeldaSeleccionada;
-		restablecerOpciones();
+		//restablecerOpciones();
+		ubicadorBotonera.removeAll();
 		mostrarOpcionesSegunCelda();
 	}
 
@@ -272,7 +308,11 @@ public class HudVista extends JPanel {
 		if (tipo == Tipo.CELDA_VACIA || 
 				tipo == Tipo.MINERAL ||
 				tipo == Tipo.VESPENO) {
-			btnConstruir.setVisible(true);
+			//btnConstruir.setVisible(true);
+			//ubicadorBotonera.remove(0);
+			ubicadorBotonera.add(botoneraCeldaVacia);
+			ubicadorBotonera.revalidate(); //validate?
+			//botoneraActual = botoneraCeldaVacia;
 		}
 		// if (tipoOcupante == TipoOcupante.RECURSO) .... es equivalente a los de arriba
 	}
@@ -282,7 +322,7 @@ public class HudVista extends JPanel {
 	}
 
 	public void mostrarOpcionesConstruccion() {
-		btnConstruir.setVisible(false);
+		/*btnConstruir.setVisible(false);
 		btnConstruirEdificioRecolectorMineral.setVisible(true);
 		btnConstruirEdificioRecolectorGasVespeno.setVisible(true);
 		btnConstruirEdificioIncrementadorPoblacion.setVisible(true);
@@ -290,7 +330,12 @@ public class HudVista extends JPanel {
 		for (int i=4; i<8; i++) {
 			huecosLabel[i].setVisible(true);
 		}
-		btnCancelar.setVisible(true);
+		btnCancelar.setVisible(true);*/
+		
+		ubicadorBotonera.removeAll();
+		ubicadorBotonera.add(botoneraConstrucciones);
+		ubicadorBotonera.revalidate(); //validate?
+		//botoneraActual = botoneraConstrucciones;
 	}
 
 	public void mostrarOpcionesColocacion() {
@@ -303,7 +348,9 @@ public class HudVista extends JPanel {
 	}
 
 	public void restablecerOpciones() {
-		btnConstruirEdificioRecolectorMineral.setVisible(false);
+		
+		
+		/*btnConstruirEdificioRecolectorMineral.setVisible(false);
 		btnConstruirEdificioRecolectorGasVespeno.setVisible(false);
 		btnConstruirEdificioIncrementadorPoblacion.setVisible(false);
 		btnConstruirEdificioEntrenadorUnidadesBasicas.setVisible(false);
@@ -312,7 +359,8 @@ public class HudVista extends JPanel {
 		}
 		btnCancelar.setVisible(false);
 		btnConstruir.setVisible(false);
-		
+		*/
+		ubicadorBotonera.removeAll();
 		mostrarOpcionesSegunCelda();
 	}
 	
