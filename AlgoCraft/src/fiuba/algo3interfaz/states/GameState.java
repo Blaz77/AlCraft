@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
+import java.util.Random;
 
 import javax.swing.SwingUtilities;
 
@@ -11,6 +12,7 @@ import fiuba.algo3.juego.Jugador;
 import fiuba.algo3interfaz.gfx.HudVista;
 import fiuba.algo3interfaz.gfx.MapaVista;
 import fiuba.algo3interfaz.gfx.RecursoVista;
+import fiuba.algo3interfaz.music.MP3Player;
 
 public class GameState extends State {
 
@@ -55,14 +57,22 @@ public class GameState extends State {
 	@Override
 	public void init() {
 		game.getPanel().setBackground(java.awt.Color.BLACK);
+		//Integer themeNumber = new Random().nextInt(3) + 1;
+		//BGMPlayer.play("terran" + themeNumber.toString() + ".mp3");
 	}
 	@Override
 	public void tick() {
-		hudActual.setVisible(false);
-		mapaActual = mapas.get(game.getModelo().getJugadorActual());
-		hudActual = huds.get(game.getModelo().getJugadorActual());
-		recursoActual = recursos.get(game.getModelo().getJugadorActual());
-		hudActual.setVisible(true);
+		if (mapaActual != mapas.get(game.getModelo().getJugadorActual())){
+			
+			this.init(); // EMI mi idea es q init corra 1 vez x cambio de jugador.
+			
+			hudActual.setVisible(false);
+			mapaActual = mapas.get(game.getModelo().getJugadorActual());
+			hudActual = huds.get(game.getModelo().getJugadorActual());
+			recursoActual = recursos.get(game.getModelo().getJugadorActual());
+			hudActual.setVisible(true);
+
+		}
 		mapaActual.tick();
 		hudActual.tick();
 		recursoActual.tick();
