@@ -197,8 +197,8 @@ public class HudVista extends JPanel {
 		g.setFont(new Font("Serif", Font.PLAIN, 18));
 		g.setColor(java.awt.Color.WHITE);
 		
-		final int ORIGEN_X = 100;
-		final int ORIGEN_Y = 400;
+		final int ORIGEN_X = panel.getWidth() / 2 - 150;
+		final int ORIGEN_Y = panel.getHeight() - 75;
 		final int ANCHO_VIDA = 50;
 		
 		if (this.mapaVisible.getOcupante(celdaSeleccionada).getTipo().getTipoOcupante() == TipoOcupante.EDIFICIO ||
