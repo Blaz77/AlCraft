@@ -380,7 +380,7 @@ public class MenuVista extends JPanel {
 	private static BufferedImage logo = ImageLoader.loadImage("/AlgoCraft.png"); //HUDzerg2.png, HUDprotoss2.png
 	
 	public void render(Graphics g) {
-		g.drawImage(logo, (anchoVentana - logo.getWidth()) / 2, 20, null);
+		g.drawImage(logo, (game.getAncho() - logo.getWidth()) / 2, 20, null);
 
 	}
 	

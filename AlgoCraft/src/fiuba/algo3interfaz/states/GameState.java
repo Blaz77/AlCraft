@@ -13,7 +13,6 @@ import fiuba.algo3interfaz.gfx.MapaVista;
 import fiuba.algo3interfaz.gfx.RecursoVista;
 
 public class GameState extends State {
-	final int HUD_ALTO = 100;
 
 	private static final int MOV_CAMARA = 16;
 	private HashMap<Jugador, MapaVista> mapas = new HashMap<Jugador, MapaVista>();
@@ -82,19 +81,17 @@ public class GameState extends State {
 
 	    }
 		
-		if (e.getY() < game.getAlto() - HUD_ALTO) {
 			mapaActual.setCeldaSeleccionada(e.getX(), e.getY());
 			hudActual.actualizarCeldaSeleccionada(mapaActual.getPosicionCeldaSeleccionada());
-		}
+		
 		game.getPanel().repaint();
 		//System.out.println("Pressed!");
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		if (e.getY() < game.getAlto() - HUD_ALTO) {
 			mapaActual.setCeldaSeleccionada(e.getX(), e.getY());
 			hudActual.actualizarCeldaSeleccionada(mapaActual.getPosicionCeldaSeleccionada());
-		}
+		
 		game.getPanel().repaint();
 		//System.out.println("Released!");
 	}

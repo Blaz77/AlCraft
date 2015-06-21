@@ -61,12 +61,12 @@ public class Game implements Runnable { // Permite correr un thread
 
 
 	public int getAncho() {
-		return ancho;
+		return panel.getWidth();
 	}
 
 
 	public int getAlto() {
-		return alto;
+		return panel.getHeight();
 	}
 
 

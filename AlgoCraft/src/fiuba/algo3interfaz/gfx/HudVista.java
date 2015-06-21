@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
@@ -85,6 +86,7 @@ public class HudVista extends JPanel {
 		ubicadorBotonera = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 70));
 		ubicadorBotonera.setPreferredSize(new Dimension(hudTest.getWidth(), hudTest.getHeight()));
 		ubicadorBotonera.setOpaque(false);
+		ubicadorBotonera.addMouseListener(new MouseAdapter() {} );
 		centrante.add(ubicadorBotonera);
 		
 		botonera = new JPanel(new InvisibleGridLayout(0, 3, 14, 8));
