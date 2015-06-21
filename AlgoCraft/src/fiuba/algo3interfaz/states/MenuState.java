@@ -22,7 +22,7 @@ public class MenuState extends State{
 
 	@Override
 	public void init() {
-		//BGMPlayer.play("main_menu.mp3");
+		MP3Player.play("main_menu.mp3");
 	}
 	
 	

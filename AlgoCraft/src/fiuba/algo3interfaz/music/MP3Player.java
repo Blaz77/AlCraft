@@ -30,16 +30,22 @@ public class MP3Player {
 		currentMusic = mps.get(fileName);
 	}
 
-	public static void play() {
+	public static void playCurrentMusic() {
 		currentMusic.play();
 		
 	}
 	
-	public static void play(String fileName){
+	public static void silence() {
 		if (currentMusic != null) currentMusic.stop();
-		setMusic(fileName);
-		play();
+		
 	}
+	
+	public static void play(String fileName){
+		silence();
+		setMusic(fileName);
+		playCurrentMusic();
+	}
+
 }
 
 

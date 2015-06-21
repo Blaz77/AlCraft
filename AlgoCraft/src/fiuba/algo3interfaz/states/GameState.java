@@ -58,7 +58,8 @@ public class GameState extends State {
 	public void init() {
 		game.getPanel().setBackground(java.awt.Color.BLACK);
 		//Integer themeNumber = new Random().nextInt(3) + 1;
-		//BGMPlayer.play("terran" + themeNumber.toString() + ".mp3");
+		//MP3Player.play("terran" + themeNumber.toString() + ".mp3");
+		MP3Player.silence();
 	}
 	@Override
 	public void tick() {
