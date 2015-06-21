@@ -1,24 +1,38 @@
 package fiuba.algo3interfaz.gfx;
 
+import javax.swing.JPanel;
+
 public class Camara {
-	public int xOffset;
-	public int yOffset;
-	private int yStart;
-	private int xStart;
-	private int xEnd;
-	private int yEnd;
 	
-	public Camara(int xOffset, int yOffset, int xStart, int yStart, int xEnd, int yEnd){
+	private static final int BORDE = 64;
+	
+	
+	private int xOffset;
+	private int yOffset;
+	private int anchoMapa;
+	private int altoMapa;
+	private JPanel panel;
+	
+
+	public Camara(int xOffset, int yOffset, int anchoMapa, int altoMapa, JPanel panel){
 		this.xOffset = xOffset;
 		this.yOffset = yOffset;
-		this.xStart = xStart;
-		this.yStart = yStart;
-		this.xEnd = xEnd;
-		this.yEnd = yEnd;
+		
+		this.anchoMapa = anchoMapa;
+		this.altoMapa = altoMapa;
+		
+		this.panel = panel;
 		
 	}
 
 	public void move(int x, int y){
+		
+		int xStart = -BORDE;
+		int yStart = -BORDE;
+		
+		int xEnd = anchoMapa - panel.getWidth() + BORDE;
+		int yEnd = altoMapa - panel.getHeight() + HudVista.ALTO +  BORDE;
+		
 		xOffset = Math.min(Math.max(xOffset + x, xStart), xEnd);
 		yOffset = Math.min(Math.max(yOffset + y, yStart), yEnd);
 	}
