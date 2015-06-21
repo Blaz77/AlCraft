@@ -57,6 +57,10 @@ public class HudVista extends JPanel {
 	private JPanel centrante;
 	private JButton btnPasarTurno;
 	private Game game;
+	private JPanel ubicadorPasarTurno;
+	private JPanel espaciadorIzquierdo;
+	private JPanel espaciadorSuperior;
+	private JPanel controlCentral;
 	
 	/* Precarga de imagenes */
 	private static BufferedImage hudTest = ImageLoader.loadImage("/HUDs/HUDterran2.png"); //HUDzerg2.png, HUDprotoss2.png
@@ -82,13 +86,41 @@ public class HudVista extends JPanel {
 		
 		setLayout(new BorderLayout());
 		this.setPreferredSize(new Dimension(hudTest.getWidth(), hudTest.getHeight()));
-		
 		centrante = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		//centrante.setBackground(new java.awt.Color(255, 255, 255, 50));
 		centrante.setOpaque(false);
 		add(centrante, java.awt.BorderLayout.SOUTH);
 		
+		espaciadorIzquierdo = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
+		espaciadorIzquierdo.setPreferredSize(new Dimension(hudTest.getWidth() / 4, hudTest.getHeight()));
+		//espaciadorIzquierdo.setBackground(new java.awt.Color(255, 255, 255, 100));
+		espaciadorIzquierdo.addMouseListener(new MouseAdapter() {} );
+		espaciadorIzquierdo.setOpaque(false);
+		centrante.add(espaciadorIzquierdo);
+		
+		controlCentral = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		controlCentral.setPreferredSize(new Dimension(hudTest.getWidth() / 2, hudTest.getHeight()));
+		//controlCentral.setBackground(new java.awt.Color(255, 255, 255, 20));
+		controlCentral.setOpaque(false);
+		centrante.add(controlCentral);
+
+		espaciadorSuperior = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		espaciadorSuperior.setPreferredSize(new Dimension(hudTest.getWidth() / 2, 50));
+		//espaciadorSuperior.setBackground(new java.awt.Color(255, 255, 255, 100));
+		espaciadorSuperior.setOpaque(false);
+		controlCentral.add(espaciadorSuperior);
+		
+		ubicadorPasarTurno = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		ubicadorPasarTurno.setPreferredSize(new Dimension(hudTest.getWidth() / 2, hudTest.getHeight() - 50));
+		//ubicadorPasarTurno.setBackground(new java.awt.Color(255, 255, 255, 150));
+		ubicadorPasarTurno.addMouseListener(new MouseAdapter() {} );
+		ubicadorPasarTurno.setOpaque(false);
+		controlCentral.add(ubicadorPasarTurno);
+		
+		
 		ubicadorBotonera = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 70));
-		ubicadorBotonera.setPreferredSize(new Dimension(hudTest.getWidth(), hudTest.getHeight()));
+		ubicadorBotonera.setPreferredSize(new Dimension(hudTest.getWidth() / 4, hudTest.getHeight()));
+		//ubicadorBotonera.setBackground(new java.awt.Color(255, 255, 255, 50));
 		ubicadorBotonera.setOpaque(false);
 		ubicadorBotonera.addMouseListener(new MouseAdapter() {} );
 		centrante.add(ubicadorBotonera);
@@ -103,7 +135,7 @@ public class HudVista extends JPanel {
 				btnPasarTurnoActionPerformed(evt);
 			}
 		});
-		botonera.add(btnPasarTurno);
+		ubicadorPasarTurno.add(btnPasarTurno);
 		
 		/* Botones utiles inicialmente invisibles */
 		
