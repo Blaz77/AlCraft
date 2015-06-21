@@ -22,6 +22,7 @@ import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.recurso.Tipo;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.raza.TipoRaza;
@@ -198,10 +199,17 @@ public class HudVista extends JPanel {
 		g.setFont(new Font("Serif", Font.PLAIN, 18));
 		g.setColor(java.awt.Color.WHITE);
 		
-		g.drawString(this.mapaVisible.getTerreno(celdaSeleccionada).name(),
-				panel.getWidth() / 2 - 140, panel.getHeight() - 50);
-		g.drawString(this.mapaVisible.getOcupante(celdaSeleccionada).getTipo().name(),
-				panel.getWidth() / 2 - 140, panel.getHeight() - 30);
+		final int ORIGEN_X = 80;
+		final int ORIGEN_Y = 500;
+		
+		if (this.mapaVisible.getOcupante(celdaSeleccionada).getTipo().getTipoOcupante() == TipoOcupante.EDIFICIO ||
+				this.mapaVisible.getOcupante(celdaSeleccionada).getTipo().getTipoOcupante() == TipoOcupante.UNIDAD) {
+			ObjetoVivo entidad = (ObjetoVivo) this.mapaVisible.getOcupante(celdaSeleccionada);
+			g.drawString(entidad.getNombre(),
+					ORIGEN_X, ORIGEN_Y);
+			g.setColor(java.awt.Color.GREEN);
+			g.fillRect(ORIGEN_X, ORIGEN_Y + 10, entidad.getVida() / entidad.getVidaMaxima() * 5, 10);
+		}
 	}
 	
 	public void actualizarCeldaSeleccionada(Posicion nuevaCeldaSeleccionada) {
