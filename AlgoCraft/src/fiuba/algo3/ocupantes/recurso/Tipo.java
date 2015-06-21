@@ -3,13 +3,13 @@ package fiuba.algo3.ocupantes.recurso;
 public enum Tipo { //Especie / Nombre
 	
 	// Especial:
-	DESCONOCIDO(TipoOcupante.DESCONOCIDO, "LAL"),
+	DESCONOCIDO(TipoOcupante.DESCONOCIDO, ""),
 	
 	// Recursos:
 	CELDA_VACIA(TipoOcupante.RECURSO, ""), //O CeldaVacia(TipoOcupante.CeldaVacia)
 	//NO_RECURSO(TipoOcupante.Celda_Vacia) en vez del de arriba
-	MINERAL(TipoOcupante.RECURSO, ""),
-	VESPENO(TipoOcupante.RECURSO, ""),
+	MINERAL(TipoOcupante.RECURSO, "Cristal"),
+	VESPENO(TipoOcupante.RECURSO, "Volcan"),
 	
 	// Unidades Terran:
 	MARINE(TipoOcupante.UNIDAD, "Marine"), //TipoRaza etc.
