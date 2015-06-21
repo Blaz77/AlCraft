@@ -33,16 +33,13 @@ import fiuba.algo3interfaz.input.btnConstruirEdificioRecolectorMineralMouseListe
 import fiuba.algo3interfaz.input.btnConstruirMouseListener;
 
 
-public class HudVista extends JPanel {
+public class HudVista extends JPanel {	
 	
 	private TipoRaza raza;
 	private Color color;
 	private Jugador jugador; // dale que va, esto ya es cualquier cosa
 	private Mapa mapaVisible;
 	private Posicion celdaSeleccionada = new Posicion(0,0);
-
-	private int anchoVentana;
-	private int altoVentana;
 
 	private JButton btnCancelar;
 	private JButton btnConstruir;
@@ -62,16 +59,16 @@ public class HudVista extends JPanel {
 	private static BufferedImage picConstruir = ImageLoader.loadImage("/textures/construir.png");
 	private static BufferedImage picCancelar = ImageLoader.loadImage("/textures/cancelar.png");
 
+	public static final int ANCHO = hudTest.getWidth();
+	public static final int ALTO = hudTest.getHeight();	
 
-	public HudVista(Jugador jugador, int anchoVentana, int altoVentana, JPanel panel){
+	public HudVista(Jugador jugador, JPanel panel){
 		this.raza = jugador.getRaza();
 		this.color = jugador.getColor();
 		this.jugador = jugador;
 		this.panel = panel; //Experimental
 		this.mapaVisible = jugador.getMapa();
 		
-		this.anchoVentana = anchoVentana;
-		this.altoVentana = altoVentana;
 		this.setFocusable(false);
 		this.setVisible(false);
 		this.setOpaque(false);

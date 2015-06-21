@@ -38,15 +38,15 @@ public class MapaVista {
 	
 	private BufferedImage marcaMapa = SpriteSheet.getSpriteMarcaMapa();
 	
-	public MapaVista(Mapa mapa, int anchoVentana, int altoVentana, JPanel panel){
+	public MapaVista(Mapa mapa, JPanel panel){
 		
-		this.datosMapa = mapa; // new MapaReal(2); Con razon andaba todo mal!
+		this.datosMapa = new MapaReal(2); // new MapaReal(2); Con razon andaba todo mal!
 		this.panel = panel;
 
 		this.ancho = datosMapa.ancho();
 		this.alto = datosMapa.alto();
 		this.mapaVista = new CeldaVista[ancho][alto];
-		this.camara = new Camara(0, 0, 0, 0, ancho*32 - anchoVentana, alto*32 - altoVentana);
+		this.camara = new Camara(0, 0, ancho, alto, panel);
 		
 		Random miRNG = new Random();
 		for (int j = 0; j < this.alto; j++)
