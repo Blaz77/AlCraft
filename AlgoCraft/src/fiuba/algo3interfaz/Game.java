@@ -146,6 +146,7 @@ public class Game implements Runnable { // Permite correr un thread
     public void update(long elapsedTime){
     }
     public void tick(){
+    	modeloJuego.nextJugadorActual();
     	State.getState().tick();
     }
    

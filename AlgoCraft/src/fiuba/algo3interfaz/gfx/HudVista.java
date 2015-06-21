@@ -20,12 +20,14 @@ import javax.swing.border.EmptyBorder;
 
 import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
+import fiuba.algo3.juego.Opciones;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.recurso.Tipo;
 import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.raza.TipoRaza;
+import fiuba.algo3interfaz.Game;
 import fiuba.algo3interfaz.input.btnCancelarMouseListener;
 import fiuba.algo3interfaz.input.btnConstruirEdificioEntrenadorUnidadesBasicasMouseListener;
 import fiuba.algo3interfaz.input.btnConstruirEdificioIncrementadorPoblacionMouseListener;
@@ -53,6 +55,8 @@ public class HudVista extends JPanel {
 	private JButton btnConstruirEdificioEntrenadorUnidadesBasicas;
 	private JPanel ubicadorBotonera;
 	private JPanel centrante;
+	private JButton btnPasarTurno;
+	private Game game;
 	
 	/* Precarga de imagenes */
 	private static BufferedImage hudTest = ImageLoader.loadImage("/HUDs/HUDterran2.png"); //HUDzerg2.png, HUDprotoss2.png
@@ -64,11 +68,12 @@ public class HudVista extends JPanel {
 	public static final int ANCHO = hudTest.getWidth();
 	public static final int ALTO = hudTest.getHeight();
 	
-	public HudVista(Jugador jugador, JPanel panel){
+	public HudVista(Jugador jugador, JPanel panel, Game game){
 		this.raza = jugador.getRaza();
 		this.color = jugador.getColor();
 		this.jugador = jugador;
 		this.panel = panel; //Experimental
+		this.game = game;
 		this.mapaVisible = jugador.getMapa();
 		
 		this.setFocusable(false);
@@ -91,6 +96,14 @@ public class HudVista extends JPanel {
 		botonera = new JPanel(new InvisibleGridLayout(0, 3, 14, 8));
 		botonera.setOpaque(false);
 		ubicadorBotonera.add(botonera);
+		
+		btnPasarTurno = new JButton("PASAR TURNO");
+		btnPasarTurno.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnPasarTurnoActionPerformed(evt);
+			}
+		});
+		botonera.add(btnPasarTurno);
 		
 		/* Botones utiles inicialmente invisibles */
 		
@@ -161,6 +174,10 @@ public class HudVista extends JPanel {
 		btnCancelar.setContentAreaFilled(false);
 		botonera.add(btnCancelar);
 	}
+	
+	private void btnPasarTurnoActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    	this.game.tick();
+    }    
 	
 	// Al mejor estilo VisualBasic
 	private void msgbox(String s){
