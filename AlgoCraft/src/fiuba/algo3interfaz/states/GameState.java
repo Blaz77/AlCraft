@@ -10,17 +10,20 @@ import javax.swing.SwingUtilities;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3interfaz.gfx.HudVista;
 import fiuba.algo3interfaz.gfx.MapaVista;
+import fiuba.algo3interfaz.gfx.RecursoVista;
 
 public class GameState extends State {
 	final int HUD_INICIO_Y = 360;
 
 	private static final int MOV_CAMARA = 16;
-	private MapaVista mapaActual;
 	private HashMap<Jugador, MapaVista> mapas = new HashMap<Jugador, MapaVista>();
+	private HashMap<Jugador, HudVista> huds = new HashMap<Jugador, HudVista>();
+	private HashMap<Jugador, RecursoVista> recursos = new HashMap<Jugador, RecursoVista>();
+	private MapaVista mapaActual;
+	private HudVista hudActual;
+	private RecursoVista recursoActual;
 	private int i,j;
 	private int iCamara,jCamara;
-	private HashMap<Jugador, HudVista> huds = new HashMap<Jugador, HudVista>();
-	private HudVista hudActual;
 
 	private int previous_x;
 	private int previous_y;
@@ -32,15 +35,21 @@ public class GameState extends State {
 		Jugador jugador = game.getModelo().getJugador(1);
 		mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getAncho(), game.getAlto() - 120, game.getPanel()));
 		huds.put(jugador, new HudVista(jugador, game.getAncho(), game.getAlto(), game.getPanel()));
+		recursos.put(jugador, new RecursoVista(jugador, game.getAncho(), game.getAlto(), game.getPanel()));
 		game.getPanel().add(huds.get(jugador));
+		game.getPanel().add(recursos.get(jugador));
 		jugador = game.getModelo().getJugador(2);
 		mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getAncho(), game.getAlto() - 150, game.getPanel()));
 		huds.put(jugador, new HudVista(jugador, game.getAncho(), game.getAlto(), game.getPanel()));
+		recursos.put(jugador, new RecursoVista(jugador, game.getAncho(), game.getAlto(), game.getPanel()));
 		game.getPanel().add(huds.get(jugador));
+		game.getPanel().add(recursos.get(jugador));
 			
 		mapaActual = mapas.get(game.getModelo().getJugadorActual());
 		hudActual =  huds.get(game.getModelo().getJugadorActual());
+		recursoActual = recursos.get(game.getModelo().getJugadorActual());
 		hudActual.setVisible(true);
+		recursoActual.setVisible(true);
 	}
 	
 	@Override
@@ -61,6 +70,7 @@ public class GameState extends State {
 	public void render(Graphics g) {
 		mapaActual.render(g);
 		hudActual.render(g);
+		recursoActual.render(g);
 	}
 
 	public void mousePressed(MouseEvent e) {

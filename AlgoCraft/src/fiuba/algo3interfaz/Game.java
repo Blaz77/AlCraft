@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.OverlayLayout;
 
 import fiuba.algo3.juego.Juego;
 import fiuba.algo3.juego.Opciones;
@@ -74,6 +75,7 @@ public class Game implements Runnable { // Permite correr un thread
 		panel.setMaximumSize(new Dimension(anchoVentana, altoVentana));
 		panel.setMinimumSize(new Dimension(anchoVentana, altoVentana));
 		
+		panel.setLayout(new OverlayLayout(panel));
 		panel.setFocusable(true);
 	}
 
