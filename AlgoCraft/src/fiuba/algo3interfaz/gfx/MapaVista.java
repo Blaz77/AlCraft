@@ -29,8 +29,8 @@ public class MapaVista {
 	private int ancho;
 	private int alto;
 	
-	private int filSeleccionada = 0;
-	private int colSeleccionada = 0;
+	private int filSeleccionada;
+	private int colSeleccionada;
 	private Mapa datosMapa;
 	private JPanel panel;
 
@@ -45,8 +45,12 @@ public class MapaVista {
 
 		this.ancho = datosMapa.ancho();
 		this.alto = datosMapa.alto();
+		this.filSeleccionada = datosMapa.getPosicionInicial().getX();
+		this.colSeleccionada = datosMapa.getPosicionInicial().getY();
 		this.mapaVista = new CeldaVista[ancho][alto];
-		this.camara = new Camara(0, 0, ancho*ANCHO_CELDA, alto*ALTO_CELDA, panel);
+		this.camara = new Camara(filSeleccionada*ANCHO_CELDA - panel.getWidth() / 2, 
+								colSeleccionada*ANCHO_CELDA - panel.getHeight() / 2, 
+								ancho*ANCHO_CELDA, alto*ALTO_CELDA, panel);
 		
 		Random miRNG = new Random();
 		for (int j = 0; j < this.alto; j++)

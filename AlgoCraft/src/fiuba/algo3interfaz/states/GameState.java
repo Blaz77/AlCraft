@@ -37,6 +37,7 @@ public class GameState extends State {
 		recursos.put(jugador, new RecursoVista(jugador, game.getAncho(), game.getAlto(), game.getPanel()));
 		game.getPanel().add(huds.get(jugador));
 		game.getPanel().add(recursos.get(jugador));
+		
 		jugador = game.getModelo().getJugador(2);
 		mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getPanel()));
 		huds.put(jugador, new HudVista(jugador, game.getPanel(), game));

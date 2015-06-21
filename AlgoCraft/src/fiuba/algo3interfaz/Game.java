@@ -100,7 +100,7 @@ public class Game implements Runnable { // Permite correr un thread
 		long now;
 		long lastTime = System.nanoTime(); // tiempo actual de la pc en nanos
 		
-		tick();
+		//tick();
 		panel.repaint();
 		// Game loop basico:
 		while(running){

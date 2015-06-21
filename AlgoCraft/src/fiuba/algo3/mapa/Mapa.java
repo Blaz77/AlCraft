@@ -10,7 +10,7 @@ public interface Mapa {
 	
 	public int distancia(Posicion pos1, Posicion pos2);
 	
-	//public Celda obtenerBaseDeJugador(int numeroJugador);
+	public Posicion getPosicionInicial();
 	
 	/* Devuelve el ancho del mapa. */
 	public int ancho();

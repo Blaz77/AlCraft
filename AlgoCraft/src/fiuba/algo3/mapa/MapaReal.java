@@ -170,6 +170,9 @@ public class MapaReal implements Mapa {
 	/**             SETTERS, GETTERS             **/
 	/**********************************************/
 	
+	public Posicion getPosicionInicial() {
+		return new Posicion(0, 0);
+	}
 	
 	public int distancia(Posicion pos1, Posicion pos2) {
 		return mapa[pos1.getX()][pos1.getY()].distancia(mapa[pos2.getX()][pos2.getY()]);
