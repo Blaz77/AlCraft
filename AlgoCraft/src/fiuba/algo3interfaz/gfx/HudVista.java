@@ -197,16 +197,18 @@ public class HudVista extends JPanel {
 		g.setFont(new Font("Serif", Font.PLAIN, 18));
 		g.setColor(java.awt.Color.WHITE);
 		
-		final int ORIGEN_X = 80;
-		final int ORIGEN_Y = 500;
+		final int ORIGEN_X = 100;
+		final int ORIGEN_Y = 400;
+		final int ANCHO_VIDA = 50;
 		
 		if (this.mapaVisible.getOcupante(celdaSeleccionada).getTipo().getTipoOcupante() == TipoOcupante.EDIFICIO ||
 				this.mapaVisible.getOcupante(celdaSeleccionada).getTipo().getTipoOcupante() == TipoOcupante.UNIDAD) {
 			ObjetoVivo entidad = (ObjetoVivo) this.mapaVisible.getOcupante(celdaSeleccionada);
 			g.drawString(entidad.getNombre(),
 					ORIGEN_X, ORIGEN_Y);
+			g.fillRect(ORIGEN_X, ORIGEN_Y + 10, ANCHO_VIDA, 10);
 			g.setColor(java.awt.Color.GREEN);
-			g.fillRect(ORIGEN_X, ORIGEN_Y + 10, entidad.getVida() / entidad.getVidaMaxima() * 5, 10);
+			g.fillRect(ORIGEN_X, ORIGEN_Y + 10, entidad.getVida() / entidad.getVidaMaxima() * ANCHO_VIDA, 10);
 		}
 	}
 	
