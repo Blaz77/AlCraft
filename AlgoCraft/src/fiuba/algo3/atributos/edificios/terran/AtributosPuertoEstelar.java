@@ -9,8 +9,7 @@ import fiuba.algo3.atributos.edificios.AtributosEdificio;
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.EntrenadorUnidades;
 import fiuba.algo3.componentes.IEntrenadorUnidades;
-import fiuba.algo3.ocupantes.recurso.Tipo;
-import fiuba.algo3.ocupantes.recurso.TipoObjetoVivo;
+import fiuba.algo3.ocupantes.Tipo;
 
 public class AtributosPuertoEstelar extends AtributosEdificio {
 
@@ -20,7 +19,6 @@ public class AtributosPuertoEstelar extends AtributosEdificio {
 		// fields ObjetoVivo:
 		this.costo = new AtributosCosto(150, 100, 10);
 		this.vida = new AtributosVida(1300); 
-		this.nombre = "Puerto Estelar";
 		this.tipo = Tipo.PUERTO_ESTELAR_TERRAN;
 		
 		// fields EdificioEntrenadorUnidades:

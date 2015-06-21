@@ -14,6 +14,7 @@ import fiuba.algo3.componentes.EstadoRegenerandoEscudo;
 import fiuba.algo3.componentes.IAtaque;
 import fiuba.algo3.componentes.IVida;
 import fiuba.algo3.componentes.VidaConEscudo;
+import fiuba.algo3.ocupantes.Tipo;
 
 public class AtributosScout extends AtributosUnidad {
 	
@@ -21,6 +22,8 @@ public class AtributosScout extends AtributosUnidad {
 	
 	public AtributosScout() {
 		// fields ObjetoVivo:
+		this.tipo = Tipo.SCOUT;
+		
 		this.costo = new AtributosCosto(
 				300,	// costoMineral
 				150,	// costoGasVespeno
@@ -30,8 +33,6 @@ public class AtributosScout extends AtributosUnidad {
 		this.vida = new AtributosVida(
 				150,	// vidaMaxima
 				100);	// escudoMaximo
-		
-		this.nombre = "Scout";
 
 		// fields de Unidad:
 		this.movimiento = new AtributosMovimiento(

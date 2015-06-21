@@ -13,9 +13,9 @@ import fiuba.algo3.juego.Color;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.MapaReal;
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.ocupantes.Tipo;
+import fiuba.algo3.ocupantes.TipoOcupante;
 import fiuba.algo3.ocupantes.edificios.Edificio;
-import fiuba.algo3.ocupantes.recurso.Tipo;
-import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.terreno.Terreno;
 
 public class MapaVista {

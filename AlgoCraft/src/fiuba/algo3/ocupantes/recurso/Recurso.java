@@ -3,6 +3,8 @@ package fiuba.algo3.ocupantes.recurso;
 import fiuba.algo3.excepciones.RecursoPresente;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.Ocupante;
+import fiuba.algo3.ocupantes.Tipo;
+import fiuba.algo3.ocupantes.TipoOcupante;
 
 public abstract class Recurso implements Ocupante {
 	

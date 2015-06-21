@@ -7,6 +7,7 @@ import fiuba.algo3.atributos.AtributosTransporte;
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.ITransporte;
 import fiuba.algo3.componentes.Transporte;
+import fiuba.algo3.ocupantes.Tipo;
 
 public class AtributosNaveDeTransporte extends AtributosUnidad {
 	
@@ -14,6 +15,8 @@ public class AtributosNaveDeTransporte extends AtributosUnidad {
 	
 	public AtributosNaveDeTransporte() {
 		// fields ObjetoVivo:
+		this.tipo = Tipo.NAVE_DE_TRANSPORTE_TERRAN;
+		
 		this.costo = new AtributosCosto(
 				100,	// costoMineral
 				100,	// costoGasVespeno
@@ -21,7 +24,6 @@ public class AtributosNaveDeTransporte extends AtributosUnidad {
 				2);		// costoPoblacion
 		
 		this.vida = new AtributosVida(150);
-		this.nombre = "Nave de transporte";
 		
 		// fields de Unidad:
 		this.movimiento = new AtributosMovimiento(

@@ -10,8 +10,9 @@ import fiuba.algo3.excepciones.RecursoAusente;
 import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
+import fiuba.algo3.ocupantes.Tipo;
+import fiuba.algo3.ocupantes.TipoOcupante;
 import fiuba.algo3.ocupantes.edificios.Edificio;
-import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.raza.TipoRaza;
 
 public class TestRefineria extends TestEdificio {
@@ -27,11 +28,11 @@ public class TestRefineria extends TestEdificio {
 	}
 	
 	private Edificio crearEnVolcan(Jugador jugador, MapaReal mapa, Posicion inicial) {
-		return crearEnRecurso(jugador, mapa, TipoOcupante.VESPENO, inicial);
+		return crearEnRecurso(jugador, mapa, Tipo.VESPENO, inicial);
 	}
 	
 	private Edificio crearFueraDeVolcan(Jugador jugador, MapaReal mapa, Posicion inicial) {
-		return crearFueraDeRecurso(jugador, mapa, TipoOcupante.VESPENO, inicial);
+		return crearFueraDeRecurso(jugador, mapa, Tipo.VESPENO, inicial);
 	}
 	
 	@Before
@@ -143,7 +144,7 @@ public class TestRefineria extends TestEdificio {
 		this.refineria = (Edificio) mapa.getOcupante(refineria.getPosicion());
 		
 		this.refineria.destruir();
-		assertEquals(TipoOcupante.VESPENO, mapa.getOcupante(refineria.getPosicion()).getTipo());
+		assertEquals(Tipo.VESPENO, mapa.getOcupante(refineria.getPosicion()).getTipo());
 	}
 
 }

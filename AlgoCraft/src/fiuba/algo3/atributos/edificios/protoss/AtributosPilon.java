@@ -12,8 +12,7 @@ import fiuba.algo3.componentes.EstadoRegenerandoEscudo;
 import fiuba.algo3.componentes.EstadoSuministrandoPoblacion;
 import fiuba.algo3.componentes.IVida;
 import fiuba.algo3.componentes.VidaConEscudo;
-import fiuba.algo3.ocupantes.recurso.Tipo;
-import fiuba.algo3.ocupantes.recurso.TipoObjetoVivo;
+import fiuba.algo3.ocupantes.Tipo;
 
 public class AtributosPilon extends AtributosEdificio {
 	
@@ -23,7 +22,6 @@ public class AtributosPilon extends AtributosEdificio {
 		// fields ObjetoVivo:
 		this.costo = new AtributosCosto(100, 0, 5);
 		this.vida = new AtributosVida(300, 300);
-		this.nombre = "Pilon";
 		this.tipo = Tipo.PILON;
 
 		// fields EdificioIncrementadorPoblacion

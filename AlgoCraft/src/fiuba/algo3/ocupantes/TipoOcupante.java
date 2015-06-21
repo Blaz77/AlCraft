@@ -1,4 +1,4 @@
-package fiuba.algo3.ocupantes.recurso;
+package fiuba.algo3.ocupantes;
 
 public enum TipoOcupante {
 		

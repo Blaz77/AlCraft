@@ -9,6 +9,7 @@ import fiuba.algo3.componentes.IMagia;
 import fiuba.algo3.componentes.Magia;
 import fiuba.algo3.magia.MagiaEMP;
 import fiuba.algo3.magia.MagiaRadiacion;
+import fiuba.algo3.ocupantes.Tipo;
 
 public class AtributosNaveDeCiencia extends AtributosUnidad {
 	
@@ -16,6 +17,8 @@ public class AtributosNaveDeCiencia extends AtributosUnidad {
 	
 	public AtributosNaveDeCiencia() {
 		// fields ObjetoVivo:
+		this.tipo = Tipo.NAVE_DE_CIENCIA;
+		
 		this.costo = new AtributosCosto(
 				100,	// costoMineral
 				225,	// costoGasVespeno
@@ -23,7 +26,6 @@ public class AtributosNaveDeCiencia extends AtributosUnidad {
 				2);		// costoPoblacion
 		
 		this.vida = new AtributosVida(200);
-		this.nombre = "Nave de ciencia";
 
 		// fields de Unidad:
 		this.movimiento = new AtributosMovimiento(

@@ -7,7 +7,7 @@ import fiuba.algo3.componentes.IEntrenadorUnidades;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.ObjetoVivo;
-import fiuba.algo3.ocupantes.recurso.TipoOcupante;
+import fiuba.algo3.ocupantes.TipoOcupante;
 import fiuba.algo3.ocupantes.unidades.constructores.Constructor;
 
 public class Edificio extends ObjetoVivo {

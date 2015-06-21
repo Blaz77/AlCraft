@@ -12,8 +12,7 @@ import fiuba.algo3.componentes.EstadoRecolectandoGasVespeno;
 import fiuba.algo3.componentes.EstadoRegenerandoEscudo;
 import fiuba.algo3.componentes.IVida;
 import fiuba.algo3.componentes.VidaConEscudo;
-import fiuba.algo3.ocupantes.recurso.Tipo;
-import fiuba.algo3.ocupantes.recurso.TipoObjetoVivo;
+import fiuba.algo3.ocupantes.Tipo;
 
 public class AtributosAsimilador extends AtributosEdificio {
 
@@ -23,7 +22,6 @@ public class AtributosAsimilador extends AtributosEdificio {
 		// fields ObjetoVivo:
 		this.costo = new AtributosCosto(100, 0, 6);
 		this.vida = new AtributosVida(450, 450);
-		this.nombre = "Asimilador";
 		this.tipo = Tipo.ASIMILADOR;
 		
 		// fields EdificioRecolectorMineral

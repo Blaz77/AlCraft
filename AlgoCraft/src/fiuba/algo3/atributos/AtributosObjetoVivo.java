@@ -7,7 +7,7 @@ import fiuba.algo3.componentes.Costo;
 import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.IVida;
 import fiuba.algo3.componentes.Vida;
-import fiuba.algo3.ocupantes.recurso.Tipo;
+import fiuba.algo3.ocupantes.Tipo;
 
 /*
   Superclase de los atributos ('stats' en la mayoria de los juegos en ingles)
@@ -20,12 +20,14 @@ public abstract class AtributosObjetoVivo { //AtributosObjetoDeJuego?
 	
 	protected AtributosVida vida;
 	protected AtributosCosto costo;
-	
-	protected String nombre;
 	protected Tipo tipo;
 
 	public Tipo getTipo() {
 		return this.tipo;
+	}
+	
+	public String getNombre() {
+		return this.tipo.getNombre();
 	}
 	
 	public List<Estado> getEstadosIniciales(){
@@ -45,10 +47,6 @@ public abstract class AtributosObjetoVivo { //AtributosObjetoDeJuego?
 	//SUPER EXTRA PECHUGA DE TEMPORAL!!!!
 	public AtributosVida getAtributosVida() {
 		return this.vida;
-	}
-	
-	public String getNombre() {
-		return nombre;
 	}
 	
 	public boolean puedeOcuparTierra(){

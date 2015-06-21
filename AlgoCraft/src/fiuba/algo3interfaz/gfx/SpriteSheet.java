@@ -8,8 +8,8 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
-import fiuba.algo3.ocupantes.recurso.Tipo;
-import fiuba.algo3.ocupantes.recurso.TipoOcupante;
+import fiuba.algo3.ocupantes.Tipo;
+import fiuba.algo3.ocupantes.TipoOcupante;
 import fiuba.algo3.terreno.Terreno;
 
 public class SpriteSheet {

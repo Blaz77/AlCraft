@@ -14,6 +14,7 @@ import fiuba.algo3.componentes.EstadoRegenerandoEscudo;
 import fiuba.algo3.componentes.IAtaque;
 import fiuba.algo3.componentes.IVida;
 import fiuba.algo3.componentes.VidaConEscudo;
+import fiuba.algo3.ocupantes.Tipo;
 
 public class AtributosZealot extends AtributosUnidad {
 
@@ -21,6 +22,8 @@ public class AtributosZealot extends AtributosUnidad {
 	
 	public AtributosZealot(){
 		// fields ObjetoVivo:
+		this.tipo = Tipo.ZEALOT;
+		
 		this.costo = new AtributosCosto(
 				100,	// costoMineral
 				0,		// costoGasVespeno
@@ -30,8 +33,6 @@ public class AtributosZealot extends AtributosUnidad {
 		this.vida = new AtributosVida(
 				100,	// vidaMaxima
 				60);	// escudoMaximo
-		
-		this.nombre = "Zealot";
 		
 		// fields de Unidad:
 		this.movimiento = new AtributosMovimiento(

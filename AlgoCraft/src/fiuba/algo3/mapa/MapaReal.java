@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import fiuba.algo3.ocupantes.Ocupante;
+import fiuba.algo3.ocupantes.Tipo;
+import fiuba.algo3.ocupantes.TipoOcupante;
 import fiuba.algo3.ocupantes.recurso.GasVespeno;
 import fiuba.algo3.ocupantes.recurso.Mineral;
-import fiuba.algo3.ocupantes.recurso.Tipo;
-import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.terreno.Terreno;
 

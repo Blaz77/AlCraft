@@ -9,8 +9,8 @@ import fiuba.algo3.excepciones.RecursoAusente;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.ocupantes.TipoOcupante;
 import fiuba.algo3.ocupantes.edificios.Edificio;
-import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.terreno.TipoTerreno;
 
 public class EdificiosFactory implements EdificiosAbstractFactory{

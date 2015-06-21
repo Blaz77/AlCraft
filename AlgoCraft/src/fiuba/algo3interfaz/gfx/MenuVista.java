@@ -18,7 +18,7 @@ import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.juego.Opciones;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
-import fiuba.algo3.ocupantes.recurso.TipoOcupante;
+import fiuba.algo3.ocupantes.TipoOcupante;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3interfaz.Game;
 import fiuba.algo3interfaz.input.btnConstruirEdificioIncrementadorPoblacionMouseListener;

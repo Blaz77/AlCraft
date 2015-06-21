@@ -7,7 +7,7 @@ import fiuba.algo3.componentes.Costo;
 import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.EstadoConstruyendoEdificio;
 import fiuba.algo3.componentes.IVida;
-import fiuba.algo3.ocupantes.recurso.TipoObjetoVivo;
+import fiuba.algo3.ocupantes.Tipo;
 
 public class AtributosConstruccion extends AtributosEdificio {
 	
@@ -15,8 +15,6 @@ public class AtributosConstruccion extends AtributosEdificio {
 	
 	public AtributosConstruccion(AtributosEdificio atrEdificio){
 		this.atributosEdificio = atrEdificio;
-		this.nombre = "Construccion";
-		this.tipo = atrEdificio.getTipo();
 	}
 
 	@Override
@@ -24,6 +22,16 @@ public class AtributosConstruccion extends AtributosEdificio {
 		IVida vida = atributosEdificio.getVida();
 		vida.recibirDanio(vida.getEscudoMaximo() + vida.getVidaMaxima() - 1);
 		return vida;
+	}
+
+	@Override
+	public Tipo getTipo() {
+		return atributosEdificio.getTipo();
+	}
+	
+	@Override
+	public String getNombre() {
+		return "Construccion";
 	}
 	
 	@Override

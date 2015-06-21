@@ -13,6 +13,7 @@ import fiuba.algo3.componentes.IVida;
 import fiuba.algo3.componentes.MagiaNull;
 import fiuba.algo3.componentes.TransporteNull;
 import fiuba.algo3.componentes.VidaAlucinada;
+import fiuba.algo3.ocupantes.Tipo;
 
 public class AtributosUnidadAlucinada extends AtributosUnidad {
 
@@ -50,6 +51,10 @@ public class AtributosUnidadAlucinada extends AtributosUnidad {
 	
 	public Costo getCosto() {
 		return atributosUnidad.getCosto();
+	}
+	
+	public Tipo getTipo() {
+		return atributosUnidad.getTipo();
 	}
 	
 	public String getNombre() {

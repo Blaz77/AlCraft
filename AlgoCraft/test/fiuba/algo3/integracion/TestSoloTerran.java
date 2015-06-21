@@ -12,8 +12,9 @@ import fiuba.algo3.juego.Opciones;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.MapaProxy;
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.ocupantes.Tipo;
+import fiuba.algo3.ocupantes.TipoOcupante;
 import fiuba.algo3.ocupantes.edificios.Edificio;
-import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.raza.TipoRaza;
 
 public class TestSoloTerran {
@@ -24,7 +25,7 @@ public class TestSoloTerran {
 	private Juego juego;
 	private EdificiosFactory edificador;
 
-	private Posicion buscarOcupante(Mapa mapa, Posicion origen, int distancia, TipoOcupante ocupante) {
+	private Posicion buscarOcupante(Mapa mapa, Posicion origen, int distancia, Tipo ocupante) {
 		for (int y = origen.getY()-distancia; y < origen.getY()+distancia; y++) {
 			for (int x = origen.getX()-distancia; x < origen.getX()+distancia; x++) {
 				if (mapa.getOcupante(new Posicion(x, y)).getTipo() == ocupante) {
@@ -77,11 +78,11 @@ public class TestSoloTerran {
 		
 		/* Recoleccion */
 		
-		Posicion destino = buscarOcupante(juego.getJugadorActual().getMapa(), posInicial, 8, TipoOcupante.MINERAL);
+		Posicion destino = buscarOcupante(juego.getJugadorActual().getMapa(), posInicial, 8, Tipo.MINERAL);
 		assertNotNull(destino); // TODO: explota aca si el mapaProxy te tapa los cristales
 		edificador.crearRecolectorMineral(juego.getJugadorActual(), destino);
 		
-		destino = buscarOcupante(juego.getJugadorActual().getMapa(), posInicial, 8, TipoOcupante.VESPENO);
+		destino = buscarOcupante(juego.getJugadorActual().getMapa(), posInicial, 8, Tipo.VESPENO);
 		assertNotNull(destino); // TODO: explota aca si el mapaProxy te tapa el volcan
 		edificador.crearRecolectorGasVespeno(juego.getJugadorActual(), destino);
 		
@@ -98,7 +99,7 @@ public class TestSoloTerran {
 		assertTrue(juego.getJugadorActual().getEdificios().size() == 2);
 		
 		/* Creacion de unidades militares */
-		destino = buscarOcupante(juego.getJugadorActual().getMapa(), posInicial, 8, TipoOcupante.CELDA_VACIA);
+		destino = buscarOcupante(juego.getJugadorActual().getMapa(), posInicial, 8, Tipo.CELDA_VACIA);
 		edificador.crearEntrenadorUnidadesBasicas(juego.getJugadorActual(), destino);
 		
 		// 15 turnos mas tarde...

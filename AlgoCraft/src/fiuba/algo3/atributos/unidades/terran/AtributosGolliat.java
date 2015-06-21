@@ -7,6 +7,7 @@ import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.Ataque;
 import fiuba.algo3.componentes.IAtaque;
+import fiuba.algo3.ocupantes.Tipo;
 
 public class AtributosGolliat extends AtributosUnidad {
 	
@@ -14,6 +15,8 @@ public class AtributosGolliat extends AtributosUnidad {
 
 	public AtributosGolliat() {
 		// fields ObjetoVivo:
+		this.tipo = Tipo.GOLLIAT;
+		
 		this.costo = new AtributosCosto(
 				100,	// costoMineral
 				50,		// costoGasVespeno
@@ -21,7 +24,6 @@ public class AtributosGolliat extends AtributosUnidad {
 				2);		// costoPoblacion
 		
 		this.vida = new AtributosVida(125);
-		this.nombre = "Golliat";
 		
 		// fields de Unidad:
 		this.movimiento = new AtributosMovimiento(

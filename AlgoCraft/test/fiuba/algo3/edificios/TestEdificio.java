@@ -4,8 +4,9 @@ import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.MapaReal;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.ObjetoVivo;
+import fiuba.algo3.ocupantes.Tipo;
+import fiuba.algo3.ocupantes.TipoOcupante;
 import fiuba.algo3.ocupantes.edificios.Edificio;
-import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.terreno.Terreno;
 
 public abstract class TestEdificio {
@@ -31,7 +32,7 @@ public abstract class TestEdificio {
 			for (int x = posInicial.getX(); x < mapa.ancho(); x++) {
 				Posicion posEnTierra = new Posicion(x, y);
 				if (mapa.getTerreno(posEnTierra) == Terreno.TIERRA
-						&&	mapa.getOcupante(posEnTierra).getTipo() == TipoOcupante.CELDA_VACIA) {
+						&&	mapa.getOcupante(posEnTierra).getTipo() == Tipo.CELDA_VACIA) {
 					return crearEdificio(jugador, posEnTierra);
 				}
 			}
@@ -76,7 +77,7 @@ public abstract class TestEdificio {
 		throw new RuntimeException();
 	}
 	
-	protected Edificio crearEnRecurso(Jugador jugador, MapaReal mapa, TipoOcupante recurso, Posicion posInicial) {
+	protected Edificio crearEnRecurso(Jugador jugador, MapaReal mapa, Tipo recurso, Posicion posInicial) {
 		for (int y = posInicial.getY(); y < mapa.alto(); y++) {
 			for (int x = posInicial.getX(); x < mapa.ancho(); x++) {
 				Posicion posConRecurso = new Posicion(x, y);
@@ -89,7 +90,7 @@ public abstract class TestEdificio {
 		throw new RuntimeException();
 	}
 	
-	protected Edificio crearFueraDeRecurso(Jugador jugador, MapaReal mapa, TipoOcupante recurso, Posicion posInicial) {
+	protected Edificio crearFueraDeRecurso(Jugador jugador, MapaReal mapa, Tipo recurso, Posicion posInicial) {
 		for (int y = posInicial.getY(); y < mapa.alto(); y++) {
 			for (int x = posInicial.getX(); x < mapa.ancho(); x++) {
 				Posicion posSinRecurso = new Posicion(x, y);

@@ -14,8 +14,9 @@ import fiuba.algo3.mapa.Celda;
 import fiuba.algo3.mapa.MapaReal;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.Ocupante;
+import fiuba.algo3.ocupantes.Tipo;
+import fiuba.algo3.ocupantes.TipoOcupante;
 import fiuba.algo3.ocupantes.edificios.Edificio;
-import fiuba.algo3.ocupantes.recurso.TipoOcupante;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.terreno.Terreno;
@@ -125,9 +126,9 @@ public class TestMapa {
 						// Inspeccion de la celda
 						recurso = mapaNuevo.getOcupante(new Posicion(x,y));
 						if (recurso == null) continue; //Despues sacar si hacemos RecursoNULL
-						if (recurso.getTipo() == TipoOcupante.MINERAL)
+						if (recurso.getTipo() == Tipo.MINERAL)
 							cristales++;
-						if (recurso.getTipo() == TipoOcupante.VESPENO)
+						if (recurso.getTipo() == Tipo.VESPENO)
 							volcanes++;
 					}
 				}

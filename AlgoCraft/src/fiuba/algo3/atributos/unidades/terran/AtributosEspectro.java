@@ -7,6 +7,7 @@ import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.Ataque;
 import fiuba.algo3.componentes.IAtaque;
+import fiuba.algo3.ocupantes.Tipo;
 
 public class AtributosEspectro extends AtributosUnidad {
 	
@@ -14,6 +15,8 @@ public class AtributosEspectro extends AtributosUnidad {
 	
 	public AtributosEspectro(){
 		// fields ObjetoVivo:
+		this.tipo = Tipo.ESPECTRO;
+		
 		this.costo = new AtributosCosto(
 				150,	// costoMineral
 				100,	// costoGasVespeno
@@ -21,7 +24,6 @@ public class AtributosEspectro extends AtributosUnidad {
 				2);		// costoPoblacion
 		
 		this.vida = new AtributosVida(120);
-		this.nombre = "Espectro";
 		
 		// fields de Unidad:
 		this.movimiento = new AtributosMovimiento(

@@ -10,9 +10,8 @@ import fiuba.algo3.excepciones.RecursoAusente;
 import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
+import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.edificios.Edificio;
-import fiuba.algo3.ocupantes.recurso.TipoOcupante;
-import fiuba.algo3.ocupantes.recurso.TipoRecurso;
 import fiuba.algo3.raza.TipoRaza;
 
 public class TestNexoMineral extends TestEdificio{
@@ -28,11 +27,11 @@ public class TestNexoMineral extends TestEdificio{
 	}
 	
 	private Edificio crearEnMineral(Jugador jugador, MapaReal mapa) {
-		return crearEnRecurso(jugador, mapa, TipoOcupante.MINERAL, new Posicion(0,0));
+		return crearEnRecurso(jugador, mapa, Tipo.MINERAL, new Posicion(0,0));
 	}
 	
 	private Edificio crearFueraDeMineral(Jugador jugador, MapaReal mapa) {
-		return crearFueraDeRecurso(jugador, mapa, TipoOcupante.MINERAL, new Posicion(0,0));
+		return crearFueraDeRecurso(jugador, mapa, Tipo.MINERAL, new Posicion(0,0));
 	}
 	
 	@Before
@@ -154,7 +153,7 @@ public class TestNexoMineral extends TestEdificio{
 		this.nexoMineral = (Edificio) mapa.getOcupante(nexoMineral.getPosicion());
 		
 		this.nexoMineral.destruir();
-		assertEquals(TipoOcupante.MINERAL, mapa.getOcupante(nexoMineral.getPosicion()).getTipo());
+		assertEquals(Tipo.MINERAL, mapa.getOcupante(nexoMineral.getPosicion()).getTipo());
 	}
 
 }

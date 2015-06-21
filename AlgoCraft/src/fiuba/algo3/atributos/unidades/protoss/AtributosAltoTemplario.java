@@ -16,6 +16,7 @@ import fiuba.algo3.componentes.Magia;
 import fiuba.algo3.componentes.VidaConEscudo;
 import fiuba.algo3.magia.MagiaAlucinacion;
 import fiuba.algo3.magia.MagiaTormentaPsionica;
+import fiuba.algo3.ocupantes.Tipo;
 
 public class AtributosAltoTemplario extends AtributosUnidad {
 	
@@ -23,6 +24,8 @@ public class AtributosAltoTemplario extends AtributosUnidad {
 	
 	public AtributosAltoTemplario() {
 		// fields ObjetoVivo:
+		this.tipo = Tipo.ALTO_TEMPLARIO;
+		
 		this.costo = new AtributosCosto(
 				50,		// costoMineral
 				150,	// costoGasVespeno
@@ -32,8 +35,6 @@ public class AtributosAltoTemplario extends AtributosUnidad {
 		this.vida = new AtributosVida(
 				40,		// vidaMaxima
 				40);	// escudoMaximo
-		
-		this.nombre = "Alto Templario";
 		
 		// fields de Unidad:
 		this.movimiento = new AtributosMovimiento(

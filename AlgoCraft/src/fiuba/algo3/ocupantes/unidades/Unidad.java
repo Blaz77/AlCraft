@@ -14,7 +14,7 @@ import fiuba.algo3.magia.MagiaDeAreaDeEfecto;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.ocupantes.ObjetoVivo;
-import fiuba.algo3.ocupantes.recurso.TipoOcupante;
+import fiuba.algo3.ocupantes.TipoOcupante;
 
 public class Unidad extends ObjetoVivo {
 	
