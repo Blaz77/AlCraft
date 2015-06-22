@@ -1,9 +1,7 @@
 package fiuba.algo3interfaz;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,7 +10,7 @@ import javax.swing.OverlayLayout;
 import fiuba.algo3.juego.Juego;
 import fiuba.algo3.juego.Opciones;
 import fiuba.algo3interfaz.states.State.StateEnum;
-import fiuba.algo3interfaz.gfx.SpriteSheet;
+import fiuba.algo3interfaz.gfx.CopyOfSpriteSheet;
 import fiuba.algo3interfaz.states.State;
 
 public class Game implements Runnable { // Permite correr un thread
@@ -49,7 +47,7 @@ public class Game implements Runnable { // Permite correr un thread
 		this.alto = altoVentana;
 		
 		// Inicializar los datos requeridos
-		SpriteSheet.inicializar();
+		CopyOfSpriteSheet.inicializar();
 		//MusicaAlgunDia.inicializar();
 		State.inicializar(this);
 		State.setState(StateEnum.MENUSTATE);

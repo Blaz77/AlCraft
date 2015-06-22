@@ -9,9 +9,11 @@ import java.util.Random;
 import javax.swing.SwingUtilities;
 
 import fiuba.algo3.juego.Jugador;
+import fiuba.algo3interfaz.gfx.CopyOfSpriteSheet;
 import fiuba.algo3interfaz.gfx.HudVista;
 import fiuba.algo3interfaz.gfx.MapaVista;
 import fiuba.algo3interfaz.gfx.RecursoVista;
+import fiuba.algo3interfaz.gfx.SpriteSheet;
 import fiuba.algo3interfaz.music.MP3Player;
 
 public class GameState extends State {
@@ -34,12 +36,12 @@ public class GameState extends State {
 	public GameState(){
 		
 		for (Jugador jugador : game.getModelo()){
-			System.out.println(jugador.getNombre());
-			mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getPanel()));
+			mapas.put(jugador, new MapaVista(jugador, game.getPanel()));
 			huds.put(jugador, new HudVista(jugador, game.getPanel(), game));
 			recursos.put(jugador, new RecursoVista(jugador, game.getAncho(), game.getAlto(), game.getPanel()));
 			game.getPanel().add(huds.get(jugador));
 			game.getPanel().add(recursos.get(jugador));
+			CopyOfSpriteSheet.crearSpritesJugador(jugador);
 		}
 			
 		mapaActual = mapas.get(game.getModelo().getJugadorActual());

@@ -9,6 +9,7 @@ import java.util.Random;
 
 import javax.swing.JPanel;
 
+import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.Tipo;
@@ -21,27 +22,28 @@ import fiuba.algo3.terreno.Terreno;
  * */
 public class MapaVista {
 
-	private static final int ANCHO_CELDA = SpriteSheet.spritesTierra.getAncho();
-	private static final int ALTO_CELDA = SpriteSheet.spritesTierra.getAlto();
+	private static final int ANCHO_CELDA = CopyOfSpriteSheet.spritesTierra.getAncho();
+	private static final int ALTO_CELDA = CopyOfSpriteSheet.spritesTierra.getAlto();
 	private static final float RESCALE_FACTOR = 0.1f;
 	private static final BufferedImageOp RESCALE_OP = new RescaleOp(RESCALE_FACTOR, 0, null);
+	private static BufferedImage marcaMapa = CopyOfSpriteSheet.getSpriteMarcaMapa();
+
+	private Jugador jugador;
 	
-	private CeldaVista[][] mapaVista;
+	private Mapa datosMapa;
 	private int ancho;
 	private int alto;
-	
-	private int filSeleccionada;
-	private int colSeleccionada;
-	private Mapa datosMapa;
-	private JPanel panel;
 
+	private JPanel panel;
+	private CeldaVista[][] mapaVista;
 	private Camara camara;
-	
-	private BufferedImage marcaMapa = SpriteSheet.getSpriteMarcaMapa();
-	
-	public MapaVista(Mapa mapa, JPanel panel){
+	private int filSeleccionada;
+	private int colSeleccionada;	
+
+	public MapaVista(Jugador jugador, JPanel panel){
 		
-		this.datosMapa = mapa; // new MapaReal(2) Con razon andaba todo mal!
+		this.jugador = jugador;
+		this.datosMapa = jugador.getMapa(); // new MapaReal(2) Con razon andaba todo mal!
 		this.panel = panel;
 
 		this.ancho = datosMapa.ancho();
@@ -66,43 +68,38 @@ public class MapaVista {
 		int indexEspacio;
 		Terreno terreno = datosMapa.getTerreno(new Posicion(x, y));
 		
+		CopyOfSpriteSheet spritesTierra = CopyOfSpriteSheet.getSpritesTierra();
+		CopyOfSpriteSheet spritesEspacio = CopyOfSpriteSheet.getSpritesEspacio();
+		CopyOfSpriteSheet spritesHibrido = CopyOfSpriteSheet.getSpritesHibrido();
 		
 		if (terreno == Terreno.SOMBRA)
 			return null;
 		
-		
 		if (terreno == Terreno.ESPACIO) {
 			indexEspacio = getIndexHibrido(x, y);
 			if (indexEspacio == -1) 
-				bi = SpriteSheet.spritesEspacio.get(randomIndex);
+				bi = spritesEspacio.get(randomIndex);
 			else
-				bi = SpriteSheet.spritesHibrido.get(indexEspacio);
+				bi = spritesHibrido.get(indexEspacio);
 		}
 				
 		if (terreno == Terreno.TIERRA)
-			bi =  SpriteSheet.spritesTierra.get(randomIndex);
+			bi =  spritesTierra.get(randomIndex);
 		
-
 		return bi;
-		//return oscurecer(bi);
-		
 	}
 
 	public void tick() {
 
 	}
 	
-	public void render(Graphics g) {
-				
-		int anchoSprite = SpriteSheet.spritesTierra.getAncho();
-		int altoSprite = SpriteSheet.spritesTierra.getAlto();
-		
+	public void render(Graphics g) {		
 		
 		// Para renderizar nomas lo q podemos ver
-		int xInicio = Math.max(0, camara.getxOffset() / anchoSprite);
-		int xFin = Math.min(ancho, 1 + (camara.getxOffset() + panel.getWidth()) / anchoSprite);
-		int yInicio = Math.max(0, camara.getyOffset() / altoSprite);
-		int yFin = Math.min(alto, 1 + (camara.getyOffset() + panel.getHeight()) / altoSprite);
+		int xInicio = Math.max(0, camara.getxOffset() / ANCHO_CELDA);
+		int xFin = Math.min(ancho, 1 + (camara.getxOffset() + panel.getWidth()) / ANCHO_CELDA);
+		int yInicio = Math.max(0, camara.getyOffset() / ALTO_CELDA);
+		int yFin = Math.min(alto, 1 + (camara.getyOffset() + panel.getHeight()) / ALTO_CELDA);
 		
 		
 		Graphics2D g2 = (Graphics2D) g;
@@ -113,8 +110,7 @@ public class MapaVista {
 				boolean celdaDesconocida = datosMapa.getOcupante(new Posicion(x,y)).getTipoOcupante() == TipoOcupante.DESCONOCIDO;
 				
 				if (celdaDesconocida)
-					g2.drawImage(spriteTerreno, RESCALE_OP, 
-							anchoSprite * x - camara.getxOffset(), altoSprite * y - camara.getyOffset());
+					dibujarEnCeldaOscura(g2, spriteTerreno, x, y);
 				else{
 					dibujarEnCelda(g, spriteTerreno, x, y);
 				
@@ -143,41 +139,39 @@ public class MapaVista {
 				ALTO_CELDA  * y - camara.getyOffset() +  (ALTO_CELDA - sprite.getHeight())/2, null);
 	}
 
-	
+	private void dibujarEnCeldaOscura(Graphics g, BufferedImage sprite, int x, int y) {
+		if (sprite == null)
+			return;
+		((Graphics2D) g).drawImage(null, RESCALE_OP, 
+				ANCHO_CELDA * x - camara.getxOffset() + (ANCHO_CELDA - sprite.getWidth())/2, 
+				ALTO_CELDA  * y - camara.getyOffset() +  (ALTO_CELDA - sprite.getHeight())/2);
+	}
+
 
 	private void dibujarOcupante(Graphics g, int x, int y) {
 				
 		Tipo tipo = datosMapa.getOcupante(new Posicion(x, y)).getTipo();
 		if (tipo == Tipo.CELDA_VACIA)
 			return;
-
-		if (tipo.getTipoOcupante() == TipoOcupante.EDIFICIO) {
-			Edificio edificio = (Edificio) datosMapa.getOcupante(new Posicion(x, y));
-			BufferedImage bi = CopyOfSpriteSheet.getSprites(edificio.getPropietario().getRaza())
-					.get(edificio.getTipo().ordinal());
-			dibujarEnCelda(g, bi, x, y);
-			return;
-		}
-		
-		if (tipo.getTipoOcupante() == TipoOcupante.UNIDAD) {
-			//
-			BufferedImage bi = CopyOfSpriteSheet.getSprites(tipo.getTipoRaza()).get(tipo.ordinal());
-			dibujarEnCelda(g, bi, x, y);
-			return;
-		}
-		
-		BufferedImage bi = SpriteSheet.getSprites(tipo).get(mapaVista[x][y].getIndex());
-		dibujarEnCelda(g, bi, x, y);
-		//g.drawImage(ImageLoader.loadImage("/textures/terran.png"), 
-		//		anchoSprite * x - camara.getxOffset(), 	altoSprite * y - camara.getyOffset(), null);
+		if (tipo.getTipoOcupante() == TipoOcupante.UNIDAD || tipo.getTipoOcupante() == TipoOcupante.EDIFICIO)
+			dibujarObjetoVivo(g, x, y, tipo);
+		else if (tipo.getTipoOcupante() == TipoOcupante.RECURSO)
+			dibujarRecurso(g, x, y, tipo);
 
 	}
 
+	private void dibujarObjetoVivo(Graphics g, int x, int y, Tipo tipo) {
+		BufferedImage bi = CopyOfSpriteSheet.getSpritesJugador(jugador).get(tipo.ordinal());
+		dibujarEnCelda(g, bi, x, y);
+	}
+
+	private void dibujarRecurso(Graphics g, int x, int y, Tipo tipo) {
+		BufferedImage bi = CopyOfSpriteSheet.getSpritesRecurso(tipo).get(mapaVista[x][y].getIndex());
+		dibujarEnCelda(g, bi, x, y);
+	}
+
 	private void ubicarMarcaMapaEn(Graphics g) {
-		
-		g.drawImage(marcaMapa, 
-				filSeleccionada * marcaMapa.getWidth() - camara.getxOffset(), 
-				colSeleccionada * marcaMapa.getHeight() - camara.getyOffset(), null);
+		dibujarEnCelda(g, marcaMapa, filSeleccionada, colSeleccionada);
 	}
 	
 	public Posicion getPosicionCeldaSeleccionada() {
