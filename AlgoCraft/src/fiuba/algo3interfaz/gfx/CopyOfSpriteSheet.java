@@ -21,8 +21,8 @@ public class CopyOfSpriteSheet {
 	private final static String VESPENO_PATH = "/textures/volcan2.png";
 	private final static String MARCA_MAPA_PATH = "/textures/marcaMapa.png";
 	private static final String PLAYER_PALETTE_PATH = "/palettes/player_palette.png";
-	private static final String TERRAN_PATH = "/textures/edificiosTerran.png";
-	private static final String PROTOSS_PATH = "/textures/edificiosTerran.png";
+	private static final String TERRAN_PATH = "/textures/ocupantesTerran.png";
+	private static final String PROTOSS_PATH = "/textures/ocupantesProtoss.png";
 	
     public static final BufferedImage spriteMarcaMapa = ImageLoader.loadImage(MARCA_MAPA_PATH);
 

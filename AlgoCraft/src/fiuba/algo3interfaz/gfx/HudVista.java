@@ -5,22 +5,17 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
-import java.util.Random;
+import java.util.HashMap;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
-import fiuba.algo3.juego.Opciones;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.ObjetoVivo;
@@ -46,6 +41,7 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 	private Jugador jugador; // dale que va, esto ya es cualquier cosa
 	private Mapa mapaVisible;
 	private Posicion celdaSeleccionada = new Posicion(0,0);
+	private BufferedImage hudImage;
 
 	private BotonBotonera btnCancelar;
 	private BotonBotonera btnConstruir;
@@ -69,15 +65,15 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 	
 	private UtilizadorDeCeldas utilizadorDeCeldasActual = this;
 	
-	/* Precarga de imagenes */
-	private static BufferedImage hudTest = ImageLoader.loadImage("/HUDs/HUDterran2.png"); //HUDzerg2.png, HUDprotoss2.png
+	/* Precarga de imagenes */ //ImageLoader.loadImage("/HUDs/HUDterran2.png"); //HUDzerg2.png, HUDprotoss2.png
+	private static HashMap<TipoRaza, BufferedImage> huds = new HashMap<TipoRaza, BufferedImage>();
 
 	private static BufferedImage picConstruir = ImageLoader.loadImage("/textures/construir.png");
 	private static BufferedImage picCancelar = ImageLoader.loadImage("/textures/cancelar.png");
 
 	
-	public static final int ANCHO = hudTest.getWidth();
-	public static final int ALTO = hudTest.getHeight();
+	public static final int ANCHO = 640;
+	public static final int ALTO = 192;
 	
 	public HudVista(Jugador jugador, JPanel panel, Game game){
 		this.raza = jugador.getRaza();
@@ -87,38 +83,40 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 		this.game = game;
 		this.mapaVisible = jugador.getMapa();
 		
+		this.hudImage = loadHUD(this.raza);//ImageLoader.loadImage("/HUDs/HUDterran2.png");
+		
 		this.setFocusable(false);
 		this.setVisible(false);
 		this.setOpaque(false);
 		
 		setLayout(new BorderLayout());
-		this.setPreferredSize(new Dimension(hudTest.getWidth(), hudTest.getHeight()));
+		this.setPreferredSize(new Dimension(hudImage.getWidth(), hudImage.getHeight()));
 		centrante = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
 		//centrante.setBackground(new java.awt.Color(255, 255, 255, 50));
 		centrante.setOpaque(false);
 		add(centrante, java.awt.BorderLayout.SOUTH);
 		
 		espaciadorIzquierdo = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
-		espaciadorIzquierdo.setPreferredSize(new Dimension(hudTest.getWidth() / 4, hudTest.getHeight()));
+		espaciadorIzquierdo.setPreferredSize(new Dimension(hudImage.getWidth() / 4, hudImage.getHeight()));
 		//espaciadorIzquierdo.setBackground(new java.awt.Color(255, 255, 255, 100));
 		espaciadorIzquierdo.addMouseListener(new MouseAdapter() {} );
 		espaciadorIzquierdo.setOpaque(false);
 		centrante.add(espaciadorIzquierdo);
 		
 		controlCentral = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-		controlCentral.setPreferredSize(new Dimension(hudTest.getWidth() / 2, hudTest.getHeight()));
+		controlCentral.setPreferredSize(new Dimension(hudImage.getWidth() / 2, hudImage.getHeight()));
 		//controlCentral.setBackground(new java.awt.Color(255, 255, 255, 20));
 		controlCentral.setOpaque(false);
 		centrante.add(controlCentral);
 
 		espaciadorSuperior = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-		espaciadorSuperior.setPreferredSize(new Dimension(hudTest.getWidth() / 2, 50));
+		espaciadorSuperior.setPreferredSize(new Dimension(hudImage.getWidth() / 2, 50));
 		//espaciadorSuperior.setBackground(new java.awt.Color(255, 255, 255, 100));
 		espaciadorSuperior.setOpaque(false);
 		controlCentral.add(espaciadorSuperior);
 		
 		ubicadorPasarTurno = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-		ubicadorPasarTurno.setPreferredSize(new Dimension(hudTest.getWidth() / 2, hudTest.getHeight() - 50));
+		ubicadorPasarTurno.setPreferredSize(new Dimension(hudImage.getWidth() / 2, hudImage.getHeight() - 50));
 		//ubicadorPasarTurno.setBackground(new java.awt.Color(255, 255, 255, 150));
 		ubicadorPasarTurno.addMouseListener(new MouseAdapter() {} );
 		ubicadorPasarTurno.setOpaque(false);
@@ -126,7 +124,7 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 		
 		
 		ubicadorBotonera = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 70));
-		ubicadorBotonera.setPreferredSize(new Dimension(hudTest.getWidth() / 4, hudTest.getHeight()));
+		ubicadorBotonera.setPreferredSize(new Dimension(hudImage.getWidth() / 4, hudImage.getHeight()));
 		//ubicadorBotonera.setBackground(new java.awt.Color(255, 255, 255, 50));
 		ubicadorBotonera.setOpaque(false);
 		ubicadorBotonera.addMouseListener(new MouseAdapter() {} );
@@ -158,6 +156,12 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 		this.botoneraConstrucciones.agregarCancelable(new btnCancelarMouseListener(this, picCancelar));
 	}
 	
+	private BufferedImage loadHUD(TipoRaza raza) {
+		if ( ! huds.containsKey(raza))
+			huds.put(raza, ImageLoader.loadImage("/HUDs/HUD" + raza.toString().toLowerCase() +"2.png"));
+		return huds.get(raza);
+	}
+
 	private void btnPasarTurnoActionPerformed(java.awt.event.ActionEvent evt) {                                         
     	this.game.tick();
     }    
@@ -181,7 +185,7 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 	
 	private void dibujarHUD(Graphics g) {
 		
-		g.drawImage(hudTest, (panel.getWidth() - hudTest.getWidth())/2, panel.getHeight() - hudTest.getHeight(), null);
+		g.drawImage(hudImage, (panel.getWidth() - hudImage.getWidth())/2, panel.getHeight() - hudImage.getHeight(), null);
 		
 	}
 	

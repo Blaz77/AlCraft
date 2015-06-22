@@ -77,6 +77,7 @@ public class SpriteSheet {
 		return Sprites.get(object);
 	}	
 	
+	/* Creo la paleta de colores para los palette swaps */
 	public static void inicializar() {
 		
 		int[] paletteImg = ImageLoader.loadImage(PLAYER_PALETTE_PATH).getRGB(0, 0, 9, 8, null, 0, 9);
