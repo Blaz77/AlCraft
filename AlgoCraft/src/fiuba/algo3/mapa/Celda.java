@@ -48,7 +48,7 @@ public class Celda { //quizas heredar de celda y armar Tierra/Espacio extends Ce
 	
 	public void verificarOcupacion(Ocupante ocupante){
 		if (!this.terreno.puedeSerOcupada(ocupante))
-			throw new TerrenoInadecuado();
+			throw new TerrenoInadecuado(terreno);
 		if (!this.ocupante.puedeCambiarsePor(ocupante))
 			this.ocupante.lanzarExcepcionDeCambio();
 	}

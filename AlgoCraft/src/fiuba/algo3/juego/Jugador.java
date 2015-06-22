@@ -87,8 +87,8 @@ public class Jugador {
 	
 	// nombre pendiente de modificacion
 	public void comprar(int costoMineral, int costoGasVespeno){
-		if (this.minerales < costoMineral) throw new MineralInsuficiente();
-		if (this.gasVespeno < costoGasVespeno) throw new GasVespenoInsuficiente();
+		if (this.minerales < costoMineral) throw new MineralInsuficiente(costoMineral, this.minerales);
+		if (this.gasVespeno < costoGasVespeno) throw new GasVespenoInsuficiente(costoGasVespeno, this.gasVespeno);
 		this.minerales -= costoMineral;
 		this.gasVespeno -= costoGasVespeno;
 	}
