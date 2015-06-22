@@ -20,26 +20,24 @@ public class TestFabrica extends TestEdificio {
 
 	private MapaReal mapa;
 	private Jugador jugador;
-	private EdificiosFactory terranFactory;
 	private Edificio barraca;
 	private Edificio fabrica;
 	private Edificio fabricaEnConst;
 	
 	@Override
 	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
-		return terranFactory.crearEntrenadorUnidadesIntermedias(jugador, posicion);
+		return jugador.getEdificador().crearEntrenadorUnidadesIntermedias(jugador, posicion);
 	}
 	
 	@Override
 	protected Edificio crearEdificioRequerido(Jugador jugador, Posicion posicion) {
-		return terranFactory.crearEntrenadorUnidadesBasicas(jugador, posicion);
+		return jugador.getEdificador().crearEntrenadorUnidadesBasicas(jugador, posicion);
 	}
 	
 	@Before
 	public void setUp() throws Exception {
 		mapa = new MapaReal(6);
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
-		this.terranFactory = new EdificiosFactory();
 		
 		// Aseguro recursos
 		jugador.agregarGasVespeno(500);

@@ -20,7 +20,6 @@ public class TestArchivosTemplarios extends TestEdificio {
 
 	private MapaReal mapa;
 	private Jugador jugador;
-	private EdificiosFactory protossFactory;
 	private Edificio acceso;
 	private Edificio puerto;
 	private Edificio archivos;
@@ -28,24 +27,23 @@ public class TestArchivosTemplarios extends TestEdificio {
 	
 	@Override
 	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
-		return protossFactory.crearEntrenadorUnidadesAvanzadas(jugador, posicion);
+		return jugador.getEdificador().crearEntrenadorUnidadesAvanzadas(jugador, posicion);
 	}
 	
 	@Override
 	protected Edificio crearEdificioRequerido(Jugador jugador, Posicion posicion) {
-		return protossFactory.crearEntrenadorUnidadesBasicas(jugador, posicion);
+		return jugador.getEdificador().crearEntrenadorUnidadesBasicas(jugador, posicion);
 	}
 	
 	@Override
 	protected Edificio crearEdificioRequeridoNivel2(Jugador jugador, Posicion posicion) {
-		return protossFactory.crearEntrenadorUnidadesIntermedias(jugador, posicion);
+		return jugador.getEdificador().crearEntrenadorUnidadesIntermedias(jugador, posicion);
 	}
 
 	@Before
 	public void setUp() throws Exception {
 		mapa = new MapaReal(6);
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.PROTOSS, mapa);
-		this.protossFactory = new EdificiosFactory();
 		
 		// Aseguro recursos
 		jugador.agregarGasVespeno(800);

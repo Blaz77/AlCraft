@@ -9,7 +9,6 @@ import fiuba.algo3.excepciones.GasVespenoInsuficiente;
 import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.OrdenConstruccionViolado;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
-import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
@@ -19,26 +18,24 @@ public class TestPuertoEstelarProtoss extends TestEdificio {
 
 	private MapaReal mapa;
 	private Jugador jugador;
-	private EdificiosFactory protossFactory;
 	private Edificio acceso;
 	private Edificio puerto;
 	private Edificio puertoEnConst;
 	
 	@Override
 	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
-		return protossFactory.crearEntrenadorUnidadesIntermedias(jugador, posicion);
+		return jugador.getEdificador().crearEntrenadorUnidadesIntermedias(jugador, posicion);
 	}
 	
 	@Override
 	protected Edificio crearEdificioRequerido(Jugador jugador, Posicion posicion) {
-		return protossFactory.crearEntrenadorUnidadesBasicas(jugador, posicion);
+		return jugador.getEdificador().crearEntrenadorUnidadesBasicas(jugador, posicion);
 	}
 	
 	@Before
 	public void setUp() throws Exception {
 		mapa = new MapaReal(6);
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.PROTOSS, mapa);
-		this.protossFactory = new EdificiosFactory();
 		
 		// Aseguro recursos
 		jugador.agregarGasVespeno(500);
