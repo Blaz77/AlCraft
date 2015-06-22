@@ -29,6 +29,8 @@ import fiuba.algo3.ocupantes.TipoOcupante;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3interfaz.Game;
 import fiuba.algo3interfaz.input.BotonBotonera;
+import fiuba.algo3interfaz.input.UtilizadorDeCeldas;
+import fiuba.algo3interfaz.input.btnAtacar;
 import fiuba.algo3interfaz.input.btnCancelarMouseListener;
 import fiuba.algo3interfaz.input.btnConstruirEdificioEntrenadorUnidadesBasicasMouseListener;
 import fiuba.algo3interfaz.input.btnConstruirEdificioIncrementadorPoblacionMouseListener;
@@ -37,7 +39,7 @@ import fiuba.algo3interfaz.input.btnConstruirEdificioRecolectorMineralMouseListe
 import fiuba.algo3interfaz.input.btnConstruirMouseListener;
 
 
-public class HudVista extends JPanel {
+public class HudVista extends JPanel implements UtilizadorDeCeldas {
 	
 	private TipoRaza raza;
 	private Color color;
@@ -64,6 +66,8 @@ public class HudVista extends JPanel {
 	private JPanel espaciadorIzquierdo;
 	private JPanel espaciadorSuperior;
 	private JPanel controlCentral;
+	
+	private UtilizadorDeCeldas utilizadorDeCeldasActual = this;
 	
 	/* Precarga de imagenes */
 	private static BufferedImage hudTest = ImageLoader.loadImage("/HUDs/HUDterran2.png"); //HUDzerg2.png, HUDprotoss2.png
@@ -142,7 +146,8 @@ public class HudVista extends JPanel {
 		
 		// Botoneras:
 		
-		this.botoneraCeldaVacia = new Botonera(new btnConstruirMouseListener(this, picConstruir));
+		this.botoneraCeldaVacia = new Botonera(new btnConstruirMouseListener(this, picConstruir),
+												new btnAtacar(this, ImageLoader.loadImage("/textures/terran.png")));
 	
 		this.botoneraConstrucciones = new Botonera(
 				new btnConstruirEdificioRecolectorMineralMouseListener(this, this.jugador),
@@ -209,6 +214,14 @@ public class HudVista extends JPanel {
 	
 	public void actualizarCeldaSeleccionada(Posicion nuevaCeldaSeleccionada) {
 		this.celdaSeleccionada = nuevaCeldaSeleccionada;
+		this.utilizadorDeCeldasActual.actualizar();	
+	}
+	
+	public void setUtilizadorDeCeldas(UtilizadorDeCeldas util){
+		this.utilizadorDeCeldasActual = util;
+	}
+	
+	public void actualizar(){
 		mostrarOpcionesSegunCelda();
 	}
 
@@ -245,6 +258,7 @@ public class HudVista extends JPanel {
 
 	public void restablecerOpciones() {
 		ubicadorBotonera.removeAll();
+		this.utilizadorDeCeldasActual = this;
 		mostrarOpcionesSegunCelda();
 	}
 	
