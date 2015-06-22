@@ -174,4 +174,10 @@ public class Game implements Runnable { // Permite correr un thread
 	public JPanel getPanel() {
 		return panel;
 	}
+
+
+	public JFrame getFrame() {
+		// TODO Auto-generated method stub
+		return frame;
+	}
 }
