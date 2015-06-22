@@ -1,27 +1,31 @@
 package fiuba.algo3interfaz.input;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import javax.swing.ImageIcon;
 
 import fiuba.algo3.excepciones.GasVespenoInsuficiente;
 import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.RecursoAusente;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.juego.Jugador;
+import fiuba.algo3interfaz.gfx.CopyOfSpriteSheet;
 import fiuba.algo3interfaz.gfx.HudVista;
 
-public class btnConstruirEdificioRecolectorGasVespenoMouseListener implements MouseListener {
+public class btnConstruirEdificioRecolectorGasVespenoMouseListener extends BotonBotonera {
 
 	private HudVista vista;
 	private Jugador jugador;
 
 	public btnConstruirEdificioRecolectorGasVespenoMouseListener(HudVista vista, Jugador jugador) {
+		super(jugador.getAtributos().getRecolectorGasVespeno().getTipo());
 		this.vista = vista;
 		this.jugador = jugador;
 	}
-	
-	public void mouseClicked(MouseEvent arg0) {
-		//vista.mostrarOpcionesColocacion();
+
+	public void actionPerformed(ActionEvent event) {
 		try {
 			jugador.getEdificador().crearRecolectorGasVespeno(jugador, vista.getCeldaSeleccionada());
 			vista.restablecerOpciones();
@@ -40,27 +44,7 @@ public class btnConstruirEdificioRecolectorGasVespenoMouseListener implements Mo
 		}
 		finally {
 			vista.requestFocus();
-		}
-	}
-
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
+		}		
 	}
 
 }

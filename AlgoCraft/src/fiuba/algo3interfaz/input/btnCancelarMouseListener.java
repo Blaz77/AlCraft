@@ -1,40 +1,23 @@
 package fiuba.algo3interfaz.input;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
+
+import javax.swing.ImageIcon;
 
 import fiuba.algo3interfaz.gfx.HudVista;
 
-public class btnCancelarMouseListener implements MouseListener {
+public class btnCancelarMouseListener extends BotonBotonera {
 
 	private HudVista vista;
 
-	public btnCancelarMouseListener(HudVista vista) {
+	public btnCancelarMouseListener(HudVista vista, BufferedImage icon) {
+		super(new ImageIcon(icon), "CANCELAR!");
 		this.vista = vista;
 	}
-	
-	public void mouseClicked(MouseEvent arg0) {
-		vista.restablecerOpciones();
-	}
 
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
+	public void actionPerformed(ActionEvent e) {
+		vista.restablecerOpciones();		
 	}
 
 }
