@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import fiuba.algo3.excepciones.CeldaNoVisible;
 import fiuba.algo3.ocupantes.Ocupante;
 import fiuba.algo3.ocupantes.OcupanteDesconocido;
+import fiuba.algo3.ocupantes.TipoOcupante;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.terreno.Terreno;
+import fiuba.algo3interfaz.input.btnAtacar;
 
 public class MapaProxy implements Mapa {
 
@@ -62,9 +64,7 @@ public class MapaProxy implements Mapa {
 		_cambiarIluminacion(unidad, false);
 	}	
 
-	private void _cambiarIluminacion(Unidad unidad, boolean quieroIluminar){
-		int vision = unidad.getRangoVision();
-		Posicion centro = unidad.getPosicion();
+	private void _cambiarIluminacion(Unidad unidad, int vision, Posicion centro, boolean quieroIluminar){
 		int pos_x, pos_y;
 		Posicion posActual;
 		for (int x = -vision; x < vision + 1; x++)
@@ -81,6 +81,10 @@ public class MapaProxy implements Mapa {
 				else
 					mapaVisibilidad[pos_x][pos_y].remove(unidad);
 			}
+	}
+	
+	private void _cambiarIluminacion(Unidad unidad, boolean quieroIluminar){
+		_cambiarIluminacion(unidad, unidad.getRangoVision(), unidad.getPosicion(), quieroIluminar);
 	}
 	
 	/* Visibiliza un cuadrado de mapa */
@@ -131,11 +135,19 @@ public class MapaProxy implements Mapa {
 		if (! (getVisibilidad(posicion)).verOcupante())
 			throw new CeldaNoVisible();
 		
+		if (ocupante.getTipoOcupante() == TipoOcupante.UNIDAD)
+			iluminar((Unidad)ocupante);
 		mapa.setOcupante(ocupante, posicion);
 	}
 	
 	public Posicion setOcupanteEnCercania(Ocupante ocupante, Posicion posicion){
-		return mapa.setOcupanteEnCercania(ocupante, posicion);
+		Posicion pos = mapa.setOcupanteEnCercania(ocupante, posicion);
+		// este va en contra de las reglas del proxy, porque bueno ...
+		if (ocupante.getTipoOcupante() == TipoOcupante.UNIDAD){
+			Unidad unidad = (Unidad) ocupante;
+			_cambiarIluminacion(unidad, unidad.getRangoVision(), pos, true);
+		}
+		return pos;
 	}
 	
 	public Ocupante getOcupante(Posicion posicion) {
