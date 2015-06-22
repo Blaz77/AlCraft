@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import fiuba.algo3.atributos.jugador.AtributosJugador;
 import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Mapa;
@@ -148,8 +149,7 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 		
 		// Botoneras:
 		this.botoneraNull = new Botonera();
-		this.botoneraCeldaVacia = new Botonera(new btnConstruirMouseListener(this, this.jugador, picConstruir),
-				new btnAtacar(this, ImageLoader.loadImage("/textures/terran.png")));
+		this.botoneraCeldaVacia = new Botonera(new btnConstruirMouseListener(this, this.jugador, picConstruir));
 		
 		this.botoneraEdificioEntrenador = new Botonera(new btnEntrenar(this, this.jugador, picEntrenar));
 		
@@ -159,10 +159,23 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 			this.botoneras.put(tipo, botoneraCeldaVacia);
 		}
 		
-		for (Tipo tipo : new Tipo[]{Tipo.BARRACA, Tipo.FABRICA, Tipo.PUERTO_ESTELAR_TERRAN}){
+		// para hacer generico sin importar la raza:
+		// (y solamente para una raza)
+		AtributosJugador atributos = jugador.getAtributos();
+		
+		for (Tipo tipo : new Tipo[]{atributos.getEntrenadorUnidadesBasicas().getTipo(),
+									atributos.getEntrenadorUnidadesIntermedias().getTipo(),
+									atributos.getEntrenadorUnidadesAvanzadas().getTipo()}){
 			this.botoneras.put(tipo, botoneraEdificioEntrenador);
 		}
+													//new btnMover
+		Botonera botoneraUnidadAtaque = new Botonera(new btnAtacar(this, ImageLoader.loadImage("/textures/terran.png")));
 		
+		for (Tipo tipo : new Tipo[]{atributos.getInfanteriaLivianaTerrestre().getTipo(),
+									atributos.getInfanteriaPesadaTerrestre().getTipo(),
+									atributos.getInfanteriaPesadaArea().getTipo()}){
+			this.botoneras.put(tipo, botoneraUnidadAtaque);
+		}
 		
 		
 	}
@@ -241,6 +254,7 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 	}
 
 	private void mostrarOpcionesSegunCelda() {
+		// chequeo de mostrar la botonera solamente si es algo mio o anonimo. TODO
 		Tipo tipo = mapaVisible.getOcupante(this.celdaSeleccionada).getTipo();
 		setBotonera(botoneras.getOrDefault(tipo, botoneraNull));
 	}
