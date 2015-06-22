@@ -1,32 +1,41 @@
-//TODO Clase sin usar!
-
 package fiuba.algo3.factories;
+
+import java.util.HashMap;
 
 import fiuba.algo3.atributos.edificios.AtributosConstruccion;
 import fiuba.algo3.atributos.edificios.AtributosEdificio;
 import fiuba.algo3.excepciones.OrdenConstruccionViolado;
-import fiuba.algo3.excepciones.RecursoAusente;
-import fiuba.algo3.excepciones.TerrenoInadecuado;
-import fiuba.algo3.juego.*;
+import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
-import fiuba.algo3.ocupantes.TipoOcupante;
+import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.edificios.Edificio;
-import fiuba.algo3.terreno.TipoTerreno;
 
 public class EdificiosFactory implements EdificiosAbstractFactory{
-
+	
+	private HashMap<Tipo,Integer> libreParaConstruccion = new HashMap<Tipo,Integer>();
+	
+	public void denegarConstruccionEdificio(Tipo tipo){
+		Integer liberadores = libreParaConstruccion.getOrDefault(tipo, 1);
+		libreParaConstruccion.put(tipo, liberadores-1);
+	}
+	
+	public void permitirConstruccionEdificio(Tipo tipo){
+		Integer liberadores = libreParaConstruccion.getOrDefault(tipo, 0);
+		libreParaConstruccion.put(tipo, liberadores+1);
+	}
+	
 	private void comprarEdificio(Jugador jugador, AtributosEdificio atributos) {
 		jugador.comprar(atributos.getCosto().getCostoMineral(), atributos.getCosto().getCostoGasVespeno());
 	}
 	
-	private boolean ordenConstruccionSeCumple(Jugador jugador, String nombreEdificioRequerido) {
-		for (Edificio edificio : jugador.getEdificios()) {
-			if (edificio.getNombre() == nombreEdificioRequerido) return true; 
-		}
-		return false;
+	private void verificarOrdenConstruccion(Tipo tipo) {
+		if (libreParaConstruccion.getOrDefault(tipo, 1) <= 0) throw new OrdenConstruccionViolado();
 	}
 	
 	private Edificio crearEdificio(Jugador jugador, Posicion posicion, AtributosEdificio atributos){
+		// Chequeo de orden construccion. 
+		verificarOrdenConstruccion(atributos.getTipo());
+		//
 		Edificio edificio = new Edificio(jugador, posicion, new AtributosConstruccion(atributos));
 		// Chequeo de terreno y/o recurso:
 		jugador.getMapa().verificarOcupacion(edificio, posicion);
@@ -55,18 +64,10 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 	}
 
 	public Edificio crearEntrenadorUnidadesIntermedias(Jugador jugador, Posicion posicion) {
-		// Chequeo de orden construccion.
-		if (! ordenConstruccionSeCumple(jugador, jugador.getAtributos().getEntrenadorUnidadesBasicas().getNombre())) {
-			throw new OrdenConstruccionViolado();
-		}
 		return crearEdificio(jugador, posicion, jugador.getAtributos().getEntrenadorUnidadesIntermedias());
 	}
 
 	public Edificio crearEntrenadorUnidadesAvanzadas(Jugador jugador, Posicion posicion) {
-		// Chequeo de orden construccion. 
-		if (! ordenConstruccionSeCumple(jugador, jugador.getAtributos().getEntrenadorUnidadesIntermedias().getNombre())) {
-			throw new OrdenConstruccionViolado();
-		}
 		return crearEdificio(jugador, posicion, jugador.getAtributos().getEntrenadorUnidadesAvanzadas());
 	}
 

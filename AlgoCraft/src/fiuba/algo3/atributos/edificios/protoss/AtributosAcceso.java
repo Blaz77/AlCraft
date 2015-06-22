@@ -10,6 +10,7 @@ import fiuba.algo3.atributos.edificios.AtributosEdificio;
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.EntrenadorUnidades;
 import fiuba.algo3.componentes.Estado;
+import fiuba.algo3.componentes.EstadoLiberandoConstruccionEdificio;
 import fiuba.algo3.componentes.EstadoRegenerandoEscudo;
 import fiuba.algo3.componentes.IEntrenadorUnidades;
 import fiuba.algo3.componentes.IVida;
@@ -34,7 +35,8 @@ public class AtributosAcceso extends AtributosEdificio {
 	
 	@Override
 	public List<Estado> getEstadosIniciales(){
-		return Arrays.asList((Estado)new EstadoRegenerandoEscudo());
+		return Arrays.asList(new EstadoRegenerandoEscudo(),
+						new EstadoLiberandoConstruccionEdificio(Tipo.PUERTO_ESTELAR_PROTOSS));
 	}
 	
 	@Override
