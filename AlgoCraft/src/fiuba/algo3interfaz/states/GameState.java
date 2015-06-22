@@ -12,6 +12,7 @@ import fiuba.algo3.juego.Jugador;
 import fiuba.algo3interfaz.gfx.CopyOfSpriteSheet;
 import fiuba.algo3interfaz.gfx.HudVista;
 import fiuba.algo3interfaz.gfx.MapaVista;
+import fiuba.algo3interfaz.gfx.MinimapaVista;
 import fiuba.algo3interfaz.gfx.RecursoVista;
 import fiuba.algo3interfaz.gfx.SpriteSheet;
 import fiuba.algo3interfaz.music.MP3Player;
@@ -22,6 +23,7 @@ public class GameState extends State {
 	private HashMap<Jugador, MapaVista> mapas = new HashMap<Jugador, MapaVista>();
 	private HashMap<Jugador, HudVista> huds = new HashMap<Jugador, HudVista>();
 	private HashMap<Jugador, RecursoVista> recursos = new HashMap<Jugador, RecursoVista>();
+	private HashMap<Jugador, MinimapaVista> minimapas = new HashMap<Jugador, MinimapaVista>();
 	private MapaVista mapaActual;
 	private HudVista hudActual;
 	private RecursoVista recursoActual;
@@ -30,6 +32,7 @@ public class GameState extends State {
 
 	private int previous_x;
 	private int previous_y;
+	private MinimapaVista minimapaActual;
 
 
 	
@@ -37,18 +40,22 @@ public class GameState extends State {
 		
 		for (Jugador jugador : game.getModelo()){
 			mapas.put(jugador, new MapaVista(jugador, game.getPanel()));
+			minimapas.put(jugador, new MinimapaVista(jugador, game.getPanel(), mapas.get(jugador).getCamara()));
 			huds.put(jugador, new HudVista(jugador, game.getPanel(), game));
 			recursos.put(jugador, new RecursoVista(jugador, game.getAncho(), game.getAlto(), game.getPanel()));
 			game.getPanel().add(huds.get(jugador));
 			game.getPanel().add(recursos.get(jugador));
+			game.getPanel().add(minimapas.get(jugador));
 			CopyOfSpriteSheet.crearSpritesJugador(jugador);
 		}
 			
 		mapaActual = mapas.get(game.getModelo().getJugadorActual());
+		minimapaActual = minimapas.get(game.getModelo().getJugadorActual());
 		hudActual =  huds.get(game.getModelo().getJugadorActual());
 		recursoActual = recursos.get(game.getModelo().getJugadorActual());
 		hudActual.setVisible(true);
 		recursoActual.setVisible(true);
+		minimapaActual.setVisible(true);
 	}
 	
 	@Override
@@ -62,12 +69,16 @@ public class GameState extends State {
 		if (mapaActual != mapas.get(game.getModelo().getJugadorActual())){
 			
 			this.init(); // EMI mi idea es q init corra 1 vez x cambio de jugador.
-			
+
+			minimapaActual.setVisible(false);
 			hudActual.setVisible(false);
+			recursoActual.setVisible(false);
 			mapaActual = mapas.get(game.getModelo().getJugadorActual());
 			hudActual = huds.get(game.getModelo().getJugadorActual());
 			recursoActual = recursos.get(game.getModelo().getJugadorActual());
+			minimapaActual.setVisible(true);
 			hudActual.setVisible(true);
+			recursoActual.setVisible(true);
 
 		}
 		mapaActual.tick();
@@ -79,6 +90,7 @@ public class GameState extends State {
 	public void render(Graphics g) {
 		mapaActual.render(g);
 		hudActual.render(g);
+		minimapaActual.render(g);
 		recursoActual.render(g);
 	}
 

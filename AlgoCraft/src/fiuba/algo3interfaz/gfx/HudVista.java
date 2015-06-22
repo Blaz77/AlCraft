@@ -104,7 +104,6 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 		espaciadorIzquierdo = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
 		espaciadorIzquierdo.setPreferredSize(new Dimension(hudImage.getWidth() / 4, hudImage.getHeight()));
 		//espaciadorIzquierdo.setBackground(new java.awt.Color(255, 255, 255, 100));
-		espaciadorIzquierdo.addMouseListener(new MouseAdapter() {} );
 		espaciadorIzquierdo.setOpaque(false);
 		centrante.add(espaciadorIzquierdo);
 		

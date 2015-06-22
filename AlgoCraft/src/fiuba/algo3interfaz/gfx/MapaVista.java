@@ -194,6 +194,10 @@ public class MapaVista {
 		
 	}
 	
+	public Camara getCamara() {
+		return camara;
+	}
+	
 	public void moverCamara(int i, int j){
 		camara.move(i, j);
 	}
