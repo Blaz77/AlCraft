@@ -32,6 +32,7 @@ import fiuba.algo3interfaz.input.btnConstruirEdificioIncrementadorPoblacionMouse
 import fiuba.algo3interfaz.input.btnConstruirEdificioRecolectorGasVespenoMouseListener;
 import fiuba.algo3interfaz.input.btnConstruirEdificioRecolectorMineralMouseListener;
 import fiuba.algo3interfaz.input.btnConstruirMouseListener;
+import fiuba.algo3interfaz.input.btnEntrenar;
 
 
 public class HudVista extends JPanel implements UtilizadorDeCeldas {
@@ -64,13 +65,17 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 	private JPanel controlCentral;
 	
 	private UtilizadorDeCeldas utilizadorDeCeldasActual = this;
+	private HashMap<Tipo, Botonera> botoneras;
+	private Botonera botoneraNull;
+	private Botonera botoneraEdificioEntrenador;
 	
 	/* Precarga de imagenes */ //ImageLoader.loadImage("/HUDs/HUDterran2.png"); //HUDzerg2.png, HUDprotoss2.png
 	private static HashMap<TipoRaza, BufferedImage> huds = new HashMap<TipoRaza, BufferedImage>();
 
-	private static BufferedImage picConstruir = ImageLoader.loadImage("/textures/construir.png");
-	private static BufferedImage picCancelar = ImageLoader.loadImage("/textures/cancelar.png");
-
+	public static BufferedImage picConstruir = ImageLoader.loadImage("/textures/construir.png");
+	public static BufferedImage picCancelar = ImageLoader.loadImage("/textures/cancelar.png");
+	//public static BufferedImage picEntrenar = ImageLoader.loadImage("/textures/entrenar.png");
+	public static BufferedImage picEntrenar = ImageLoader.loadImage("/textures/terran.png");
 	
 	public static final int ANCHO = 640;
 	public static final int ALTO = 192;
@@ -143,17 +148,24 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 		ubicadorPasarTurno.add(btnPasarTurno);
 		
 		// Botoneras:
+		this.botoneraNull = new Botonera();
+		this.botoneraCeldaVacia = new Botonera(new btnConstruirMouseListener(this, this.jugador, picConstruir),
+				new btnAtacar(this, ImageLoader.loadImage("/textures/terran.png")));
 		
-		this.botoneraCeldaVacia = new Botonera(new btnConstruirMouseListener(this, picConstruir),
-												new btnAtacar(this, ImageLoader.loadImage("/textures/terran.png")));
-	
-		this.botoneraConstrucciones = new Botonera(
-				new btnConstruirEdificioRecolectorMineralMouseListener(this, this.jugador),
-				new btnConstruirEdificioRecolectorGasVespenoMouseListener(this, this.jugador),
-				new btnConstruirEdificioIncrementadorPoblacionMouseListener(this, this.jugador),
-				new btnConstruirEdificioEntrenadorUnidadesBasicasMouseListener(this, this.jugador));
+		this.botoneraEdificioEntrenador = new Botonera(new btnEntrenar(this, this.jugador, picEntrenar));
 		
-		this.botoneraConstrucciones.agregarCancelable(new btnCancelarMouseListener(this, picCancelar));
+		this.botoneras = new HashMap<Tipo, Botonera>();
+		
+		for (Tipo tipo : new Tipo[]{Tipo.CELDA_VACIA, Tipo.MINERAL, Tipo.VESPENO}) {
+			this.botoneras.put(tipo, botoneraCeldaVacia);
+		}
+		
+		for (Tipo tipo : new Tipo[]{Tipo.BARRACA, Tipo.FABRICA, Tipo.PUERTO_ESTELAR_TERRAN}){
+			this.botoneras.put(tipo, botoneraEdificioEntrenador);
+		}
+		
+		
+		
 	}
 	
 	private BufferedImage loadHUD(TipoRaza raza) {
@@ -230,24 +242,17 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 	}
 
 	private void mostrarOpcionesSegunCelda() {
-		ubicadorBotonera.removeAll();
 		Tipo tipo = mapaVisible.getOcupante(this.celdaSeleccionada).getTipo();
-		if (tipo == Tipo.CELDA_VACIA || 
-				tipo == Tipo.MINERAL ||
-				tipo == Tipo.VESPENO) {
-			ubicadorBotonera.add(botoneraCeldaVacia);
-			ubicadorBotonera.revalidate(); //validate?
-		}
-		// if (tipoOcupante == TipoOcupante.RECURSO) .... es equivalente a los de arriba
+		setBotonera(botoneras.getOrDefault(tipo, botoneraNull));
 	}
 
 	public Posicion getCeldaSeleccionada() {
 		return celdaSeleccionada;
 	}
 
-	public void mostrarOpcionesConstruccion() {
+	public void setBotonera(Botonera nuevaBotonera) {
 		ubicadorBotonera.removeAll();
-		ubicadorBotonera.add(botoneraConstrucciones);
+		ubicadorBotonera.add(nuevaBotonera);
 		ubicadorBotonera.revalidate(); //validate?
 	}
 
@@ -261,7 +266,6 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 	}
 
 	public void restablecerOpciones() {
-		ubicadorBotonera.removeAll();
 		this.utilizadorDeCeldasActual = this;
 		mostrarOpcionesSegunCelda();
 	}

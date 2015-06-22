@@ -159,6 +159,13 @@ public class MapaVista {
 			return;
 		}
 		
+		if (tipo.getTipoOcupante() == TipoOcupante.UNIDAD) {
+			//
+			BufferedImage bi = CopyOfSpriteSheet.getSprites(tipo.getTipoRaza()).get(tipo.ordinal());
+			dibujarEnCelda(g, bi, x, y);
+			return;
+		}
+		
 		BufferedImage bi = SpriteSheet.getSprites(tipo).get(mapaVista[x][y].getIndex());
 		dibujarEnCelda(g, bi, x, y);
 		//g.drawImage(ImageLoader.loadImage("/textures/terran.png"), 

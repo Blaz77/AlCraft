@@ -2,6 +2,7 @@ package fiuba.algo3.ocupantes.unidades.constructores;
 
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.IEntrenadorUnidades;
+import fiuba.algo3.ocupantes.Tipo;
 
 public class Constructor {
 	
@@ -19,6 +20,10 @@ public class Constructor {
 	
 	public void crear(){
 		this.entrenador.entrenar(this.atributos);
+	}
+
+	public Tipo getTipo() {
+		return this.atributos.getTipo();
 	}
 
 }
