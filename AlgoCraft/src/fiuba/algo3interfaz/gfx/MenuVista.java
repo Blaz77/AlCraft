@@ -29,6 +29,11 @@ import fiuba.algo3interfaz.input.btnConstruirMouseListener;
 
 public class MenuVista extends JPanel {
 	
+	private static final int TITLE_FONTSIZE = 24;
+	private static final int TEXT_FONTSIZE = 12;
+	private static final String TITLE_FONT = "Century Gothic";
+	private static final String TEXT_FONT = "Tahoma";
+
 	// Al mejor estilo VisualBasic
 	private void msgbox(String s){
 	   JOptionPane.showMessageDialog(null, s);
@@ -122,28 +127,28 @@ public class MenuVista extends JPanel {
         chkNombreColorJugador1 = new javax.swing.JCheckBox();
         chkNombreColorJugador2 = new javax.swing.JCheckBox();
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font(TITLE_FONT, 0, TITLE_FONTSIZE)); // NOI18N
         jLabel1.setText("Jugador 1");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font(TITLE_FONT, 0, TITLE_FONTSIZE)); // NOI18N
         jLabel2.setText("Jugador 2");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font(TEXT_FONT, 0, TEXT_FONTSIZE)); // NOI18N
         jLabel3.setText("Raza");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font(TEXT_FONT, 0, TEXT_FONTSIZE)); // NOI18N
         jLabel4.setText("Color");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font(TEXT_FONT, 0, TEXT_FONTSIZE)); // NOI18N
         jLabel5.setText("Nombre");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font(TEXT_FONT, 0, TEXT_FONTSIZE)); // NOI18N
         jLabel6.setText("Raza");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font(TEXT_FONT, 0, TEXT_FONTSIZE)); // NOI18N
         jLabel7.setText("Color");
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font(TEXT_FONT, 0, TEXT_FONTSIZE)); // NOI18N
         jLabel8.setText("Nombre");
 
         txtNombreJugador2.setText("Nombre");
