@@ -48,10 +48,10 @@ public class MapaProxy implements Mapa {
 	
 	private void setPuntoOrigen(Posicion posicionInicial) {
 		// Proximamente esto en el constructor
-		final int SEMILADO = 8; //Arbitrario
+		final int semilado = MapaReal.SEMILADO_BASE; //Arbitrario
 		
-		this._visibilizar_area(new Posicion(posicionInicial.getX() - SEMILADO, posicionInicial.getY() - SEMILADO), 
-							new Posicion(posicionInicial.getX() + SEMILADO, posicionInicial.getY() + SEMILADO));
+		this._visibilizar_area(new Posicion(posicionInicial.getX() - semilado, posicionInicial.getY() - semilado), 
+							new Posicion(posicionInicial.getX() + semilado + 1, posicionInicial.getY() + semilado + 1));
 	}
 	
 	private void iluminar(Unidad unidad){

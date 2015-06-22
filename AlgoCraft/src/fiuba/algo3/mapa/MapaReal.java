@@ -12,13 +12,13 @@ import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.terreno.Terreno;
 
 public class MapaReal implements Mapa {
-	final static int DISTANCIA_BORDE = 10;
-	final static int DISTANCIA_ENTRE_BASES = 64;
+	public final static int DISTANCIA_BORDE = 10;
+	public final static int DISTANCIA_ENTRE_BASES = 64;
 	
 	// La base es un territorio cuadrado, del q marcamos su centro
-	final static int SEMILADO_BASE = 8; // El lado de una base sera entonces 2 * semilado + 1 (el centro)
+	public final static int SEMILADO_BASE = 8; // El lado de una base sera entonces 2 * semilado + 1 (el centro)
 	
-	final static int MINERALES_POR_BASE = 6;
+	private final static int MINERALES_POR_BASE = 6;
 		
 	private int ancho;
 	private int alto;
