@@ -20,10 +20,12 @@ public class btnConstruirMouseListener extends BotonBotonera {
 		super(new ImageIcon(icon), "CONSTRUIR!");
 		this.vista = vista;
 		this.botoneraConstrucciones = new Botonera(
-				new btnConstruirEdificioRecolectorMineralMouseListener(vista, jugador),
-				new btnConstruirEdificioRecolectorGasVespenoMouseListener(vista, jugador),
-				new btnConstruirEdificioIncrementadorPoblacionMouseListener(vista, jugador),
-				new btnConstruirEdificioEntrenadorUnidadesBasicasMouseListener(vista, jugador));
+				new btnConstruirEdificio(vista, jugador, jugador.getAtributos().getRecolectorMineral()),
+				new btnConstruirEdificio(vista, jugador, jugador.getAtributos().getRecolectorGasVespeno()),
+				new btnConstruirEdificio(vista, jugador, jugador.getAtributos().getIncrementadorPoblacion()),
+				new btnConstruirEdificio(vista, jugador, jugador.getAtributos().getEntrenadorUnidadesBasicas()),
+				new btnConstruirEdificio(vista, jugador, jugador.getAtributos().getEntrenadorUnidadesIntermedias()),
+				new btnConstruirEdificio(vista, jugador, jugador.getAtributos().getEntrenadorUnidadesAvanzadas()));
 		
 		this.botoneraConstrucciones.agregarCancelable(new btnCancelarMouseListener(vista, HudVista.picCancelar));
 	}

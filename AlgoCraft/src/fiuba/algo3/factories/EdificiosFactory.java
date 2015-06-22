@@ -32,7 +32,8 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 		if (libreParaConstruccion.getOrDefault(tipo, 1) <= 0) throw new OrdenConstruccionViolado();
 	}
 	
-	private Edificio crearEdificio(Jugador jugador, Posicion posicion, AtributosEdificio atributos){
+	//public para la interfaz!
+	public Edificio crearEdificio(Jugador jugador, Posicion posicion, AtributosEdificio atributos){
 		// Chequeo de orden construccion. 
 		verificarOrdenConstruccion(atributos.getTipo());
 		//
