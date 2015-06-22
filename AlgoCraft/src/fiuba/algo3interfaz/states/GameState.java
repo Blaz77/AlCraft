@@ -33,19 +33,14 @@ public class GameState extends State {
 	
 	public GameState(){
 		
-		Jugador jugador = game.getModelo().getJugador(1);
-		mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getPanel()));
-		huds.put(jugador, new HudVista(jugador, game.getPanel(), game));
-		recursos.put(jugador, new RecursoVista(jugador, game.getAncho(), game.getAlto(), game.getPanel()));
-		game.getPanel().add(huds.get(jugador));
-		game.getPanel().add(recursos.get(jugador));
-		
-		jugador = game.getModelo().getJugador(2);
-		mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getPanel()));
-		huds.put(jugador, new HudVista(jugador, game.getPanel(), game));
-		recursos.put(jugador, new RecursoVista(jugador, game.getAncho(), game.getAlto(), game.getPanel()));
-		game.getPanel().add(huds.get(jugador));
-		game.getPanel().add(recursos.get(jugador));
+		for (Jugador jugador : game.getModelo()){
+			System.out.println(jugador.getNombre());
+			mapas.put(jugador, new MapaVista(jugador.getMapa(), game.getPanel()));
+			huds.put(jugador, new HudVista(jugador, game.getPanel(), game));
+			recursos.put(jugador, new RecursoVista(jugador, game.getAncho(), game.getAlto(), game.getPanel()));
+			game.getPanel().add(huds.get(jugador));
+			game.getPanel().add(recursos.get(jugador));
+		}
 			
 		mapaActual = mapas.get(game.getModelo().getJugadorActual());
 		hudActual =  huds.get(game.getModelo().getJugadorActual());

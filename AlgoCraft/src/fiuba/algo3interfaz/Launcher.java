@@ -1,5 +1,7 @@
 package fiuba.algo3interfaz;
 
+import javax.swing.UIManager;
+
 /* De seguir con esta linea, esta vendria a ser la main class, supongo*/ 
 public class Launcher {
 

@@ -23,7 +23,7 @@ public class Juego implements Iterable<Jugador>, Iterator<Jugador>{
 	//int turnosMAX; // si los hay
 	private MapaReal mapa;
 	ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
-	ArrayList<Jugador> jugadoresMuertos = new ArrayList<Jugador>();
+	ArrayList<Jugador> jugadoresVivos = new ArrayList<Jugador>();
 	// Metodos:
 	
 	/* Inicializa el juego pero sin jugadores (mas facil 
@@ -34,12 +34,15 @@ public class Juego implements Iterable<Jugador>, Iterator<Jugador>{
 		String nombreJugador;
 		TipoRaza razaJugador;
 		Color colorJugador;
+		Jugador jugadorActual;
 		for (int n = 1; n <= opciones.getCantidadJugadores(); n++){
 			nombreJugador = opciones.getNombreJugador(n);
 			colorJugador = opciones.getColorJugador(n);
 			razaJugador = opciones.getRazaJugador(n);
 			MapaProxy proxy = new MapaProxy(mapa, mapa.obtenerBaseDeJugador(n).getPosicion());
-			jugadores.add(new Jugador(nombreJugador, colorJugador, razaJugador, proxy));
+			jugadorActual = new Jugador(nombreJugador, colorJugador, razaJugador, proxy);
+			jugadores.add(jugadorActual);
+			jugadoresVivos.add(jugadorActual);
 			//jugadores.get(n-1).setPosicionInicial(mapa.obtenerBaseDeJugador(n).getPosicion());
 		}
 	}
@@ -59,17 +62,15 @@ public class Juego implements Iterable<Jugador>, Iterator<Jugador>{
 	
 	//TODO: :D
 	public Jugador getJugadorActual(){
-		return jugadores.get(indiceJugadorActual);
+		return jugadoresVivos.get(indiceJugadorActual);
 	}
 
 	// Elimina a un jugador del juego!
 	public void eliminarJugador(Jugador jugador){
 		//TODO: Excepciones x errores x aqui
-		jugadores.remove(jugador);
+		jugadoresVivos.remove(jugador);
 		indiceJugadorActual = indiceJugadorActual % jugadores.size();
 		
-		//TODO: y por aqui tambien
-		jugadoresMuertos.add(jugador);
 	}		
 	
 	/* Ordena a todas las unidades/edificios del jugador
@@ -82,27 +83,28 @@ public class Juego implements Iterable<Jugador>, Iterator<Jugador>{
 		if (indiceJugadorActual == 0) turnos ++;
 	}
 	
+	public Jugador getJugador(int i) {
+		return jugadores.get(i - 1);
+		
+	}
 		
 	/**********************************************/
 	/**            ITERATOR (SIN CICLO)          **/
 	/**********************************************/
 	
+	private int iter_nextPlayer = 1;
 	public Iterator<Jugador> iterator() {
 		return this;
 	}
 
 	public boolean hasNext() {
-		return getJugadorActual() != jugadores.get(jugadores.size() - 1);
+		return iter_nextPlayer <= jugadores.size();
 	}
 
 	public Jugador next() {
-		nextJugadorActual();
-		return getJugadorActual();
-	}
-
-	public Jugador getJugador(int i) {
-		return jugadores.get(i - 1);
-		
+		Jugador jugador =  getJugador(iter_nextPlayer);
+		iter_nextPlayer++;
+		return jugador;
 	}
 	
 	//	- de Delegacion (podrian no estar y q de arriba accedan a los objetos directamente):

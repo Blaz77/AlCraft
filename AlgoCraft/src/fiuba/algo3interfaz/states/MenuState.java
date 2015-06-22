@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import javax.swing.UIManager;
+
 import fiuba.algo3interfaz.Game;
 import fiuba.algo3interfaz.gfx.ImageLoader;
 import fiuba.algo3interfaz.gfx.MenuVista;
@@ -22,6 +24,7 @@ public class MenuState extends State{
 
 	@Override
 	public void init() {
+		game.getPanel().setBackground(UIManager.getColor ( "Panel.background" )); // Default color
 		MP3Player.play("main_menu.mp3");
 	}
 	
