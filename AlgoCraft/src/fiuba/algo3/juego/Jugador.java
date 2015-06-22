@@ -33,8 +33,6 @@ public class Jugador {
 	private final static int MINERALES_INICIAL = 200;
 	private final static int VESPENO_INICIAL = 50;
 
-	private final EdificiosFactory edificador = new EdificiosFactory();
-	
 	private Color color;
 	private Raza raza;
 	private int minerales;
@@ -73,6 +71,10 @@ public class Jugador {
 
 	public TipoRaza getRaza() {
 		return raza.getTipoRaza();
+	}
+	
+	public EdificiosFactory getEdificador() {
+		return this.raza.getEdificador();
 	}
 	
 	public String getNombre() {
@@ -173,9 +175,5 @@ public class Jugador {
 			unidad.pasarTurno();
 		for (Edificio edificio: new ArrayList<Edificio>(edificios))
 			edificio.pasarTurno();
-	}
-
-	public EdificiosFactory getEdificador() {
-		return this.edificador;
 	}
 }

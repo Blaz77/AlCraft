@@ -1,14 +1,17 @@
 package fiuba.algo3.raza;
 
-import fiuba.algo3.atributos.jugador.AtributosJugador;
 import fiuba.algo3.atributos.jugador.AtributosJugadorProtoss;
+import fiuba.algo3.factories.EdificiosFactory;
+import fiuba.algo3.ocupantes.Tipo;
 
 class RazaProtoss implements Raza {
 
-	private AtributosJugadorProtoss atributos;
+	private AtributosJugadorProtoss atributos = new AtributosJugadorProtoss();
+	private EdificiosFactory edificador = new EdificiosFactory();
 	
 	public RazaProtoss(){
-		this.atributos = new AtributosJugadorProtoss();
+		this.edificador.denegarConstruccionEdificio(Tipo.PUERTO_ESTELAR_PROTOSS);
+		this.edificador.denegarConstruccionEdificio(Tipo.ARCHIVOS_TEMPLARIOS);
 	}
 	
 	public Object construccionesDisponibles() {
@@ -29,4 +32,7 @@ class RazaProtoss implements Raza {
 		return this.atributos;
 	}
 	
+	public EdificiosFactory getEdificador() {
+		return this.edificador;
+	}
 }
