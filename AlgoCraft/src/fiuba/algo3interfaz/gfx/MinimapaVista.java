@@ -67,7 +67,7 @@ public class MinimapaVista extends JPanel implements MouseListener {
 		this.alto = datosMapa.alto();
 		this.mapaVista = new CeldaVista[ancho][alto];
 		
-		this.factorEscala = this.ancho / ANCHO_MAPA;
+		this.factorEscala = (float) this.ancho / (float) ANCHO_MAPA;
 		this.ALTO_MAPA = this.alto; // Medio deforme se va a ver
 		
 		this.bufferMinimapa = new BufferedImage(ANCHO_MAPA, ALTO_MAPA, BufferedImage.TYPE_INT_RGB);
@@ -124,7 +124,7 @@ public class MinimapaVista extends JPanel implements MouseListener {
 			return java.awt.Color.DARK_GRAY;
 				
 		if (terreno == Terreno.TIERRA)
-			return java.awt.Color.getHSBColor(210, 250, 180); // Verde claro
+			return new java.awt.Color(100, 140, 70); // Verde claro
 		
 		
 		return null;
@@ -174,10 +174,10 @@ public class MinimapaVista extends JPanel implements MouseListener {
 
 	private void dibujarCuadroCamara(Graphics g) {
 		// Recalcular, esto quedo mal
-		int x_mini = (panel.getWidth() / 2) - 310;
-		x_mini += (int) Math.floor((this.camara.getxOffset() / 32) / this.factorEscala*2);
+		int x_mini = (panel.getWidth() / 2) - 300;
+		x_mini += (int) Math.floor((this.camara.getxOffset() / 32) / this.factorEscala);
 		int y_mini = panel.getHeight() - 100;
-		y_mini += (int) Math.floor((this.camara.getyOffset() / 32) / this.factorEscala*2);
+		y_mini += (int) Math.floor((this.camara.getyOffset() / 32));
 		int ancho_mini = (int) Math.floor((panel.getWidth() / areaMinimapa.getWidth()) * 2);
 		int alto_mini = (int) Math.floor((panel.getHeight() / areaMinimapa.getHeight()) * 2);
 		
