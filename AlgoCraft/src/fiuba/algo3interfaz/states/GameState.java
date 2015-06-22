@@ -74,6 +74,7 @@ public class GameState extends State {
 			hudActual.setVisible(false);
 			recursoActual.setVisible(false);
 			mapaActual = mapas.get(game.getModelo().getJugadorActual());
+			minimapaActual = minimapas.get(game.getModelo().getJugadorActual());
 			hudActual = huds.get(game.getModelo().getJugadorActual());
 			recursoActual = recursos.get(game.getModelo().getJugadorActual());
 			minimapaActual.setVisible(true);
@@ -83,6 +84,7 @@ public class GameState extends State {
 		}
 		mapaActual.tick();
 		hudActual.tick();
+		minimapaActual.tick();
 		recursoActual.tick();
 	}
 

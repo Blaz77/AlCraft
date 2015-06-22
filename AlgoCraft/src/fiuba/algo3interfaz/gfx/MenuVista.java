@@ -361,7 +361,7 @@ public class MenuVista extends JPanel {
     	if (! validarCampos()) return;
 
     	Opciones opciones = new Opciones();
-    	opciones.setCantidadBases(6);
+    	opciones.setCantidadBases(4);
     	nombreJugador1 = definirNombreJugador(chkNombreColorJugador1, txtNombreJugador1, cboColorJugador1, razaJugador1);
     	nombreJugador2 = definirNombreJugador(chkNombreColorJugador2, txtNombreJugador2, cboColorJugador2, razaJugador2);
     	opciones.setDatosJugador(1, nombreJugador1, Color.values()[cboColorJugador1.getSelectedIndex()], razaJugador1);
