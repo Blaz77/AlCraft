@@ -72,7 +72,7 @@ public class Transporte implements ITransporte{
 		
 		while (iter.hasNext()){
 			Unidad unidad = iter.next();
-			if (unidad == unidadAlmacenada)
+			if (unidad == unidadAlmacenada){
 				// Posicionar en el mapa:
 				unidad.setPosicion(unidad.getPropietario().getMapa()
 						.setOcupanteEnCercania(unidad, unidad.getPosicion()));
@@ -80,6 +80,7 @@ public class Transporte implements ITransporte{
 				iter.remove();
 				this.almacenamientoEnUso -= unidad.getCostoAlmacenamiento();
 				break;
+			}
 		}
 	}
 	
