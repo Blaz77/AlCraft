@@ -38,4 +38,10 @@ public class EstadoAtormentando implements Estado {
 
 	public void desactivar() {}
 
+	@Override
+	public String getDescripcion() {
+		return String.format("Ejecutando Tormenta sobre la posicion %s. %d Turnos restantes."
+				, posicionCentral.toString(), turnosRestantes);
+	}
+
 }

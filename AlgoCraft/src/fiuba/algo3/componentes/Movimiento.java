@@ -85,5 +85,10 @@ public class Movimiento implements IMovimiento, Estado {
 			if (mapa.celdaValida(adyacente) && mapa.puedeOcupar(this.portador, adyacente))
 				_getPosiblesMovimientos(mapa, posiblesMov, adyacente, restantes);
 	}
+
+	@Override
+	public String getDescripcion() {
+		return String.format("Movimiento: %d movimeintos restantes.", movRestantes);
+	}
 	
 }
