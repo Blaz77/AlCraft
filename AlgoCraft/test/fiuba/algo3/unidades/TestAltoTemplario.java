@@ -82,7 +82,7 @@ public class TestAltoTemplario extends TestUnidadMagica {
 	public void testMagiasConsumenEnergia() {
 		this.llenarEnergia();
 		int energiaRelativa = unidad.getEnergia();
-		unidad.getMagiaDeAreaDeEfecto().ejecutar(unidad.getPosicion(), mapa);
+		unidad.getMagiaDeAreaDeEfecto().ejecutar(unidad.getPosicion());
 		assertEquals(energiaRelativa - COSTO_TORMENTA, unidad.getEnergia());
 		
 		energiaRelativa = unidad.getEnergia();
@@ -97,7 +97,7 @@ public class TestAltoTemplario extends TestUnidadMagica {
 		assertTrue(unidadEnemigaTerrestre.getVida() != 0);
 		int vidaRelativa = unidadEnemigaTerrestre.getVida();
 
-		unidad.getMagiaDeAreaDeEfecto().ejecutar(unidad.getPosicion(), mapa);
+		unidad.getMagiaDeAreaDeEfecto().ejecutar(unidad.getPosicion());
 		assertEquals(unidadEnemigaTerrestre.getVida(), vidaRelativa);
 		
 		unidad.pasarTurno();
@@ -121,7 +121,7 @@ public class TestAltoTemplario extends TestUnidadMagica {
 		int vidaRelativa = otraUnidad.getVida();
 		assertTrue(vidaRelativa != 0);
 
-		unidad.getMagiaDeAreaDeEfecto().ejecutar(unidad.getPosicion(), mapa);
+		unidad.getMagiaDeAreaDeEfecto().ejecutar(unidad.getPosicion());
 		assertEquals(otraUnidad.getVida(), vidaRelativa);
 		
 		unidad.pasarTurno();
