@@ -174,8 +174,23 @@ public class MinimapaVista extends JPanel implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+		int ORIGEN_X = (panel.getWidth() / 2) - 300;
+		int ORIGEN_Y = panel.getHeight() - DISTANCIA_INFERIOR_MAPA;
+		int x = e.getX() + (panel.getWidth() - ANCHO_HUD) / 2;
+		int y = e.getY() + (panel.getHeight() - ALTURA_HUD);
 		
+		if (x >= ORIGEN_X && x <= ORIGEN_X + ANCHO_MAPA) {
+			//System.out.println(String.format("%d %d", e.getX(), e.getY()));
+			//System.out.println(String.format("%d %d", ORIGEN_X, ORIGEN_Y));
+			//System.out.println(String.format("%d %d", ANCHO_MAPA, ALTO_MAPA));
+			if (y >= ORIGEN_Y && y <= ORIGEN_Y + ALTO_MAPA) {
+				// Dentro del minimapa
+				// Corregir
+				System.out.print("aas");
+				camara.move(camara.getxOffset() - (ORIGEN_X - x) ,
+						camara.getyOffset() - (ORIGEN_Y - y));
+			}
+		}
 	}
 
 	public void mouseEntered(MouseEvent e) {
