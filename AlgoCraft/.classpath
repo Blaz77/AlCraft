@@ -3,8 +3,9 @@
 	<classpathentry excluding="fiuba/algo3/A_BORRAR/" kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="libs/junit-jar-4.10.jar"/>
 	<classpathentry kind="lib" path="res"/>
 	<classpathentry kind="lib" path="libs/jfxrt.jar"/>
+	<classpathentry kind="lib" path="libs/junit-jar-4.12.jar"/>
+	<classpathentry kind="lib" path="libs/hamcrest-core-jar-1.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
