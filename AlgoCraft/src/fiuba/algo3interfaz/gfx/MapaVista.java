@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
 import java.awt.image.RescaleOp;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -39,7 +40,8 @@ public class MapaVista {
 	private Camara camara;
 	private int filSeleccionada;
 	private int colSeleccionada;
-	private ArrayList<Posicion> celdasTonalizadas;	
+	private ArrayList<Posicion> celdasTonalizadas;
+	private BufferedImage tonalizador;	
 
 	public MapaVista(Jugador jugador, JPanel panel){
 		
@@ -129,10 +131,12 @@ public class MapaVista {
 
 			}*/
 		//dibujarEnCelda(g, terran, ancho-1, alto-1);
-				
+		
+		dibujarTonalizadores();
 		ubicarMarcaMapaEn(g);
 		
 	}
+
 
 	private void dibujarEnCelda(Graphics g, BufferedImage sprite, int x, int y) {
 
@@ -174,6 +178,12 @@ public class MapaVista {
 
 	private void ubicarMarcaMapaEn(Graphics g) {
 		dibujarEnCelda(g, marcaMapa, filSeleccionada, colSeleccionada);
+	}
+	
+	private void dibujarTonalizadores(Graphics g) {
+		for (Posicion posicion : this.celdasTonalizadas) {
+			dibujarEnCelda(g, marcaMapa, posicion.getX(), posicion.getY());
+		}
 	}
 	
 	public Posicion getPosicionCeldaSeleccionada() {
@@ -221,6 +231,15 @@ public class MapaVista {
 		if (datosMapa.celdaValida(posicionAMirar) && datosMapa.getTerreno(posicionAMirar) != Terreno.ESPACIO)
 			indexEspacio = indexEspacio + 8;
 		return indexEspacio - 1;
+	}
+
+	public void definirTonalizadores(BufferedImage picTonalizadorMovimiento,
+			HashSet<Posicion> posiblesMovimientos) {
+		this.celdasTonalizadas.clear();
+		this.tonalizador = picTonalizadorMovimiento;
+		for (Posicion posicion : posiblesMovimientos) {
+			this.celdasTonalizadas.add(posicion);
+		}
 	}
 	
 }
