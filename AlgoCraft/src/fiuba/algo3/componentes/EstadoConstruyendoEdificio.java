@@ -40,4 +40,10 @@ public class EstadoConstruyendoEdificio implements Estado {
 		portador.getPropietario().agregarEdificio(edificio);
 	}
 
+	@Override
+	public String getDescripcion() {
+		return String.format("Construyendo %s ...", atributos.getTipo().getNombre());
+		// quizas poner informacion de turnos faltantes o porcentaje terminado etc.
+	}
+
 }

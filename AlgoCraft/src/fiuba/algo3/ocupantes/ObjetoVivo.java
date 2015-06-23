@@ -1,7 +1,9 @@
 package fiuba.algo3.ocupantes;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import fiuba.algo3.atributos.AtributosObjetoVivo;
 import fiuba.algo3.componentes.Estado;
@@ -32,6 +34,14 @@ public abstract class ObjetoVivo implements Ocupante { //ObjetoVivo / ObjetoInte
 		for (Estado estado : atributos.getEstadosIniciales()) {
 			this.agregarEstado(estado);
 		}
+	}
+	
+	public List<String> getDescripcionEstados(){
+		ArrayList<String> descripciones = new ArrayList<String>();
+		for (Estado estado : estados) {
+			descripciones.add(estado.getDescripcion());
+		}
+		return descripciones;
 	}
 	
 	public AtributosObjetoVivo getAtributos(){

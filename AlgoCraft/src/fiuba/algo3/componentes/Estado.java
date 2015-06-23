@@ -4,6 +4,8 @@ import fiuba.algo3.ocupantes.ObjetoVivo;
 
 public interface Estado{
 	
+	public String getDescripcion();
+	
 	//A llamar cuando ingresa en un Edificio/Unidad
 	public void activar(ObjetoVivo portador);
 	
