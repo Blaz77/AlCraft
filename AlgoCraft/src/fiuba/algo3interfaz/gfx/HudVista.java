@@ -22,6 +22,7 @@ import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.TipoOcupante;
+import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3interfaz.Game;
 import fiuba.algo3interfaz.input.BotonBotonera;
@@ -238,6 +239,13 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 			String nombrePropietario = entidad.getPropietario().getNombre();
 			g.setColor(colorPropietario);
 			g.drawString(nombrePropietario, FINAL_X - g.getFontMetrics().stringWidth(nombrePropietario), ORIGEN_Y + 20);
+			
+			/* Informacion de estados */
+			if (entidad.getTipoOcupante() == TipoOcupante.EDIFICIO) {
+				Edificio edificio = (Edificio) entidad;
+				
+				// Y ahora?
+			}
 		}
 	}
 	
