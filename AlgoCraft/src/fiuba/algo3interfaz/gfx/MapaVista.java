@@ -132,7 +132,7 @@ public class MapaVista {
 			}*/
 		//dibujarEnCelda(g, terran, ancho-1, alto-1);
 		
-		dibujarTonalizadores();
+		dibujarTonalizadores(g);
 		ubicarMarcaMapaEn(g);
 		
 	}
