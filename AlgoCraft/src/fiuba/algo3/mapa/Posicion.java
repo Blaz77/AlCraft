@@ -19,6 +19,11 @@ public class Posicion {
 		return this.y;
 	}
 	
+	public void desplazarA(Posicion destino) {
+		this.x = destino.x;
+		this.y = destino.y;
+	}
+	
 	@Override
 	public String toString() {
 		return String.format("(%d, %d)", x, y);

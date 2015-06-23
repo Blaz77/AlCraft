@@ -116,6 +116,15 @@ public class TestNaveDeTransporteTerran extends TestUnidadTransporte {
 		assertEquals(0, unidad.getUnidadesAlmacenadas().size());
 	}
 	
+	@Test 
+	public void testTransporteAlMorirLiberaTodasLasUnidades() {
+		unidad.almacenarA(pasajero);
+		unidad.almacenarA(pasajero2);
+		unidad.destruir();
+		assertSame(pasajero, mapa.getOcupante(pasajero.getPosicion()));
+		assertSame(pasajero2, mapa.getOcupante(pasajero2.getPosicion()));
+	}
+	
 	@Test
 	public void testNoPuedeAlmacenarPasadoSuCapacidadMaxima() {
 		for (int i = 0; i < capacidad;i++){

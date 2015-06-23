@@ -65,7 +65,7 @@ public abstract class ObjetoVivo implements Ocupante { //ObjetoVivo / ObjetoInte
 	}
 
 	public Posicion getPosicion() {
-		return this.posicion;  //quizas devolver copia!
+		return this.posicion;
 	}
 	
 	public void setPosicion(Posicion nuevaPosicion) {

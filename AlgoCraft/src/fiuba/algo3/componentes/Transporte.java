@@ -9,11 +9,12 @@ import fiuba.algo3.excepciones.CapacidadAlmacenamientoInsuficente;
 import fiuba.algo3.excepciones.FueraDelRangoPermitido;
 import fiuba.algo3.excepciones.NoEsUnAliado;
 import fiuba.algo3.excepciones.UnidadNoEsAlmacenable;
+import fiuba.algo3.excepciones.UnidadYaAlmacenada;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.unidades.Pasajero;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 
-public class Transporte implements ITransporte{
+public class Transporte implements ITransporte, Estado{
 	
 	private int almacenamientoEnUso = 0; //transporte
 	private LinkedList<Unidad> almacenados = new LinkedList<Unidad>();
@@ -23,10 +24,39 @@ public class Transporte implements ITransporte{
 	public Transporte(AtributosTransporte atributos, ObjetoVivo portador) {
 		this.atributos = atributos;
 		this.portador = portador;
+		portador.agregarEstado(this);
+	}
+	
+	@Override
+	public String getDescripcion() {
+		return String.format("Almacenamiento en uso: %d/%d.", 
+				almacenamientoEnUso, atributos.getCapacidadAlmacenamiento());
+		
+	}
+
+	@Override
+	public void activar(ObjetoVivo portador) {}
+
+	@Override
+	public void pasarTurno() throws Exception {}
+
+	@Override // solamente se llama cuando se muere el transporte.
+	public void desactivar() {
+		for (Unidad unidad : this.almacenados) {
+			unidad.setPosicion(unidad.getPropietario().getMapa()
+					.setOcupanteEnCercania(unidad, portador.getPosicion()));
+		}
 	}
 	
 	public boolean puedeAlmacenar() {
 		return true;
+	}
+	
+	private boolean tengoAlmacenadoA(Unidad unidad){
+		for (Unidad unidadAlmacenada : this.almacenados) {
+			if (unidad == unidadAlmacenada) return true;
+		}
+		return false;
 	}
 	
 	private boolean hayLugarPara(Unidad unidad){
@@ -39,6 +69,7 @@ public class Transporte implements ITransporte{
 	public boolean puedeAlmacenarA(Unidad unidad){
 		return (unidad.puedeSerAlmacenada() &&
 				!portador.esEnemigoDe(unidad) &&
+				!this.tengoAlmacenadoA(unidad) &&
 				portador.getPosicion().estaEnRango(unidad.getPosicion(), atributos.getRangoEntrada()) &&
 				this.hayLugarPara(unidad));
 	}
@@ -49,6 +80,7 @@ public class Transporte implements ITransporte{
 		//Chequeos:
 		if (!unidad.puedeSerAlmacenada()) throw new UnidadNoEsAlmacenable();
 		if (portador.esEnemigoDe(unidad)) throw new NoEsUnAliado();
+		if (this.tengoAlmacenadoA(unidad)) throw new UnidadYaAlmacenada();
 		if (!portador.getPosicion().estaEnRango(unidad.getPosicion(), atributos.getRangoEntrada()))
 			throw new FueraDelRangoPermitido();
 		if (!this.hayLugarPara(unidad)) throw new CapacidadAlmacenamientoInsuficente();
@@ -79,7 +111,7 @@ public class Transporte implements ITransporte{
 			if (unidad == unidadAlmacenada){
 				// Posicionar en el mapa:
 				unidad.setPosicion(unidad.getPropietario().getMapa()
-						.setOcupanteEnCercania(unidad, unidad.getPosicion()));
+						.setOcupanteEnCercania(unidad, portador.getPosicion()));
 				// Sacar de mi lista:
 				iter.remove();
 				this.almacenamientoEnUso -= unidad.getCostoAlmacenamiento();

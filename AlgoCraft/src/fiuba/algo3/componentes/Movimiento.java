@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import fiuba.algo3.atributos.AtributosMovimiento;
+import fiuba.algo3.excepciones.FueraDelRangoPermitido;
 import fiuba.algo3.excepciones.MovimientoInvalido;
 import fiuba.algo3.excepciones.PosicionOcupada;
 import fiuba.algo3.mapa.Mapa;
@@ -50,7 +51,7 @@ public class Movimiento implements IMovimiento, Estado {
 	// - Habria que diferenciar los que no se pueden mover nunca
 	// 	 de los que terminaron sus turnos?
 	public boolean puedeMoverse(){
-		return (this.movRestantes != 0);
+		return (this.movRestantes != 0); //es equivalente a esta en rango!?
 	}
 	
 	public boolean puedeMoverseA(Posicion destino){
@@ -59,13 +60,14 @@ public class Movimiento implements IMovimiento, Estado {
 	}
 	
 	public void moverA(Posicion destino){
-		if (! puedeMoverseA(destino)) {
-			throw new MovimientoInvalido();
-		}
-			
-		this.movRestantes -= portador.getPosicion().distancia(destino);
+		if (!this.puedeMoverse()) throw new MovimientoInvalido();
+		if (!portador.getPosicion().estaEnRango(destino, movRestantes))
+			throw new FueraDelRangoPermitido();
+		// este lanza excepciones en caso de terreno(s) inadecuados
 		portador.getPropietario().getMapa().mover(this.portador, destino);
-		portador.setPosicion(destino);
+		// actualizar..
+		this.movRestantes -= portador.getPosicion().distancia(destino);
+		portador.getPosicion().desplazarA(destino);
 	}
 
 	//TODO: chequear q funcione!
