@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -327,6 +328,7 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 
 	public void restablecerOpciones() {
 		this.utilizadorDeCeldasActual = this;
+		vistaMapa.definirTonalizadores(picTonalizadorMovimiento, new HashSet<>());
 		mostrarOpcionesSegunCelda();
 	}
 	

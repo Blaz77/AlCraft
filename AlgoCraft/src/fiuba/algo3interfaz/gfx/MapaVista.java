@@ -182,7 +182,7 @@ public class MapaVista {
 	
 	private void dibujarTonalizadores(Graphics g) {
 		for (Posicion posicion : this.celdasTonalizadas) {
-			dibujarEnCelda(g, marcaMapa, posicion.getX(), posicion.getY());
+			dibujarEnCelda(g, tonalizador, posicion.getX(), posicion.getY());
 		}
 	}
 	
