@@ -62,6 +62,7 @@ public class Ataque implements IAtaque, Estado {
 		enemigo.recibirDanio(enemigo.getDanioEfectivo(
 				this.atributos.getDanioAtkAire(),
 				this.atributos.getDanioAtkTierra()));
+		this.ataquesRestantes--;
 	}
 	
 	//esto es una idea nomas, no necesariamente hacerlo

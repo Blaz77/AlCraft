@@ -32,6 +32,7 @@ import fiuba.algo3interfaz.input.btnAtacar;
 import fiuba.algo3interfaz.input.btnCancelarMouseListener;
 import fiuba.algo3interfaz.input.btnConstruirMouseListener;
 import fiuba.algo3interfaz.input.btnEntrenar;
+import fiuba.algo3interfaz.input.btnMover;
 
 
 public class HudVista extends JPanel implements UtilizadorDeCeldas {
@@ -69,7 +70,10 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 	public static BufferedImage picConstruir = ImageLoader.loadImage("/textures/construir.png");
 	public static BufferedImage picCancelar = ImageLoader.loadImage("/textures/cancelar.png");
 	//public static BufferedImage picEntrenar = ImageLoader.loadImage("/textures/entrenar.png");
+	// TODO : tomar img para los de abajo!
 	public static BufferedImage picEntrenar = ImageLoader.loadImage("/textures/terran.png");
+	public static BufferedImage picAtacar = ImageLoader.loadImage("/textures/terran.png");
+	public static BufferedImage picMover = ImageLoader.loadImage("/textures/construir.png");
 	
 	public static final int ANCHO = 640;
 	public static final int ALTO = 192;
@@ -162,7 +166,9 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 			this.botoneras.put(tipo, botoneraEdificioEntrenador);
 		}
 													//new btnMover
-		Botonera botoneraUnidadAtaque = new Botonera(new btnAtacar(this, ImageLoader.loadImage("/textures/terran.png")));
+		Botonera botoneraUnidadAtaque = new Botonera(
+				new btnMover(this, picMover),
+				new btnAtacar(this, picAtacar));
 		
 		for (Tipo tipo : new Tipo[]{atributos.getInfanteriaLivianaTerrestre().getTipo(),
 									atributos.getInfanteriaPesadaTerrestre().getTipo(),
