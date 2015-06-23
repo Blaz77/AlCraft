@@ -20,6 +20,7 @@ import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.ObjetoVivo;
+import fiuba.algo3.ocupantes.Ocupante;
 import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.TipoOcupante;
 import fiuba.algo3.ocupantes.edificios.Edificio;
@@ -224,10 +225,10 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 		final int ANCHO_VIDA = 50;
 		
 		/* Nombre */
-		g.drawString(this.mapaVisible.getOcupante(celdaSeleccionada).getTipo().getNombre(), ORIGEN_X, ORIGEN_Y);
-		if (this.mapaVisible.getOcupante(celdaSeleccionada).getTipo().getTipoOcupante() == TipoOcupante.EDIFICIO ||
-				this.mapaVisible.getOcupante(celdaSeleccionada).getTipo().getTipoOcupante() == TipoOcupante.UNIDAD) {
-			ObjetoVivo entidad = (ObjetoVivo) this.mapaVisible.getOcupante(celdaSeleccionada);
+		g.drawString(getOcupanteSelecccionado().getTipo().getNombre(), ORIGEN_X, ORIGEN_Y);
+		if (getOcupanteSelecccionado().getTipo().getTipoOcupante() == TipoOcupante.EDIFICIO ||
+				getOcupanteSelecccionado().getTipo().getTipoOcupante() == TipoOcupante.UNIDAD) {
+			ObjetoVivo entidad = (ObjetoVivo) getOcupanteSelecccionado();
 			
 			/* Barra de vida */
 			g.fillRect(ORIGEN_X, ORIGEN_Y + 10, ANCHO_VIDA, 10);
@@ -243,6 +244,7 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 			g.drawString(nombrePropietario, FINAL_X - g.getFontMetrics().stringWidth(nombrePropietario), ORIGEN_Y + 20);
 			
 			/* Informacion de estados */
+			// No importa el tipoOcupante, hacer para ObjetoVivo
 			if (entidad.getTipoOcupante() == TipoOcupante.EDIFICIO) {
 				Edificio edificio = (Edificio) entidad;
 				
@@ -266,12 +268,17 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 
 	private void mostrarOpcionesSegunCelda() {
 		// chequeo de mostrar la botonera solamente si es algo mio o anonimo. TODO
-		Tipo tipo = mapaVisible.getOcupante(this.celdaSeleccionada).getTipo();
+		Tipo tipo = getOcupanteSelecccionado().getTipo();
 		setBotonera(botoneras.getOrDefault(tipo, botoneraNull));
 	}
 
 	public Posicion getCeldaSeleccionada() {
 		return celdaSeleccionada;
+	}
+	
+	// para que de afuera no necesiten el mapa:
+	public Ocupante getOcupanteSelecccionado() {
+		return mapaVisible.getOcupante(this.celdaSeleccionada);
 	}
 
 	public void setBotonera(Botonera nuevaBotonera) {
