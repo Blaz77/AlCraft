@@ -20,4 +20,9 @@ public class EstadoIrradiado implements Estado {
 
 	public void desactivar() {}
 
+	@Override
+	public String getDescripcion() {
+		return String.format("Irradiado!: recibiendo %d daño por turno.",(int) (portador.getVidaMaxima() * 0.10));
+	}
+
 }

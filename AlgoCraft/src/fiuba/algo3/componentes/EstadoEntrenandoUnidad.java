@@ -30,4 +30,9 @@ public class EstadoEntrenandoUnidad implements Estado {
 		this.entrenador.proximoEntrenamiento();
 	}
 
+	@Override
+	public String getDescripcion() {
+		return String.format("Entrenando %s. %d Turnos restantes.", atributos.getNombre(), turnosRestantes);
+	}
+
 }

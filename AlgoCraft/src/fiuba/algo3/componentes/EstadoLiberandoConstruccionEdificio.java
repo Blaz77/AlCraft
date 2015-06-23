@@ -26,4 +26,11 @@ public class EstadoLiberandoConstruccionEdificio implements Estado {
 		this.edificador.denegarConstruccionEdificio(tipo);
 	}
 
+	@Override
+	public String getDescripcion() {
+		return String.format("Permito la construccion de %s.", tipo.getNombre());
+	}
+	
+	
+
 }
