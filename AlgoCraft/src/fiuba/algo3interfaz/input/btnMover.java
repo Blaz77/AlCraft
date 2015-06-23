@@ -22,6 +22,7 @@ public class btnMover extends BotonBotonera implements UtilizadorDeCeldas {
 		vista.setUtilizadorDeCeldas(this);
 		// si este casteo falla es un problema de la asociacion de botonera a tipo!
 		movible = (IMovimiento) vista.getOcupanteSelecccionado();
+		vista.mostrarPosiblesMovimientos(movible);
 	}
 
 	public void actualizar() {

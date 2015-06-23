@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import fiuba.algo3.atributos.jugador.AtributosJugador;
+import fiuba.algo3.componentes.IMovimiento;
 import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Mapa;
@@ -66,6 +67,7 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 	private HashMap<Tipo, Botonera> botoneras;
 	private Botonera botoneraNull;
 	private Botonera botoneraEdificioEntrenador;
+	private MapaVista vistaMapa;
 	
 	/* Precarga de imagenes */ //ImageLoader.loadImage("/HUDs/HUDterran2.png"); //HUDzerg2.png, HUDprotoss2.png
 	private static HashMap<TipoRaza, BufferedImage> huds = new HashMap<TipoRaza, BufferedImage>();
@@ -81,15 +83,19 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 	public static BufferedImage picLiberar = ImageLoader.loadImage("/textures/construir.png");
 	public static BufferedImage picMagias = ImageLoader.loadImage("/textures/construir.png");
 	
+	public static BufferedImage picTonalizadorMovimiento = ImageLoader.loadImage("/textures/tonalizador_movimiento.png");
+	
+	
 	public static final int ANCHO = 640;
 	public static final int ALTO = 192;
 	
-	public HudVista(Jugador jugador, JPanel panel, Game game){
+	public HudVista(Jugador jugador, JPanel panel, MapaVista vistaMapa, Game game){
 		this.raza = jugador.getRaza();
 		this.color = jugador.getColor();
 		this.jugador = jugador;
 		this.panel = panel; //Experimental
 		this.game = game;
+		this.vistaMapa = vistaMapa;
 		this.mapaVisible = jugador.getMapa();
 		
 		this.hudImage = loadHUD(this.raza);//ImageLoader.loadImage("/HUDs/HUDterran2.png");
@@ -327,5 +333,9 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 	@Override
 	public void requestFocus() {
 		this.panel.requestFocus();
+	}
+
+	public void mostrarPosiblesMovimientos(IMovimiento movible) {
+		vistaMapa.definirTonalizadores(picTonalizadorMovimiento, movible.getPosiblesMovimientos(mapaVisible));
 	}
 }

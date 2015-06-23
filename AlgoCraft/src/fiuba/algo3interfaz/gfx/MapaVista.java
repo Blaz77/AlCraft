@@ -52,7 +52,7 @@ public class MapaVista {
 		this.filSeleccionada = datosMapa.getPosicionInicial().getX();
 		this.colSeleccionada = datosMapa.getPosicionInicial().getY();
 		this.mapaVista = new CeldaVista[ancho][alto];
-		this.celdasTonalizadas = new ArrayList<Posicion>;
+		this.celdasTonalizadas = new ArrayList<Posicion>();
 		this.camara = new Camara(filSeleccionada*ANCHO_CELDA - panel.getWidth() / 2, 
 								colSeleccionada*ANCHO_CELDA - panel.getHeight() / 2, 
 								ancho*ANCHO_CELDA, alto*ALTO_CELDA, panel);
