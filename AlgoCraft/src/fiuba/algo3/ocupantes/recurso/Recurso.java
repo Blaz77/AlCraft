@@ -48,7 +48,7 @@ public abstract class Recurso implements Ocupante {
 	}
 	
 	public void lanzarExcepcionDeCambio(){
-		throw new RecursoPresente();
+		throw new RecursoPresente(this);
 	}
 	
 }

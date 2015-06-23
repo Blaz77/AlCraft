@@ -7,6 +7,7 @@ import fiuba.algo3.excepciones.GasVespenoInsuficiente;
 import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.OrdenConstruccionViolado;
 import fiuba.algo3.excepciones.RecursoAusente;
+import fiuba.algo3.excepciones.RecursoPresente;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3interfaz.gfx.HudVista;
@@ -37,7 +38,7 @@ public class btnConstruirEdificio extends BotonBotonera {
 			else
 				vista.mostrarMensaje("Su licencia ha caducado. Intente crackear nuevamente");
 		}
-		catch (TerrenoInadecuado|OrdenConstruccionViolado|MineralInsuficiente|GasVespenoInsuficiente e) {
+		catch (TerrenoInadecuado|RecursoPresente|OrdenConstruccionViolado|MineralInsuficiente|GasVespenoInsuficiente e) {
 			vista.mostrarMensaje(e.getMessage());
 		}
 		finally {
