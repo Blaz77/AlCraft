@@ -5,14 +5,14 @@ import fiuba.algo3.raza.TipoRaza;
 
 public enum AdaptadorColor {
 
-	ROJO		( java.awt.Color.RED	),
-	AZUL		( java.awt.Color.RED	),
-	AZUL_TEAL	( java.awt.Color.RED	),
-	PURPURA		( java.awt.Color.RED	),
-	NARANJA		( java.awt.Color.RED	),
-	MARRON		( java.awt.Color.RED	),
-	BLANCO		( java.awt.Color.RED	),
-	AMARILLO	( java.awt.Color.RED	);
+	ROJO		( new java.awt.Color(255, 62, 62)	),
+	AZUL		( new java.awt.Color(109, 118, 216)	),
+	AZUL_TEAL	( new java.awt.Color(153, 217, 234)	),
+	PURPURA		( new java.awt.Color(193, 179, 255)	),
+	NARANJA		( new java.awt.Color(255, 147, 74)	),
+	MARRON		( new java.awt.Color(184, 107, 88)	),
+	BLANCO		( new java.awt.Color(255, 255, 255)	),
+	AMARILLO	( new java.awt.Color(255, 242, 0)	);
 	
 	private java.awt.Color colorAwtAsociado;
 	

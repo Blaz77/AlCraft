@@ -23,11 +23,6 @@ import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.TipoOcupante;
 import fiuba.algo3.raza.TipoRaza;
-import fiuba.algo3interfaz.input.btnCancelarMouseListener;
-import fiuba.algo3interfaz.input.btnConstruirEdificioEntrenadorUnidadesBasicasMouseListener;
-import fiuba.algo3interfaz.input.btnConstruirEdificioIncrementadorPoblacionMouseListener;
-import fiuba.algo3interfaz.input.btnConstruirEdificioRecolectorGasVespenoMouseListener;
-import fiuba.algo3interfaz.input.btnConstruirEdificioRecolectorMineralMouseListener;
 import fiuba.algo3interfaz.input.btnConstruirMouseListener;
 
 
@@ -80,11 +75,6 @@ public class RecursoVista extends JPanel {
 		lblPoblacion.setVisible(true);
 		add(lblPoblacion);
 		
-	}
-	
-	// Al mejor estilo VisualBasic
-	private void msgbox(String s){
-	   JOptionPane.showMessageDialog(null, s);
 	}
 	
 	public void tick(){

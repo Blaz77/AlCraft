@@ -14,7 +14,6 @@ import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.TipoOcupante;
-import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.terreno.Terreno;
 
 /* Muestra el mapa personal de un jugador.
@@ -43,7 +42,7 @@ public class MapaVista {
 	public MapaVista(Jugador jugador, JPanel panel){
 		
 		this.jugador = jugador;
-		this.datosMapa = jugador.getMapa(); // new MapaReal(2) Con razon andaba todo mal!
+		this.datosMapa = jugador.getMapa(); // new MapaReal(2)
 		this.panel = panel;
 
 		this.ancho = datosMapa.ancho();

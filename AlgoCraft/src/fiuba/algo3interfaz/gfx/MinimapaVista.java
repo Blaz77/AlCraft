@@ -4,13 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
-import java.awt.image.BufferedImageOp;
-import java.awt.image.RescaleOp;
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -22,7 +19,6 @@ import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.Ocupante;
 import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.TipoOcupante;
-import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.terreno.Terreno;
 
 /* Muestra el mapa personal de un jugador.
@@ -32,26 +28,20 @@ public class MinimapaVista extends JPanel implements MouseListener {
 
 	private static final int ANCHO_CELDA = SpriteSheet.spritesTierra.getAncho();
 	private static final int ALTO_CELDA = SpriteSheet.spritesTierra.getAlto();
-	private static final float RESCALE_FACTOR = 0.1f;
-	private static final BufferedImageOp RESCALE_OP = new RescaleOp(RESCALE_FACTOR, 0, null);
 	private static final int ANCHO_MAPA = 100;
 	private int ALTO_MAPA;
 	private static final int ANCHO_HUD = 640;
 	private static final int ALTURA_HUD = 165;
 	
-	private CeldaVista[][] mapaVista;
 	private int ancho;
 	private int alto;
 	
-	private int filSeleccionada;
-	private int colSeleccionada;
 	private Mapa datosMapa;
 	private JPanel panel;
 
 	private Camara camara;
 	
 	private BufferedImage bufferMinimapa;
-	private BufferedImage marcaMapa = SpriteSheet.getSpriteMarcaMapa();
 	private JPanel centrante;
 	private JPanel areaMinimapa;
 	private float factorEscala;  // > 1
@@ -65,7 +55,6 @@ public class MinimapaVista extends JPanel implements MouseListener {
 
 		this.ancho = datosMapa.ancho();
 		this.alto = datosMapa.alto();
-		this.mapaVista = new CeldaVista[ancho][alto];
 		
 		this.factorEscala = (float) this.ancho / (float) ANCHO_MAPA;
 		this.ALTO_MAPA = this.alto; // Medio deforme se va a ver
@@ -137,14 +126,6 @@ public class MinimapaVista extends JPanel implements MouseListener {
 	
 	public void render(Graphics g) {
 		
-		/*// Para renderizar nomas lo q podemos ver
-		int xInicio = Math.max(0, camara.getxOffset() / anchoSprite);
-		int xFin = Math.min(ancho, 1 + (camara.getxOffset() + panel.getWidth()) / anchoSprite);
-		int yInicio = Math.max(0, camara.getyOffset() / altoSprite);
-		int yFin = Math.min(alto, 1 + (camara.getyOffset() + panel.getHeight()) / altoSprite);
-		*/
-		
-		Graphics2D g2 = (Graphics2D) g;
 		for (int y_mini = 0; y_mini < ALTO_MAPA; y_mini++) {
 			for (int x_mini = 0; x_mini < ANCHO_MAPA; x_mini++){
 				guardarContenidoCeldaEnBuffer(x_mini, y_mini);

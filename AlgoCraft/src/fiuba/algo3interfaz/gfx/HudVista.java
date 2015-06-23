@@ -28,10 +28,6 @@ import fiuba.algo3interfaz.input.BotonBotonera;
 import fiuba.algo3interfaz.input.UtilizadorDeCeldas;
 import fiuba.algo3interfaz.input.btnAtacar;
 import fiuba.algo3interfaz.input.btnCancelarMouseListener;
-import fiuba.algo3interfaz.input.btnConstruirEdificioEntrenadorUnidadesBasicasMouseListener;
-import fiuba.algo3interfaz.input.btnConstruirEdificioIncrementadorPoblacionMouseListener;
-import fiuba.algo3interfaz.input.btnConstruirEdificioRecolectorGasVespenoMouseListener;
-import fiuba.algo3interfaz.input.btnConstruirEdificioRecolectorMineralMouseListener;
 import fiuba.algo3interfaz.input.btnConstruirMouseListener;
 import fiuba.algo3interfaz.input.btnEntrenar;
 
@@ -51,11 +47,6 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 	private Botonera botoneraActual;
 	private Botonera botoneraConstrucciones;
 	private Botonera botoneraCeldaVacia;
-	private JLabel[] huecosLabel;
-	private BotonBotonera btnConstruirEdificioRecolectorMineral;
-	private BotonBotonera btnConstruirEdificioRecolectorGasVespeno;
-	private BotonBotonera btnConstruirEdificioIncrementadorPoblacion;
-	private BotonBotonera btnConstruirEdificioEntrenadorUnidadesBasicas;
 	private JPanel ubicadorBotonera;
 	private JPanel centrante;
 	private JButton btnPasarTurno;
