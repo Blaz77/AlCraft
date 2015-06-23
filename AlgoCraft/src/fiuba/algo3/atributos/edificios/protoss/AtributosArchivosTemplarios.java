@@ -33,6 +33,11 @@ public class AtributosArchivosTemplarios extends AtributosEdificio {
 	}
 	
 	@Override
+	public Tipo getEdificioRequerido() {
+		return Tipo.PUERTO_ESTELAR_PROTOSS;
+	}
+	
+	@Override
 	public List<Estado> getEstadosIniciales(){
 		return Arrays.asList((Estado)new EstadoRegenerandoEscudo());
 	}

@@ -1,10 +1,12 @@
 package fiuba.algo3.excepciones;
 
+import fiuba.algo3.atributos.edificios.AtributosEdificio;
+
 public class OrdenConstruccionViolado extends RuntimeException {
 
-	public OrdenConstruccionViolado(String nombreEdificioRequerido){
+	public OrdenConstruccionViolado(AtributosEdificio atributos){
 		super(String.format("No puede construir este edificio. Requiere %s", 
-				nombreEdificioRequerido));
+				atributos.getEdificioRequerido().getNombre()));
 	}
 	
 }

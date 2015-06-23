@@ -34,6 +34,11 @@ public class AtributosPuertoEstelarProtoss extends AtributosEdificio {
 	}
 	
 	@Override
+	public Tipo getEdificioRequerido() {
+		return Tipo.ACCESO;
+	}
+	
+	@Override
 	public List<Estado> getEstadosIniciales(){
 		return Arrays.asList(new EstadoRegenerandoEscudo(),
 						new EstadoLiberandoConstruccionEdificio(Tipo.ARCHIVOS_TEMPLARIOS));

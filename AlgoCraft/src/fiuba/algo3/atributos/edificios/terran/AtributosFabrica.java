@@ -36,6 +36,11 @@ public class AtributosFabrica extends AtributosEdificio {
 	}
 	
 	@Override
+	public Tipo getEdificioRequerido() {
+		return Tipo.BARRACA;
+	}
+	
+	@Override
 	public List<Estado> getEstadosIniciales(){
 		return Arrays.asList((Estado)new EstadoLiberandoConstruccionEdificio(Tipo.PUERTO_ESTELAR_TERRAN));
 	}
