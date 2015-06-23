@@ -14,6 +14,7 @@ import fiuba.algo3.componentes.MagiaNull;
 import fiuba.algo3.componentes.TransporteNull;
 import fiuba.algo3.componentes.VidaAlucinada;
 import fiuba.algo3.ocupantes.Tipo;
+import fiuba.algo3.ocupantes.unidades.Unidad;
 
 public class AtributosUnidadAlucinada extends AtributosUnidad {
 
@@ -24,60 +25,74 @@ public class AtributosUnidadAlucinada extends AtributosUnidad {
 	}
 	
 	//Importante: hacer ovveride de este para Protoss y usar
-	//en cambio VidaConEscudo
+
+	@Override//en cambio VidaConEscudo
 	public IVida getVida() {
 		return new VidaAlucinada(atributosUnidad.getVida()); //vida alucinada!
 	}
 	
-	public IAtaque getAtaque() {
-		return new AtaqueAlucinado(atributosUnidad.getAtaque());
+	@Override
+	public IAtaque getAtaque(Unidad portador) {
+		return new AtaqueAlucinado(atributosUnidad.getAtaque(portador));
 	}
 	
-	public IMagia getMagia() {
+	@Override
+	public IMagia getMagia(Unidad portador) {
 		return new MagiaNull();
 	}
-	
-	public ITransporte getTransporte() {
+
+	@Override
+	public ITransporte getTransporte(Unidad portador) {
 		return new TransporteNull();
 	}
-	
-	public IMovimiento getMovimiento(){
-		return atributosUnidad.getMovimiento();
+
+	@Override
+	public IMovimiento getMovimiento(Unidad portador){
+		return atributosUnidad.getMovimiento(portador);
 	}
-	
+
+	@Override
 	public List<Estado> getEstadosIniciales(){
 		return atributosUnidad.getEstadosIniciales();
 	}
-	
+
+	@Override
 	public Costo getCosto() {
 		return atributosUnidad.getCosto();
 	}
-	
+
+	@Override
 	public Tipo getTipo() {
 		return atributosUnidad.getTipo();
 	}
-	
+
+	@Override
 	public String getNombre() {
 		return atributosUnidad.getNombre();
 	}
-	
+
+	@Override
 	public boolean puedeOcuparTierra(){
 		return atributosUnidad.puedeOcuparTierra();
 	}
 	
-	// esAereo, puedeVolar()
+
+	@Override// esAereo, puedeVolar()
 	public boolean puedeOcuparEspacio(){
 		return atributosUnidad.puedeOcuparEspacio();
 	}
-	
+
+	@Override
 	public boolean debeOcuparRecurso(){
 		return atributosUnidad.debeOcuparRecurso();
 	}
-	
+
+	@Override
 	public boolean debeOcuparMineral(){
 		return atributosUnidad.debeOcuparMineral();
 	}
-	
+
+	@Override
 	public boolean debeOcuparGasVespeno(){
 		return atributosUnidad.debeOcuparGasVespeno();
 	}
@@ -86,11 +101,13 @@ public class AtributosUnidadAlucinada extends AtributosUnidad {
 	// y yo que se como soy, le devuelvo el que funciona 
 	// en el ataque correspondiente.
 	// -> yo soy aereo, entonces devuelvo rangoAire
-	// -> yo soy terrestre, entonces devuelvo rangoTierra.
+
+	@Override// -> yo soy terrestre, entonces devuelvo rangoTierra.
 	public int getRangoEfectivo(int rangoAire, int rangoTierra){
 		return atributosUnidad.getRangoEfectivo(rangoAire, rangoTierra);
 	}
 
+	@Override
 	public int getDanioEfectivo(int danioAire, int danioTierra) {
 		return atributosUnidad.getDanioEfectivo(danioAire, danioTierra);
 	}

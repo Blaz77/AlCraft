@@ -5,8 +5,6 @@ import fiuba.algo3.ocupantes.ObjetoVivo;
 
 public interface IAtaque {
 	
-	public void setPortador(ObjetoVivo portador);
-	
 	//Pensar:
 	// - Habria que diferenciar los que no pueden atacar nunca
 	// 	 de los que terminaron sus turnos?

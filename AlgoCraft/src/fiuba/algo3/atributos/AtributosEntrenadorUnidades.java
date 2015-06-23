@@ -1,6 +1,6 @@
 package fiuba.algo3.atributos;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
@@ -8,15 +8,10 @@ import fiuba.algo3.atributos.unidades.AtributosUnidad;
 public class AtributosEntrenadorUnidades {
 	
 	private int maxEntrenamientosSimultaneos;
-	private ArrayList<AtributosUnidad> unidadesEntrenables;
+	private AtributosUnidad[] unidadesEntrenables;
 	
-	public AtributosEntrenadorUnidades(int maxEntrSimult, List<AtributosUnidad> entrenables){
-		this.unidadesEntrenables = new ArrayList<AtributosUnidad>(entrenables);
-		this.maxEntrenamientosSimultaneos = maxEntrSimult;
-	}
-	
-	public AtributosEntrenadorUnidades(int maxEntrSimult) {
-		this.unidadesEntrenables = new ArrayList<AtributosUnidad>();
+	public AtributosEntrenadorUnidades(int maxEntrSimult, AtributosUnidad[] entrenables){
+		this.unidadesEntrenables = entrenables;
 		this.maxEntrenamientosSimultaneos = maxEntrSimult;
 	}
 	
@@ -24,12 +19,8 @@ public class AtributosEntrenadorUnidades {
 		return this.maxEntrenamientosSimultaneos;
 	}
 	
-	public void agregarEntrenable(AtributosUnidad unidad){
-		this.unidadesEntrenables.add(unidad);
-	}
-	
-	public ArrayList<AtributosUnidad> getUnidadesEntrenables(){
-		return new ArrayList<AtributosUnidad>(unidadesEntrenables);
+	public List<AtributosUnidad> getUnidadesEntrenables(){
+		return Arrays.asList(unidadesEntrenables);
 	}
 
 }

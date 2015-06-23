@@ -10,24 +10,25 @@ import fiuba.algo3.componentes.ITransporte;
 import fiuba.algo3.componentes.MagiaNull;
 import fiuba.algo3.componentes.Movimiento;
 import fiuba.algo3.componentes.TransporteNull;
+import fiuba.algo3.ocupantes.unidades.Unidad;
 
 public abstract class AtributosUnidad extends AtributosObjetoVivo {
 	
 	protected AtributosMovimiento movimiento;
 	
-	public IMovimiento getMovimiento(){
-		return new Movimiento(this.movimiento);
+	public IMovimiento getMovimiento(Unidad portador){
+		return new Movimiento(this.movimiento, portador);
 	}
 	
-	public IAtaque getAtaque() {
+	public IAtaque getAtaque(Unidad portador) {
 		return new AtaqueNull();
 	}
 	
-	public IMagia getMagia() {
+	public IMagia getMagia(Unidad portador) {
 		return new MagiaNull();
 	}
 	
-	public ITransporte getTransporte() {
+	public ITransporte getTransporte(Unidad portador) {
 		return new TransporteNull();
 	}
 	

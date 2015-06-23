@@ -8,8 +8,6 @@ import fiuba.algo3.ocupantes.unidades.Unidad;
 
 public interface IMovimiento {
 	
-		public void setPortador(Unidad unidad);
-	
 	//Pensar:
 		// - Habria que diferenciar los que no se pueden mover nunca
 		// 	 de los que terminaron sus turnos?

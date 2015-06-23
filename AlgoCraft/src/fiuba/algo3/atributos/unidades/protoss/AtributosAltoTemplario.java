@@ -17,6 +17,7 @@ import fiuba.algo3.componentes.VidaConEscudo;
 import fiuba.algo3.magia.MagiaAlucinacion;
 import fiuba.algo3.magia.MagiaTormentaPsionica;
 import fiuba.algo3.ocupantes.Tipo;
+import fiuba.algo3.ocupantes.unidades.Unidad;
 
 public class AtributosAltoTemplario extends AtributosUnidad {
 	
@@ -63,8 +64,8 @@ public class AtributosAltoTemplario extends AtributosUnidad {
 	}
 	
 	@Override
-	public IMagia getMagia() {
-		return new Magia(this.magia);
+	public IMagia getMagia(Unidad portador) {
+		return new Magia(this.magia, portador);
 	}
 	
 }

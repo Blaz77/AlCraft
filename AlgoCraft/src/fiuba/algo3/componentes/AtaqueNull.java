@@ -6,8 +6,6 @@ import fiuba.algo3.ocupantes.ObjetoVivo;
 
 public class AtaqueNull implements IAtaque {
 
-	public void setPortador(ObjetoVivo portador) {}
-	
 	public boolean puedeAtacar() {
 		return false;
 	}

@@ -16,7 +16,7 @@ import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.TipoOcupante;
 
-public class Unidad extends ObjetoVivo {
+public class Unidad extends ObjetoVivo implements IAtaque, IMovimiento, IMagia, ITransporte{
 	
 	private IMovimiento movimiento;
 	private IAtaque ataque;
@@ -28,14 +28,10 @@ public class Unidad extends ObjetoVivo {
 	
 	public Unidad(Jugador propietario, Posicion posicion, AtributosUnidad atributos){
 		super(propietario, posicion, atributos);
-		this.ataque = atributos.getAtaque();
-		this.ataque.setPortador(this);
-		this.magia = atributos.getMagia();
-		this.magia.setPortador(this);
-		this.transporte = atributos.getTransporte();
-		//this.transporte.setPortador(this);
-		this.movimiento = atributos.getMovimiento();
-		this.movimiento.setPortador(this);
+		this.ataque = atributos.getAtaque(this);
+		this.magia = atributos.getMagia(this);
+		this.transporte = atributos.getTransporte(this);
+		this.movimiento = atributos.getMovimiento(this);
 	}
 
 	@Override
@@ -123,6 +119,7 @@ public class Unidad extends ObjetoVivo {
 		return this.magia.getEnergiaMaxima();
 	}
 	
+	//borrar
 	public int getEnergiaARegenerarPorTurno(){
 		return this.magia.getEnergiaARegenerarPorTurno();
 	}
@@ -145,15 +142,15 @@ public class Unidad extends ObjetoVivo {
 	}
 	
 	public boolean estaEnRangoDeMagia(Posicion otraPosicion){
-		return this.magia.estaEnRangoDeMagia(this, otraPosicion);
+		return this.magia.estaEnRangoDeMagia(otraPosicion);
 	}
 	
 	public MagiaDeAreaDeEfecto getMagiaDeAreaDeEfecto(){
-		return this.magia.getMagiaDeAreaDeEfecto(this);
+		return this.magia.getMagiaDeAreaDeEfecto();
 	}
 	
 	public MagiaAUnidad getMagiaAUnidad(){
-		return this.magia.getMagiaAUnidad(this);
+		return this.magia.getMagiaAUnidad();
 	}
 	
 	/*
@@ -166,11 +163,11 @@ public class Unidad extends ObjetoVivo {
 	}
 	
 	public boolean puedeAlmacenarA(Unidad unidad){
-		return this.transporte.puedeAlmacenarA(this, unidad);
+		return this.transporte.puedeAlmacenarA(unidad);
 	}
 	
 	public void almacenarA(Unidad unidad){
-		this.transporte.almacenarA(this, unidad);
+		this.transporte.almacenarA(unidad);
 	}
 	
 	public ArrayList<Pasajero> getUnidadesAlmacenadas(){

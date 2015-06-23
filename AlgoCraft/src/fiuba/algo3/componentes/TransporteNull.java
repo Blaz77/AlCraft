@@ -11,11 +11,11 @@ public class TransporteNull implements ITransporte {
 		return false;
 	}
 
-	public boolean puedeAlmacenarA(Unidad transporte, Unidad unidad) {
+	public boolean puedeAlmacenarA(Unidad unidad) {
 		return false;
 	}
 
-	public void almacenarA(Unidad transporte, Unidad unidad) {
+	public void almacenarA(Unidad unidad) {
 		// throw ALGO?
 	}
 

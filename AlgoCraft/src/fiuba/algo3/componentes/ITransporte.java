@@ -9,9 +9,9 @@ public interface ITransporte {
 	public boolean puedeAlmacenar();
 	
 	//							ObjetoVivo obj.
-	public boolean puedeAlmacenarA(Unidad transporte, Unidad unidad);
+	public boolean puedeAlmacenarA(Unidad unidad);
 	//							ObjetoVivo obj.
-	public void almacenarA(Unidad transporte, Unidad unidad);
+	public void almacenarA(Unidad unidad);
 	
 	public ArrayList<Pasajero> getUnidadesAlmacenadas();
 	

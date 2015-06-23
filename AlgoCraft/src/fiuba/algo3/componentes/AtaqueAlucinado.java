@@ -12,8 +12,6 @@ public class AtaqueAlucinado implements IAtaque {
 		this.ataque = ataqueOriginal;
 	}
 
-	public void setPortador(ObjetoVivo portador) {}
-
 	public boolean puedeAtacar() {
 		return ataque.puedeAtacar();
 	}

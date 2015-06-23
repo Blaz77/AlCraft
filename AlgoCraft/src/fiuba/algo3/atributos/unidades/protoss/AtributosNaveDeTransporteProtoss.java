@@ -15,6 +15,7 @@ import fiuba.algo3.componentes.IVida;
 import fiuba.algo3.componentes.Transporte;
 import fiuba.algo3.componentes.VidaConEscudo;
 import fiuba.algo3.ocupantes.Tipo;
+import fiuba.algo3.ocupantes.unidades.Unidad;
 
 public class AtributosNaveDeTransporteProtoss extends AtributosUnidad {
 	
@@ -56,7 +57,7 @@ public class AtributosNaveDeTransporteProtoss extends AtributosUnidad {
 	}
 
 	@Override
-	public ITransporte getTransporte() {
-		return new Transporte(this.transporte);
+	public ITransporte getTransporte(Unidad portador) {
+		return new Transporte(this.transporte, portador);
 	}
 }

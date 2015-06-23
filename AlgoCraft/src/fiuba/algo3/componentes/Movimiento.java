@@ -16,12 +16,9 @@ public class Movimiento implements IMovimiento, Estado {
 	private AtributosMovimiento atributos;
 	private Unidad portador;
 	
-	public Movimiento(AtributosMovimiento atributos){
+	public Movimiento(AtributosMovimiento atributos, Unidad portador){
 		this.atributos = atributos;
 		this.movRestantes = atributos.getMovPorTurno();
-	}
-
-	public void setPortador(Unidad portador){
 		this.portador = portador;
 		portador.agregarEstado(this);
 	}

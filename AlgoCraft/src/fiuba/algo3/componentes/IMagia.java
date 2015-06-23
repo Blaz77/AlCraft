@@ -3,12 +3,8 @@ package fiuba.algo3.componentes;
 import fiuba.algo3.magia.MagiaAUnidad;
 import fiuba.algo3.magia.MagiaDeAreaDeEfecto;
 import fiuba.algo3.mapa.Posicion;
-import fiuba.algo3.ocupantes.ObjetoVivo;
-import fiuba.algo3.ocupantes.unidades.Unidad;
 
 public interface IMagia {
-	
-	public void setPortador(ObjetoVivo portador);
 	
 	//necesario?
 	public boolean puedeHacerMagia();
@@ -29,10 +25,10 @@ public interface IMagia {
 	//Equivalente al rango de ataque pero para magia
 	public int getRangoMagia();
 	
-	public boolean estaEnRangoDeMagia(Unidad efectuador, Posicion otraPosicion);
+	public boolean estaEnRangoDeMagia(Posicion otraPosicion);
 	
-	public MagiaDeAreaDeEfecto getMagiaDeAreaDeEfecto(Unidad efectuador);
+	public MagiaDeAreaDeEfecto getMagiaDeAreaDeEfecto();
 	
-	public MagiaAUnidad getMagiaAUnidad(Unidad efectuador);
+	public MagiaAUnidad getMagiaAUnidad();
 
 }

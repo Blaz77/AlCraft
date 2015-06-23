@@ -10,8 +10,6 @@ public interface IEntrenadorUnidades {
 	
 	public boolean puedeEntrenarUnidades();
 	
-	public void setPortador(ObjetoVivo portador);
-	
 	public ArrayList<Constructor> getUnidadesEntrenables();
 	
 	public boolean puedeEntrenar(AtributosUnidad atributosUnidad);

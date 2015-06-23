@@ -10,6 +10,7 @@ import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.EntrenadorUnidades;
 import fiuba.algo3.componentes.IEntrenadorUnidades;
 import fiuba.algo3.ocupantes.Tipo;
+import fiuba.algo3.ocupantes.edificios.Edificio;
 
 public class AtributosPuertoEstelar extends AtributosEdificio {
 
@@ -23,19 +24,13 @@ public class AtributosPuertoEstelar extends AtributosEdificio {
 		
 		// fields EdificioEntrenadorUnidades:
 		this.entrenador = new AtributosEntrenadorUnidades(
-				1,		//MaxEntrenamientosSimultaneos
-				Arrays.asList(entrenables)); //lista de unidades entrenables);
-		
-		// fields EdificioEntrenadorUnidades:
-		//this.entrenador = new AtributosEntrenadorUnidades(1);
-		//this.entrenador.agregarConstructor(new ConstructorInfanteriaPesadaAerea());
-		//this.entrenador.agregarConstructor(new ConstructorInfanteriaMagica());
-		//this.entrenador.agregarConstructor(new ConstructorTransporte());
+				1,				// MaxEntrenamientosSimultaneos
+				entrenables); 	// Lista de unidades entrenables
 	}
 	
 	@Override
-	public IEntrenadorUnidades getEntrenadorUnidades() {
-		return new EntrenadorUnidades(this.entrenador);
+	public IEntrenadorUnidades getEntrenadorUnidades(Edificio portador) {
+		return new EntrenadorUnidades(this.entrenador, portador);
 	}
 	
 	@Override

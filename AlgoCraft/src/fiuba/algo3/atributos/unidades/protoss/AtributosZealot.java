@@ -15,6 +15,7 @@ import fiuba.algo3.componentes.IAtaque;
 import fiuba.algo3.componentes.IVida;
 import fiuba.algo3.componentes.VidaConEscudo;
 import fiuba.algo3.ocupantes.Tipo;
+import fiuba.algo3.ocupantes.unidades.Unidad;
 
 public class AtributosZealot extends AtributosUnidad {
 
@@ -60,8 +61,8 @@ public class AtributosZealot extends AtributosUnidad {
 	}
 	
 	@Override
-	public IAtaque getAtaque(){
-		return new Ataque(this.ataque);
+	public IAtaque getAtaque(Unidad portador){
+		return new Ataque(this.ataque, portador);
 	}
 
 }

@@ -8,6 +8,7 @@ import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.Ataque;
 import fiuba.algo3.componentes.IAtaque;
 import fiuba.algo3.ocupantes.Tipo;
+import fiuba.algo3.ocupantes.unidades.Unidad;
 
 public class AtributosGolliat extends AtributosUnidad {
 	
@@ -42,8 +43,8 @@ public class AtributosGolliat extends AtributosUnidad {
 	}
 	
 	@Override
-	public IAtaque getAtaque(){
-		return new Ataque(this.ataque);
+	public IAtaque getAtaque(Unidad portador){
+		return new Ataque(this.ataque, portador);
 	}
 	
 }

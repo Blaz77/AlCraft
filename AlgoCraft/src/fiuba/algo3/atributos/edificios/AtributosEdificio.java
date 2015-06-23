@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import fiuba.algo3.atributos.AtributosEntrenadorUnidades;
 import fiuba.algo3.atributos.AtributosIncrementadorPoblacion;
 import fiuba.algo3.atributos.AtributosObjetoVivo;
+import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.componentes.EntrenadorUnidadesNull;
 import fiuba.algo3.componentes.IEntrenadorUnidades;
 import fiuba.algo3.componentes.IVida;
@@ -18,7 +19,7 @@ public abstract class AtributosEdificio extends AtributosObjetoVivo {
 	//Por ahora todos metodos con el comportamiento mas usual.
 	//Quizas hacer todo abstracto despues (no sabria bien porque)
 
-	public IEntrenadorUnidades getEntrenadorUnidades(){
+	public IEntrenadorUnidades getEntrenadorUnidades(Edificio portador){
 		return new EntrenadorUnidadesNull();
 	}
 

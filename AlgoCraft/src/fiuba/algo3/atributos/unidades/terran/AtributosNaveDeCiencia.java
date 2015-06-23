@@ -10,6 +10,7 @@ import fiuba.algo3.componentes.Magia;
 import fiuba.algo3.magia.MagiaEMP;
 import fiuba.algo3.magia.MagiaRadiacion;
 import fiuba.algo3.ocupantes.Tipo;
+import fiuba.algo3.ocupantes.unidades.Unidad;
 
 public class AtributosNaveDeCiencia extends AtributosUnidad {
 	
@@ -44,8 +45,8 @@ public class AtributosNaveDeCiencia extends AtributosUnidad {
 	}
 	
 	@Override
-	public IMagia getMagia() {
-		return new Magia(this.magia);
+	public IMagia getMagia(Unidad portador) {
+		return new Magia(this.magia, portador);
 	}
 	
 	@Override

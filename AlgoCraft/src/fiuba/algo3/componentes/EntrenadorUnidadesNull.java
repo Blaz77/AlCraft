@@ -12,8 +12,6 @@ public class EntrenadorUnidadesNull implements IEntrenadorUnidades {
 		return false;
 	}
 
-	public void setPortador(ObjetoVivo portador) {}
-
 	public ArrayList<Constructor> getUnidadesEntrenables() {
 		return null;
 	}

@@ -8,6 +8,7 @@ import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.Ataque;
 import fiuba.algo3.componentes.IAtaque;
 import fiuba.algo3.ocupantes.Tipo;
+import fiuba.algo3.ocupantes.unidades.Unidad;
 
 public class AtributosMarine extends AtributosUnidad {
 
@@ -40,8 +41,8 @@ public class AtributosMarine extends AtributosUnidad {
 				1); //Ataques por Turno
 	}
 	
-	public IAtaque getAtaque(){
-		return new Ataque(this.ataque);
+	public IAtaque getAtaque(Unidad portador){
+		return new Ataque(this.ataque, portador);
 	}
 	
 }

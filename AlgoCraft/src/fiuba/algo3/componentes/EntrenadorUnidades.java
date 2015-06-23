@@ -19,12 +19,9 @@ public class EntrenadorUnidades implements IEntrenadorUnidades { //, Estado
 	private AtributosEntrenadorUnidades atributos;
 	private ObjetoVivo portador;
 	
-	public EntrenadorUnidades(AtributosEntrenadorUnidades atributos) {
+	public EntrenadorUnidades(AtributosEntrenadorUnidades atributos, ObjetoVivo portador) {
 		this.atributos = atributos;
 		this.entrenamientosActuales = 0;
-	}
-	
-	public void setPortador(ObjetoVivo portador){
 		this.portador = portador;
 	}
 	

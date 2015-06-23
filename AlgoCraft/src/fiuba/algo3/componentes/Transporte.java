@@ -8,6 +8,7 @@ import fiuba.algo3.atributos.AtributosTransporte;
 import fiuba.algo3.excepciones.CapacidadAlmacenamientoInsuficente;
 import fiuba.algo3.excepciones.NoEsUnAliado;
 import fiuba.algo3.excepciones.UnidadNoEsAlmacenable;
+import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.unidades.Pasajero;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 
@@ -16,9 +17,11 @@ public class Transporte implements ITransporte{
 	private int almacenamientoEnUso = 0; //transporte
 	private LinkedList<Unidad> almacenados = new LinkedList<Unidad>();
 	private AtributosTransporte atributos;
+	private ObjetoVivo portador;
 	
-	public Transporte(AtributosTransporte atributos) {
+	public Transporte(AtributosTransporte atributos, ObjetoVivo portador) {
 		this.atributos = atributos;
+		this.portador = portador;
 	}
 	
 	public boolean puedeAlmacenar() {
@@ -32,23 +35,23 @@ public class Transporte implements ITransporte{
 	
 	// los edificios tendrian que implementar puedeSerAlmacenada()
 	//							ObjetoVivo obj.
-	public boolean puedeAlmacenarA(Unidad transporte, Unidad unidad){
+	public boolean puedeAlmacenarA(Unidad unidad){
 		return (unidad.puedeSerAlmacenada() &&
-				!transporte.esEnemigoDe(unidad) &&
+				!portador.esEnemigoDe(unidad) &&
 				this.hayLugarPara(unidad));
 	}
 	
 	// los edificios tendrian que implementar puedeSerAlmacenada()
 	//							ObjetoVivo obj.
-	public void almacenarA(Unidad transporte, Unidad unidad){
+	public void almacenarA(Unidad unidad){
 		//Chequeos:
 		if (!unidad.puedeSerAlmacenada()) throw new UnidadNoEsAlmacenable();
-		if (transporte.esEnemigoDe(unidad)) throw new NoEsUnAliado();
+		if (portador.esEnemigoDe(unidad)) throw new NoEsUnAliado();
 		if (!this.hayLugarPara(unidad)) throw new CapacidadAlmacenamientoInsuficente();
 		// Sacar del mapa:
-		transporte.getPropietario().getMapa().removerOcupante(unidad.getPosicion());
+		portador.getPropietario().getMapa().removerOcupante(unidad.getPosicion());
 		// Compartir posicion con el transporte (se actualiza solo):
-		unidad.setPosicion(transporte.getPosicion());
+		unidad.setPosicion(portador.getPosicion());
 		// Agregar a mi lista:
 		this.almacenados.add(unidad);
 		this.almacenamientoEnUso += unidad.getCostoAlmacenamiento();

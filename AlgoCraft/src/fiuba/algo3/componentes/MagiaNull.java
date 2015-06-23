@@ -4,12 +4,9 @@ import fiuba.algo3.magia.MagiaAUnidad;
 import fiuba.algo3.magia.MagiaDeAreaDeEfecto;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.ObjetoVivo;
-import fiuba.algo3.ocupantes.unidades.Unidad;
 
 public class MagiaNull implements IMagia {
 
-	public void setPortador(ObjetoVivo portador) {}
-	
 	public boolean puedeHacerMagia() {
 		return false;
 	}
@@ -42,16 +39,15 @@ public class MagiaNull implements IMagia {
 		return 0;
 	}
 
-	public boolean estaEnRangoDeMagia(Unidad efectuador,
-			Posicion otraPosicion) {
+	public boolean estaEnRangoDeMagia(Posicion otraPosicion) {
 		return false;
 	}
 
-	public MagiaDeAreaDeEfecto getMagiaDeAreaDeEfecto(Unidad efectuador) {
+	public MagiaDeAreaDeEfecto getMagiaDeAreaDeEfecto() {
 		return null;
 	}
 
-	public MagiaAUnidad getMagiaAUnidad(Unidad efectuador) {
+	public MagiaAUnidad getMagiaAUnidad() {
 		return null;
 	}
 

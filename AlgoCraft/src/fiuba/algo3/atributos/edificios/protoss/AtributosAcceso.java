@@ -16,6 +16,7 @@ import fiuba.algo3.componentes.IEntrenadorUnidades;
 import fiuba.algo3.componentes.IVida;
 import fiuba.algo3.componentes.VidaConEscudo;
 import fiuba.algo3.ocupantes.Tipo;
+import fiuba.algo3.ocupantes.edificios.Edificio;
 
 public class AtributosAcceso extends AtributosEdificio {
 	
@@ -29,8 +30,8 @@ public class AtributosAcceso extends AtributosEdificio {
 		
 		// fields EdificioEntrenadorUnidades:
 		this.entrenador = new AtributosEntrenadorUnidades(
-				1,		//MaxEntrenamientosSimultaneos
-				Arrays.asList(entrenables)); //lista de unidades entrenables
+				1,				// MaxEntrenamientosSimultaneos
+				entrenables); 	// Lista de unidades entrenables
 	}
 	
 	@Override
@@ -45,8 +46,8 @@ public class AtributosAcceso extends AtributosEdificio {
 	}
 	
 	@Override
-	public IEntrenadorUnidades getEntrenadorUnidades() {
-		return new EntrenadorUnidades(this.entrenador);
+	public IEntrenadorUnidades getEntrenadorUnidades(Edificio portador) {
+		return new EntrenadorUnidades(this.entrenador, portador);
 	}
 	
 }

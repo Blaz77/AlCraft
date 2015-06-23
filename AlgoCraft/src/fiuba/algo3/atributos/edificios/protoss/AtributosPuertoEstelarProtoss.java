@@ -7,6 +7,7 @@ import fiuba.algo3.atributos.AtributosCosto;
 import fiuba.algo3.atributos.AtributosEntrenadorUnidades;
 import fiuba.algo3.atributos.AtributosVida;
 import fiuba.algo3.atributos.edificios.AtributosEdificio;
+import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.EntrenadorUnidades;
 import fiuba.algo3.componentes.Estado;
@@ -29,8 +30,8 @@ public class AtributosPuertoEstelarProtoss extends AtributosEdificio {
 		
 		// fields EdificioEntrenadorUnidades:
 		this.entrenador = new AtributosEntrenadorUnidades(
-				1,		//MaxEntrenamientosSimultaneos
-				Arrays.asList(entrenables)); //lista de unidades entrenables
+				1,				// MaxEntrenamientosSimultaneos
+				entrenables); 	// Lista de unidades entrenables
 	}
 	
 	@Override
@@ -50,7 +51,7 @@ public class AtributosPuertoEstelarProtoss extends AtributosEdificio {
 	}
 
 	@Override
-	public IEntrenadorUnidades getEntrenadorUnidades() {
-		return new EntrenadorUnidades(this.entrenador);
+	public IEntrenadorUnidades getEntrenadorUnidades(Edificio portador) {
+		return new EntrenadorUnidades(this.entrenador, portador);
 	}
 }

@@ -13,6 +13,7 @@ import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.EstadoLiberandoConstruccionEdificio;
 import fiuba.algo3.componentes.IEntrenadorUnidades;
 import fiuba.algo3.ocupantes.Tipo;
+import fiuba.algo3.ocupantes.edificios.Edificio;
 
 public class AtributosBarraca extends AtributosEdificio {
 
@@ -26,13 +27,13 @@ public class AtributosBarraca extends AtributosEdificio {
 		
 		// fields EdificioEntrenadorUnidades:
 		this.entrenador = new AtributosEntrenadorUnidades(
-				1,		//MaxEntrenamientosSimultaneos
-				Arrays.asList(entrenables)); //lista de unidades entrenables
+				1,				// MaxEntrenamientosSimultaneos
+				entrenables); 	// Lista de unidades entrenables
 	}
 	
 	@Override
-	public IEntrenadorUnidades getEntrenadorUnidades() {
-		return new EntrenadorUnidades(this.entrenador);
+	public IEntrenadorUnidades getEntrenadorUnidades(Edificio portador) {
+		return new EntrenadorUnidades(this.entrenador, portador);
 	}
 
 	@Override

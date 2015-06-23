@@ -12,14 +12,11 @@ public class Magia implements IMagia, Estado{
 	
 	private int energia;
 	private AtributosMagia atributos;
-	private ObjetoVivo portador;
+	private Unidad portador;
 	
-	public Magia(AtributosMagia atributos) {
+	public Magia(AtributosMagia atributos, Unidad portador) {
 		this.atributos = atributos;
 		this.energia = this.atributos.getEnergiaInicial();
-	}
-	
-	public void setPortador(ObjetoVivo portador) {
 		this.portador = portador;
 		portador.agregarEstado(this);
 	}
@@ -69,19 +66,19 @@ public class Magia implements IMagia, Estado{
 		return this.atributos.getRangoMagia();
 	}
 	
-	public boolean estaEnRangoDeMagia(Unidad efectuador, Posicion otraPosicion){
-		return efectuador.getPosicion().estaEnRango(otraPosicion, this.getRangoMagia());
+	public boolean estaEnRangoDeMagia(Posicion otraPosicion){
+		return portador.getPosicion().estaEnRango(otraPosicion, this.getRangoMagia());
 	}
 	
-	public MagiaDeAreaDeEfecto getMagiaDeAreaDeEfecto(Unidad efectuador){
+	public MagiaDeAreaDeEfecto getMagiaDeAreaDeEfecto(){
 		MagiaDeAreaDeEfecto magia = this.atributos.getMagiaDeAreaDeEfecto();
-		magia.setUnidad(efectuador);
+		magia.setUnidad(portador);
 		return magia;
 	}
 	
-	public MagiaAUnidad getMagiaAUnidad(Unidad efectuador){
+	public MagiaAUnidad getMagiaAUnidad(){
 		MagiaAUnidad magia = this.atributos.getMagiaAUnidad();
-		magia.setUnidad(efectuador);
+		magia.setUnidad(portador);
 		return magia;
 	}
 

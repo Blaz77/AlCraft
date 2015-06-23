@@ -8,6 +8,7 @@ import fiuba.algo3.atributos.unidades.AtributosUnidad;
 import fiuba.algo3.componentes.ITransporte;
 import fiuba.algo3.componentes.Transporte;
 import fiuba.algo3.ocupantes.Tipo;
+import fiuba.algo3.ocupantes.unidades.Unidad;
 
 public class AtributosNaveDeTransporte extends AtributosUnidad {
 	
@@ -35,7 +36,8 @@ public class AtributosNaveDeTransporte extends AtributosUnidad {
 		this.transporte = new AtributosTransporte(8); //capac.Almac.
 	}
 	
-	public ITransporte getTransporte() {
-		return new Transporte(this.transporte);
+	@Override
+	public ITransporte getTransporte(Unidad portador) {
+		return new Transporte(this.transporte, portador);
 	}
 }

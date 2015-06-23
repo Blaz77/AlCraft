@@ -17,17 +17,15 @@ public class Ataque implements IAtaque, Estado {
 	//Ataque quizas despues comparte Posicion con el objeto que lo use
 	// -> actualizaciones a Posicion se reflejarian tambien aca!	
 	
-	public Ataque(AtributosAtaque atributos){
+	public Ataque(AtributosAtaque atributos, ObjetoVivo portador){
 		this.atributos = atributos;
-		this.ataquesRestantes = this.atributos.getAtaquesPorTurno();
-	}
-	
-	public void setPortador(ObjetoVivo portador) {
 		this.portador = portador;
 		portador.agregarEstado(this);
 	}
 	
-	public void activar(ObjetoVivo portador) {}
+	public void activar(ObjetoVivo portador) {
+		this.ataquesRestantes = this.atributos.getAtaquesPorTurno();
+	}
 	
 	public void desactivar() {}
 	
