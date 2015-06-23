@@ -9,14 +9,17 @@ import fiuba.algo3interfaz.gfx.HudVista;
 public class btnConstructor extends BotonBotonera {
 
 	private Constructor constructor;
+	private HudVista vista;
 	
-	public btnConstructor(Jugador jugador, Constructor constructor){
+	public btnConstructor(HudVista vista, Jugador jugador, Constructor constructor){
 		super(jugador, constructor.getTipo());
 		this.constructor = constructor;
+		this.vista = vista;
 	}
 	
 	public void actionPerformed(ActionEvent e) {
 		constructor.crear();
+		vista.requestFocus();
 	}
 
 }

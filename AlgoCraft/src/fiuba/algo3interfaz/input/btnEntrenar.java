@@ -34,7 +34,7 @@ public class btnEntrenar extends BotonBotonera {
 		BotonBotonera[] botones = new BotonBotonera[entrenador.getUnidadesEntrenables().size()];
 		int i = 0;
 		for (Constructor constructor : entrenador.getUnidadesEntrenables()) {
-			botones[i] = new btnConstructor(jugador, constructor);
+			botones[i] = new btnConstructor(vista, jugador, constructor);
 			i++;
 		}
 		
@@ -42,6 +42,7 @@ public class btnEntrenar extends BotonBotonera {
 		
 		this.botoneraUnidadesEntrenables.agregarCancelable(new btnCancelarMouseListener(vista, HudVista.picCancelar));
 		
-		vista.setBotonera(botoneraUnidadesEntrenables);		
+		vista.setBotonera(botoneraUnidadesEntrenables);
+		vista.requestFocus();
 	}
 }

@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 
 import fiuba.algo3.componentes.IMovimiento;
+import fiuba.algo3.excepciones.MovimientoInvalido;
 import fiuba.algo3interfaz.gfx.HudVista;
 
 public class btnMover extends BotonBotonera implements UtilizadorDeCeldas {
@@ -23,13 +24,19 @@ public class btnMover extends BotonBotonera implements UtilizadorDeCeldas {
 		// si este casteo falla es un problema de la asociacion de botonera a tipo!
 		movible = (IMovimiento) vista.getOcupanteSelecccionado();
 		vista.mostrarPosiblesMovimientos(movible);
+		if (! movible.puedeMoverse()) {
+			vista.mostrarMensaje("No hay movimientos posibles");
+		}
 	}
 
 	public void actualizar() {
 		try {
 			movible.moverA(vista.getCeldaSeleccionada());
-		//catch cosas!
-		} finally {
+		}
+		catch (MovimientoInvalido e) {
+			// Simplemente no hace nada. Es como cancelar el movimiento
+		}
+		finally {
 			vista.restablecerOpciones();
 			vista.requestFocus();
 		}	

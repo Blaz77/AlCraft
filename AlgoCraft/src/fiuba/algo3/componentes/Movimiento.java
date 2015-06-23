@@ -2,6 +2,8 @@ package fiuba.algo3.componentes;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import fiuba.algo3.atributos.AtributosMovimiento;
 import fiuba.algo3.excepciones.MovimientoInvalido;
@@ -72,6 +74,31 @@ public class Movimiento implements IMovimiento, Estado {
 		
 	}
 	
+	
+	public void _getPosiblesMovimientos(Mapa mapa, HashSet<Posicion> posiblesMov, Posicion posicionActual, int distancia){
+		ArrayList<Posicion> visitados = new ArrayList<Posicion>();
+		Queue<Posicion> cola = new LinkedList<Posicion>();
+		Posicion v;
+		
+		cola.add(posicionActual);
+		visitados.add(posicionActual);
+		while (! cola.isEmpty()) {
+			v = cola.poll();
+			for (Posicion w : v.getAdyacentes()) {
+				if (! visitados.contains(w) && w.distancia(posicionActual) <= distancia) {
+					visitados.add(w);
+					cola.add(w);
+				}
+			}
+		}
+
+		posiblesMov.clear();
+		for (Posicion pos : visitados) {
+			if ((pos) != posicionActual) posiblesMov.add(pos);
+		}
+	}
+	
+	/*
 	// TODO: chequear q funcione! Basicamente hago un BFS y agrego todas las unidades a las q llego
 	public void _getPosiblesMovimientos(Mapa mapa, HashSet<Posicion> posiblesMov, Posicion posicionActual, int restantes){
 		if (restantes == 0 || posiblesMov.contains(posicionActual)) return;
@@ -81,7 +108,7 @@ public class Movimiento implements IMovimiento, Estado {
 		for (Posicion adyacente: adyacentes)
 			if (mapa.celdaValida(adyacente) && mapa.puedeOcupar(this.portador, adyacente))
 				_getPosiblesMovimientos(mapa, posiblesMov, adyacente, restantes);
-	}
+	}*/
 
 	@Override
 	public String getDescripcion() {
