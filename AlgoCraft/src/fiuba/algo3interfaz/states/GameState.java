@@ -151,6 +151,8 @@ public class GameState extends State {
 		if(keyPressed == KeyEvent.VK_DOWN)jCamara = MOV_CAMARA;
 		if(keyPressed == KeyEvent.VK_LEFT)iCamara = -MOV_CAMARA;
 		if(keyPressed == KeyEvent.VK_RIGHT)iCamara = MOV_CAMARA;
+
+		if(keyPressed == KeyEvent.VK_P) game.tick();
 		
 		mapaActual.moverCeldaSeleccionada(i, j);
 		mapaActual.moverCamara(iCamara, jCamara);

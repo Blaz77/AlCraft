@@ -1,7 +1,5 @@
 package fiuba.algo3interfaz.gfx;
 
-import fiuba.algo3.juego.Color;
-import fiuba.algo3.raza.TipoRaza;
 
 public enum AdaptadorColor {
 

@@ -26,7 +26,11 @@ public class btnEntrenar extends BotonBotonera {
 	
 	public void actionPerformed(ActionEvent e) {
 		Edificio entrenador = (Edificio) jugador.getMapa().getOcupante(vista.getCeldaSeleccionada());
-		//ojo! : chequear que tenga unidadesEntrenables!
+		if (! entrenador.puedeEntrenarUnidades()) {
+			vista.mostrarMensaje("No es posible entrenar unidades. Edificio en construccion");
+			return;
+		}
+		
 		BotonBotonera[] botones = new BotonBotonera[entrenador.getUnidadesEntrenables().size()];
 		int i = 0;
 		for (Constructor constructor : entrenador.getUnidadesEntrenables()) {
