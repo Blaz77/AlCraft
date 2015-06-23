@@ -1,6 +1,7 @@
 package fiuba.algo3.ocupantes.unidades;
 
 import fiuba.algo3.componentes.ITransporte;
+import fiuba.algo3.ocupantes.Tipo;
 
 public class Pasajero {
 	
@@ -14,6 +15,10 @@ public class Pasajero {
 
 	public void salir(){ //definir aca una Posicion?
 		this.transporte.liberarUnidad(pasajero);
+	}
+
+	public Tipo getTipo() {
+		return this.pasajero.getTipo();
 	}
 	
 }

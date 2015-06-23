@@ -6,28 +6,30 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 
 import fiuba.algo3.componentes.IAtaque;
+import fiuba.algo3.componentes.ITransporte;
 import fiuba.algo3.ocupantes.ObjetoVivo;
+import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3interfaz.gfx.HudVista;
 
-public class btnAtacar extends BotonBotonera implements UtilizadorDeCeldas{
+public class btnAlmacenar extends BotonBotonera implements UtilizadorDeCeldas {
 
 	private HudVista vista;
-	private IAtaque atacante; //proximamente: IAtaque atacante
+	private ITransporte transporte; //proximamente: IAtaque atacante
 	
-	public btnAtacar(HudVista vista, BufferedImage icon) {
-		super(new ImageIcon(icon), "ATACAR!!");
+	public btnAlmacenar(HudVista vista, BufferedImage icon) {
+		super(new ImageIcon(icon), "Almacenar!!");
 		this.vista = vista;
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		vista.setUtilizadorDeCeldas(this);
 		// si este casteo falla es un problema de la asociacion de botonera a tipo!
-		atacante = (IAtaque) vista.getOcupanteSelecccionado();
+		transporte = (ITransporte) vista.getOcupanteSelecccionado();
 	}
 
 	public void actualizar() {
 		try {
-			atacante.atacarA((ObjetoVivo)vista.getOcupanteSelecccionado());
+			transporte.almacenarA((Unidad)vista.getOcupanteSelecccionado());
 		} catch (ClassCastException e) {
 			vista.mostrarMensaje("No es un objeto atacable!");
 		//catch mas cosas!
@@ -36,4 +38,5 @@ public class btnAtacar extends BotonBotonera implements UtilizadorDeCeldas{
 			vista.requestFocus();
 		}	
 	}
+
 }
