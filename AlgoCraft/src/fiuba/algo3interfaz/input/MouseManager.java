@@ -1,5 +1,7 @@
 package fiuba.algo3interfaz.input;
 
+// DEPRECATED
+
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

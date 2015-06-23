@@ -1,5 +1,7 @@
 package fiuba.algo3interfaz.gfx;
 
+// DEPRECATED
+
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;

@@ -1,5 +1,7 @@
 package fiuba.algo3interfaz.input;
 
+// DEPRECATED
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 

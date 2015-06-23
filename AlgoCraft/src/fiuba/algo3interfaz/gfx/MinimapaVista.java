@@ -159,8 +159,8 @@ public class MinimapaVista extends JPanel implements MouseListener {
 		x_mini += (int) Math.floor((this.camara.getxOffset() / 32) / this.factorEscala);
 		int y_mini = panel.getHeight() - 100;
 		y_mini += (int) Math.floor((this.camara.getyOffset() / 32));
-		int ancho_mini = (int) Math.floor((panel.getWidth() / areaMinimapa.getWidth()) * 2);
-		int alto_mini = (int) Math.floor((panel.getHeight() / areaMinimapa.getHeight()) * 2);
+		int ancho_mini = (int) Math.floor((panel.getWidth() / (datosMapa.ancho()*32.0f) * ANCHO_MAPA));
+		int alto_mini = (int) Math.floor((panel.getHeight() / (datosMapa.alto()*32.0f) * ALTO_MAPA));
 		
 		g.setColor(java.awt.Color.YELLOW);
 		g.drawRect(x_mini, y_mini, ancho_mini, alto_mini);
