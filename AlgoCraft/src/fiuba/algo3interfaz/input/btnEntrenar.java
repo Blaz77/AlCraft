@@ -34,7 +34,7 @@ public class btnEntrenar extends BotonBotonera {
 		BotonBotonera[] botones = new BotonBotonera[entrenador.getUnidadesEntrenables().size()];
 		int i = 0;
 		for (Constructor constructor : entrenador.getUnidadesEntrenables()) {
-			botones[i] = new btnConstructor(constructor);
+			botones[i] = new btnConstructor(jugador, constructor);
 			i++;
 		}
 		

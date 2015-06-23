@@ -19,7 +19,7 @@ public class btnConstruirEdificio extends BotonBotonera {
 	private Jugador jugador;
 
 	public btnConstruirEdificio(HudVista vista, Jugador jugador, AtributosEdificio atributos) {
-		super(atributos.getTipo());
+		super(jugador, atributos.getTipo());
 		this.atributos = atributos;
 		this.vista = vista;
 		this.jugador = jugador;

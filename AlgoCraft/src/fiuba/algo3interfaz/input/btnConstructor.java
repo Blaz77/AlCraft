@@ -10,8 +10,8 @@ public class btnConstructor extends BotonBotonera {
 
 	private Constructor constructor;
 	
-	public btnConstructor(Constructor constructor){
-		super(constructor.getTipo());
+	public btnConstructor(Jugador jugador, Constructor constructor){
+		super(jugador, constructor.getTipo());
 		this.constructor = constructor;
 	}
 	

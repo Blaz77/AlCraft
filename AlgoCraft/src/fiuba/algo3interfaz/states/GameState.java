@@ -39,6 +39,7 @@ public class GameState extends State {
 	public GameState(){
 		
 		for (Jugador jugador : game.getModelo()){
+			CopyOfSpriteSheet.crearSpritesJugador(jugador);
 			mapas.put(jugador, new MapaVista(jugador, game.getPanel()));
 			minimapas.put(jugador, new MinimapaVista(jugador, game.getPanel(), mapas.get(jugador).getCamara()));
 			huds.put(jugador, new HudVista(jugador, game.getPanel(), game));
@@ -46,7 +47,6 @@ public class GameState extends State {
 			game.getPanel().add(huds.get(jugador));
 			game.getPanel().add(recursos.get(jugador));
 			game.getPanel().add(minimapas.get(jugador));
-			CopyOfSpriteSheet.crearSpritesJugador(jugador);
 		}
 			
 		mapaActual = mapas.get(game.getModelo().getJugadorActual());
