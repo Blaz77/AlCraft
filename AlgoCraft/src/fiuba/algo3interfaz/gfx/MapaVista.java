@@ -167,7 +167,8 @@ public class MapaVista {
 	}
 
 	private void dibujarObjetoVivo(Graphics g, int x, int y, Tipo tipo) {
-		BufferedImage bi = CopyOfSpriteSheet.getSpritesJugador(jugador).get(tipo.ordinal());
+		Jugador propietario = ((ObjetoVivo)(datosMapa.getOcupante(new Posicion(x, y)))).getPropietario();
+		BufferedImage bi = CopyOfSpriteSheet.getSpritesJugador(propietario).get(tipo.ordinal());
 		dibujarEnCelda(g, bi, x, y);
 	}
 
