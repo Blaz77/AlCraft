@@ -33,7 +33,7 @@ public class AtributosNaveDeTransporte extends AtributosUnidad {
 				0);		// costoAlmacenamiento
 		
 		// fields de UnidadTransporte:
-		this.transporte = new AtributosTransporte(8); //capac.Almac.
+		this.transporte = new AtributosTransporte(8, 1); //capac.Almac., rangoEntrada
 	}
 	
 	@Override

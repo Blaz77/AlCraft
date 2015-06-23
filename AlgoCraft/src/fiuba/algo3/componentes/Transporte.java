@@ -6,6 +6,7 @@ import java.util.LinkedList;
 
 import fiuba.algo3.atributos.AtributosTransporte;
 import fiuba.algo3.excepciones.CapacidadAlmacenamientoInsuficente;
+import fiuba.algo3.excepciones.FueraDelRangoPermitido;
 import fiuba.algo3.excepciones.NoEsUnAliado;
 import fiuba.algo3.excepciones.UnidadNoEsAlmacenable;
 import fiuba.algo3.ocupantes.ObjetoVivo;
@@ -38,6 +39,7 @@ public class Transporte implements ITransporte{
 	public boolean puedeAlmacenarA(Unidad unidad){
 		return (unidad.puedeSerAlmacenada() &&
 				!portador.esEnemigoDe(unidad) &&
+				portador.getPosicion().estaEnRango(unidad.getPosicion(), atributos.getRangoEntrada()) &&
 				this.hayLugarPara(unidad));
 	}
 	
@@ -47,6 +49,8 @@ public class Transporte implements ITransporte{
 		//Chequeos:
 		if (!unidad.puedeSerAlmacenada()) throw new UnidadNoEsAlmacenable();
 		if (portador.esEnemigoDe(unidad)) throw new NoEsUnAliado();
+		if (!portador.getPosicion().estaEnRango(unidad.getPosicion(), atributos.getRangoEntrada()))
+			throw new FueraDelRangoPermitido();
 		if (!this.hayLugarPara(unidad)) throw new CapacidadAlmacenamientoInsuficente();
 		// Sacar del mapa:
 		portador.getPropietario().getMapa().removerOcupante(unidad.getPosicion());

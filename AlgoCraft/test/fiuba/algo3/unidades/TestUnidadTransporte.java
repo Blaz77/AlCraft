@@ -23,7 +23,7 @@ public abstract class TestUnidadTransporte extends TestUnidad {
 	}
 
 	@Test
-	public void testGolliatNoPuedeHacerMagia() {
+	public void testUnidadNoPuedeHacerMagia() {
 		assertFalse(this.unidad.puedeHacerMagia());
 	}
 
