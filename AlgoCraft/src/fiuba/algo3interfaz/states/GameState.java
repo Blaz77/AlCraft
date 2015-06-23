@@ -155,6 +155,7 @@ public class GameState extends State {
 		if(keyPressed == KeyEvent.VK_P) game.tick();
 		
 		mapaActual.moverCeldaSeleccionada(i, j);
+		hudActual.actualizarCeldaSeleccionada(mapaActual.getPosicionCeldaSeleccionada());
 		mapaActual.moverCamara(iCamara, jCamara);
 
 		game.getPanel().repaint();
