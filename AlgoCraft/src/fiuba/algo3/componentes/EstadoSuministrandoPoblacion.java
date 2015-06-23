@@ -12,11 +12,7 @@ public class EstadoSuministrandoPoblacion implements Estado {
 	public EstadoSuministrandoPoblacion(AtributosIncrementadorPoblacion atributos) {
 		this.atributos = atributos;
 	}
-	
-	public Estado clone() {
-		return new EstadoSuministrandoPoblacion(atributos);
-	}
-	
+		
 	public void activar(ObjetoVivo portador) {
 		this.beneficiario = portador.getPropietario();
 		this.beneficiario.aumentarCapacidadPoblacion(atributos.getIncrementoDePoblacion());
@@ -26,6 +22,11 @@ public class EstadoSuministrandoPoblacion implements Estado {
 
 	public void desactivar() {
 		this.beneficiario.aumentarCapacidadPoblacion(-(atributos.getIncrementoDePoblacion()));
+	}
+
+	@Override
+	public String getDescripcion() {
+		return String.format("Suministrando poblacion: %d.", atributos.getIncrementoDePoblacion());
 	}
 
 }

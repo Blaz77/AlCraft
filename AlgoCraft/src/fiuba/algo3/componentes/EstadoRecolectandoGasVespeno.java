@@ -29,5 +29,10 @@ public class EstadoRecolectandoGasVespeno implements Estado {
 	public void desactivar() {
 		this.beneficiario.getMapa().reemplazar(this.posicion, new GasVespeno(this.posicion));
 	}
+	
+	@Override
+	public String getDescripcion() {
+		return String.format("Recolectando Gas Vespeno: %d por turno.", atributos.getCantARecolectarPorTurno());
+	}
 
 }

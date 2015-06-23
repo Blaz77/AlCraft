@@ -17,4 +17,9 @@ public class EstadoRegenerandoEscudo implements Estado {
 	
 	public void desactivar() {	}
 
+	@Override
+	public String getDescripcion() {
+		return String.format("Regenerando escudo: %d por turno.", (int)portador.getEscudoMaximo()/10);
+	}
+
 }

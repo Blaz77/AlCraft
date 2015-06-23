@@ -29,5 +29,10 @@ public class EstadoRecolectandoMineral implements Estado {
 	public void desactivar() {
 		this.beneficiario.getMapa().reemplazar(this.posicion, new Mineral(this.posicion));
 	}
+
+	@Override
+	public String getDescripcion() {
+		return String.format("Recolectando Minerales: %d por turno.", atributos.getCantARecolectarPorTurno());
+	}
 	
 }
