@@ -3,6 +3,7 @@ package fiuba.algo3.componentes;
 import java.util.ArrayList;
 
 import fiuba.algo3.atributos.AtributosAtaque;
+import fiuba.algo3.excepciones.AccionesPorTurnoInsuficientes;
 import fiuba.algo3.excepciones.FueraDelRangoPermitido;
 import fiuba.algo3.excepciones.NoEsUnEnemigo;
 import fiuba.algo3.ocupantes.ObjetoVivo;
@@ -24,11 +25,6 @@ public class Ataque implements IAtaque, Estado {
 	public void setPortador(ObjetoVivo portador) {
 		this.portador = portador;
 		portador.agregarEstado(this);
-	}
-	
-	public Estado clone() {
-		return new Ataque(this.atributos);
-		//poner el portador?
 	}
 	
 	public void activar(ObjetoVivo portador) {}
@@ -54,11 +50,13 @@ public class Ataque implements IAtaque, Estado {
 	}
 	
 	public boolean puedeAtacarA(ObjetoVivo enemigo){
-		return (this.portador.esEnemigoDe(enemigo) && 
+		return (this.puedeAtacar() &&
+				this.portador.esEnemigoDe(enemigo) && 
 				this.estaEnRangoDeAtaque(enemigo));
 	}
 	
 	public void atacarA(ObjetoVivo enemigo){
+		if (!this.puedeAtacar()) throw new AccionesPorTurnoInsuficientes();
 		if (!this.portador.esEnemigoDe(enemigo)) throw new NoEsUnEnemigo();
 		if (!this.estaEnRangoDeAtaque(enemigo)) throw new FueraDelRangoPermitido();
 		enemigo.recibirDanio(enemigo.getDanioEfectivo(
@@ -69,6 +67,11 @@ public class Ataque implements IAtaque, Estado {
 	//esto es una idea nomas, no necesariamente hacerlo
 	public ArrayList<ObjetoVivo> getPosiblesObjetivos(){
 		return null;
+	}
+
+	@Override
+	public String getDescripcion() {
+		return String.format("Ataque: %d ataques restantes.", ataquesRestantes);
 	}
 
 

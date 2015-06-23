@@ -85,4 +85,10 @@ public class Magia implements IMagia, Estado{
 		return magia;
 	}
 
+	@Override
+	public String getDescripcion() {
+		return String.format("Energia: %d. Regenerando %d por turno."
+				, energia, atributos.getEnergiaARegenerarPorTurno());
+	}
+
 }

@@ -19,6 +19,11 @@ public class Posicion {
 		return this.y;
 	}
 	
+	@Override
+	public String toString() {
+		return String.format("(%d, %d)", x, y);
+	}
+	
 	public int distancia(Posicion other) {
 		return Math.abs(this.x - other.x) + Math.abs(this.y - other.y);
 	}
