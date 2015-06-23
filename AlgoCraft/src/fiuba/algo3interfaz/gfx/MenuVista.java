@@ -63,6 +63,9 @@ public class MenuVista extends JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JSpinner spnCantidadBases;
     private javax.swing.JRadioButton radRazaTerranJugador2;
     private javax.swing.JRadioButton radRazaProtossJugador2;
     private javax.swing.JRadioButton jRadioButton3;
@@ -110,6 +113,9 @@ public class MenuVista extends JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        spnCantidadBases = new javax.swing.JSpinner();
         txtNombreJugador2 = new javax.swing.JTextField();
         radRazaTerranJugador2 = new javax.swing.JRadioButton();
         radRazaProtossJugador2 = new javax.swing.JRadioButton();
@@ -123,6 +129,12 @@ public class MenuVista extends JPanel {
         btnJugar = new javax.swing.JButton();
         chkNombreColorJugador1 = new javax.swing.JCheckBox();
         chkNombreColorJugador2 = new javax.swing.JCheckBox();
+        
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel10.setText("Mapa");
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel9.setText("Cantidad de bases");
 
         jLabel1.setFont(new java.awt.Font(TITLE_FONT, 0, TITLE_FONTSIZE)); // NOI18N
         jLabel1.setText("Jugador 1");
@@ -231,6 +243,8 @@ public class MenuVista extends JPanel {
                 chkNombreColorJugador1ActionPerformed(evt);
             }
         });
+
+        spnCantidadBases.setModel(new javax.swing.SpinnerNumberModel(4, 2, 6, 1));
         
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(640, 480));
@@ -238,95 +252,117 @@ public class MenuVista extends JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel1)
-                .addGap(205, 205, 205)
-                .addComponent(jLabel2))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel8)
-                .addGap(27, 27, 27)
-                .addComponent(txtNombreJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(jLabel5)
-                .addGap(27, 27, 27)
-                .addComponent(txtNombreJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel6)
-                .addGap(46, 46, 46)
-                .addComponent(radRazaTerranJugador1)
-                .addGap(13, 13, 13)
-                .addComponent(radRazaProtossJugador1)
-                .addGap(9, 9, 9)
-                .addComponent(jRadioButton6)
-                .addGap(53, 53, 53)
-                .addComponent(jLabel3)
-                .addGap(46, 46, 46)
-                .addComponent(radRazaTerranJugador2)
-                .addGap(3, 3, 3)
-                .addComponent(radRazaProtossJugador2)
-                .addGap(19, 19, 19)
-                .addComponent(jRadioButton3))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel7)
-                .addGap(43, 43, 43)
-                .addComponent(cboColorJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(jLabel4)
-                .addGap(43, 43, 43)
-                .addComponent(cboColorJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(chkNombreColorJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(120, 120, 120)
-                .addComponent(chkNombreColorJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(170, 170, 170)
-                .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(160, 160, 160)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNombreJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombreJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(30, 30, 30)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel10)
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGap(205, 205, 205)
+                            .addComponent(jLabel2)
+                            .addContainerGap(184, Short.MAX_VALUE))))
+                .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel9)
+                            .addGap(18, 18, 18)
+                            .addComponent(spnCantidadBases, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(21, 21, 21))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel5))))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(radRazaTerranJugador1)
-                    .addComponent(radRazaProtossJugador1)
-                    .addComponent(jRadioButton6)
-                    .addComponent(jLabel3)
-                    .addComponent(radRazaTerranJugador2)
-                    .addComponent(radRazaProtossJugador2)
-                    .addComponent(jRadioButton3))
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(cboColorJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(cboColorJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(chkNombreColorJugador1)
-                    .addComponent(chkNombreColorJugador2))
-                .addGap(7, 7, 7)
-                .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(jLabel8)
+                                .addGap(27, 27, 27)
+                                .addComponent(txtNombreJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(50, 50, 50)
+                                .addComponent(jLabel5)
+                                .addGap(27, 27, 27)
+                                .addComponent(txtNombreJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(jLabel6)
+                                .addGap(46, 46, 46)
+                                .addComponent(radRazaTerranJugador1)
+                                .addGap(13, 13, 13)
+                                .addComponent(radRazaProtossJugador1)
+                                .addGap(9, 9, 9)
+                                .addComponent(jRadioButton6)
+                                .addGap(53, 53, 53)
+                                .addComponent(jLabel3)
+                                .addGap(46, 46, 46)
+                                .addComponent(radRazaTerranJugador2)
+                                .addGap(3, 3, 3)
+                                .addComponent(radRazaProtossJugador2)
+                                .addGap(19, 19, 19)
+                                .addComponent(jRadioButton3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(jLabel7)
+                                .addGap(43, 43, 43)
+                                .addComponent(cboColorJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(50, 50, 50)
+                                .addComponent(jLabel4)
+                                .addGap(43, 43, 43)
+                                .addComponent(cboColorJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(100, 100, 100)
+                                .addComponent(chkNombreColorJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(120, 120, 120)
+                                .addComponent(chkNombreColorJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(170, 170, 170)
+                                .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGap(0, 0, Short.MAX_VALUE))
+            );
+            layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(106, 106, 106)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel9)
+                        .addComponent(spnCantidadBases, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(18, 18, 18)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel2))
+                    .addGap(21, 21, 21)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtNombreJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNombreJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel8)
+                                .addComponent(jLabel5))))
+                    .addGap(10, 10, 10)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel6)
+                        .addComponent(radRazaTerranJugador1)
+                        .addComponent(radRazaProtossJugador1)
+                        .addComponent(jRadioButton6)
+                        .addComponent(jLabel3)
+                        .addComponent(radRazaTerranJugador2)
+                        .addComponent(radRazaProtossJugador2)
+                        .addComponent(jRadioButton3))
+                    .addGap(7, 7, 7)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel7)
+                        .addComponent(cboColorJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)
+                        .addComponent(cboColorJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(10, 10, 10)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(chkNombreColorJugador1)
+                        .addComponent(chkNombreColorJugador2))
+                    .addGap(7, 7, 7)
+                    .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(25, Short.MAX_VALUE))
+            );
 
 	}
 	
@@ -358,7 +394,7 @@ public class MenuVista extends JPanel {
     	if (! validarCampos()) return;
 
     	Opciones opciones = new Opciones();
-    	opciones.setCantidadBases(4);
+    	opciones.setCantidadBases((Integer) spnCantidadBases.getValue());
     	nombreJugador1 = definirNombreJugador(chkNombreColorJugador1, txtNombreJugador1, cboColorJugador1, razaJugador1);
     	nombreJugador2 = definirNombreJugador(chkNombreColorJugador2, txtNombreJugador2, cboColorJugador2, razaJugador2);
     	opciones.setDatosJugador(1, nombreJugador1, Color.values()[cboColorJugador1.getSelectedIndex()], razaJugador1);
