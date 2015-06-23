@@ -58,22 +58,7 @@ public class TestMapa {
 	public void setUp() {
 		mapaNuevo = new MapaReal(cantidadBases);
 	}
-	
-	@Test
-	public void testMapaGeneradoRespetaSeparacionJugadores() {
-		Celda puntoGeneracionJugador1 = mapaNuevo.obtenerBaseDeJugador(1);
-		Celda puntoGeneracionJugador2 = mapaNuevo.obtenerBaseDeJugador(2);
 		
-		// Para considerar que los jugadores estan en extremos opuestos, su distancia
-		// horizontal o vertical debe ser similar al ancho o alto del mapa respectivamente
-		
-		int distanciaHorizontal = Math.abs(puntoGeneracionJugador1.getX() - puntoGeneracionJugador2.getX());
-		int distanciaVertical = Math.abs(puntoGeneracionJugador1.getY() - puntoGeneracionJugador2.getY());
-		
-		Assert.assertTrue(distanciaHorizontal > mapaNuevo.ancho() * 0.7 || 
-						distanciaVertical > mapaNuevo.alto() * 0.7);
-	}
-	
 	@Test
 	public void testMapaGeneradoRespetaCantidadDeBases() {
 		Assert.assertTrue(mapaNuevo.getBases().size() == cantidadBases);

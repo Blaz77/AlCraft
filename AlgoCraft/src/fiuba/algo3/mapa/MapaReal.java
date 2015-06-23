@@ -12,13 +12,13 @@ import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.terreno.Terreno;
 
 public class MapaReal implements Mapa {
-	public final static int DISTANCIA_BORDE = 10;
-	public final static int DISTANCIA_ENTRE_BASES = 64;
+	public static final int DISTANCIA_BORDE = 10;
+	public static final int DISTANCIA_ENTRE_BASES = 5;
 	
 	// La base es un territorio cuadrado, del q marcamos su centro
-	public final static int SEMILADO_BASE = 8; // El lado de una base sera entonces 2 * semilado + 1 (el centro)
+	public static final int SEMILADO_BASE = 8; // El lado de una base sera entonces 2 * semilado + 1 (el centro)
 	
-	private final static int MINERALES_POR_BASE = 6;
+	public static final int MINERALES_POR_BASE = 6;
 		
 	private int ancho;
 	private int alto;
@@ -50,36 +50,56 @@ public class MapaReal implements Mapa {
 	 * de tierra.
 	 */
 	private void generarMapaVacio(int cantidadBases) {
-		// En particular, esto genera un chorizo estilo
-		//...........       ...........
-		//..P.....B....etc....B.....P..  P = Base de Jugador
-		//...........       ...........  B = Base neutral.
-		int lado = 2 * SEMILADO_BASE + 1;
-		int bordes = 2 * DISTANCIA_BORDE;
-		Posicion pos;
-		ancho = bordes + cantidadBases * lado + DISTANCIA_ENTRE_BASES * (cantidadBases - 1);
-		alto = bordes + lado;
-
-		mapa = new Celda[ancho][alto];
+	
+		// sea b las bases, d la distancia entre ellas y r el radio a tomar.
+		// Imaginese una circunferencia y tomamos b puntos equidistantes de ella, partiendo del angulo 0.
+		// Como la distancia entre estos puntos no debe ser inferior a d, debe cumplirse (2*pi*r)/b > d.
+		// entonces, r > (b*d)/(2*pi). Uso los bordes y ese 1.25 para asegurarme q eso ocurra.
 		
+		// Un ejemplo de mapa con 5 bases entonces seria:
+		
+		// ...............................
+		// ...............................
+		// ...............................
+		// .................B.............
+		// ...............................
+		// .....B.........................
+		// ...............................
+		// ...............................
+		// .........................B.....
+		// ...............................
+		// ...............................
+		// .....B.........................
+		// ...............................
+		// .................B.............
+		// ...............................
+		// ...............................
+		
+		int radioMapa = (int) ( (DISTANCIA_BORDE + SEMILADO_BASE*2 + 1.25 * cantidadBases * (SEMILADO_BASE * 2 + DISTANCIA_ENTRE_BASES)) / Math.PI);
+		ancho = radioMapa * 2;
+		alto = radioMapa * 2;
+		mapa = new Celda[ancho][alto];
+
 		for (int x = 0; x < ancho; x++){
 			for (int y = 0; y < alto; y++){
-				pos = new Posicion(x, y);
-				setCelda(pos, Terreno.TIERRA);
+				setCelda(new Posicion(x, y), Terreno.TIERRA);
 			}
-		}		
+		}
 	}
 
 	private void ubicarBases(int cantidadBases) {
 		
+		int radio = (int) (cantidadBases * (SEMILADO_BASE * 2 + DISTANCIA_ENTRE_BASES) / Math.PI);
 		for (int i = 0; i < cantidadBases; i++){
-			int base_x = DISTANCIA_BORDE + SEMILADO_BASE + i * (1 + 2*SEMILADO_BASE + DISTANCIA_ENTRE_BASES); 
-			int base_y = DISTANCIA_BORDE + SEMILADO_BASE;
+			
+			double angulo = 360 * i / cantidadBases;
+			int base_x = (int)((ancho/2) + radio * Math.cos(Math.toRadians(angulo)) );
+			int base_y = (int)((alto/2) + radio * Math.sin(Math.toRadians(angulo)) );
 			bases.add(mapa[base_x][base_y]);
 		}
-			
+		
 		basesJugadores.add(bases.get(0));
-		basesJugadores.add(bases.get(bases.size() - 1));
+		basesJugadores.add(bases.get(bases.size()/2));
 	}
 	
 	// Ubicar los recursos de forma aleatoria. Explico como:
@@ -144,7 +164,7 @@ public class MapaReal implements Mapa {
 		Posicion posAnterior, pos = null;
 		Random miRNG = new Random();
 		// Esto le pone algunas celdas espaciales al borde de arriba
-		for (int y = 0; y < DISTANCIA_BORDE; y++)
+		for (int y = 0; y < DISTANCIA_BORDE/2; y++)
 			for (int x = 0; x < ancho; x++){
 				posAnterior = new Posicion(x, y-1);
 				pos = new Posicion(x, y);
@@ -154,7 +174,7 @@ public class MapaReal implements Mapa {
 			}		
 		
 		// y esto al de abajo
-		for (int y = alto - 1; y > alto - DISTANCIA_BORDE; y--)
+		for (int y = alto - 1; y > alto - DISTANCIA_BORDE/2; y--)
 			for (int x = 0; x < ancho; x++){
 				posAnterior = new Posicion(x, y+1);
 				pos = new Posicion(x, y);
@@ -326,7 +346,7 @@ public class MapaReal implements Mapa {
 	/**                DEBUG AREA                **/
 	/**********************************************/
 	// A borrar cuando se borre el main
-	final static int BASES_PARA_MAIN = 5;
+	final static int BASES_PARA_MAIN = 3;
 	
 	/* Imprime los puntos en formato "x, y: recurso". 
 	 * Achicar constantes antes de usar. */
@@ -402,9 +422,9 @@ public class MapaReal implements Mapa {
 				else {
 					elRecurso = getOcupante(new Posicion(x2, y2));
 					if(elRecurso != null && elRecurso.getTipo() == Tipo.VESPENO)
-						System.out.print("G");
+						System.out.print(".");
 					else if(elRecurso != null && elRecurso.getTipo() == Tipo.MINERAL)
-							System.out.print("M");
+							System.out.print(".");
 					else if(getTerreno(new Posicion(x2, y2)) == Terreno.ESPACIO)
 						System.out.print(" ");
 					else
@@ -417,6 +437,18 @@ public class MapaReal implements Mapa {
 
 	/* Mostrar info del mapa de varias formas" */
 	public static void main(String[] args){ //Renombrar a "main" para ejecutar.
+		/*
+		MapaReal miMapa;
+		for (int bases = 2; bases <= 8; bases++)
+			for (int dist_base = 2; dist_base < 65; dist_base++)
+				for (int semilado = 4; semilado < 10; semilado++)
+					for (int borde = 2; borde < 20; borde++){
+						DISTANCIA_BORDE = borde;
+						SEMILADO_BASE = semilado;
+						DISTANCIA_ENTRE_BASES = dist_base;
+						//System.out.format("Bases: %d, DistBases: %d, Semilado: %d, Borde: %d %n", bases, dist_base, semilado, borde);
+						miMapa = new MapaReal(bases);
+		}*/
 		
 		MapaReal miMapa = new MapaReal(BASES_PARA_MAIN);
 		
@@ -433,4 +465,6 @@ public class MapaReal implements Mapa {
 	}
 		
 
+	
+	
 }
