@@ -13,37 +13,31 @@ import fiuba.algo3.mapa.*;
 import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.raza.TipoRaza;
+import fiuba.algo3.terreno.Terreno;
 
 public class TestNexoMineral extends TestEdificio{
 
-	private MapaReal mapa;
-	private Jugador jugador;
-	private EdificiosFactory protossFactory;
 	private Edificio nexoMineral;
 	
 	@Override
-	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
-		return protossFactory.crearRecolectorMineral(jugador, posicion);
+	protected Edificio crearEdificio() {
+		return crearEnMineral();
 	}
-	
-	private Edificio crearEnMineral(Jugador jugador, MapaReal mapa) {
-		return crearEnRecurso(jugador, mapa, Tipo.MINERAL, new Posicion(0,0));
-	}
-	
-	private Edificio crearFueraDeMineral(Jugador jugador, MapaReal mapa) {
-		return crearFueraDeRecurso(jugador, mapa, Tipo.MINERAL, new Posicion(0,0));
+
+	@Override
+	protected Edificio crearEdificioEn(Terreno terreno, Tipo tipo) {
+		return crearEn((j,p) -> jugador.getEdificador().crearRecolectorMineral(j,p), terreno, tipo);
 	}
 	
 	@Before
 	public void setUp() {
 		mapa = new MapaReal(6);
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.PROTOSS, mapa);
-		this.protossFactory = new EdificiosFactory();
 	}
 	
 	@Test
 	public void testCrearNexoMineral() {
-		this.nexoMineral = crearEnMineral(jugador, mapa);
+		this.nexoMineral = crearEdificio();
 		for(int i = 0; i < 4; i++) nexoMineral.pasarTurno();
 		this.nexoMineral = (Edificio) mapa.getOcupante(nexoMineral.getPosicion());
 		
@@ -57,43 +51,26 @@ public class TestNexoMineral extends TestEdificio{
 		int costoGas = 0;
 		int costoMineral = 50;
 		
-		this.nexoMineral = crearEnMineral(jugador, mapa);
+		this.nexoMineral = crearEdificio();
 		
 		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
 		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
 	}
 	
-	@Test
-	public void testCrearNexoMineralSinRecursosDebeFallar() {
-		while (jugador.getMinerales() >= 50) {
-			jugador.agregarMinerales(-10);
-		}
-		try {
-			this.nexoMineral = crearEnMineral(jugador, mapa);
-			fail();
-		}
-		catch (MineralInsuficiente e) {
-			assertTrue(true);
-			return;
-		}
+	@Test(expected = MineralInsuficiente.class)
+	public void testCrearCentroDeMineralSinRecursosDebeFallar() {
+		while (jugador.getMinerales() >= 50) jugador.agregarMinerales(-10);
+		crearEdificio();
 	}
 	
-	@Test
-	public void testCrearNexoMineralFueraDeMineralFalla() {
-		try {
-			this.nexoMineral = crearFueraDeMineral(jugador, mapa);
-			fail();
-		}
-		catch (RecursoAusente e) {
-			assertTrue(true);
-			return;
-		}
-		fail();
+	@Test(expected = RecursoAusente.class)
+	public void testCrearCentroDeMineralFueraDeMineralFalla() {
+		crearEnTierra();
 	}
 	
 	@Test
 	public void testNexoMineralSubeVidaDuranteConstruccion() {
-		this.nexoMineral = crearEnMineral(jugador, mapa);
+		this.nexoMineral = crearEdificio();
 		int vidaRelativa = nexoMineral.getVida();
 		for(int i = 0; i < 4; i++){
 			nexoMineral.pasarTurno();
@@ -106,7 +83,7 @@ public class TestNexoMineral extends TestEdificio{
 	
 	@Test
 	public void testPuertoEstelarSubeEscudoDuranteConstruccion() {
-		this.nexoMineral = crearEnMineral(jugador, mapa);
+		this.nexoMineral = crearEdificio();
 		int escudoRelativo = nexoMineral.getEscudo();
 		for(int i = 0; i < 4; i++){
 			nexoMineral.pasarTurno();
@@ -119,7 +96,7 @@ public class TestNexoMineral extends TestEdificio{
 	
 	@Test
 	public void testNexoMineralMientrasConstruyeNoRecolecta() {
-		this.nexoMineral = crearEnMineral(jugador, mapa);
+		this.nexoMineral = crearEdificio();
 		int mineralRelativo = jugador.getMinerales();
 		
 		for(int i = 0; i < 4; i++) {
@@ -132,7 +109,7 @@ public class TestNexoMineral extends TestEdificio{
 	
 	@Test
 	public void testNexoMineralRecolectaMinerales() {
-		this.nexoMineral = crearEnMineral(jugador, mapa);
+		this.nexoMineral = crearEdificio();
 		for(int i = 0; i < 4; i++) nexoMineral.pasarTurno(); // Construccion
 		this.nexoMineral = (Edificio) mapa.getOcupante(nexoMineral.getPosicion());
 		
@@ -148,7 +125,7 @@ public class TestNexoMineral extends TestEdificio{
 	
 	@Test
 	public void testNexoMineralAlDestruirseDejaMineralEnMapa() {
-		this.nexoMineral = crearEnMineral(jugador, mapa);
+		this.nexoMineral = crearEdificio();
 		for(int i = 0; i < 4; i++) nexoMineral.pasarTurno(); // Construccion
 		this.nexoMineral = (Edificio) mapa.getOcupante(nexoMineral.getPosicion());
 		

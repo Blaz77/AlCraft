@@ -11,96 +11,59 @@ import fiuba.algo3.terreno.Terreno;
 
 public abstract class TestEdificio {
 	
+	protected Jugador jugador;
+	protected MapaReal mapa;
+	
 	protected Posicion posRelativa(ObjetoVivo o, int offsetX, int offsetY){
 		return new Posicion(o.getPosicion().getX() + offsetX, o.getPosicion().getY() + offsetY);
 	}
 
-	protected abstract Edificio crearEdificio(Jugador jugador, Posicion posicion);
+	// La forma correcta de crear el edificio va aca dentro:
+	protected abstract Edificio crearEdificio();
 	
-	protected Edificio crearEdificioRequerido(Jugador jugador, Posicion posicion) {
+	// Para crear de forma especifica:
+	// Redefinir llamando a crearEn(..,..,..)!
+	protected abstract Edificio crearEdificioEn(Terreno terreno, Tipo tipo);
+	
+	protected Edificio crearEn(CreadorEdificio creador, Terreno terreno, Tipo tipo) {
+		for (int y = 0; y < mapa.alto(); y++) {
+			for (int x = 0; x < mapa.ancho(); x++) {
+				Posicion posicion = new Posicion(x, y);
+				if (mapa.getTerreno(posicion) == terreno
+					&&	mapa.getOcupante(posicion).getTipo() == tipo) {
+						return creador.crear(jugador, posicion);
+				}
+			}
+		}
+		throw new RuntimeException();
+	}
+	
+	// La forma correcta de crear el edificio va aca dentro:
+	protected Edificio crearEdificioRequerido() {
 		// Si no hay requerido, no redefinir
 		throw new RuntimeException();
 	}
 	
-	protected Edificio crearEdificioRequeridoNivel2(Jugador jugador, Posicion posicion) {
+	// La forma correcta de crear el edificio va aca dentro:
+	protected Edificio crearEdificioRequeridoNivel2() {
 		// Si no hay requerido, no redefinir
 		throw new RuntimeException();
 	}
-	
-	protected Edificio crearEnTierra(Jugador jugador, MapaReal mapa, Posicion posInicial) {
-		for (int y = posInicial.getY(); y < mapa.alto(); y++) {
-			for (int x = posInicial.getX(); x < mapa.ancho(); x++) {
-				Posicion posEnTierra = new Posicion(x, y);
-				if (mapa.getTerreno(posEnTierra) == Terreno.TIERRA
-						&&	mapa.getOcupante(posEnTierra).getTipo() == Tipo.CELDA_VACIA) {
-					return crearEdificio(jugador, posEnTierra);
-				}
-			}
-		}
-		throw new RuntimeException();
+		
+	protected Edificio crearFueraDeTierra() {
+		return crearEdificioEn(Terreno.ESPACIO, Tipo.CELDA_VACIA);
 	}
 	
-	protected Edificio crearRequeridoEnTierra(Jugador jugador, MapaReal mapa, Posicion posInicial) {
-		for (int y = posInicial.getY(); y < mapa.alto(); y++) {
-			for (int x = posInicial.getX(); x < mapa.ancho(); x++) {
-				Posicion posEnTierra = new Posicion(x, y);
-				if (mapa.getTerreno(posEnTierra) == Terreno.TIERRA) {
-					return crearEdificioRequerido(jugador, posEnTierra);
-				}
-			}
-		}
-		throw new RuntimeException();
+	protected Edificio crearEnVolcan() {
+		return crearEdificioEn(Terreno.TIERRA, Tipo.VESPENO);
 	}
 	
-	// Perdon por este horror, si se les ocurre algo mejor, bienvenido
-	protected Edificio crearRequeridoNivel2EnTierra(Jugador jugador, MapaReal mapa, Posicion posInicial) {
-		for (int y = posInicial.getY(); y < mapa.alto(); y++) {
-			for (int x = posInicial.getX(); x < mapa.ancho(); x++) {
-				Posicion posEnTierra = new Posicion(x, y);
-				if (mapa.getTerreno(posEnTierra) == Terreno.TIERRA) {
-					return crearEdificioRequeridoNivel2(jugador, posEnTierra);
-				}
-			}
-		}
-		throw new RuntimeException();
+	protected Edificio crearEnMineral() {
+		return crearEdificioEn(Terreno.TIERRA, Tipo.MINERAL);
 	}
 	
-	protected Edificio crearFueraDeTierra(Jugador jugador, MapaReal mapa, Posicion posInicial) {
-		for (int y = posInicial.getY(); y < mapa.alto(); y++) {
-			for (int x = posInicial.getX(); x < mapa.ancho(); x++) {
-				Posicion posFueraDeTierra = new Posicion(x, y);
-				if (mapa.getTerreno(posFueraDeTierra) != Terreno.TIERRA) {
-					return crearEdificio(jugador, posFueraDeTierra);
-				}
-			}
-		}
-		throw new RuntimeException();
-	}
-	
-	protected Edificio crearEnRecurso(Jugador jugador, MapaReal mapa, Tipo recurso, Posicion posInicial) {
-		for (int y = posInicial.getY(); y < mapa.alto(); y++) {
-			for (int x = posInicial.getX(); x < mapa.ancho(); x++) {
-				Posicion posConRecurso = new Posicion(x, y);
-				if (mapa.getTerreno(posConRecurso) == Terreno.TIERRA
-					&&	mapa.getOcupante(posConRecurso).getTipo() == recurso) {
-						return crearEdificio(jugador, posConRecurso);
-				}
-			}
-		}
-		throw new RuntimeException();
-	}
-	
-	protected Edificio crearFueraDeRecurso(Jugador jugador, MapaReal mapa, Tipo recurso, Posicion posInicial) {
-		for (int y = posInicial.getY(); y < mapa.alto(); y++) {
-			for (int x = posInicial.getX(); x < mapa.ancho(); x++) {
-				Posicion posSinRecurso = new Posicion(x, y);
-				if (mapa.getTerreno(posSinRecurso) == Terreno.TIERRA
-					&&	mapa.getOcupante(posSinRecurso).getTipo() != recurso) {
-						return crearEdificio(jugador, posSinRecurso);
-				}
-			}
-		}
-		throw new RuntimeException();
+	protected Edificio crearEnTierra() {
+		return crearEdificioEn(Terreno.TIERRA, Tipo.CELDA_VACIA);
 	}
 	
 }

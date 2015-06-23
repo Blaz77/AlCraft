@@ -10,21 +10,25 @@ import fiuba.algo3.excepciones.SuministroInsuficiente;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.raza.TipoRaza;
+import fiuba.algo3.terreno.Terreno;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
+import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 
 public class TestAcceso extends TestEdificio {
 
-	private MapaReal mapa;
-	private Jugador jugador;
-	private EdificiosFactory protossFactory; //EdificiosAbstractFactory
 	private Edificio acceso;
 	private Edificio accesoEnConst;
 	
 	@Override
-	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
-		return protossFactory.crearEntrenadorUnidadesBasicas(jugador, posicion);
+	protected Edificio crearEdificio() {
+		return crearEnTierra();
+	}
+
+	@Override
+	protected Edificio crearEdificioEn(Terreno terreno, Tipo tipo) {
+		return crearEn((j,p) -> jugador.getEdificador().crearEntrenadorUnidadesBasicas(j,p), terreno, tipo);
 	}
 	
 	
@@ -34,15 +38,12 @@ public class TestAcceso extends TestEdificio {
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.PROTOSS, mapa);
 		this.jugador.agregarMinerales(300);
 		this.jugador.agregarGasVespeno(300);
-		this.protossFactory = new EdificiosFactory();
-		this.acceso = crearEnTierra(jugador, mapa, new Posicion(0,0));
+		this.acceso = crearEdificio();
 		for(int i = 0; i < 8; i++) acceso.pasarTurno();//Construccion
 		this.acceso = (Edificio) mapa.getOcupante(acceso.getPosicion());
-		this.accesoEnConst = crearEnTierra(jugador, mapa, posRelativa(acceso, 1, 1));
+		this.accesoEnConst = crearEdificio();
 	}
 
-	//TESTS SIN REQUISITOS POR AHORA!!!
-	
 	@Test
 	public void testCrearAcceso() {
 		assertEquals(acceso.getNombre(),"Acceso");
@@ -55,38 +56,21 @@ public class TestAcceso extends TestEdificio {
 		int costoGas = 0;
 		int costoMineral = 150;
 		
-		this.acceso = crearEnTierra(jugador, mapa, posRelativa(accesoEnConst, 1, 1));
+		this.acceso = crearEdificio();
 		
 		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
 		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
 	}
 	
-	@Test
+	@Test(expected = TerrenoInadecuado.class)
 	public void testCrearAccesoFueraDeTierraFalla() {
-		try {
-			this.acceso = crearFueraDeTierra(jugador, mapa, posRelativa(accesoEnConst, 1, 1));
-			fail();
-		}
-		catch (TerrenoInadecuado e) {
-			assertTrue(true);
-			return;
-		}
-		fail();
+		crearFueraDeTierra();
 	}
 	
-	@Test
+	@Test(expected = MineralInsuficiente.class)
 	public void testCrearAccesoSinRecursosDebeFallar() {
-		while (jugador.getMinerales() >= 150) {
-			jugador.agregarMinerales(-10);
-		}
-		try {
-			this.acceso = crearEnTierra(jugador, mapa, posRelativa(accesoEnConst, 1, 1));
-			fail();
-		}
-		catch (MineralInsuficiente e) {
-			assertTrue(true);
-			return;
-		}
+		while (jugador.getMinerales() >= 150) jugador.agregarMinerales(-10);
+		crearEdificio();
 	}
 	
 	@Test
@@ -122,7 +106,7 @@ public class TestAcceso extends TestEdificio {
 	}
 	
 	@Test
-	public void testAccesoTerminadaPuedeEntrenar() {
+	public void testAccesoTerminadoPuedeEntrenar() {
 		assertTrue(acceso.puedeEntrenarUnidades());
 	}
 	
@@ -157,20 +141,10 @@ public class TestAcceso extends TestEdificio {
 
 	}
 	
-	@Test
+	@Test(expected = MineralInsuficiente.class)
 	public void testAccesoEntrenaUnidadSinRecursosDebeFallar() {
-		while (jugador.getMinerales() >= 100) {
-			jugador.agregarMinerales(-10);
-		}
-		try {
-			acceso.getUnidadesEntrenables().get(0).crear();
-			fail();
-		}
-		catch (MineralInsuficiente e) {
-			assertTrue(true);
-			return;
-		}
-
+		while (jugador.getMinerales() >= 100) jugador.agregarMinerales(-10);
+		acceso.getUnidadesEntrenables().get(0).crear();
 	}
 	
 	@Test
@@ -193,20 +167,10 @@ public class TestAcceso extends TestEdificio {
 		assertEquals(jugador.getUnidades().get(1).getNombre(), "Zealot");
 	}
 
-	@Test
+	@Test(expected = SuministroInsuficiente.class)
 	public void testAccesoEntrenaUnidadSinPoblacionDebeFallar() {
-		while (jugador.getCapacidadPoblacion() > 1) {
-			jugador.aumentarCapacidadPoblacion(-1);
-		}
-		try {
-			acceso.getUnidadesEntrenables().get(0).crear();
-			fail();
-		}
-		catch (SuministroInsuficiente e) {
-			assertTrue(true);
-			return;
-		}
-
+		while (jugador.getCapacidadPoblacion() > 1) jugador.aumentarCapacidadPoblacion(-1);
+		acceso.getUnidadesEntrenables().get(0).crear();
 	}
 
 }

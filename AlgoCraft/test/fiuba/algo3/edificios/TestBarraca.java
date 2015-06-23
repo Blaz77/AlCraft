@@ -10,22 +10,26 @@ import fiuba.algo3.excepciones.SuministroInsuficiente;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.raza.TipoRaza;
+import fiuba.algo3.terreno.Terreno;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
+import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 
 public class TestBarraca extends TestEdificio {
 
-	private MapaReal mapa;
-	private Jugador jugador;
-	private EdificiosFactory terranFactory; //EdificiosAbstractFactory
 	private Edificio barraca;
 	private Edificio barracaEnConst;
 	
 	@Override
-	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
-		return terranFactory.crearEntrenadorUnidadesBasicas(jugador, posicion);
+	protected Edificio crearEdificio() {
+		return crearEnTierra();
+	}
+
+	@Override
+	protected Edificio crearEdificioEn(Terreno terreno, Tipo tipo) {
+		return crearEn((j,p) -> jugador.getEdificador().crearEntrenadorUnidadesBasicas(j,p), terreno, tipo);
 	}
 	
 	@Before
@@ -34,11 +38,10 @@ public class TestBarraca extends TestEdificio {
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
 		this.jugador.agregarMinerales(300);
 		this.jugador.agregarGasVespeno(300);
-		this.terranFactory = new EdificiosFactory();
-		this.barraca = crearEnTierra(jugador, mapa, new Posicion(0,0));
+		this.barraca = crearEdificio();
 		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
 		this.barraca = (Edificio) mapa.getOcupante(barraca.getPosicion());
-		this.barracaEnConst = crearEnTierra(jugador, mapa, posRelativa(barraca, 1, 1));
+		this.barracaEnConst = crearEdificio();
 	}
 
 	//TESTS SIN REQUISITOS POR AHORA!!!
@@ -55,7 +58,7 @@ public class TestBarraca extends TestEdificio {
 		int costoGas = 0;
 		int costoMineral = 150;
 		
-		this.barraca = crearEnTierra(jugador, mapa, posRelativa(barracaEnConst, 1, 1));
+		this.barraca = crearEdificio();
 		
 		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
 		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
@@ -64,7 +67,7 @@ public class TestBarraca extends TestEdificio {
 	@Test
 	public void testCrearBarracaFueraDeTierraFalla() {
 		try {
-			this.barraca = crearFueraDeTierra(jugador, mapa, posRelativa(barracaEnConst, 1, 1));
+			this.barraca = crearFueraDeTierra();
 			fail();
 		}
 		catch (TerrenoInadecuado e) {
@@ -80,7 +83,7 @@ public class TestBarraca extends TestEdificio {
 			jugador.agregarMinerales(-10);
 		}
 		try {
-			this.barraca = crearEnTierra(jugador, mapa, posRelativa(barracaEnConst, 1, 1));
+			this.barraca = crearEdificio();
 			fail();
 		}
 		catch (MineralInsuficiente e) {

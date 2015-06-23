@@ -12,32 +12,39 @@ import fiuba.algo3.excepciones.SuministroInsuficiente;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.raza.TipoRaza;
+import fiuba.algo3.terreno.Terreno;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
+import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 
 public class TestArchivosTemplarios extends TestEdificio {
 
-	private MapaReal mapa;
-	private Jugador jugador;
 	private Edificio acceso;
 	private Edificio puerto;
 	private Edificio archivos;
 	private Edificio archivosEnConst;
 	
 	@Override
-	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
-		return jugador.getEdificador().crearEntrenadorUnidadesAvanzadas(jugador, posicion);
+	protected Edificio crearEdificio() {
+		return crearEnTierra();
+	}
+
+	@Override
+	protected Edificio crearEdificioEn(Terreno terreno, Tipo tipo) {
+		return crearEn((j,p) -> jugador.getEdificador().crearEntrenadorUnidadesAvanzadas(j,p), terreno, tipo);
 	}
 	
 	@Override
-	protected Edificio crearEdificioRequerido(Jugador jugador, Posicion posicion) {
-		return jugador.getEdificador().crearEntrenadorUnidadesBasicas(jugador, posicion);
+	protected Edificio crearEdificioRequerido() {
+		return crearEn((j,p) -> jugador.getEdificador().crearEntrenadorUnidadesBasicas(j,p),
+				Terreno.TIERRA, Tipo.CELDA_VACIA);
 	}
 	
 	@Override
-	protected Edificio crearEdificioRequeridoNivel2(Jugador jugador, Posicion posicion) {
-		return jugador.getEdificador().crearEntrenadorUnidadesIntermedias(jugador, posicion);
+	protected Edificio crearEdificioRequeridoNivel2() {
+		return crearEn((j,p) -> jugador.getEdificador().crearEntrenadorUnidadesIntermedias(j,p),
+				Terreno.TIERRA, Tipo.CELDA_VACIA);
 	}
 
 	@Before
@@ -48,17 +55,16 @@ public class TestArchivosTemplarios extends TestEdificio {
 		// Aseguro recursos
 		jugador.agregarGasVespeno(800);
 		jugador.agregarMinerales(600);
-		this.acceso = crearRequeridoEnTierra(jugador, mapa, new Posicion(0,0));
+		this.acceso = crearEdificioRequerido();
 		for(int i = 0; i < 8; i++) acceso.pasarTurno();//Construccion
 		this.acceso = (Edificio) mapa.getOcupante(acceso.getPosicion());
-		this.puerto = crearRequeridoNivel2EnTierra(jugador, mapa, posRelativa(acceso, 1, 1));
+		this.puerto = crearEdificioRequeridoNivel2();
 		for(int i = 0; i < 10; i++) puerto.pasarTurno();//Construccion
 		this.puerto = (Edificio) mapa.getOcupante(puerto.getPosicion());
-		this.archivos = crearEnTierra(jugador, mapa, posRelativa(puerto, 1, 1));
+		this.archivos = crearEdificio();
 		for(int i = 0; i < 9; i++) archivos.pasarTurno();//Construccion
 		this.archivos = (Edificio) mapa.getOcupante(archivos.getPosicion());
-
-		this.archivosEnConst = crearEnTierra(jugador, mapa, posRelativa(archivos, 1, 1));
+		this.archivosEnConst = crearEdificio();
 	}
 
 	
@@ -67,23 +73,21 @@ public class TestArchivosTemplarios extends TestEdificio {
 		assertEquals(archivos.getNombre(),"Archivos Templarios");
 	}
 	
-	@Test
-	public void testCrearArchivosSinBarracaFalla() {
-		Jugador jugador2 = new Jugador("Prueba2", Color.AZUL, TipoRaza.PROTOSS, mapa);
+	@Test(expected = OrdenConstruccionViolado.class)
+	public void testCrearArchivosSinPuertoFalla() {
+		jugador = new Jugador("Prueba2", Color.AZUL, TipoRaza.PROTOSS, mapa);
 		// Aseguro recursos
-		jugador2.agregarGasVespeno(500);
-		jugador2.agregarMinerales(600);
-		Edificio acceso2 = crearRequeridoEnTierra(jugador2, mapa, posRelativa(archivosEnConst, 1, 1));
+		jugador.agregarGasVespeno(500);
+		jugador.agregarMinerales(600);
+		Edificio acceso = crearEdificioRequerido();
 		for(int i = 0; i < 8; i++) acceso.pasarTurno();//Construccion
-		try {
-			Edificio archivos2 = crearEnTierra(jugador2, mapa, new Posicion(0,0));
-			fail();
-		}
-		catch (OrdenConstruccionViolado e) {
-			assertTrue(true);
-			return;
-		}
-		fail();
+		crearEdificio();
+	}
+	
+	@Test(expected = OrdenConstruccionViolado.class)
+	public void testCrearArchivosLuegoDeDestruirPuertoFalla() {
+		puerto.destruir();
+		crearEdificio();
 	}
 	
 	@Test
@@ -93,53 +97,27 @@ public class TestArchivosTemplarios extends TestEdificio {
 		int costoGas = 200;
 		int costoMineral = 150;
 		
-		this.archivosEnConst = crearEnTierra(jugador, mapa, posRelativa(archivosEnConst, 1, 1));
+		this.archivosEnConst = crearEdificio();
 		
 		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
 		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
 	}
 	
-	@Test
+	@Test(expected = TerrenoInadecuado.class)
 	public void testCrearArchivosFueraDeTierraFalla() {
-		try {
-			this.archivosEnConst = crearFueraDeTierra(jugador, mapa, posRelativa(archivosEnConst, 1, 1));
-			fail();
-		}
-		catch (TerrenoInadecuado e) {
-			assertTrue(true);
-			return;
-		}
-		fail();
+		crearFueraDeTierra();
 	}
 	
-	@Test
+	@Test(expected = MineralInsuficiente.class)
 	public void testCrearArchivosSinMineralesDebeFallar() {
-		while (jugador.getMinerales() >= 150) {
-			jugador.agregarMinerales(-10);
-		}
-		try {
-			this.archivosEnConst = crearEnTierra(jugador, mapa, posRelativa(archivosEnConst, 1, 1));
-			fail();
-		}
-		catch (MineralInsuficiente e) {
-			assertTrue(true);
-			return;
-		}
+		while (jugador.getMinerales() >= 150) jugador.agregarMinerales(-10);
+		crearEdificio();
 	}
 	
-	@Test
+	@Test(expected = GasVespenoInsuficiente.class)
 	public void testCrearArchivosSinGasVespenoDebeFallar() {
-		while (jugador.getGasVespeno() >= 200) {
-			jugador.agregarGasVespeno(-10);
-		}
-		try {
-			this.archivosEnConst = crearEnTierra(jugador, mapa, posRelativa(archivosEnConst, 1, 1));
-			fail();
-		}
-		catch (GasVespenoInsuficiente e) {
-			assertTrue(true);
-			return;
-		}
+		while (jugador.getGasVespeno() >= 200) jugador.agregarGasVespeno(-10);
+		crearEdificio();
 	}
 	
 	@Test
@@ -199,36 +177,16 @@ public class TestArchivosTemplarios extends TestEdificio {
 
 	}
 	
-	@Test
+	@Test(expected = MineralInsuficiente.class)
 	public void testArchivosEntrenaUnidadSinMineralesDebeFallar() {
-		while (jugador.getMinerales() >= 50) {
-			jugador.agregarMinerales(-10);
-		}
-		try {
-			archivos.getUnidadesEntrenables().get(0).crear();
-			fail();
-		}
-		catch (MineralInsuficiente e) {
-			assertTrue(true);
-			return;
-		}
-
+		while (jugador.getMinerales() >= 50) jugador.agregarMinerales(-10);
+		archivos.getUnidadesEntrenables().get(0).crear();
 	}
 	
-	@Test
+	@Test(expected = GasVespenoInsuficiente.class)
 	public void testArchivosEntrenaUnidadSinGasVespenoDebeFallar() {
-		while (jugador.getGasVespeno() >= 150) {
-			jugador.agregarGasVespeno(-10);
-		}
-		try {
-			archivos.getUnidadesEntrenables().get(0).crear();
-			fail();
-		}
-		catch (GasVespenoInsuficiente e) {
-			assertTrue(true);
-			return;
-		}
-
+		while (jugador.getGasVespeno() >= 150) jugador.agregarGasVespeno(-10);
+		archivos.getUnidadesEntrenables().get(0).crear();
 	}
 	
 	@Test
@@ -257,20 +215,10 @@ public class TestArchivosTemplarios extends TestEdificio {
 		assertEquals(jugador.getUnidades().get(1).getNombre(), "Alto Templario");
 	}
 
-	@Test
+	@Test(expected = SuministroInsuficiente.class)
 	public void testArchviosEntrenaUnidadSinPoblacionDebeFallar() {
-		while (jugador.getCapacidadPoblacion() > 1) {
-			jugador.aumentarCapacidadPoblacion(-1);
-		}
-		try {
-			archivos.getUnidadesEntrenables().get(0).crear();
-			fail();
-		}
-		catch (SuministroInsuficiente e) {
-			assertTrue(true);
-			return;
-		}
-
+		while (jugador.getCapacidadPoblacion() > 1) jugador.aumentarCapacidadPoblacion(-1);
+		archivos.getUnidadesEntrenables().get(0).crear();
 	}
 	
 }

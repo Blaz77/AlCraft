@@ -14,37 +14,31 @@ import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.TipoOcupante;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.raza.TipoRaza;
+import fiuba.algo3.terreno.Terreno;
 
 public class TestAsimilador extends TestEdificio {
 
-	private MapaReal mapa;
-	private Jugador jugador;
-	private EdificiosFactory protossFactory;
 	private Edificio asimilador;
 	
 	@Override
-	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
-		return protossFactory.crearRecolectorGasVespeno(jugador, posicion);
+	protected Edificio crearEdificio() {
+		return crearEnVolcan();
 	}
-	
-	private Edificio crearEnVolcan(Jugador jugador, MapaReal mapa) {
-		return crearEnRecurso(jugador, mapa, Tipo.VESPENO, new Posicion(0,0));
-	}
-	
-	private Edificio crearFueraDeVolcan(Jugador jugador, MapaReal mapa) {
-		return crearFueraDeRecurso(jugador, mapa, Tipo.VESPENO, new Posicion(0,0));
+
+	@Override
+	protected Edificio crearEdificioEn(Terreno terreno, Tipo tipo) {
+		return crearEn((j,p) -> jugador.getEdificador().crearRecolectorGasVespeno(j,p), terreno, tipo);
 	}
 	
 	@Before
 	public void setUp() throws Exception {
 		mapa = new MapaReal(6);
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.PROTOSS, mapa);
-		this.protossFactory = new EdificiosFactory();
 	}
 	
 	@Test
 	public void testCrearAsimiladorEnVolcan() {
-		asimilador = crearEnVolcan(jugador, mapa);
+		asimilador = crearEdificio();
 		for(int i = 0; i < 6; i++) asimilador.pasarTurno(); // Construyendo
 		this.asimilador = (Edificio) mapa.getOcupante(asimilador.getPosicion());
 		
@@ -59,43 +53,26 @@ public class TestAsimilador extends TestEdificio {
 		int costoGas = 0;
 		int costoMineral = 100;
 		
-		this.asimilador = crearEnVolcan(jugador, mapa);
+		this.asimilador = crearEdificio();
 		
 		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
 		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
 	}
 	
-	@Test
+	@Test(expected = MineralInsuficiente.class)
 	public void testCrearAsimiladorSinMineralesDebeFallar() {
-		while (jugador.getMinerales() >= 100) {
-			jugador.agregarMinerales(-10);
-		}
-		try {
-			asimilador = crearEnVolcan(jugador, mapa);
-			fail();
-		}
-		catch (MineralInsuficiente e) {
-			assertTrue(true);
-			return;
-		}
+		while (jugador.getMinerales() >= 100) jugador.agregarMinerales(-10);
+		crearEdificio();
 	}
 	
-	@Test
+	@Test(expected = RecursoAusente.class)
 	public void testCrearAsimiladorFueraDeVolcanFalla() {
-		try {
-			this.asimilador = crearFueraDeVolcan(jugador, mapa);
-			fail();
-		}
-		catch (RecursoAusente e) {
-			assertTrue(true);
-			return;
-		}
-		fail();
+		crearEnTierra();
 	}
 	
 	@Test
 	public void testAsimiladorSubeVidaDuranteConstruccion() {
-		asimilador = crearEnVolcan(jugador, mapa);
+		asimilador = crearEdificio();
 		
 		int vidaRelativa = asimilador.getVida();
 		for(int i = 0; i < 6; i++){
@@ -108,8 +85,8 @@ public class TestAsimilador extends TestEdificio {
 	}
 	
 	@Test
-	public void testAsimiliadorSubeEscudoDuranteConstruccion() {
-		asimilador = crearEnVolcan(jugador, mapa);
+	public void testAsimiladorSubeEscudoDuranteConstruccion() {
+		asimilador = crearEdificio();
 		
 		int escudoRelativo = asimilador.getEscudo();
 		for(int i = 0; i < 6; i++){
@@ -123,7 +100,7 @@ public class TestAsimilador extends TestEdificio {
 	
 	@Test
 	public void testAsimiladorMientrasConstruyeNoRecolecta() {
-		this.asimilador = crearEnVolcan(jugador, mapa);
+		this.asimilador = crearEdificio();
 		int mineralRelativo = jugador.getMinerales();
 		
 		for(int i = 0; i < 6; i++) {
@@ -136,7 +113,7 @@ public class TestAsimilador extends TestEdificio {
 	
 	@Test
 	public void testAsimiladorRecolectaGasVespeno() {
-		asimilador = crearEnVolcan(jugador, mapa);
+		asimilador = crearEdificio();
 		for(int i = 0; i < 6; i++) asimilador.pasarTurno(); // Construyendo
 		this.asimilador = (Edificio) mapa.getOcupante(asimilador.getPosicion());
 		
@@ -152,7 +129,7 @@ public class TestAsimilador extends TestEdificio {
 	
 	@Test
 	public void testAsimiladorAlDestruirseDejaGasVespenoEnMapa() {
-		this.asimilador = crearEnVolcan(jugador, mapa);
+		this.asimilador = crearEdificio();
 		for(int i = 0; i < 6; i++) asimilador.pasarTurno(); // Construccion
 		this.asimilador = (Edificio) mapa.getOcupante(asimilador.getPosicion());
 		

@@ -14,37 +14,31 @@ import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.TipoOcupante;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.raza.TipoRaza;
+import fiuba.algo3.terreno.Terreno;
 
 public class TestCentroDeMineral extends TestEdificio{
 
-	private MapaReal mapa;
-	private Jugador jugador;
-	private EdificiosFactory terranFactory;
 	private Edificio centroMineral;
 	
 	@Override
-	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
-		return terranFactory.crearRecolectorMineral(jugador, posicion);
+	protected Edificio crearEdificio() {
+		return crearEnMineral();
 	}
-	
-	private Edificio crearEnMineral(Jugador jugador, MapaReal mapa, Posicion inicial) {
-		return crearEnRecurso(jugador, mapa, Tipo.MINERAL, inicial);
-	}
-	
-	private Edificio crearFueraDeMineral(Jugador jugador, MapaReal mapa, Posicion inicial) {
-		return crearFueraDeRecurso(jugador, mapa, Tipo.MINERAL, inicial);
+
+	@Override
+	protected Edificio crearEdificioEn(Terreno terreno, Tipo tipo) {
+		return crearEn((j,p) -> jugador.getEdificador().crearRecolectorMineral(j,p), terreno, tipo);
 	}
 	
 	@Before
 	public void setUp() {
 		mapa = new MapaReal(6);
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
-		this.terranFactory = new EdificiosFactory();
 	}
 	
 	@Test
 	public void testCrearCentroDeMineral() {
-		this.centroMineral = crearEnMineral(jugador, mapa, new Posicion(0,0));
+		this.centroMineral = crearEdificio();
 		for(int i = 0; i < 4; i++) centroMineral.pasarTurno();
 		this.centroMineral = (Edificio) mapa.getOcupante(centroMineral.getPosicion());
 		assertEquals(centroMineral.getNombre(),"Centro de Mineral");
@@ -57,43 +51,26 @@ public class TestCentroDeMineral extends TestEdificio{
 		int costoGas = 0;
 		int costoMineral = 50;
 		
-		this.centroMineral = crearEnMineral(jugador, mapa, new Posicion(0,0));
+		this.centroMineral = crearEdificio();
 		
 		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
 		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
 	}
 	
-	@Test
+	@Test(expected = MineralInsuficiente.class)
 	public void testCrearCentroDeMineralSinRecursosDebeFallar() {
-		while (jugador.getMinerales() >= 50) {
-			jugador.agregarMinerales(-10);
-		}
-		try {
-			this.centroMineral = crearEnMineral(jugador, mapa, new Posicion(0,0));
-			fail();
-		}
-		catch (MineralInsuficiente e) {
-			assertTrue(true);
-			return;
-		}
+		while (jugador.getMinerales() >= 50) jugador.agregarMinerales(-10);
+		crearEdificio();
 	}
 	
-	@Test
+	@Test(expected = RecursoAusente.class)
 	public void testCrearCentroDeMineralFueraDeMineralFalla() {
-		try {
-			this.centroMineral = crearFueraDeMineral(jugador, mapa, new Posicion(0,0));
-			fail();
-		}
-		catch (RecursoAusente e) {
-			assertTrue(true);
-			return;
-		}
-		fail();
+		crearEnTierra();
 	}
 	
 	@Test
 	public void testCentroDeMineralSubeVidaDuranteConstruccion() {
-		this.centroMineral = crearEnMineral(jugador, mapa, new Posicion(0,0));
+		this.centroMineral = crearEdificio();
 		int vidaRelativa = centroMineral.getVida();
 		for(int i = 0; i < 4; i++){
 			centroMineral.pasarTurno();
@@ -106,7 +83,7 @@ public class TestCentroDeMineral extends TestEdificio{
 	
 	@Test
 	public void testCentroDeMineralMientrasConstruyeNoRecolecta() {
-		this.centroMineral = crearEnMineral(jugador, mapa, new Posicion(0,0));
+		this.centroMineral = crearEdificio();
 		int mineralRelativo = jugador.getMinerales();
 		
 		for(int i = 0; i < 4; i++) {
@@ -119,7 +96,7 @@ public class TestCentroDeMineral extends TestEdificio{
 	
 	@Test
 	public void testCentroDeMineralRecolectaMinerales() {
-		this.centroMineral = crearEnMineral(jugador, mapa, new Posicion(0,0));
+		this.centroMineral = crearEdificio();
 		for(int i = 0; i < 4; i++) centroMineral.pasarTurno(); // Construccion
 		this.centroMineral = (Edificio) mapa.getOcupante(centroMineral.getPosicion());
 	
@@ -135,7 +112,7 @@ public class TestCentroDeMineral extends TestEdificio{
 	
 	@Test
 	public void testCentroDeMineralAlDestruirseDejaMineralEnMapa() {
-		this.centroMineral = crearEnMineral(jugador, mapa, new Posicion(0, 0));
+		this.centroMineral = crearEdificio();
 		for(int i = 0; i < 4; i++) centroMineral.pasarTurno(); // Construccion
 		this.centroMineral = (Edificio) mapa.getOcupante(centroMineral.getPosicion());
 		
