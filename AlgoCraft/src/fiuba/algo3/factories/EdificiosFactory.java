@@ -11,16 +11,18 @@ import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 
 public class EdificiosFactory implements EdificiosAbstractFactory{
+	private final int NO_HABILITADO = 0;
+	private final int HABILITADO = 1;
 	
 	private HashMap<Tipo,Integer> libreParaConstruccion = new HashMap<Tipo,Integer>();
 	
 	public void denegarConstruccionEdificio(Tipo tipo){
-		Integer liberadores = libreParaConstruccion.getOrDefault(tipo, 1);
+		Integer liberadores = libreParaConstruccion.getOrDefault(tipo, HABILITADO);
 		libreParaConstruccion.put(tipo, liberadores-1);
 	}
 	
 	public void permitirConstruccionEdificio(Tipo tipo){
-		Integer liberadores = libreParaConstruccion.getOrDefault(tipo, 0);
+		Integer liberadores = libreParaConstruccion.getOrDefault(tipo, NO_HABILITADO);
 		libreParaConstruccion.put(tipo, liberadores+1);
 	}
 	
@@ -28,14 +30,22 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 		jugador.comprar(atributos.getCosto().getCostoMineral(), atributos.getCosto().getCostoGasVespeno());
 	}
 	
-	private void verificarOrdenConstruccion(Tipo tipo) {
-		if (libreParaConstruccion.getOrDefault(tipo, 1) <= 0) throw new OrdenConstruccionViolado();
+	private void verificarOrdenConstruccion(Jugador jugador, AtributosEdificio atributos, Tipo tipo) {
+		// Mejorar
+		if (libreParaConstruccion.getOrDefault(tipo, HABILITADO) <= NO_HABILITADO) {
+			if (jugador.getAtributos().getEntrenadorUnidadesAvanzadas().getTipo() == tipo) {
+				throw new OrdenConstruccionViolado(jugador.getAtributos().getEntrenadorUnidadesIntermedias().getNombre());
+			}
+			else if (jugador.getAtributos().getEntrenadorUnidadesIntermedias().getTipo() == tipo) {
+				throw new OrdenConstruccionViolado(jugador.getAtributos().getEntrenadorUnidadesBasicas().getNombre());
+			}
+		}
 	}
 	
 	//public para la interfaz!
 	public Edificio crearEdificio(Jugador jugador, Posicion posicion, AtributosEdificio atributos){
 		// Chequeo de orden construccion. 
-		verificarOrdenConstruccion(atributos.getTipo());
+		verificarOrdenConstruccion(jugador, atributos, atributos.getTipo());
 		//
 		Edificio edificio = new Edificio(jugador, posicion, new AtributosConstruccion(atributos));
 		// Chequeo de terreno y/o recurso:
