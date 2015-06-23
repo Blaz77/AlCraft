@@ -79,7 +79,7 @@ public class TestNaveDeCiencia extends TestUnidadMagica {
 		this.llenarEnergia();
 		
 		int energiaRelativa = unidad.getEnergia();
-		unidad.getMagiaDeAreaDeEfecto().ejecutar(unidad.getPosicion(), mapa);
+		unidad.getMagiaDeAreaDeEfecto().ejecutar(unidad.getPosicion());
 		assertEquals(energiaRelativa - 100, unidad.getEnergia());
 		
 		energiaRelativa = unidad.getEnergia();
@@ -93,7 +93,7 @@ public class TestNaveDeCiencia extends TestUnidadMagica {
 		
 		assertTrue(unidadEnemigaMagica.getEnergia() != 0);
 
-		unidad.getMagiaDeAreaDeEfecto().ejecutar(unidad.getPosicion(), mapa);
+		unidad.getMagiaDeAreaDeEfecto().ejecutar(unidad.getPosicion());
 		assertTrue(unidadEnemigaMagica.getEnergia() == 0);
 	}
 	
@@ -104,7 +104,7 @@ public class TestNaveDeCiencia extends TestUnidadMagica {
 		int energiaRelativa = otraUnidad.getEnergia();
 		assertTrue(energiaRelativa != 0);
 
-		unidad.getMagiaDeAreaDeEfecto().ejecutar(unidad.getPosicion(), mapa);
+		unidad.getMagiaDeAreaDeEfecto().ejecutar(unidad.getPosicion());
 		assertEquals(otraUnidad.getEnergia(), energiaRelativa);
 	}
 	

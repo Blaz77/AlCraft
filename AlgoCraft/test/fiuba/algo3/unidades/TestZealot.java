@@ -7,8 +7,7 @@ import org.junit.Test;
 
 import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
-import fiuba.algo3.mapa.Posicion;
-import fiuba.algo3.ocupantes.edificios.Barraca;
+import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.raza.TipoRaza;
 
@@ -20,11 +19,11 @@ public class TestZealot extends TestUnidadAtaque {
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.PROTOSS, mapa);
 		this.unidad = new Unidad(this.jugador, POSICION_A, jugador.getAtributos().getInfanteriaLivianaTerrestre());
 		this.otraUnidad = new Unidad(this.jugador, POSICION_B, jugador.getAtributos().getInfanteriaLivianaTerrestre());
-		this.edificioPropio = new Barraca(this.jugador, POSICION_C);
+		this.edificioPropio = new Edificio(this.jugador, POSICION_C, jugador.getAtributos().getEntrenadorUnidadesBasicas());
 		this.jugadorEnemigo = new Jugador("Enemigo", Color.ROJO, TipoRaza.TERRAN, mapa);
 		this.unidadEnemigaTerrestre = new Unidad(jugadorEnemigo, POSICION_D, jugadorEnemigo.getAtributos().getInfanteriaLivianaTerrestre());
 		this.unidadEnemigaAerea = new Unidad(jugadorEnemigo, POSICION_E, jugadorEnemigo.getAtributos().getInfanteriaPesadaArea());
-		this.edificioEnemigo = new Barraca(jugadorEnemigo, POSICION_H);	
+		this.edificioEnemigo = new Edificio(jugadorEnemigo, POSICION_H, jugadorEnemigo.getAtributos().getEntrenadorUnidadesBasicas());	
 		
 		this.danioTierra = 8;
 		this.danioAire = 0;

@@ -9,8 +9,7 @@ import fiuba.algo3.excepciones.NoEsUnAliado;
 import fiuba.algo3.excepciones.UnidadNoEsAlmacenable;
 import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
-import fiuba.algo3.mapa.Posicion;
-import fiuba.algo3.ocupantes.edificios.Barraca;
+import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.raza.TipoRaza;
 
@@ -25,11 +24,11 @@ public class TestNaveDeTransporteTerran extends TestUnidadTransporte {
 		this.unidad = new Unidad(this.jugador, POSICION_A, jugador.getAtributos().getTransporte());
 		this.pasajero = new Unidad(this.jugador, POSICION_B, jugador.getAtributos().getInfanteriaLivianaTerrestre());
 		this.unidadVoladora = new Unidad(this.jugador, POSICION_C, jugador.getAtributos().getInfanteriaPesadaArea());
-		this.edificioPropio = new Barraca(this.jugador, POSICION_D);
+		this.edificioPropio = new Edificio(this.jugador, POSICION_D, jugador.getAtributos().getEntrenadorUnidadesBasicas());
 		this.jugadorEnemigo = new Jugador("Enemigo", Color.ROJO, TipoRaza.TERRAN, mapa);
 		this.unidadEnemigaTerrestre = new Unidad(jugadorEnemigo, POSICION_E, jugadorEnemigo.getAtributos().getInfanteriaLivianaTerrestre());
 		this.unidadEnemigaAerea = new Unidad(jugadorEnemigo, POSICION_F, jugadorEnemigo.getAtributos().getInfanteriaPesadaArea());
-		this.edificioEnemigo = new Barraca(jugadorEnemigo, POSICION_G);	
+		this.edificioEnemigo = new Edificio(jugadorEnemigo, POSICION_G, jugadorEnemigo.getAtributos().getEntrenadorUnidadesBasicas());	
 		
 		this.capacidad = 8;
 		
