@@ -37,6 +37,11 @@ public class AtributosPuertoEstelar extends AtributosEdificio {
 	public IEntrenadorUnidades getEntrenadorUnidades() {
 		return new EntrenadorUnidades(this.entrenador);
 	}
+	
+	@Override
+	public Tipo getEdificioRequerido() {
+		return Tipo.FABRICA;
+	}
 
 	
 }

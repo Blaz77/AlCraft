@@ -10,6 +10,7 @@ import fiuba.algo3.componentes.IEntrenadorUnidades;
 import fiuba.algo3.componentes.IVida;
 import fiuba.algo3.componentes.Vida;
 import fiuba.algo3.componentes.VidaConEscudo;
+import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.unidades.constructores.Constructor;
 
 public abstract class AtributosEdificio extends AtributosObjetoVivo {
@@ -24,5 +25,9 @@ public abstract class AtributosEdificio extends AtributosObjetoVivo {
 	@Override
 	public IVida getVida() {
 		return new Vida(this.vida);
+	}
+	
+	public Tipo getEdificioRequerido() {
+		return null;
 	}
 }
