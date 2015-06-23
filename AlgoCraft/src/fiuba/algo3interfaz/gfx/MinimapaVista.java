@@ -30,6 +30,7 @@ public class MinimapaVista extends JPanel implements MouseListener {
 	private static final int ALTO_CELDA = SpriteSheet.spritesTierra.getAlto();
 	private static final int ANCHO_MAPA = 100;
 	private int ALTO_MAPA;
+	private int DISTANCIA_INFERIOR_MAPA;	// Sirve para centrar el mapa de altura variable
 	private static final int ANCHO_HUD = 640;
 	private static final int ALTURA_HUD = 165;
 	
@@ -57,7 +58,8 @@ public class MinimapaVista extends JPanel implements MouseListener {
 		this.alto = datosMapa.alto();
 		
 		this.factorEscala = (float) this.ancho / (float) ANCHO_MAPA;
-		this.ALTO_MAPA = this.alto; // Medio deforme se va a ver
+		this.ALTO_MAPA = this.alto;
+		this.DISTANCIA_INFERIOR_MAPA = 65 + ALTO_MAPA / 2 ;
 		
 		this.bufferMinimapa = new BufferedImage(ANCHO_MAPA, ALTO_MAPA, BufferedImage.TYPE_INT_RGB);
 		
@@ -147,7 +149,7 @@ public class MinimapaVista extends JPanel implements MouseListener {
 
 	private void dibujarBuffer(Graphics g) {
 		int x = (panel.getWidth() / 2) - 300;
-		int y = panel.getHeight() - 100;
+		int y = panel.getHeight() - DISTANCIA_INFERIOR_MAPA;
 		
 		g.drawImage(bufferMinimapa, x, y, null);
 		
@@ -156,7 +158,7 @@ public class MinimapaVista extends JPanel implements MouseListener {
 	private void dibujarCuadroCamara(Graphics g) {
 		int x_mini = (panel.getWidth() / 2) - 300;
 		x_mini += (int) Math.floor((this.camara.getxOffset() / 32) / this.factorEscala);
-		int y_mini = panel.getHeight() - 100;
+		int y_mini = panel.getHeight() - DISTANCIA_INFERIOR_MAPA;
 		y_mini += (int) Math.floor((this.camara.getyOffset() / 32));
 		int ancho_mini = (int) Math.floor((panel.getWidth() / (datosMapa.ancho()*32.0f) * ANCHO_MAPA));
 		int alto_mini = (int) Math.floor((panel.getHeight() / (datosMapa.alto()*32.0f) * ALTO_MAPA));
