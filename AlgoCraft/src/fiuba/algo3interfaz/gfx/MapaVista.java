@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
 import java.awt.image.RescaleOp;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -37,7 +38,8 @@ public class MapaVista {
 	private CeldaVista[][] mapaVista;
 	private Camara camara;
 	private int filSeleccionada;
-	private int colSeleccionada;	
+	private int colSeleccionada;
+	private ArrayList<Posicion> celdasTonalizadas;	
 
 	public MapaVista(Jugador jugador, JPanel panel){
 		
@@ -50,6 +52,7 @@ public class MapaVista {
 		this.filSeleccionada = datosMapa.getPosicionInicial().getX();
 		this.colSeleccionada = datosMapa.getPosicionInicial().getY();
 		this.mapaVista = new CeldaVista[ancho][alto];
+		this.celdasTonalizadas = new ArrayList<Posicion>;
 		this.camara = new Camara(filSeleccionada*ANCHO_CELDA - panel.getWidth() / 2, 
 								colSeleccionada*ANCHO_CELDA - panel.getHeight() / 2, 
 								ancho*ANCHO_CELDA, alto*ALTO_CELDA, panel);

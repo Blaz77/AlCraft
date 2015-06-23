@@ -154,7 +154,6 @@ public class MinimapaVista extends JPanel implements MouseListener {
 	}
 
 	private void dibujarCuadroCamara(Graphics g) {
-		// Recalcular, esto quedo mal
 		int x_mini = (panel.getWidth() / 2) - 300;
 		x_mini += (int) Math.floor((this.camara.getxOffset() / 32) / this.factorEscala);
 		int y_mini = panel.getHeight() - 100;
