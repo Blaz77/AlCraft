@@ -67,13 +67,13 @@ public class MapaProxy implements Mapa {
 	private void _cambiarIluminacion(Unidad unidad, int vision, Posicion centro, boolean quieroIluminar){
 		int pos_x, pos_y;
 		Posicion posActual;
-		for (int x = -vision; x < vision + 1; x++)
-			for (int y = -vision; y < vision + 1; y++){
+		for (int x = -vision; x < vision; x++)
+			for (int y = -vision; y < vision; y++){
 				pos_x = centro.getX() + x;
 				pos_y = centro.getY() + y;
-				if (pos_x < 0 || pos_y < 0) 
-					continue;
 				posActual = new Posicion(pos_x, pos_y); 
+				if (! celdaValida(posActual)) 
+					continue;
 				if (centro.distancia(posActual) > vision)
 					continue;
 				if (quieroIluminar)

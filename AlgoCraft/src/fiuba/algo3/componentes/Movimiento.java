@@ -7,6 +7,7 @@ import java.util.Queue;
 
 import fiuba.algo3.atributos.AtributosMovimiento;
 import fiuba.algo3.excepciones.MovimientoInvalido;
+import fiuba.algo3.excepciones.PosicionOcupada;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.ObjetoVivo;
@@ -58,9 +59,10 @@ public class Movimiento implements IMovimiento, Estado {
 	}
 	
 	public void moverA(Posicion destino){
-		if (!portador.getPosicion().estaEnRango(destino, movRestantes)) throw new MovimientoInvalido();
-		this.portador.getPropietario().getMapa().verificarOcupacion(this.portador, destino);
-		
+		if (! puedeMoverseA(destino)) {
+			throw new MovimientoInvalido();
+		}
+			
 		this.movRestantes -= portador.getPosicion().distancia(destino);
 		portador.getPropietario().getMapa().mover(this.portador, destino);
 		portador.setPosicion(destino);
@@ -74,7 +76,7 @@ public class Movimiento implements IMovimiento, Estado {
 		
 	}
 	
-	
+	/* BFS que agrega todas las posiciones de movimiento posibles, sin incluir la actual */
 	public void _getPosiblesMovimientos(Mapa mapa, HashSet<Posicion> posiblesMov, Posicion posicionActual, int distancia){
 		ArrayList<Posicion> visitados = new ArrayList<Posicion>();
 		Queue<Posicion> cola = new LinkedList<Posicion>();
@@ -85,7 +87,8 @@ public class Movimiento implements IMovimiento, Estado {
 		while (! cola.isEmpty()) {
 			v = cola.poll();
 			for (Posicion w : v.getAdyacentes()) {
-				if (! visitados.contains(w) && w.distancia(posicionActual) <= distancia) {
+				if (! visitados.contains(w) && w.distancia(posicionActual) <= distancia &&
+						mapa.celdaValida(w) && portador.getPropietario().getMapa().puedeOcupar(portador, w)) {
 					visitados.add(w);
 					cola.add(w);
 				}

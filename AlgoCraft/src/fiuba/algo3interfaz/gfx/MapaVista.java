@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
+import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.TipoOcupante;
 import fiuba.algo3.terreno.Terreno;
@@ -163,6 +164,8 @@ public class MapaVista {
 			dibujarObjetoVivo(g, x, y, tipo);
 		else if (tipo.getTipoOcupante() == TipoOcupante.RECURSO)
 			dibujarRecurso(g, x, y, tipo);
+		else
+			throw new RuntimeException();
 
 	}
 

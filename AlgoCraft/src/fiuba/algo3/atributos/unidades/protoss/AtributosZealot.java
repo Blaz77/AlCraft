@@ -37,7 +37,7 @@ public class AtributosZealot extends AtributosUnidad {
 		
 		// fields de Unidad:
 		this.movimiento = new AtributosMovimiento(
-				1,		// movPorTuno
+				3,		// movPorTuno
 				7,		// rangoVision
 				2);		// costoAlmacenamiento
 		

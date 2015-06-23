@@ -37,7 +37,7 @@ public class AtributosDragon extends AtributosUnidad {
 
 		// fields de Unidad:
 		this.movimiento = new AtributosMovimiento(
-				1,		// movPorTuno
+				2,		// movPorTuno
 				8,		// rangoVision
 				4);		// costoAlmacenamiento
 
