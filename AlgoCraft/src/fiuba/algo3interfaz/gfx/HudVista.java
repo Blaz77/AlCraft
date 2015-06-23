@@ -232,7 +232,9 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 			/* Barra de vida */
 			g.fillRect(ORIGEN_X, ORIGEN_Y + 10, ANCHO_VIDA, 10);
 			g.setColor(java.awt.Color.GREEN);
-			g.fillRect(ORIGEN_X, ORIGEN_Y + 10, Math.floorDiv(entidad.getVida()* ANCHO_VIDA, entidad.getVidaMaxima()) , 10);
+			g.fillRect(ORIGEN_X, ORIGEN_Y + 10, Math.floorDiv(entidad.getVida() * ANCHO_VIDA, entidad.getVidaMaxima()), 10);
+			g.setColor(java.awt.Color.WHITE);
+			g.drawString(String.format("%d / %d", entidad.getVida(), entidad.getVidaMaxima()), ORIGEN_X + ANCHO_VIDA + 5, ORIGEN_Y + 21);
 			
 			/* Propietario: Color y nombre */
 			java.awt.Color colorPropietario = AdaptadorColor.values()[entidad.getPropietario().getColor().ordinal()].getColorAwtAsociado();
