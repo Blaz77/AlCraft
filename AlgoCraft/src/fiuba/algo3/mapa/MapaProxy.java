@@ -182,8 +182,7 @@ public class MapaProxy implements Mapa {
 		this.mapa.verificarOcupacion(ocupante, posicion);		
 	}
 	public ArrayList<Unidad> getUnidadesEnRango(Posicion centro, int distancia) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.mapa.getUnidadesEnRango(centro, distancia);
 	}
 	
 	/**********************************************/

@@ -28,10 +28,13 @@ import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3interfaz.Game;
 import fiuba.algo3interfaz.input.BotonBotonera;
 import fiuba.algo3interfaz.input.UtilizadorDeCeldas;
+import fiuba.algo3interfaz.input.btnAlmacenar;
 import fiuba.algo3interfaz.input.btnAtacar;
 import fiuba.algo3interfaz.input.btnCancelarMouseListener;
 import fiuba.algo3interfaz.input.btnConstruirMouseListener;
 import fiuba.algo3interfaz.input.btnEntrenar;
+import fiuba.algo3interfaz.input.btnLiberar;
+import fiuba.algo3interfaz.input.btnMagias;
 import fiuba.algo3interfaz.input.btnMover;
 
 
@@ -72,8 +75,11 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 	//public static BufferedImage picEntrenar = ImageLoader.loadImage("/textures/entrenar.png");
 	// TODO : tomar img para los de abajo!
 	public static BufferedImage picEntrenar = ImageLoader.loadImage("/textures/terran.png");
-	public static BufferedImage picAtacar = ImageLoader.loadImage("/textures/terran.png");
 	public static BufferedImage picMover = ImageLoader.loadImage("/textures/construir.png");
+	public static BufferedImage picAtacar = ImageLoader.loadImage("/textures/terran.png");
+	public static BufferedImage picAlmacenar = ImageLoader.loadImage("/textures/construir.png");
+	public static BufferedImage picLiberar = ImageLoader.loadImage("/textures/construir.png");
+	public static BufferedImage picMagias = ImageLoader.loadImage("/textures/construir.png");
 	
 	public static final int ANCHO = 640;
 	public static final int ALTO = 192;
@@ -165,7 +171,7 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 									atributos.getEntrenadorUnidadesAvanzadas().getTipo()}){
 			this.botoneras.put(tipo, botoneraEdificioEntrenador);
 		}
-													//new btnMover
+											
 		Botonera botoneraUnidadAtaque = new Botonera(
 				new btnMover(this, picMover),
 				new btnAtacar(this, picAtacar));
@@ -176,7 +182,18 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 			this.botoneras.put(tipo, botoneraUnidadAtaque);
 		}
 		
+		Botonera botoneraUnidadTransporte = new Botonera(
+				new btnMover(this, picMover),
+				new btnAlmacenar(this, picAlmacenar),
+				new btnLiberar(this, this.jugador, picLiberar));
 		
+		this.botoneras.put(atributos.getTransporte().getTipo(), botoneraUnidadTransporte);
+		
+		Botonera botoneraUnidadMagica = new Botonera(
+				new btnMover(this, picMover),
+				new btnMagias(this, picMagias));
+		
+		this.botoneras.put(atributos.getInfanteriaMagica().getTipo(), botoneraUnidadMagica);
 	}
 	
 	private BufferedImage loadHUD(TipoRaza raza) {

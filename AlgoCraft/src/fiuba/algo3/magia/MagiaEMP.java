@@ -1,7 +1,6 @@
 package fiuba.algo3.magia;
 
 import fiuba.algo3.excepciones.FueraDelRangoPermitido;
-import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 
@@ -25,12 +24,13 @@ public class MagiaEMP implements MagiaDeAreaDeEfecto {
 				this.unidad.puedeDisminuirEnergia(this.costoDeEjecutar));
 	}
 
-	public void ejecutar(Posicion posicionCentral, Mapa mapa) {
+	public void ejecutar(Posicion posicionCentral) {
 		if (!this.unidad.estaEnRangoDeMagia(posicionCentral))
 			throw new FueraDelRangoPermitido();
 		this.unidad.disminuirEnergia(this.costoDeEjecutar);
 		
-		for (Unidad unidad : mapa.getUnidadesEnRango(posicionCentral, rangoAoE)) {
+		for (Unidad unidad : unidad.getPropietario().getMapa()
+				.getUnidadesEnRango(posicionCentral, rangoAoE)) {
 			if (unidad.getPropietario() != this.unidad.getPropietario()) {
 				unidad.disminuirEnergia(unidad.getEnergia());
 			}
