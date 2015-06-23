@@ -30,7 +30,7 @@ public class btnLiberar extends BotonBotonera {
 		BotonBotonera[] botones = new BotonBotonera[transporte.getUnidadesAlmacenadas().size()];
 		int i = 0;
 		for (Pasajero pasajero : transporte.getUnidadesAlmacenadas()) {
-			botones[i] = new btnPasajero(jugador, pasajero);
+			botones[i] = new btnPasajero(this, jugador, pasajero);
 			i++;
 		}
 		

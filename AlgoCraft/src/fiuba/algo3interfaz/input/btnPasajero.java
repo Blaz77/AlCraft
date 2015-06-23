@@ -9,16 +9,17 @@ import fiuba.algo3.ocupantes.unidades.constructores.Constructor;
 public class btnPasajero extends BotonBotonera {
 
 	private Pasajero pasajero;
+	private BotonBotonera btnOrigen;
 	
-	public btnPasajero(Jugador jugador, Pasajero pasajero){
+	public btnPasajero(BotonBotonera btnOrigen, Jugador jugador, Pasajero pasajero){
 		super(jugador, pasajero.getTipo());
 		this.pasajero = pasajero;
+		this.btnOrigen = btnOrigen;
 	}
 	
 	public void actionPerformed(ActionEvent e) {
 		pasajero.salir();
-		//va a quedar el pasajero mostrado aunque haya salido
-		//restablecer la vista ? 
+		btnOrigen.actionPerformed(null); //vuelva a armar una botonera actualizada!
 	}
 
 }
