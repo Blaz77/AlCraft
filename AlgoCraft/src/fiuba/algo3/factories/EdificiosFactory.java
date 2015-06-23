@@ -30,22 +30,15 @@ public class EdificiosFactory implements EdificiosAbstractFactory{
 		jugador.comprar(atributos.getCosto().getCostoMineral(), atributos.getCosto().getCostoGasVespeno());
 	}
 	
-	private void verificarOrdenConstruccion(Jugador jugador, AtributosEdificio atributos, Tipo tipo) {
-		// Mejorar
-		if (libreParaConstruccion.getOrDefault(tipo, HABILITADO) <= NO_HABILITADO) {
-			if (jugador.getAtributos().getEntrenadorUnidadesAvanzadas().getTipo() == tipo) {
-				throw new OrdenConstruccionViolado(jugador.getAtributos().getEntrenadorUnidadesIntermedias().getNombre());
-			}
-			else if (jugador.getAtributos().getEntrenadorUnidadesIntermedias().getTipo() == tipo) {
-				throw new OrdenConstruccionViolado(jugador.getAtributos().getEntrenadorUnidadesBasicas().getNombre());
-			}
-		}
+	private void verificarOrdenConstruccion(AtributosEdificio atributos) {
+		if (libreParaConstruccion.getOrDefault(atributos.getTipo(), HABILITADO) <= NO_HABILITADO)
+			throw new OrdenConstruccionViolado(atributos);
 	}
 	
 	//public para la interfaz!
 	public Edificio crearEdificio(Jugador jugador, Posicion posicion, AtributosEdificio atributos){
 		// Chequeo de orden construccion. 
-		verificarOrdenConstruccion(jugador, atributos, atributos.getTipo());
+		verificarOrdenConstruccion(atributos);
 		//
 		Edificio edificio = new Edificio(jugador, posicion, new AtributosConstruccion(atributos));
 		// Chequeo de terreno y/o recurso:
