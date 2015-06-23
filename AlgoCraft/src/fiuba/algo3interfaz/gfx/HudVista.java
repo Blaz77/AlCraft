@@ -218,16 +218,26 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 		
 		final int ORIGEN_X = panel.getWidth() / 2 - 150;
 		final int ORIGEN_Y = panel.getHeight() - 75;
+		final int FINAL_X = panel.getWidth() / 2 + 72;
+		final int FINAL_Y = panel.getWidth() - 5;
 		final int ANCHO_VIDA = 50;
 		
+		/* Nombre */
 		g.drawString(this.mapaVisible.getOcupante(celdaSeleccionada).getTipo().getNombre(), ORIGEN_X, ORIGEN_Y);
 		if (this.mapaVisible.getOcupante(celdaSeleccionada).getTipo().getTipoOcupante() == TipoOcupante.EDIFICIO ||
 				this.mapaVisible.getOcupante(celdaSeleccionada).getTipo().getTipoOcupante() == TipoOcupante.UNIDAD) {
 			ObjetoVivo entidad = (ObjetoVivo) this.mapaVisible.getOcupante(celdaSeleccionada);
 			
+			/* Barra de vida */
 			g.fillRect(ORIGEN_X, ORIGEN_Y + 10, ANCHO_VIDA, 10);
 			g.setColor(java.awt.Color.GREEN);
 			g.fillRect(ORIGEN_X, ORIGEN_Y + 10, entidad.getVida() / entidad.getVidaMaxima() * ANCHO_VIDA, 10);
+			
+			/* Propietario: Color y nombre */
+			java.awt.Color colorPropietario = AdaptadorColor.values()[entidad.getPropietario().getColor().ordinal()].getColorAwtAsociado();
+			String nombrePropietario = entidad.getPropietario().getNombre();
+			g.setColor(colorPropietario);
+			g.drawString(nombrePropietario, FINAL_X - g.getFontMetrics().stringWidth(nombrePropietario), ORIGEN_Y + 20);
 		}
 	}
 	
