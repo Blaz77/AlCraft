@@ -25,7 +25,9 @@ public class CopyOfSpriteSheet {
 	private final static String MARCA_MAPA_PATH = "/textures/marcaMapa.png";
 	private static final String PLAYER_PALETTE_PATH = "/palettes/player_palette.png";
 	private static final String TERRAN_PATH = "/textures/ocupantesTerran.png";
+	private static final String ACCIONES_TERRAN_PATH = "/textures/accionesTerran.png";;
 	private static final String PROTOSS_PATH = "/textures/ocupantesProtoss.png";
+	private static final String ACCIONES_PROTOSS_PATH = "/textures/accionesProtoss.png";;
 	private static final String ZERG_PATH = null;
 	//private static final String ZERG_PATH = "/textures/ocupantesZerg.png"; 
 
@@ -41,7 +43,9 @@ public class CopyOfSpriteSheet {
 	public static CopyOfSpriteSheet spritesVespeno = new CopyOfSpriteSheet(VESPENO_PATH);
 	
 	public static CopyOfSpriteSheet spritesTerran = new CopyOfSpriteSheet(TERRAN_PATH);
+	public static CopyOfSpriteSheet spritesAccionesTerran = new CopyOfSpriteSheet(ACCIONES_TERRAN_PATH);
 	public static CopyOfSpriteSheet spritesProtoss = new CopyOfSpriteSheet(PROTOSS_PATH);
+	public static CopyOfSpriteSheet spritesAccionesProtoss = new CopyOfSpriteSheet(ACCIONES_PROTOSS_PATH);
 
 	private static HashMap<Jugador, CopyOfSpriteSheet> spritesJugador = new HashMap<Jugador, CopyOfSpriteSheet>();
 	private static HashMap<Tipo, CopyOfSpriteSheet>	spritesRecurso = new HashMap<Tipo, CopyOfSpriteSheet>(){
@@ -55,6 +59,15 @@ public class CopyOfSpriteSheet {
         			
             put(TipoRaza.TERRAN, spritesTerran);
             put(TipoRaza.PROTOSS, spritesProtoss);
+            
+        }
+    };	
+
+	private static HashMap<TipoRaza, CopyOfSpriteSheet> spritesAccionesRaza = new HashMap<TipoRaza, CopyOfSpriteSheet>(){
+        {
+        			
+            put(TipoRaza.TERRAN, spritesAccionesTerran);
+            put(TipoRaza.PROTOSS, spritesAccionesProtoss);
             
         }
     };	
@@ -82,6 +95,10 @@ public class CopyOfSpriteSheet {
 	
 	public static CopyOfSpriteSheet getSprites(Object object) {
 		return spritesRaza.get(object);
+	}	
+	
+	public static CopyOfSpriteSheet getSpritesAcciones(TipoRaza raza) {
+		return spritesRaza.get(raza);
 	}	
 	
 	public static void inicializar() {
