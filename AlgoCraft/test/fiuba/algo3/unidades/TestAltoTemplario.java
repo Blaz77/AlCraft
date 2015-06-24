@@ -5,9 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import fiuba.algo3.excepciones.FueraDelRangoPermitido;
 import fiuba.algo3.excepciones.NoEsUnAliado;
 import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
+import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.raza.TipoRaza;
@@ -88,6 +90,19 @@ public class TestAltoTemplario extends TestUnidadMagica {
 		energiaRelativa = unidad.getEnergia();
 		unidad.getMagiaAUnidad().ejecutar(unidadAliadaAtaque);
 		assertEquals(energiaRelativa - COSTO_ALUCINACION, unidad.getEnergia());
+	}
+	
+	@Test(expected = FueraDelRangoPermitido.class)
+	public void testMagiaAUnidadFueraDeRangoLanzaExcepcion() {
+		this.llenarEnergia();
+		otraUnidad.setPosicion(new Posicion(40,20));
+		unidad.getMagiaAUnidad().ejecutar(otraUnidad);
+	}
+	
+	@Test(expected = FueraDelRangoPermitido.class)
+	public void testMagiaDeAreaDeEfectoFueraDeRangoLanzaExcepcion() {
+		this.llenarEnergia();
+		unidad.getMagiaDeAreaDeEfecto().ejecutar(new Posicion(40,20));
 	}
 	
 	@Test

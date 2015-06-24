@@ -1,21 +1,32 @@
 package fiuba.algo3.componentes;
 
 import fiuba.algo3.ocupantes.ObjetoVivo;
+import fiuba.algo3.ocupantes.unidades.Unidad;
 
 public class EstadoIrradiado implements Estado {
 
-	ObjetoVivo portador;
-	int danio;
+	private final int distancia = 1;
+	private ObjetoVivo portador;
+	private final float factorPortador = 0.10f;
+	private final float factorCercanos = 0.05f;
+	
+	private int getDanio(int danio, float factor){
+		return Math.max((int) (danio * factor), 1);
+	}
 	
 	public void activar(ObjetoVivo portador) {
-		//sacar vida aca tambien?
 		this.portador = portador;
-		this.danio = (int) (portador.getVidaMaxima() * 0.10);
+		this.portador.recibirDanio(getDanio(portador.getVidaMaxima(), factorPortador));
 	}
 
 	public void pasarTurno() throws Exception {
-		this.portador.recibirDanio(danio);
-		//TODO: FALTA EL DANIO A LAS UNIDADES PROXIMAS!
+		this.portador.recibirDanio(getDanio(portador.getVidaMaxima(), factorPortador));
+		
+		for (Unidad unidad : portador.getPropietario().getMapa().
+				getUnidadesEnRango(portador.getPosicion(), distancia)) {
+			if (unidad == portador) continue;
+			unidad.recibirDanio(getDanio(unidad.getVidaMaxima(), factorCercanos));
+		}
 	}
 
 	public void desactivar() {}

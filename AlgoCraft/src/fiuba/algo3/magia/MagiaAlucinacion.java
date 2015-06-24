@@ -6,7 +6,6 @@ import fiuba.algo3.excepciones.FueraDelRangoPermitido;
 import fiuba.algo3.excepciones.NoEsUnAliado;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 
-//TEMPORAL SOLO PARA PROBAR
 public class MagiaAlucinacion implements MagiaAUnidad {
 
 	private Unidad unidad;

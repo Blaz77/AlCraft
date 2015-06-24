@@ -39,7 +39,7 @@ public class AtributosNaveDeCiencia extends AtributosUnidad {
 				50,		//energiaInicial
 				200,	//energiaMaxima
 				10,		//energiaARegenerarPorTurno
-				10,		//rangoDeMagia
+				8,		//rangoDeMagia (por debajo del rango vision)
 				new MagiaEMP(),
 				new MagiaRadiacion());
 	}

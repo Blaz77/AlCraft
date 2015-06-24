@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import fiuba.algo3.excepciones.FueraDelRangoPermitido;
 import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
@@ -86,6 +87,19 @@ public class TestNaveDeCiencia extends TestUnidadMagica {
 		assertEquals(energiaRelativa -75, unidad.getEnergia());
 	}
 	
+	@Test(expected = FueraDelRangoPermitido.class)
+	public void testMagiaAUnidadFueraDeRangoLanzaExcepcion() {
+		this.llenarEnergia();
+		unidadEnemigaTerrestre.setPosicion(new Posicion(40,20));
+		unidad.getMagiaAUnidad().ejecutar(unidadEnemigaTerrestre);
+	}
+	
+	@Test(expected = FueraDelRangoPermitido.class)
+	public void testMagiaDeAreaDeEfectoFueraDeRangoLanzaExcepcion() {
+		this.llenarEnergia();
+		unidad.getMagiaDeAreaDeEfecto().ejecutar(new Posicion(40,20));
+	}
+	
 	@Test
 	public void testMagiaEMPCausaEfectoAUnidadMagicaCercana() {
 		this.llenarEnergia();
@@ -108,6 +122,16 @@ public class TestNaveDeCiencia extends TestUnidadMagica {
 	}
 	
 	@Test
+	public void testMagiaRadiacionCausaEfectoAUnidadElegidaEnseguida() {
+		this.llenarEnergia();
+		
+		int vidaRelativa = unidadEnemigaTerrestre.getVida();
+
+		unidad.getMagiaAUnidad().ejecutar(unidadEnemigaTerrestre);
+		assertTrue(unidadEnemigaTerrestre.getVida() < vidaRelativa);
+	}
+	
+	@Test
 	public void testMagiaRadiacionCausaEfectoAUnidadElegida() {
 		this.llenarEnergia();
 		
@@ -116,5 +140,80 @@ public class TestNaveDeCiencia extends TestUnidadMagica {
 		unidad.getMagiaAUnidad().ejecutar(unidadEnemigaTerrestre);
 		unidadEnemigaTerrestre.pasarTurno();
 		assertTrue(unidadEnemigaTerrestre.getVida() < vidaRelativa);
+	}
+	
+	@Test
+	public void testMagiaRadiacionAfectaAUnidadHastaSuMuerte() {
+		this.llenarEnergia();
+		
+		assertSame(unidadEnemigaTerrestre, mapa.getOcupante(unidadEnemigaTerrestre.getPosicion()));
+		
+		unidad.getMagiaAUnidad().ejecutar(unidadEnemigaTerrestre);
+		
+		while(unidadEnemigaTerrestre.getVida() > 0) unidadEnemigaTerrestre.pasarTurno();
+		
+		assertNotSame(unidadEnemigaTerrestre, mapa.getOcupante(unidadEnemigaTerrestre.getPosicion()));
+	}
+	
+	
+	
+	@Test
+	public void testMagiaRadiacionAfectaAUnidadesDistancia1() {
+		this.llenarEnergia();
+		
+		unidadEnemigaAerea = new Unidad(jugadorEnemigo, new Posicion(35,12), jugadorEnemigo.getAtributos().getInfanteriaPesadaArea());
+		unidadEnemigaMagica = new Unidad(jugadorEnemigo, new Posicion(35,11), jugadorEnemigo.getAtributos().getInfanteriaMagica());
+		this.mapa.setOcupante(unidadEnemigaAerea, unidadEnemigaAerea.getPosicion());
+		this.mapa.setOcupante(unidadEnemigaMagica, unidadEnemigaMagica.getPosicion());
+		
+		int vidaRelativa = unidadEnemigaMagica.getVida();
+		
+		unidad.getMagiaAUnidad().ejecutar(unidadEnemigaAerea);
+		unidadEnemigaAerea.pasarTurno();
+		
+		assertTrue(unidadEnemigaMagica.getVida() < vidaRelativa);
+	}
+	
+	@Test
+	public void testMagiaRadiacionAfectaAUnidadesDistancia1AunqueSeaAliado() {
+		this.llenarEnergia();
+		
+		int vidaRelativa = unidad.getVida();
+		
+		unidad.getMagiaAUnidad().ejecutar(unidadEnemigaTerrestre);
+		unidadEnemigaTerrestre.pasarTurno();
+		
+		assertTrue(unidad.getVida() < vidaRelativa);
+	}
+	
+	@Test
+	public void testMagiaRadiacionNoAfectaAUnidadesLejanas() {
+		this.llenarEnergia();
+		
+		int vidaRelativa1 = otraUnidad.getVida();
+		int vidaRelativa2 = unidadEnemigaMagica.getVida();
+		
+		unidad.getMagiaAUnidad().ejecutar(unidadEnemigaTerrestre);
+		unidadEnemigaTerrestre.pasarTurno();
+		
+		assertTrue(otraUnidad.getVida() == vidaRelativa1);
+		assertTrue(unidadEnemigaMagica.getVida() == vidaRelativa2);
+	}
+	
+	@Test
+	public void testMagiaRadiacionNoAfectaAEdificiosDistancia1() {
+		this.llenarEnergia();
+		
+		this.edificioEnemigo = new Edificio(jugadorEnemigo, new Posicion(35,11), jugadorEnemigo.getAtributos().getEntrenadorUnidadesIntermedias());
+		this.unidadEnemigaMagica = new Unidad(jugadorEnemigo, new Posicion(35,12), jugadorEnemigo.getAtributos().getInfanteriaMagica());
+		this.mapa.setOcupante(unidadEnemigaMagica, unidadEnemigaMagica.getPosicion());
+		this.mapa.setOcupante(edificioEnemigo, edificioEnemigo.getPosicion());
+		
+		int vidaRelativa = edificioEnemigo.getVida();
+		
+		unidad.getMagiaAUnidad().ejecutar(unidadEnemigaMagica);
+		unidadEnemigaMagica.pasarTurno();
+		
+		assertEquals(vidaRelativa, edificioEnemigo.getVida());
 	}
 }

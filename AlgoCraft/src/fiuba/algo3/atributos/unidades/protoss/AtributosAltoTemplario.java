@@ -48,7 +48,7 @@ public class AtributosAltoTemplario extends AtributosUnidad {
 				50,		//energiaInicial
 				200,	//energiaMaxima
 				15,		//energiaARegenerarPorTurno
-				10,		//rangoDeMagia
+				6,		//rangoDeMagia (por debajo del rango de vision)
 				new MagiaTormentaPsionica(),
 				new MagiaAlucinacion());
 	}
