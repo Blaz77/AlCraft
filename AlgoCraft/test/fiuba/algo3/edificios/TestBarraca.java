@@ -45,8 +45,6 @@ public class TestBarraca extends TestEdificioEntrenador {
 		this.barracaEnConst = crearEdificio();
 		entrenador = this.barraca;
 	}
-
-	//TESTS SIN REQUISITOS POR AHORA!!!
 	
 	@Test
 	public void testCrearBarraca() {

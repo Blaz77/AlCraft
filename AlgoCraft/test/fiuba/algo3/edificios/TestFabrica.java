@@ -2,6 +2,8 @@ package fiuba.algo3.edificios;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,7 +12,6 @@ import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.OrdenConstruccionViolado;
 import fiuba.algo3.excepciones.SuministroInsuficiente;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
-import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.terreno.Terreno;
 import fiuba.algo3.juego.*;
@@ -18,11 +19,12 @@ import fiuba.algo3.mapa.*;
 import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 
-public class TestFabrica extends TestEdificio {
+public class TestFabrica extends TestEdificioEntrenador {
 
 	private Edificio barraca;
 	private Edificio fabrica;
 	private Edificio fabricaEnConst;
+	private final int turnosGolliat = 6;
 	
 	@Override
 	protected Edificio crearEdificio() {
@@ -46,8 +48,9 @@ public class TestFabrica extends TestEdificio {
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
 		
 		// Aseguro recursos
-		jugador.agregarGasVespeno(500);
-		jugador.agregarMinerales(600);
+		jugador.agregarGasVespeno(800);
+		jugador.agregarMinerales(800);
+		jugador.aumentarCapacidadPoblacion(10);
 		this.barraca = crearEdificioRequerido();
 		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
 		this.barraca = (Edificio) mapa.getOcupante(barraca.getPosicion());
@@ -55,6 +58,7 @@ public class TestFabrica extends TestEdificio {
 		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Construccion
 		this.fabrica = (Edificio) mapa.getOcupante(fabrica.getPosicion());
 		this.fabricaEnConst = crearEdificio();
+		entrenador = this.fabrica;
 	}
 
 	
@@ -126,104 +130,66 @@ public class TestFabrica extends TestEdificio {
 	}
 	
 	@Test
-	public void testBarracaTerminadaPuedeEntrenar() {
+	public void testFabricaTerminadaPuedeEntrenar() {
 		assertTrue(fabrica.puedeEntrenarUnidades());
 	}
 	
 	@Test
-	public void testFabricaEntrenaUnidad() {
-		fabrica.getUnidadesEntrenables().get(0).crear();
-		
-		for(int i = 0; i < 6; i++) fabrica.pasarTurno();//Entrenar Golliat
-		
-		assertEquals(jugador.getUnidades().get(0).getNombre(), "Golliat");
-
-	}
-
-	@Test
-	public void testFabricaEntrenaUnidadConsumeRecursos() {
-		int mineralRelativo = jugador.getMinerales();
-		int gasRelativo = jugador.getGasVespeno();
-		
-		fabrica.getUnidadesEntrenables().get(0).crear();
-		for(int i = 0; i < 6; i++) fabrica.pasarTurno();//Entrenar Golliat
-		
-		assertEquals(jugador.getMinerales(), mineralRelativo - 100);
-		assertEquals(jugador.getGasVespeno(), gasRelativo - 50);
-
+	public void testFabricaPuedeEntrenarUnaUnidad() {
+		assertEquals(1, fabrica.getUnidadesEntrenables().size());
 	}
 	
 	@Test
-	public void testFabricaEntrenaUnidadSinMineralesDebeFallar() {
-		while (jugador.getMinerales() >= 100) {
-			jugador.agregarMinerales(-10);
-		}
-		try {
-			fabrica.getUnidadesEntrenables().get(0).crear();
-			fail();
-		}
-		catch (MineralInsuficiente e) {
-			assertTrue(true);
-			return;
-		}
-
+	public void testFabricaPuedeEntrenarGolliat() {
+		puedeEntrenarUnidad(Tipo.GOLLIAT);
 	}
 	
 	@Test
-	public void testFabricaEntrenaUnidadSinGasVespenoDebeFallar() {
-		while (jugador.getGasVespeno() >= 50) {
-			jugador.agregarGasVespeno(-10);
-		}
-		try {
-			fabrica.getUnidadesEntrenables().get(0).crear();
-			fail();
-		}
-		catch (GasVespenoInsuficiente e) {
-			assertTrue(true);
-			return;
-		}
-
+	public void testFabricaMientrasEntrenaGolliatNoEstaDisponible() {
+		mientrasEntrenaUnidadNoDisponible(Tipo.GOLLIAT, turnosGolliat);
 	}
 	
 	@Test
-	public void testFabricaEntrenarVariasUnidadesSinColaDeEspera() {
-		// Aseguro recursos
-		jugador.agregarGasVespeno(100);
-		
-		fabrica.getUnidadesEntrenables().get(0).crear();
-		for(int i = 0; i < 6; i++) fabrica.pasarTurno();//Entrenar Golliat
-		assertEquals(jugador.getUnidades().get(0).getNombre(), "Golliat");
-		
-		fabrica.getUnidadesEntrenables().get(0).crear();
-		for(int i = 0; i < 6; i++) fabrica.pasarTurno();//Entrenar Golliat
-		assertEquals(jugador.getUnidades().get(1).getNombre(), "Golliat");
+	public void testFabricaEntrenaGolliat() {
+		entrenarUnidadVerJugador(Tipo.GOLLIAT, turnosGolliat);
 	}
 	
 	@Test
-	public void testFabricaEntrenarVariasUnidadesConColaDeEspera() {
-		// Aseguro recursos
-		jugador.agregarGasVespeno(100);
-		
-		fabrica.getUnidadesEntrenables().get(0).crear();
-		fabrica.getUnidadesEntrenables().get(0).crear();
-		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Entrenar 2 Golliats
-		assertEquals(jugador.getUnidades().get(0).getNombre(), "Golliat");
-		assertEquals(jugador.getUnidades().get(1).getNombre(), "Golliat");
+	public void testFabricaEntrenaGolliatDejaEnElMapa() {
+		entrenarUnidadVerMapa(Tipo.GOLLIAT, turnosGolliat);
 	}
-
+	
 	@Test
-	public void testFabricaEntrenaUnidadSinPoblacionDebeFallar() {
-		while (jugador.getCapacidadPoblacion() > 1) {
-			jugador.aumentarCapacidadPoblacion(-1);
-		}
-		try {
-			fabrica.getUnidadesEntrenables().get(0).crear();
-			fail();
-		}
-		catch (SuministroInsuficiente e) {
-			assertTrue(true);
-			return;
-		}
-
+	public void testFabricaEntrenaGolliatConsumeRecursos() {
+		entrenarUnidadConsumeRecursos(Tipo.GOLLIAT, turnosGolliat, 100, 50, 2);
+	}
+	
+	@Test(expected = MineralInsuficiente.class)
+	public void testFabricaEntrenaGolliatSinMineralesDebeFallar() {
+		entrenarSinMinerales(Tipo.GOLLIAT);
+	}
+	
+	@Test(expected = GasVespenoInsuficiente.class)
+	public void testFabricaEntrenaGolliatSinGasVespenoDebeFallar() {
+		entrenarSinGasVespeno(Tipo.GOLLIAT);
+	}
+	
+	@Test(expected = SuministroInsuficiente.class)
+	public void testFabricaEntrenaGolliatSinPoblacionDebeFallar() {
+		entrenarSinCapacidadPoblacion(Tipo.GOLLIAT);
+	}
+	
+	@Test
+	public void testFabricaEntrenaVariasUnidadesSinColaDeEspera() {		
+		for (int i = 0; i < 3; i++)
+			entrenarUnidadVerJugador(Tipo.GOLLIAT, turnosGolliat);
+	}
+	
+	@Test
+	public void testFabricaEntrenaVariasUnidadesConColaDeEspera() {
+		entrenarVariasUnidadesSostieneElOrden(
+					Arrays.asList(fabrica.getUnidadesEntrenables().get(0),
+							fabrica.getUnidadesEntrenables().get(0)), 
+							turnosGolliat, turnosGolliat);
 	}
 }

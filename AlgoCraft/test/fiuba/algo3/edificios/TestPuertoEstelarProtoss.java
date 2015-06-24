@@ -8,6 +8,7 @@ import org.junit.Test;
 import fiuba.algo3.excepciones.GasVespenoInsuficiente;
 import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.OrdenConstruccionViolado;
+import fiuba.algo3.excepciones.SuministroInsuficiente;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.terreno.Terreno;
@@ -16,11 +17,13 @@ import fiuba.algo3.mapa.*;
 import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 
-public class TestPuertoEstelarProtoss extends TestEdificio {
+public class TestPuertoEstelarProtoss extends TestEdificioEntrenador {
 
 	private Edificio acceso;
 	private Edificio puerto;
 	private Edificio puertoEnConst;
+	private final int turnosScout = 9;
+	private final int turnosNave = 8;
 	
 	@Override
 	protected Edificio crearEdificio() {
@@ -44,8 +47,9 @@ public class TestPuertoEstelarProtoss extends TestEdificio {
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.PROTOSS, mapa);
 		
 		// Aseguro recursos
-		jugador.agregarGasVespeno(500);
-		jugador.agregarMinerales(500);
+		jugador.agregarGasVespeno(1500);
+		jugador.agregarMinerales(1500);
+		jugador.aumentarCapacidadPoblacion(30);
 		this.acceso = crearEdificioRequerido();
 		for(int i = 0; i < 8; i++) acceso.pasarTurno();//Construccion
 		this.acceso = (Edificio) mapa.getOcupante(acceso.getPosicion());
@@ -53,6 +57,7 @@ public class TestPuertoEstelarProtoss extends TestEdificio {
 		for(int i = 0; i < 10; i++) puerto.pasarTurno();//Construccion
 		this.puerto = (Edificio) mapa.getOcupante(puerto.getPosicion());
 		this.puertoEnConst = crearEdificio();
+		entrenador = this.puerto;
 	}
 	
 	@Test
@@ -140,21 +145,89 @@ public class TestPuertoEstelarProtoss extends TestEdificio {
 	}
 	
 	@Test
-	public void testPuertoEstelarEntrenaUnidad() {
-		//Junto recursos y poblacion para entrenar
-		jugador.agregarGasVespeno(1000);
-		jugador.agregarMinerales(1000);
-		jugador.aumentarCapacidadPoblacion(10);
-		
-		puerto.getUnidadesEntrenables().get(0).crear();
-		
-		for(int i = 0; i < 9; i++) puerto.pasarTurno(); //Entrenar Scout
-		assertEquals(jugador.getUnidades().get(0).getNombre(), "Scout");
-
-		puerto.getUnidadesEntrenables().get(1).crear();
-		
-		for(int i = 0; i < 8; i++) puerto.pasarTurno(); //Entrenar NaveDeTransporte
-		assertEquals(jugador.getUnidades().get(1).getNombre(), "Nave de transporte");
+	public void testPuertoEstelarPuedeEntrenarDosUnidades() {
+		assertEquals(2, puerto.getUnidadesEntrenables().size());
 	}
-
+	
+	@Test
+	public void testPuertoEstelarPuedeEntrenarScout() {
+		puedeEntrenarUnidad(Tipo.SCOUT);
+	}
+	
+	@Test
+	public void testPuertoEstelarPuedeEntrenarNaveDeTransporte() {
+		puedeEntrenarUnidad(Tipo.NAVE_DE_TRANSPORTE_PROTOSS);
+	}
+	
+	@Test
+	public void testPuertoEstelarMientrasEntrenaScoutNoEstaDisponible() {
+		mientrasEntrenaUnidadNoDisponible(Tipo.SCOUT, turnosScout);
+	}
+	
+	@Test
+	public void testPuertoEstelarMientrasEntrenaNaveTransporteNoEstaDisponible() {
+		mientrasEntrenaUnidadNoDisponible(Tipo.NAVE_DE_TRANSPORTE_PROTOSS, turnosNave);
+	}
+	
+	@Test
+	public void testPuertoEstelarEntrenaScout() {
+		entrenarUnidadVerJugador(Tipo.SCOUT, turnosScout);
+	}
+	
+	@Test
+	public void testPuertoEstelarEntrenaNaveTransporte() {
+		entrenarUnidadVerJugador(Tipo.NAVE_DE_TRANSPORTE_PROTOSS, turnosNave);
+	}
+	
+	@Test
+	public void testPuertoEstelarEntrenaScoutDejaEnElMapa() {
+		entrenarUnidadVerMapa(Tipo.SCOUT, turnosScout);
+	}
+	
+	@Test
+	public void testPuertoEstelarEntrenaNaveTransporteDejaEnElMapa() {
+		entrenarUnidadVerMapa(Tipo.NAVE_DE_TRANSPORTE_PROTOSS, turnosNave);
+	}
+	
+	@Test
+	public void testPuertoEstelarEntrenaScoutConsumeRecursos() {
+		entrenarUnidadConsumeRecursos(Tipo.SCOUT, turnosScout, 300, 150, 3);
+	}
+	
+	@Test
+	public void testPuertoEstelarEntrenaNaveTransporteConsumeRecursos() {
+		entrenarUnidadConsumeRecursos(Tipo.NAVE_DE_TRANSPORTE_PROTOSS, turnosNave
+										, 200, 0, 2);
+	}
+	
+	@Test(expected = MineralInsuficiente.class)
+	public void testPuertoEstelarEntrenaUnidadSinMineralesDebeFallar() {
+		entrenarSinMinerales(Tipo.SCOUT);
+		entrenarSinMinerales(Tipo.NAVE_DE_TRANSPORTE_PROTOSS);
+	}
+	
+	@Test(expected = GasVespenoInsuficiente.class)
+	public void testPuertoEstelarEntrenaUnidadSinGasVespenoDebeFallar() {
+		entrenarSinGasVespeno(Tipo.SCOUT);
+	}
+	
+	@Test(expected = SuministroInsuficiente.class)
+	public void testPuertoEstelarEntrenaUnidadSinPoblacionDebeFallar() {
+		entrenarSinCapacidadPoblacion(Tipo.SCOUT);
+		entrenarSinCapacidadPoblacion(Tipo.NAVE_DE_TRANSPORTE_PROTOSS);
+	}
+	
+	@Test
+	public void testPuertoEstelarEntrenaVariasUnidadesSinColaDeEspera() {
+		for (int i = 0; i < 2; i++){
+			entrenarUnidadVerJugador(Tipo.SCOUT, turnosScout);
+			entrenarUnidadVerJugador(Tipo.NAVE_DE_TRANSPORTE_PROTOSS, turnosNave);
+		}
+	}
+	
+	@Test
+	public void testPuertoEstelarEntrenaVariasUnidadesConColaDeEspera() {
+		entrenarVariasUnidadesSostieneElOrden(puerto.getUnidadesEntrenables(),
+				turnosScout, turnosNave);
+	}
 }
