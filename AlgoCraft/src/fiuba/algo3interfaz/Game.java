@@ -109,23 +109,18 @@ public class Game implements Runnable { // Permite correr un thread
 	// Basico juego hermoso :D
 	public void run(){
 				
-		double timePerTick = 1000000000 / MIN_FPS;
-		double delta = 0;
-		long now;
-		long lastTime = System.nanoTime();
-		
+		int msPerTick = 1000 / MIN_FPS; // Ahora en milisegundos xD	
 		panel.repaint();
 		while(running){
-			now = System.nanoTime();
-			delta += (now - lastTime) / timePerTick;
-			lastTime = now;
-			if (delta >= 1){
-				panel.repaint();
-				delta --;
+			panel.repaint();
+			try {
+				Thread.sleep(msPerTick);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
 		stop();
-	}
+	}	
 	
 	public synchronized void start(){
 		if (running)
