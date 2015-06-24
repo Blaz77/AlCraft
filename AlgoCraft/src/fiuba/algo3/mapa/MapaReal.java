@@ -82,7 +82,7 @@ public class MapaReal implements Mapa {
 
 		for (int x = 0; x < ancho; x++){
 			for (int y = 0; y < alto; y++){
-				setCelda(new Posicion(x, y), Terreno.TIERRA);
+				mapa[x][y] = new Celda(new Posicion(x,y), Terreno.TIERRA);
 			}
 		}
 	}
@@ -161,31 +161,67 @@ public class MapaReal implements Mapa {
 	 */
 	private void definirTerreno(){
 		
-		Posicion posAnterior, pos = null;
+		Posicion posAnterior = new Posicion(0,0);
+		Posicion pos = null;
 		Random miRNG = new Random();
-		// Esto le pone algunas celdas espaciales al borde de arriba
-		for (int y = 0; y < DISTANCIA_BORDE/2; y++)
-			for (int x = 0; x < ancho; x++){
-				posAnterior = new Posicion(x, y-1);
-				pos = new Posicion(x, y);
-				if (miRNG.nextBoolean() && (y == 0 || 
-						getTerreno(posAnterior) == Terreno.ESPACIO))
-					setCelda(pos, Terreno.ESPACIO);
-			}		
-		
-		// y esto al de abajo
-		for (int y = alto - 1; y > alto - DISTANCIA_BORDE/2; y--)
-			for (int x = 0; x < ancho; x++){
-				posAnterior = new Posicion(x, y+1);
-				pos = new Posicion(x, y);
-				if (miRNG.nextBoolean() && (((y == alto-1) || 
-						getTerreno(posAnterior) == Terreno.ESPACIO)))
-					setCelda(pos, Terreno.ESPACIO);
-			}
-		
+		// Esto le pone algunas celdas espaciales al mapa.
+		for (int i = 0; i < (ancho/10); i++){
+				esparcirTerreno(miRNG, i*10 , 0, true);
+				esparcirTerreno(miRNG, 0 , i*10, true);
+				esparcirTerreno(miRNG, i*10 , alto-1, true);
+				esparcirTerreno(miRNG, ancho-1, i*10, true);
+		}
+		esparcirTerreno(miRNG, ancho/2, alto/2, true);
+				/*
+				if ( 
+						(! celdaEnBase(pos)) && 
+						miRNG.nextInt(10) == 0) 
+					mapa[x][y].setTerreno(Terreno.ESPACIO);
+				posAnterior = pos;
+			}				
+		*/
+	}
+	
+
+	
+	private void esparcirTerreno(Random miRNG, int x, int y, boolean firstTime){
+		Posicion pos = new Posicion(x,y);
+		if (celdaValida(pos)  &&  mapa[x][y].getTerreno() == Terreno.TIERRA &&
+		( firstTime && miRNG.nextBoolean() ||
+		(miRNG.nextInt(100) < 3*distanciaABases(pos)))) {
+			mapa[x][y].setTerreno(Terreno.ESPACIO);
+			esparcirTerreno(miRNG, x+1, y, false);
+			esparcirTerreno(miRNG, x-1, y, false);
+			esparcirTerreno(miRNG, x, y+1, false);
+			esparcirTerreno(miRNG, x, y-1, false);
+		}
+	}
+	
+	
+	private boolean celdaEnBase(Posicion pos) {
+		// TODO Auto-generated method stub
+		for (Celda base: bases){
+			if (Math.abs(base.getX() - pos.getX()) <= SEMILADO_BASE && 
+					Math.abs(base.getY() - pos.getY()) <= SEMILADO_BASE ) 
+				return true;
+		}
+		return false;
+	}
+
+	private int distanciaABases(Posicion pos){
+		int minDistancia = ancho;
+		int dist;
+		for (Celda base: bases){
+			dist = Math.max( 	(Math.abs(base.getX() - pos.getX()) - SEMILADO_BASE),
+								(Math.abs(base.getY() - pos.getY()) - SEMILADO_BASE) );
+			minDistancia = Math.min(minDistancia, dist);
+		}
+	
+		return minDistancia;
 		
 	}
 	
+
 	/**********************************************/
 	/**             SETTERS, GETTERS             **/
 	/**********************************************/
@@ -215,11 +251,7 @@ public class MapaReal implements Mapa {
 	public ArrayList<Celda> getBases() {
 		return new ArrayList<Celda>(bases);
 	}
-	
-	private void setCelda(Posicion posicion, Terreno terreno){
-		mapa[posicion.getX()][posicion.getY()] = new Celda(posicion, terreno);
-	}
-	
+		
 	private Celda getCelda(Posicion posicion){
 		return mapa[posicion.getX()][posicion.getY()];
 	}
@@ -436,8 +468,8 @@ public class MapaReal implements Mapa {
 	}
 
 	/* Mostrar info del mapa de varias formas" */
-	public static void main(String[] args){ //Renombrar a "main" para ejecutar.
-		/*
+	/*public static void main(String[] args){ //Renombrar a "main" para ejecutar.
+		
 		MapaReal miMapa;
 		for (int bases = 2; bases <= 8; bases++)
 			for (int dist_base = 2; dist_base < 65; dist_base++)
@@ -448,7 +480,7 @@ public class MapaReal implements Mapa {
 						DISTANCIA_ENTRE_BASES = dist_base;
 						//System.out.format("Bases: %d, DistBases: %d, Semilado: %d, Borde: %d %n", bases, dist_base, semilado, borde);
 						miMapa = new MapaReal(bases);
-		}*/
+		}
 		
 		MapaReal miMapa = new MapaReal(BASES_PARA_MAIN);
 		
@@ -457,7 +489,7 @@ public class MapaReal implements Mapa {
 			miMapa.imprimirMineralesCercaDeJugadores();
 		if (args.length != 0) // false
 			miMapa.imprimirRecursoPorCelda();
-	}
+	}*/
 
 	/* Para uso especifico de TestMapa */
 	public boolean esBase(Posicion pos) {

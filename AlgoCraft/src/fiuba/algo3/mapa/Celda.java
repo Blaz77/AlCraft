@@ -78,6 +78,11 @@ public class Celda { //quizas heredar de celda y armar Tierra/Espacio extends Ce
 		return this.terreno;
 	}
 
+	public void setTerreno(Terreno terreno) {
+		this.terreno = terreno;
+		
+	}
+
 	//O posicionar directo!
 	//O preguntar si puede posicionar y luego posicionar
 	

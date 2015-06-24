@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import fiuba.algo3.factories.EdificiosFactory;
+import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.MapaProxy;
 import fiuba.algo3.mapa.MapaReal;
 import fiuba.algo3.raza.TipoRaza;
@@ -39,8 +40,8 @@ public class Juego implements Iterable<Jugador>, Iterator<Jugador>{
 			nombreJugador = opciones.getNombreJugador(n);
 			colorJugador = opciones.getColorJugador(n);
 			razaJugador = opciones.getRazaJugador(n);
-			MapaProxy proxy = new MapaProxy(mapa, mapa.obtenerBaseDeJugador(n).getPosicion());
-			jugadorActual = new Jugador(nombreJugador, colorJugador, razaJugador, proxy);
+			Mapa mapaJugador = new MapaProxy(mapa, mapa.obtenerBaseDeJugador(n).getPosicion()); // (if opciones.fogOfWar? else: proxy = mapa? :D
+			jugadorActual = new Jugador(nombreJugador, colorJugador, razaJugador, mapaJugador);
 			jugadores.add(jugadorActual);
 			jugadoresVivos.add(jugadorActual);
 			//jugadores.get(n-1).setPosicionInicial(mapa.obtenerBaseDeJugador(n).getPosicion());

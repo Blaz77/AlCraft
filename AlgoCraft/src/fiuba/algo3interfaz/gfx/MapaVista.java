@@ -196,8 +196,14 @@ public class MapaVista {
 	}
 
 	public void setCeldaSeleccionada(int x, int y) {
-		this.filSeleccionada = (x + camara.getxOffset()) / marcaMapa.getWidth();
-		this.colSeleccionada = (y + camara.getyOffset()) / marcaMapa.getHeight();
+		
+		int fil = (x + camara.getxOffset()) / marcaMapa.getWidth();
+		int col = (y + camara.getyOffset()) / marcaMapa.getHeight();
+		
+		if (fil < 0 || fil >= ancho || col < 0 || col >= alto)
+			return;
+		this.filSeleccionada = fil;
+		this.colSeleccionada = col;
 	}
 	
 	public void moverCeldaSeleccionada(int i, int j) {
