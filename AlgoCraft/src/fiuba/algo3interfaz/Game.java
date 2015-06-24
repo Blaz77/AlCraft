@@ -15,7 +15,8 @@ import fiuba.algo3interfaz.states.State;
 
 public class Game implements Runnable { // Permite correr un thread
 
-	private static final int FRAMES_PER_SECOND = 3;
+	private static final int MIN_FPS = 2;
+	private static final int MAX_FPS = 30;
 	
 	/** Atributos del Thread **/
 	private boolean running = false;
@@ -24,7 +25,23 @@ public class Game implements Runnable { // Permite correr un thread
 	/** Frame (el JPanel es si mismo y despues se añade) **/
 	private JFrame frame = new JFrame("AlgoCraft");
 	private JPanel panel = new JPanel() {
+		
+		private double timePerTick = 1000000000 / MAX_FPS;
+		private double delta = 0;
+		long now;
+		long lastTime = System.nanoTime();
+		
 		public void paintComponent(Graphics g){
+			now = System.nanoTime();
+			delta += (now - lastTime) / timePerTick;
+			lastTime = now;
+			if (delta >= 1){
+				_paintComponent(g);
+				delta -= Math.floor(delta);
+			}
+		}
+
+		public void _paintComponent(Graphics g){
 			super.paintComponent(g);
 			State.getState().render(g);
 		}
@@ -92,35 +109,18 @@ public class Game implements Runnable { // Permite correr un thread
 	// Basico juego hermoso :D
 	public void run(){
 				
-		int fps = FRAMES_PER_SECOND;
-		double timePerTick = 1000000000 / fps; // 1 second = 1000000000 nanoseconds
-		double delta = 0; // whut.
-		long now;
-		long lastTime = System.nanoTime(); // tiempo actual de la pc en nanos
-		
-		//tick();
+		int msPerTick = 1000 / MIN_FPS; // Ahora en milisegundos xD	
 		panel.repaint();
-		// Game loop basico:
 		while(running){
 			panel.repaint();
 			try {
-				Thread.sleep(500);
+				Thread.sleep(msPerTick);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			/*now = System.nanoTime();
-			delta += (now - lastTime) / timePerTick;
-			lastTime = now;
-			if (delta >= 1){
-				//tick();
-				//panel.repaint();
-				delta --;
-			}*/
-			
 		}
 		stop();
-	}
+	}	
 	
 	public synchronized void start(){
 		if (running)
