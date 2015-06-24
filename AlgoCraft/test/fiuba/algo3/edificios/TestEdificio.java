@@ -3,9 +3,7 @@ package fiuba.algo3.edificios;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.MapaReal;
 import fiuba.algo3.mapa.Posicion;
-import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.Tipo;
-import fiuba.algo3.ocupantes.TipoOcupante;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.terreno.Terreno;
 
@@ -13,10 +11,6 @@ public abstract class TestEdificio {
 	
 	protected Jugador jugador;
 	protected MapaReal mapa;
-	
-	protected Posicion posRelativa(ObjetoVivo o, int offsetX, int offsetY){
-		return new Posicion(o.getPosicion().getX() + offsetX, o.getPosicion().getY() + offsetY);
-	}
 
 	// La forma correcta de crear el edificio va aca dentro:
 	protected abstract Edificio crearEdificio();

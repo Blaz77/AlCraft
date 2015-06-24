@@ -10,32 +10,36 @@ import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
+import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.raza.TipoRaza;
+import fiuba.algo3.terreno.Terreno;
 
 public class TestPilon extends TestEdificio {
 
-	private MapaReal mapa;
-	private Jugador jugador;
-	private EdificiosFactory protossFactory;
 	private Edificio pilon;
 	
 	
 	@Override
-	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
-		return protossFactory.crearIncrementadorPoblacion(jugador, posicion);
+	protected Edificio crearEdificio() {
+		return crearEnTierra();
 	}
+	
+	@Override
+	protected Edificio crearEdificioEn(Terreno terreno, Tipo tipo) {
+		return crearEn((j,p) -> jugador.getEdificador().crearIncrementadorPoblacion(j,p), terreno, tipo);
+	}
+
 	
 	@Before
 	public void setUp() {
 		mapa = new MapaReal(6);
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.PROTOSS, mapa);
-		this.protossFactory = new EdificiosFactory();
 	}
 	
 	@Test
 	public void testCrearPilon() {
-		this.pilon = crearEnTierra(jugador, mapa, new Posicion(0,0));
+		this.pilon = crearEdificio();
 		for(int i = 0; i < 5; i++) pilon.pasarTurno(); //Construccion
 		this.pilon = (Edificio) mapa.getOcupante(pilon.getPosicion());
 		
@@ -49,43 +53,26 @@ public class TestPilon extends TestEdificio {
 		int costoGas = 0;
 		int costoMineral = 100;
 		
-		this.pilon = crearEnTierra(jugador, mapa, new Posicion(0,0));
+		this.pilon = crearEdificio();
 		
 		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
 		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
 	}
 	
-	@Test
+	@Test(expected = TerrenoInadecuado.class)
 	public void testCrearPilonFueraDeTierraFalla() {
-		try {
-			this.pilon = crearFueraDeTierra(jugador, mapa, new Posicion(0,0));
-			fail();
-		}
-		catch (TerrenoInadecuado e) {
-			assertTrue(true);
-			return;
-		}
-		fail();
+		crearFueraDeTierra();
 	}
 	
-	@Test
+	@Test(expected = MineralInsuficiente.class)
 	public void testCrearPilonSinRecursosDebeFallar() {
-		while (jugador.getMinerales() >= 100) {
-			jugador.agregarMinerales(-10);
-		}
-		try {
-			this.pilon = crearEnTierra(jugador, mapa, new Posicion(0,0));
-			fail();
-		}
-		catch (MineralInsuficiente e) {
-			assertTrue(true);
-			return;
-		}
+		while (jugador.getMinerales() >= 100) jugador.agregarMinerales(-10);
+		crearEdificio();
 	}
 	
 	@Test
 	public void testPilonSubeVidaDuranteConstruccion() {
-		this.pilon = crearEnTierra(jugador, mapa, new Posicion(0,0));
+		this.pilon = crearEdificio();
 		
 		int vidaRelativa = pilon.getVida();
 		for(int i = 0; i < 5; i++){
@@ -99,7 +86,7 @@ public class TestPilon extends TestEdificio {
 	
 	@Test
 	public void testPilonSubeEscudoDuranteConstruccion() {
-		this.pilon = crearEnTierra(jugador, mapa, new Posicion(0,0));
+		this.pilon = crearEdificio();
 		
 		int escudoRelativo = pilon.getEscudo();
 		for(int i = 0; i < 5; i++){
@@ -114,7 +101,7 @@ public class TestPilon extends TestEdificio {
 	@Test
 	public void testPilonMientrasConstruyeNoAumentaPoblacion() {
 		int poblacionRelativa = jugador.getCapacidadPoblacion();
-		this.pilon = crearEnTierra(jugador, mapa, new Posicion(0,0));
+		this.pilon = crearEdificio();
 		
 		assertEquals(poblacionRelativa, jugador.getCapacidadPoblacion());
 	}
@@ -122,7 +109,7 @@ public class TestPilon extends TestEdificio {
 	@Test
 	public void testPilonDespuesDeConstruirAumentaPoblacion() {
 		int poblacionRelativa = jugador.getCapacidadPoblacion();
-		this.pilon = crearEnTierra(jugador, mapa, new Posicion(0,0));
+		this.pilon = crearEdificio();
 		for(int i = 0; i < 5; i++) pilon.pasarTurno(); // Construyendo
 		this.pilon = (Edificio) mapa.getOcupante(pilon.getPosicion());
 		
@@ -132,7 +119,7 @@ public class TestPilon extends TestEdificio {
 	@Test
 	public void testPilonAlDestruirDisminuyePoblacion() {
 		int poblacionRelativa = jugador.getCapacidadPoblacion();
-		this.pilon = crearEnTierra(jugador, mapa, new Posicion(0,0));
+		this.pilon = crearEdificio();
 		for(int i = 0; i < 5; i++) pilon.pasarTurno(); // Construyendo
 		this.pilon = (Edificio) mapa.getOcupante(pilon.getPosicion());
 		

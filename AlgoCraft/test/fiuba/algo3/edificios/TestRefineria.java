@@ -14,38 +14,31 @@ import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.TipoOcupante;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.raza.TipoRaza;
+import fiuba.algo3.terreno.Terreno;
 
 public class TestRefineria extends TestEdificio {
 
-	private MapaReal mapa;
-	private Jugador jugador;
-	private EdificiosFactory terranFactory;
 	private Edificio refineria;
 	
 	@Override
-	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
-		return terranFactory.crearRecolectorGasVespeno(jugador, posicion);
+	protected Edificio crearEdificio() {
+		return crearEnVolcan();
 	}
-	
-	private Edificio crearEnVolcan(Jugador jugador, MapaReal mapa, Posicion inicial) {
-		return crearEnRecurso(jugador, mapa, Tipo.VESPENO, inicial);
-	}
-	
-	private Edificio crearFueraDeVolcan(Jugador jugador, MapaReal mapa, Posicion inicial) {
-		return crearFueraDeRecurso(jugador, mapa, Tipo.VESPENO, inicial);
+
+	@Override
+	protected Edificio crearEdificioEn(Terreno terreno, Tipo tipo) {
+		return crearEn((j,p) -> jugador.getEdificador().crearRecolectorGasVespeno(j,p), terreno, tipo);
 	}
 	
 	@Before
 	public void setUp() throws Exception {
 		mapa = new MapaReal(6);
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.TERRAN, mapa);
-		this.terranFactory = new EdificiosFactory();
-		//this.refineria = terranFactory.crearRecolectorGasVespeno(jugador, 20, 40);
 	}
 	
 	@Test
 	public void testCrearRefineriaEnVolcan() {
-		refineria = crearEnVolcan(jugador, mapa, new Posicion(0,0));
+		refineria = crearEdificio();
 		for(int i = 0; i < 6; i++) refineria.pasarTurno(); // Construyendo
 		refineria = (Edificio) mapa.getOcupante(refineria.getPosicion());
 		
@@ -60,43 +53,26 @@ public class TestRefineria extends TestEdificio {
 		int costoGas = 0;
 		int costoMineral = 100;
 		
-		this.refineria = crearEnVolcan(jugador, mapa, new Posicion(0,0));
+		this.refineria = crearEdificio();
 		
 		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
 		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
 	}
 	
-	@Test
+	@Test(expected = MineralInsuficiente.class)
 	public void testCrearRefineriaSinMineralesDebeFallar() {
-		while (jugador.getMinerales() >= 100) {
-			jugador.agregarMinerales(-10);
-		}
-		try {
-			refineria = crearEnVolcan(jugador, mapa, new Posicion(0,0));
-			fail();
-		}
-		catch (MineralInsuficiente e) {
-			assertTrue(true);
-			return;
-		}
+		while (jugador.getMinerales() >= 100) jugador.agregarMinerales(-10);
+		crearEdificio();
 	}
 	
-	@Test
+	@Test(expected = RecursoAusente.class)
 	public void testCrearRefineriaFueraDeVolcanFalla() {
-		try {
-			this.refineria = crearFueraDeVolcan(jugador, mapa, new Posicion(0,0));
-			fail();
-		}
-		catch (RecursoAusente e) {
-			assertTrue(true);
-			return;
-		}
-		fail();
+		crearEnTierra();
 	}
 	
 	@Test
 	public void testRefineriaSubeVidaDuranteConstruccion() {
-		refineria = crearEnVolcan(jugador, mapa, new Posicion(0,0));
+		refineria = crearEdificio();
 		
 		int vidaRelativa = refineria.getVida();
 		for(int i = 0; i < 6; i++){
@@ -110,7 +86,7 @@ public class TestRefineria extends TestEdificio {
 	
 	@Test
 	public void testRefineriaMientrasConstruyeNoRecolecta() {
-		this.refineria = crearEnVolcan(jugador, mapa, new Posicion(0,0));
+		this.refineria = crearEdificio();
 		int mineralRelativo = jugador.getMinerales();
 		
 		for(int i = 0; i < 6; i++) {
@@ -123,7 +99,7 @@ public class TestRefineria extends TestEdificio {
 	
 	@Test
 	public void testRefineriaRecolectaGasVespeno() {
-		refineria = crearEnVolcan(jugador, mapa, new Posicion(0,0));
+		refineria = crearEdificio();
 		for(int i = 0; i < 6; i++) refineria.pasarTurno(); // Construyendo
 		refineria = (Edificio) mapa.getOcupante(refineria.getPosicion());
 		
@@ -139,7 +115,7 @@ public class TestRefineria extends TestEdificio {
 	
 	@Test
 	public void testRefineriaAlDestruirseDejaGasVespenoEnMapa() {
-		this.refineria = crearEnVolcan(jugador, mapa, new Posicion(0, 0));
+		this.refineria = crearEdificio();
 		for(int i = 0; i < 6; i++) refineria.pasarTurno(); // Construccion
 		this.refineria = (Edificio) mapa.getOcupante(refineria.getPosicion());
 		
