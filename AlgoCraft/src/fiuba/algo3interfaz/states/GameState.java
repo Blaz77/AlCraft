@@ -104,24 +104,17 @@ public class GameState extends State {
 			this.previous_y = e.getY();
 
 	    }
-		
+	    else{
 			mapaActual.setCeldaSeleccionada(e.getX(), e.getY());
 			hudActual.actualizarCeldaSeleccionada(mapaActual.getPosicionCeldaSeleccionada());
-		
-		game.getPanel().repaint();
+			game.getPanel().repaint();
+	    }
 		//System.out.println("Pressed!");
 	}
 
 	public void mouseReleased(MouseEvent e) {
-			mapaActual.setCeldaSeleccionada(e.getX(), e.getY());
-			hudActual.actualizarCeldaSeleccionada(mapaActual.getPosicionCeldaSeleccionada());
-		
-		game.getPanel().repaint();
-		//System.out.println("Released!");
 	}
 
-	
-	
 	
 	public void mouseDragged(MouseEvent e) {
 		
