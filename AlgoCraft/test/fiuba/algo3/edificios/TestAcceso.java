@@ -2,9 +2,12 @@ package fiuba.algo3.edificios;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+
 import org.junit.Before;
 import org.junit.Test;
 
+import fiuba.algo3.excepciones.GasVespenoInsuficiente;
 import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.SuministroInsuficiente;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
@@ -16,10 +19,12 @@ import fiuba.algo3.mapa.*;
 import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 
-public class TestAcceso extends TestEdificio {
+public class TestAcceso extends TestEdificioEntrenador {
 
 	private Edificio acceso;
 	private Edificio accesoEnConst;
+	private final int turnosZealot = 4;
+	private final int turnosDragon = 6;
 	
 	@Override
 	protected Edificio crearEdificio() {
@@ -36,12 +41,14 @@ public class TestAcceso extends TestEdificio {
 	public void setUp() {
 		mapa = new MapaReal(6);
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.PROTOSS, mapa);
-		this.jugador.agregarMinerales(300);
-		this.jugador.agregarGasVespeno(300);
+		this.jugador.agregarMinerales(1000);
+		this.jugador.agregarGasVespeno(1000);
+		this.jugador.aumentarCapacidadPoblacion(10);
 		this.acceso = crearEdificio();
 		for(int i = 0; i < 8; i++) acceso.pasarTurno();//Construccion
 		this.acceso = (Edificio) mapa.getOcupante(acceso.getPosicion());
 		this.accesoEnConst = crearEdificio();
+		entrenador = this.acceso;	
 	}
 
 	@Test
@@ -111,66 +118,89 @@ public class TestAcceso extends TestEdificio {
 	}
 	
 	@Test
+	public void testAccesoPuedeEntrenarDosUnidades() {
+		assertEquals(2, acceso.getUnidadesEntrenables().size());
+	}
+	
+	@Test
+	public void testAccesoPuedeEntrenarZealot() {
+		puedeEntrenarUnidad(Tipo.ZEALOT);
+	}
+	
+	@Test
+	public void testAccesoPuedeEntrenarDragon() {
+		puedeEntrenarUnidad(Tipo.DRAGON);
+	}
+	
+	@Test
+	public void testAccesoMientrasEntrenaZealotNoEstaDisponible() {
+		mientrasEntrenaUnidadNoDisponible(Tipo.ZEALOT, turnosZealot);
+	}
+	
+	@Test
+	public void testAccesoMientrasEntrenaDragonNoEstaDisponible() {
+		mientrasEntrenaUnidadNoDisponible(Tipo.DRAGON, turnosDragon);
+	}
+	
+	@Test
 	public void testAccesoEntrenaZealot() {
-		acceso.getUnidadesEntrenables().get(0).crear();
-		
-		for(int i = 0; i < 4; i++) acceso.pasarTurno();//Entrenar Zealot
-		
-		assertEquals(jugador.getUnidades().get(0).getNombre(), "Zealot");
-
+		entrenarUnidadVerJugador(Tipo.ZEALOT, turnosZealot);
 	}
 	
 	@Test
 	public void testAccesoEntrenaDragon() {
-		acceso.getUnidadesEntrenables().get(1).crear();
-		
-		for(int i = 0; i < 6; i++) acceso.pasarTurno();//Entrenar Dragon
-		
-		assertEquals(jugador.getUnidades().get(0).getNombre(), "Dragon");
-
+		entrenarUnidadVerJugador(Tipo.DRAGON, turnosDragon);
 	}
 	
 	@Test
-	public void testAccesoEntrenaUnidadConsumeRecursos() {
-		int mineralRelativo = jugador.getMinerales();
-		
-		acceso.getUnidadesEntrenables().get(0).crear();
-		for(int i = 0; i < 4; i++) acceso.pasarTurno();//Entrenar Zealot
-		
-		assertEquals(jugador.getMinerales(), mineralRelativo - 100);
-
+	public void testAccesoEntrenaZealotDejaEnElMapa() {
+		entrenarUnidadVerMapa(Tipo.ZEALOT, turnosZealot);
+	}
+	
+	@Test
+	public void testAccesoEntrenaDragonDejaEnElMapa() {
+		entrenarUnidadVerMapa(Tipo.DRAGON, turnosDragon);
+	}
+	
+	@Test
+	public void testAccesoEntrenaZealotConsumeRecursos() {
+		entrenarUnidadConsumeRecursos(Tipo.ZEALOT, turnosZealot, 100, 0, 2);
+	}
+	
+	@Test
+	public void testAccesoEntrenaDragonConsumeRecursos() {
+		entrenarUnidadConsumeRecursos(Tipo.DRAGON, turnosDragon, 125, 50, 2);
 	}
 	
 	@Test(expected = MineralInsuficiente.class)
-	public void testAccesoEntrenaUnidadSinRecursosDebeFallar() {
-		while (jugador.getMinerales() >= 100) jugador.agregarMinerales(-10);
-		acceso.getUnidadesEntrenables().get(0).crear();
+	public void testAccesoEntrenaUnidadSinMineralesDebeFallar() {
+		entrenarSinMinerales(Tipo.ZEALOT);
+		entrenarSinMinerales(Tipo.DRAGON);
+	}
+	
+	@Test(expected = GasVespenoInsuficiente.class)
+	public void testAccesoEntrenaUnidadSinGasVespenoDebeFallar() {
+		entrenarSinGasVespeno(Tipo.DRAGON);
+	}
+	
+	@Test(expected = SuministroInsuficiente.class)
+	public void testAccesoEntrenaUnidadSinPoblacionDebeFallar() {
+		entrenarSinCapacidadPoblacion(Tipo.ZEALOT);
+		entrenarSinCapacidadPoblacion(Tipo.DRAGON);
 	}
 	
 	@Test
-	public void testAccesoEntrenarVariasUnidadesSinColaDeEspera() {		
-		acceso.getUnidadesEntrenables().get(0).crear();
-		for(int i = 0; i < 4; i++) acceso.pasarTurno();//Entrenar Zealot
-		assertEquals(jugador.getUnidades().get(0).getNombre(), "Zealot");
-		
-		acceso.getUnidadesEntrenables().get(0).crear();
-		for(int i = 0; i < 4; i++) acceso.pasarTurno();//Entrenar Zealot
-		assertEquals(jugador.getUnidades().get(1).getNombre(), "Zealot");
+	public void testAccesoEntrenarVariasUnidadesSinColaDeEspera() {
+		for (int i = 0; i < 2; i++){
+			entrenarUnidadVerJugador(Tipo.ZEALOT, turnosZealot);
+			entrenarUnidadVerJugador(Tipo.DRAGON, turnosDragon);
+		}
 	}
 	
 	@Test
 	public void testAccesoEntrenarVariasUnidadesConColaDeEspera() {
-		acceso.getUnidadesEntrenables().get(0).crear();
-		acceso.getUnidadesEntrenables().get(0).crear();
-		for(int i = 0; i < 8; i++) acceso.pasarTurno();//Entrenar 2 Zealots
-		assertEquals(jugador.getUnidades().get(0).getNombre(), "Zealot");
-		assertEquals(jugador.getUnidades().get(1).getNombre(), "Zealot");
-	}
-
-	@Test(expected = SuministroInsuficiente.class)
-	public void testAccesoEntrenaUnidadSinPoblacionDebeFallar() {
-		while (jugador.getCapacidadPoblacion() > 1) jugador.aumentarCapacidadPoblacion(-1);
-		acceso.getUnidadesEntrenables().get(0).crear();
+		entrenarVariasUnidadesSostieneElOrden(acceso.getUnidadesEntrenables(),
+				turnosZealot, turnosDragon);
 	}
 
 }

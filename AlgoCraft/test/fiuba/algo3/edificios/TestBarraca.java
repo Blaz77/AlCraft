@@ -2,25 +2,26 @@ package fiuba.algo3.edificios;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.SuministroInsuficiente;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
-import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.terreno.Terreno;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
 import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.edificios.Edificio;
-import fiuba.algo3.ocupantes.unidades.Unidad;
 
-public class TestBarraca extends TestEdificio {
+public class TestBarraca extends TestEdificioEntrenador {
 
 	private Edificio barraca;
 	private Edificio barracaEnConst;
+	private final int turnosMarine = 3;
 	
 	@Override
 	protected Edificio crearEdificio() {
@@ -42,6 +43,7 @@ public class TestBarraca extends TestEdificio {
 		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
 		this.barraca = (Edificio) mapa.getOcupante(barraca.getPosicion());
 		this.barracaEnConst = crearEdificio();
+		entrenador = this.barraca;
 	}
 
 	//TESTS SIN REQUISITOS POR AHORA!!!
@@ -64,32 +66,15 @@ public class TestBarraca extends TestEdificio {
 		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
 	}
 	
-	@Test
+	@Test(expected = TerrenoInadecuado.class)
 	public void testCrearBarracaFueraDeTierraFalla() {
-		try {
-			this.barraca = crearFueraDeTierra();
-			fail();
-		}
-		catch (TerrenoInadecuado e) {
-			assertTrue(true);
-			return;
-		}
-		fail();
+		crearFueraDeTierra();
 	}
 	
-	@Test
+	@Test(expected = MineralInsuficiente.class)
 	public void testCrearBarracaSinRecursosDebeFallar() {
-		while (jugador.getMinerales() >= 150) {
-			jugador.agregarMinerales(-10);
-		}
-		try {
-			this.barraca = crearEdificio();
-			fail();
-		}
-		catch (MineralInsuficiente e) {
-			assertTrue(true);
-			return;
-		}
+		while (jugador.getMinerales() >= 150) jugador.agregarMinerales(-10);
+		crearEdificio();
 	}
 	
 	@Test
@@ -118,91 +103,56 @@ public class TestBarraca extends TestEdificio {
 	}
 	
 	@Test
+	public void testBarracaPuedeEntrenarUnaUnidad() {
+		assertEquals(1, barraca.getUnidadesEntrenables().size());
+	}
+	
+	@Test
+	public void testBarracaPuedeEntrenarMarine() {
+		puedeEntrenarUnidad(Tipo.MARINE);
+	}
+	
+	@Test
+	public void testBarracaMientrasEntrenaUnidadNoEstaDisponible() {
+		mientrasEntrenaUnidadNoDisponible(Tipo.MARINE, turnosMarine);
+	}
+	
+	@Test
 	public void testBarracaEntrenaUnidad() {
-		barraca.getUnidadesEntrenables().get(0).crear();
-		
-		for(int i = 0; i < 3; i++) barraca.pasarTurno();//Entrenar Marine
-		
-		assertEquals(jugador.getUnidades().get(0).getNombre(), "Marine");
-
+		entrenarUnidadVerJugador(Tipo.MARINE, turnosMarine);
 	}
 	
 	@Test
 	public void testBarracaEntrenaUnidadDejaEnElMapa() {
-		barraca.getUnidadesEntrenables().get(0).crear();
-		
-		for(int i = 0; i < 3; i++) barraca.pasarTurno();//Entrenar Marine
-		
-		Unidad marine = jugador.getUnidades().get(0);
-		Posicion posEnMapa = marine.getPosicion();
-		
-		assertEquals(marine, mapa.getOcupante(posEnMapa));
-
+		entrenarUnidadVerMapa(Tipo.MARINE, turnosMarine);
 	}
 	
 	@Test
-	public void testBarracaEntrenaUnidadConsumeRecursos() {
-		int mineralRelativo = jugador.getMinerales();
-		
-		barraca.getUnidadesEntrenables().get(0).crear();
-		for(int i = 0; i < 3; i++) barraca.pasarTurno();//Entrenar Marine
-		
-		assertEquals(jugador.getMinerales(), mineralRelativo - 50);
-
+	public void testBarracaEntrenaMarineConsumeRecursos() {
+		entrenarUnidadConsumeRecursos(Tipo.MARINE, turnosMarine, 50, 0, 1);
 	}
 	
-	@Test
-	public void testBarracaEntrenaUnidadSinRecursosDebeFallar() {
-		while (jugador.getMinerales() >= 50) {
-			jugador.agregarMinerales(-10);
-		}
-		try {
-			barraca.getUnidadesEntrenables().get(0).crear();
-			fail();
-		}
-		catch (MineralInsuficiente e) {
-			assertTrue(true);
-			return;
-		}
-
+	@Test(expected = MineralInsuficiente.class)
+	public void testBarracaEntrenaUnidadSinMineralesDebeFallar() {
+		entrenarSinMinerales(Tipo.MARINE);
+	}
+	
+	@Test(expected = SuministroInsuficiente.class)
+	public void testBarracaEntrenaUnidadSinPoblacionDebeFallar() {
+		entrenarSinCapacidadPoblacion(Tipo.MARINE);
 	}
 	
 	@Test
 	public void testBarracaEntrenarVariasUnidadesSinColaDeEspera() {		
-		barraca.getUnidadesEntrenables().get(0).crear();
-		for(int i = 0; i < 3; i++) barraca.pasarTurno();//Entrenar Marine
-		assertEquals(jugador.getUnidades().get(0).getNombre(), "Marine");
-		
-		barraca.getUnidadesEntrenables().get(0).crear();
-		for(int i = 0; i < 3; i++) barraca.pasarTurno();//Entrenar Marine
-		assertEquals(jugador.getUnidades().get(1).getNombre(), "Marine");
+		for (int i = 0; i < 3; i++)
+			entrenarUnidadVerJugador(Tipo.MARINE, turnosMarine);
 	}
 	
 	@Test
 	public void testBarracaEntrenarVariasUnidadesConColaDeEspera() {
-		barraca.getUnidadesEntrenables().get(0).crear();
-		barraca.getUnidadesEntrenables().get(0).crear();
-		for(int i = 0; i < 6; i++) barraca.pasarTurno();//Entrenar 2 Marines
-		assertEquals(jugador.getUnidades().get(0).getNombre(), "Marine");
-		assertEquals(jugador.getUnidades().get(1).getNombre(), "Marine");
-	}
-
-	@Test
-	public void testBarracaEntrenaUnidadSinPoblacionDebeFallar() {
-		while (jugador.getCapacidadPoblacion() > 1) {
-			jugador.aumentarCapacidadPoblacion(-1);
-		}
-		barraca.getUnidadesEntrenables().get(0).crear();
-		for(int i = 0; i < 3; i++) barraca.pasarTurno();//Entrenar Marine
-		try {
-			barraca.getUnidadesEntrenables().get(0).crear();
-			fail();
-		}
-		catch (SuministroInsuficiente e) {
-			assertTrue(true);
-			return;
-		}
-
+		entrenarVariasUnidadesSostieneElOrden(
+					Arrays.asList(barraca.getUnidadesEntrenables().get(0),
+							barraca.getUnidadesEntrenables().get(0)), turnosMarine, turnosMarine);
 	}
 
 }

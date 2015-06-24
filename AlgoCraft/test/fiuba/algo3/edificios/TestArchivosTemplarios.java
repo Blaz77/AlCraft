@@ -2,6 +2,8 @@ package fiuba.algo3.edificios;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,12 +20,13 @@ import fiuba.algo3.mapa.*;
 import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 
-public class TestArchivosTemplarios extends TestEdificio {
+public class TestArchivosTemplarios extends TestEdificioEntrenador {
 
 	private Edificio acceso;
 	private Edificio puerto;
 	private Edificio archivos;
 	private Edificio archivosEnConst;
+	private final int turnosAltoTemplario = 7;
 	
 	@Override
 	protected Edificio crearEdificio() {
@@ -53,8 +56,9 @@ public class TestArchivosTemplarios extends TestEdificio {
 		this.jugador = new Jugador("Prueba", Color.AZUL, TipoRaza.PROTOSS, mapa);
 		
 		// Aseguro recursos
-		jugador.agregarGasVespeno(800);
-		jugador.agregarMinerales(600);
+		jugador.agregarGasVespeno(1200);
+		jugador.agregarMinerales(1200);
+		jugador.aumentarCapacidadPoblacion(20);
 		this.acceso = crearEdificioRequerido();
 		for(int i = 0; i < 8; i++) acceso.pasarTurno();//Construccion
 		this.acceso = (Edificio) mapa.getOcupante(acceso.getPosicion());
@@ -65,6 +69,7 @@ public class TestArchivosTemplarios extends TestEdificio {
 		for(int i = 0; i < 9; i++) archivos.pasarTurno();//Construccion
 		this.archivos = (Edificio) mapa.getOcupante(archivos.getPosicion());
 		this.archivosEnConst = crearEdificio();
+		entrenador = this.archivos;
 	}
 
 	
@@ -150,75 +155,66 @@ public class TestArchivosTemplarios extends TestEdificio {
 	}
 	
 	@Test
-	public void testArchivosTerminadaPuedeEntrenar() {
+	public void testArchivosTerminadoPuedeEntrenar() {
 		assertTrue(archivos.puedeEntrenarUnidades());
 	}
 	
 	@Test
-	public void testArchivosEntrenaUnidad() {
-		archivos.getUnidadesEntrenables().get(0).crear();
-		
-		for(int i = 0; i < 7; i++) archivos.pasarTurno();//Entrenar AltoTemplario
-		
-		assertEquals(jugador.getUnidades().get(0).getNombre(), "Alto Templario");
-
+	public void testArchivosPuedeEntrenarUnaUnidad() {
+		assertEquals(1, archivos.getUnidadesEntrenables().size());
 	}
-
+	
 	@Test
-	public void testArchivosEntrenaUnidadConsumeRecursos() {
-		int mineralRelativo = jugador.getMinerales();
-		int gasRelativo = jugador.getGasVespeno();
-		
-		archivos.getUnidadesEntrenables().get(0).crear();
-		for(int i = 0; i < 7; i++) archivos.pasarTurno();//Entrenar AltoTemplario
-		
-		assertEquals(jugador.getMinerales(), mineralRelativo - 50);
-		assertEquals(jugador.getGasVespeno(), gasRelativo - 150);
-
+	public void testArchivosPuedeEntrenarAltoTemplario() {
+		puedeEntrenarUnidad(Tipo.ALTO_TEMPLARIO);
+	}
+	
+	@Test
+	public void testArchivosMientrasEntrenaAltoTemplarioNoEstaDisponible() {
+		mientrasEntrenaUnidadNoDisponible(Tipo.ALTO_TEMPLARIO, turnosAltoTemplario);
+	}
+	
+	@Test
+	public void testArchivosEntrenaAltoTemplario() {
+		entrenarUnidadVerJugador(Tipo.ALTO_TEMPLARIO, turnosAltoTemplario);
+	}
+	
+	@Test
+	public void testArchivosEntrenaAltoTemplarioDejaEnElMapa() {
+		entrenarUnidadVerMapa(Tipo.ALTO_TEMPLARIO, turnosAltoTemplario);
+	}
+	
+	@Test
+	public void testArchivosEntrenaAltoTemplarioConsumeRecursos() {
+		entrenarUnidadConsumeRecursos(Tipo.ALTO_TEMPLARIO, turnosAltoTemplario, 50, 150, 2);
 	}
 	
 	@Test(expected = MineralInsuficiente.class)
-	public void testArchivosEntrenaUnidadSinMineralesDebeFallar() {
-		while (jugador.getMinerales() >= 50) jugador.agregarMinerales(-10);
-		archivos.getUnidadesEntrenables().get(0).crear();
+	public void testArchivosEntrenaAltoTemplarioSinMineralesDebeFallar() {
+		entrenarSinMinerales(Tipo.ALTO_TEMPLARIO);
 	}
 	
 	@Test(expected = GasVespenoInsuficiente.class)
-	public void testArchivosEntrenaUnidadSinGasVespenoDebeFallar() {
-		while (jugador.getGasVespeno() >= 150) jugador.agregarGasVespeno(-10);
-		archivos.getUnidadesEntrenables().get(0).crear();
+	public void testArchivosEntrenaAltoTemplarioSinGasVespenoDebeFallar() {
+		entrenarSinGasVespeno(Tipo.ALTO_TEMPLARIO);
 	}
 	
-	@Test
-	public void testArchivosEntrenarVariasUnidadesSinColaDeEspera() {
-		// Aseguro recursos
-		jugador.agregarGasVespeno(100);
-		
-		archivos.getUnidadesEntrenables().get(0).crear();
-		for(int i = 0; i < 7; i++) archivos.pasarTurno();//Entrenar AltoTemplario
-		assertEquals(jugador.getUnidades().get(0).getNombre(), "Alto Templario");
-		
-		archivos.getUnidadesEntrenables().get(0).crear();
-		for(int i = 0; i < 7; i++) archivos.pasarTurno();//Entrenar AltoTemplario
-		assertEquals(jugador.getUnidades().get(1).getNombre(), "Alto Templario");
-	}
-	
-	@Test
-	public void testArchivosEntrenarVariasUnidadesConColaDeEspera() {
-		// Aseguro recursos
-		jugador.agregarGasVespeno(300);
-		
-		archivos.getUnidadesEntrenables().get(0).crear();
-		archivos.getUnidadesEntrenables().get(0).crear();
-		for(int i = 0; i < 14; i++) archivos.pasarTurno();//Entrenar 2 AltoTemplarios
-		assertEquals(jugador.getUnidades().get(0).getNombre(), "Alto Templario");
-		assertEquals(jugador.getUnidades().get(1).getNombre(), "Alto Templario");
-	}
-
 	@Test(expected = SuministroInsuficiente.class)
-	public void testArchviosEntrenaUnidadSinPoblacionDebeFallar() {
-		while (jugador.getCapacidadPoblacion() > 1) jugador.aumentarCapacidadPoblacion(-1);
-		archivos.getUnidadesEntrenables().get(0).crear();
+	public void testArchivosEntrenaAltoTemplarioSinPoblacionDebeFallar() {
+		entrenarSinCapacidadPoblacion(Tipo.ALTO_TEMPLARIO);
 	}
 	
+	@Test
+	public void testArchivosEntrenaVariasUnidadesSinColaDeEspera() {		
+		for (int i = 0; i < 3; i++)
+			entrenarUnidadVerJugador(Tipo.ALTO_TEMPLARIO, turnosAltoTemplario);
+	}
+	
+	@Test
+	public void testArchivosEntrenaVariasUnidadesConColaDeEspera() {
+		entrenarVariasUnidadesSostieneElOrden(
+					Arrays.asList(archivos.getUnidadesEntrenables().get(0),
+							archivos.getUnidadesEntrenables().get(0)), 
+							turnosAltoTemplario, turnosAltoTemplario);
+	}	
 }
