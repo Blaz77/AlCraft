@@ -45,7 +45,7 @@ public class MinimapaVista extends JPanel implements MouseListener {
 	private BufferedImage bufferMinimapa;
 	private JPanel centrante;
 	private JPanel areaMinimapa;
-	private float factorEscala;  // > 1
+	private float factorEscala; 
 	private JPanel espaciadorDerecho;
 	
 	public MinimapaVista(Jugador jugador, JPanel panel, Camara camara){
@@ -180,17 +180,16 @@ public class MinimapaVista extends JPanel implements MouseListener {
 		int y = e.getY() + (panel.getHeight() - ALTURA_HUD);
 		
 		if (x >= ORIGEN_X && x <= ORIGEN_X + ANCHO_MAPA) {
-			//System.out.println(String.format("%d %d", e.getX(), e.getY()));
-			//System.out.println(String.format("%d %d", ORIGEN_X, ORIGEN_Y));
-			//System.out.println(String.format("%d %d", ANCHO_MAPA, ALTO_MAPA));
 			if (y >= ORIGEN_Y && y <= ORIGEN_Y + ALTO_MAPA) {
-				// Dentro del minimapa
-				// Corregir
-				System.out.print("aas");
-				camara.move(camara.getxOffset() - (ORIGEN_X - x) ,
-						camara.getyOffset() - (ORIGEN_Y - y));
+				System.out.print(String.format("aas %f", this.factorEscala));
+				camara.move(
+						(int) Math.floor((x - ORIGEN_X) * 32f * factorEscala)- camara.getxOffset() - panel.getWidth() / 2,
+						(y - ORIGEN_Y)*32 - camara.getyOffset() - panel.getHeight() / 2
+						);
 			}
 		}
+		
+		panel.repaint();
 	}
 
 	public void mouseEntered(MouseEvent e) {
