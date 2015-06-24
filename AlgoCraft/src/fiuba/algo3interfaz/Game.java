@@ -41,17 +41,7 @@ public class Game implements Runnable { // Permite correr un thread
 			}
 		}
 
-		private int count = 0;
-		private long nowCount;
-		private long lastTimeCount = System.nanoTime();
 		public void _paintComponent(Graphics g){
-			count++;
-			nowCount = System.nanoTime();
-			if (nowCount - lastTimeCount > 1000000000){
-				System.out.format("FPS: %d%n", count);
-				count = 0;
-				lastTimeCount = nowCount;
-			}
 			super.paintComponent(g);
 			State.getState().render(g);
 		}
