@@ -15,7 +15,8 @@ import fiuba.algo3interfaz.states.State;
 
 public class Game implements Runnable { // Permite correr un thread
 
-	private static final int FRAMES_PER_SECOND = 3;
+	private static final int MIN_FPS = 2;
+	private static final int MAX_FPS = 30;
 	
 	/** Atributos del Thread **/
 	private boolean running = false;
@@ -24,7 +25,33 @@ public class Game implements Runnable { // Permite correr un thread
 	/** Frame (el JPanel es si mismo y despues se añade) **/
 	private JFrame frame = new JFrame("AlgoCraft");
 	private JPanel panel = new JPanel() {
+		
+		private double timePerTick = 1000000000 / MAX_FPS;
+		private double delta = 0;
+		long now;
+		long lastTime = System.nanoTime();
+		
 		public void paintComponent(Graphics g){
+			now = System.nanoTime();
+			delta += (now - lastTime) / timePerTick;
+			lastTime = now;
+			if (delta >= 1){
+				_paintComponent(g);
+				delta -= Math.floor(delta);
+			}
+		}
+
+		private int count = 0;
+		private long nowCount;
+		private long lastTimeCount = System.nanoTime();
+		public void _paintComponent(Graphics g){
+			count++;
+			nowCount = System.nanoTime();
+			if (nowCount - lastTimeCount > 1000000000){
+				System.out.format("FPS: %d%n", count);
+				count = 0;
+				lastTimeCount = nowCount;
+			}
 			super.paintComponent(g);
 			State.getState().render(g);
 		}
@@ -92,32 +119,20 @@ public class Game implements Runnable { // Permite correr un thread
 	// Basico juego hermoso :D
 	public void run(){
 				
-		int fps = FRAMES_PER_SECOND;
-		double timePerTick = 1000000000 / fps; // 1 second = 1000000000 nanoseconds
-		double delta = 0; // whut.
+		double timePerTick = 1000000000 / MIN_FPS;
+		double delta = 0;
 		long now;
-		long lastTime = System.nanoTime(); // tiempo actual de la pc en nanos
+		long lastTime = System.nanoTime();
 		
-		//tick();
 		panel.repaint();
-		// Game loop basico:
 		while(running){
-			panel.repaint();
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			/*now = System.nanoTime();
+			now = System.nanoTime();
 			delta += (now - lastTime) / timePerTick;
 			lastTime = now;
 			if (delta >= 1){
-				//tick();
-				//panel.repaint();
+				panel.repaint();
 				delta --;
-			}*/
-			
+			}
 		}
 		stop();
 	}
