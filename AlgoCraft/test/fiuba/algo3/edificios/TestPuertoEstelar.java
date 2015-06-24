@@ -19,8 +19,6 @@ import fiuba.algo3.ocupantes.edificios.Edificio;
 
 public class TestPuertoEstelar extends TestEdificio {
 
-	private MapaReal mapa;
-	private Jugador jugador;
 	private Edificio fabrica;
 	private Edificio barraca;
 	private Edificio puerto;
@@ -59,7 +57,7 @@ public class TestPuertoEstelar extends TestEdificio {
 		this.barraca = crearEdificioRequerido();
 		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
 		this.barraca = (Edificio) mapa.getOcupante(barraca.getPosicion());
-		this.fabrica = crearEdificioRequerido();
+		this.fabrica = crearEdificioRequeridoNivel2();
 		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Construccion
 		this.fabrica = (Edificio) mapa.getOcupante(fabrica.getPosicion());
 		this.puerto = crearEdificio();

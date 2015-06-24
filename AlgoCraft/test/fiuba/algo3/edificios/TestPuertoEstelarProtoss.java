@@ -10,26 +10,32 @@ import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.OrdenConstruccionViolado;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.raza.TipoRaza;
+import fiuba.algo3.terreno.Terreno;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
+import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 
 public class TestPuertoEstelarProtoss extends TestEdificio {
 
-	private MapaReal mapa;
-	private Jugador jugador;
 	private Edificio acceso;
 	private Edificio puerto;
 	private Edificio puertoEnConst;
 	
 	@Override
-	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
-		return jugador.getEdificador().crearEntrenadorUnidadesIntermedias(jugador, posicion);
+	protected Edificio crearEdificio() {
+		return crearEnTierra();
+	}
+
+	@Override
+	protected Edificio crearEdificioEn(Terreno terreno, Tipo tipo) {
+		return crearEn((j,p) -> jugador.getEdificador().crearEntrenadorUnidadesIntermedias(j,p), terreno, tipo);
 	}
 	
 	@Override
-	protected Edificio crearEdificioRequerido(Jugador jugador, Posicion posicion) {
-		return jugador.getEdificador().crearEntrenadorUnidadesBasicas(jugador, posicion);
+	protected Edificio crearEdificioRequerido() {
+		return crearEn((j,p) -> jugador.getEdificador().crearEntrenadorUnidadesBasicas(j,p),
+				Terreno.TIERRA, Tipo.CELDA_VACIA);
 	}
 	
 	@Before
@@ -40,13 +46,13 @@ public class TestPuertoEstelarProtoss extends TestEdificio {
 		// Aseguro recursos
 		jugador.agregarGasVespeno(500);
 		jugador.agregarMinerales(500);
-		this.acceso = crearRequeridoEnTierra(jugador, mapa, new Posicion(0,0));
+		this.acceso = crearEdificioRequerido();
 		for(int i = 0; i < 8; i++) acceso.pasarTurno();//Construccion
 		this.acceso = (Edificio) mapa.getOcupante(acceso.getPosicion());
-		this.puerto = crearEnTierra(jugador, mapa, posRelativa(acceso, 1, 1));
+		this.puerto = crearEdificio();
 		for(int i = 0; i < 10; i++) puerto.pasarTurno();//Construccion
 		this.puerto = (Edificio) mapa.getOcupante(puerto.getPosicion());
-		this.puertoEnConst = crearEnTierra(jugador, mapa, posRelativa(puerto, 1, 1));
+		this.puertoEnConst = crearEdificio();
 	}
 	
 	@Test
@@ -54,21 +60,19 @@ public class TestPuertoEstelarProtoss extends TestEdificio {
 		assertEquals(puerto.getNombre(),"Puerto Estelar");
 	}
 	
-	@Test
+	@Test(expected = OrdenConstruccionViolado.class)
 	public void testCrearPuertoEstelarSinAccesoFalla() {
-		Jugador jugador2 = new Jugador("Prueba2", Color.AZUL, TipoRaza.PROTOSS, mapa);
+		jugador = new Jugador("Prueba2", Color.AZUL, TipoRaza.PROTOSS, mapa);
 		// Aseguro recursos
-		jugador2.agregarGasVespeno(500);
-		jugador2.agregarMinerales(500);
-		try {
-			Edificio puerto2 = crearEnTierra(jugador2, mapa, posRelativa(puertoEnConst, 1, 1));
-			fail();
-		}
-		catch (OrdenConstruccionViolado e) {
-			assertTrue(true);
-			return;
-		}
-		fail();
+		jugador.agregarGasVespeno(500);
+		jugador.agregarMinerales(600);
+		crearEdificio();
+	}
+	
+	@Test(expected = OrdenConstruccionViolado.class)
+	public void testCrearPuertoEstelarLuegoDeDestruirAccesoFalla() {
+		acceso.destruir();
+		crearEdificio();
 	}
 	
 	@Test
@@ -78,52 +82,27 @@ public class TestPuertoEstelarProtoss extends TestEdificio {
 		int costoGas = 150;
 		int costoMineral = 150;
 		
-		this.puertoEnConst = crearEnTierra(jugador, mapa, posRelativa(puertoEnConst, 1,1));
+		this.puertoEnConst = crearEdificio();
 		
 		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
 		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
 	}
 	
-	@Test
+	@Test(expected = TerrenoInadecuado.class)
 	public void testCrearPuertoEstelarFueraDeTierraFalla() {
-		try {
-			this.puertoEnConst = crearFueraDeTierra(jugador, mapa, posRelativa(puertoEnConst, 1,1));
-			fail();
-		}
-		catch (TerrenoInadecuado e) {
-			assertTrue(true);
-			return;
-		}
-		fail();
+		crearFueraDeTierra();
 	}
 	
-	@Test
+	@Test(expected = MineralInsuficiente.class)
 	public void testCrearPuertoEstelarSinMineralesDebeFallar() {
-		while (jugador.getMinerales() >= 150) {
-			jugador.agregarMinerales(-10);
-		}
-		try {
-			this.puertoEnConst = crearEnTierra(jugador, mapa, posRelativa(puertoEnConst, 1,1));
-			fail();
-		}
-		catch (MineralInsuficiente e) {
-			assertTrue(true);
-			return;
-		}
+		while (jugador.getMinerales() >= 150) jugador.agregarMinerales(-10);
+		crearEdificio();
 	}
 	
+	@Test(expected = GasVespenoInsuficiente.class)
 	public void testCrearPuertoEstelarSinGasVespenoDebeFallar() {
-		while (jugador.getMinerales() >= 100) {
-			jugador.agregarMinerales(-10);
-		}
-		try {
-			this.puertoEnConst = crearEnTierra(jugador, mapa, posRelativa(puertoEnConst, 1,1));
-			fail();
-		}
-		catch (GasVespenoInsuficiente e) {
-			assertTrue(true);
-			return;
-		}
+		while (jugador.getGasVespeno() >= 150) jugador.agregarGasVespeno(-10);
+		crearEdificio();
 	}
 	
 	@Test

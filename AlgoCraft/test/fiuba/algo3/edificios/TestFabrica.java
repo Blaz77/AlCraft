@@ -12,26 +12,32 @@ import fiuba.algo3.excepciones.SuministroInsuficiente;
 import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.raza.TipoRaza;
+import fiuba.algo3.terreno.Terreno;
 import fiuba.algo3.juego.*;
 import fiuba.algo3.mapa.*;
+import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 
 public class TestFabrica extends TestEdificio {
 
-	private MapaReal mapa;
-	private Jugador jugador;
 	private Edificio barraca;
 	private Edificio fabrica;
 	private Edificio fabricaEnConst;
 	
 	@Override
-	protected Edificio crearEdificio(Jugador jugador, Posicion posicion) {
-		return jugador.getEdificador().crearEntrenadorUnidadesIntermedias(jugador, posicion);
+	protected Edificio crearEdificio() {
+		return crearEnTierra();
+	}
+
+	@Override
+	protected Edificio crearEdificioEn(Terreno terreno, Tipo tipo) {
+		return crearEn((j,p) -> jugador.getEdificador().crearEntrenadorUnidadesIntermedias(j,p), terreno, tipo);
 	}
 	
 	@Override
-	protected Edificio crearEdificioRequerido(Jugador jugador, Posicion posicion) {
-		return jugador.getEdificador().crearEntrenadorUnidadesBasicas(jugador, posicion);
+	protected Edificio crearEdificioRequerido() {
+		return crearEn((j,p) -> jugador.getEdificador().crearEntrenadorUnidadesBasicas(j,p),
+				Terreno.TIERRA, Tipo.CELDA_VACIA);
 	}
 	
 	@Before
@@ -42,12 +48,13 @@ public class TestFabrica extends TestEdificio {
 		// Aseguro recursos
 		jugador.agregarGasVespeno(500);
 		jugador.agregarMinerales(600);
-		this.barraca = crearRequeridoEnTierra(jugador, mapa, new Posicion(0,0));
+		this.barraca = crearEdificioRequerido();
 		for(int i = 0; i < 12; i++) barraca.pasarTurno();//Construccion
-		this.fabrica = crearEnTierra(jugador, mapa, posRelativa(barraca, 1, 1));
+		this.barraca = (Edificio) mapa.getOcupante(barraca.getPosicion());
+		this.fabrica = crearEdificio();
 		for(int i = 0; i < 12; i++) fabrica.pasarTurno();//Construccion
 		this.fabrica = (Edificio) mapa.getOcupante(fabrica.getPosicion());
-		this.fabricaEnConst = crearEnTierra(jugador, mapa, posRelativa(fabrica, 1, 1));
+		this.fabricaEnConst = crearEdificio();
 	}
 
 	
@@ -56,21 +63,19 @@ public class TestFabrica extends TestEdificio {
 		assertEquals(fabrica.getNombre(),"Fabrica");
 	}
 	
-	@Test
+	@Test(expected = OrdenConstruccionViolado.class)
 	public void testCrearFabricaSinBarracaFalla() {
-		Jugador jugador2 = new Jugador("Prueba2", Color.AZUL, TipoRaza.TERRAN, mapa);
+		jugador = new Jugador("Prueba2", Color.AZUL, TipoRaza.TERRAN, mapa);
 		// Aseguro recursos
-		jugador2.agregarGasVespeno(500);
-		jugador2.agregarMinerales(600);
-		try {
-			Edificio fabrica2 = crearEnTierra(jugador2, mapa, new Posicion(0,0));
-			fail();
-		}
-		catch (OrdenConstruccionViolado e) {
-			assertTrue(true);
-			return;
-		}
-		fail();
+		jugador.agregarGasVespeno(500);
+		jugador.agregarMinerales(600);
+		crearEdificio();
+	}
+	
+	@Test(expected = OrdenConstruccionViolado.class)
+	public void testCrearFabricaLuegoDeDestruirBarracaFalla() {
+		barraca.destruir();
+		crearEdificio();
 	}
 	
 	@Test
@@ -80,53 +85,27 @@ public class TestFabrica extends TestEdificio {
 		int costoGas = 100;
 		int costoMineral = 200;
 		
-		this.fabricaEnConst = crearEnTierra(jugador, mapa, new Posicion(32,32));
+		this.fabricaEnConst = crearEdificio();
 		
 		assertEquals(mineralRelativo - costoMineral, jugador.getMinerales());
 		assertEquals(gasRelativo - costoGas, jugador.getGasVespeno());
 	}
 	
-	@Test
+	@Test(expected = TerrenoInadecuado.class)
 	public void testCrearFabricaFueraDeTierraFalla() {
-		try {
-			this.fabricaEnConst = crearFueraDeTierra(jugador, mapa, new Posicion(32,32));
-			fail();
-		}
-		catch (TerrenoInadecuado e) {
-			assertTrue(true);
-			return;
-		}
-		fail();
+		crearFueraDeTierra();
 	}
 	
-	@Test
+	@Test(expected = MineralInsuficiente.class)
 	public void testCrearFabricaSinMineralesDebeFallar() {
-		while (jugador.getMinerales() >= 200) {
-			jugador.agregarMinerales(-10);
-		}
-		try {
-			this.fabricaEnConst = crearEnTierra(jugador, mapa, new Posicion(32,32));
-			fail();
-		}
-		catch (MineralInsuficiente e) {
-			assertTrue(true);
-			return;
-		}
+		while (jugador.getMinerales() >= 200) jugador.agregarMinerales(-10);
+		crearEdificio();
 	}
 	
-	@Test
+	@Test(expected = GasVespenoInsuficiente.class)
 	public void testCrearFabricaSinGasVespenoDebeFallar() {
-		while (jugador.getGasVespeno() >= 100) {
-			jugador.agregarGasVespeno(-10);
-		}
-		try {
-			this.fabricaEnConst = crearEnTierra(jugador, mapa, new Posicion(32,32));
-			fail();
-		}
-		catch (GasVespenoInsuficiente e) {
-			assertTrue(true);
-			return;
-		}
+		while (jugador.getGasVespeno() >= 100) jugador.agregarGasVespeno(-10);
+		crearEdificio();
 	}
 	
 	@Test
