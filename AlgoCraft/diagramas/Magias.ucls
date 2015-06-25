@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.8" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
+  <class id="1" language="java" name="fiuba.algo3.magia.MagiaAlucinacion" project="TP0_Tema2" 
+    file="/TP0_Tema2/src/fiuba/algo3/magia/MagiaAlucinacion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="310" y="328"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <interface id="2" language="java" name="fiuba.algo3.magia.MagiaAUnidad" project="TP0_Tema2" 
+    file="/TP0_Tema2/src/fiuba/algo3/magia/MagiaAUnidad.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="278" y="178"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </interface>  
+  <interface id="3" language="java" name="fiuba.algo3.magia.MagiaDeAreaDeEfecto" project="TP0_Tema2" 
+    file="/TP0_Tema2/src/fiuba/algo3/magia/MagiaDeAreaDeEfecto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="500" y="177"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </interface>  
+  <class id="4" language="java" name="fiuba.algo3.magia.MagiaEMP" project="TP0_Tema2" 
+    file="/TP0_Tema2/src/fiuba/algo3/magia/MagiaEMP.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="446" y="327"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="fiuba.algo3.magia.MagiaRadiacion" project="TP0_Tema2" 
+    file="/TP0_Tema2/src/fiuba/algo3/magia/MagiaRadiacion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="165" y="328"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="fiuba.algo3.magia.MagiaTormentaPsionica" project="TP0_Tema2" 
+    file="/TP0_Tema2/src/fiuba/algo3/magia/MagiaTormentaPsionica.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="593" y="327"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <interface id="7" language="java" name="fiuba.algo3.componentes.IMagia" project="TP0_Tema2" 
+    file="/TP0_Tema2/src/fiuba/algo3/componentes/IMagia.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="379" y="44"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </interface>  
+  <realization id="8">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <dependency id="9">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <realization id="10">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <realization id="11">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <realization id="12">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <dependency id="13">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="false" package="false" protected="false" private="false" static="false"/>    
+    <operations public="false" package="false" protected="false" private="false" static="false"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
