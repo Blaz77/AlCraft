@@ -12,13 +12,11 @@ import fiuba.algo3.ocupantes.unidades.Unidad;
 public class Visibilidad {
 
 	private boolean fueVista;
-	private boolean iluminacionForzada;
-	private HashSet<Unidad> observadores;
+	private int observadores;
 
 	public Visibilidad(){
 		this.fueVista = false;
-		this.iluminacionForzada = false;
-		this.observadores = new HashSet<Unidad>();
+		this.observadores = 0;
 	}
 	
 	public boolean verTerreno(){
@@ -26,21 +24,20 @@ public class Visibilidad {
 	}
 	
 	public boolean verOcupante(){
-		return (this.iluminacionForzada || ! observadores.isEmpty());
+		return observadores > 0;
 	}
 	
-	public void add(Unidad unidad){
+	public void add(){
 		fueVista = true;
-		observadores.add(unidad);
+		observadores++;
 	}
 	
-	public void remove(Unidad unidad){
-		observadores.remove(unidad);
+	public void remove(){
+		observadores--;
 	}
 	
 	public void forzarIluminacion() {
-		this.fueVista = true;
-		this.iluminacionForzada = true;
+		add();
 	}
 	
 }

@@ -56,15 +56,15 @@ public class MapaProxy implements Mapa {
 							new Posicion(posicionInicial.getX() + semilado + 1, posicionInicial.getY() + semilado + 1));
 	}
 	
-	private void iluminar(Unidad unidad){
-		_cambiarIluminacion(unidad, true);
+	private void iluminar(int vision, Posicion centro){
+		_cambiarIluminacion(vision, centro, true);
 	}
 	
-	private void oscurecer(Unidad unidad){
-		_cambiarIluminacion(unidad, false);
+	private void oscurecer(int vision, Posicion centro){
+		_cambiarIluminacion(vision, centro, false);
 	}	
 
-	private void _cambiarIluminacion(Unidad unidad, int vision, Posicion centro, boolean quieroIluminar){
+	private void _cambiarIluminacion(int vision, Posicion centro, boolean quieroIluminar){
 		int pos_x, pos_y;
 		Posicion posActual;
 		for (int x = -vision; x < vision; x++)
@@ -77,16 +77,12 @@ public class MapaProxy implements Mapa {
 				if (centro.distancia(posActual) > vision)
 					continue;
 				if (quieroIluminar)
-					mapaVisibilidad[pos_x][pos_y].add(unidad);
+					mapaVisibilidad[pos_x][pos_y].add();
 				else
-					mapaVisibilidad[pos_x][pos_y].remove(unidad);
+					mapaVisibilidad[pos_x][pos_y].remove();
 			}
 	}
-	
-	private void _cambiarIluminacion(Unidad unidad, boolean quieroIluminar){
-		_cambiarIluminacion(unidad, unidad.getRangoVision(), unidad.getPosicion(), quieroIluminar);
-	}
-	
+		
 	/* Visibiliza un cuadrado de mapa */
 	private void _visibilizar_area(Posicion posInicial, Posicion posFinal) {
 		for (int y=posInicial.getY(); y < posFinal.getY(); y++) {
@@ -136,7 +132,7 @@ public class MapaProxy implements Mapa {
 			throw new CeldaNoVisible();
 		
 		if (ocupante.getTipoOcupante() == TipoOcupante.UNIDAD)
-			iluminar((Unidad)ocupante);
+			iluminar( ((Unidad)ocupante).getRangoVision(), ocupante.getPosicion() );
 		mapa.setOcupante(ocupante, posicion);
 	}
 	
@@ -145,7 +141,7 @@ public class MapaProxy implements Mapa {
 		// este va en contra de las reglas del proxy, porque bueno ...
 		if (ocupante.getTipoOcupante() == TipoOcupante.UNIDAD){
 			Unidad unidad = (Unidad) ocupante;
-			_cambiarIluminacion(unidad, unidad.getRangoVision(), pos, true);
+			iluminar(unidad.getRangoVision(), pos);
 		}
 		return pos;
 	}
@@ -173,9 +169,9 @@ public class MapaProxy implements Mapa {
 	}
 
 	public void mover(Unidad /*ObjetoVivo*/ unidad, Posicion destino){
-		oscurecer(unidad);
+		oscurecer(unidad.getRangoVision(), unidad.getPosicion());
 		mapa.mover(unidad, destino);
-		iluminar(unidad);
+		iluminar(unidad.getRangoVision(), destino);
 	}
 	 
 	public void verificarOcupacion(Ocupante ocupante, Posicion posicion) {
