@@ -6,10 +6,8 @@ import fiuba.algo3.atributos.jugador.AtributosJugador;
 import fiuba.algo3.excepciones.GasVespenoInsuficiente;
 import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.SuministroInsuficiente;
-import fiuba.algo3.excepciones.UnidadNoPropia;
 import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.mapa.Mapa;
-import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.raza.Raza;
@@ -159,12 +157,6 @@ public class Jugador {
 	
 	public void removerUnidad(Unidad unidad) {
 		this.unidades.remove(unidad);
-	}
-	
-	public void mover(Unidad unidad, Posicion destino){
-		if (! unidades.contains(unidad)) // medio lento este chequeo.
-			throw new UnidadNoPropia();
-		mapaPropio.mover(unidad, destino);
 	}
 	
 	public void pasarTurno(){
