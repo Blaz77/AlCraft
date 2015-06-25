@@ -40,7 +40,7 @@ public class btnEntrenar extends BotonBotonera {
 		
 		this.botoneraUnidadesEntrenables = new Botonera(botones);
 		
-		this.botoneraUnidadesEntrenables.agregarCancelable(new btnCancelarMouseListener(vista, HudVista.picCancelar));
+		this.botoneraUnidadesEntrenables.agregarCancelable(new btnCancelarMouseListener(vista, vista.getPicCancelar()));
 		
 		vista.setBotonera(botoneraUnidadesEntrenables);
 		vista.requestFocus();

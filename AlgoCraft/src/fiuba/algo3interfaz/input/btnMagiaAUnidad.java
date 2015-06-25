@@ -1,6 +1,7 @@
 package fiuba.algo3interfaz.input;
 
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 
@@ -9,15 +10,19 @@ import fiuba.algo3.magia.MagiaDeAreaDeEfecto;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3interfaz.gfx.HudVista;
 import fiuba.algo3interfaz.gfx.ImageLoader;
+import fiuba.algo3interfaz.gfx.SpriteSheet;
+
 
 public class btnMagiaAUnidad extends BotonBotonera implements UtilizadorDeCeldas{
 
+	public static final int INDICE_SPRITE = 7;
 	private HudVista vista;
 	private MagiaAUnidad magia;
 	
+	
 	public btnMagiaAUnidad(HudVista vista, MagiaAUnidad magia) {
 		//hay que ver como agarrar la informacion de la magia: (otro tipo?)
-		super(new ImageIcon(ImageLoader.loadImage("/textures/construir_viejo.png")), "MagiaAUnidad");
+		super(new ImageIcon(SpriteSheet.getSpritesAcciones(vista.getRaza()).get(INDICE_SPRITE)), "MagiaAUnidad");
 		this.magia = magia;
 		this.vista = vista;
 	}

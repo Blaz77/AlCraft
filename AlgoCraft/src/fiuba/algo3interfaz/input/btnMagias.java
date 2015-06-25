@@ -27,7 +27,7 @@ public class btnMagias extends BotonBotonera {
 					new btnMagiaAUnidad(vista, magico.getMagiaAUnidad()),
 					new btnMagiaAOE(vista, magico.getMagiaDeAreaDeEfecto()));
 		
-		this.botoneraMagias.agregarCancelable(new btnCancelarMouseListener(vista, HudVista.picCancelar));
+		this.botoneraMagias.agregarCancelable(new btnCancelarMouseListener(vista, vista.getPicCancelar()));
 		
 		vista.setBotonera(botoneraMagias);		
 	}

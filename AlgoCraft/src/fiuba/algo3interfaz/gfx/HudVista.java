@@ -69,20 +69,12 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 	private Botonera botoneraNull;
 	private Botonera botoneraEdificioEntrenador;
 	private MapaVista vistaMapa;
+	private SpriteSheet spritesAcciones;
 	
 	/* Precarga de imagenes */ //ImageLoader.loadImage("/HUDs/HUDterran2.png"); //HUDzerg2.png, HUDprotoss2.png
 	private static HashMap<TipoRaza, BufferedImage> huds = new HashMap<TipoRaza, BufferedImage>();
 
-	public static BufferedImage picConstruir = ImageLoader.loadImage("/textures/construir.png");
-	public static BufferedImage picCancelar = ImageLoader.loadImage("/textures/cancelar.png");
-	//public static BufferedImage picEntrenar = ImageLoader.loadImage("/textures/entrenar.png");
-	// TODO : tomar img para los de abajo!
-	public static BufferedImage picEntrenar = ImageLoader.loadImage("/textures/terran.png");
-	public static BufferedImage picMover = ImageLoader.loadImage("/textures/mover.png");
-	public static BufferedImage picAtacar = ImageLoader.loadImage("/textures/terran.png");
-	public static BufferedImage picAlmacenar = ImageLoader.loadImage("/textures/construir.png");
-	public static BufferedImage picLiberar = ImageLoader.loadImage("/textures/construir.png");
-	public static BufferedImage picMagias = ImageLoader.loadImage("/textures/construir.png");
+	private static BufferedImage picCancelar = ImageLoader.loadImage("/textures/cancelar.png");
 	
 	public static BufferedImage picTonalizadorMovimiento = ImageLoader.loadImage("/textures/tonalizador_movimiento.png");
 	
@@ -90,6 +82,14 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 	public static final int ANCHO = 640;
 	public static final int ALTO = 192;
 	
+	private static final int INDICE_MOVER = 0;
+	private static final int INDICE_ATACAR = 1;
+	private static final int INDICE_CONSTRUIR = 2;
+	private static final int INDICE_ENTRENAR = 3;
+	private static final int INDICE_PARAR = 4;
+	private static final int INDICE_CANCELAR = 5;
+	private static final int INDICE_MAGIAS = 6;
+
 	public HudVista(Jugador jugador, JPanel panel, MapaVista vistaMapa, Game game){
 		this.raza = jugador.getRaza();
 		this.color = jugador.getColor();
@@ -100,7 +100,7 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 		this.mapaVisible = jugador.getMapa();
 		
 		this.hudImage = loadHUD(this.raza);//ImageLoader.loadImage("/HUDs/HUDterran2.png");
-		
+		this.spritesAcciones = SpriteSheet.getSpritesAcciones(getRaza());
 		this.setFocusable(false);
 		this.setVisible(false);
 		this.setOpaque(false);
@@ -158,10 +158,11 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 		ubicadorPasarTurno.add(btnPasarTurno);
 		
 		// Botoneras:
-		this.botoneraNull = new Botonera();
-		this.botoneraCeldaVacia = new Botonera(new btnConstruirMouseListener(this, this.jugador, picConstruir));
 		
-		this.botoneraEdificioEntrenador = new Botonera(new btnEntrenar(this, this.jugador, picEntrenar));
+		this.botoneraNull = new Botonera();
+		this.botoneraCeldaVacia = new Botonera(new btnConstruirMouseListener(this, this.jugador, getPicConstruir()));
+		
+		this.botoneraEdificioEntrenador = new Botonera(new btnEntrenar(this, this.jugador, getPicEntrenar()));
 		
 		this.botoneras = new HashMap<Tipo, Botonera>();
 		
@@ -180,8 +181,8 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 		}
 											
 		Botonera botoneraUnidadAtaque = new Botonera(
-				new btnMover(this, picMover),
-				new btnAtacar(this, picAtacar));
+				new btnMover(this, getPicMover()),
+				new btnAtacar(this, getPicAtacar()));
 		
 		for (Tipo tipo : new Tipo[]{atributos.getInfanteriaLivianaTerrestre().getTipo(),
 									atributos.getInfanteriaPesadaTerrestre().getTipo(),
@@ -190,19 +191,20 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 		}
 		
 		Botonera botoneraUnidadTransporte = new Botonera(
-				new btnMover(this, picMover),
-				new btnAlmacenar(this, picAlmacenar),
-				new btnLiberar(this, this.jugador, picLiberar));
+				new btnMover(this, getPicMover()),
+				new btnAlmacenar(this, getPicAlmacenar()),
+				new btnLiberar(this, this.jugador, getPicLiberar()));
 		
 		this.botoneras.put(atributos.getTransporte().getTipo(), botoneraUnidadTransporte);
 		
 		Botonera botoneraUnidadMagica = new Botonera(
-				new btnMover(this, picMover),
-				new btnMagias(this, picMagias));
+				new btnMover(this, getPicMover()),
+				new btnMagias(this, getPicMagias()));
 		
 		this.botoneras.put(atributos.getInfanteriaMagica().getTipo(), botoneraUnidadMagica);
 	}
 	
+
 	private BufferedImage loadHUD(TipoRaza raza) {
 		if ( ! huds.containsKey(raza))
 			huds.put(raza, ImageLoader.loadImage("/HUDs/HUD" + raza.toString().toLowerCase() +"2.png"));
@@ -281,6 +283,42 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 				// Y ahora?
 			}
 		}
+	}
+	
+	public TipoRaza getRaza() {
+		return raza;
+	}
+	
+	private BufferedImage getPicConstruir() {
+		return spritesAcciones.get(INDICE_CONSTRUIR);
+	}
+	
+	public BufferedImage getPicCancelar() {
+		return spritesAcciones.get(INDICE_CANCELAR);
+	}
+
+	public BufferedImage getPicEntrenar() {
+		return spritesAcciones.get(INDICE_ENTRENAR);
+	}
+
+	public BufferedImage getPicMover() {
+		return spritesAcciones.get(INDICE_MOVER);
+	}
+
+	public BufferedImage getPicAtacar() {
+		return spritesAcciones.get(INDICE_ATACAR);
+	}
+
+	public BufferedImage getPicAlmacenar() {
+		return spritesAcciones.get(INDICE_MOVER);
+	}
+
+	public BufferedImage getPicLiberar() {
+		return spritesAcciones.get(INDICE_PARAR);
+	}
+
+	public BufferedImage getPicMagias() {
+		return spritesAcciones.get(INDICE_MAGIAS);
 	}
 	
 	public void actualizarCeldaSeleccionada(Posicion nuevaCeldaSeleccionada) {

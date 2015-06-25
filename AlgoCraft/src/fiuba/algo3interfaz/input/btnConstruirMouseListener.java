@@ -27,7 +27,7 @@ public class btnConstruirMouseListener extends BotonBotonera {
 				new btnConstruirEdificio(vista, jugador, jugador.getAtributos().getEntrenadorUnidadesIntermedias()),
 				new btnConstruirEdificio(vista, jugador, jugador.getAtributos().getEntrenadorUnidadesAvanzadas()));
 		
-		this.botoneraConstrucciones.agregarCancelable(new btnCancelarMouseListener(vista, HudVista.picCancelar));
+		this.botoneraConstrucciones.agregarCancelable(new btnCancelarMouseListener(vista, vista.getPicCancelar()));
 	}
 	
 	public void actionPerformed(ActionEvent e) {

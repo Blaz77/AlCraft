@@ -36,7 +36,7 @@ public class btnLiberar extends BotonBotonera {
 		
 		this.botoneraPasajeros = new Botonera(botones);
 		
-		this.botoneraPasajeros.agregarCancelable(new btnCancelarMouseListener(vista, HudVista.picCancelar));
+		this.botoneraPasajeros.agregarCancelable(new btnCancelarMouseListener(vista, vista.getPicCancelar()));
 		
 		vista.setBotonera(botoneraPasajeros);		
 	}

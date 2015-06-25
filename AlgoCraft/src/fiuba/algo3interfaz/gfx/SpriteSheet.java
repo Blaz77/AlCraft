@@ -86,6 +86,12 @@ public class SpriteSheet {
 	public static SpriteSheet getSpritesHibrido() {
 		return spritesHibrido;
 	}
+	
+	public static SpriteSheet getSpritesAcciones(TipoRaza raza) {
+		return spritesAccionesRaza.get(raza);
+	}
+	
+
 
 	public static SpriteSheet getSpritesJugador(Jugador jugador) {
 		// TODO Auto-generated method stub
@@ -94,10 +100,6 @@ public class SpriteSheet {
 	
 	public static SpriteSheet getSprites(Object object) {
 		return spritesRaza.get(object);
-	}	
-	
-	public static SpriteSheet getSpritesAcciones(TipoRaza raza) {
-		return spritesRaza.get(raza);
 	}	
 	
 	public static void inicializar() {
