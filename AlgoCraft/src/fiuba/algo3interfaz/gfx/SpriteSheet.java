@@ -2,18 +2,11 @@ package fiuba.algo3interfaz.gfx;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-
-import javax.imageio.ImageIO;
 
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.ocupantes.Tipo;
-import fiuba.algo3.ocupantes.TipoOcupante;
 import fiuba.algo3.raza.TipoRaza;
-import fiuba.algo3.terreno.Terreno;
 
 public class SpriteSheet {
 
