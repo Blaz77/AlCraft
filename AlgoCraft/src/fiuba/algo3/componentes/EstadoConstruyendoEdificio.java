@@ -1,6 +1,7 @@
 package fiuba.algo3.componentes;
 
 import fiuba.algo3.atributos.edificios.AtributosEdificio;
+import fiuba.algo3.excepciones.EstadoFinalizado;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 
@@ -26,13 +27,13 @@ public class EstadoConstruyendoEdificio implements Estado {
 		
 	}
 
-	public void pasarTurno() throws Exception {
+	public void pasarTurno() throws EstadoFinalizado {
 		this.turnosRestantes--;
 		portador.regenerarVida(cantVidaSumadaPorTurno);
 		portador.regenerarEscudo(cantEscudoSumadoPorTurno);
 		if (portador.getVida() == portador.getVidaMaxima() &&
 			portador.getEscudo() == portador.getEscudoMaximo()) {
-			throw new Exception();
+			throw new EstadoFinalizado();
 		}
 	}
 

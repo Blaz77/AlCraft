@@ -1,5 +1,6 @@
 package fiuba.algo3.componentes;
 
+import fiuba.algo3.excepciones.EstadoFinalizado;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 
@@ -19,7 +20,7 @@ public class EstadoIrradiado implements Estado {
 		this.portador.recibirDanio(getDanio(portador.getVidaMaxima(), factorPortador));
 	}
 
-	public void pasarTurno() throws Exception {
+	public void pasarTurno() throws EstadoFinalizado {
 		this.portador.recibirDanio(getDanio(portador.getVidaMaxima(), factorPortador));
 		
 		for (Unidad unidad : portador.getPropietario().getMapa().

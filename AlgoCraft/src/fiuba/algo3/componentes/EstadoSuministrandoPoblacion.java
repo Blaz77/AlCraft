@@ -1,6 +1,7 @@
 package fiuba.algo3.componentes;
 
 import fiuba.algo3.atributos.AtributosIncrementadorPoblacion;
+import fiuba.algo3.excepciones.EstadoFinalizado;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 
@@ -18,7 +19,7 @@ public class EstadoSuministrandoPoblacion implements Estado {
 		this.beneficiario.aumentarCapacidadPoblacion(atributos.getIncrementoDePoblacion());
 	}
 
-	public void pasarTurno() throws Exception {}
+	public void pasarTurno() throws EstadoFinalizado {}
 
 	public void desactivar() {
 		this.beneficiario.aumentarCapacidadPoblacion(-(atributos.getIncrementoDePoblacion()));

@@ -1,5 +1,6 @@
 package fiuba.algo3.componentes;
 
+import fiuba.algo3.excepciones.EstadoFinalizado;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 
 public class EstadoRegenerandoEscudo implements Estado {
@@ -10,7 +11,7 @@ public class EstadoRegenerandoEscudo implements Estado {
 		this.portador = portador;
 	}
 
-	public void pasarTurno() throws Exception {
+	public void pasarTurno() throws EstadoFinalizado {
 		//REGENERA 10% POR TURNO
 		portador.regenerarEscudo((portador.getEscudoMaximo() / 10));
 	}

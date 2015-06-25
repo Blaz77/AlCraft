@@ -1,5 +1,6 @@
 package fiuba.algo3.componentes;
 
+import fiuba.algo3.excepciones.EstadoFinalizado;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 
 public interface Estado{
@@ -18,9 +19,9 @@ public interface Estado{
 	*/
 	
 	//A llamar en el pasarTurno() de Edificio/Unidad
-	public void pasarTurno() throws Exception; //FinalizacionEstadoException
+	public void pasarTurno() throws EstadoFinalizado; //FinalizacionEstadoException
 	
-	//A llamar cuando finalizo el estado (la excepcion de arriba).
+	//A llamar cuando finalizo el estado (la excepcion de arriba). o muere la unidad!
 	public void desactivar();
 
 }

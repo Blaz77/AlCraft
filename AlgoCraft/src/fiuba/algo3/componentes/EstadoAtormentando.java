@@ -1,5 +1,6 @@
 package fiuba.algo3.componentes;
 
+import fiuba.algo3.excepciones.EstadoFinalizado;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.ObjetoVivo;
@@ -24,7 +25,7 @@ public class EstadoAtormentando implements Estado {
 		this.turnosRestantes = 2;
 	}
 
-	public void pasarTurno() throws Exception {
+	public void pasarTurno() throws EstadoFinalizado {
 		for (Unidad unidad : mapa.getUnidadesEnRango(posicionCentral, rangoTormenta)) {
 			if (unidad.getPropietario() != portador.getPropietario()) {
 				unidad.recibirDanio(100); // Es mucho, pero es lo que dice el enunciado
@@ -32,7 +33,7 @@ public class EstadoAtormentando implements Estado {
 		}
 		this.turnosRestantes -= 1;
 		if (turnosRestantes == 0) {
-			throw new Exception();
+			throw new EstadoFinalizado();
 		}
 	}
 

@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import fiuba.algo3.atributos.AtributosMovimiento;
+import fiuba.algo3.excepciones.EstadoFinalizado;
 import fiuba.algo3.excepciones.FueraDelRangoPermitido;
 import fiuba.algo3.excepciones.MovimientoInvalido;
 import fiuba.algo3.excepciones.PosicionOcupada;
@@ -29,7 +30,7 @@ public class Movimiento implements IMovimiento, Estado {
 
 	public void activar(ObjetoVivo portador) {}
 
-	public void pasarTurno() throws Exception {
+	public void pasarTurno() throws EstadoFinalizado {
 		this.movRestantes = atributos.getMovPorTurno();
 	}
 
