@@ -23,6 +23,8 @@ public class CopyOfSpriteSheet {
 	private final static String MINERAL_PATH = "/textures/cristal2.png";
 	private final static String VESPENO_PATH = "/textures/volcan2.png";
 	private final static String MARCA_MAPA_PATH = "/textures/marcaMapa.png";
+	private static final String SOMBRA_PATH = "/textures/sombra.png";
+	private static final String MEDIA_SOMBRA_PATH = "/textures/mediasombra.png";
 	private static final String PLAYER_PALETTE_PATH = "/palettes/player_palette.png";
 	private static final String TERRAN_PATH = "/textures/ocupantesTerran.png";
 	private static final String ACCIONES_TERRAN_PATH = "/textures/accionesTerran.png";;
@@ -32,6 +34,8 @@ public class CopyOfSpriteSheet {
 	//private static final String ZERG_PATH = "/textures/ocupantesZerg.png"; 
 
     public static final BufferedImage spriteMarcaMapa = ImageLoader.loadImage(MARCA_MAPA_PATH);
+	private static final BufferedImage spriteSombra = ImageLoader.loadImage(SOMBRA_PATH);
+	private static final BufferedImage spriteMediaSombra = ImageLoader.loadImage(MEDIA_SOMBRA_PATH);
 
 	private static java.awt.Color[] playerPalette = new Color[72];// = ImageLoader.loadImage(PLAYER_PALETTE_PATH).getRGB(0, 0, 9, 8, null, 0, 9);
     
@@ -74,6 +78,14 @@ public class CopyOfSpriteSheet {
     
 	public static BufferedImage getSpriteMarcaMapa() {
 		return spriteMarcaMapa;
+	}
+
+	public static BufferedImage getSpriteSombra() {
+		return spriteSombra;
+	}
+
+	public static BufferedImage getSpriteMediaSombra() {
+		return spriteMediaSombra;
 	}
 
 	public static CopyOfSpriteSheet getSpritesTierra() {

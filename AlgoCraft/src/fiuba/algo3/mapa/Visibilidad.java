@@ -35,7 +35,7 @@ public class Visibilidad {
 	}
 	
 	public void remove(Unidad unidad){
-		//observadores.remove(unidad);
+		observadores.remove(unidad);
 	}
 	
 	public void forzarIluminacion() {

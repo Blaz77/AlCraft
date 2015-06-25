@@ -26,10 +26,12 @@ public class MapaVista {
 
 	private static final int ANCHO_CELDA = CopyOfSpriteSheet.spritesTierra.getAncho();
 	private static final int ALTO_CELDA = CopyOfSpriteSheet.spritesTierra.getAlto();
-	private static final float RESCALE_FACTOR = 0.1f;
+	private static final float RESCALE_FACTOR = 0.5f;
 	private static final BufferedImageOp RESCALE_OP = new RescaleOp(RESCALE_FACTOR, 0, null);
 	private static BufferedImage marcaMapa = CopyOfSpriteSheet.getSpriteMarcaMapa();
-
+	private static BufferedImage sombra = CopyOfSpriteSheet.getSpriteSombra();
+	private static BufferedImage mediaSombra = CopyOfSpriteSheet.getSpriteMediaSombra();
+	
 	private Jugador jugador;
 	
 	private Mapa datosMapa;
@@ -78,7 +80,7 @@ public class MapaVista {
 		CopyOfSpriteSheet spritesHibrido = CopyOfSpriteSheet.getSpritesHibrido();
 		
 		if (terreno == Terreno.SOMBRA)
-			return null;
+			return sombra;
 		
 		if (terreno == Terreno.ESPACIO) {
 			indexEspacio = getIndexHibrido(x, y);
@@ -112,7 +114,7 @@ public class MapaVista {
 			for (int x = xInicio; x < xFin; x++){
 				BufferedImage spriteTerreno = spriteTerreno(x, y);
 				
-				boolean celdaDesconocida = datosMapa.getOcupante(new Posicion(x,y)).getTipoOcupante() == TipoOcupante.DESCONOCIDO;
+				boolean celdaDesconocida = datosMapa.getOcupante(new Posicion(x,y)).getTipo() == Tipo.DESCONOCIDO;
 				
 				if (celdaDesconocida)
 					dibujarEnCeldaOscura(g2, spriteTerreno, x, y);
@@ -147,11 +149,18 @@ public class MapaVista {
 	}
 
 	private void dibujarEnCeldaOscura(Graphics g, BufferedImage sprite, int x, int y) {
-		if (sprite == null)
-			return;
-		((Graphics2D) g).drawImage(null, RESCALE_OP, 
+		g.drawImage(sprite, 
 				ANCHO_CELDA * x - camara.getxOffset() + (ANCHO_CELDA - sprite.getWidth())/2, 
-				ALTO_CELDA  * y - camara.getyOffset() +  (ALTO_CELDA - sprite.getHeight())/2);
+				ALTO_CELDA  * y - camara.getyOffset() +  (ALTO_CELDA - sprite.getHeight())/2, null);
+		g.drawImage(CopyOfSpriteSheet.getSpriteMediaSombra(), 
+				ANCHO_CELDA * x - camara.getxOffset() + (ANCHO_CELDA - sprite.getWidth())/2, 
+				ALTO_CELDA  * y - camara.getyOffset() +  (ALTO_CELDA - sprite.getHeight())/2, null);
+		
+		/*if (sprite == null)
+			return;*/
+		/*((Graphics2D) g).drawImage(sprite, RESCALE_OP, 
+				ANCHO_CELDA * x - camara.getxOffset() + (ANCHO_CELDA - sprite.getWidth())/2, 
+				ALTO_CELDA  * y - camara.getyOffset() +  (ALTO_CELDA - sprite.getHeight())/2);*/
 	}
 
 
