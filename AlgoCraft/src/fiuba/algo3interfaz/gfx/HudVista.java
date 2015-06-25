@@ -294,7 +294,6 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 		}
 	}
 	
-<<<<<<< HEAD
 	public TipoRaza getRaza() {
 		return raza;
 	}
@@ -329,14 +328,14 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 
 	public BufferedImage getPicMagias() {
 		return spritesAcciones.get(INDICE_MAGIAS);
-=======
+	}
+	
 	private String filtrarDescripcionEstado(String descripcion) {
 		if (descripcion.contains("Construyendo") || descripcion.contains("Entrenando")) {
 			return descripcion;
 		}
 		
 		return "";
->>>>>>> origin/master
 	}
 	
 	public void actualizarCeldaSeleccionada(Posicion nuevaCeldaSeleccionada) {
