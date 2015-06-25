@@ -9,12 +9,11 @@ import java.util.Random;
 import javax.swing.SwingUtilities;
 
 import fiuba.algo3.juego.Jugador;
-import fiuba.algo3interfaz.gfx.CopyOfSpriteSheet;
+import fiuba.algo3interfaz.gfx.SpriteSheet;
 import fiuba.algo3interfaz.gfx.HudVista;
 import fiuba.algo3interfaz.gfx.MapaVista;
 import fiuba.algo3interfaz.gfx.MinimapaVista;
 import fiuba.algo3interfaz.gfx.RecursoVista;
-import fiuba.algo3interfaz.gfx.SpriteSheet;
 import fiuba.algo3interfaz.music.MP3Player;
 
 public class GameState extends State {
@@ -39,7 +38,7 @@ public class GameState extends State {
 	public GameState(){
 		
 		for (Jugador jugador : game.getModelo()){
-			CopyOfSpriteSheet.crearSpritesJugador(jugador);
+			SpriteSheet.crearSpritesJugador(jugador);
 			mapas.put(jugador, new MapaVista(jugador, game.getPanel()));
 			minimapas.put(jugador, new MinimapaVista(jugador, game.getPanel(), mapas.get(jugador).getCamara()));
 			huds.put(jugador, new HudVista(jugador, game.getPanel(), mapas.get(jugador), game));
