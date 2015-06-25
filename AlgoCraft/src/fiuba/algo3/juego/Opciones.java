@@ -54,7 +54,6 @@ public class Opciones {
 	}
 	
 	public void setDatosJugador(int n, String nombre, Color color, TipoRaza tipoRaza) {
-		// TODO: crear una buena excepcion para este.
 		if (nombre.length() < 4)
 			throw new NombreInvalido();
 		nombresJugadores.set(n-1, nombre);

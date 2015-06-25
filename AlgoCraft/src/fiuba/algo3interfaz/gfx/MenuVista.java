@@ -81,6 +81,14 @@ public class MenuVista extends JPanel {
     		msgbox("Debe especificar el nombre del jugador");
         	return false;
     	}
+    	if (txtNombreJugador1.getText().length() < 4 || txtNombreJugador2.getText().length() < 4) {
+    		msgbox("El nombre del jugador debe tener al menos 4 caracteres");
+        	return false;
+    	}
+    	if (cboColorJugador1.getSelectedIndex() == cboColorJugador2.getSelectedIndex()) {
+    		msgbox("Los jugadores deben tener distinto color");
+        	return false;
+    	}
     	
     	return true;
     }
@@ -189,7 +197,8 @@ public class MenuVista extends JPanel {
         });
 
         cboColorJugador2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ROJO", "AZUL", "AZUL_TEAL", "PURPURA", "NARANJA", "MARRON", "BLANCO", "AMARILLO" }));
-
+        cboColorJugador2.setSelectedIndex(1);
+        
         buttonGroup2.add(radRazaTerranJugador1);
         radRazaTerranJugador1.setText("Terran");
         radRazaTerranJugador1.addActionListener(new java.awt.event.ActionListener() {
