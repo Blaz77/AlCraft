@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 
 import fiuba.algo3.componentes.IMovimiento;
+import fiuba.algo3.excepciones.FueraDelRangoPermitido;
 import fiuba.algo3.excepciones.MovimientoInvalido;
 import fiuba.algo3interfaz.gfx.HudVista;
 
@@ -27,13 +28,14 @@ public class btnMover extends BotonBotonera implements UtilizadorDeCeldas {
 		if (! movible.puedeMoverse()) {
 			vista.mostrarMensaje("No hay movimientos posibles");
 		}
+		vista.requestFocus();
 	}
 
 	public void actualizar() {
 		try {
 			movible.moverA(vista.getCeldaSeleccionada());
 		}
-		catch (MovimientoInvalido e) {
+		catch (MovimientoInvalido|FueraDelRangoPermitido e) {
 			// Simplemente no hace nada. Es como cancelar el movimiento
 		}
 		finally {
