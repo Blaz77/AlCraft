@@ -10,7 +10,7 @@ import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 
-public class EdificiosFactory implements EdificiosAbstractFactory{
+public class EdificiosFactory {
 	private final int NO_HABILITADO = 0;
 	private final int HABILITADO = 1;
 	
