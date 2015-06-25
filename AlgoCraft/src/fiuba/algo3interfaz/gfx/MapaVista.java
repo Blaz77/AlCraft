@@ -217,11 +217,21 @@ public class MapaVista {
 	
 	public void moverCeldaSeleccionada(int i, int j) {
 		
+		if (i == 0 && j == 0) return;
 		int x = this.filSeleccionada;
 		this.filSeleccionada = Math.min(Math.max(x + i, 0), ancho-1);
 		
 		int y = this.colSeleccionada;
 		this.colSeleccionada = Math.min(Math.max(y + j, 0), alto-1);
+		
+		if (this.filSeleccionada * ANCHO_CELDA <= camara.getxOffset())
+			camara.move(this.filSeleccionada * ANCHO_CELDA - camara.getxOffset(), 0);
+		if ((this.filSeleccionada) * ANCHO_CELDA >= camara.getxOffset() + panel.getWidth())
+			camara.move((this.filSeleccionada + 1) * ANCHO_CELDA - (camara.getxOffset() + panel.getWidth()), 0);
+		if (this.colSeleccionada * ALTO_CELDA <= camara.getyOffset())
+			camara.move(0, this.colSeleccionada * ALTO_CELDA - camara.getyOffset());
+		if ((this.colSeleccionada) * ALTO_CELDA >= camara.getyOffset() + panel.getHeight())
+			camara.move(0, (this.colSeleccionada + 1) * ALTO_CELDA - (camara.getyOffset() + panel.getHeight()));
 		
 	}
 	
