@@ -267,6 +267,16 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 			g.setColor(java.awt.Color.WHITE);
 			g.drawString(String.format("%d / %d", entidad.getVida(), entidad.getVidaMaxima()), ORIGEN_X + ANCHO_VIDA + 5, ORIGEN_Y + 21);
 			
+			/* Barra de escudo */
+			if (entidad.tieneEscudo()) {
+				g.setColor(java.awt.Color.WHITE);
+				g.fillRect(ORIGEN_X, ORIGEN_Y + 25, ANCHO_VIDA, 10);
+				g.setColor(java.awt.Color.BLUE);
+				g.fillRect(ORIGEN_X, ORIGEN_Y + 25, Math.floorDiv(entidad.getEscudo() * ANCHO_VIDA, entidad.getEscudoMaximo()), 10);
+				g.setColor(java.awt.Color.WHITE);
+				g.drawString(String.format("%d / %d", entidad.getEscudo(), entidad.getEscudoMaximo()), ORIGEN_X + ANCHO_VIDA + 5, ORIGEN_Y + 36);
+			}
+			
 			/* Propietario: Color y nombre */
 			java.awt.Color colorPropietario = AdaptadorColor.values()[entidad.getPropietario().getColor().ordinal()].getColorAwtAsociado();
 			String nombrePropietario = entidad.getPropietario().getNombre();
