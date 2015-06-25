@@ -14,6 +14,7 @@ import fiuba.algo3.excepciones.UnidadNoEsAlmacenable;
 import fiuba.algo3.excepciones.UnidadYaAlmacenada;
 import fiuba.algo3.juego.Color;
 import fiuba.algo3.juego.Jugador;
+import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 import fiuba.algo3.ocupantes.unidades.Pasajero;
 import fiuba.algo3.ocupantes.unidades.Unidad;
@@ -94,10 +95,10 @@ public class TestNaveDeTransporteTerran extends TestUnidadTransporte {
 		unidad.almacenarA(pasajero2);
 		assertEquals(unidad.getPosicion(), pasajero.getPosicion());
 		assertEquals(unidad.getPosicion(), pasajero2.getPosicion());
-		unidad.moverA(POSICION_B);
+		unidad.moverA(new Posicion(32,9)); // == POSICION_B
 		assertEquals(unidad.getPosicion(), pasajero.getPosicion());
 		assertEquals(unidad.getPosicion(), pasajero2.getPosicion());
-		unidad.moverA(POSICION_A);
+		unidad.moverA(new Posicion(32,10)); // == POSICION_A
 		assertEquals(unidad.getPosicion(), pasajero.getPosicion());
 		assertEquals(unidad.getPosicion(), pasajero2.getPosicion());
 	}
