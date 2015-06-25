@@ -32,7 +32,7 @@ public class EstadoEntrenandoUnidad implements Estado {
 
 	@Override
 	public String getDescripcion() {
-		return String.format("Entrenando %s. %d Turnos restantes.", atributos.getNombre(), turnosRestantes);
+		return String.format("Entrenando %s... %d%%.", atributos.getNombre(), 100 - turnosRestantes * 100 / atributos.getCosto().getTurnosConstruccion());
 	}
 
 }

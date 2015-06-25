@@ -274,13 +274,20 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 			g.drawString(nombrePropietario, FINAL_X - g.getFontMetrics().stringWidth(nombrePropietario), ORIGEN_Y + 20);
 			
 			/* Informacion de estados */
-			// No importa el tipoOcupante, hacer para ObjetoVivo
-			if (entidad.getTipoOcupante() == TipoOcupante.EDIFICIO) {
-				Edificio edificio = (Edificio) entidad;
-				
-				// Y ahora?
-			}
+			entidad.getDescripcionEstados();
+			g.setColor(java.awt.Color.LIGHT_GRAY);
+			String descripcionEstado = filtrarDescripcionEstado(entidad.getDescripcionEstados().get(entidad.getDescripcionEstados().size()-1));
+			g.drawString(descripcionEstado, ORIGEN_X, ORIGEN_Y + 60);
+			
 		}
+	}
+	
+	private String filtrarDescripcionEstado(String descripcion) {
+		if (descripcion.contains("Construyendo") || descripcion.contains("Entrenando")) {
+			return descripcion;
+		}
+		
+		return "";
 	}
 	
 	public void actualizarCeldaSeleccionada(Posicion nuevaCeldaSeleccionada) {

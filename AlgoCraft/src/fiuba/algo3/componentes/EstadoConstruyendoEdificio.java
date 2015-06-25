@@ -10,9 +10,11 @@ public class EstadoConstruyendoEdificio implements Estado {
 	private int cantEscudoSumadoPorTurno;
 	private ObjetoVivo portador;
 	private AtributosEdificio atributos;
+	private int turnosRestantes;
 	
 	public EstadoConstruyendoEdificio(AtributosEdificio atributos){
 		this.atributos = atributos;
+		this.turnosRestantes = atributos.getCosto().getTurnosConstruccion();
 	}
 	
 	public void activar(ObjetoVivo portador) {
@@ -25,6 +27,7 @@ public class EstadoConstruyendoEdificio implements Estado {
 	}
 
 	public void pasarTurno() throws Exception {
+		this.turnosRestantes--;
 		portador.regenerarVida(cantVidaSumadaPorTurno);
 		portador.regenerarEscudo(cantEscudoSumadoPorTurno);
 		if (portador.getVida() == portador.getVidaMaxima() &&
@@ -42,7 +45,7 @@ public class EstadoConstruyendoEdificio implements Estado {
 
 	@Override
 	public String getDescripcion() {
-		return String.format("Construyendo %s ...", atributos.getTipo().getNombre());
+		return String.format("Construyendo... %d%%", 100 - turnosRestantes * 100 / atributos.getCosto().getTurnosConstruccion());
 		// quizas poner informacion de turnos faltantes o porcentaje terminado etc.
 	}
 
