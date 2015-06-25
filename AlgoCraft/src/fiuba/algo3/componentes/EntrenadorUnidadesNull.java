@@ -16,10 +16,6 @@ public class EntrenadorUnidadesNull implements IEntrenadorUnidades {
 		return null;
 	}
 
-	public boolean puedeEntrenar(AtributosUnidad atributosUnidad) {
-		return false;
-	}
-
 	public void entrenar(AtributosUnidad atributosUnidad) {}
 
 	public void liberarUnidad(AtributosUnidad atributosUnidad) {}

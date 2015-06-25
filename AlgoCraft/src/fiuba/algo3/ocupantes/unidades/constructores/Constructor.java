@@ -14,10 +14,6 @@ public class Constructor {
 		this.entrenador = entrenador;
 	}
 	
-	public boolean puedeCrear() { // puedeComprar / verificarCostos
-		return this.entrenador.puedeEntrenar(this.atributos);
-	}
-	
 	public void crear(){
 		this.entrenador.entrenar(this.atributos);
 	}

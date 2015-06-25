@@ -12,8 +12,6 @@ public interface IEntrenadorUnidades {
 	
 	public ArrayList<Constructor> getUnidadesEntrenables();
 	
-	public boolean puedeEntrenar(AtributosUnidad atributosUnidad);
-	
 	public void entrenar(AtributosUnidad atributosUnidad);
 
 	public void liberarUnidad(AtributosUnidad atributosUnidad);

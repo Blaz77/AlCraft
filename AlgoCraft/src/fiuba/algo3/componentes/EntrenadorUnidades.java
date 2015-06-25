@@ -38,10 +38,6 @@ public class EntrenadorUnidades implements IEntrenadorUnidades { //, Estado
 		return entrenables;
 	}
 	
-	public boolean puedeEntrenar(AtributosUnidad atrUnidad){
-		return true; // TODO -> propietario.verificarCompra...
-	}
-	
 	public void entrenar(AtributosUnidad atrUnidad){
 		portador.getPropietario().comprar(atrUnidad.getCosto().getCostoMineral(),
 				atrUnidad.getCosto().getCostoGasVespeno(), atrUnidad.getCosto().getCostoPoblacion());

@@ -78,7 +78,7 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 	//public static BufferedImage picEntrenar = ImageLoader.loadImage("/textures/entrenar.png");
 	// TODO : tomar img para los de abajo!
 	public static BufferedImage picEntrenar = ImageLoader.loadImage("/textures/terran.png");
-	public static BufferedImage picMover = ImageLoader.loadImage("/textures/construir.png");
+	public static BufferedImage picMover = ImageLoader.loadImage("/textures/mover.png");
 	public static BufferedImage picAtacar = ImageLoader.loadImage("/textures/terran.png");
 	public static BufferedImage picAlmacenar = ImageLoader.loadImage("/textures/construir.png");
 	public static BufferedImage picLiberar = ImageLoader.loadImage("/textures/construir.png");

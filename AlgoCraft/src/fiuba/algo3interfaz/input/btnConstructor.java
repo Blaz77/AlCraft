@@ -2,6 +2,12 @@ package fiuba.algo3interfaz.input;
 
 import java.awt.event.ActionEvent;
 
+import fiuba.algo3.excepciones.GasVespenoInsuficiente;
+import fiuba.algo3.excepciones.MineralInsuficiente;
+import fiuba.algo3.excepciones.OrdenConstruccionViolado;
+import fiuba.algo3.excepciones.RecursoAusente;
+import fiuba.algo3.excepciones.RecursoPresente;
+import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.ocupantes.unidades.constructores.Constructor;
 import fiuba.algo3interfaz.gfx.HudVista;
@@ -17,9 +23,17 @@ public class btnConstructor extends BotonBotonera {
 		this.vista = vista;
 	}
 	
-	public void actionPerformed(ActionEvent e) {
-		constructor.crear();
-		vista.requestFocus();
+	public void actionPerformed(ActionEvent event) {
+		try {
+			constructor.crear();
+			vista.restablecerOpciones();
+		}
+		catch (MineralInsuficiente|GasVespenoInsuficiente e) {
+			vista.mostrarMensaje(e.getMessage());
+		}
+		finally {
+			vista.requestFocus();
+		}
 	}
 
 }
