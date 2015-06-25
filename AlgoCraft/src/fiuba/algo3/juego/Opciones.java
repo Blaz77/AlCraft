@@ -20,7 +20,6 @@ public class Opciones {
 	private ArrayList<String> nombresJugadores = new ArrayList<String>();
 	private ArrayList<Color> coloresJugadores = new ArrayList<Color>();
 	
-	//private int cantidadJugadores = 2; // eventualmente poder implementar n jugadores? XD
 	private int cantidadBases = 6;
 	// otras opciones
 	

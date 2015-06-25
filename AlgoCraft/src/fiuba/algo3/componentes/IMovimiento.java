@@ -17,7 +17,6 @@ public interface IMovimiento {
 		
 		public void moverA(Posicion destino);
 
-		//TODO: chequear q funcione!
 		public HashSet<Posicion> getPosiblesMovimientos(Mapa mapa);
 
 		public int getRangoVision();

@@ -70,7 +70,6 @@ public class Movimiento implements IMovimiento, Estado {
 		portador.getPosicion().desplazarA(destino);
 	}
 
-	//TODO: chequear q funcione!
 	public HashSet<Posicion> getPosiblesMovimientos(Mapa mapa){
 		HashSet<Posicion> posiblesMov = new HashSet<Posicion>();
 		_getPosiblesMovimientos(mapa, posiblesMov, portador.getPosicion(), movRestantes);
@@ -102,18 +101,6 @@ public class Movimiento implements IMovimiento, Estado {
 			if ((pos) != posicionActual) posiblesMov.add(pos);
 		}
 	}
-	
-	/*
-	// TODO: chequear q funcione! Basicamente hago un BFS y agrego todas las unidades a las q llego
-	public void _getPosiblesMovimientos(Mapa mapa, HashSet<Posicion> posiblesMov, Posicion posicionActual, int restantes){
-		if (restantes == 0 || posiblesMov.contains(posicionActual)) return;
-		restantes --;
-		posiblesMov.add(posicionActual);
-		ArrayList<Posicion> adyacentes = posicionActual.getAdyacentes();
-		for (Posicion adyacente: adyacentes)
-			if (mapa.celdaValida(adyacente) && mapa.puedeOcupar(this.portador, adyacente))
-				_getPosiblesMovimientos(mapa, posiblesMov, adyacente, restantes);
-	}*/
 
 	@Override
 	public String getDescripcion() {

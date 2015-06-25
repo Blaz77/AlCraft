@@ -17,11 +17,7 @@ public interface Mapa {
 	
 	/* Devuelve el alto del mapa. */
 	public int alto();
-	
-	//public ArrayList<Celda> getBases();
-	
-	// Aca prohibo celdas negativas, no en posicion, para no perder la chance
-	// de "sumar" para moverme en direcciones negativas 
+
 	public boolean celdaValida(Posicion posicion);
 	
 	//una opcion para que devuelva booleano

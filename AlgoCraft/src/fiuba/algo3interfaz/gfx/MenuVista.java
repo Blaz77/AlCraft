@@ -387,17 +387,13 @@ public class MenuVista extends JPanel {
     	razaJugador2 = TipoRaza.PROTOSS;
     }                                             
 
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // TODO add your handling code here:
-    }                                             
+    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {}                                             
 
     private void radRazaProtossJugador1ActionPerformed(java.awt.event.ActionEvent evt) {                                              
     	razaJugador1 = TipoRaza.PROTOSS;
     }                                             
 
-    private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // TODO add your handling code here:
-    }                                             
+    private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {}                                             
 
     private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {                                         
     	if (! validarCampos()) return;

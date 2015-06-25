@@ -101,7 +101,6 @@ public class CopyOfSpriteSheet {
 	}
 
 	public static CopyOfSpriteSheet getSpritesJugador(Jugador jugador) {
-		// TODO Auto-generated method stub
 		return spritesJugador.get(jugador);
 	}
 	

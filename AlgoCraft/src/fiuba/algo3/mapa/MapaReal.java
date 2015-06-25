@@ -199,7 +199,6 @@ public class MapaReal implements Mapa {
 	
 	
 	private boolean celdaEnBase(Posicion pos) {
-		// TODO Auto-generated method stub
 		for (Celda base: bases){
 			if (Math.abs(base.getX() - pos.getX()) <= SEMILADO_BASE && 
 					Math.abs(base.getY() - pos.getY()) <= SEMILADO_BASE ) 

@@ -16,8 +16,6 @@ import fiuba.algo3.raza.Raza;
 import fiuba.algo3.raza.RazaFactory;
 import fiuba.algo3.raza.TipoRaza;
 
-//import java.util.ArrayList;
-
 
 /*
  * La Clase Jugador maneja los recursos y datos especificos 
@@ -40,7 +38,6 @@ public class Jugador {
 	private int poblacion;
 	private int poblacionCapacidad; // Depende de los edificios correspondientes.
 	private Mapa mapaPropio;
-	private Posicion posicionInicial;
 	private ArrayList<Unidad> unidades = new ArrayList<Unidad>();
 	private ArrayList<Edificio> edificios = new ArrayList<Edificio>();
 	private String nombre;
@@ -105,13 +102,13 @@ public class Jugador {
 		this.poblacion += costoPoblacion;
 	}
 
+	// Acepta numeros negativos
 	public void agregarMinerales(int cantidad) {
-		//si cantidad es negativo levantar excepcion?
 		this.minerales += cantidad;
 	}
 	
+	// Acepta numeros negativos
 	public void agregarGasVespeno(int cantidad){
-		//si cantidad es negativo levantar excepcion?
 		this.gasVespeno += cantidad;
 	}
 

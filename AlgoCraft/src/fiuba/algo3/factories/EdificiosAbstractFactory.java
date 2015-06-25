@@ -1,5 +1,3 @@
-//TODO Clase sin usar!
-
 package fiuba.algo3.factories;
 
 import fiuba.algo3.juego.Jugador;
@@ -9,7 +7,6 @@ import fiuba.algo3.ocupantes.edificios.Edificio;
 public interface EdificiosAbstractFactory {
 	
 	// crear/construir
-	// Despues pasar Jugador al constructor
 	
 	public Edificio crearRecolectorGasVespeno(Jugador jugador, Posicion posicion);
 	

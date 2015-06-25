@@ -11,7 +11,7 @@ public class EstadoRegenerandoEscudo implements Estado {
 	}
 
 	public void pasarTurno() throws Exception {
-		//REGENERA 10% POR TURNO, SE PUEDE CAMBIAR, VER BIEN EL REAL
+		//REGENERA 10% POR TURNO
 		portador.regenerarEscudo((portador.getEscudoMaximo() / 10));
 	}
 	

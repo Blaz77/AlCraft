@@ -175,7 +175,6 @@ public class Game implements Runnable { // Permite correr un thread
 
 
 	public JFrame getFrame() {
-		// TODO Auto-generated method stub
 		return frame;
 	}
 }
