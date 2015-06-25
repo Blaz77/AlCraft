@@ -44,11 +44,6 @@ public abstract class AtributosObjetoVivo { //AtributosObjetoDeJuego?
 		return new Vida(this.vida);
 	}
 	
-	//SUPER EXTRA PECHUGA DE TEMPORAL!!!!
-	public AtributosVida getAtributosVida() {
-		return this.vida;
-	}
-	
 	public boolean puedeOcuparTierra(){
 		return true;
 	}
