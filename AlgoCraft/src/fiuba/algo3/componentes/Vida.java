@@ -1,7 +1,7 @@
 package fiuba.algo3.componentes;
 
 import fiuba.algo3.atributos.AtributosVida;
-import fiuba.algo3.excepciones.VidaEnCeroException;
+import fiuba.algo3.excepciones.VidaEnCero;
 
 //public class Vida implements Lastimable/Atacable/etc
 public class Vida implements IVida {
@@ -51,7 +51,7 @@ public class Vida implements IVida {
 	
 	public void recibirDanio(int puntos){
 		this.vida -= puntos;
-		if (this.vida <= 0) throw new VidaEnCeroException(); 
+		if (this.vida <= 0) throw new VidaEnCero(); 
 		// Emi: como dije antes, usar excepciones como herramienta de control del flujo del programa
 		// me huele muy mal. Suelen no usarse xq manejar estos casos con valores de retorno es entendible
 		// (para programadores al menos), mas rapido (las excepciones son lentas) y MUCHO mas rapido (le

@@ -10,7 +10,7 @@ import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.IVida;
 import fiuba.algo3.excepciones.EstadoFinalizado;
 import fiuba.algo3.excepciones.PosicionOcupada;
-import fiuba.algo3.excepciones.VidaEnCeroException;
+import fiuba.algo3.excepciones.VidaEnCero;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.recurso.GasVespeno;
@@ -161,7 +161,7 @@ public abstract class ObjetoVivo implements Ocupante { //ObjetoVivo / ObjetoInte
 		try {
 			this.vida.recibirDanio(puntos);
 		} 
-		catch (VidaEnCeroException e) {
+		catch (VidaEnCero e) {
 			this.destruir();
 		}
 	}
