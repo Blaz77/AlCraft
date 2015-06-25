@@ -7,7 +7,7 @@ import javax.swing.JButton;
 
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.ocupantes.Tipo;
-import fiuba.algo3interfaz.gfx.CopyOfSpriteSheet;
+import fiuba.algo3interfaz.gfx.SpriteSheet;
 
 public abstract class BotonBotonera extends JButton implements ActionListener{// implements ActionListener{
 	
@@ -23,7 +23,7 @@ public abstract class BotonBotonera extends JButton implements ActionListener{//
 	}
 	
 	public BotonBotonera(Jugador jugador, Tipo tipo){
-		this(new ImageIcon(CopyOfSpriteSheet.getSpritesJugador(jugador).get(tipo.ordinal()))
+		this(new ImageIcon(SpriteSheet.getSpritesJugador(jugador).get(tipo.ordinal()))
 			, tipo.getNombre());
 	}
 

@@ -24,13 +24,12 @@ import fiuba.algo3.terreno.Terreno;
  * */
 public class MapaVista {
 
-	private static final int ANCHO_CELDA = CopyOfSpriteSheet.spritesTierra.getAncho();
-	private static final int ALTO_CELDA = CopyOfSpriteSheet.spritesTierra.getAlto();
+	private static final int ANCHO_CELDA = SpriteSheet.spritesTierra.getAncho();
+	private static final int ALTO_CELDA = SpriteSheet.spritesTierra.getAlto();
 	private static final float RESCALE_FACTOR = 0.5f;
 	private static final BufferedImageOp RESCALE_OP = new RescaleOp(RESCALE_FACTOR, 0, null);
-	private static BufferedImage marcaMapa = CopyOfSpriteSheet.getSpriteMarcaMapa();
-	private static BufferedImage sombra = CopyOfSpriteSheet.getSpriteSombra();
-	private static BufferedImage mediaSombra = CopyOfSpriteSheet.getSpriteMediaSombra();
+	private static BufferedImage marcaMapa = SpriteSheet.getSpriteMarcaMapa();
+	private static BufferedImage mediaSombra = SpriteSheet.getSpriteMediaSombra();
 	
 	private Jugador jugador;
 	
@@ -75,12 +74,12 @@ public class MapaVista {
 		int indexEspacio;
 		Terreno terreno = datosMapa.getTerreno(new Posicion(x, y));
 		
-		CopyOfSpriteSheet spritesTierra = CopyOfSpriteSheet.getSpritesTierra();
-		CopyOfSpriteSheet spritesEspacio = CopyOfSpriteSheet.getSpritesEspacio();
-		CopyOfSpriteSheet spritesHibrido = CopyOfSpriteSheet.getSpritesHibrido();
+		SpriteSheet spritesTierra = SpriteSheet.getSpritesTierra();
+		SpriteSheet spritesEspacio = SpriteSheet.getSpritesEspacio();
+		SpriteSheet spritesHibrido = SpriteSheet.getSpritesHibrido();
 		
 		if (terreno == Terreno.SOMBRA)
-			return sombra;
+			return null;
 		
 		if (terreno == Terreno.ESPACIO) {
 			indexEspacio = getIndexHibrido(x, y);
@@ -142,17 +141,18 @@ public class MapaVista {
 
 
 	private void dibujarEnCelda(Graphics g, BufferedImage sprite, int x, int y) {
-
+		if (sprite == null) return;
 		g.drawImage(sprite, 
 				ANCHO_CELDA * x - camara.getxOffset() + (ANCHO_CELDA - sprite.getWidth())/2, 
 				ALTO_CELDA  * y - camara.getyOffset() +  (ALTO_CELDA - sprite.getHeight())/2, null);
 	}
 
 	private void dibujarEnCeldaOscura(Graphics g, BufferedImage sprite, int x, int y) {
+		if (sprite == null) return;
 		g.drawImage(sprite, 
 				ANCHO_CELDA * x - camara.getxOffset() + (ANCHO_CELDA - sprite.getWidth())/2, 
 				ALTO_CELDA  * y - camara.getyOffset() +  (ALTO_CELDA - sprite.getHeight())/2, null);
-		g.drawImage(CopyOfSpriteSheet.getSpriteMediaSombra(), 
+		g.drawImage(SpriteSheet.getSpriteMediaSombra(), 
 				ANCHO_CELDA * x - camara.getxOffset() + (ANCHO_CELDA - sprite.getWidth())/2, 
 				ALTO_CELDA  * y - camara.getyOffset() +  (ALTO_CELDA - sprite.getHeight())/2, null);
 		
@@ -180,12 +180,12 @@ public class MapaVista {
 
 	private void dibujarObjetoVivo(Graphics g, int x, int y, Tipo tipo) {
 		Jugador propietario = ((ObjetoVivo)(datosMapa.getOcupante(new Posicion(x, y)))).getPropietario();
-		BufferedImage bi = CopyOfSpriteSheet.getSpritesJugador(propietario).get(tipo.ordinal());
+		BufferedImage bi = SpriteSheet.getSpritesJugador(propietario).get(tipo.ordinal());
 		dibujarEnCelda(g, bi, x, y);
 	}
 
 	private void dibujarRecurso(Graphics g, int x, int y, Tipo tipo) {
-		BufferedImage bi = CopyOfSpriteSheet.getSpritesRecurso(tipo).get(mapaVista[x][y].getIndex());
+		BufferedImage bi = SpriteSheet.getSpritesRecurso(tipo).get(mapaVista[x][y].getIndex());
 		dibujarEnCelda(g, bi, x, y);
 	}
 

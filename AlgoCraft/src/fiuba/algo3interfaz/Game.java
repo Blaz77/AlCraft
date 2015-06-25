@@ -10,13 +10,13 @@ import javax.swing.OverlayLayout;
 import fiuba.algo3.juego.Juego;
 import fiuba.algo3.juego.Opciones;
 import fiuba.algo3interfaz.states.State.StateEnum;
-import fiuba.algo3interfaz.gfx.CopyOfSpriteSheet;
+import fiuba.algo3interfaz.gfx.SpriteSheet;
 import fiuba.algo3interfaz.states.State;
 
 public class Game implements Runnable { // Permite correr un thread
 
-	private static final int MIN_FPS = 2;
-	private static final int MAX_FPS = 30;
+	private static final int MIN_FPS = 42;
+	private static final int MAX_FPS = 42;
 	
 	/** Atributos del Thread **/
 	private boolean running = false;
@@ -64,7 +64,7 @@ public class Game implements Runnable { // Permite correr un thread
 		this.alto = altoVentana;
 		
 		// Inicializar los datos requeridos
-		CopyOfSpriteSheet.inicializar();
+		SpriteSheet.inicializar();
 		//MusicaAlgunDia.inicializar();
 		State.inicializar(this);
 		State.setState(StateEnum.MENUSTATE);

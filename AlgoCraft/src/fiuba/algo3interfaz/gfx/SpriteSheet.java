@@ -1,17 +1,18 @@
 package fiuba.algo3interfaz.gfx;
 
-// DEPRECATED
-
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
+import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.TipoOcupante;
+import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3.terreno.Terreno;
 
 public class SpriteSheet {
@@ -19,14 +20,21 @@ public class SpriteSheet {
 	private final static String TIERRA_PATH = "/textures/tierra.png";
 	private final static String ESPACIO_PATH = "/textures/espacio.png";
 	private final static String HIBRIDO_PATH = "/textures/hibrido.png";
-	private final static String MINERAL_PATH = "/textures/cristal2.png";
-	private final static String VESPENO_PATH = "/textures/volcan2.png";
+	private final static String MINERAL_PATH = "/textures/cristal.png";
+	private final static String VESPENO_PATH = "/textures/volcan.png";
 	private final static String MARCA_MAPA_PATH = "/textures/marcaMapa.png";
+	private static final String MEDIA_SOMBRA_PATH = "/textures/mediasombra.png";
 	private static final String PLAYER_PALETTE_PATH = "/palettes/player_palette.png";
+	private static final String TERRAN_PATH = "/textures/ocupantesTerran.png";
+	private static final String ACCIONES_TERRAN_PATH = "/textures/accionesTerran.png";;
+	private static final String PROTOSS_PATH = "/textures/ocupantesProtoss.png";
+	private static final String ACCIONES_PROTOSS_PATH = "/textures/accionesProtoss.png";;
+	private static final String ZERG_PATH = null;
+	//private static final String ZERG_PATH = "/textures/ocupantesZerg.png"; 
 
-	
-	
     public static final BufferedImage spriteMarcaMapa = ImageLoader.loadImage(MARCA_MAPA_PATH);
+	private static final BufferedImage spriteMediaSombra = ImageLoader.loadImage(MEDIA_SOMBRA_PATH);
+
 	private static java.awt.Color[] playerPalette = new Color[72];// = ImageLoader.loadImage(PLAYER_PALETTE_PATH).getRGB(0, 0, 9, 8, null, 0, 9);
     
 	public static SpriteSheet spritesTierra = new SpriteSheet(TIERRA_PATH);
@@ -35,27 +43,46 @@ public class SpriteSheet {
 	
 	public static SpriteSheet spritesMineral = new SpriteSheet(MINERAL_PATH);
 	public static SpriteSheet spritesVespeno = new SpriteSheet(VESPENO_PATH);
-    
-	private static HashMap<Object, SpriteSheet> Sprites = new HashMap<Object, SpriteSheet>(){
-        {
-            put(Terreno.TIERRA, spritesTierra);
-            put(Terreno.ESPACIO, spritesEspacio);
-            //put(Terreno.SOMBRA, spritesSombra);
-            
+	
+	public static SpriteSheet spritesTerran = new SpriteSheet(TERRAN_PATH);
+	public static SpriteSheet spritesAccionesTerran = new SpriteSheet(ACCIONES_TERRAN_PATH);
+	public static SpriteSheet spritesProtoss = new SpriteSheet(PROTOSS_PATH);
+	public static SpriteSheet spritesAccionesProtoss = new SpriteSheet(ACCIONES_PROTOSS_PATH);
+
+	private static HashMap<Jugador, SpriteSheet> spritesJugador = new HashMap<Jugador, SpriteSheet>();
+	private static HashMap<Tipo, SpriteSheet>	spritesRecurso = new HashMap<Tipo, SpriteSheet>(){
+		{
             put(Tipo.MINERAL, spritesMineral);
             put(Tipo.VESPENO, spritesVespeno);
-            
-            //put(TipoEdificio.PUERTO_ESTELAR_TERRAN, spritesPuertoEstelarTerran);
+		}
+	};
+	private static HashMap<TipoRaza, SpriteSheet> spritesRaza = new HashMap<TipoRaza, SpriteSheet>(){
+        {
+        			
+            put(TipoRaza.TERRAN, spritesTerran);
+            put(TipoRaza.PROTOSS, spritesProtoss);
             
         }
-    };
-	
-	
+    };	
+
+	private static HashMap<TipoRaza, SpriteSheet> spritesAccionesRaza = new HashMap<TipoRaza, SpriteSheet>(){
+        {
+        			
+            put(TipoRaza.TERRAN, spritesAccionesTerran);
+            put(TipoRaza.PROTOSS, spritesAccionesProtoss);
+            
+        }
+    };	
+    
 	public static BufferedImage getSpriteMarcaMapa() {
 		return spriteMarcaMapa;
 	}
 
-	public static SpriteSheet getSpritestierra() {
+	public static BufferedImage getSpriteMediaSombra() {
+		return spriteMediaSombra;
+	}
+
+	public static SpriteSheet getSpritesTierra() {
 		return spritesTierra;
 	}
 
@@ -67,19 +94,19 @@ public class SpriteSheet {
 		return spritesHibrido;
 	}
 
-	public static SpriteSheet getSpritesMineral() {
-		return spritesMineral;
+	public static SpriteSheet getSpritesJugador(Jugador jugador) {
+		// TODO Auto-generated method stub
+		return spritesJugador.get(jugador);
 	}
-
-	public static SpriteSheet getSpritesVespeno() {
-		return spritesVespeno;
-	}
-
+	
 	public static SpriteSheet getSprites(Object object) {
-		return Sprites.get(object);
+		return spritesRaza.get(object);
 	}	
 	
-	/* Creo la paleta de colores para los palette swaps */
+	public static SpriteSheet getSpritesAcciones(TipoRaza raza) {
+		return spritesRaza.get(raza);
+	}	
+	
 	public static void inicializar() {
 		
 		int[] paletteImg = ImageLoader.loadImage(PLAYER_PALETTE_PATH).getRGB(0, 0, 9, 8, null, 0, 9);
@@ -87,17 +114,6 @@ public class SpriteSheet {
 			Color c = new Color(paletteImg[i], true);
 			playerPalette[i] = new Color(c.getRed(), c.getGreen(), c.getBlue(), 255);
 		}
-		
-		/*for (int i = 0; i < spritesTierra.cantidad; i++){
-			
-			BufferedImage sprite = spritesTierra.sheet[i];
-			
-			byte[] g = {0,0,0,0};
-			ColorModel icm2 = spritesEspacio.sheet[(i+ 1) % spritesTierra.cantidad].getColorModel();
-			WritableRaster wr = spritesTierra.sheet[(i+ 1) % spritesTierra.cantidad].getRaster();
-			boolean bAlphaPremultiplied = sprite.isAlphaPremultiplied();
-			spritesTierra.sheet[i] = new BufferedImage(icm2, wr, bAlphaPremultiplied, new Hashtable());
-		}*/
 	}
 	
 	private static fiuba.algo3.juego.Color[] colores = fiuba.algo3.juego.Color.values();
@@ -113,7 +129,7 @@ public class SpriteSheet {
 		new Color(25, 0, 25), new Color(38, 0, 0)
 	};
 	
-    public static void swapColors( BufferedImage img, fiuba.algo3.juego.Color color ){
+    private void swapColors(fiuba.algo3.juego.Color color ){
     	fiuba.algo3.juego.Color[] colores = fiuba.algo3.juego.Color.values();
     	int colorIndex = 0;
     	for (int i = 0; i < colores.length; i++  ){
@@ -122,10 +138,11 @@ public class SpriteSheet {
     			break;
     		}
     	}
-    	_swapColors(img,  colorIndex, playerPalette);
+    	for (BufferedImage sprite: this.sheet)
+    		_swapColors(sprite,  colorIndex, playerPalette);
     }
     	
-    public static void _swapColors( BufferedImage img, int colorIndex, Color... mapping ){
+    private static void _swapColors( BufferedImage img, int colorIndex, Color... mapping ){
     
         int[] pixels = img.getRGB( 0, 0, img.getWidth(), img.getHeight(), null, 0, img.getWidth() );
         HashMap<Integer, Integer> map = new HashMap<Integer, Integer>(); 
@@ -183,6 +200,29 @@ public class SpriteSheet {
 	
 	private BufferedImage crop(BufferedImage bi, int index){
 		return bi.getSubimage(0, (index % cantidad) * altoSprite, anchoSprite, altoSprite);
+	}
+
+	public static void crearSpritesJugador(Jugador jugador) {
+		
+		String path = null;
+		TipoRaza raza = jugador.getRaza();
+		fiuba.algo3.juego.Color color = jugador.getColor();
+		
+		if (raza == TipoRaza.TERRAN)
+			path = TERRAN_PATH;
+		else if (raza == TipoRaza.PROTOSS)
+			path = PROTOSS_PATH;
+		else
+			path = ZERG_PATH;
+		
+		SpriteSheet sheetRaza = new SpriteSheet(path);
+		sheetRaza.swapColors(color);
+		spritesJugador.put(jugador, sheetRaza);
+	}
+
+	public static SpriteSheet getSpritesRecurso(Tipo tipo) {
+		return spritesRecurso.get(tipo);
+		
 	}
 
 }
