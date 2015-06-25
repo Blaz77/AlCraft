@@ -3,6 +3,7 @@ package fiuba.algo3.juego;
 import java.util.ArrayList;
 
 import fiuba.algo3.atributos.jugador.AtributosJugador;
+import fiuba.algo3.componentes.Costo;
 import fiuba.algo3.excepciones.GasVespenoInsuficiente;
 import fiuba.algo3.excepciones.MineralInsuficiente;
 import fiuba.algo3.excepciones.SuministroInsuficiente;
@@ -25,7 +26,7 @@ import fiuba.algo3.raza.TipoRaza;
 public class Jugador {
 	
 	private final static int POB_MAX_INICIAL = 5;
-	//private final static int POB_MAX_TOTAL = 200;
+	private final static int POB_MAX_TOTAL = 200;
 	private final static int MINERALES_INICIAL = 200;
 	private final static int VESPENO_INICIAL = 50;
 
@@ -80,24 +81,19 @@ public class Jugador {
 		return this.minerales;
 	}
 	
-	// nombre pendiente de modificacion
-	public void comprar(int costoMineral, int costoGasVespeno){
-		if (this.minerales < costoMineral) throw new MineralInsuficiente(costoMineral, this.minerales);
-		if (this.gasVespeno < costoGasVespeno) throw new GasVespenoInsuficiente(costoGasVespeno, this.gasVespeno);
-		this.minerales -= costoMineral;
-		this.gasVespeno -= costoGasVespeno;
-	}
-	
 	/* Verifica si hay recursos y poblacion necesaria para crear la unidad.
 	 * Si no se cumple, lanza una excepcion
 	 */
-	// nombre pendiente de modificacion
-	public void comprar(int costoMineral, int costoGasVespeno, int costoPoblacion){
-		if ((this.poblacion + costoPoblacion) > this.poblacionCapacidad)
+	public void comprar(Costo costo){
+		if (this.minerales < costo.getCostoMineral()) 
+			throw new MineralInsuficiente(costo.getCostoMineral(), this.minerales);
+		if (this.gasVespeno < costo.getCostoGasVespeno()) 
+			throw new GasVespenoInsuficiente(costo.getCostoGasVespeno(), this.gasVespeno);
+		if ((this.poblacion + costo.getCostoPoblacion()) > this.poblacionCapacidad)
 			throw new SuministroInsuficiente();
-		this.comprar(costoMineral, costoGasVespeno); //hace chequeos
-		//si paso aumento la poblacion:
-		this.poblacion += costoPoblacion;
+		this.minerales -= costo.getCostoMineral();
+		this.gasVespeno -= costo.getCostoGasVespeno();
+		this.poblacion += costo.getCostoPoblacion();
 	}
 
 	// Acepta numeros negativos
@@ -115,7 +111,8 @@ public class Jugador {
 	}
 	
 	public void aumentarCapacidadPoblacion(int i) {
-		this.poblacionCapacidad += i;		
+		this.poblacionCapacidad += i;
+		this.poblacionCapacidad = poblacionCapacidad > POB_MAX_TOTAL? POB_MAX_TOTAL: poblacionCapacidad;
 	}
 	
 

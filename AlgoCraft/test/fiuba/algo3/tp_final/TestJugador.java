@@ -1,7 +1,9 @@
 package fiuba.algo3.tp_final;
 
-import junit.framework.Assert;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,18 +22,39 @@ public class TestJugador {
 
 	@Test
 	public void testJugadorCreadoPreservaDatos() {
-		Assert.assertTrue(jugadorTerran.getColor() == Color.ROJO);
-		Assert.assertTrue(jugadorTerran.getRaza() == TipoRaza.TERRAN);
+		assertTrue(jugadorTerran.getColor() == Color.ROJO);
+		assertTrue(jugadorTerran.getRaza() == TipoRaza.TERRAN);
 	}
 	
 	@Test
 	public void testJugadorCreadoDatosIniciales() {
-		Assert.assertEquals(jugadorTerran.getCapacidadPoblacion(), 5);
-		Assert.assertEquals(jugadorTerran.getPoblacion(), 0);
-		Assert.assertEquals(jugadorTerran.getMinerales(), 200);
-		Assert.assertEquals(jugadorTerran.getGasVespeno(), 50);
+		assertEquals(jugadorTerran.getCapacidadPoblacion(), 5);
+		assertEquals(jugadorTerran.getPoblacion(), 0);
+		assertEquals(jugadorTerran.getMinerales(), 200);
+		assertEquals(jugadorTerran.getGasVespeno(), 50);
 
-		Assert.assertTrue(jugadorTerran.getUnidades().isEmpty());
+		assertTrue(jugadorTerran.getUnidades().isEmpty());
+	}
+	
+	@Test
+	public void testJugadorLimitaLaPoblacionMaximaA200() {
+		
+		jugadorTerran.aumentarCapacidadPoblacion(400);
+		
+		assertEquals(200, jugadorTerran.getCapacidadPoblacion());
+	}
+	
+	@Test
+	public void testJugadorDisminuyeCapacidadSostieneLaPoblacion() {
+		
+		jugadorTerran.aumentarCapacidadPoblacion(100);
+		jugadorTerran.aumentarPoblacion(50);
+		
+		int poblacionRelativa = jugadorTerran.getPoblacion();
+		
+		jugadorTerran.aumentarCapacidadPoblacion(-100);
+		
+		assertEquals(poblacionRelativa, jugadorTerran.getPoblacion());
 	}
 
 }

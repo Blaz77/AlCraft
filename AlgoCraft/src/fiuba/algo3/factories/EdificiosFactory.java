@@ -26,10 +26,6 @@ public class EdificiosFactory {
 		libreParaConstruccion.put(tipo, liberadores+1);
 	}
 	
-	private void comprarEdificio(Jugador jugador, AtributosEdificio atributos) {
-		jugador.comprar(atributos.getCosto().getCostoMineral(), atributos.getCosto().getCostoGasVespeno());
-	}
-	
 	private void verificarOrdenConstruccion(AtributosEdificio atributos) {
 		if (libreParaConstruccion.getOrDefault(atributos.getTipo(), HABILITADO) <= NO_HABILITADO)
 			throw new OrdenConstruccionViolado(atributos);
@@ -44,7 +40,7 @@ public class EdificiosFactory {
 		// Chequeo de terreno y/o recurso:
 		jugador.getMapa().verificarOcupacion(edificio, posicion);
 		// Chequeo y compra 
-		comprarEdificio(jugador, atributos);
+		jugador.comprar(atributos.getCosto());
 		// Poner en mapa (chequeado anteriormente)
 		jugador.getMapa().setOcupante(edificio, posicion);
 		jugador.agregarEdificio(edificio);
