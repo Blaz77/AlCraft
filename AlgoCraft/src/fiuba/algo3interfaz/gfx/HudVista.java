@@ -297,9 +297,16 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 	}
 
 	private void mostrarOpcionesSegunCelda() {
-		// chequeo de mostrar la botonera solamente si es algo mio o anonimo. TODO
-		Tipo tipo = getOcupanteSelecccionado().getTipo();
-		setBotonera(botoneras.getOrDefault(tipo, botoneraNull));
+		if ((getOcupanteSelecccionado().getTipoOcupante() == TipoOcupante.EDIFICIO ||
+			getOcupanteSelecccionado().getTipoOcupante() == TipoOcupante.UNIDAD) &&
+			! jugador.getEdificios().contains(getOcupanteSelecccionado()) &&
+			! jugador.getUnidades().contains(getOcupanteSelecccionado())) {
+			setBotonera(botoneraNull);
+		}
+		else {
+			Tipo tipo = getOcupanteSelecccionado().getTipo();
+			setBotonera(botoneras.getOrDefault(tipo, botoneraNull));
+		}
 	}
 
 	public Posicion getCeldaSeleccionada() {
