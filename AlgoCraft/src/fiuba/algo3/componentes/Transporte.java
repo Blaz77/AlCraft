@@ -6,6 +6,7 @@ import java.util.LinkedList;
 
 import fiuba.algo3.atributos.AtributosTransporte;
 import fiuba.algo3.excepciones.CapacidadAlmacenamientoInsuficente;
+import fiuba.algo3.excepciones.EstadoFinalizado;
 import fiuba.algo3.excepciones.FueraDelRangoPermitido;
 import fiuba.algo3.excepciones.NoEsUnAliado;
 import fiuba.algo3.excepciones.UnidadNoEsAlmacenable;
@@ -38,7 +39,7 @@ public class Transporte implements ITransporte, Estado{
 	public void activar(ObjetoVivo portador) {}
 
 	@Override
-	public void pasarTurno() throws Exception {}
+	public void pasarTurno() throws EstadoFinalizado {}
 
 	@Override // solamente se llama cuando se muere el transporte.
 	public void desactivar() {

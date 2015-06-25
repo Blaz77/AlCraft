@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import fiuba.algo3.atributos.AtributosAtaque;
 import fiuba.algo3.excepciones.AccionesPorTurnoInsuficientes;
+import fiuba.algo3.excepciones.EstadoFinalizado;
 import fiuba.algo3.excepciones.FueraDelRangoPermitido;
 import fiuba.algo3.excepciones.NoEsUnEnemigo;
 import fiuba.algo3.ocupantes.ObjetoVivo;
@@ -29,7 +30,7 @@ public class Ataque implements IAtaque, Estado {
 	
 	public void desactivar() {}
 	
-	public void pasarTurno(){
+	public void pasarTurno() throws EstadoFinalizado{
 		this.ataquesRestantes = this.atributos.getAtaquesPorTurno();
 	}
 	

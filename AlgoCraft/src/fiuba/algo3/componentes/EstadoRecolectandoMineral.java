@@ -1,6 +1,7 @@
 package fiuba.algo3.componentes;
 
 import fiuba.algo3.atributos.AtributosRecolector;
+import fiuba.algo3.excepciones.EstadoFinalizado;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.mapa.Posicion;
 import fiuba.algo3.ocupantes.ObjetoVivo;
@@ -21,7 +22,7 @@ public class EstadoRecolectandoMineral implements Estado {
 		this.posicion = portador.getPosicion();
 	}
 	
-	public void pasarTurno() throws Exception {
+	public void pasarTurno() throws EstadoFinalizado {
 		this.beneficiario.agregarMinerales(
 				this.atributos.getCantARecolectarPorTurno());
 	}

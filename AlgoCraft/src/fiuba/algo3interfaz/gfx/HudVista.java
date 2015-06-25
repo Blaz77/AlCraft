@@ -269,6 +269,16 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 			g.setColor(java.awt.Color.WHITE);
 			g.drawString(String.format("%d / %d", entidad.getVida(), entidad.getVidaMaxima()), ORIGEN_X + ANCHO_VIDA + 5, ORIGEN_Y + 21);
 			
+			/* Barra de escudo */
+			if (entidad.tieneEscudo()) {
+				g.setColor(java.awt.Color.WHITE);
+				g.fillRect(ORIGEN_X, ORIGEN_Y + 25, ANCHO_VIDA, 10);
+				g.setColor(java.awt.Color.BLUE);
+				g.fillRect(ORIGEN_X, ORIGEN_Y + 25, Math.floorDiv(entidad.getEscudo() * ANCHO_VIDA, entidad.getEscudoMaximo()), 10);
+				g.setColor(java.awt.Color.WHITE);
+				g.drawString(String.format("%d / %d", entidad.getEscudo(), entidad.getEscudoMaximo()), ORIGEN_X + ANCHO_VIDA + 5, ORIGEN_Y + 36);
+			}
+			
 			/* Propietario: Color y nombre */
 			java.awt.Color colorPropietario = AdaptadorColor.values()[entidad.getPropietario().getColor().ordinal()].getColorAwtAsociado();
 			String nombrePropietario = entidad.getPropietario().getNombre();
@@ -276,15 +286,15 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 			g.drawString(nombrePropietario, FINAL_X - g.getFontMetrics().stringWidth(nombrePropietario), ORIGEN_Y + 20);
 			
 			/* Informacion de estados */
-			// No importa el tipoOcupante, hacer para ObjetoVivo
-			if (entidad.getTipoOcupante() == TipoOcupante.EDIFICIO) {
-				Edificio edificio = (Edificio) entidad;
-				
-				// Y ahora?
-			}
+			entidad.getDescripcionEstados();
+			g.setColor(java.awt.Color.LIGHT_GRAY);
+			String descripcionEstado = filtrarDescripcionEstado(entidad.getDescripcionEstados().get(entidad.getDescripcionEstados().size()-1));
+			g.drawString(descripcionEstado, ORIGEN_X, ORIGEN_Y + 60);
+			
 		}
 	}
 	
+<<<<<<< HEAD
 	public TipoRaza getRaza() {
 		return raza;
 	}
@@ -319,6 +329,14 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 
 	public BufferedImage getPicMagias() {
 		return spritesAcciones.get(INDICE_MAGIAS);
+=======
+	private String filtrarDescripcionEstado(String descripcion) {
+		if (descripcion.contains("Construyendo") || descripcion.contains("Entrenando")) {
+			return descripcion;
+		}
+		
+		return "";
+>>>>>>> origin/master
 	}
 	
 	public void actualizarCeldaSeleccionada(Posicion nuevaCeldaSeleccionada) {

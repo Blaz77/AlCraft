@@ -1,5 +1,6 @@
 package fiuba.algo3.componentes;
 
+import fiuba.algo3.excepciones.EstadoFinalizado;
 import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.Tipo;
@@ -20,7 +21,7 @@ public class EstadoLiberandoConstruccionEdificio implements Estado {
 		this.edificador.permitirConstruccionEdificio(tipo);
 	}
 
-	public void pasarTurno() throws Exception {}
+	public void pasarTurno() throws EstadoFinalizado {}
 
 	public void desactivar() {
 		this.edificador.denegarConstruccionEdificio(tipo);

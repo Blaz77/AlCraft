@@ -8,6 +8,7 @@ import java.util.List;
 import fiuba.algo3.atributos.AtributosObjetoVivo;
 import fiuba.algo3.componentes.Estado;
 import fiuba.algo3.componentes.IVida;
+import fiuba.algo3.excepciones.EstadoFinalizado;
 import fiuba.algo3.excepciones.PosicionOcupada;
 import fiuba.algo3.excepciones.VidaEnCeroException;
 import fiuba.algo3.juego.Jugador;
@@ -195,7 +196,7 @@ public abstract class ObjetoVivo implements Ocupante { //ObjetoVivo / ObjetoInte
 			Estado estado = iter.next();
 			try {
 				estado.pasarTurno();
-			} catch (Exception e) {
+			} catch (EstadoFinalizado e) {
 				iter.remove();
 				aDesactivar.addLast(estado);
 			}

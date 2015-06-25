@@ -2,6 +2,7 @@ package fiuba.algo3.componentes;
 
 import fiuba.algo3.atributos.AtributosMagia;
 import fiuba.algo3.excepciones.EnergiaInsuficiente;
+import fiuba.algo3.excepciones.EstadoFinalizado;
 import fiuba.algo3.magia.MagiaAUnidad;
 import fiuba.algo3.magia.MagiaDeAreaDeEfecto;
 import fiuba.algo3.mapa.Posicion;
@@ -23,7 +24,7 @@ public class Magia implements IMagia, Estado{
 	
 	public void activar(ObjetoVivo portador) {}
 
-	public void pasarTurno() throws Exception {
+	public void pasarTurno() throws EstadoFinalizado {
 		this.regenerarEnergia(this.atributos.getEnergiaARegenerarPorTurno());		
 	}
 

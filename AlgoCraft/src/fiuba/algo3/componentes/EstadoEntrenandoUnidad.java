@@ -1,6 +1,7 @@
 package fiuba.algo3.componentes;
 
 import fiuba.algo3.atributos.unidades.AtributosUnidad;
+import fiuba.algo3.excepciones.EstadoFinalizado;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 
 public class EstadoEntrenandoUnidad implements Estado {
@@ -17,11 +18,11 @@ public class EstadoEntrenandoUnidad implements Estado {
 	
 	public void activar(ObjetoVivo portador) {}
 
-	public void pasarTurno() throws Exception {
+	public void pasarTurno() throws EstadoFinalizado {
 		this.turnosRestantes--;
 		if (this.turnosRestantes == 0) {
 			this.entrenador.liberarUnidad(atributos);
-			throw new Exception();
+			throw new EstadoFinalizado();
 		}
 	}
 
@@ -32,7 +33,7 @@ public class EstadoEntrenandoUnidad implements Estado {
 
 	@Override
 	public String getDescripcion() {
-		return String.format("Entrenando %s. %d Turnos restantes.", atributos.getNombre(), turnosRestantes);
+		return String.format("Entrenando %s... %d%%.", atributos.getNombre(), 100 - turnosRestantes * 100 / atributos.getCosto().getTurnosConstruccion());
 	}
 
 }

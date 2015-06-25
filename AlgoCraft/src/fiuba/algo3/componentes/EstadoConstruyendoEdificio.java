@@ -1,6 +1,7 @@
 package fiuba.algo3.componentes;
 
 import fiuba.algo3.atributos.edificios.AtributosEdificio;
+import fiuba.algo3.excepciones.EstadoFinalizado;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.edificios.Edificio;
 
@@ -10,9 +11,11 @@ public class EstadoConstruyendoEdificio implements Estado {
 	private int cantEscudoSumadoPorTurno;
 	private ObjetoVivo portador;
 	private AtributosEdificio atributos;
+	private int turnosRestantes;
 	
 	public EstadoConstruyendoEdificio(AtributosEdificio atributos){
 		this.atributos = atributos;
+		this.turnosRestantes = atributos.getCosto().getTurnosConstruccion();
 	}
 	
 	public void activar(ObjetoVivo portador) {
@@ -24,12 +27,13 @@ public class EstadoConstruyendoEdificio implements Estado {
 		
 	}
 
-	public void pasarTurno() throws Exception {
+	public void pasarTurno() throws EstadoFinalizado {
+		this.turnosRestantes--;
 		portador.regenerarVida(cantVidaSumadaPorTurno);
 		portador.regenerarEscudo(cantEscudoSumadoPorTurno);
 		if (portador.getVida() == portador.getVidaMaxima() &&
 			portador.getEscudo() == portador.getEscudoMaximo()) {
-			throw new Exception();
+			throw new EstadoFinalizado();
 		}
 	}
 
@@ -42,7 +46,7 @@ public class EstadoConstruyendoEdificio implements Estado {
 
 	@Override
 	public String getDescripcion() {
-		return String.format("Construyendo %s ...", atributos.getTipo().getNombre());
+		return String.format("Construyendo... %d%%", 100 - turnosRestantes * 100 / atributos.getCosto().getTurnosConstruccion());
 		// quizas poner informacion de turnos faltantes o porcentaje terminado etc.
 	}
 
