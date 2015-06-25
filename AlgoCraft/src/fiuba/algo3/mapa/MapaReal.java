@@ -339,6 +339,7 @@ public class MapaReal implements Mapa {
 	}
 	
 	public void mover(Unidad /*ObjetoVivo*/ unidad, Posicion destino){
+		verificarOcupacion(unidad, destino);
 		setOcupante(removerOcupante(unidad.getPosicion()), destino);
 	}
 
