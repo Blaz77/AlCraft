@@ -26,6 +26,7 @@ import fiuba.algo3.ocupantes.Ocupante;
 import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.TipoOcupante;
 import fiuba.algo3.ocupantes.edificios.Edificio;
+import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.raza.TipoRaza;
 import fiuba.algo3interfaz.Game;
 import fiuba.algo3interfaz.input.BotonBotonera;
@@ -247,7 +248,7 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 	}
 	
 	private void dibujarDatosCeldaSeleccionada(Graphics g) {
-		g.setFont(new Font("Serif", Font.PLAIN, 18));
+		g.setFont(new Font("SansSerif", Font.PLAIN, 18));
 		g.setColor(java.awt.Color.WHITE);
 		
 		final int ORIGEN_X = panel.getWidth() / 2 - 150;
@@ -263,23 +264,38 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 			ObjetoVivo entidad = (ObjetoVivo) getOcupanteSelecccionado();
 			
 			/* Barra de vida */
-			g.fillRect(ORIGEN_X, ORIGEN_Y + 10, ANCHO_VIDA, 10);
+			g.setFont(new Font("SansSerif", Font.PLAIN, 14));
+			g.fillRect(ORIGEN_X, ORIGEN_Y + 9, ANCHO_VIDA, 10);
 			g.setColor(java.awt.Color.GREEN);
-			g.fillRect(ORIGEN_X, ORIGEN_Y + 10, Math.floorDiv(entidad.getVida() * ANCHO_VIDA, entidad.getVidaMaxima()), 10);
+			g.fillRect(ORIGEN_X, ORIGEN_Y + 9, Math.floorDiv(entidad.getVida() * ANCHO_VIDA, entidad.getVidaMaxima()), 10);
 			g.setColor(java.awt.Color.WHITE);
-			g.drawString(String.format("%d / %d", entidad.getVida(), entidad.getVidaMaxima()), ORIGEN_X + ANCHO_VIDA + 5, ORIGEN_Y + 21);
+			g.drawString(String.format("%d / %d", entidad.getVida(), entidad.getVidaMaxima()), ORIGEN_X + ANCHO_VIDA + 5, ORIGEN_Y + 19);
 			
 			/* Barra de escudo */
 			if (entidad.tieneEscudo()) {
 				g.setColor(java.awt.Color.WHITE);
-				g.fillRect(ORIGEN_X, ORIGEN_Y + 25, ANCHO_VIDA, 10);
+				g.fillRect(ORIGEN_X, ORIGEN_Y + 24, ANCHO_VIDA, 10);
 				g.setColor(java.awt.Color.BLUE);
-				g.fillRect(ORIGEN_X, ORIGEN_Y + 25, Math.floorDiv(entidad.getEscudo() * ANCHO_VIDA, entidad.getEscudoMaximo()), 10);
+				g.fillRect(ORIGEN_X, ORIGEN_Y + 24, Math.floorDiv(entidad.getEscudo() * ANCHO_VIDA, entidad.getEscudoMaximo()), 10);
 				g.setColor(java.awt.Color.WHITE);
-				g.drawString(String.format("%d / %d", entidad.getEscudo(), entidad.getEscudoMaximo()), ORIGEN_X + ANCHO_VIDA + 5, ORIGEN_Y + 36);
+				g.drawString(String.format("%d / %d", entidad.getEscudo(), entidad.getEscudoMaximo()), ORIGEN_X + ANCHO_VIDA + 5, ORIGEN_Y + 34);
+			}
+			
+			/* Barra de energia */
+			if (entidad.getTipoOcupante() == TipoOcupante.UNIDAD) {
+				Unidad unidad = (Unidad) entidad;
+				if (unidad.puedeHacerMagia()) {
+					g.setColor(java.awt.Color.WHITE);
+					g.fillRect(ORIGEN_X + 110, ORIGEN_Y + 24, ANCHO_VIDA, 10);
+					g.setColor(java.awt.Color.ORANGE);
+					g.fillRect(ORIGEN_X + 110, ORIGEN_Y + 24, Math.floorDiv(unidad.getEnergia() * ANCHO_VIDA, unidad.getEnergiaMaxima()), 10);
+					g.setColor(java.awt.Color.WHITE);
+					g.drawString(String.format("%d / %d", unidad.getEnergia(), unidad.getEnergiaMaxima()), ORIGEN_X + ANCHO_VIDA + 110 + 5, ORIGEN_Y + 34);
+				}
 			}
 			
 			/* Propietario: Color y nombre */
+			g.setFont(new Font("SansSerif", Font.PLAIN, 18));
 			java.awt.Color colorPropietario = AdaptadorColor.values()[entidad.getPropietario().getColor().ordinal()].getColorAwtAsociado();
 			String nombrePropietario = entidad.getPropietario().getNombre();
 			g.setColor(colorPropietario);
