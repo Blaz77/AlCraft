@@ -42,7 +42,7 @@ public class GameState extends State {
 			mapas.put(jugador, new MapaVista(jugador, game.getPanel()));
 			minimapas.put(jugador, new MinimapaVista(jugador, game.getPanel(), mapas.get(jugador).getCamara()));
 			huds.put(jugador, new HudVista(jugador, game.getPanel(), mapas.get(jugador), game));
-			recursos.put(jugador, new RecursoVista(jugador, game.getAncho(), game.getAlto(), game.getPanel()));
+			recursos.put(jugador, new RecursoVista(jugador, game.getPanel()));
 			game.getPanel().add(huds.get(jugador));
 			game.getPanel().add(recursos.get(jugador));
 			game.getPanel().add(minimapas.get(jugador));

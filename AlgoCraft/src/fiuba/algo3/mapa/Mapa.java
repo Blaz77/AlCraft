@@ -2,6 +2,7 @@ package fiuba.algo3.mapa;
 
 import java.util.ArrayList;
 
+import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.Ocupante;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.terreno.Terreno;
@@ -27,8 +28,9 @@ public interface Mapa {
 	public void verificarOcupacion(Ocupante ocupante, Posicion posicion);
 	
 	public void setOcupante(Ocupante ocupante, Posicion posicion);
+	public void setOcupante(ObjetoVivo ocupante, Posicion posicion);
 	
-	public Posicion setOcupanteEnCercania(Ocupante ocupante, Posicion posicion);
+	public Posicion setOcupanteEnCercania(ObjetoVivo ocupante, Posicion posicion);
 	
 	public Ocupante getOcupante(Posicion posicion);
 	

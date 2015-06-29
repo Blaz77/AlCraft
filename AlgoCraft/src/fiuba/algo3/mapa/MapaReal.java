@@ -3,6 +3,7 @@ package fiuba.algo3.mapa;
 import java.util.ArrayList;
 import java.util.Random;
 
+import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.Ocupante;
 import fiuba.algo3.ocupantes.Tipo;
 import fiuba.algo3.ocupantes.TipoOcupante;
@@ -279,6 +280,9 @@ public class MapaReal implements Mapa {
 	public void setOcupante(Ocupante ocupante, Posicion posicion) {
 		this.getCelda(posicion).setOcupante(ocupante);
 	}
+	public void setOcupante(ObjetoVivo ocupante, Posicion posicion) {
+		this.getCelda(posicion).setOcupante(ocupante);
+	}
 	
 	private boolean puedeOcupar(Ocupante ocupante, int x, int y){
 		try {
@@ -288,7 +292,7 @@ public class MapaReal implements Mapa {
 		}
 	}
 	
-	public Posicion setOcupanteEnCercania(Ocupante ocupante, Posicion posicion){
+	public Posicion setOcupanteEnCercania(ObjetoVivo ocupante, Posicion posicion){
 		int x = posicion.getX();
 		int y = posicion.getY();
 		

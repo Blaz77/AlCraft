@@ -11,6 +11,7 @@ import fiuba.algo3.ocupantes.unidades.constructores.Constructor;
 
 public class Edificio extends ObjetoVivo {
 	
+	private static final int RANGO_VISION_EDIFICIOS = 1;
 	private IEntrenadorUnidades entrenador;
 	
 	public Edificio(Jugador propietario, Posicion posicion, 
@@ -21,6 +22,11 @@ public class Edificio extends ObjetoVivo {
 
 	public boolean puedeEntrenarUnidades(){
 		return this.entrenador.puedeEntrenarUnidades();
+	}
+	
+	@Override
+	public int getRangoVision() {
+		return RANGO_VISION_EDIFICIOS;
 	}
 	
 	@Override

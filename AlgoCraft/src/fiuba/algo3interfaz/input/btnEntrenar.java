@@ -28,6 +28,7 @@ public class btnEntrenar extends BotonBotonera {
 		Edificio entrenador = (Edificio) jugador.getMapa().getOcupante(vista.getCeldaSeleccionada());
 		if (! entrenador.puedeEntrenarUnidades()) {
 			vista.mostrarMensaje("No es posible entrenar unidades. Edificio en construccion");
+			vista.requestFocus();
 			return;
 		}
 		

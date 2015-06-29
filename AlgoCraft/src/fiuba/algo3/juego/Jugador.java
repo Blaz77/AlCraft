@@ -90,7 +90,7 @@ public class Jugador {
 		if (this.gasVespeno < costo.getCostoGasVespeno()) 
 			throw new GasVespenoInsuficiente(costo.getCostoGasVespeno(), this.gasVespeno);
 		if ((this.poblacion + costo.getCostoPoblacion()) > this.poblacionCapacidad)
-			throw new SuministroInsuficiente();
+			throw new SuministroInsuficiente(raza.getAtributos().getIncrementadorPoblacion().getNombre());
 		this.minerales -= costo.getCostoMineral();
 		this.gasVespeno -= costo.getCostoGasVespeno();
 		this.poblacion += costo.getCostoPoblacion();

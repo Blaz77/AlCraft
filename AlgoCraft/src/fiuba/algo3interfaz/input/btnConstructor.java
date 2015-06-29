@@ -4,10 +4,7 @@ import java.awt.event.ActionEvent;
 
 import fiuba.algo3.excepciones.GasVespenoInsuficiente;
 import fiuba.algo3.excepciones.MineralInsuficiente;
-import fiuba.algo3.excepciones.OrdenConstruccionViolado;
-import fiuba.algo3.excepciones.RecursoAusente;
-import fiuba.algo3.excepciones.RecursoPresente;
-import fiuba.algo3.excepciones.TerrenoInadecuado;
+import fiuba.algo3.excepciones.SuministroInsuficiente;
 import fiuba.algo3.juego.Jugador;
 import fiuba.algo3.ocupantes.unidades.constructores.Constructor;
 import fiuba.algo3interfaz.gfx.HudVista;
@@ -28,7 +25,7 @@ public class btnConstructor extends BotonBotonera {
 			constructor.crear();
 			vista.restablecerOpciones();
 		}
-		catch (MineralInsuficiente|GasVespenoInsuficiente e) {
+		catch (SuministroInsuficiente|MineralInsuficiente|GasVespenoInsuficiente e) {
 			vista.mostrarMensaje(e.getMessage());
 		}
 		finally {

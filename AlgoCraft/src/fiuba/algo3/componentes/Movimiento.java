@@ -61,7 +61,8 @@ public class Movimiento implements IMovimiento, Estado {
 	}
 	
 	public void moverA(Posicion destino){
-		if (!this.puedeMoverse()) throw new MovimientoInvalido();
+		if (!this.puedeMoverse() || !portador.getPropietario().getMapa().puedeOcupar(portador, destino)) 
+			throw new MovimientoInvalido();
 		if (!portador.getPosicion().estaEnRango(destino, movRestantes))
 			throw new FueraDelRangoPermitido();
 		// este lanza excepciones en caso de terreno(s) inadecuados

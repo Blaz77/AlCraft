@@ -30,9 +30,6 @@ public class RecursoVista extends JPanel {
 	
 	private Jugador jugador;
 
-	private int anchoVentana;
-	private int altoVentana;
-
 	private JPanel panel;
 	private JLabel lblMineral;
 	private JLabel lblGasVespeno;
@@ -42,12 +39,10 @@ public class RecursoVista extends JPanel {
 	private static BufferedImage picFondo = ImageLoader.loadImage("/textures/recurso_fondo.png");
 
 
-	public RecursoVista(Jugador jugador, int anchoVentana, int altoVentana, JPanel panel){
+	public RecursoVista(Jugador jugador, JPanel panel){
 		this.jugador = jugador;
 		this.panel = panel;
 		
-		this.anchoVentana = anchoVentana;
-		this.altoVentana = altoVentana;
 		this.setPreferredSize(new Dimension(640, 480));
 		this.setFocusable(false);
 		this.setVisible(false);

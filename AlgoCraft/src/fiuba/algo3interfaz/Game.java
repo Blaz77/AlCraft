@@ -15,7 +15,7 @@ import fiuba.algo3interfaz.states.State;
 
 public class Game implements Runnable { // Permite correr un thread
 
-	private static final int MIN_FPS = 42;
+	private static final int MIN_FPS = 1;
 	private static final int MAX_FPS = 42;
 	
 	/** Atributos del Thread **/
@@ -31,17 +31,17 @@ public class Game implements Runnable { // Permite correr un thread
 		long now;
 		long lastTime = System.nanoTime();
 		
-		public void paintComponent(Graphics g){
+		public void repaint(){
 			now = System.nanoTime();
 			delta += (now - lastTime) / timePerTick;
 			lastTime = now;
 			if (delta >= 1){
-				_paintComponent(g);
+				super.repaint();
 				delta -= Math.floor(delta);
 			}
 		}
 
-		public void _paintComponent(Graphics g){
+		public void paintComponent(Graphics g){
 			super.paintComponent(g);
 			State.getState().render(g);
 		}
@@ -108,19 +108,8 @@ public class Game implements Runnable { // Permite correr un thread
 	
 	// Basico juego hermoso :D
 	public void run(){
-				
-		int msPerTick = 1000 / MIN_FPS; // Ahora en milisegundos xD	
-		panel.repaint();
-		while(running){
-			panel.repaint();
-			try {
-				Thread.sleep(msPerTick);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		stop();
-	}	
+
+	}
 	
 	public synchronized void start(){
 		if (running)

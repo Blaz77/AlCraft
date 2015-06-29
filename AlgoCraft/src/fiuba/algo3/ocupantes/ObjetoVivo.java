@@ -64,6 +64,8 @@ public abstract class ObjetoVivo implements Ocupante { //ObjetoVivo / ObjetoInte
 	public Jugador getPropietario() {
 		return this.propietario;
 	}
+	
+	public abstract int getRangoVision();
 
 	public Posicion getPosicion() {
 		return this.posicion;

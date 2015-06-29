@@ -5,9 +5,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 
-import fiuba.algo3.componentes.IAtaque;
 import fiuba.algo3.componentes.ITransporte;
-import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3interfaz.gfx.HudVista;
 

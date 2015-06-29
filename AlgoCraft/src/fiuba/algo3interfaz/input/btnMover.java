@@ -8,12 +8,14 @@ import javax.swing.ImageIcon;
 import fiuba.algo3.componentes.IMovimiento;
 import fiuba.algo3.excepciones.FueraDelRangoPermitido;
 import fiuba.algo3.excepciones.MovimientoInvalido;
+import fiuba.algo3.excepciones.PosicionOcupada;
+import fiuba.algo3.excepciones.TerrenoInadecuado;
 import fiuba.algo3interfaz.gfx.HudVista;
 
 public class btnMover extends BotonBotonera implements UtilizadorDeCeldas {
 
 	private HudVista vista;
-	private IMovimiento movible; //proximamente: IMovimiento movible
+	private IMovimiento movible;
 	
 	public btnMover(HudVista vista, BufferedImage icon) {
 		super(new ImageIcon(icon), "MOVER!!");

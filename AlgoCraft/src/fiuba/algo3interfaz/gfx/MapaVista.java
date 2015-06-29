@@ -3,8 +3,6 @@ package fiuba.algo3interfaz.gfx;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.awt.image.BufferedImageOp;
-import java.awt.image.RescaleOp;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
@@ -26,12 +24,7 @@ public class MapaVista {
 
 	private static final int ANCHO_CELDA = SpriteSheet.spritesTierra.getAncho();
 	private static final int ALTO_CELDA = SpriteSheet.spritesTierra.getAlto();
-	private static final float RESCALE_FACTOR = 0.5f;
-	private static final BufferedImageOp RESCALE_OP = new RescaleOp(RESCALE_FACTOR, 0, null);
 	private static BufferedImage marcaMapa = SpriteSheet.getSpriteMarcaMapa();
-	private static BufferedImage mediaSombra = SpriteSheet.getSpriteMediaSombra();
-	
-	private Jugador jugador;
 	
 	private Mapa datosMapa;
 	private int ancho;
@@ -47,7 +40,6 @@ public class MapaVista {
 
 	public MapaVista(Jugador jugador, JPanel panel){
 		
-		this.jugador = jugador;
 		this.datosMapa = jugador.getMapa(); // new MapaReal(2)
 		this.panel = panel;
 
@@ -123,16 +115,6 @@ public class MapaVista {
 					dibujarOcupante(g, x, y);
 				}
 			}
-		// Lindo terran :D
-		/*SpriteSheet terranSprites = new SpriteSheet("/textures/edificiosTerran.png");
-		for (int c = 0; c < 8; c++)
-			for (int u = 0; u < 6; u++){
-				SpriteSheet.swapColors(terranSprites.get(u), Color.values()[c]);
-				dibujarEnCelda(g, terranSprites.get(u), 2*c, 2*u);
-				terranSprites = new SpriteSheet("/textures/edificiosTerran.png");
-
-			}*/
-		//dibujarEnCelda(g, terran, ancho-1, alto-1);
 		
 		dibujarTonalizadores(g);
 		ubicarMarcaMapaEn(g);
@@ -149,18 +131,8 @@ public class MapaVista {
 
 	private void dibujarEnCeldaOscura(Graphics g, BufferedImage sprite, int x, int y) {
 		if (sprite == null) return;
-		g.drawImage(sprite, 
-				ANCHO_CELDA * x - camara.getxOffset() + (ANCHO_CELDA - sprite.getWidth())/2, 
-				ALTO_CELDA  * y - camara.getyOffset() +  (ALTO_CELDA - sprite.getHeight())/2, null);
-		g.drawImage(SpriteSheet.getSpriteMediaSombra(), 
-				ANCHO_CELDA * x - camara.getxOffset() + (ANCHO_CELDA - sprite.getWidth())/2, 
-				ALTO_CELDA  * y - camara.getyOffset() +  (ALTO_CELDA - sprite.getHeight())/2, null);
-		
-		/*if (sprite == null)
-			return;*/
-		/*((Graphics2D) g).drawImage(sprite, RESCALE_OP, 
-				ANCHO_CELDA * x - camara.getxOffset() + (ANCHO_CELDA - sprite.getWidth())/2, 
-				ALTO_CELDA  * y - camara.getyOffset() +  (ALTO_CELDA - sprite.getHeight())/2);*/
+		dibujarEnCelda(g, sprite, x, y);
+		dibujarEnCelda(g, SpriteSheet.getSpriteMediaSombra(), x, y);
 	}
 
 

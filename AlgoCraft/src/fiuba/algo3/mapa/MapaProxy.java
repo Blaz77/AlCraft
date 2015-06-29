@@ -3,6 +3,7 @@ package fiuba.algo3.mapa;
 import java.util.ArrayList;
 
 import fiuba.algo3.excepciones.CeldaNoVisible;
+import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3.ocupantes.Ocupante;
 import fiuba.algo3.ocupantes.OcupanteDesconocido;
 import fiuba.algo3.ocupantes.TipoOcupante;
@@ -67,8 +68,8 @@ public class MapaProxy implements Mapa {
 	private void _cambiarIluminacion(int vision, Posicion centro, boolean quieroIluminar){
 		int pos_x, pos_y;
 		Posicion posActual;
-		for (int x = -vision; x < vision; x++)
-			for (int y = -vision; y < vision; y++){
+		for (int x = -vision; x < vision + 1; x++)
+			for (int y = -vision; y < vision + 1; y++){
 				pos_x = centro.getX() + x;
 				pos_y = centro.getY() + y;
 				posActual = new Posicion(pos_x, pos_y); 
@@ -128,21 +129,25 @@ public class MapaProxy implements Mapa {
 	}
 	
 	public void setOcupante(Ocupante ocupante, Posicion posicion) {
+		// Esto tendria sentido si un jugador pudiera plantar recursos
 		if (! (getVisibilidad(posicion)).verOcupante())
 			throw new CeldaNoVisible();
 		
-		if (ocupante.getTipoOcupante() == TipoOcupante.UNIDAD)
-			iluminar( ((Unidad)ocupante).getRangoVision(), ocupante.getPosicion() );
 		mapa.setOcupante(ocupante, posicion);
 	}
 	
-	public Posicion setOcupanteEnCercania(Ocupante ocupante, Posicion posicion){
+	public void setOcupante(ObjetoVivo ocupante, Posicion posicion) {
+		if (! (getVisibilidad(posicion)).verOcupante())
+			throw new CeldaNoVisible();
+		
+		iluminar(ocupante.getRangoVision(), ocupante.getPosicion());
+		mapa.setOcupante(ocupante, posicion);
+	}
+	
+	public Posicion setOcupanteEnCercania(ObjetoVivo ocupante, Posicion posicion){
 		Posicion pos = mapa.setOcupanteEnCercania(ocupante, posicion);
-		// este va en contra de las reglas del proxy, porque bueno ...
-		if (ocupante.getTipoOcupante() == TipoOcupante.UNIDAD){
-			Unidad unidad = (Unidad) ocupante;
-			iluminar(unidad.getRangoVision(), pos);
-		}
+		
+		iluminar(ocupante.getRangoVision(), pos);
 		return pos;
 	}
 	

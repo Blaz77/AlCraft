@@ -9,6 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -44,17 +45,12 @@ import fiuba.algo3interfaz.input.btnMover;
 public class HudVista extends JPanel implements UtilizadorDeCeldas {
 	
 	private TipoRaza raza;
-	private Color color;
-	private Jugador jugador; // dale que va, esto ya es cualquier cosa
+	private Jugador jugador;
 	private Mapa mapaVisible;
 	private Posicion celdaSeleccionada = new Posicion(0,0);
 	private BufferedImage hudImage;
-
-	private BotonBotonera btnCancelar;
-	private BotonBotonera btnConstruir;
+	
 	private JPanel panel;
-	private Botonera botoneraActual;
-	private Botonera botoneraConstrucciones;
 	private Botonera botoneraCeldaVacia;
 	private JPanel ubicadorBotonera;
 	private JPanel centrante;
@@ -74,8 +70,6 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 	
 	/* Precarga de imagenes */ //ImageLoader.loadImage("/HUDs/HUDterran2.png"); //HUDzerg2.png, HUDprotoss2.png
 	private static HashMap<TipoRaza, BufferedImage> huds = new HashMap<TipoRaza, BufferedImage>();
-
-	private static BufferedImage picCancelar = ImageLoader.loadImage("/textures/cancelar.png");
 	
 	public static BufferedImage picTonalizadorMovimiento = ImageLoader.loadImage("/textures/tonalizador_movimiento.png");
 	
@@ -93,7 +87,6 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 
 	public HudVista(Jugador jugador, JPanel panel, MapaVista vistaMapa, Game game){
 		this.raza = jugador.getRaza();
-		this.color = jugador.getColor();
 		this.jugador = jugador;
 		this.panel = panel; //Experimental
 		this.game = game;
@@ -146,10 +139,6 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 		ubicadorBotonera.addMouseListener(new MouseAdapter() {} );
 		centrante.add(ubicadorBotonera);
 		
-		/*botonera = new JPanel(new InvisibleGridLayout(0, 3, 14, 8));
-		botonera.setOpaque(false);
-		ubicadorBotonera.add(botonera);*/
-		
 		btnPasarTurno = new JButton("PASAR TURNO");
 		btnPasarTurno.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,7 +147,7 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 		});
 		ubicadorPasarTurno.add(btnPasarTurno);
 		
-		// Botoneras:
+		/* Botoneras: */
 		
 		this.botoneraNull = new Botonera();
 		this.botoneraCeldaVacia = new Botonera(new btnConstruirMouseListener(this, this.jugador, getPicConstruir()));
@@ -222,14 +211,13 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 	}
 	
 	public void tick(){
-		
+		restablecerOpciones();
 	}
 	
 	public void render(Graphics g) {
 		
 		dibujarHUD(g);
 		dibujarDatosJugador(g);
-		//dibujarMinimapa(g); Tal vez en otra vista
 		dibujarDatosCeldaSeleccionada(g);
 	}
 	
@@ -304,7 +292,7 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 			/* Informacion de estados */
 			entidad.getDescripcionEstados();
 			g.setColor(java.awt.Color.LIGHT_GRAY);
-			String descripcionEstado = filtrarDescripcionEstado(entidad.getDescripcionEstados().get(entidad.getDescripcionEstados().size()-1));
+			String descripcionEstado = filtrarDescripcionEstados(entidad.getDescripcionEstados());
 			g.drawString(descripcionEstado, ORIGEN_X, ORIGEN_Y + 60);
 			
 		}
@@ -346,9 +334,14 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 		return spritesAcciones.get(INDICE_MAGIAS);
 	}
 	
-	private String filtrarDescripcionEstado(String descripcion) {
-		if (descripcion.contains("Construyendo") || descripcion.contains("Entrenando")) {
-			return descripcion;
+	private String filtrarDescripcionEstados(List<String> descripciones) {
+		String descripcionActual;
+		
+		for (int i=0; i<descripciones.size(); i++) {
+			descripcionActual = descripciones.get(descripciones.size()-1 - i);
+			if (descripcionActual.contains("Construyendo") || descripciones.contains("Entrenando")) {
+				return descripcionActual;
+			}
 		}
 		
 		return "";
@@ -393,6 +386,7 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 		ubicadorBotonera.removeAll();
 		ubicadorBotonera.add(nuevaBotonera);
 		ubicadorBotonera.revalidate(); //validate?
+		panel.repaint();
 	}
 
 	public void mostrarOpcionesColocacion() {
@@ -417,5 +411,6 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 
 	public void mostrarPosiblesMovimientos(IMovimiento movible) {
 		vistaMapa.definirTonalizadores(picTonalizadorMovimiento, movible.getPosiblesMovimientos(mapaVisible));
+		panel.repaint();
 	}
 }

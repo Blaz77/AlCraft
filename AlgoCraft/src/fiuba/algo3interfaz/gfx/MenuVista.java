@@ -44,9 +44,6 @@ public class MenuVista extends JPanel {
 	private String nombreJugador2;
 
 	private Game game;
-
-	private int anchoVentana;
-	private int altoVentana;
 	
 	private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
@@ -106,8 +103,6 @@ public class MenuVista extends JPanel {
 	public MenuVista(int anchoVentana, int altoVentana, Game game){
 		this.game = game; //Dudoso
 		
-		this.anchoVentana = anchoVentana;
-		this.altoVentana = altoVentana;
 		//this.setVisible(false);
 		
 		
