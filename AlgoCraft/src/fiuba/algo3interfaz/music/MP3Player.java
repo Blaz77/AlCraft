@@ -1,6 +1,5 @@
 package fiuba.algo3interfaz.music;
 
-import java.nio.file.Paths;
 import java.util.HashMap;
 
 import javafx.embed.swing.JFXPanel;
@@ -13,11 +12,11 @@ public class MP3Player {
 	
 	private static HashMap<String, MediaPlayer> mps = new HashMap<String, MediaPlayer>();
 
-	private static final String CARPETA_MUSICA = "res/music/";
+	private static final String CARPETA_MUSICA = "/music/";
 	
 	private static MediaPlayer crearMediaPlayer(String fileName) {
 		
-		String aMediaSrc = Paths.get(CARPETA_MUSICA + fileName).toUri().toString();
+		String aMediaSrc = System.class.getResource(CARPETA_MUSICA + fileName).toString();
 		final MediaPlayer player = new MediaPlayer(new Media(aMediaSrc));
 	    return player;
 	 }

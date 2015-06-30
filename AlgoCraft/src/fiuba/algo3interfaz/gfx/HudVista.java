@@ -47,7 +47,7 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 	private TipoRaza raza;
 	private Jugador jugador;
 	private Mapa mapaVisible;
-	private Posicion celdaSeleccionada = new Posicion(0,0);
+	private Posicion celdaSeleccionada;
 	private BufferedImage hudImage;
 	
 	private JPanel panel;
@@ -92,6 +92,7 @@ public class HudVista extends JPanel implements UtilizadorDeCeldas {
 		this.game = game;
 		this.vistaMapa = vistaMapa;
 		this.mapaVisible = jugador.getMapa();
+		this.celdaSeleccionada = vistaMapa.getPosicionCeldaSeleccionada();
 		
 		this.hudImage = loadHUD(this.raza);//ImageLoader.loadImage("/HUDs/HUDterran2.png");
 		this.spritesAcciones = SpriteSheet.getSpritesAcciones(getRaza());

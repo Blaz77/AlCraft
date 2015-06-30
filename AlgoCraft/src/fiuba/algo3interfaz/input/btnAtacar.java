@@ -6,6 +6,8 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 
 import fiuba.algo3.componentes.IAtaque;
+import fiuba.algo3.excepciones.AccionesPorTurnoInsuficientes;
+import fiuba.algo3.excepciones.NoEsUnEnemigo;
 import fiuba.algo3.ocupantes.ObjetoVivo;
 import fiuba.algo3interfaz.gfx.HudVista;
 
@@ -30,7 +32,10 @@ public class btnAtacar extends BotonBotonera implements UtilizadorDeCeldas{
 			atacante.atacarA((ObjetoVivo)vista.getOcupanteSelecccionado());
 		} catch (ClassCastException e) {
 			vista.mostrarMensaje("No es un objeto atacable!");
-		//catch mas cosas!
+		} catch (AccionesPorTurnoInsuficientes e) {
+			vista.mostrarMensaje("No hay ataques posibles para este turno");
+		} catch (NoEsUnEnemigo e) {
+			vista.mostrarMensaje("La unidad no es un enemigo");
 		} finally {
 			vista.restablecerOpciones();
 			vista.requestFocus();

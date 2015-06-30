@@ -20,8 +20,6 @@ public class CopyOfSpriteSheet {
 	private final static String TIERRA_PATH = "/textures/tierra.png";
 	private final static String ESPACIO_PATH = "/textures/espacio.png";
 	private final static String HIBRIDO_PATH = "/textures/hibrido.png";
-	private final static String MINERAL_PATH = "/textures/cristal2.png";
-	private final static String VESPENO_PATH = "/textures/volcan2.png";
 	private final static String MARCA_MAPA_PATH = "/textures/marcaMapa.png";
 	private static final String SOMBRA_PATH = "/textures/sombra.png";
 	private static final String MEDIA_SOMBRA_PATH = "/textures/mediasombra.png";
@@ -43,21 +41,12 @@ public class CopyOfSpriteSheet {
 	public static CopyOfSpriteSheet spritesEspacio = new CopyOfSpriteSheet(ESPACIO_PATH);
 	public static CopyOfSpriteSheet spritesHibrido = new CopyOfSpriteSheet(HIBRIDO_PATH);
 	
-	public static CopyOfSpriteSheet spritesMineral = new CopyOfSpriteSheet(MINERAL_PATH);
-	public static CopyOfSpriteSheet spritesVespeno = new CopyOfSpriteSheet(VESPENO_PATH);
-	
 	public static CopyOfSpriteSheet spritesTerran = new CopyOfSpriteSheet(TERRAN_PATH);
 	public static CopyOfSpriteSheet spritesAccionesTerran = new CopyOfSpriteSheet(ACCIONES_TERRAN_PATH);
 	public static CopyOfSpriteSheet spritesProtoss = new CopyOfSpriteSheet(PROTOSS_PATH);
 	public static CopyOfSpriteSheet spritesAccionesProtoss = new CopyOfSpriteSheet(ACCIONES_PROTOSS_PATH);
 
 	private static HashMap<Jugador, CopyOfSpriteSheet> spritesJugador = new HashMap<Jugador, CopyOfSpriteSheet>();
-	private static HashMap<Tipo, CopyOfSpriteSheet>	spritesRecurso = new HashMap<Tipo, CopyOfSpriteSheet>(){
-		{
-            put(Tipo.MINERAL, spritesMineral);
-            put(Tipo.VESPENO, spritesVespeno);
-		}
-	};
 	private static HashMap<TipoRaza, CopyOfSpriteSheet> spritesRaza = new HashMap<TipoRaza, CopyOfSpriteSheet>(){
         {
         			
@@ -225,9 +214,5 @@ public class CopyOfSpriteSheet {
 		spritesJugador.put(jugador, sheetRaza);
 	}
 
-	public static CopyOfSpriteSheet getSpritesRecurso(Tipo tipo) {
-		return spritesRecurso.get(tipo);
-		
-	}
-
 }
+

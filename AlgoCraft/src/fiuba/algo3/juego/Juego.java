@@ -7,6 +7,8 @@ import fiuba.algo3.factories.EdificiosFactory;
 import fiuba.algo3.mapa.Mapa;
 import fiuba.algo3.mapa.MapaProxy;
 import fiuba.algo3.mapa.MapaReal;
+import fiuba.algo3.ocupantes.edificios.Edificio;
+import fiuba.algo3.ocupantes.unidades.Unidad;
 import fiuba.algo3.raza.TipoRaza;
 
 public class Juego implements Iterable<Jugador>, Iterator<Jugador>{
@@ -44,10 +46,25 @@ public class Juego implements Iterable<Jugador>, Iterator<Jugador>{
 			jugadorActual = new Jugador(nombreJugador, colorJugador, razaJugador, mapaJugador);
 			jugadores.add(jugadorActual);
 			jugadoresVivos.add(jugadorActual);
-			//jugadores.get(n-1).setPosicionInicial(mapa.obtenerBaseDeJugador(n).getPosicion());
+			insertarEntidadesIniciales(jugadorActual);
 		}
 	}
 		
+	/* Bypass de algunas reglas para agilizar el inicio de la partida */
+	private void insertarEntidadesIniciales(Jugador jugadorActual) {
+		Edificio casaCentral = new Edificio(jugadorActual, null, jugadorActual.getAtributos().getIncrementadorPoblacion());
+		casaCentral.setPosicion(
+				jugadorActual.getMapa().setOcupanteEnCercania(casaCentral, jugadorActual.getMapa().getPosicionInicial())
+					);
+		jugadorActual.agregarEdificio(casaCentral);
+				
+		Unidad explorador = new Unidad(jugadorActual, null, jugadorActual.getAtributos().getInfanteriaPesadaArea());
+		explorador.setPosicion(
+				jugadorActual.getMapa().setOcupanteEnCercania(explorador, jugadorActual.getMapa().getPosicionInicial())
+					);
+		jugadorActual.agregarUnidad(explorador);
+	}
+
 	// Se fija si queda un jugador vivo nomas.
 	public boolean hayGanador() {
 		return (jugadores.size() == 1);
