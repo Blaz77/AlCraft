@@ -1,7 +1,9 @@
 package fiuba.algo3interfaz.gfx;
 
+import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RadialGradientPaint;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -107,10 +109,13 @@ public class MapaVista {
 				
 				boolean celdaDesconocida = datosMapa.getOcupante(new Posicion(x,y)).getTipo() == Tipo.DESCONOCIDO;
 				
-				if (celdaDesconocida)
+				if (celdaDesconocida) {
 					dibujarEnCeldaOscura(g2, spriteTerreno, x, y);
+					suavizarBordes(g, x, y);
+				}
 				else{
 					dibujarEnCelda(g, spriteTerreno, x, y);
+					suavizarBordes(g, x, y);
 				
 					dibujarOcupante(g, x, y);
 				}
@@ -134,7 +139,79 @@ public class MapaVista {
 		dibujarEnCelda(g, sprite, x, y);
 		dibujarEnCelda(g, SpriteSheet.getSpriteMediaSombra(), x, y);
 	}
+	
+	private void suavizarEsquina(Graphics2D g2, int x, int y, int destinoX, int destinoY) {
+		int centerDestX_screen = ANCHO_CELDA * destinoX - camara.getxOffset() + ANCHO_CELDA / 2;
+		int centerDestY_screen = ALTO_CELDA  * destinoY - camara.getyOffset() + ALTO_CELDA / 2;
+		
+		int x_screen = ANCHO_CELDA * x - camara.getxOffset();
+		int y_screen = ALTO_CELDA * y - camara.getyOffset();
+		
+		java.awt.Color colores[] = new java.awt.Color[] {java.awt.Color.BLACK, new java.awt.Color(0, 0, 0, 0)};
+		
+		try {
+			if (spriteTerreno(destinoX, destinoY) == null) {
+				if (spriteTerreno(x, destinoY) == null && spriteTerreno(destinoX, y) == null) {
+					// Esquina externa
+					g2.setPaint(new RadialGradientPaint( centerDestX_screen, centerDestY_screen,
+														ANCHO_CELDA * 2, new float[] {0.5f, 1.0f}, colores));
+					g2.fillRect(x_screen, y_screen, ANCHO_CELDA, ALTO_CELDA);
+				}
+				else if	(spriteTerreno(x, destinoY) != null && spriteTerreno(destinoX, y) != null) {
+					// Esquina interna
+					g2.setPaint(new RadialGradientPaint( centerDestX_screen, centerDestY_screen,
+														ANCHO_CELDA * 2, new float[] {0.3f, 0.6f}, colores));
+					g2.fillRect(x_screen, y_screen, ANCHO_CELDA, ALTO_CELDA);
+				}
+			}
+		}
+		catch (ArrayIndexOutOfBoundsException e) {
+		}
+	}
 
+	/* Pre: Las posiciones deben 'tocarse' */
+	private void suavizarBorde(Graphics2D g2, int x, int y, int destinoX, int destinoY) {
+		int centerX_screen = ANCHO_CELDA * x - camara.getxOffset() + ANCHO_CELDA / 2;
+		int centerY_screen = ALTO_CELDA  * y - camara.getyOffset() + ALTO_CELDA / 2;
+		
+		try {
+			if (spriteTerreno(destinoX, destinoY) == null) {
+				g2.setPaint(new GradientPaint( centerX_screen + (destinoX - x) * ANCHO_CELDA / 2, 
+												centerY_screen + (destinoY - y) * ALTO_CELDA / 2, 
+												java.awt.Color.BLACK, 
+												centerX_screen, 
+												centerY_screen, 
+												new java.awt.Color(0, 0, 0, 0)));
+				g2.fillRect(centerX_screen - ANCHO_CELDA / 2, centerY_screen - ALTO_CELDA / 2, 
+							ANCHO_CELDA, ALTO_CELDA);
+			}
+		}
+		catch (ArrayIndexOutOfBoundsException e) {
+		}
+	}
+	
+	private void suavizarBordes(Graphics g, int x, int y) {
+		if (spriteTerreno(x, y) == null) return;
+		Graphics2D g2 = (Graphics2D) g;
+		
+		// Izquierda
+		suavizarBorde(g2, x, y, x-1, y);
+		
+		// Derecha
+		suavizarBorde(g2, x, y, x+1, y);
+		
+		// Arriba
+		suavizarBorde(g2, x, y, x, y-1);
+		
+		// Abajo
+		suavizarBorde(g2, x, y, x, y+1);
+		
+		// Esquinas
+		suavizarEsquina(g2, x, y, x-1, y-1);
+		suavizarEsquina(g2, x, y, x-1, y+1);
+		suavizarEsquina(g2, x, y, x+1, y-1);
+		suavizarEsquina(g2, x, y, x+1, y+1);
+	}
 
 	private void dibujarOcupante(Graphics g, int x, int y) {
 				
